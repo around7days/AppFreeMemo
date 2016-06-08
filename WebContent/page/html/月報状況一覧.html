@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../fw/bootstrap/css/bootstrap.min.css">
+	<!-- jQuery -->
+	<script src="../fw/jquery/js/jquery-2.2.3.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="../fw/bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<form class="main">
+
+	<div class="container">
+		<!-- 画面サイズ指定 -->
+		<div style="max-width: 80em">
+
+			<!-- ヘッダ -->
+			<div class="page-header">
+				<h2>月報状況一覧</h2>
+			</div>
+
+			<!-- 検索条件 -->
+			<div class="form-horizontal">
+				<!-- -->
+				<div class="form-group">
+					<label for="s" class="col-sm-3 control-label">申請者</label>
+					<div class="col-sm-9">
+						<input type="text" value="" id="s" placeholder="申請者" class="form-control">
+					</div>
+				</div>
+				<!-- -->
+				<div class="form-group">
+					<label for="c" class="col-sm-3 control-label">状況</label>
+					<div class="col-sm-9">
+						<label class="checkbox-inline">
+						  <input type="checkbox" value=""> ○○承認待ち
+						</label>
+						<label class="checkbox-inline">
+						  <input type="checkbox" value=""> ××承認待ち
+						</label>
+					</div>
+				</div>
+				<!-- 検索 -->
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<button type="button" class="btn btn-default">検索 <span class="glyphicon glyphicon-search"></span></button>
+						<button type="button" class="btn btn-default">一括DL <span class="glyphicon glyphicon-download"></span></button>
+					</div>
+				</div>
+			</div><!-- /検索条件 -->
+
+			<!-- 余白 -->
+			<p style="margin-bottom:3em;"></p>
+
+			<!-- 検索結果 -->
+			<div class="container">
+				<table class="table table-hover table-condensed">
+					<!-- ヘッダ -->
+					<thead>
+						<tr>
+							<th>選択</th>
+							<th>年度</th>
+							<th>申請日</th>
+							<th>申請者</th>
+							<th>状況</th>
+							<th>月報</th>
+						</tr>
+					</thead>
+					<!-- 明細 -->
+					<tbody>
+						<!-- -->
+						<tr>
+							<td><button type="button" class="btn btn-default">選択</button></td>
+							<td>2016/06</td>
+							<td>月報太郎</td>
+							<td>2016/04/27 17:46</td>
+							<td>○○承認待ち</td>
+							<td><button type="button" class="btn btn-link">添付ファイル１<span class="glyphicon glyphicon-download"></span></button></td>
+						</tr>
+						<!-- -->
+						<tr>
+							<td><button type="button" class="btn btn-default">選択</button></td>
+							<td>2016/06</td>
+							<td>月報太郎</td>
+							<td>2016/04/27 17:46</td>
+							<td>○○承認待ち</td>
+							<td><button type="button" class="btn btn-link">添付ファイル１<span class="glyphicon glyphicon-download"></span></button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div><!-- /検索結果 -->
+
+		</div>
+	</div><!-- /container -->
+
+</form>
+</body>
+</html>
