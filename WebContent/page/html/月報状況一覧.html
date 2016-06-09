@@ -17,13 +17,24 @@
 <body>
 <form class="main">
 
+	<!-- ナビバー -->
+	<nav class="navbar navbar-default">
+		<div class="collapse navbar-collapse">
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="#">メニュー<span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+			<li><a href="#">ログアウト<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+		  </ul>
+		</div>
+	</nav>
+
+	<!-- メイン -->
 	<div class="container">
 		<!-- 画面サイズ指定 -->
 		<div style="max-width: 80em">
 
 			<!-- ヘッダ -->
 			<div class="page-header">
-				<h2>月報状況一覧</h2>
+				<h2>月報状況一覧画面</h2>
 			</div>
 
 			<!-- 検索条件 -->
@@ -40,10 +51,10 @@
 					<label for="c" class="col-sm-3 control-label">状況</label>
 					<div class="col-sm-9">
 						<label class="checkbox-inline">
-						  <input type="checkbox" value=""> ○○承認待ち
+							<input type="checkbox" value=""> ○○承認待ち
 						</label>
 						<label class="checkbox-inline">
-						  <input type="checkbox" value=""> ××承認待ち
+							<input type="checkbox" value=""> ××承認待ち
 						</label>
 					</div>
 				</div>
@@ -66,9 +77,9 @@
 					<thead>
 						<tr>
 							<th>選択</th>
-							<th>年度</th>
-							<th>申請日</th>
+							<th>年月</th>
 							<th>申請者</th>
+							<th>部署</th>
 							<th>状況</th>
 							<th>月報</th>
 						</tr>
@@ -80,7 +91,7 @@
 							<td><button type="button" class="btn btn-default">選択</button></td>
 							<td>2016/06</td>
 							<td>月報太郎</td>
-							<td>2016/04/27 17:46</td>
+							<td>2SOL</td>
 							<td>○○承認待ち</td>
 							<td><button type="button" class="btn btn-link">添付ファイル１<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
@@ -89,7 +100,7 @@
 							<td><button type="button" class="btn btn-default">選択</button></td>
 							<td>2016/06</td>
 							<td>月報太郎</td>
-							<td>2016/04/27 17:46</td>
+							<td>SCM</td>
 							<td>○○承認待ち</td>
 							<td><button type="button" class="btn btn-link">添付ファイル１<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
