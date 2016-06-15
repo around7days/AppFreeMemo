@@ -1,0 +1,12 @@
+#
+# ant.properties
+#
+web.app.name=MonthlyManagement
+
+temp.dir=./temp
+dist.dir=./dist
+
+server.host=
+server.ftp.user=
+server.ftp.pass=
+server.app.path=
