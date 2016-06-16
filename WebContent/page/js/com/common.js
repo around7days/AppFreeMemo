@@ -7,6 +7,6 @@ function changeStyle(style){
 	});
 	setTimeout(function(){
 		$("body").fadeIn("normal");
-	},1000);
+	},2000);
 
 }
