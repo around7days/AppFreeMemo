@@ -6,49 +6,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 
-	<!-- bootswatch CSS -->
-	<link rel="stylesheet" href="../fw/bootstrap/css/bootswatch-theme-Cerulean.css">
+	<!-- bootstrap CSS -->
+	<link rel="stylesheet" id="mystyle" href="../fw/bootstrap/css/bootswatch-theme-Cerulean.css">
 	<!-- jQuery -->
 	<script src="../fw/jquery/js/jquery-2.2.3.js"></script>
-	<!-- bootswatch JS -->
+	<!-- bootstrap JS -->
 	<script src="../fw/bootstrap/js/bootstrap.js"></script>
-
+	<!-- common JS -->
+	<script src="../js/com/common.js"></script>
+	<!-- include navbar2 -->
+	<script src="../js/include/include_navbar2.js"></script>
 </head>
 <body>
 <form class="main">
 
 	<!-- ナビバー -->
-	<nav class="navbar navbar-default navbar-static-top">
-		<div class="container-fluid">
-			<!-- ナビヘッダ -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-content">
-					<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-				</button>
-				<div class="navbar-brand"><strong>月報管理システム</strong></div>
-			</div>
-
-			<!-- ナビ -->
-			<div class="collapse navbar-collapse" id="nav-content">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="./メニュー.html" aria-expanded="false" aria-haspopup="true">メニュー<span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-					<li><a href="./ログイン.html">ログアウト<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<div id="navbar"></div>
 
 	<!-- メイン -->
 	<div class="container">
 		<!-- 画面サイズ指定 -->
-		<div style="max-width: 30em">
+		<div style="max-width: 40em">
 
 			<!-- ヘッダ -->
 			<div class="page-header">
 				<h2>月報承認画面</h2>
 			</div>
 
-			<!-- 月報登録 -->
+			<!-- 月報承認 -->
 			<div class="form-horizontal">
 				<!-- 年月 -->
 				<div class="form-group">
@@ -57,52 +42,50 @@
 						<input type="month" class="form-control" value="2016-06" disabled />
 					</div>
 				</div>
-				<!-- 月報 -->
+				<!-- 申請者月報 -->
 				<div class="form-group">
-					<label for="A" class="col-sm-3 control-label">月報</label>
+					<label for="A" class="col-sm-3 control-label">申請者月報</label>
+					<div class="col-sm-9">
+						<button type="button" class="btn btn-link">申請者が提出した月報.xlsx<span class="glyphicon glyphicon-download"></span></button>
+					</div>
+				</div>
+				<!-- 承認 -->
+				<div class="form-group">
+					<label for="A" class="col-sm-3 control-label">承認</label>
 					<div class="col-sm-9">
 						<input type="file" class="form-control" id="A">
 					</div>
 				</div>
-				<!-- 承認者1 -->
+				<!-- 申請者・承認者1 -->
 				<div class="form-group">
+					<!-- 申請者 -->
+					<label for="B0" class="col-sm-3 control-label">申請者</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="B0" value="作業一郎" disabled>
+					</div>
+					<!-- 承認者1 -->
 					<label for="B1" class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
-						<div class="input-group">
-							<input type="text" class="form-control" id="B1" placeholder="承認者１" disabled>
-							<span class="input-group-btn">
-								<button type="button" class="btn btn-default">？</button>
-							</span>
-						</div>
+						<input type="text" class="form-control" id="B1" value="承認太郎" disabled>
 					</div>
 					<!-- 承認者2 -->
 					<label for="B2" class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
-						<div class="input-group">
-							<input type="text" class="form-control" id="B2" placeholder="承認者２" disabled>
-							<span class="input-group-btn">
-								<button type="button" class="btn btn-default">？</button>
-							</span>
-						</div>
+						<input type="text" class="form-control" id="B2" value="承認花子" disabled>
 					</div>
 					<!-- 承認者3 -->
 					<label for="B3" class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
-						<div class="input-group">
-							<input type="text" class="form-control" id="B3" placeholder="承認者３" disabled>
-							<span class="input-group-btn">
-								<button type="button" class="btn btn-default">？</button>
-							</span>
-						</div>
+						<input type="text" class="form-control" id="B3" value="承認光郎" disabled>
 					</div>
 				</div>
-				<!-- 申請 -->
+				<!-- 承認 -->
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<button type="button" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
+						<button type="button" class="btn btn-primary">承認<span class="glyphicon glyphicon-chevron-right"></span></button>
 					</div>
 				</div>
-			</div><!-- /月報登録 -->
+			</div><!-- /月報承認 -->
 
 		</div><!-- /画面サイズ指定 -->
 	</div><!-- /container -->
