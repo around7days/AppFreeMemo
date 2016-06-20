@@ -1,0 +1,11 @@
+apply plugin: 'eclipse'
+task doma-gen << {
+    ant.taskdef(resource: 'domagentask.properties',
+        classpath: configurations.domaGenRuntime.asPath)
+    ant.gen(url: 'jdbc:mysql://localhost:3306/mm', user: 'user1', password: 'user1') {
+        entityConfig(packageName: 'com.doma2.entity')
+        daoConfig(packageName: 'com.doma2.dao')
+        sqlConfig()
+    }
+}
+
