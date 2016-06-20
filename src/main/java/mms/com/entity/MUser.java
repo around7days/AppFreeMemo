@@ -1,4 +1,4 @@
-package mms.user;
+package mms.com.entity;
 
 import java.time.LocalDateTime;
 
