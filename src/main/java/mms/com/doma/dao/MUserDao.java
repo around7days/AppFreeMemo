@@ -1,6 +1,4 @@
-package mms.com.dao;
-
-import java.util.List;
+package mms.com.doma.dao;
 
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
@@ -9,7 +7,7 @@ import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 
-import mms.com.entity.MUser;
+import mms.com.doma.entity.MUser;
 
 /**
  */
@@ -23,12 +21,6 @@ public interface MUserDao {
      */
     @Select
     MUser selectById(String userId);
-
-    /**
-     * @return the MUser entity
-     */
-    @Select
-    List<MUser> selectAll();
 
     /**
      * @param entity

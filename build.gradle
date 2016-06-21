@@ -11,27 +11,29 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 
 jar {
 	baseName = 'MonthlyManagement'
 	version = '0.0.1-SNAPSHOT'
 }
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
-    mavenLocal()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+	mavenLocal()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/'}
 }
 
-/* DomaのSQLファイルをコンパイルより前に出力先Dirにコピーするための設定 */
-//processResources.destinationDir = compileJava.destinationDir
-//compileJava.dependsOn processResources
+// DomaのSQLファイルをコンパイルより前に出力先Dirにコピーするための設定
+processResources.destinationDir = compileJava.destinationDir
+compileJava.dependsOn processResources
+
+// doma-gen用
 configurations {
-    domaGenRuntime
+	domaGenRuntime
 }
 
 dependencies {
@@ -41,14 +43,16 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
-    compile("org.seasar.doma.boot:doma-spring-boot-starter:+")
+	compile("org.seasar.doma.boot:doma-spring-boot-starter:+")
 	runtime('mysql:mysql-connector-java')
+
+	// test用
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	
-    // doma-gen用
-    domaGenRuntime('org.seasar.doma:doma-gen:+')
-    domaGenRuntime('mysql:mysql-connector-java')
+
+	// doma-gen用
+	domaGenRuntime('org.seasar.doma:doma-gen:+')
+	domaGenRuntime('mysql:mysql-connector-java')
 }
 
 apply from:'eclipse.gradle'
-//apply from:'doma.gradle'
+apply from:'doma.gradle'
