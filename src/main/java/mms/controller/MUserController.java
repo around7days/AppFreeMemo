@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import mms.com.doma.dao.MUserDao;
 import mms.com.doma.entity.MUser;
 
-
 @RestController
 @Transactional
 public class MUserController {
