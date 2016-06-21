@@ -17,9 +17,18 @@ public class LoginController {
     MUserDao dao;
 
     @RequestMapping("/")
+    public String init(Model model) {
+        return "login";
+    }
+
+    @RequestMapping("/login")
     public String login(Model model) {
-    	model.addAttribute("user_id", "user1");
+        model.addAttribute("user_id", "user1");
         return "html/ログイン";
     }
 
+    @RequestMapping("/menu")
+    public String menu(Model model) {
+        return "html/メニュー";
+    }
 }
