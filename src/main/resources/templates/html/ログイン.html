@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title></title>
+
+	<!-- Thymeleaf Toymol JS(debug用) -->
+	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
+
+	<!-- bootstrap CSS -->
+	<link rel="stylesheet" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<!-- jQuery -->
+	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
+	<!-- bootstrap JS -->
+	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
+	<!-- common JS -->
+	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+</head>
+<body>
+<form class="main">
+
+	<!-- ナビバー -->
+	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
+
+	<!-- メイン -->
+	<div class="container">
+		<!-- 画面サイズ指定 -->
+		<div style="max-width: 20em">
+
+			<!-- ヘッダ -->
+			<div class="page-header">
+				<h2>ログイン画面</h2>
+			</div>
+
+			<!-- サインイン -->
+			<div>
+				<!-- ID -->
+				<div class="form-group">
+					<label class="control-label">ID</label>
+					<input type="text" th:value="${user_id}" name="user_id" id="user_id" class="form-control" placeholder="ID" autofocus="autofocus" />
+				</div>
+				<!-- パスワード -->
+				<div class="form-group">
+					<label class="control-label">パスワード</label>
+					<input type="text" name="user_id" id="user_id" class="form-control" placeholder="パスワード" />
+				</div>
+				<button type="button" class="btn btn-primary" onclick="location.href='./メニュー.html'">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
+			</div><!-- /サインイン -->
+
+		</div><!-- /画面サイズ指定 -->
+	</div><!-- /container -->
+
+</form>
+</body>
+</html>

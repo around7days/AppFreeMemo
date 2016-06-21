@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title></title>
 
+	<!-- Thymeleaf Toymol JS(debug用) -->
+	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
+
 	<!-- bootstrap CSS -->
-	<link rel="stylesheet" id="mystyle" href="../fw/bootstrap/css/bootswatch-theme-Cerulean.css">
+	<link rel="stylesheet" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<!-- jQuery -->
-	<script src="../fw/jquery/js/jquery-2.2.3.js"></script>
+	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
-	<script src="../fw/bootstrap/js/bootstrap.js"></script>
+	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
 	<!-- common JS -->
-	<script src="../js/com/common.js"></script>
-	<!-- include navbar2 -->
-	<script src="../js/include/include_navbar2.js"></script>
+	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 </head>
 <body>
 <form class="main">
 
 	<!-- ナビバー -->
-	<div id="navbar"></div>
+	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
 
 	<!-- メイン -->
 	<div class="container">

@@ -1,10 +1,11 @@
 /*
  * DB接続定義
  */
-def dbUrl    = 'jdbc:mysql://localhost:3306/mmsdb'
-def dbUser   = 'user1'
-def dbPass   = 'user1'
-
+def dbUrl       = 'jdbc:mysql://localhost:3306/mmsdb'
+def dbUser      = 'user1'
+def dbPass      = 'user1'
+def tableTypes  = 'TABLE,VIEW'
+def templateDir = 'domaGenTemplates'
 
 /*
  * 共通ソースコード自動生成
@@ -14,7 +15,7 @@ task domaGen << {
 	def daoPkg    = 'mms.com.doma.dao'
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
-    ant.gen(url: dbUrl, user: dbUser, password: dbPass, tableTypes: "TABLE,VIEW") {
+    ant.gen(url: dbUrl, user: dbUser, password: dbPass, tableTypes: tableTypes, templatePrimaryDir: templateDir) {
         entityConfig(packageName: entityPkg, overwrite: true, overwriteListener: false)
         daoConfig(packageName: daoPkg, overwrite: false)
         sqlConfig(overwrite: true)
@@ -30,7 +31,7 @@ task domaGenEntity << {
 	def sql       = 'select count(*) as cnt from m_user'
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
-    ant.gen(url: dbUrl, user: dbUser, password: dbPass) {
+    ant.gen(url: dbUrl, user: dbUser, password: dbPass, tableTypes: tableTypes, templatePrimaryDir: templateDir) {
         entityConfig(packageName: entityPkg, entityName: entityNm, sql: sql)
     }
 }
