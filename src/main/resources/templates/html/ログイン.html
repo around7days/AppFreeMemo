@@ -19,7 +19,7 @@
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 </head>
 <body>
-<form action="/login" class="main">
+<form th:action="@{/login}" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
@@ -34,19 +34,23 @@
 				<h2>ログイン画面</h2>
 			</div>
 
+			<!-- メッセージ -->
+			<div th:text="${#fields.hasAnyErrors()}">
+			</div>
+
 			<!-- サインイン -->
 			<div>
 				<!-- ID -->
 				<div class="form-group">
 					<label class="control-label">ID</label>
-					<input type="text" th:value="${user_id}" name="user_id" id="user_id" class="form-control" placeholder="ID" autofocus="autofocus" />
+					<input type="text" name="userId" id="userId" class="form-control" placeholder="ID" autofocus="autofocus" />
 				</div>
 				<!-- パスワード -->
 				<div class="form-group">
 					<label class="control-label">パスワード</label>
 					<input type="text" name="password" id="password" class="form-control" placeholder="パスワード" />
 				</div>
-				<a th:href="@{/login}" href="./メニュー.html" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></a>
+				<button type="submit" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div><!-- /サインイン -->
 
 		</div><!-- /画面サイズ指定 -->
