@@ -19,7 +19,7 @@
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 </head>
 <body>
-<form class="main">
+<form action="/login" class="main">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
@@ -46,7 +46,7 @@
 					<label class="control-label">パスワード</label>
 					<input type="text" name="password" id="password" class="form-control" placeholder="パスワード" />
 				</div>
-				<button type="button" class="btn btn-primary" onclick="location.href='./メニュー.html'">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
+				<a th:href="@{/login}" href="./メニュー.html" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div><!-- /サインイン -->
 
 		</div><!-- /画面サイズ指定 -->
