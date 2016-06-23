@@ -19,7 +19,7 @@
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 </head>
 <body>
-<form th:action="@{/login}" method="post">
+<form th:action="@{/login}" th:object="${loginForm}" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
@@ -35,15 +35,14 @@
 			</div>
 
 			<!-- メッセージ -->
-			<div th:text="${#fields.hasAnyErrors()}">
-			</div>
+			<div th:replace="@{/html/include/include_message}::message"></div>
 
 			<!-- サインイン -->
 			<div>
 				<!-- ID -->
 				<div class="form-group">
 					<label class="control-label">ID</label>
-					<input type="text" name="userId" id="userId" class="form-control" placeholder="ID" autofocus="autofocus" />
+					<input type="text" th:value="*{userId}" name="userId" id="userId" class="form-control" placeholder="ID" autofocus="autofocus" />
 				</div>
 				<!-- パスワード -->
 				<div class="form-group">

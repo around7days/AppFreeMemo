@@ -22,20 +22,19 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     /** ログイン画面フォーム */
-    LoginForm form;
+    @ModelAttribute
+    LoginForm setupForm() {
+        return new LoginForm();
+    }
 
     /**
      * 初期処理
-     * @param form
      * @param model
      * @return
      */
     @RequestMapping("/")
-    public String init(LoginForm form,
-                       Model model) {
+    public String init(Model model) {
         // 初期処理
-        form.setUserId("user1");
-        model.addAttribute("form", form);
 
         // ログイン画面表示
         return "html/ログイン";
@@ -43,25 +42,25 @@ public class LoginController {
 
     /**
      * ログイン処理
-     * @param form
+     * @param loginForm
      * @param bindingResult
      * @param model
      * @return
      */
     @RequestMapping("/login")
-    public String login(@ModelAttribute @Valid LoginForm form,
+    public String login(@Valid LoginForm loginForm,
                         BindingResult bindingResult,
                         Model model) {
+        logger.debug("userId={}", loginForm.getUserId());
+        logger.debug("password={}", loginForm.getPassword());
+
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug("validate error");
-            // model.addAttribute("form", form);
             return "html/ログイン";
         }
 
         // ログイン処理
-        logger.info(form.getUserId());
-        logger.info(form.getPassword());
 
         // メニュー画面初期処理にリダイレクト
         return "redirect:/menu";

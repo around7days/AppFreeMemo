@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<!-- メッセージ -->
+<div th:fragment="message">
+	<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
+		<ul>
+			<li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+		</ul>
+	</div>
+</div>
+
+</html>
