@@ -1,4 +1,4 @@
-package mms;
+package mms.com.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         /* 許可設定 */
         http.authorizeRequests().antMatchers("/", "/login", "logout").permitAll(); // "/"は全ユーザー許可
-        // http.authorizeRequests().anyRequest().authenticated(); //
+        http.authorizeRequests().anyRequest().authenticated(); //
         // それ以外は全て認証無しの場合アクセス拒否
 
         /* ログイン設定 */
@@ -28,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // .loginProcessingUrl("/login") // 認証処理のパス
         // .usernameParameter("userId") // ユーザー名のパラメータ名
         // .passwordParameter("password"); // パスワードのパラメータ名
-        ;
 
         /* ログアウト設定 */
         http.logout()
