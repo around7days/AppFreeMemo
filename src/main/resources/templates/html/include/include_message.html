@@ -3,11 +3,15 @@
 
 <!-- メッセージ -->
 <div th:fragment="message">
+	<!-- エラー -->
 	<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
-		<ul>
-			<li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-		</ul>
+		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
+		<ul><li th:each="err : ${#fields.allErrors()}" th:text="${err}" /></ul>
+	</div>
+	<!-- 通常 -->
+	<div th:if="${successMessages}" class="alert alert-success">
+		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　成功
+		<ul><li th:each="msg : ${successMessages}" th:text="${msg}" /></ul>
 	</div>
 </div>
-
 </html>

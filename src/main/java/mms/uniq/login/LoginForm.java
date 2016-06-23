@@ -11,13 +11,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class LoginForm {
 
     /** ユーザーID */
-    @NotEmpty
-    @Size(max = 10)
+    @NotEmpty(message = "ユーザーIDは{NotEmpty.message}")
+    @Size(max = 10, message = "ユーザーIDは{Size.message}")
     private String userId;
 
     /** パスワード */
-    @NotEmpty
-    @Size(max = 10)
+    @NotEmpty(message = "パスワードは{NotEmpty.message}")
+    @Size(max = 10, message = "パスワードは{Size.message}")
     private String password;
 
     /**
