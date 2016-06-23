@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import mms.com.doma.dao.MUserDao;
-import mms.com.doma.entity.MUser;
 
 /**
  * ログイン画面コントローラー
@@ -40,7 +39,7 @@ public class LoginController {
      * @param model
      * @return
      */
-    @RequestMapping("/")
+    @RequestMapping("/login")
     public String init(Model model) {
         // 初期処理
 
@@ -55,7 +54,7 @@ public class LoginController {
      * @param model
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping("/login_auth_validate")
     public String login(@Valid LoginForm loginForm,
                         BindingResult bindingResult,
                         Model model) {
@@ -65,20 +64,8 @@ public class LoginController {
             return "html/ログイン";
         }
 
-        // ログイン処理
-        MUser mUser = mUserDao.selectById(loginForm.getUserId());
-        if (mUser == null) {
-            // ログイン失敗
-            bindingResult.reject("", "ログインに失敗しました");
-            logger.debug(bindingResult.getAllErrors().toString());
-            return "html/ログイン";
-        }
-
-        // ログインユーザー情報をセッションに保存
-        logger.debug(mUser.getUserNm());
-
-        // メニュー画面初期処理にリダイレクト
-        return "redirect:/menu";
+        // ログイン認証処理にフォワード
+        return "forward:/login_auth";
     }
 
     /**
@@ -101,7 +88,7 @@ public class LoginController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/login-error")
+    @RequestMapping(value = "/login_error")
     public String loginError(LoginForm loginForm,
                              BindingResult bindingResult,
                              Model model) {

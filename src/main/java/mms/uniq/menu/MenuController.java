@@ -1,4 +1,4 @@
-package mms.controller;
+package mms.uniq.menu;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

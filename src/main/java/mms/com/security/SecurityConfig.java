@@ -1,6 +1,8 @@
 package mms.com.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,52 +15,59 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // http://qiita.com/nvtomo1029/items/8827d95327b647a6cf50
 
-        /* 許可設定 */
-        http.authorizeRequests().antMatchers("/", "/login", "logout").permitAll(); // "/"は全ユーザー許可
-        http.authorizeRequests().anyRequest().authenticated(); //
-        // それ以外は全て認証無しの場合アクセス拒否
+        /* ログイン前の認証設定 */
+        // OK(アクセス許可)
+        http.authorizeRequests().antMatchers("/login**", "/logout", "/error").permitAll();
+        // NG（それ以外は全て認証無しの場合アクセス拒否）
+        // http.authorizeRequests().anyRequest().authenticated();
+
+        /* セッション設定 */
+        // http.sessionManagement().invalidSessionUrl("/");
 
         /* ログイン設定 */
-        // http.formLogin()
-        // .loginPage("/") // ログインフォームのパス
-        // .loginProcessingUrl("/login") // 認証処理のパス
-        // .usernameParameter("userId") // ユーザー名のパラメータ名
-        // .passwordParameter("password"); // パスワードのパラメータ名
+        http.formLogin()
+            .loginPage("/login") // ログインフォームのパス
+            .loginProcessingUrl("/login_auth") // 認証処理のパス
+            .usernameParameter("userId") // ユーザー名のパラメータ名
+            .passwordParameter("password") // パスワードのパラメータ名
+            .defaultSuccessUrl("/menu") // 認証成功時のパス
+            .failureUrl("/login_error") // 認証失敗時のパス
+        ;
 
         /* ログアウト設定 */
         http.logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // ログアウト処理のパス
-            .logoutSuccessUrl("/") // ログアウト完了時のパス
+            .logoutSuccessUrl("/login") // ログアウト完了時のパス
             .deleteCookies("JSESSIONID") // cookiesの削除
-            .invalidateHttpSession(true); // セッション破棄
-
+            .invalidateHttpSession(true) // セッション破棄
+        ;
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         // セキュリティ設定を無視するリクエスト設定
         // 静的リソース(images、css、javascript等)に対するアクセスはセキュリティ設定を無視する
-        web.ignoring().antMatchers("/fw/**", "/js/**", "/css/**", "/image/**");
+        web.ignoring().antMatchers("/fw/**", "/js/**", "/css/**", "/image/**", "/webjars/**");
     }
 
     // @Autowired
     // public void configAuthentication(AuthenticationManagerBuilder auth)
     // throws Exception {
-    // auth.jdbcAuthentication()
-    // .dataSource(dataSource)
-    // .usersByUsernameQuery("select id, password, enabled from user where id =
-    // ?")
-    // .authoritiesByUsernameQuery("select id, role from user_role where id =
-    // ?");
+    // auth.userDetailsService(userDetailsService);
     // }
 
-    // @Autowired
-    // public void configureGlobal(AuthenticationManagerBuilder auth) throws
-    // Exception {
-    // auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
-    // }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // 独自認証
+        auth.userDetailsService(userDetailsService);
+    }
+
 }
