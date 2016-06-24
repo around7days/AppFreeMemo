@@ -47,7 +47,7 @@
 				<!-- パスワード -->
 				<div class="form-group">
 					<label class="control-label">パスワード</label>
-					<input type="text" name="password" id="password" class="form-control" placeholder="パスワード" />
+					<input type="text" th:value="*{password}" name="password" id="password" class="form-control" placeholder="パスワード" />
 				</div>
 				<button type="submit" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div><!-- /サインイン -->

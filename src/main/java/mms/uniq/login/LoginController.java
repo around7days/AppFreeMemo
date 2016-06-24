@@ -4,15 +4,12 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import mms.com.doma.dao.MUserDao;
 
 /**
  * ログイン画面コントローラー
@@ -21,6 +18,7 @@ import mms.com.doma.dao.MUserDao;
 @Controller
 @Transactional
 public class LoginController {
+
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -30,25 +28,26 @@ public class LoginController {
         return new LoginForm();
     }
 
-    /** ユーザーマスタDao */
-    @Autowired
-    MUserDao mUserDao;
-
     /**
      * 初期処理
+     * @param loginForm
      * @param model
      * @return
      */
     @RequestMapping("/login")
-    public String init(Model model) {
+    public String init(LoginForm loginForm,
+                       Model model) {
         // 初期処理
+        loginForm.setUserId("user01");
+        loginForm.setPassword("pass");
 
         // ログイン画面表示
         return "html/ログイン";
     }
 
     /**
-     * ログイン処理
+     * ログイン処理<br>
+     * ログイン認証/ログアウト処理はSecurityConfigで実施
      * @param loginForm
      * @param bindingResult
      * @param model
@@ -66,18 +65,6 @@ public class LoginController {
 
         // ログイン認証処理にフォワード
         return "forward:/login_auth";
-    }
-
-    /**
-     * ログアウト処理
-     * @return
-     */
-    @RequestMapping("/logout")
-    public String logout() {
-        // ログアウト処理
-
-        // ログイン画面初期処理にフォワード
-        return "forward:/";
     }
 
     /**

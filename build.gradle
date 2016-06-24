@@ -43,7 +43,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile("org.seasar.doma.boot:doma-spring-boot-starter:+")
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.seasar.doma.boot:doma-spring-boot-starter:+')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
 	runtime('mysql:mysql-connector-java')
 
 	// test用

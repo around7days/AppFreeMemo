@@ -20,10 +20,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         MUser mUser = mUserDao.selectById(id);
         if (mUser == null) {
-            // 例外はSpringSecurityにあったものを適当に使用
             throw new UsernameNotFoundException("ログインに失敗しました");
         }
 
-        return new LoginUserInfo(mUser);
+        return new UserInfo(mUser);
     }
 }

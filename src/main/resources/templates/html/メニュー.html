@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,7 +19,7 @@
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 </head>
 <body>
-<form class="main">
+<form th:action="@{/menu}" th:object="${menuForm}" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -44,9 +44,9 @@
 				</ul>
 				<!-- メニュー明細 -->
 				<div class="list-group">
-					<a href="#" th:href="@{/月報申請}" class="list-group-item" onclick="location.href='./月報申請.html'"><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</a>
-					<a href="#" th:href="@{/月報承認}" class="list-group-item" onclick="location.href='./月報承認.html'"><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認</a>
-					<a href="#" th:href="@{/月報状況一覧}" class="list-group-item" onclick="location.href='./月報状況一覧.html'"><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報状況一覧</a>
+					<button type="submit" name="t001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報状況一覧</button>
+					<button type="submit" name="t002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
+					<button type="submit" name="t003" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認</button>
 					<a href="#" class="list-group-item"><span class="glyphicon glyphicon glyphicon-hand-right"></span>　XXXXXX</a>
 					<a href="#" class="list-group-item"><span class="glyphicon glyphicon glyphicon-hand-right"></span>　XXXXXX</a>
 				</div>

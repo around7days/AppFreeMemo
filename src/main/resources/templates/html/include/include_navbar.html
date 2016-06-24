@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <!-- ナビバー（ログイン前） -->
 <div th:fragment="navbar1">
@@ -28,7 +28,8 @@
 
 			<!-- ナビ -->
 			<div class="collapse navbar-collapse" id="nav-content">
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-left">
+					<!-- デザイン -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">デザイン<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -50,9 +51,18 @@
 							<li><a href="#" onclick="changeStyle('Yeti');">Yeti</a></li>
 						</ul>
 					</li>
-					<li><a href="#">設定<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a></li>
+					<!-- 設定 -->
+					<!-- <li><a href="#">設定<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a></li> -->
+					<!-- メニュー -->
 					<li><a th:href="@{/menu}" href="./メニュー.html">メニュー<span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+					<!-- ログアウト -->
 					<li><a th:href="@{/logout}" href="./ログイン.html">ログアウト<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<!-- ユーザー情報 -->
+					<li class="navbar-brand">
+						<small>ユーザ名：<span sec:authentication="principal.userNm"></span></small>
+					</li>
 				</ul>
 			</div>
 		</div>
