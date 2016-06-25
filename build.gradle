@@ -37,23 +37,28 @@ configurations {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-devtools')
-	compile('org.springframework.boot:spring-boot-starter-mail')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.boot:spring-boot-starter-validation')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-aop')
-	compile('org.seasar.doma.boot:doma-spring-boot-starter:+')
-	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
-	runtime('mysql:mysql-connector-java')
+	compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
+	compile group: 'org.seasar.doma.boot', name: 'doma-spring-boot-starter', version: '+'
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.1.2.RELEASE'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '+'
+//	compile group: 'org.apache.commons', name: 'commons-collections4', version: '+'
+	runtime group: 'mysql', name: 'mysql-connector-java'
 
 	// test用
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+
+	// generator用
+	compile group: 'org.freemarker', name: 'freemarker', version: '+'
 
 	// doma-gen用
-	domaGenRuntime('org.seasar.doma:doma-gen:+')
-	domaGenRuntime('mysql:mysql-connector-java')
+	domaGenRuntime group: 'org.seasar.doma', name: 'doma-gen', version: '+'
+	domaGenRuntime group: 'mysql', name: 'mysql-connector-java'
 }
 
 apply from:'eclipse.gradle'

@@ -2,6 +2,8 @@ package mms.uniq.login;
 
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -50,6 +52,10 @@ public class LoginForm {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

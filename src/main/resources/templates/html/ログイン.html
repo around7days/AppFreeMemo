@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,7 +19,7 @@
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 </head>
 <body>
-<form th:action="@{/login_auth_validate}" th:object="${loginForm}" method="post">
+<form th:action="@{/login_auth_validate}" th:object="${loginForm}" name="main" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
@@ -47,8 +47,9 @@
 				<!-- パスワード -->
 				<div class="form-group">
 					<label class="control-label">パスワード</label>
-					<input type="text" th:value="*{password}" name="password" id="password" class="form-control" placeholder="パスワード" />
+					<input type="password" th:value="*{password}" name="password" id="password" class="form-control" placeholder="パスワード" />
 				</div>
+				<!-- ログイン -->
 				<button type="submit" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div><!-- /サインイン -->
 

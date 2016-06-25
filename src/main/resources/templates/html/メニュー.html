@@ -19,7 +19,7 @@
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 </head>
 <body>
-<form th:action="@{/menu}" th:object="${menuForm}" method="post">
+<form th:action="@{/menu}" th:object="${menuForm}" name="main" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>

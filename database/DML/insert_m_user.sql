@@ -1,3 +1,12 @@
 INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', 'ユーザー０１', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
 INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user02', 'ユーザー０２', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user03', 'ユーザー０３', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user04', 'ユーザー０４', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user05', 'ユーザー０５', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user06', 'ユーザー０６', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user07', 'ユーザー０７', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user08', 'ユーザー０８', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user09', 'ユーザー０９', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user10', 'ユーザー１０', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
+INSERT INTO m_user(user_id, user_nm, password, email, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user11', 'ユーザー１１', 'pass', 'xxx@xxx.xx', 0, now(), 'system', now(), 'system');
 commit;

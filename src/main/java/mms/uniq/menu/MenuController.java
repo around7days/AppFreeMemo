@@ -1,5 +1,9 @@
 package mms.uniq.menu;
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,15 +29,30 @@ public class MenuController {
      */
     @RequestMapping("/menu")
     public String init(@AuthenticationPrincipal UserInfo userInfo,
+                       HttpSession session,
                        Model model) {
         logger.debug("ユーザーID：{}", userInfo.getUserId());
         logger.debug("ユーザー名：{}", userInfo.getUserNm());
+
+        logger.debug("session ");
+        Enumeration<String> e = session.getAttributeNames();
+        while (e.hasMoreElements()) {
+            String key = (String) e.nextElement();
+            logger.info("key: {}", key);
+            logger.info("value: {}", session.getAttribute(key));
+        }
+
         return "html/メニュー";
     }
 
+    /**
+     * ユーザー一覧画面に遷移
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/menu", params = "m001")
     public String M001(Model model) {
-        return "html/ユーザ一覧";
+        return "redirect:/mst/user/search?init";
     }
 
     @RequestMapping(value = "/menu", params = "t001")
