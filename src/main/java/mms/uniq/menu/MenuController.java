@@ -31,6 +31,11 @@ public class MenuController {
         return "html/メニュー";
     }
 
+    @RequestMapping(value = "/menu", params = "m001")
+    public String M001(Model model) {
+        return "html/ユーザ一覧";
+    }
+
     @RequestMapping(value = "/menu", params = "t001")
     public String T001(Model model) {
         return "html/月報状況一覧";

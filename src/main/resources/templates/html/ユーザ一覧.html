@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title></title>
+
+	<!-- Thymeleaf Toymol JS(debug用) -->
+	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
+
+	<!-- bootstrap CSS -->
+	<link rel="stylesheet" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<!-- jQuery -->
+	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
+	<!-- bootstrap JS -->
+	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
+	<!-- common JS -->
+	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+</head>
+<body>
+<form th:action="@{/userSearch}" th:object="${userSearchForm}" method="post">
+
+	<!-- ナビバー -->
+	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
+
+	<!-- メイン -->
+	<div class="container">
+		<!-- 画面サイズ指定 -->
+		<div style="max-width: 80em">
+
+			<!-- ヘッダ -->
+			<div class="page-header">
+				<h2>ユーザ一覧画面</h2>
+			</div>
+
+			<!-- 検索条件 -->
+			<div class="form-horizontal">
+				<!-- ユーザ -->
+				<div class="form-group">
+					<label for="s" class="col-sm-3 control-label">ユーザ</label>
+					<div class="col-sm-9">
+						<input type="text" value="" id="s" placeholder="ID" class="form-control" />
+					</div>
+				</div>
+				<!-- 検索 -->
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<button type="button" class="btn btn-default">検索 <span class="glyphicon glyphicon-search"></span></button>
+					</div>
+				</div>
+			</div><!-- /検索条件 -->
+
+			<!-- 検索結果 -->
+			<div class="container">
+				<!-- ページング -->
+				<nav>
+					<ul class="pager">
+						<li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Prev</a></li>
+						<li>100件中 1-20件表示</li>
+						<li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+					</ul>
+				</nav>
+
+				<!-- 検索結果テーブル -->
+				<table class="table table-hover table-condensed">
+					<!-- ヘッダ -->
+					<thead class="thead-default">
+						<tr>
+							<th>選択</th>
+							<th>ユーザID</th>
+							<th>ユーザ名</th>
+							<th>メールアドレス</th>
+						</tr>
+					</thead>
+					<!-- 明細 -->
+					<tbody>
+						<!-- -->
+						<tr>
+							<td><button type="button" class="btn btn-default btn-sm">選択</button></td>
+							<td>9999</td>
+							<td>月報太郎</td>
+							<td>xxxxxxx@xxx.xx.xx</td>
+						</tr>
+					</tbody>
+				</table>
+			</div><!-- /検索結果 -->
+
+		</div><!-- /画面サイズ指定 -->
+	</div><!-- /container -->
+
+</form>
+</body>
+</html>
