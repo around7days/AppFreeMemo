@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  * @author
  */
 @Controller
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @SessionAttributes(value = "loginForm")
 public class LoginController {
 
@@ -27,7 +27,6 @@ public class LoginController {
     /** ログイン画面フォーム */
     @ModelAttribute(value = "loginForm")
     LoginForm setupForm() {
-        logger.debug("create new form");
         return new LoginForm();
     }
 

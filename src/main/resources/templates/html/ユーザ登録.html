@@ -34,6 +34,9 @@
 				<h2>ユーザ登録画面</h2>
 			</div>
 
+			<!-- メッセージ -->
+			<div th:replace="@{/html/include/include_message}::message" ></div>
+
 			<!-- ユーザ登録 -->
 			<div class="form-horizontal">
 				<!-- ユーザID -->
@@ -63,6 +66,7 @@
 					<div class="col-sm-offset-3 col-sm-9">
 						<button type="submit" name="insert" class="btn btn-primary">登録<span class="glyphicon glyphicon-chevron-right"></span></button>
 						<button type="submit" name="update" class="btn btn-primary">更新<span class="glyphicon glyphicon-chevron-right"></span></button>
+						<button type="submit" name="back" class="btn btn-primary">戻る<span class="glyphicon glyphicon-chevron-left"></span></button>
 					</div>
 				</div>
 

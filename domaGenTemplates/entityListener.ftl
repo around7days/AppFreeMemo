@@ -10,9 +10,12 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.time.LocalDateTime;
 
 /**
- * 
+ *
 <#if lib.author??>
  * @author ${lib.author}
 </#if>
@@ -20,12 +23,38 @@ import ${importName};
 public class ${simpleName}<#if superclassSimpleName??> extends ${superclassSimpleName}<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}><#else> implements EntityListener<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}></#if> {
 <#if !superclassSimpleName??>
 
+    // 認証情報
+    private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
+                                                                              .getAuthentication()
+                                                                              .getPrincipal();
     @Override
     public void preInsert(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName} entity, PreInsertContext<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}> context) {
+        LocalDateTime now = LocalDateTime.now();
+
+        if (entity.getInsId() == null) {
+            entity.setInsId(principal.getUsername());
+        }
+        if (entity.getInsDate() == null) {
+            entity.setInsDate(now);
+        }
+        if (entity.getUpdId() == null) {
+            entity.setUpdId(principal.getUsername());
+        }
+        if (entity.getUpdDate() == null) {
+            entity.setUpdDate(now);
+        }
     }
 
     @Override
     public void preUpdate(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName} entity, PreUpdateContext<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}> context) {
+        LocalDateTime now = LocalDateTime.now();
+
+        if (entity.getUpdId() == null) {
+            entity.setUpdId(principal.getUsername());
+        }
+        if (entity.getUpdDate() == null) {
+            entity.setUpdDate(now);
+        }
     }
 
     @Override

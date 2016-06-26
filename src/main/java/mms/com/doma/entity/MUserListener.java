@@ -7,18 +7,47 @@ import org.seasar.doma.jdbc.entity.PostUpdateContext;
 import org.seasar.doma.jdbc.entity.PreDeleteContext;
 import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.time.LocalDateTime;
 
 /**
- * 
+ *
  */
 public class MUserListener implements EntityListener<MUser> {
 
+    // 認証情報
+    private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
+                                                                              .getAuthentication()
+                                                                              .getPrincipal();
     @Override
     public void preInsert(MUser entity, PreInsertContext<MUser> context) {
+        LocalDateTime now = LocalDateTime.now();
+
+        if (entity.getInsId() == null) {
+            entity.setInsId(principal.getUsername());
+        }
+        if (entity.getInsDate() == null) {
+            entity.setInsDate(now);
+        }
+        if (entity.getUpdId() == null) {
+            entity.setUpdId(principal.getUsername());
+        }
+        if (entity.getUpdDate() == null) {
+            entity.setUpdDate(now);
+        }
     }
 
     @Override
     public void preUpdate(MUser entity, PreUpdateContext<MUser> context) {
+        LocalDateTime now = LocalDateTime.now();
+
+        if (entity.getUpdId() == null) {
+            entity.setUpdId(principal.getUsername());
+        }
+        if (entity.getUpdDate() == null) {
+            entity.setUpdDate(now);
+        }
     }
 
     @Override

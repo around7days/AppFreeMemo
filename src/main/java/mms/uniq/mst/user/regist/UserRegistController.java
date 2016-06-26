@@ -1,7 +1,6 @@
 package mms.uniq.mst.user.regist;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 
 import javax.validation.Valid;
 
@@ -26,7 +25,7 @@ import mms.com.doma.entity.MUser;
  * @author
  */
 @Controller
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @SessionAttributes(value = "userRegistForm")
 public class UserRegistController {
 
@@ -40,7 +39,6 @@ public class UserRegistController {
     /** ユーザー登録画面フォーム */
     @ModelAttribute
     UserRegistForm setupForm() {
-        logger.debug("create new form");
         return new UserRegistForm();
     }
 
@@ -106,13 +104,14 @@ public class UserRegistController {
 
         // 登録処理
 
-        return "html/ユーザー登録";
+        return "forward:/mst/user/regist?back";
     }
 
     /**
      * 更新処理
      * @param form
      * @param bindingResult
+     * @param principal
      * @param model
      * @return
      */
@@ -130,18 +129,24 @@ public class UserRegistController {
         }
 
         // 更新処理
-        // ユーザー情報の取得
-        MUser mUser = mUserDao.selectById(form.getUserId());
         // 値の設定
+        MUser mUser = new MUser();
         BeanUtils.copyProperties(form, mUser);
-        mUser.setUpdId(principal.getName());
-        mUser.setUpdDate(LocalDateTime.now());
         logger.debug("更新情報：{}", mUser.toString());
 
         // 更新
         mUserDao.update(mUser);
 
-        return "html/ユーザ登録";
+        return "redirect:/mst/user/regist?back";
+    }
+
+    /**
+     * 戻る処理
+     * @return
+     */
+    @RequestMapping(value = "/mst/user/regist", params = "back")
+    public String back() {
+        return "redirect:/mst/user/search?reSearch";
     }
 
 }

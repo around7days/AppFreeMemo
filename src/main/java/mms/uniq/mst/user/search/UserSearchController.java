@@ -27,7 +27,7 @@ import mms.com.utils.SelectOptionsUtil;
  * @author
  */
 @Controller
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @SessionAttributes(value = "userSearchForm")
 public class UserSearchController {
 
@@ -37,7 +37,6 @@ public class UserSearchController {
     /** ユーザ一覧画面フォーム */
     @ModelAttribute(value = "userSearchForm")
     UserSearchForm setupForm() {
-        logger.debug("create new form");
         return new UserSearchForm();
     }
 
@@ -55,6 +54,7 @@ public class UserSearchController {
     public String init(UserSearchForm form,
                        Model model) {
         // 初期値設定
+        form.setUserNm("ユーザー０");
 
         return "html/ユーザ一覧";
     }
@@ -94,6 +94,37 @@ public class UserSearchController {
             bindingResult.reject("", "検索結果は存在しません");
             return "html/ユーザ一覧";
         }
+
+        // 検索結果格納
+        pageInfo.setTotalSize(options.getCount());
+        form.setResultList(result);
+
+        return "html/ユーザ一覧";
+    }
+
+    /**
+     * 再検索処理
+     * @param form
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/mst/user/search", params = "reSearch")
+    public String reSearch(UserSearchForm form,
+                           Model model) {
+        logger.debug("フォーム情報：{}", form.toString());
+
+        /*
+         * 検索処理
+         */
+        // ページング設定
+        PageInfo pageInfo = form.getPageInfo();
+        SelectOptions options = SelectOptionsUtil.get(pageInfo);
+
+        // 検索処理
+        List<MUser> result = dao.searchUser(form, options);
+        logger.debug("検索結果(全件)：{}件", options.getCount());
+        logger.debug("検索結果：{}件", result.size());
+        result.forEach(obj -> logger.debug(ToStringBuilder.reflectionToString(obj)));
 
         // 検索結果格納
         pageInfo.setTotalSize(options.getCount());

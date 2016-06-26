@@ -2,8 +2,8 @@
  * DB接続定義
  */
 def dbUrl       = 'jdbc:mysql://localhost:3306/mmsdb'
-def dbUser      = 'user1'
-def dbPass      = 'user1'
+def dbUser      = 'mms01'
+def dbPass      = 'mms01'
 def tableTypes  = 'TABLE,VIEW'
 def templateDir = 'domaGenTemplates'
 
@@ -11,14 +11,18 @@ def templateDir = 'domaGenTemplates'
  * 共通ソースコード自動生成
  */
 task domaGen << {
-	def entityPkg = 'mms.com.doma.entity'
-	def daoPkg    = 'mms.com.doma.dao'
+	def entityPkg         = 'mms.com.doma.entity'
+	def daoPkg            = 'mms.com.doma.dao'
+	def entityOverwrite   = true
+	def listenerOverwrite = true
+	def DaoOverwrite      = true
+	def SqlConfgOverwrite = true
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
     ant.gen(url: dbUrl, user: dbUser, password: dbPass, tableTypes: tableTypes, templatePrimaryDir: templateDir) {
-        entityConfig(packageName: entityPkg, overwrite: true, overwriteListener: false)
-        daoConfig(packageName: daoPkg, overwrite: false)
-        sqlConfig(overwrite: true)
+        entityConfig(packageName: entityPkg, overwrite: entityOverwrite, overwriteListener: listenerOverwrite)
+        daoConfig(packageName: daoPkg, overwrite: DaoOverwrite)
+        sqlConfig(overwrite: SqlConfgOverwrite)
     }
 }
 

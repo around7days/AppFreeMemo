@@ -48,14 +48,14 @@ public interface ${simpleName} {
      * @param entity
      * @return affected rows
      */
-    @Insert
+    @Insert(excludeNull = true)
     int insert(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 
     /**
      * @param entity
      * @return affected rows
      */
-    @Update
+    @Update(excludeNull = true)
     int update(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 
     /**
