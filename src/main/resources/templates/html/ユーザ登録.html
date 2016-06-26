@@ -10,13 +10,15 @@
 	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
 
 	<!-- bootstrap CSS -->
-	<link rel="stylesheet" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+	<!-- 個別 JS -->
+	<script th:src="@{/js/userRegist.js}" src="../../static/js/userRegist.js"></script>
 </head>
 <body>
 <form th:action="@{/mst/user/regist}" th:object="${userRegistForm}" name="main" method="post">
@@ -61,13 +63,11 @@
 					</div>
 				</div>
 
-				<!-- 登録・更新 -->
-				<div class="form-group">
-					<div class="col-sm-offset-3 col-sm-9">
-						<button type="submit" name="insert" class="btn btn-primary">登録<span class="glyphicon glyphicon-chevron-right"></span></button>
-						<button type="submit" name="update" class="btn btn-primary">更新<span class="glyphicon glyphicon-chevron-right"></span></button>
-						<button type="submit" name="back" class="btn btn-primary">戻る<span class="glyphicon glyphicon-chevron-left"></span></button>
-					</div>
+				<!-- 登録・更新ボタン -->
+				<div class="text-center">
+					<button type="submit" name="back" id="backBtn" class="btn btn-primary">戻る<span class="glyphicon glyphicon-chevron-left"></span></button>
+					<button type="submit" name="insert" id="insertBtn" class="btn btn-primary">登録<span class="glyphicon glyphicon-chevron-right"></span></button>
+					<button type="submit" name="update" id="updateBtn" class="btn btn-primary">更新<span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 
 			</div><!-- /ユーザ登録 -->

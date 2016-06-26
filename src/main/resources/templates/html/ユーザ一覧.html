@@ -10,13 +10,15 @@
 	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
 
 	<!-- bootstrap CSS -->
-	<link rel="stylesheet" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+	<!-- 個別 JS -->
+	<script th:src="@{/js/userSearch.js}" src="../../static/js/userSearch.js"></script>
 </head>
 <body>
 <form th:action="@{/mst/user/search}" th:object="${userSearchForm}" name="main" method="post">
@@ -43,16 +45,14 @@
 				<div class="form-group">
 					<label for="user" class="col-sm-3 control-label">ユーザ</label>
 					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{userId}" name="userId" id="userId" placeholder="ユーザID" class="form-control" />
+						<input type="text" th:value="*{userId}" name="userId" id="userId" placeholder="ユーザID（完全一致）" class="form-control" />
 						<input type="text" th:value="*{userNm}" name="userNm" id="userNm" placeholder="ユーザ名（部分一致）" class="form-control" />
 					</div>
 				</div>
-				<!-- 検索・新規 -->
-				<div class="form-group">
-					<div class="col-sm-offset-3 col-sm-9">
-						<button type="submit" name="search" class="btn btn-default">検索 <span class="glyphicon glyphicon-search"></span></button>
-						<button type="submit" name="search" class="btn btn-default">新規 <span class="glyphicon glyphicon-chevron-right"></span></button>
-					</div>
+				<!-- 検索・新規ボタン -->
+				<div class="text-center">
+					<button type="submit" name="search" class="btn btn-default">検索 <span class="glyphicon glyphicon-search"></span></button>
+					<button type="submit" name="newBtn" id="newBtn" class="btn btn-default">新規 <span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 			</div><!-- /検索条件 -->
 

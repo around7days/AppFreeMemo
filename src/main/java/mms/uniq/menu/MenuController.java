@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import mms.com.security.UserInfo;
 
+/**
+ * メニュー登録画面コントローラー
+ * @author
+ */
 @Controller
 @Transactional(rollbackFor = Exception.class)
 public class MenuController {
@@ -35,10 +39,16 @@ public class MenuController {
         logger.debug("ユーザーID：{}", userInfo.getUserId());
         logger.debug("ユーザー名：{}", userInfo.getUserNm());
 
-        // TODO
+        // TODO どっかのタイミングできれいにする
+        // 個別セッションの破棄
         Enumeration<String> e = session.getAttributeNames();
         while (e.hasMoreElements()) {
-            logger.info("session key: {}", e.nextElement());
+            String key = e.nextElement();
+            logger.info("session key: {}", key);
+            if (!"SPRING_SECURITY_CONTEXT".equals(key)
+                && !"org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN".equals(key)) {
+                session.removeAttribute(key);
+            }
         }
 
         return "html/メニュー";
@@ -69,10 +79,12 @@ public class MenuController {
         return "html/月報承認";
     }
 
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/menu", params = "e001")
     public String T004(Model model) throws Exception {
-        if (true)
+        if (true) {
             throw new Exception("意図的な強制Exception");
+        }
         return "";
     }
 

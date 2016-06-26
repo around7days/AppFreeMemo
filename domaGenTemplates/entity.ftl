@@ -10,6 +10,8 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
 <#if showDbComment && comment??>
@@ -59,23 +61,28 @@ public class <#if entityPrefix??>${entityPrefix}</#if>${simpleName}<#if supercla
 <#if useAccessor>
   <#list ownEntityPropertyDescs as property>
 
-    /** 
+    /**
      * Returns the ${property.name}.
-     * 
+     *
      * @return the ${property.name}
      */
     public ${property.propertyClassSimpleName} get${property.name?cap_first}() {
         return ${property.name};
     }
 
-    /** 
+    /**
      * Sets the ${property.name}.
-     * 
+     *
      * @param ${property.name} the ${property.name}
      */
     public void set${property.name?cap_first}(${property.propertyClassSimpleName} ${property.name}) {
         this.${property.name} = ${property.name};
     }
   </#list>
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
 </#if>
 }

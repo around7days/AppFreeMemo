@@ -4,7 +4,7 @@
 function changeStyle(style){
 	// フェードアウト後にCSS変更
 	$("body").fadeOut("normal", function(){
-		$("#mystyle").attr("href", "../../static/fw/bootstrap/css/bootswatch-theme-"+ style +".css");
+		$("#myStyle").attr("href", "/fw/bootstrap/css/bootswatch-theme-"+ style +".css");
 	});
 
 	// N秒後にフェードイン

@@ -17,14 +17,12 @@ public class TraceInterceptor {
 
     @Before("within(mms..*Controller*)")
     public void invokeBefore(JoinPoint joinPoint) {
-        logger.debug("[AOP at before] called {}#{}", joinPoint.getTarget().getClass(),
-                     joinPoint.getSignature().getName());
+        logger.debug("[AOP before] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
     }
 
     @After("within(mms..*Controller*)")
     public void invokeAfter(JoinPoint joinPoint) {
-        logger.debug("[AOP at after] called {}#{}", joinPoint.getTarget().getClass(),
-                     joinPoint.getSignature().getName());
+        logger.debug("[AOP after ] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
     }
 
     // @Before("execution(* mms..*Controller.*(..))")

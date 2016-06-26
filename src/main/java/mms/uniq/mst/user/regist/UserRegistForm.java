@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * ユーザ登録画面フォーム
@@ -14,27 +15,28 @@ public class UserRegistForm {
 
     /** 画面表示モード定義 */
     enum ViewMode {
-        NEW, UPDATE;
+        /** 新規 */
+        NEW,
+        /** 更新 */
+        UPDATE;
     }
 
     /** 画面表示モード */
     private ViewMode viewMode;
 
     /** ユーザーID */
+    @NotEmpty(message = "ユーザーIDは{NotEmpty.message}")
     @Size(max = 10, message = "ユーザーIDは{Size.message}")
     private String userId;
 
     /** ユーザー名 */
+    @NotEmpty(message = "ユーザー名は{NotEmpty.message}")
     @Size(max = 10, message = "ユーザー名は{Size.message}")
     private String userNm;
 
     /** メールアドレス */
     @Email(message = "メールアドレスの{Email.message}")
     private String email;
-
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
 
     /**
      * 画面表示モードを取得します。
@@ -100,4 +102,7 @@ public class UserRegistForm {
         this.email = email;
     }
 
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }

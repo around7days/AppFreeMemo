@@ -10,13 +10,15 @@
 	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
 
 	<!-- bootstrap CSS -->
-	<link rel="stylesheet" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+	<!-- 個別 JS -->
+	<script th:src="@{/js/login.js}" src="../../static/js/login.js"></script>
 </head>
 <body>
 <form th:action="@{/login_auth_validate}" th:object="${loginForm}" name="main" method="post">
@@ -47,7 +49,7 @@
 				<!-- パスワード -->
 				<div class="form-group">
 					<label class="control-label">パスワード</label>
-					<input type="password" th:value="*{password}" name="password" id="password" class="form-control" placeholder="パスワード" />
+					<input type="password" th:value="*{password}" name="password" id="password" class="form-control" placeholder="パスワード" autocomplete="off" />
 				</div>
 				<!-- ログイン -->
 				<button type="submit" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>

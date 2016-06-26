@@ -10,7 +10,7 @@
 	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
 
 	<!-- bootstrap CSS -->
-	<link rel="stylesheet" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
@@ -50,7 +50,6 @@
 				<!-- メニュー明細 -->
 				<div class="list-group">
 					<button type="submit" name="m001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ一覧</button>
-					<button type="submit" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ登録</button>
 					<button type="submit" name="t001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報状況一覧</button>
 					<button type="submit" name="t002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
 					<button type="submit" name="t003" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認</button>
