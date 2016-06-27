@@ -20,7 +20,7 @@ import mms.com.security.UserInfo;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-public class MenuController {
+public class MenuController extends mms.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);

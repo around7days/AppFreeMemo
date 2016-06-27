@@ -39,7 +39,9 @@
 			<!-- メッセージ -->
 			<div th:replace="@{/html/include/include_message}::message" ></div>
 
-			<!-- 検索条件 -->
+			<!--
+				検索条件
+			 -->
 			<div class="form-horizontal">
 				<!-- ユーザ -->
 				<div class="form-group">
@@ -52,11 +54,14 @@
 				<!-- 検索・新規ボタン -->
 				<div class="text-center">
 					<button type="submit" name="search" class="btn btn-default">検索 <span class="glyphicon glyphicon-search"></span></button>
-					<button type="submit" name="newBtn" id="newBtn" class="btn btn-default">新規 <span class="glyphicon glyphicon-chevron-right"></span></button>
+					<button type="submit" name="new" class="btn btn-default">新規 <span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 			</div><!-- /検索条件 -->
 
-			<!-- 検索結果 -->
+
+			<!--
+				検索結果
+			 -->
 			<div class="container">
 				<!-- ページング -->
 				<div th:replace="@{/html/include/include_page}::pageing" ></div>

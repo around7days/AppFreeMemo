@@ -1,6 +1,6 @@
 package mms.uniq.mst.user.regist;
 
-import java.security.Principal;
+import java.util.Locale;
 
 import javax.validation.Valid;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mms.com.doma.dao.MUserDao;
 import mms.com.doma.entity.MUser;
@@ -27,7 +28,7 @@ import mms.com.doma.entity.MUser;
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @SessionAttributes(value = "userRegistForm")
-public class UserRegistController {
+public class UserRegistController extends mms.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);
@@ -48,7 +49,7 @@ public class UserRegistController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/regist/initNew")
+    @RequestMapping(value = "/mst/user/regist/init/new")
     public String initNew(UserRegistForm form,
                           Model model) {
         // 初期値設定
@@ -64,7 +65,7 @@ public class UserRegistController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/regist/initUpdate/{userId}")
+    @RequestMapping(value = "/mst/user/regist/init/update/{userId}")
     public String initUpdate(UserRegistForm form,
                              @PathVariable String userId,
                              Model model) {
@@ -87,12 +88,14 @@ public class UserRegistController {
      * 登録処理
      * @param form
      * @param bindingResult
+     * @param redirectAttr
      * @param model
      * @return
      */
     @RequestMapping(value = "/mst/user/regist", params = "insert")
     public String insert(@Valid UserRegistForm form,
                          BindingResult bindingResult,
+                         RedirectAttributes redirectAttr,
                          Model model) {
         logger.debug("フォーム情報：{}", form.toString());
 
@@ -104,21 +107,25 @@ public class UserRegistController {
 
         // 登録処理
 
-        return "forward:/mst/user/regist?back";
+        // TODO messageResorceが使いにくい。どこかで改良。
+        // 完了メッセージ
+        redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));
+
+        return "redirect:/mst/user/search?reSearch";
     }
 
     /**
      * 更新処理
      * @param form
      * @param bindingResult
-     * @param principal
+     * @param redirectAttr
      * @param model
      * @return
      */
     @RequestMapping(value = "/mst/user/regist", params = "update")
     public String update(@Valid UserRegistForm form,
                          BindingResult bindingResult,
-                         Principal principal,
+                         RedirectAttributes redirectAttr,
                          Model model) {
         logger.debug("フォーム情報：{}", form.toString());
 
@@ -137,7 +144,10 @@ public class UserRegistController {
         // 更新
         mUserDao.update(mUser);
 
-        return "redirect:/mst/user/regist?back";
+        // 完了メッセージ
+        redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.002", null, Locale.getDefault()));
+
+        return "redirect:/mst/user/search?reSearch";
     }
 
     /**

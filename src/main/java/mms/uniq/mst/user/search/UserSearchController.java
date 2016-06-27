@@ -29,7 +29,7 @@ import mms.com.utils.SelectOptionsUtil;
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @SessionAttributes(value = "userSearchForm")
-public class UserSearchController {
+public class UserSearchController extends mms.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSearchController.class);
@@ -154,6 +154,15 @@ public class UserSearchController {
     // }
 
     /**
+     * ユーザー新規処理
+     * @return
+     */
+    @RequestMapping(value = "/mst/user/search", params = "new")
+    public String selectNew() {
+        return "redirect:/mst/user/regist/init/new/";
+    }
+
+    /**
      * ユーザー選択処理
      * @param form
      * @param index
@@ -171,6 +180,6 @@ public class UserSearchController {
         MUser user = form.getResultList().get(index);
         logger.debug("選択ユーザ情報：{}", user.toString());
 
-        return "redirect:/mst/user/regist/initUpdate/" + user.getUserId();
+        return "redirect:/mst/user/regist/init/update/" + user.getUserId();
     }
 }
