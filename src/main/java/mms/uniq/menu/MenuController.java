@@ -64,6 +64,16 @@ public class MenuController extends mms.com.abstracts.AbstractController {
         return "redirect:/mst/user/search?init";
     }
 
+    /**
+     * ユーザー登録画面に遷移
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/menu", params = "m002")
+    public String M002(Model model) {
+        return "redirect:/mst/user/regist/init/new";
+    }
+
     @RequestMapping(value = "/menu", params = "t001")
     public String T001(Model model) {
         return "html/月報状況一覧";

@@ -1,4 +1,4 @@
-package mms.com.controller;
+package mms.com.exception;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;

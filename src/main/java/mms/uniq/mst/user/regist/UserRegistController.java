@@ -11,15 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mms.com.doma.dao.MUserDao;
 import mms.com.doma.entity.MUser;
+import mms.com.exception.ValidateException;
 
 /**
  * ユーザー登録画面コントローラー
@@ -32,6 +36,9 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);
+
+    /** ValidateデフォルトエラーView名 */
+    private static final String validateErrorPage = "html/ユーザ登録";
 
     /** MUserDao */
     @Autowired
@@ -102,12 +109,12 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return "html/ユーザ登録";
+            throw new ValidateException();
         }
 
         // 登録処理
 
-        // TODO messageResorceが使いにくい。どこかで改良。
+        // TODO MessageResorceが使いにくい。どこかで改良。
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));
 
@@ -159,4 +166,20 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         return "redirect:/mst/user/search?reSearch";
     }
 
+    /**
+     * ValidateExceptionのエラーハンドリング
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(ValidateException.class)
+    public ModelAndView ValidateException(ValidateException e,
+                                          UserRegistForm form) {
+        String viewName = StringUtils.isEmpty(e.getViewName()) ? validateErrorPage : e.getViewName();
+        logger.debug("★★★★★★★★");
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(viewName);
+
+        return mv;
+    }
 }
