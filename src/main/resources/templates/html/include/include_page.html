@@ -5,11 +5,11 @@
 <div th:fragment="pageing">
 	<nav>
 		<ul class="pager">
-			<li class="previous disabled">
+			<li th:class="'previous ' +  (*{pageInfo.hasPrev}? '' : 'disabled')|" class="previous disabled" >
 				<a href="#" onclick="document.main.submit();return false;"><span aria-hidden="true">&larr;</span> Prev</a>
 			</li>
-			<li th:text="|*{pageInfo.totalSize}件中 *{pageInfo.startNo}-*{pageInfo.endNo}件表示|">100件中 1-20件表示</li>
-			<li class="next">
+			<li th:text="|*{pageInfo.totalSize}件中 *{pageInfo.startIndex}-*{pageInfo.endIndex}件表示|">100件中 1-20件表示</li>
+			<li th:class="'next ' +  (*{pageInfo.hasNext}? '' : 'disabled')|" class="next disabled" >
 				<a href="#" onclick="document.main.submit();return false;">Next <span aria-hidden="true">&rarr;</span></a>
 			</li>
 		</ul>

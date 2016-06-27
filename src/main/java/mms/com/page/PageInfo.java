@@ -1,46 +1,55 @@
 package mms.com.page;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ページ情報
  * @author
  */
 public class PageInfo {
-    private static final int DEFAULT_LIMIT = 5;
+    /** logger */
+    private static Logger logger = LoggerFactory.getLogger(PageInfo.class);
 
-    /** 表示ページ */
-    private int page = 1;
+    /** 1ページ表示件数（デフォルト） */
+    private static final int DEFAULT_LIMIT = 5;
 
     /** 1ページ表示件数 */
     private int limit = DEFAULT_LIMIT;
 
-    /** 表示開始No */
-    private int startNo = 1;
-
-    /** 表示終了No */
-    private int endNo;
+    /** 表示ページ */
+    private int page = 1;
 
     /** 合計表示件数 */
-    private Long totalSize;
+    private int totalSize = 0;
 
-    /** 前ページ有無 */
-    private boolean hasPrev;
+    //    /** 表示開始No */
+    //    private int startNo = 1;
+    //
+    //    /** 表示終了No */
+    //    private int endNo;
+    //
+    //    /** 前ページ有無 */
+    //    private boolean hasPrev;
+    //
+    //    /** 次ページ有無 */
+    //    private boolean hasNext;
 
-    /** 次ページ有無 */
-    private boolean hasNext;
-
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
-
+    /*-----------------------------------------------------------------------*/
     /**
-     * 表示ページを取得します。
-     * @return 表示ページ
+     * 1ページ表示件数を設定します。
+     * @param limit 1ページ表示件数
      */
-    public int getPage() {
-        return page;
+    public void setLimit(int limit) {
+        if (limit < 1) {
+            logger.warn("limit to {} can not be assigned", limit);
+            return;
+        }
+        this.limit = limit;
     }
 
     /**
@@ -48,8 +57,35 @@ public class PageInfo {
      * @param page 表示ページ
      */
     public void setPage(int page) {
+        if (page < 1) {
+            logger.warn("page to {} can not be assigned", page);
+            return;
+        }
         this.page = page;
     }
+
+    /**
+     * 合計表示件数を設定します。
+     * @param totalSize 合計表示件数
+     */
+    public void setTotalSize(Long totalSize) {
+        // TODO intの上限を超えるとエラーが発生する。
+        setTotalSize(new Integer(totalSize.toString()));
+    }
+
+    /**
+     * 合計表示件数を設定します。
+     * @param totalSize 合計表示件数
+     */
+    public void setTotalSize(int totalSize) {
+        if (totalSize < 0) {
+            logger.warn("totalSize to {} can not be assigned", totalSize);
+            return;
+        }
+        this.totalSize = totalSize;
+    }
+
+    /*-----------------------------------------------------------------------*/
 
     /**
      * 1ページ表示件数を取得します。
@@ -60,91 +96,85 @@ public class PageInfo {
     }
 
     /**
-     * 1ページ表示件数を設定します。
-     * @param limit 1ページ表示件数
+     * 表示ページを取得します。
+     * @return 表示ページ
      */
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public int getPage() {
+        if (totalSize <= 0) {
+            // データ件数が0件の場合
+            return 1;
+        } else if (limit * (page - 1) > totalSize - 1) {
+            // データ件数が減り、現在ページを表示できない場合、表示ページを最終ページとして返却
+            return getTotalPage();
+        } else {
+            // 上記以外
+            return page;
+        }
+    }
+
+    /**
+     * 総ページ数を取得する。
+     * @return 総ページ数
+     */
+    public int getTotalPage() {
+        BigDecimal value = new BigDecimal(totalSize);
+        value = value.divide(new BigDecimal(limit), BigDecimal.ROUND_UP);
+        return value.intValue();
     }
 
     /**
      * 表示開始Noを取得します。
-     * @return 表示開始No
+     * @return 表示開始Index
      */
-    public int getStartNo() {
-        return startNo;
-    }
-
-    /**
-     * 表示開始Noを設定します。
-     * @param startNo 表示開始No
-     */
-    public void setStartNo(int startNo) {
-        this.startNo = startNo;
+    public int getStartIndex() {
+        if (totalSize <= 0) {
+            return 0;
+        }
+        return (getPage() * limit) - (limit - 1);
     }
 
     /**
      * 表示終了Noを取得します。
-     * @return 表示終了No
+     * @return 表示終了Index
      */
-    public int getEndNo() {
-        return endNo;
-    }
-
-    /**
-     * 表示終了Noを設定します。
-     * @param endNo 表示終了No
-     */
-    public void setEndNo(int endNo) {
-        this.endNo = endNo;
+    public int getEndIndex() {
+        if (totalSize < (getPage() * limit)) {
+            return totalSize;
+        }
+        return getPage() * limit;
     }
 
     /**
      * 合計表示件数を取得します。
      * @return 合計表示件数
      */
-    public Long getTotalSize() {
+    public int getTotalSize() {
         return totalSize;
-    }
-
-    /**
-     * 合計表示件数を設定します。
-     * @param totalSize 合計表示件数
-     */
-    public void setTotalSize(Long totalSize) {
-        this.totalSize = totalSize;
     }
 
     /**
      * 前ページ有無を取得します。
      * @return 前ページ有無
      */
-    public boolean isHasPrev() {
-        return hasPrev;
-    }
-
-    /**
-     * 前ページ有無を設定します。
-     * @param hasPrev 前ページ有無
-     */
-    public void setHasPrev(boolean hasPrev) {
-        this.hasPrev = hasPrev;
+    public boolean getHasPrev() {
+        if (getPage() <= 1) {
+            return false;
+        }
+        return true;
     }
 
     /**
      * 次ページ有無を取得します。
      * @return 次ページ有無
      */
-    public boolean isHasNext() {
-        return hasNext;
+    public boolean getHasNext() {
+        if (getPage() >= getTotalPage()) {
+            return false;
+        }
+        return true;
     }
 
-    /**
-     * 次ページ有無を設定します。
-     * @param hasNext 次ページ有無
-     */
-    public void setHasNext(boolean hasNext) {
-        this.hasNext = hasNext;
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
-
 }

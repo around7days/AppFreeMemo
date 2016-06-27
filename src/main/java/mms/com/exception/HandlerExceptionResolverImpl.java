@@ -1,4 +1,4 @@
-package mms.com.controller;
+package mms.com.exception;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * @author
+ */
 @Component
 public class HandlerExceptionResolverImpl implements HandlerExceptionResolver {
-    // TODO
     /** logger */
-    @SuppressWarnings("unused")
     private static Logger logger = LoggerFactory.getLogger(HandlerExceptionResolverImpl.class);
 
     @Override
@@ -21,10 +22,10 @@ public class HandlerExceptionResolverImpl implements HandlerExceptionResolver {
                                          HttpServletResponse response,
                                          Object handler,
                                          Exception ex) {
-        System.out.println(ex.getClass() + " : " + ex.getMessage());
+        logger.error(ex.getMessage(), ex);
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("error");
+        mv.setViewName("redirect:/error");
 
         return mv;
     }
