@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import mms.com.consts.PageIdConst;
+
 /**
  * ログイン画面コントローラー
  * @author
@@ -43,8 +45,7 @@ public class LoginController {
         form.setUserId("user01");
         form.setPassword("pass");
 
-        // ログイン画面表示
-        return "html/ログイン";
+        return PageIdConst.Com.LOGIN;
     }
 
     /**
@@ -62,7 +63,7 @@ public class LoginController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return "html/ログイン";
+            return PageIdConst.Com.LOGIN;
         }
 
         // ログイン認証処理にフォワード
@@ -83,6 +84,6 @@ public class LoginController {
                              Model model) {
         bindingResult.reject("", "ログインに失敗しました");
         logger.debug(bindingResult.getAllErrors().toString());
-        return "html/ログイン";
+        return PageIdConst.Com.LOGIN;
     }
 }

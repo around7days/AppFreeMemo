@@ -31,6 +31,9 @@ public class ${simpleName}<#if superclassSimpleName??> extends ${superclassSimpl
     public void preInsert(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName} entity, PreInsertContext<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}> context) {
         LocalDateTime now = LocalDateTime.now();
 
+        if (entity.getDelFlg() == null) {
+            entity.setDelFlg(0);
+        }
         if (entity.getInsId() == null) {
             entity.setInsId(principal.getUsername());
         }

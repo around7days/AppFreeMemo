@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mms.com.consts.PageIdConst;
 import mms.com.doma.dao.MUserDao;
 import mms.com.doma.entity.MUser;
 import mms.com.exception.ValidateException;
@@ -38,7 +39,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);
 
     /** ValidateデフォルトエラーView名 */
-    private static final String validateErrorPage = "html/ユーザ登録";
+    private static final String validateErrorPage = PageIdConst.Mst.USER_REGIST;
 
     /** MUserDao */
     @Autowired
@@ -62,7 +63,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 初期値設定
         form.setViewMode(UserRegistForm.ViewMode.NEW);
 
-        return "html/ユーザ登録";
+        return PageIdConst.Mst.USER_REGIST;
     }
 
     /**
@@ -88,7 +89,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
 
         logger.debug("ユーザ情報：{}", form.toString());
 
-        return "html/ユーザ登録";
+        return PageIdConst.Mst.USER_REGIST;
     }
 
     /**
@@ -113,6 +114,14 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         }
 
         // 登録処理
+        // 値の設定
+        MUser mUser = new MUser();
+        BeanUtils.copyProperties(form, mUser);
+        mUser.setPassword("pass");
+        logger.debug("登録情報：{}", mUser.toString());
+
+        // 登録
+        mUserDao.insert(mUser);
 
         // TODO MessageResorceが使いにくい。どこかで改良。
         // 完了メッセージ
@@ -139,7 +148,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return "html/ユーザ登録";
+            return PageIdConst.Mst.USER_REGIST;
         }
 
         // 更新処理
@@ -172,8 +181,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @return
      */
     @ExceptionHandler(ValidateException.class)
-    public ModelAndView ValidateException(ValidateException e,
-                                          UserRegistForm form) {
+    public ModelAndView ValidateException(ValidateException e) {
         String viewName = StringUtils.isEmpty(e.getViewName()) ? validateErrorPage : e.getViewName();
         logger.debug("★★★★★★★★");
 

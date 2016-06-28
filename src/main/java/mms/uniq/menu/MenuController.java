@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import mms.com.consts.PageIdConst;
 import mms.com.security.UserInfo;
 
 /**
@@ -51,7 +52,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
             }
         }
 
-        return "html/メニュー";
+        return PageIdConst.Com.MENU;
     }
 
     /**

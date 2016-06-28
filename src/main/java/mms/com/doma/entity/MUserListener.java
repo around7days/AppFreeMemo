@@ -24,6 +24,9 @@ public class MUserListener implements EntityListener<MUser> {
     public void preInsert(MUser entity, PreInsertContext<MUser> context) {
         LocalDateTime now = LocalDateTime.now();
 
+        if (entity.getDelFlg() == null) {
+            entity.setDelFlg(0);
+        }
         if (entity.getInsId() == null) {
             entity.setInsId(principal.getUsername());
         }

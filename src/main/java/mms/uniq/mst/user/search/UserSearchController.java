@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import mms.com.consts.PageIdConst;
 import mms.com.doma.entity.MUser;
 import mms.com.page.PageInfo;
 import mms.com.utils.SelectOptionsUtil;
@@ -56,7 +57,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         // 初期値設定
         form.setUserNm("ユーザー０");
 
-        return "html/ユーザ一覧";
+        return PageIdConst.Mst.USER_SEARCH;
     }
 
     /**
@@ -75,7 +76,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return "html/ユーザ一覧";
+            return PageIdConst.Mst.USER_SEARCH;
         }
 
         /*
@@ -92,14 +93,14 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         result.forEach(obj -> logger.debug(ToStringBuilder.reflectionToString(obj)));
         if (result.isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
-            return "html/ユーザ一覧";
+            return PageIdConst.Mst.USER_SEARCH;
         }
 
         // 検索結果格納
         pageInfo.setTotalSize(options.getCount());
         form.setResultList(result);
 
-        return "html/ユーザ一覧";
+        return PageIdConst.Mst.USER_SEARCH;
     }
 
     /**
@@ -130,7 +131,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         pageInfo.setTotalSize(options.getCount());
         form.setResultList(result);
 
-        return "html/ユーザ一覧";
+        return PageIdConst.Mst.USER_SEARCH;
     }
 
     // /**

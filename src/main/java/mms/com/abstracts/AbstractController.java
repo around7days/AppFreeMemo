@@ -1,6 +1,3 @@
-/**
- *
- */
 package mms.com.abstracts;
 
 import org.springframework.beans.factory.annotation.Autowired;
