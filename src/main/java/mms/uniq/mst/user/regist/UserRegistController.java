@@ -32,7 +32,7 @@ import mms.com.exception.ValidateException;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(value = "userRegistForm")
+@SessionAttributes(types = UserRegistForm.class)
 public class UserRegistController extends mms.com.abstracts.AbstractController {
 
     /** logger */

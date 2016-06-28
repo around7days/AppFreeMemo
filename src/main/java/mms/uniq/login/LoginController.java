@@ -20,7 +20,7 @@ import mms.com.consts.PageIdConst;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(value = "loginForm")
+@SessionAttributes(types = LoginForm.class)
 public class LoginController {
 
     /** logger */

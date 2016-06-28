@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import mms.com.consts.PageIdConst;
 import mms.com.security.UserInfo;
@@ -21,6 +22,7 @@ import mms.com.security.UserInfo;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
+@SessionAttributes(types = MenuForm.class)
 public class MenuController extends mms.com.abstracts.AbstractController {
 
     /** logger */

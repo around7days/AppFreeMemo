@@ -29,7 +29,7 @@ import mms.com.utils.SelectOptionsUtil;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(value = "userSearchForm")
+@SessionAttributes(types = UserSearchForm.class)
 public class UserSearchController extends mms.com.abstracts.AbstractController {
 
     /** logger */
