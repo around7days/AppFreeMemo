@@ -27,18 +27,6 @@ public class PageInfo {
     /** 合計表示件数 */
     private int totalSize = 0;
 
-    //    /** 表示開始No */
-    //    private int startNo = 1;
-    //
-    //    /** 表示終了No */
-    //    private int endNo;
-    //
-    //    /** 前ページ有無 */
-    //    private boolean hasPrev;
-    //
-    //    /** 次ページ有無 */
-    //    private boolean hasNext;
-
     /*-----------------------------------------------------------------------*/
     /**
      * 1ページ表示件数を設定します。
@@ -83,6 +71,20 @@ public class PageInfo {
             throw new RuntimeException("totalSize to " + totalSize + "can not be assigned");
         }
         this.totalSize = totalSize;
+    }
+
+    /**
+     * 前ページに移動します。
+     */
+    public void prev() {
+        setPage(this.page - 1);
+    }
+
+    /**
+     * 次ページに移動します。
+     */
+    public void next() {
+        setPage(this.page + 1);
     }
 
     /*-----------------------------------------------------------------------*/

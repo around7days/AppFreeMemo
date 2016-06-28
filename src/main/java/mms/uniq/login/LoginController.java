@@ -56,7 +56,7 @@ public class LoginController {
      * @param model
      * @return
      */
-    @RequestMapping("/login_auth_validate")
+    @RequestMapping("/login_validate")
     public String login(@Valid LoginForm form,
                         BindingResult bindingResult,
                         Model model) {

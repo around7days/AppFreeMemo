@@ -6,11 +6,11 @@
 	<nav>
 		<ul class="pager">
 			<li th:class="'previous ' +  (*{pageInfo.hasPrev}? '' : 'disabled')|" class="previous disabled" >
-				<a href="#" onclick="document.main.submit();return false;"><span aria-hidden="true">&larr;</span> Prev</a>
+				<a href="#" id="pagePrev" th:data="*{pageInfo.page}-1"><span aria-hidden="true">&larr;</span> Prev</a>
 			</li>
 			<li th:text="|*{pageInfo.totalSize}件中 *{pageInfo.startIndex}-*{pageInfo.endIndex}件表示|">100件中 1-20件表示</li>
 			<li th:class="'next ' +  (*{pageInfo.hasNext}? '' : 'disabled')|" class="next disabled" >
-				<a href="#" onclick="document.main.submit();return false;">Next <span aria-hidden="true">&rarr;</span></a>
+				<a href="#" id="pageNext" th:data="*{pageInfo.page}+1">Next <span aria-hidden="true">&rarr;</span></a>
 			</li>
 		</ul>
 	</nav>

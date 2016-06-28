@@ -2,17 +2,19 @@
  * ログイン画面JS
  */
 $(function() {
+
 	/** form */
 	var fmMain = $('#formMain');
 
-	/** デフォルトActionURL */
-	var actionUrl = '/login_auth_validate';
+	/** デフォルトURL */
+	var defaultUrl = '/login_validate';
 
 	/**
 	 * ログインボタン押下
 	 */
 	$('#login').on('click', function() {
-		fmMain.attr('action', actionUrl);
+		var url = defaultUrl;
+		fmMain.attr('action', url);
 		fmMain.submit();
 	});
 });

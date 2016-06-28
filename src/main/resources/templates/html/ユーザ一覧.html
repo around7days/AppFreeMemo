@@ -21,7 +21,7 @@
 	<script th:src="@{/js/userSearch.js}" src="../../static/js/userSearch.js"></script>
 </head>
 <body>
-<form th:action="@{/mst/user/search}" th:object="${userSearchForm}" name="main" method="post">
+<form th:action="dummy" th:object="${userSearchForm}" id="formMain" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -53,8 +53,8 @@
 				</div>
 				<!-- 検索・新規ボタン -->
 				<div class="text-center">
-					<button type="submit" name="search" class="btn btn-default">検索 <span class="glyphicon glyphicon-search"></span></button>
-					<button type="submit" name="new" class="btn btn-default">新規 <span class="glyphicon glyphicon-chevron-right"></span></button>
+					<button type="button" id="search" class="btn btn-default">検索 <span class="glyphicon glyphicon-search"></span></button>
+					<button type="button" id="new" class="btn btn-default">新規 <span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 			</div><!-- /検索条件 -->
 

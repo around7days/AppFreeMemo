@@ -17,9 +17,11 @@
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+	<!-- 個別 JS -->
+	<script th:src="@{/js/userSearch.js}" src="../../static/js/userSearch.js"></script>
 </head>
 <body>
-<form th:action="@{/menu}" th:object="${menuForm}" name="main" method="post">
+<form th:action="@{/menu}" th:object="${menuForm}" id="formMain" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>

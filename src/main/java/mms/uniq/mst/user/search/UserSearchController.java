@@ -35,6 +35,9 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSearchController.class);
 
+    /** デフォルトマッピングURL */
+    public static final String MAPPING_URL = "/mst/user/search";
+
     /** ユーザ一覧画面フォーム */
     @ModelAttribute(value = "userSearchForm")
     UserSearchForm setupForm() {
@@ -51,7 +54,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/search", params = "init")
+    @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(UserSearchForm form,
                        Model model) {
         // 初期値設定
@@ -67,7 +70,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/search", params = "search")
+    @RequestMapping(value = MAPPING_URL, params = "search")
     public String search(@Valid UserSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
@@ -103,13 +106,14 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         return PageIdConst.Mst.USER_SEARCH;
     }
 
+    // TODO Serviceクラスに移行時に検索と再検索ロジックを一緒にしたい
     /**
      * 再検索処理
      * @param form
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/search", params = "reSearch")
+    @RequestMapping(value = MAPPING_URL, params = "reSearch")
     public String reSearch(UserSearchForm form,
                            Model model) {
         logger.debug("フォーム情報：{}", form.toString());
@@ -134,31 +138,41 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         return PageIdConst.Mst.USER_SEARCH;
     }
 
-    // /**
-    // * ページング処理
-    // * @param form
-    // * @param page
-    // * @param model
-    // * @return
-    // */
-    // @RequestMapping(value = "/mst/user/search/page/{page}")
-    // public String page(UserSearchForm form,
-    // @PathVariable int page,
-    // Model model) {
-    // logger.debug("フォーム情報：{}", form.toString());
-    //
-    // // ページング設定
-    // PageInfo pageInfo = form.getPageInfo();
-    // pageInfo.setPage(page);
-    //
-    // return "forward:/mst/user/search?search";
-    // }
+    /**
+     * 前ページング処理<br>
+     * @param form
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "pagePrev")
+    public String pagePrev(UserSearchForm form,
+                           Model model) {
+        // ページング設定
+        form.getPageInfo().prev();
+
+        return "redirect:/mst/user/search?reSearch";
+    }
+
+    /**
+     * 次ページング処理<br>
+     * @param form
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "pageNext")
+    public String pageNext(UserSearchForm form,
+                           Model model) {
+        // ページング設定
+        form.getPageInfo().next();
+
+        return "redirect:/mst/user/search?reSearch";
+    }
 
     /**
      * ユーザー新規処理
      * @return
      */
-    @RequestMapping(value = "/mst/user/search", params = "new")
+    @RequestMapping(value = MAPPING_URL, params = "new")
     public String selectNew() {
         return "redirect:/mst/user/regist/init/new/";
     }
@@ -170,7 +184,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping("/mst/user/search/select/{index}")
+    @RequestMapping(value = MAPPING_URL + "/select/{index}")
     public String select(UserSearchForm form,
                          @PathVariable int index,
                          Model model) {
