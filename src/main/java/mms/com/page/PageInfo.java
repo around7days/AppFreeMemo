@@ -46,8 +46,8 @@ public class PageInfo {
      */
     public void setLimit(int limit) {
         if (limit < 1) {
-            logger.warn("limit to {} can not be assigned", limit);
-            return;
+            logger.error("limit to {} can not be assigned", limit);
+            throw new RuntimeException("limit to " + limit + "can not be assigned");
         }
         this.limit = limit;
     }
@@ -58,8 +58,8 @@ public class PageInfo {
      */
     public void setPage(int page) {
         if (page < 1) {
-            logger.warn("page to {} can not be assigned", page);
-            return;
+            logger.error("page to {} can not be assigned", page);
+            throw new RuntimeException("page to " + page + "can not be assigned");
         }
         this.page = page;
     }
@@ -80,7 +80,7 @@ public class PageInfo {
     public void setTotalSize(int totalSize) {
         if (totalSize < 0) {
             logger.warn("totalSize to {} can not be assigned", totalSize);
-            return;
+            throw new RuntimeException("totalSize to " + totalSize + "can not be assigned");
         }
         this.totalSize = totalSize;
     }

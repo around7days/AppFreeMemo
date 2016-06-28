@@ -27,6 +27,11 @@ repositories {
 	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/'}
 }
 
+javadoc {
+    options.charSet = 'UTF-8'
+    options.encoding = 'UTF-8'
+}
+
 // DomaのSQLファイルをコンパイルより前に出力先Dirにコピーするための設定
 processResources.destinationDir = compileJava.destinationDir
 compileJava.dependsOn processResources
