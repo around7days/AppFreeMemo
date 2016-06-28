@@ -21,7 +21,7 @@
 	<script th:src="@{/js/login.js}" src="../../static/js/login.js"></script>
 </head>
 <body>
-<form th:action="@{/login_auth_validate}" th:object="${loginForm}" name="main" method="post">
+<form th:action="dummy" th:object="${loginForm}" id="formMain" method="post">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
@@ -52,7 +52,7 @@
 					<input type="password" th:value="*{password}" name="password" id="password" class="form-control" placeholder="パスワード" autocomplete="off" />
 				</div>
 				<!-- ログイン -->
-				<button type="submit" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
+				<button type="button" id="login" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div><!-- /サインイン -->
 
 		</div><!-- /画面サイズ指定 -->
