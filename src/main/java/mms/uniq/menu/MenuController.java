@@ -26,6 +26,9 @@ public class MenuController extends mms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
+    /** デフォルトマッピングURL */
+    public static final String MAPPING_URL = "/menu";
+
     /**
      * メニュー画面初期表示
      * @param userInfo
@@ -33,7 +36,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping("/menu")
+    @RequestMapping(value = MAPPING_URL)
     public String init(@AuthenticationPrincipal UserInfo userInfo,
                        HttpSession session,
                        Model model) {
@@ -60,7 +63,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/menu", params = "m001")
+    @RequestMapping(value = MAPPING_URL, params = "m001")
     public String M001(Model model) {
         return "redirect:/mst/user/search?init";
     }
@@ -70,28 +73,28 @@ public class MenuController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/menu", params = "m002")
+    @RequestMapping(value = MAPPING_URL, params = "m002")
     public String M002(Model model) {
-        return "redirect:/mst/user/regist/init/new";
+        return "redirect:/mst/user/regist?initNew";
     }
 
-    @RequestMapping(value = "/menu", params = "t001")
+    @RequestMapping(value = MAPPING_URL, params = "t001")
     public String T001(Model model) {
         return "html/月報状況一覧";
     }
 
-    @RequestMapping(value = "/menu", params = "t002")
+    @RequestMapping(value = MAPPING_URL, params = "t002")
     public String T002(Model model) {
         return "html/月報申請";
     }
 
-    @RequestMapping(value = "/menu", params = "t003")
+    @RequestMapping(value = MAPPING_URL, params = "t003")
     public String T003(Model model) {
         return "html/月報承認";
     }
 
     @SuppressWarnings("unused")
-    @RequestMapping(value = "/menu", params = "e001")
+    @RequestMapping(value = MAPPING_URL, params = "e001")
     public String T004(Model model) throws Exception {
         if (true) {
             throw new Exception("意図的な強制Exception");

@@ -174,7 +174,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = MAPPING_URL, params = "new")
     public String selectNew() {
-        return "redirect:/mst/user/regist/init/new/";
+        return "redirect:/mst/user/regist?initNew";
     }
 
     /**
@@ -195,6 +195,6 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         MUser user = form.getResultList().get(index);
         logger.debug("選択ユーザ情報：{}", user.toString());
 
-        return "redirect:/mst/user/regist/init/update/" + user.getUserId();
+        return "redirect:/mst/user/regist/" + user.getUserId() + "?initUpdate";
     }
 }

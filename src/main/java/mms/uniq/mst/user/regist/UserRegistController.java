@@ -38,8 +38,11 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);
 
-    /** ValidateデフォルトエラーView名 */
-    private static final String validateErrorPage = PageIdConst.Mst.USER_REGIST;
+    /** デフォルトマッピングURL */
+    public static final String MAPPING_URL = "/mst/user/regist";
+
+    /** デフォルトエラーView名 */
+    public static final String ERROR_VIEW = "redirect:" + MAPPING_URL + "/?reDisplay";
 
     /** MUserDao */
     @Autowired
@@ -57,11 +60,13 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/regist/init/new")
+    @RequestMapping(value = MAPPING_URL, params = "initNew")
     public String initNew(UserRegistForm form,
                           Model model) {
         // 初期値設定
         form.setViewMode(UserRegistForm.ViewMode.NEW);
+
+        form.setUserId("xxxxxxxxxxxxxxxxxxxxx");
 
         return PageIdConst.Mst.USER_REGIST;
     }
@@ -73,7 +78,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/regist/init/update/{userId}")
+    @RequestMapping(value = MAPPING_URL + "/{userId}", params = "initUpdate")
     public String initUpdate(UserRegistForm form,
                              @PathVariable String userId,
                              Model model) {
@@ -100,7 +105,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/regist", params = "insert")
+    @RequestMapping(value = MAPPING_URL, params = "insert")
     public String insert(@Valid UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
@@ -110,7 +115,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            throw new ValidateException();
+            return PageIdConst.Mst.USER_REGIST;
         }
 
         // 登録処理
@@ -124,6 +129,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         mUserDao.insert(mUser);
 
         // TODO MessageResorceが使いにくい。どこかで改良。
+        // TODO 完了メッセージをどこかで定数にする。
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));
 
@@ -138,7 +144,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/mst/user/regist", params = "update")
+    @RequestMapping(value = MAPPING_URL, params = "update")
     public String update(@Valid UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
@@ -170,9 +176,26 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * 戻る処理
      * @return
      */
-    @RequestMapping(value = "/mst/user/regist", params = "back")
+    @RequestMapping(value = MAPPING_URL, params = "back")
     public String back() {
         return "redirect:/mst/user/search?reSearch";
+    }
+
+    // TODO ここはもう少しどうにかしないと・・・エラーメッセージをどう表示するかな
+    /**
+     * 再表示処理
+     * @param form
+     * @param bindingResult
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "reDisplay")
+    public String reDisplay(UserRegistForm form,
+                            BindingResult bindingResult,
+                            Model model) {
+        logger.debug("フォーム情報：{}", form.toString());
+        bindingResult.reject("", "ああああああああああああ");
+        return PageIdConst.Mst.USER_REGIST;
     }
 
     /**
@@ -181,9 +204,8 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @return
      */
     @ExceptionHandler(ValidateException.class)
-    public ModelAndView ValidateException(ValidateException e) {
-        String viewName = StringUtils.isEmpty(e.getViewName()) ? validateErrorPage : e.getViewName();
-        logger.debug("★★★★★★★★");
+    public ModelAndView handlerException(ValidateException e) {
+        String viewName = StringUtils.isEmpty(e.getViewName()) ? ERROR_VIEW : e.getViewName();
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName(viewName);
