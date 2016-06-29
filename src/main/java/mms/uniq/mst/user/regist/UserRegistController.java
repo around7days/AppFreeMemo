@@ -36,10 +36,10 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);
 
     /** デフォルトマッピングURL */
-    public static final String MAPPING_URL = "/mst/user/regist";
+    public static final String DEFAULT_URL = "/mst/user/regist";
 
-    /** デフォルトエラーView名 */
-    public static final String ERROR_VIEW = "redirect:" + MAPPING_URL + "/?reDisplay";
+    /** デフォルトページView */
+    private static final String DEFAULT_PAGE = PageIdConst.Mst.USER_REGIST;
 
     /** ユーザ登録画面サービス */
     @Autowired
@@ -57,13 +57,13 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "initNew")
+    @RequestMapping(value = DEFAULT_URL, params = "initNew")
     public String initNew(UserRegistForm form,
                           Model model) {
         // 初期値設定
         form.setViewMode(UserRegistForm.ViewMode.NEW);
 
-        return PageIdConst.Mst.USER_REGIST;
+        return DEFAULT_PAGE;
     }
 
     /**
@@ -73,7 +73,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/{userId}", params = "initUpdate")
+    @RequestMapping(value = DEFAULT_URL + "/{userId}", params = "initUpdate")
     public String initUpdate(UserRegistForm form,
                              @PathVariable String userId,
                              Model model) {
@@ -85,7 +85,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
 
         logger.debug("フォーム情報：{}", form.toString());
 
-        return PageIdConst.Mst.USER_REGIST;
+        return DEFAULT_PAGE;
     }
 
     /**
@@ -96,7 +96,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "insert")
+    @RequestMapping(value = DEFAULT_URL, params = "insert")
     public String insert(@Valid UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
@@ -106,7 +106,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return PageIdConst.Mst.USER_REGIST;
+            return DEFAULT_PAGE;
         }
 
         // 登録処理
@@ -128,7 +128,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "update")
+    @RequestMapping(value = DEFAULT_URL, params = "update")
     public String update(@Valid UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
@@ -138,7 +138,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return PageIdConst.Mst.USER_REGIST;
+            return DEFAULT_PAGE;
         }
 
         // 更新処理
@@ -154,12 +154,16 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * 戻る処理
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "back")
+    @RequestMapping(value = DEFAULT_URL, params = "back")
     public String back() {
         return "redirect:/mst/user/search?reSearch";
     }
 
+    // ----------------------------------------------------------------------------------------
     // TODO ここはもう少しどうにかしないと・・・エラーメッセージをどう表示するかな
+    /** デフォルトエラーView名 */
+    public static final String ERROR_VIEW = "redirect:" + DEFAULT_URL + "/?reDisplay";
+
     /**
      * 再表示処理
      * @param form
@@ -167,13 +171,13 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "reDisplay")
+    @RequestMapping(value = DEFAULT_URL, params = "reDisplay")
     public String reDisplay(UserRegistForm form,
                             BindingResult bindingResult,
                             Model model) {
         logger.debug("フォーム情報：{}", form.toString());
         bindingResult.reject("", "ああああああああああああ");
-        return PageIdConst.Mst.USER_REGIST;
+        return DEFAULT_PAGE;
     }
 
     /**
@@ -190,4 +194,5 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
 
         return mv;
     }
+    // ----------------------------------------------------------------------------------------
 }

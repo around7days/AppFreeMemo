@@ -30,7 +30,10 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(UserSearchController.class);
 
     /** デフォルトマッピングURL */
-    public static final String MAPPING_URL = "/mst/user/search";
+    public static final String DEFAULT_URL = "/mst/user/search";
+
+    /** デフォルトページID */
+    private static final String DEFAULT_PAGE = PageIdConst.Mst.USER_SEARCH;
 
     /** ユーザ一覧画面サービス */
     @Autowired
@@ -48,13 +51,13 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "init")
+    @RequestMapping(value = DEFAULT_URL, params = "init")
     public String init(UserSearchForm form,
                        Model model) {
         // 初期値設定
         form.setUserNm("ユーザー０");
 
-        return PageIdConst.Mst.USER_SEARCH;
+        return DEFAULT_PAGE;
     }
 
     /**
@@ -64,7 +67,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "search")
+    @RequestMapping(value = DEFAULT_URL, params = "search")
     public String search(@Valid UserSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
@@ -73,17 +76,17 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return PageIdConst.Mst.USER_SEARCH;
+            return DEFAULT_PAGE;
         }
 
         // 検索処理
         userSearchService.search(form);
         if (form.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
-            return PageIdConst.Mst.USER_SEARCH;
+            return DEFAULT_PAGE;
         }
 
-        return PageIdConst.Mst.USER_SEARCH;
+        return DEFAULT_PAGE;
     }
 
     /**
@@ -92,7 +95,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "reSearch")
+    @RequestMapping(value = DEFAULT_URL, params = "reSearch")
     public String reSearch(UserSearchForm form,
                            Model model) {
         logger.debug("フォーム情報：{}", form.toString());
@@ -100,7 +103,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         // 検索処理
         userSearchService.search(form);
 
-        return PageIdConst.Mst.USER_SEARCH;
+        return DEFAULT_PAGE;
     }
 
     /**
@@ -109,7 +112,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "pagePrev")
+    @RequestMapping(value = DEFAULT_URL, params = "pagePrev")
     public String pagePrev(UserSearchForm form,
                            Model model) {
         // ページング設定
@@ -124,7 +127,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "pageNext")
+    @RequestMapping(value = DEFAULT_URL, params = "pageNext")
     public String pageNext(UserSearchForm form,
                            Model model) {
         // ページング設定
@@ -137,7 +140,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * ユーザー新規処理
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "new")
+    @RequestMapping(value = DEFAULT_URL, params = "new")
     public String selectNew() {
         return "redirect:/mst/user/regist?initNew";
     }
@@ -149,7 +152,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
+    @RequestMapping(value = DEFAULT_URL + "/{index}", params = "select")
     public String select(UserSearchForm form,
                          @PathVariable int index,
                          Model model) {

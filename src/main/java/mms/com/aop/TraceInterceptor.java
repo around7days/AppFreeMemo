@@ -8,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * TraceInterceptorクラス
+ * @author
+ */
 @Aspect
 @Component
 public class TraceInterceptor {
@@ -15,11 +19,19 @@ public class TraceInterceptor {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(TraceInterceptor.class);
 
+    /**
+     * Controllerクラス内のメソッド開始時にログを出力
+     * @param joinPoint
+     */
     @Before("within(mms..*Controller*)")
     public void invokeBefore(JoinPoint joinPoint) {
         logger.debug("[AOP before] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
     }
 
+    /**
+     * Controllerクラス内のメソッド終了時にログを出力
+     * @param joinPoint
+     */
     @After("within(mms..*Controller*)")
     public void invokeAfter(JoinPoint joinPoint) {
         logger.debug("[AOP after ] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
