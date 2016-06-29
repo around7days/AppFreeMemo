@@ -24,6 +24,9 @@ public class LoginController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    /** デフォルトページID */
+    private static final String DEFAULT_PAGE = PageIdConst.Com.LOGIN;
+
     /** ログイン画面フォーム */
     @ModelAttribute(value = "loginForm")
     LoginForm setupForm() {
@@ -43,7 +46,7 @@ public class LoginController {
         form.setUserId("user01");
         form.setPassword("pass");
 
-        return PageIdConst.Com.LOGIN;
+        return DEFAULT_PAGE;
     }
 
     /**
@@ -61,7 +64,7 @@ public class LoginController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return PageIdConst.Com.LOGIN;
+            return DEFAULT_PAGE;
         }
 
         // ログイン認証処理にフォワード
@@ -82,6 +85,6 @@ public class LoginController {
                              Model model) {
         bindingResult.reject("", "ログインに失敗しました");
         logger.debug(bindingResult.getAllErrors().toString());
-        return PageIdConst.Com.LOGIN;
+        return DEFAULT_PAGE;
     }
 }

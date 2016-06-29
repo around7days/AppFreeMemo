@@ -118,7 +118,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         // ページング設定
         form.getPageInfo().prev();
 
-        return "redirect:/mst/user/search?reSearch";
+        return redirect("/mst/user/search", "reSearch");
     }
 
     /**
@@ -133,7 +133,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         // ページング設定
         form.getPageInfo().next();
 
-        return "redirect:/mst/user/search?reSearch";
+        return redirect("/mst/user/search", "reSearch");
     }
 
     /**
@@ -142,7 +142,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = DEFAULT_URL, params = "new")
     public String selectNew() {
-        return "redirect:/mst/user/regist?initNew";
+        return redirect("/mst/user/search", "initNew");
     }
 
     /**
@@ -162,6 +162,6 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
         MUser user = form.getResultList().get(index);
         logger.debug("選択ユーザ情報：{}", user.toString());
 
-        return "redirect:/mst/user/regist/" + user.getUserId() + "?initUpdate";
+        return redirect("/mst/user/regist/" + user.getUserId(), "initUpdate");
     }
 }

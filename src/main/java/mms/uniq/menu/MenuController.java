@@ -29,6 +29,9 @@ public class MenuController extends mms.com.abstracts.AbstractController {
     /** デフォルトマッピングURL */
     public static final String DEFAULT_URL = "/menu";
 
+    /** デフォルトページID */
+    private static final String DEFAULT_PAGE = PageIdConst.Com.MENU;
+
     /**
      * メニュー画面初期表示
      * @param userInfo
@@ -55,7 +58,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
             }
         }
 
-        return PageIdConst.Com.MENU;
+        return DEFAULT_PAGE;
     }
 
     /**

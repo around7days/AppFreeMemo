@@ -38,7 +38,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     /** デフォルトマッピングURL */
     public static final String DEFAULT_URL = "/mst/user/regist";
 
-    /** デフォルトページView */
+    /** デフォルトページID */
     private static final String DEFAULT_PAGE = PageIdConst.Mst.USER_REGIST;
 
     /** ユーザ登録画面サービス */
@@ -117,7 +117,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));
 
-        return "redirect:/mst/user/search?reSearch";
+        return redirect("/mst/user/search", "reSearch");
     }
 
     /**
@@ -147,7 +147,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.002", null, Locale.getDefault()));
 
-        return "redirect:/mst/user/search?reSearch";
+        return redirect("/mst/user/search", "reSearch");
     }
 
     /**
@@ -156,7 +156,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = DEFAULT_URL, params = "back")
     public String back() {
-        return "redirect:/mst/user/search?reSearch";
+        return redirect("/mst/user/search", "reSearch");
     }
 
     // ----------------------------------------------------------------------------------------
