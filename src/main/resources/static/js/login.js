@@ -4,17 +4,17 @@
 $(function() {
 
 	/** form */
-	var fmMain = $('#formMain');
+	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = '/login_validate';
+	var defaultUrl = "/login_validate";
 
 	/**
 	 * ログインボタン押下
 	 */
-	$('#login').on('click', function() {
+	$("#login").on("click", function() {
 		var url = defaultUrl;
-		fmMain.attr('action', url);
+		fmMain.attr("action", url);
 		fmMain.submit();
 	});
 });

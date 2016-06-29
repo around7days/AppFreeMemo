@@ -4,44 +4,55 @@
 $(function() {
 
 	/** form */
-	var fmMain = $('#formMain');
+	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = '/mst/user/search';
+	var defaultUrl = "/mst/user/search";
 
 	/**
 	 * 検索ボタン押下
 	 */
-	$('#search').on('click', function() {
+	$("#search").on("click", function() {
 		var url = defaultUrl + "?search";
-		fmMain.attr('action', url);
+		fmMain.attr("action", url);
 		fmMain.submit();
 	});
 
 	/**
 	 * 新規ボタン押下
 	 */
-	$('#new').on('click', function() {
+	$("#new").on("click", function() {
 		var url = defaultUrl + "?new";
-		fmMain.attr('action', url);
+		fmMain.attr("action", url);
+		fmMain.submit();
+	});
+
+	/**
+	 * 選択ボタン押下<br>
+	 * (テーブル明細内)
+	 */
+	$("#resultTable button[name='select']").on("click", function() {
+		var index = $(this).val();
+		var url = defaultUrl + "/" + index + "?select";
+		fmMain.attr("action", url);
 		fmMain.submit();
 	});
 
 	/**
 	 * Prevアンカー押下
 	 */
-	$('#pagePrev').on('click', function() {
+	$("#pagePrev").on("click", function() {
 		var url = defaultUrl + "?pagePrev";
-		fmMain.attr('action', url);
+		fmMain.attr("action", url);
 		fmMain.submit();
 	});
 
 	/**
 	 * Nextアンカー押下
 	 */
-	$('#pageNext').on('click', function() {
+	$("#pageNext").on("click", function() {
 		var url = defaultUrl + "?pageNext";
-		fmMain.attr('action', url);
+		fmMain.attr("action", url);
 		fmMain.submit();
 	});
 
