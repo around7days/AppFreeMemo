@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +18,6 @@ import mms.com.consts.PageIdConst;
  * @author
  */
 @Controller
-@Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = LoginForm.class)
 public class LoginController {
 

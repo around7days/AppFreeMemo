@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -21,7 +20,6 @@ import mms.com.security.UserInfo;
  * @author
  */
 @Controller
-@Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = MenuForm.class)
 public class MenuController extends mms.com.abstracts.AbstractController {
 

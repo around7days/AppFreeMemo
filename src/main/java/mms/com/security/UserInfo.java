@@ -2,6 +2,8 @@ package mms.com.security;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,7 +21,7 @@ public class UserInfo extends User {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserInfo.class);
 
-    /**
+    /*
      * ユーザー情報
      */
     /** ユーザーID */
@@ -66,5 +68,9 @@ public class UserInfo extends User {
      */
     public String getEmail() {
         return email;
+    }
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

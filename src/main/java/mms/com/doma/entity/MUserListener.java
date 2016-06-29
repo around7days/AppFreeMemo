@@ -1,5 +1,7 @@
 package mms.com.doma.entity;
 
+import java.time.LocalDateTime;
+
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
 import org.seasar.doma.jdbc.entity.PostInsertContext;
@@ -9,7 +11,6 @@ import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.time.LocalDateTime;
 
 /**
  *
@@ -20,8 +21,10 @@ public class MUserListener implements EntityListener<MUser> {
     private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                                                                               .getAuthentication()
                                                                               .getPrincipal();
+
     @Override
-    public void preInsert(MUser entity, PreInsertContext<MUser> context) {
+    public void preInsert(MUser entity,
+                          PreInsertContext<MUser> context) {
         LocalDateTime now = LocalDateTime.now();
 
         if (entity.getDelFlg() == null) {
@@ -42,7 +45,8 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preUpdate(MUser entity, PreUpdateContext<MUser> context) {
+    public void preUpdate(MUser entity,
+                          PreUpdateContext<MUser> context) {
         LocalDateTime now = LocalDateTime.now();
 
         if (entity.getUpdId() == null) {
@@ -54,18 +58,22 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preDelete(MUser entity, PreDeleteContext<MUser> context) {
+    public void preDelete(MUser entity,
+                          PreDeleteContext<MUser> context) {
     }
 
     @Override
-    public void postInsert(MUser entity, PostInsertContext<MUser> context) {
+    public void postInsert(MUser entity,
+                           PostInsertContext<MUser> context) {
     }
 
     @Override
-    public void postUpdate(MUser entity, PostUpdateContext<MUser> context) {
+    public void postUpdate(MUser entity,
+                           PostUpdateContext<MUser> context) {
     }
 
     @Override
-    public void postDelete(MUser entity, PostDeleteContext<MUser> context) {
+    public void postDelete(MUser entity,
+                           PostDeleteContext<MUser> context) {
     }
 }

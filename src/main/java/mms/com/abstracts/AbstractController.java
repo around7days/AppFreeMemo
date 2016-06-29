@@ -11,7 +11,7 @@ import mms.com.security.UserInfo;
  */
 public abstract class AbstractController {
     @Autowired
-    public MessageSource message;
+    protected MessageSource message;
 
     // TODO いる・・・？どっちかというとサービスクラス以降にほしい？
     /** 認証情報 */

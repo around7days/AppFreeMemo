@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mms.com.consts.PageIdConst;
-import mms.com.doma.dao.MUserDao;
-import mms.com.doma.entity.MUser;
 import mms.com.exception.ValidateException;
 
 /**
@@ -44,9 +41,9 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     /** デフォルトエラーView名 */
     public static final String ERROR_VIEW = "redirect:" + MAPPING_URL + "/?reDisplay";
 
-    /** MUserDao */
+    /** ユーザ登録画面サービス */
     @Autowired
-    MUserDao mUserDao;
+    UserRegistService userRegistService;
 
     /** ユーザー登録画面フォーム */
     @ModelAttribute
@@ -66,8 +63,6 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 初期値設定
         form.setViewMode(UserRegistForm.ViewMode.NEW);
 
-        form.setUserId("xxxxxxxxxxxxxxxxxxxxx");
-
         return PageIdConst.Mst.USER_REGIST;
     }
 
@@ -85,20 +80,16 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 初期値設定
         form.setViewMode(UserRegistForm.ViewMode.UPDATE);
 
-        // ユーザー情報の取得
-        MUser mUser = mUserDao.selectById(userId);
+        // 更新初期画面表示情報の取得
+        userRegistService.initUpdate(form, userId);
 
-        // 画面表示設定
-        // 詰め替え
-        BeanUtils.copyProperties(mUser, form);
-
-        logger.debug("ユーザ情報：{}", form.toString());
+        logger.debug("フォーム情報：{}", form.toString());
 
         return PageIdConst.Mst.USER_REGIST;
     }
 
     /**
-     * 登録処理
+     * 新規登録処理
      * @param form
      * @param bindingResult
      * @param redirectAttr
@@ -119,14 +110,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         }
 
         // 登録処理
-        // 値の設定
-        MUser mUser = new MUser();
-        BeanUtils.copyProperties(form, mUser);
-        mUser.setPassword("pass");
-        logger.debug("登録情報：{}", mUser.toString());
-
-        // 登録
-        mUserDao.insert(mUser);
+        userRegistService.insert(form);
 
         // TODO MessageResorceが使いにくい。どこかで改良。
         // TODO 完了メッセージをどこかで定数にする。
@@ -158,13 +142,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         }
 
         // 更新処理
-        // 値の設定
-        MUser mUser = new MUser();
-        BeanUtils.copyProperties(form, mUser);
-        logger.debug("更新情報：{}", mUser.toString());
-
-        // 更新
-        mUserDao.update(mUser);
+        userRegistService.update(form);
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.002", null, Locale.getDefault()));

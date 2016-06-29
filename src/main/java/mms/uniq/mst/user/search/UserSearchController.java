@@ -1,11 +1,7 @@
 package mms.uniq.mst.user.search;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.seasar.doma.jdbc.SelectOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import mms.com.consts.PageIdConst;
 import mms.com.doma.entity.MUser;
-import mms.com.page.PageInfo;
-import mms.com.utils.SelectOptionsUtil;
 
 /**
  * ユーザ一覧画面コントローラー
@@ -38,15 +32,15 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     /** デフォルトマッピングURL */
     public static final String MAPPING_URL = "/mst/user/search";
 
+    /** ユーザ一覧画面サービス */
+    @Autowired
+    UserSearchService userSearchService;
+
     /** ユーザ一覧画面フォーム */
     @ModelAttribute(value = "userSearchForm")
     UserSearchForm setupForm() {
         return new UserSearchForm();
     }
-
-    /** ユーザー一覧画面Dao */
-    @Autowired
-    UserSearchDao dao;
 
     /**
      * 初期処理
@@ -82,31 +76,16 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
             return PageIdConst.Mst.USER_SEARCH;
         }
 
-        /*
-         * 検索処理
-         */
-        // ページング設定
-        PageInfo pageInfo = form.getPageInfo();
-        SelectOptions options = SelectOptionsUtil.get(pageInfo);
-
         // 検索処理
-        List<MUser> result = dao.searchUser(form, options);
-        logger.debug("検索結果(全件)：{}件", options.getCount());
-        logger.debug("検索結果：{}件", result.size());
-        result.forEach(obj -> logger.debug(ToStringBuilder.reflectionToString(obj)));
-        if (result.isEmpty()) {
+        userSearchService.search(form);
+        if (form.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
             return PageIdConst.Mst.USER_SEARCH;
         }
 
-        // 検索結果格納
-        pageInfo.setTotalSize(options.getCount());
-        form.setResultList(result);
-
         return PageIdConst.Mst.USER_SEARCH;
     }
 
-    // TODO Serviceクラスに移行時に検索と再検索ロジックを一緒にしたい
     /**
      * 再検索処理
      * @param form
@@ -118,22 +97,8 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
                            Model model) {
         logger.debug("フォーム情報：{}", form.toString());
 
-        /*
-         * 検索処理
-         */
-        // ページング設定
-        PageInfo pageInfo = form.getPageInfo();
-        SelectOptions options = SelectOptionsUtil.get(pageInfo);
-
         // 検索処理
-        List<MUser> result = dao.searchUser(form, options);
-        logger.debug("検索結果(全件)：{}件", options.getCount());
-        logger.debug("検索結果：{}件", result.size());
-        result.forEach(obj -> logger.debug(ToStringBuilder.reflectionToString(obj)));
-
-        // 検索結果格納
-        pageInfo.setTotalSize(options.getCount());
-        form.setResultList(result);
+        userSearchService.search(form);
 
         return PageIdConst.Mst.USER_SEARCH;
     }
@@ -184,12 +149,11 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/select/{index}")
+    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
     public String select(UserSearchForm form,
                          @PathVariable int index,
                          Model model) {
         logger.debug("選択値：{}", index);
-        logger.debug("フォーム情報：{}", form.toString());
 
         // 選択したユーザー情報
         MUser user = form.getResultList().get(index);
