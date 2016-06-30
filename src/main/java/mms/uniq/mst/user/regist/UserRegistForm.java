@@ -54,6 +54,23 @@ public class UserRegistForm {
         this.viewMode = viewMode;
     }
 
+    // TODO
+    /**
+     * 画面表示モード：新規？
+     * @return 結果
+     */
+    public boolean isViewModeInsert() {
+        return viewMode == ViewMode.NEW;
+    }
+
+    /**
+     * 画面表示モード：更新？
+     * @return 結果
+     */
+    public boolean isViewModeUpdate() {
+        return viewMode == ViewMode.UPDATE;
+    }
+
     /**
      * ユーザーIDを取得します。
      * @return ユーザーID
