@@ -6,6 +6,7 @@ package mms.com.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
 
 /**
  * @author
@@ -15,11 +16,14 @@ public class ValidateException extends RuntimeException {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(ValidateException.class);
 
+    //    /** View名 */
+    //    private String viewName;
+
     /** エラーメッセージ */
     private String[] errorMessages;
 
-    /** View名 */
-    private String viewName;
+    /** BindingResult */
+    private BindingResult bindingResult;
 
     /**
      *
@@ -29,24 +33,21 @@ public class ValidateException extends RuntimeException {
     }
 
     /**
-     * @param viewName
+     * @param errorMessages
      */
-    public ValidateException(String viewName) {
+    public ValidateException(String... errorMessages) {
         super();
-        this.viewName = viewName;
-        logger.debug("ViewName:{}", viewName);
+        this.errorMessages = errorMessages;
+        logger.debug("errorMessages:{}", errorMessages.toString());
     }
 
     /**
-     * @param viewName
-     * @param errorMessages
+     * @param bindingResult
      */
-    public ValidateException(String viewName, String... errorMessages) {
+    public ValidateException(BindingResult bindingResult) {
         super();
-        this.viewName = viewName;
-        this.errorMessages = errorMessages;
-        logger.debug("ViewName:{}", viewName);
-        logger.debug("errorMessages:{}", errorMessages.toString());
+        this.bindingResult = bindingResult;
+        logger.debug("errorMessages:{}", bindingResult.getAllErrors().toString());
     }
 
     /**
@@ -58,10 +59,11 @@ public class ValidateException extends RuntimeException {
     }
 
     /**
-     * View名を取得します。
-     * @return View名
+     * BindingResultを取得します。
+     * @return BindingResult
      */
-    public String getViewName() {
-        return viewName;
+    public BindingResult getBindingResult() {
+        return bindingResult;
     }
+
 }

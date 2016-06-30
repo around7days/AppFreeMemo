@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -106,7 +105,8 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return DEFAULT_PAGE;
+            throw new ValidateException(bindingResult);
+            //            return DEFAULT_PAGE;
         }
 
         // 登録処理
@@ -187,10 +187,9 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      */
     @ExceptionHandler(ValidateException.class)
     public ModelAndView handlerException(ValidateException e) {
-        String viewName = StringUtils.isEmpty(e.getViewName()) ? ERROR_VIEW : e.getViewName();
-
         ModelAndView mv = new ModelAndView();
-        mv.setViewName(viewName);
+        mv.setViewName(DEFAULT_PAGE);
+        mv.addObject(setupForm());
 
         return mv;
     }
