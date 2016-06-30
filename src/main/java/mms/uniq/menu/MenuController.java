@@ -78,7 +78,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = DEFAULT_URL, params = "m002")
     public String M002(Model model) {
-        return "redirect:/mst/user/regist?initNew";
+        return "redirect:/mst/user/regist?initInsert";
     }
 
     @RequestMapping(value = DEFAULT_URL, params = "t001")

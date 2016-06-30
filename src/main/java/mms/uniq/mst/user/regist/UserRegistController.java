@@ -56,11 +56,11 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "initNew")
-    public String initNew(UserRegistForm form,
-                          Model model) {
+    @RequestMapping(value = DEFAULT_URL, params = "initInsert")
+    public String initInsert(UserRegistForm form,
+                             Model model) {
         // 初期値設定
-        form.setViewMode(UserRegistForm.ViewMode.NEW);
+        form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
 
         return DEFAULT_PAGE;
     }
@@ -77,7 +77,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
                              @PathVariable String userId,
                              Model model) {
         // 初期値設定
-        form.setViewMode(UserRegistForm.ViewMode.UPDATE);
+        form.setViewMode(UserRegistForm.VIEW_MODE_UPDATE);
 
         // 更新初期画面表示情報の取得
         userRegistService.initUpdate(form, userId);

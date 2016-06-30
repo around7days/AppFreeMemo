@@ -53,7 +53,8 @@
 【クライアントサイド】------------------------------------------------------
 	◆
 		○画面作成
-		×条件分岐
+		○条件分岐（定数）
+		△条件分岐（Enum）→出来るけど長い　 T(mms.uniq.mst.user.regist.UserRegistForm.ViewMode).NEW
 		○text
 		×checkbox
 		×selectbox
@@ -84,6 +85,13 @@
 【メモ】------------------------------------------------------
 redirectとforwardの使い分けどうしよう
 htmlのフォームにth:actionを足しておかないと何故か動かない・・・
+おかしいURLにアクセスするとログイン画面に飛ばされる・・・
 
 
+■■■eclipse■■■
+all in one eclipse4.5
 
+Thymeleaf Content Assist
+FreeMarker IDE
+Doma Tools
+Spring Tool Suite

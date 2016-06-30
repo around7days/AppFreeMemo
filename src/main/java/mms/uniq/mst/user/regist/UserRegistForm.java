@@ -13,16 +13,13 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class UserRegistForm {
 
-    /** 画面表示モード定義 */
-    enum ViewMode {
-        /** 新規 */
-        NEW,
-        /** 更新 */
-        UPDATE;
-    }
+    /** 画面表示モード：新規 */
+    public static final String VIEW_MODE_INSERT = "insert";
+    /** 画面表示モード：更新 */
+    public static final String VIEW_MODE_UPDATE = "update";
 
     /** 画面表示モード */
-    private ViewMode viewMode;
+    private String viewMode;
 
     /** ユーザーID */
     @NotEmpty(message = "ユーザーIDは{NotEmpty.message}")
@@ -42,7 +39,7 @@ public class UserRegistForm {
      * 画面表示モードを取得します。
      * @return 画面表示モード
      */
-    public ViewMode getViewMode() {
+    public String getViewMode() {
         return viewMode;
     }
 
@@ -50,25 +47,8 @@ public class UserRegistForm {
      * 画面表示モードを設定します。
      * @param viewMode 画面表示モード
      */
-    public void setViewMode(ViewMode viewMode) {
+    public void setViewMode(String viewMode) {
         this.viewMode = viewMode;
-    }
-
-    // TODO
-    /**
-     * 画面表示モード：新規？
-     * @return 結果
-     */
-    public boolean isViewModeInsert() {
-        return viewMode == ViewMode.NEW;
-    }
-
-    /**
-     * 画面表示モード：更新？
-     * @return 結果
-     */
-    public boolean isViewModeUpdate() {
-        return viewMode == ViewMode.UPDATE;
     }
 
     /**

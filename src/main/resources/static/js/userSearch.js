@@ -21,8 +21,8 @@ $(function() {
 	/**
 	 * 新規ボタン押下
 	 */
-	$("#new").on("click", function() {
-		var url = defaultUrl + "?new";
+	$("#insert").on("click", function() {
+		var url = defaultUrl + "?insert";
 		fmMain.attr("action", url);
 		fmMain.submit();
 	});

@@ -140,9 +140,9 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * ユーザー新規処理
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "new")
-    public String selectNew() {
-        return redirect("/mst/user/regist", "initNew");
+    @RequestMapping(value = DEFAULT_URL, params = "insert")
+    public String selectInsert() {
+        return redirect("/mst/user/regist", "initInsert");
     }
 
     /**
