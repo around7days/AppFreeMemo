@@ -2,8 +2,6 @@ package mms.uniq.mst.user.regist;
 
 import java.util.Locale;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,7 @@ import mms.com.consts.PageIdConst;
 import mms.com.exception.ValidateException;
 
 /**
- * ユーザー登録画面コントローラー
+ * ユーザ登録画面コントローラー
  * @author
  */
 @Controller
@@ -38,13 +37,13 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     public static final String DEFAULT_URL = "/mst/user/regist";
 
     /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.Mst.USER_REGIST;
+    private static final String DEFAULT_PAGE = PageIdConst.MST_USER_REGIST;
 
     /** ユーザ登録画面サービス */
     @Autowired
     UserRegistService userRegistService;
 
-    /** ユーザー登録画面フォーム */
+    /** ユーザ登録画面フォーム */
     @ModelAttribute
     UserRegistForm setupForm() {
         return new UserRegistForm();
@@ -52,15 +51,16 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
 
     /**
      * 新規初期処理
-     * @param form
      * @param model
      * @return
      */
     @RequestMapping(value = DEFAULT_URL, params = "initInsert")
-    public String initInsert(UserRegistForm form,
-                             Model model) {
+    public String initInsert(Model model) {
         // 初期値設定
+        UserRegistForm form = new UserRegistForm();
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
+        // 格納
+        model.addAttribute(form);
 
         return DEFAULT_PAGE;
     }
@@ -96,7 +96,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @return
      */
     @RequestMapping(value = DEFAULT_URL, params = "insert")
-    public String insert(@Valid UserRegistForm form,
+    public String insert(@Validated(UserRegistForm.Insert.class) UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) {
@@ -105,8 +105,8 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            throw new ValidateException(bindingResult);
-            //            return DEFAULT_PAGE;
+            //            throw new ValidateException(bindingResult);
+            return DEFAULT_PAGE;
         }
 
         // 登録処理
@@ -129,7 +129,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
      * @return
      */
     @RequestMapping(value = DEFAULT_URL, params = "update")
-    public String update(@Valid UserRegistForm form,
+    public String update(@Validated(UserRegistForm.Update.class) UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) {

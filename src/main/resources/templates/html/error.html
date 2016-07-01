@@ -6,9 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>システムエラー</title>
 
-	<!-- Thymeleaf Toymol JS(debug用) -->
-	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
-
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<!-- jQuery -->
@@ -18,7 +15,7 @@
 
 </head>
 <body>
-<form name="main">
+<form>
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>

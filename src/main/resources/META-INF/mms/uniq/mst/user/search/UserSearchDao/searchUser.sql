@@ -9,6 +9,6 @@ where
 	A.user_id = /* form.userId */'user01'
 /*%end */
 /*%if @isNotEmpty(form.userNm) */
-and A.user_nm like /* @infix(form.userNm) */'ユーザー０１'
+and A.user_nm like /* @infix(form.userNm) */'ユーザ０１'
 /*%end */
 and A.del_flg = 0

@@ -30,7 +30,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
     public static final String DEFAULT_URL = "/menu";
 
     /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.Com.MENU;
+    private static final String DEFAULT_PAGE = PageIdConst.MENU;
 
     /**
      * メニュー画面初期表示
@@ -43,8 +43,8 @@ public class MenuController extends mms.com.abstracts.AbstractController {
     public String init(@AuthenticationPrincipal UserInfo userInfo,
                        HttpSession session,
                        Model model) {
-        logger.debug("ユーザーID：{}", userInfo.getUserId());
-        logger.debug("ユーザー名：{}", userInfo.getUserNm());
+        logger.debug("ユーザID：{}", userInfo.getUserId());
+        logger.debug("ユーザ名：{}", userInfo.getUserNm());
 
         // TODO どっかのタイミングできれいにする
         // 個別セッションの破棄
@@ -62,7 +62,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
     }
 
     /**
-     * ユーザー一覧画面に遷移
+     * ユーザ一覧画面に遷移
      * @param model
      * @return
      */
@@ -72,7 +72,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
     }
 
     /**
-     * ユーザー登録画面に遷移
+     * ユーザ登録画面に遷移
      * @param model
      * @return
      */
@@ -88,7 +88,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
 
     @RequestMapping(value = DEFAULT_URL, params = "t002")
     public String T002(Model model) {
-        return "html/月報申請";
+        return "redirect:/tran/report/applicant?initInsert";
     }
 
     @RequestMapping(value = DEFAULT_URL, params = "t003")

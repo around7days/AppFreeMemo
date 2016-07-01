@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import mms.com.doma.entity.MUser;
 
 /**
- * 認証ユーザーの情報を格納するクラス
+ * 認証ユーザの情報を格納するクラス
  */
 public class UserInfo extends User {
     private static final long serialVersionUID = 1L;
@@ -22,12 +22,12 @@ public class UserInfo extends User {
     private static final Logger logger = LoggerFactory.getLogger(UserInfo.class);
 
     /*
-     * ユーザー情報
+     * ユーザ情報
      */
-    /** ユーザーID */
+    /** ユーザID */
     String userId;
 
-    /** ユーザー名 */
+    /** ユーザ名 */
     String userNm;
 
     /** メールアドレス */
@@ -38,8 +38,8 @@ public class UserInfo extends User {
      * @param user
      */
     public UserInfo(MUser user) {
-        // スーパークラスのユーザーID、パスワードに値をセットする
-        // 実際の認証はスーパークラスのユーザーID、パスワードで行われる
+        // スーパークラスのユーザID、パスワードに値をセットする
+        // 実際の認証はスーパークラスのユーザID、パスワードで行われる
         super(user.getUserId(), user.getPassword(), true, true, true, true, new ArrayList<GrantedAuthority>());
         this.userId = user.getUserId();
         this.userNm = user.getUserNm();
@@ -47,16 +47,16 @@ public class UserInfo extends User {
     }
 
     /**
-     * ユーザーIDを取得します。
-     * @return ユーザーID
+     * ユーザIDを取得します。
+     * @return ユーザID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * ユーザー名を取得します。
-     * @return ユーザー名
+     * ユーザ名を取得します。
+     * @return ユーザ名
      */
     public String getUserNm() {
         return userNm;

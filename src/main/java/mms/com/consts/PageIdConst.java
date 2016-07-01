@@ -9,29 +9,25 @@ public class PageIdConst {
     /*
      * 共通
      */
-    public class Com {
-        /** ログイン画面 */
-        public static final String LOGIN = "html/ログイン";
-        /** メニュー画面 */
-        public static final String MENU = "html/メニュー";
-        /** エラー画面 */
-        public static final String ERROR = "html/error";
-    }
+    /** 共通：ログイン画面 */
+    public static final String LOGIN = "html/ログイン";
+    /** 共通：メニュー画面 */
+    public static final String MENU = "html/メニュー";
+    /** 共通：エラー画面 */
+    public static final String ERROR = "html/error";
 
     /*
      * マスタ
      */
-    public class Mst {
-        /** ユーザ画面 */
-        public static final String USER_SEARCH = "html/ユーザ一覧";
-        /** ユーザ画面 */
-        public static final String USER_REGIST = "html/ユーザ登録";
-    }
+    /** マスタ：ユーザ一覧画面 */
+    public static final String MST_USER_SEARCH = "html/ユーザ一覧";
+    /** マスタ：ユーザ登録画面 */
+    public static final String MST_USER_REGIST = "html/ユーザ登録";
 
     /*
-     * トランザクション
+     * トラン
      */
-    public class Tran {
-    }
+    /** トラン：月報申請画面 */
+    public static final String TRAN_REPROT_APPLICANT = "html/月報申請";
 
 }

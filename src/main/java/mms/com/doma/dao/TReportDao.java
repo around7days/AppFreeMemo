@@ -1,6 +1,6 @@
 package mms.com.doma.dao;
 
-import mms.com.doma.entity.MUser;
+import mms.com.doma.entity.TReport;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
@@ -12,33 +12,34 @@ import org.seasar.doma.boot.ConfigAutowireable;
  */
 @Dao
 @ConfigAutowireable
-public interface MUserDao {
+public interface TReportDao {
 
     /**
-     * @param userId
-     * @return the MUser entity
+     * @param applicantId
+     * @param targetYm
+     * @return the TReport entity
      */
     @Select(ensureResult = true)
-    MUser selectById(String userId);
+    TReport selectById(String applicantId, Integer targetYm);
 
     /**
      * @param entity
      * @return affected rows
      */
     @Insert(excludeNull = true)
-    int insert(MUser entity);
+    int insert(TReport entity);
 
     /**
      * @param entity
      * @return affected rows
      */
     @Update(excludeNull = true)
-    int update(MUser entity);
+    int update(TReport entity);
 
     /**
      * @param entity
      * @return affected rows
      */
     @Delete
-    int delete(MUser entity);
+    int delete(TReport entity);
 }

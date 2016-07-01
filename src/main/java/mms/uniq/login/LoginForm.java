@@ -12,9 +12,9 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class LoginForm {
 
-    /** ユーザーID */
-    @NotEmpty(message = "ユーザーIDは{NotEmpty.message}")
-    @Size(max = 10, message = "ユーザーIDは{Size.message}")
+    /** ユーザID */
+    @NotEmpty(message = "ユーザIDは{NotEmpty.message}")
+    @Size(max = 10, message = "ユーザIDは{Size.message}")
     private String userId;
 
     /** パスワード */
@@ -23,16 +23,16 @@ public class LoginForm {
     private String password;
 
     /**
-     * ユーザーIDを取得します。
-     * @return ユーザーID
+     * ユーザIDを取得します。
+     * @return ユーザID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * ユーザーIDを設定します。
-     * @param userId ユーザーID
+     * ユーザIDを設定します。
+     * @param userId ユーザID
      */
     public void setUserId(String userId) {
         this.userId = userId;

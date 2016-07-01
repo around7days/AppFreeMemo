@@ -19,12 +19,12 @@ public class UserSearchForm {
     /*
      * 検索条件
      */
-    /** ユーザーID */
-    @Size(max = 10, message = "ユーザーIDは{Size.message}")
+    /** ユーザID */
+    @Size(max = 10, message = "ユーザIDは{Size.message}")
     private String userId;
 
-    /** ユーザー名 */
-    @Size(max = 10, message = "ユーザー名は{Size.message}")
+    /** ユーザ名 */
+    @Size(max = 10, message = "ユーザ名は{Size.message}")
     private String userNm;
 
     /*
@@ -39,32 +39,32 @@ public class UserSearchForm {
     private List<MUser> resultList;
 
     /**
-     * ユーザーIDを取得します。
-     * @return ユーザーID
+     * ユーザIDを取得します。
+     * @return ユーザID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * ユーザーIDを設定します。
-     * @param userId ユーザーID
+     * ユーザIDを設定します。
+     * @param userId ユーザID
      */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
     /**
-     * ユーザー名を取得します。
-     * @return ユーザー名
+     * ユーザ名を取得します。
+     * @return ユーザ名
      */
     public String getUserNm() {
         return userNm;
     }
 
     /**
-     * ユーザー名を設定します。
-     * @param userNm ユーザー名
+     * ユーザ名を設定します。
+     * @param userNm ユーザ名
      */
     public void setUserNm(String userNm) {
         this.userNm = userNm;

@@ -1,7 +1,5 @@
 package mms.uniq.mst.user.search;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +32,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     public static final String DEFAULT_URL = "/mst/user/search";
 
     /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.Mst.USER_SEARCH;
+    private static final String DEFAULT_PAGE = PageIdConst.MST_USER_SEARCH;
 
     /** ユーザ一覧画面サービス */
     @Autowired
@@ -55,7 +54,6 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     public String init(UserSearchForm form,
                        Model model) {
         // 初期値設定
-        form.setUserNm("ユーザー０");
 
         return DEFAULT_PAGE;
     }
@@ -68,7 +66,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
      * @return
      */
     @RequestMapping(value = DEFAULT_URL, params = "search")
-    public String search(@Valid UserSearchForm form,
+    public String search(@Validated UserSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
         logger.debug("フォーム情報：{}", form.toString());
@@ -137,7 +135,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     }
 
     /**
-     * ユーザー新規処理
+     * ユーザ新規処理
      * @return
      */
     @RequestMapping(value = DEFAULT_URL, params = "insert")
@@ -146,7 +144,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     }
 
     /**
-     * ユーザー選択処理
+     * ユーザ選択処理
      * @param form
      * @param index
      * @param model
@@ -158,7 +156,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
                          Model model) {
         logger.debug("選択値：{}", index);
 
-        // 選択したユーザー情報
+        // 選択したユーザ情報
         MUser user = form.getResultList().get(index);
         logger.debug("選択ユーザ情報：{}", user.toString());
 

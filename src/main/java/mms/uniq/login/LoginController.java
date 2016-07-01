@@ -1,12 +1,11 @@
 package mms.uniq.login;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -25,7 +24,7 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.Com.LOGIN;
+    private static final String DEFAULT_PAGE = PageIdConst.LOGIN;
 
     /** ログイン画面フォーム */
     @ModelAttribute(value = "loginForm")
@@ -58,7 +57,7 @@ public class LoginController {
      * @return
      */
     @RequestMapping("/login_validate")
-    public String login(@Valid LoginForm form,
+    public String login(@Validated LoginForm form,
                         BindingResult bindingResult,
                         Model model) {
         // 入力チェック

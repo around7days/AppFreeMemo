@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title></title>
+	<title>月報申請画面</title>
 
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
@@ -14,64 +14,14 @@
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+	<!-- 個別 JS -->
+	<script th:src="@{/js/reportApplicant.js}" src="../../static/js/reportApplicant.js"></script>
 </head>
 <body>
-<form class="main">
+<form th:action="dummy" th:object="${reportApplicantForm}" enctype="multipart/form-data" id="formMain" method="post">
 
 	<!-- ナビバー -->
-	<div th:replace="@{/html/include/include_navbar}::navbar2">
-		<nav class="navbar navbar-default navbar-static-top">
-			<div class="container-fluid">
-				<!-- ナビヘッダ -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-content">
-						<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button>
-					<div class="navbar-brand"><strong>月報管理システム</strong></div>
-				</div>
-
-				<!-- ナビ -->
-				<div class="collapse navbar-collapse" id="nav-content">
-					<ul class="nav navbar-nav navbar-left">
-						<!-- デザイン -->
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">デザイン<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#" onclick="changeStyle('Cerulean');">Cerulean</a></li>
-								<li><a href="#" onclick="changeStyle('Cosmo');">Cosmo</a></li>
-								<li><a href="#" onclick="changeStyle('Cyborg');">Cyborg</a></li>
-								<li><a href="#" onclick="changeStyle('Darkly');">Darkly</a></li>
-								<li><a href="#" onclick="changeStyle('Flatly');">Flatly</a></li>
-								<li><a href="#" onclick="changeStyle('Journal');">Journal</a></li>
-								<li><a href="#" onclick="changeStyle('Lumen');">Lumen</a></li>
-								<li><a href="#" onclick="changeStyle('Paper');">Paper</a></li>
-								<li><a href="#" onclick="changeStyle('Readable');">Readable</a></li>
-								<li><a href="#" onclick="changeStyle('Sandstone');">Sandstone</a></li>
-								<li><a href="#" onclick="changeStyle('Simplex');">Simplex</a></li>
-								<li><a href="#" onclick="changeStyle('Slate');">Slate</a></li>
-								<li><a href="#" onclick="changeStyle('Spacelab');">Spacelab</a></li>
-								<li><a href="#" onclick="changeStyle('Superhero');">Superhero</a></li>
-								<li><a href="#" onclick="changeStyle('United');">United</a></li>
-								<li><a href="#" onclick="changeStyle('Yeti');">Yeti</a></li>
-							</ul>
-						</li>
-						<!-- 設定 -->
-						<!-- <li><a href="#">設定<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a></li> -->
-						<!-- メニュー -->
-						<li><a th:href="@{/menu}" href="./メニュー.html">メニュー<span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-						<!-- ログアウト -->
-						<li><a th:href="@{/logout}" href="./ログイン.html">ログアウト<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<!-- ユーザー情報 -->
-						<li class="navbar-brand">
-							<small>ユーザ名：<span sec:authentication="principal.userNm"></span></small>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
+	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
 
 	<!-- メイン -->
 	<div class="container">
@@ -83,51 +33,57 @@
 				<h2>月報申請画面</h2>
 			</div>
 
+			<!-- メッセージ -->
+			<div th:replace="@{/html/include/include_message}::message" ></div>
+
 			<!-- 月報申請 -->
 			<div class="form-horizontal">
 				<!-- 年月 -->
 				<div class="form-group">
-					<label for="X" class="col-sm-3 control-label">年月</label>
+					<label for="targetYm" class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9">
-						<input type="month" class="form-control" value="2016-06" />
+						<input type="month" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control" value="2016-06" />
 					</div>
 				</div>
 				<!-- 月報 -->
 				<div class="form-group">
-					<label for="A" class="col-sm-3 control-label">月報</label>
+					<label for="file" class="col-sm-3 control-label">月報</label>
 					<div class="col-sm-9">
-						<input type="file" class="form-control" id="A" />
+						<input type="file" name="file" id="file" class="form-control" />
 					</div>
 				</div>
 				<!-- 承認者 -->
 				<div class="form-group">
 					<!-- 承認者1 -->
-					<label for="B1" class="col-sm-3 control-label">承認者１</label>
+					<label for="approver1Nm" class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="text" class="form-control" id="B1" placeholder="承認者１" disabled="disabled" />
+							<input type="hidden" id="approver1Id" />
+							<input type="text" class="form-control" id="approver1Nm" placeholder="承認者１" disabled="disabled" />
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default">？</button>
+								<button type="button" id="approver1IdBtn" class="btn btn-default">？</button>
 							</span>
 						</div>
 					</div>
 					<!-- 承認者2 -->
-					<label for="B2" class="col-sm-3 control-label">承認者２</label>
+					<label for="approver2Nm" class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="text" class="form-control" id="B2" placeholder="承認者２" disabled="disabled" />
+							<input type="hidden" id="approver2Id" />
+							<input type="text" class="form-control" id="approver2Nm" placeholder="承認者２" disabled="disabled" />
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default">？</button>
+								<button type="button" id="approver2IdBtn" class="btn btn-default">？</button>
 							</span>
 						</div>
 					</div>
 					<!-- 承認者3 -->
-					<label for="B3" class="col-sm-3 control-label">承認者３</label>
+					<label for="approver3Nm" class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="text" class="form-control" id="B3" placeholder="承認者３" disabled="disabled" />
+							<input type="hidden" id="approver3Id" />
+							<input type="text" class="form-control" id="approver3Nm" placeholder="承認者３" disabled="disabled" />
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default">？</button>
+								<button type="button" id="approver3IdBtn" class="btn btn-default">？</button>
 							</span>
 						</div>
 					</div>
@@ -136,7 +92,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
 						<button type="button" id="back" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-						<button type="button" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
+						<button type="button" id="applicant" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
 					</div>
 				</div>
 			</div><!-- /月報申請 -->

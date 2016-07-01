@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
             .loginPage("/login") // ログインフォームのパス
             .loginProcessingUrl("/login_auth") // 認証処理のパス
-            .usernameParameter("userId") // ユーザー名のパラメータ名
+            .usernameParameter("userId") // ユーザ名のパラメータ名
             .passwordParameter("password") // パスワードのパラメータ名
             .defaultSuccessUrl("/menu") // 認証成功時のパス
             .failureUrl("/login_error") // 認証失敗時のパス

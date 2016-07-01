@@ -17,7 +17,7 @@ import mms.com.doma.entity.MUser;
 public interface UserSearchDao {
 
     /**
-     * ユーザー検索処理
+     * ユーザ検索処理
      * @param form
      * @return
      */
@@ -25,7 +25,7 @@ public interface UserSearchDao {
     List<MUser> searchUser(UserSearchForm form);
 
     /**
-     * ユーザー検索処理
+     * ユーザ検索処理
      * @param form
      * @param options
      * @return

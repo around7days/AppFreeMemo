@@ -4,10 +4,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title></title>
-
-	<!-- Thymeleaf Toymol JS(debug用) -->
-	<script th:remove="all" src="../../static/fw/thymeleaf/thymol.js"></script>
+	<title>ユーザ登録画面</title>
 
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
@@ -45,7 +42,21 @@
 				<div class="form-group">
 					<label for="userId" class="col-sm-3 control-label">ユーザID</label>
 					<div class="col-sm-9">
-						<input type="text" th:value="*{userId}" name="userId" id="userId" class="form-control" placeholder="ユーザID" />
+						<div th:switch="*{viewMode}">
+							<div th:case="*{VIEW_MODE_INSERT}"><!-- 新規時 -->
+								<input type="text" th:value="*{userId}" name="userId" id="userId" class="form-control" placeholder="ユーザID" autofocus="autofocus" />
+							</div>
+							<div th:case="*{VIEW_MODE_UPDATE}"><!-- 更新時 -->
+								<pre th:text="*{userId}">更新表示時のユーザ名</pre>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- パスワード -->
+				<div th:if="*{viewMode == VIEW_MODE_INSERT}" class="form-group">
+					<label for="password" class="col-sm-3 control-label">パスワード</label>
+					<div class="col-sm-9">
+						<input type="password" name="password" id="password" class="form-control" placeholder="パスワード" />
 					</div>
 				</div>
 				<!-- ユーザ名 -->

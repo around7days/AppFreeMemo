@@ -37,6 +37,6 @@ public class ErrorControllerImpl implements ErrorController {
             logger.debug("exception session invalidate to {}", session.getId());
             session.invalidate();
         }
-        return PageIdConst.Com.ERROR;
+        return PageIdConst.ERROR;
     }
 }

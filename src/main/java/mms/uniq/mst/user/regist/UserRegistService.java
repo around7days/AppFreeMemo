@@ -29,12 +29,14 @@ public class UserRegistService extends mms.com.abstracts.AbstractService {
      */
     public void initUpdate(UserRegistForm form,
                            String userId) {
-        // ユーザー情報の取得
+        // ユーザ情報の取得
         MUser mUser = mUserDao.selectById(userId);
 
         // 画面表示設定
         // 詰め替え
         BeanUtils.copyProperties(mUser, form);
+        // パスワードは消しておく
+        form.setPassword(null);
     }
 
     /**

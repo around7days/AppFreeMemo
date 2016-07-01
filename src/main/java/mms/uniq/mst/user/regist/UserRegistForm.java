@@ -13,6 +13,13 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class UserRegistForm {
 
+    //@formatter:off
+    /** 入力チェック：新規 */
+    protected static interface Insert{};
+    /** 入力チェック：更新 */
+    protected static interface Update{};
+    //@formatter:on
+
     /** 画面表示モード：新規 */
     public static final String VIEW_MODE_INSERT = "insert";
     /** 画面表示モード：更新 */
@@ -21,18 +28,23 @@ public class UserRegistForm {
     /** 画面表示モード */
     private String viewMode;
 
-    /** ユーザーID */
-    @NotEmpty(message = "ユーザーIDは{NotEmpty.message}")
-    @Size(max = 10, message = "ユーザーIDは{Size.message}")
+    /** ユーザID */
+    @NotEmpty(message = "ユーザIDは{NotEmpty.message}", groups = { Insert.class, Update.class })
+    @Size(max = 10, message = "ユーザIDは{Size.message}", groups = { Insert.class, Update.class })
     private String userId;
 
-    /** ユーザー名 */
-    @NotEmpty(message = "ユーザー名は{NotEmpty.message}")
-    @Size(max = 10, message = "ユーザー名は{Size.message}")
+    /** パスワード */
+    @NotEmpty(message = "パスワードは{NotEmpty.message}", groups = { Insert.class })
+    @Size(max = 10, message = "パスワードは{Size.message}", groups = { Insert.class })
+    private String password;
+
+    /** ユーザ名 */
+    @NotEmpty(message = "ユーザ名は{NotEmpty.message}", groups = { Insert.class, Update.class })
+    @Size(max = 10, message = "ユーザ名は{Size.message}", groups = { Insert.class, Update.class })
     private String userNm;
 
     /** メールアドレス */
-    @Email(message = "メールアドレスの{Email.message}")
+    @Email(message = "メールアドレスの{Email.message}", groups = { Insert.class, Update.class })
     private String email;
 
     /**
@@ -52,32 +64,48 @@ public class UserRegistForm {
     }
 
     /**
-     * ユーザーIDを取得します。
-     * @return ユーザーID
+     * ユーザIDを取得します。
+     * @return ユーザID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * ユーザーIDを設定します。
-     * @param userId ユーザーID
+     * ユーザIDを設定します。
+     * @param userId ユーザID
      */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
     /**
-     * ユーザー名を取得します。
-     * @return ユーザー名
+     * パスワードを取得します。
+     * @return パスワード
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * パスワードを設定します。
+     * @param password パスワード
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * ユーザ名を取得します。
+     * @return ユーザ名
      */
     public String getUserNm() {
         return userNm;
     }
 
     /**
-     * ユーザー名を設定します。
-     * @param userNm ユーザー名
+     * ユーザ名を設定します。
+     * @param userNm ユーザ名
      */
     public void setUserNm(String userNm) {
         this.userNm = userNm;
