@@ -31,9 +31,6 @@ public class ReportApplicantForm {
     /** 月報ファイル */
     private MultipartFile file;
 
-    /** 月報ファイルタイプ */
-    private String fileType;
-
     /** 承認者１ID */
     private String approver1Id;
 
@@ -98,22 +95,6 @@ public class ReportApplicantForm {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
-    }
-
-    /**
-     * 月報ファイルタイプを取得します。
-     * @return 月報ファイルタイプ
-     */
-    public String getFileType() {
-        return fileType;
-    }
-
-    /**
-     * 月報ファイルタイプを設定します。
-     * @param fileType 月報ファイルタイプ
-     */
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
     }
 
     /**

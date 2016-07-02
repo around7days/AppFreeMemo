@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mms.com.consts.PageIdConst;
+import mms.com.security.UserInfo;
 import mms.uniq.mst.user.regist.UserRegistForm;
 
 /**
@@ -57,6 +59,11 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
         // 初期値設定
         ReportApplicantForm form = new ReportApplicantForm();
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
+
+        //
+        form.setApprover3Id("user03");
+        form.setApprover3Nm("ゆーざー０３");
+
         reportApplicantService.initInsert(form);
         // 格納
         model.addAttribute(form);
@@ -88,6 +95,7 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
 
     /**
      * 新規登録処理
+     * @param userInfo
      * @param form
      * @param bindingResult
      * @param redirectAttr
@@ -97,7 +105,8 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
      * @throws IllegalStateException
      */
     @RequestMapping(value = DEFAULT_URL, params = "insert")
-    public String insert(@Validated(ReportApplicantForm.Insert.class) ReportApplicantForm form,
+    public String insert(@AuthenticationPrincipal UserInfo userInfo,
+                         @Validated(ReportApplicantForm.Insert.class) ReportApplicantForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) throws IllegalStateException, IOException {
@@ -110,7 +119,9 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
         }
 
         // 登録処理
-        reportApplicantService.insert(form);
+        reportApplicantService.insert(form, userInfo);
+        // ファイル保存処理
+        reportApplicantService.saveFile(form.getFile());
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));

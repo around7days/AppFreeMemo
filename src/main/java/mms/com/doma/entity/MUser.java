@@ -15,12 +15,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table(name = "m_user")
 public class MUser {
 
-    /** ユーザID */
+    /** ユーザーID */
     @Id
     @Column(name = "user_id")
     String userId;
 
-    /** ユーザ名 */
+    /** ユーザー名 */
     @Column(name = "user_nm")
     String userNm;
 

@@ -38,9 +38,16 @@
 
 			<!-- 月報申請 -->
 			<div class="form-horizontal">
+				<!-- 申請者 -->
+				<div class="form-group">
+					<label class="col-sm-3 control-label">申請者</label>
+					<div class="col-sm-9">
+						<pre sec:authentication="principal.userNm">申請太郎</pre>
+					</div>
+				</div>
 				<!-- 年月 -->
 				<div class="form-group">
-					<label for="targetYm" class="col-sm-3 control-label">年月</label>
+					<label class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9">
 						<input type="month" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control" value="2016-06" />
 					</div>
@@ -58,8 +65,8 @@
 					<label for="approver1Nm" class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="hidden" id="approver1Id" />
-							<input type="text" class="form-control" id="approver1Nm" placeholder="承認者１" disabled="disabled" />
+							<input type="hidden" name="approver1Id" id="approver1Id" th:value="*{approver1Id}" />
+							<input type="text" name ="approver1Nm" id="approver1Nm" th:value="*{approver1Nm}" class="form-control" placeholder="承認者１" disabled="disabled" />
 							<span class="input-group-btn">
 								<button type="button" id="approver1IdBtn" class="btn btn-default">？</button>
 							</span>
@@ -69,8 +76,8 @@
 					<label for="approver2Nm" class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="hidden" id="approver2Id" />
-							<input type="text" class="form-control" id="approver2Nm" placeholder="承認者２" disabled="disabled" />
+							<input type="hidden" name="approver2Id" id="approver2Id" th:value="*{approver2Id}" />
+							<input type="text" name ="approver2Nm" id="approver2Nm" th:value="*{approver2Nm}" class="form-control" placeholder="承認者２" disabled="disabled" />
 							<span class="input-group-btn">
 								<button type="button" id="approver2IdBtn" class="btn btn-default">？</button>
 							</span>
@@ -80,8 +87,8 @@
 					<label for="approver3Nm" class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="hidden" id="approver3Id" />
-							<input type="text" class="form-control" id="approver3Nm" placeholder="承認者３" disabled="disabled" />
+							<input type="hidden" name="approver3Id" id="approver3Id" th:value="*{approver3Id}" />
+							<input type="text" name ="approver3Nm" id="approver3Nm" th:value="*{approver3Nm}" class="form-control" placeholder="承認者３" disabled="disabled" />
 							<span class="input-group-btn">
 								<button type="button" id="approver3IdBtn" class="btn btn-default">？</button>
 							</span>

@@ -34,16 +34,16 @@ public class TReport {
     Integer status;
 
     /** 承認者１ID */
-    @Column(name = "approval1_id")
-    String approval1Id;
+    @Column(name = "approver1_id")
+    String approver1Id;
 
     /** 承認者２ID */
-    @Column(name = "approval2_id")
-    String approval2Id;
+    @Column(name = "approver2_id")
+    String approver2Id;
 
     /** 承認者３ID */
-    @Column(name = "approval3_id")
-    String approval3Id;
+    @Column(name = "approver3_id")
+    String approver3Id;
 
     /** 月報ファイルパス */
     @Column(name = "file_path")
@@ -142,57 +142,57 @@ public class TReport {
     }
 
     /**
-     * Returns the approval1Id.
+     * Returns the approver1Id.
      *
-     * @return the approval1Id
+     * @return the approver1Id
      */
-    public String getApproval1Id() {
-        return approval1Id;
+    public String getApprover1Id() {
+        return approver1Id;
     }
 
     /**
-     * Sets the approval1Id.
+     * Sets the approver1Id.
      *
-     * @param approval1Id the approval1Id
+     * @param approver1Id the approver1Id
      */
-    public void setApproval1Id(String approval1Id) {
-        this.approval1Id = approval1Id;
+    public void setApprover1Id(String approver1Id) {
+        this.approver1Id = approver1Id;
     }
 
     /**
-     * Returns the approval2Id.
+     * Returns the approver2Id.
      *
-     * @return the approval2Id
+     * @return the approver2Id
      */
-    public String getApproval2Id() {
-        return approval2Id;
+    public String getApprover2Id() {
+        return approver2Id;
     }
 
     /**
-     * Sets the approval2Id.
+     * Sets the approver2Id.
      *
-     * @param approval2Id the approval2Id
+     * @param approver2Id the approver2Id
      */
-    public void setApproval2Id(String approval2Id) {
-        this.approval2Id = approval2Id;
+    public void setApprover2Id(String approver2Id) {
+        this.approver2Id = approver2Id;
     }
 
     /**
-     * Returns the approval3Id.
+     * Returns the approver3Id.
      *
-     * @return the approval3Id
+     * @return the approver3Id
      */
-    public String getApproval3Id() {
-        return approval3Id;
+    public String getApprover3Id() {
+        return approver3Id;
     }
 
     /**
-     * Sets the approval3Id.
+     * Sets the approver3Id.
      *
-     * @param approval3Id the approval3Id
+     * @param approver3Id the approver3Id
      */
-    public void setApproval3Id(String approval3Id) {
-        this.approval3Id = approval3Id;
+    public void setApprover3Id(String approver3Id) {
+        this.approver3Id = approver3Id;
     }
 
     /**
