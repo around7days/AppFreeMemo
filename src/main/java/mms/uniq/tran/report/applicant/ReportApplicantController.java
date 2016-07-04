@@ -165,7 +165,7 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
      */
     @RequestMapping(value = DEFAULT_URL, params = "back")
     public String back() {
-        return PageIdConst.MENU;
+        return redirect("/menu");
     }
 
 }

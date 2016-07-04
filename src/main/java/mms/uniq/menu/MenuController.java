@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -31,6 +32,12 @@ public class MenuController extends mms.com.abstracts.AbstractController {
 
     /** デフォルトページID */
     private static final String DEFAULT_PAGE = PageIdConst.MENU;
+
+    /** メニュー画面フォーム */
+    @ModelAttribute
+    MenuForm setupForm() {
+        return new MenuForm();
+    }
 
     /**
      * メニュー画面初期表示
@@ -85,7 +92,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
 
     @RequestMapping(value = DEFAULT_URL, params = "t001")
     public String T001(Model model) {
-        return "html/月報状況一覧";
+        return redirect("/tran/report/search", "init");
     }
 
     @RequestMapping(value = DEFAULT_URL, params = "t002")

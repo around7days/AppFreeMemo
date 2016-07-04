@@ -14,64 +14,14 @@
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
+	<!-- 個別 JS -->
+	<script th:src="@{/js/reportSearch.js}" src="../../static/js/reportSearch.js"></script>
 </head>
 <body>
-<form th:action="@{/mmSearch}" th:object="${mmSearchForm}" method="post">
+<form th:action="dummy" th:object="${reportSearchForm}" id="formMain" method="post">
 
 	<!-- ナビバー -->
-	<div th:replace="@{/html/include/include_navbar}::navbar2">
-		<nav class="navbar navbar-default navbar-static-top">
-			<div class="container-fluid">
-				<!-- ナビヘッダ -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-content">
-						<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button>
-					<div class="navbar-brand"><strong>月報管理システム</strong></div>
-				</div>
-
-				<!-- ナビ -->
-				<div class="collapse navbar-collapse" id="nav-content">
-					<ul class="nav navbar-nav navbar-left">
-						<!-- デザイン -->
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">デザイン<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#" onclick="changeStyle('Cerulean');">Cerulean</a></li>
-								<li><a href="#" onclick="changeStyle('Cosmo');">Cosmo</a></li>
-								<li><a href="#" onclick="changeStyle('Cyborg');">Cyborg</a></li>
-								<li><a href="#" onclick="changeStyle('Darkly');">Darkly</a></li>
-								<li><a href="#" onclick="changeStyle('Flatly');">Flatly</a></li>
-								<li><a href="#" onclick="changeStyle('Journal');">Journal</a></li>
-								<li><a href="#" onclick="changeStyle('Lumen');">Lumen</a></li>
-								<li><a href="#" onclick="changeStyle('Paper');">Paper</a></li>
-								<li><a href="#" onclick="changeStyle('Readable');">Readable</a></li>
-								<li><a href="#" onclick="changeStyle('Sandstone');">Sandstone</a></li>
-								<li><a href="#" onclick="changeStyle('Simplex');">Simplex</a></li>
-								<li><a href="#" onclick="changeStyle('Slate');">Slate</a></li>
-								<li><a href="#" onclick="changeStyle('Spacelab');">Spacelab</a></li>
-								<li><a href="#" onclick="changeStyle('Superhero');">Superhero</a></li>
-								<li><a href="#" onclick="changeStyle('United');">United</a></li>
-								<li><a href="#" onclick="changeStyle('Yeti');">Yeti</a></li>
-							</ul>
-						</li>
-						<!-- 設定 -->
-						<!-- <li><a href="#">設定<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a></li> -->
-						<!-- メニュー -->
-						<li><a th:href="@{/menu}" href="./メニュー.html">メニュー<span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-						<!-- ログアウト -->
-						<li><a th:href="@{/logout}" href="./ログイン.html">ログアウト<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<!-- ユーザ情報 -->
-						<li class="navbar-brand">
-							<small>ユーザ名：<span sec:authentication="principal.userNm"></span></small>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
+	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
 
 	<!-- メイン -->
 	<div class="container">
@@ -83,45 +33,48 @@
 				<h2>月報状況一覧画面</h2>
 			</div>
 
-			<!-- 検索条件 -->
+			<!-- メッセージ -->
+			<div th:replace="@{/html/include/include_message}::message" ></div>
+
+			<!--
+				検索条件
+			 -->
 			<div class="form-horizontal">
-				<!-- -->
+				<!-- 申請者 -->
 				<div class="form-group">
-					<label for="s" class="col-sm-3 control-label">申請者</label>
-					<div class="col-sm-9">
-						<input type="text" value="" id="s" placeholder="申請者" class="form-control" />
+					<label for="user" class="col-sm-3 control-label">申請者</label>
+					<div class="col-sm-9 form-inline">
+						<input type="text" th:value="*{condition.applicantId}" name="applicantId" id="applicantId" placeholder="申請者ID（完全一致）" class="form-control" />
+						<input type="text" th:value="*{condition.applicantNm}" name="applicantNm" id="applicantNm" placeholder="申請者名（部分一致）" class="form-control" />
 					</div>
 				</div>
-				<!-- -->
+				<!-- 承認状況-->
 				<div class="form-group">
-					<label for="c" class="col-sm-3 control-label">状況</label>
+					<label for="c" class="col-sm-3 control-label">承認状況</label>
 					<div class="col-sm-9">
 						<label class="checkbox-inline">
-							<input type="checkbox" value="" /> ○○承認待ち
+							<input type="checkbox" name="statusUnApprove" id="statusUnApprove" th:field="*{condition.statusUnApprove}" value="on" /> 未承認
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" value="" /> ××承認待ち
+							<input type="checkbox" name="statusApprove" id="statusApprove" th:field="*{condition.statusApprove}" value="on" /> 承認済み
 						</label>
 					</div>
 				</div>
 				<!-- 検索 -->
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<button type="button" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
+						<button type="button" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
+						<button type="button" id="downloadBulk" class="btn btn-primary">一括DL <span class="glyphicon glyphicon-download"></span></button>
 					</div>
 				</div>
 			</div><!-- /検索条件 -->
 
-			<!-- 検索結果 -->
+			<!--
+				検索結果
+			 -->
 			<div class="container">
 				<!-- ページング -->
-				<nav>
-					<ul class="pager">
-						<li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Prev</a></li>
-						<li>100件中 1-20件表示</li>
-						<li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
-					</ul>
-				</nav>
+				<div th:replace="@{/html/include/include_page}::pageing" ></div>
 
 				<!-- 検索結果テーブル -->
 				<table class="table table-hover table-condensed">
@@ -139,32 +92,14 @@
 					<!-- 明細 -->
 					<tbody>
 						<!-- -->
-						<tr>
-							<td><button type="button" class="btn btn-default btn-sm">選択</button></td>
-							<td>2016/06</td>
-							<td>月報太郎</td>
-							<td>2SOL</td>
-							<td>○○承認待ち</td>
-							<td><button type="button" class="btn btn-link btn-sm">月報ファイル１.xlsx<span class="glyphicon glyphicon-download"></span></button></td>
+						<tr th:each="result,iteStatus : *{resultList}">
+							<td><button type="button" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
+							<td th:text="${result.targetYm}">2016/06</td>
+							<td th:text="${result.applicantNm}">月報太郎</td>
+							<td th:text="${result.department}">2SOL</td>
+							<td th:text="${result.statusNm}">○○承認待ち</td>
+							<td><button type="button" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
-						<!-- -->
-						<tr>
-							<td><button type="button" class="btn btn-default btn-sm">選択</button></td>
-							<td>2016/06</td>
-							<td>月報花子</td>
-							<td>SCM</td>
-							<td>××承認待ち</td>
-							<td><button type="button" class="btn btn-link btn-sm">月報ファイル２.xlsx<span class="glyphicon glyphicon-download"></span></button></td>
-						</tr>
-						<!-- -->
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
-						<tr><td><button type="button" class="btn btn-default btn-sm">選択</button></td><td></td><td></td><td></td><td></td><td></td></tr>
 					</tbody>
 				</table>
 			</div><!-- /検索結果 -->
