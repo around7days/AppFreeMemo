@@ -1,14 +1,12 @@
 package mms.uniq.tran.report.applicant;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 月報申請画面フォーム
  * @author
  */
-public class ReportApplicantForm {
+public class ReportApplicantForm extends mms.com.abstracts.AbstractForm {
 
     //@formatter:off
     /** 入力チェック：新規 */
@@ -191,10 +189,6 @@ public class ReportApplicantForm {
      */
     public void setApprover3Nm(String approver3Nm) {
         this.approver3Nm = approver3Nm;
-    }
-
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import mms.com.doma.entity.MUser;
 import mms.com.page.PageInfo;
 
@@ -14,7 +11,7 @@ import mms.com.page.PageInfo;
  * ユーザ一覧画面フォーム
  * @author
  */
-public class UserSearchForm {
+public class UserSearchForm extends mms.com.abstracts.AbstractForm {
 
     /*
      * 検索条件
@@ -101,9 +98,4 @@ public class UserSearchForm {
     public void setResultList(List<MUser> resultList) {
         this.resultList = resultList;
     }
-
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
-
 }

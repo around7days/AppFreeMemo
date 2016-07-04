@@ -29,5 +29,7 @@ public class PageIdConst {
      */
     /** トラン：月報申請画面 */
     public static final String TRAN_REPROT_APPLICANT = "html/月報申請";
+    /** トラン：月報状況一覧画面 */
+    public static final String TRAN_REPROT_SEARCH = "html/月報状況一覧";
 
 }

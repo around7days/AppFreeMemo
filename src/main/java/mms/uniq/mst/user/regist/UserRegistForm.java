@@ -2,8 +2,6 @@ package mms.uniq.mst.user.regist;
 
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -11,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * ユーザ登録画面フォーム
  * @author
  */
-public class UserRegistForm {
+public class UserRegistForm extends mms.com.abstracts.AbstractForm {
 
     //@formatter:off
     /** 入力チェック：新規 */
@@ -127,7 +125,4 @@ public class UserRegistForm {
         this.email = email;
     }
 
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
 }
