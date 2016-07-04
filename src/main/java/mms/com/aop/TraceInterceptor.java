@@ -24,7 +24,7 @@ public class TraceInterceptor {
      * @param joinPoint
      */
     @Before("within(mms..*Controller*)")
-    public void invokeBefore(JoinPoint joinPoint) {
+    public void invokeControllerBefore(JoinPoint joinPoint) {
         logger.debug("[AOP before] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
     }
 
@@ -33,35 +33,26 @@ public class TraceInterceptor {
      * @param joinPoint
      */
     @After("within(mms..*Controller*)")
-    public void invokeAfter(JoinPoint joinPoint) {
+    public void invokeControllerAfter(JoinPoint joinPoint) {
         logger.debug("[AOP after ] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
     }
-
-    // @Before("execution(* mms..*Controller.*(..))")
-    // public void invokeBefore(JoinPoint joinPoint) {
-    // logger.debug("[AOP at before] called {}#{}",
-    // joinPoint.getTarget().getClass(),
-    // joinPoint.getSignature().getName());
-    // }
-
-    // @Around("within(public mms.uniq..*.*Controller(..))")
-    // public Object invoke(ProceedingJoinPoint proceedingJoinPoint) throws
-    // Throwable {
-    // Object ret = null;
-    // try {
-    // System.out.printf("[AOP at around] before invoke, parameters = %s, by
-    // %s#%s%n",
-    // Arrays.toString(proceedingJoinPoint.getArgs()),
-    // proceedingJoinPoint.getTarget().getClass(),
-    // proceedingJoinPoint.getSignature().getName());
     //
-    // ret = proceedingJoinPoint.proceed();
-    // return ret;
-    // } finally {
-    // System.out.printf("[AOP at around] after invoke, result = %s, %s#%s%n",
-    // ret,
-    // proceedingJoinPoint.getTarget().getClass(),
-    // proceedingJoinPoint.getSignature().getName());
-    // }
-    // }
+    //    /**
+    //     * Serviceクラス内のメソッド開始時にログを出力
+    //     * @param joinPoint
+    //     */
+    //    @Before("within(mms..*Service*)")
+    //    public void invokeServiceBefore(JoinPoint joinPoint) {
+    //        logger.debug("[AOP before] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
+    //    }
+    //
+    //    /**
+    //     * Serviceクラス内のメソッド終了時にログを出力
+    //     * @param joinPoint
+    //     */
+    //    @After("within(mms..*Service*)")
+    //    public void invokeServiceAfter(JoinPoint joinPoint) {
+    //        logger.debug("[AOP after ] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
+    //    }
+
 }

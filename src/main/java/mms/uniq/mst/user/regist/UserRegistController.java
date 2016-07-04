@@ -105,7 +105,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            //            throw new ValidateException(bindingResult);
+            //            throw new ValidateException("aaa");
             return DEFAULT_PAGE;
         }
 
@@ -189,7 +189,6 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     public ModelAndView handlerException(ValidateException e) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName(DEFAULT_PAGE);
-        mv.addObject(setupForm());
 
         return mv;
     }
