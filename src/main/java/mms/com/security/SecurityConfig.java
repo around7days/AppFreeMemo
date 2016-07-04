@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         /* ログイン前の認証設定 */
         // OK(アクセス許可)
-        http.authorizeRequests().antMatchers("/login**", "/logout", "/error").permitAll();
+        http.authorizeRequests().antMatchers("/", "/login**", "/logout", "/error").permitAll();
         // NG（それ以外は全て認証無しの場合アクセス拒否）
         http.authorizeRequests().anyRequest().authenticated();
 

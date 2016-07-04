@@ -14,6 +14,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * ${simpleName}クラス
 <#if showDbComment && comment??>
  * ${comment}
 </#if>
@@ -62,18 +63,16 @@ public class <#if entityPrefix??>${entityPrefix}</#if>${simpleName}<#if supercla
   <#list ownEntityPropertyDescs as property>
 
     /**
-     * Returns the ${property.name}.
-     *
-     * @return the ${property.name}
+     * ${property.comment}を取得します.
+     * @return ${property.comment}
      */
     public ${property.propertyClassSimpleName} get${property.name?cap_first}() {
         return ${property.name};
     }
 
     /**
-     * Sets the ${property.name}.
-     *
-     * @param ${property.name} the ${property.name}
+     * ${property.comment}を設定します.
+     * @param ${property.name} ${property.comment}
      */
     public void set${property.name?cap_first}(${property.propertyClassSimpleName} ${property.name}) {
         this.${property.name} = ${property.name};

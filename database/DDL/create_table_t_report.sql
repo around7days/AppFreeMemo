@@ -7,7 +7,7 @@ create table t_report (
 	applicant_id			varchar(20)		comment '申請者ID'					not null,
 	target_ym					int(6)				comment '対象年月(yyyymm)'	not null,
 	applicant_date		timestamp			comment '申請日'						not null,
-	status						int(2)				comment '承認状況' 					not null,
+	status						varchar(3)		comment '承認状況' 					not null,
 	approver1_id			varchar(20)		comment '承認者１ID',
 	approver2_id			varchar(20)		comment '承認者２ID',
 	approver3_id			varchar(20)		comment '承認者３ID'				not null,

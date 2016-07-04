@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
+import mms.com.consts.MCodeConst;
 import mms.com.doma.dao.TReportDao;
 import mms.com.doma.entity.TReport;
 import mms.com.security.UserInfo;
@@ -74,11 +76,19 @@ public class ReportApplicantService extends mms.com.abstracts.AbstractService {
         entity.setApplicantId(userInfo.getUserId());
         entity.setTargetYm(Integer.valueOf(form.getTargetYm().replace("-", "")));
         entity.setApplicantDate(LocalDateTime.now());
-        entity.setStatus(0);
         entity.setApprover1Id(form.getApprover1Id());
         entity.setApprover2Id(form.getApprover2Id());
         entity.setApprover3Id(form.getApprover3Id());
         entity.setFilePath(form.getFile().getOriginalFilename());
+
+        // 承認者の有無に合わせてステータスを設定
+        if (!StringUtils.isEmpty(form.getApprover1Id())) {
+            entity.setStatus(MCodeConst.A001_Y01);
+        } else if (!StringUtils.isEmpty(form.getApprover2Id())) {
+            entity.setStatus(MCodeConst.A001_Y02);
+        } else {
+            entity.setStatus(MCodeConst.A001_Y03);
+        }
 
         // TODO
         tReportDao.delete(entity);

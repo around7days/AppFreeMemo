@@ -126,7 +126,7 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));
 
-        return PageIdConst.MENU;
+        return redirect("/menu");
     }
 
     //    /**

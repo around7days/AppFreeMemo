@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * MUserクラス
  * 
  */
 @Entity(listener = MUserListener.class)
@@ -53,162 +54,162 @@ public class MUser {
     String updId;
 
     /**
-     * Returns the userId.
+     * ユーザーIDを取得します.
      *
-     * @return the userId
+     * @return ユーザーID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * Sets the userId.
+     * ユーザーIDを設定します.
      *
-     * @param userId the userId
+     * @param userId ユーザーID
      */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
     /**
-     * Returns the userNm.
+     * ユーザー名を取得します.
      *
-     * @return the userNm
+     * @return ユーザー名
      */
     public String getUserNm() {
         return userNm;
     }
 
     /**
-     * Sets the userNm.
+     * ユーザー名を設定します.
      *
-     * @param userNm the userNm
+     * @param userNm ユーザー名
      */
     public void setUserNm(String userNm) {
         this.userNm = userNm;
     }
 
     /**
-     * Returns the password.
+     * パスワードを取得します.
      *
-     * @return the password
+     * @return パスワード
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * Sets the password.
+     * パスワードを設定します.
      *
-     * @param password the password
+     * @param password パスワード
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * Returns the email.
+     * メールアドレスを取得します.
      *
-     * @return the email
+     * @return メールアドレス
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Sets the email.
+     * メールアドレスを設定します.
      *
-     * @param email the email
+     * @param email メールアドレス
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Returns the delFlg.
+     * 削除フラグを取得します.
      *
-     * @return the delFlg
+     * @return 削除フラグ
      */
     public Integer getDelFlg() {
         return delFlg;
     }
 
     /**
-     * Sets the delFlg.
+     * 削除フラグを設定します.
      *
-     * @param delFlg the delFlg
+     * @param delFlg 削除フラグ
      */
     public void setDelFlg(Integer delFlg) {
         this.delFlg = delFlg;
     }
 
     /**
-     * Returns the insDate.
+     * 登録日時を取得します.
      *
-     * @return the insDate
+     * @return 登録日時
      */
     public LocalDateTime getInsDate() {
         return insDate;
     }
 
     /**
-     * Sets the insDate.
+     * 登録日時を設定します.
      *
-     * @param insDate the insDate
+     * @param insDate 登録日時
      */
     public void setInsDate(LocalDateTime insDate) {
         this.insDate = insDate;
     }
 
     /**
-     * Returns the insId.
+     * 登録IDを取得します.
      *
-     * @return the insId
+     * @return 登録ID
      */
     public String getInsId() {
         return insId;
     }
 
     /**
-     * Sets the insId.
+     * 登録IDを設定します.
      *
-     * @param insId the insId
+     * @param insId 登録ID
      */
     public void setInsId(String insId) {
         this.insId = insId;
     }
 
     /**
-     * Returns the updDate.
+     * 更新日時を取得します.
      *
-     * @return the updDate
+     * @return 更新日時
      */
     public LocalDateTime getUpdDate() {
         return updDate;
     }
 
     /**
-     * Sets the updDate.
+     * 更新日時を設定します.
      *
-     * @param updDate the updDate
+     * @param updDate 更新日時
      */
     public void setUpdDate(LocalDateTime updDate) {
         this.updDate = updDate;
     }
 
     /**
-     * Returns the updId.
+     * 更新IDを取得します.
      *
-     * @return the updId
+     * @return 更新ID
      */
     public String getUpdId() {
         return updId;
     }
 
     /**
-     * Sets the updId.
+     * 更新IDを設定します.
      *
-     * @param updId the updId
+     * @param updId 更新ID
      */
     public void setUpdId(String updId) {
         this.updId = updId;

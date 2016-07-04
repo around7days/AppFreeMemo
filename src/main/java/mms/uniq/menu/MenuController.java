@@ -35,12 +35,14 @@ public class MenuController extends mms.com.abstracts.AbstractController {
     /**
      * メニュー画面初期表示
      * @param userInfo
+     * @param form
      * @param session
      * @param model
      * @return
      */
     @RequestMapping(value = DEFAULT_URL)
     public String init(@AuthenticationPrincipal UserInfo userInfo,
+                       MenuForm form,
                        HttpSession session,
                        Model model) {
         logger.debug("ユーザID：{}", userInfo.getUserId());
@@ -68,7 +70,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = DEFAULT_URL, params = "m001")
     public String M001(Model model) {
-        return "redirect:/mst/user/search?init";
+        return redirect("/mst/user/search", "init");
     }
 
     /**
@@ -78,7 +80,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = DEFAULT_URL, params = "m002")
     public String M002(Model model) {
-        return "redirect:/mst/user/regist?initInsert";
+        return redirect("/mst/user/regist", "initInsert");
     }
 
     @RequestMapping(value = DEFAULT_URL, params = "t001")
@@ -88,7 +90,7 @@ public class MenuController extends mms.com.abstracts.AbstractController {
 
     @RequestMapping(value = DEFAULT_URL, params = "t002")
     public String T002(Model model) {
-        return "redirect:/tran/report/applicant?initInsert";
+        return redirect("/tran/report/applicant", "initInsert");
     }
 
     @RequestMapping(value = DEFAULT_URL, params = "t003")

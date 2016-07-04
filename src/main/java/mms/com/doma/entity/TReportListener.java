@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 
 /**
- *
+ * TReportListenerクラス
  */
 public class TReportListener implements EntityListener<TReport> {
 

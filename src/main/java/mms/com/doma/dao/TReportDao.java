@@ -9,12 +9,14 @@ import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
+ * TReportDaoクラス
  */
 @Dao
 @ConfigAutowireable
 public interface TReportDao {
 
     /**
+     * selectById
      * @param applicantId
      * @param targetYm
      * @return the TReport entity
@@ -23,6 +25,7 @@ public interface TReportDao {
     TReport selectById(String applicantId, Integer targetYm);
 
     /**
+     * insert
      * @param entity
      * @return affected rows
      */
@@ -30,6 +33,7 @@ public interface TReportDao {
     int insert(TReport entity);
 
     /**
+     * udpate
      * @param entity
      * @return affected rows
      */
@@ -37,6 +41,7 @@ public interface TReportDao {
     int update(TReport entity);
 
     /**
+     * delete
      * @param entity
      * @return affected rows
      */

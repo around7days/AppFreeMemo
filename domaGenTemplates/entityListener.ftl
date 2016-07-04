@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 
 /**
- *
+ * ${simpleName}クラス
 <#if lib.author??>
  * @author ${lib.author}
 </#if>

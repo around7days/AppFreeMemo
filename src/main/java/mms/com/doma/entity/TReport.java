@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * TReportクラス
  * 
  */
 @Entity(listener = TReportListener.class)
@@ -31,7 +32,7 @@ public class TReport {
 
     /** 承認状況 */
     @Column(name = "status")
-    Integer status;
+    String status;
 
     /** 承認者１ID */
     @Column(name = "approver1_id")
@@ -70,234 +71,234 @@ public class TReport {
     String updId;
 
     /**
-     * Returns the applicantId.
+     * 申請者IDを取得します.
      *
-     * @return the applicantId
+     * @return 申請者ID
      */
     public String getApplicantId() {
         return applicantId;
     }
 
     /**
-     * Sets the applicantId.
+     * 申請者IDを設定します.
      *
-     * @param applicantId the applicantId
+     * @param applicantId 申請者ID
      */
     public void setApplicantId(String applicantId) {
         this.applicantId = applicantId;
     }
 
     /**
-     * Returns the targetYm.
+     * 対象年月(yyyymm)を取得します.
      *
-     * @return the targetYm
+     * @return 対象年月(yyyymm)
      */
     public Integer getTargetYm() {
         return targetYm;
     }
 
     /**
-     * Sets the targetYm.
+     * 対象年月(yyyymm)を設定します.
      *
-     * @param targetYm the targetYm
+     * @param targetYm 対象年月(yyyymm)
      */
     public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
     }
 
     /**
-     * Returns the applicantDate.
+     * 申請日を取得します.
      *
-     * @return the applicantDate
+     * @return 申請日
      */
     public LocalDateTime getApplicantDate() {
         return applicantDate;
     }
 
     /**
-     * Sets the applicantDate.
+     * 申請日を設定します.
      *
-     * @param applicantDate the applicantDate
+     * @param applicantDate 申請日
      */
     public void setApplicantDate(LocalDateTime applicantDate) {
         this.applicantDate = applicantDate;
     }
 
     /**
-     * Returns the status.
+     * 承認状況を取得します.
      *
-     * @return the status
+     * @return 承認状況
      */
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
     /**
-     * Sets the status.
+     * 承認状況を設定します.
      *
-     * @param status the status
+     * @param status 承認状況
      */
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     /**
-     * Returns the approver1Id.
+     * 承認者１IDを取得します.
      *
-     * @return the approver1Id
+     * @return 承認者１ID
      */
     public String getApprover1Id() {
         return approver1Id;
     }
 
     /**
-     * Sets the approver1Id.
+     * 承認者１IDを設定します.
      *
-     * @param approver1Id the approver1Id
+     * @param approver1Id 承認者１ID
      */
     public void setApprover1Id(String approver1Id) {
         this.approver1Id = approver1Id;
     }
 
     /**
-     * Returns the approver2Id.
+     * 承認者２IDを取得します.
      *
-     * @return the approver2Id
+     * @return 承認者２ID
      */
     public String getApprover2Id() {
         return approver2Id;
     }
 
     /**
-     * Sets the approver2Id.
+     * 承認者２IDを設定します.
      *
-     * @param approver2Id the approver2Id
+     * @param approver2Id 承認者２ID
      */
     public void setApprover2Id(String approver2Id) {
         this.approver2Id = approver2Id;
     }
 
     /**
-     * Returns the approver3Id.
+     * 承認者３IDを取得します.
      *
-     * @return the approver3Id
+     * @return 承認者３ID
      */
     public String getApprover3Id() {
         return approver3Id;
     }
 
     /**
-     * Sets the approver3Id.
+     * 承認者３IDを設定します.
      *
-     * @param approver3Id the approver3Id
+     * @param approver3Id 承認者３ID
      */
     public void setApprover3Id(String approver3Id) {
         this.approver3Id = approver3Id;
     }
 
     /**
-     * Returns the filePath.
+     * 月報ファイルパスを取得します.
      *
-     * @return the filePath
+     * @return 月報ファイルパス
      */
     public String getFilePath() {
         return filePath;
     }
 
     /**
-     * Sets the filePath.
+     * 月報ファイルパスを設定します.
      *
-     * @param filePath the filePath
+     * @param filePath 月報ファイルパス
      */
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Returns the delFlg.
+     * 削除フラグを取得します.
      *
-     * @return the delFlg
+     * @return 削除フラグ
      */
     public Integer getDelFlg() {
         return delFlg;
     }
 
     /**
-     * Sets the delFlg.
+     * 削除フラグを設定します.
      *
-     * @param delFlg the delFlg
+     * @param delFlg 削除フラグ
      */
     public void setDelFlg(Integer delFlg) {
         this.delFlg = delFlg;
     }
 
     /**
-     * Returns the insDate.
+     * 登録日時を取得します.
      *
-     * @return the insDate
+     * @return 登録日時
      */
     public LocalDateTime getInsDate() {
         return insDate;
     }
 
     /**
-     * Sets the insDate.
+     * 登録日時を設定します.
      *
-     * @param insDate the insDate
+     * @param insDate 登録日時
      */
     public void setInsDate(LocalDateTime insDate) {
         this.insDate = insDate;
     }
 
     /**
-     * Returns the insId.
+     * 登録IDを取得します.
      *
-     * @return the insId
+     * @return 登録ID
      */
     public String getInsId() {
         return insId;
     }
 
     /**
-     * Sets the insId.
+     * 登録IDを設定します.
      *
-     * @param insId the insId
+     * @param insId 登録ID
      */
     public void setInsId(String insId) {
         this.insId = insId;
     }
 
     /**
-     * Returns the updDate.
+     * 更新日時を取得します.
      *
-     * @return the updDate
+     * @return 更新日時
      */
     public LocalDateTime getUpdDate() {
         return updDate;
     }
 
     /**
-     * Sets the updDate.
+     * 更新日時を設定します.
      *
-     * @param updDate the updDate
+     * @param updDate 更新日時
      */
     public void setUpdDate(LocalDateTime updDate) {
         this.updDate = updDate;
     }
 
     /**
-     * Returns the updId.
+     * 更新IDを取得します.
      *
-     * @return the updId
+     * @return 更新ID
      */
     public String getUpdId() {
         return updId;
     }
 
     /**
-     * Sets the updId.
+     * 更新IDを設定します.
      *
-     * @param updId the updId
+     * @param updId 更新ID
      */
     public void setUpdId(String updId) {
         this.updId = updId;

@@ -9,12 +9,14 @@ import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
+ * MUserDaoクラス
  */
 @Dao
 @ConfigAutowireable
 public interface MUserDao {
 
     /**
+     * selectById
      * @param userId
      * @return the MUser entity
      */
@@ -22,6 +24,7 @@ public interface MUserDao {
     MUser selectById(String userId);
 
     /**
+     * insert
      * @param entity
      * @return affected rows
      */
@@ -29,6 +32,7 @@ public interface MUserDao {
     int insert(MUser entity);
 
     /**
+     * udpate
      * @param entity
      * @return affected rows
      */
@@ -36,6 +40,7 @@ public interface MUserDao {
     int update(MUser entity);
 
     /**
+     * delete
      * @param entity
      * @return affected rows
      */

@@ -13,6 +13,7 @@ import ${importName};
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
+ * ${simpleName}クラス
 <#if lib.author??>
  * @author ${lib.author}
 </#if>
@@ -23,6 +24,7 @@ public interface ${simpleName} {
 
 <#if entityDesc.idEntityPropertyDescs?size gt 0>
     /**
+     * selectById
 <#list entityDesc.idEntityPropertyDescs as property>
      * @param ${property.name}
 </#list>
@@ -34,6 +36,7 @@ public interface ${simpleName} {
 </#if>
 <#if entityDesc.idEntityPropertyDescs?size gt 0 && entityDesc.versionEntityPropertyDesc??>
     /**
+     * selectByIdAndVersion
 <#list entityDesc.idEntityPropertyDescs as property>
      * @param ${property.name}
 </#list>
@@ -45,6 +48,7 @@ public interface ${simpleName} {
 
 </#if>
     /**
+     * insert
      * @param entity
      * @return affected rows
      */
@@ -52,6 +56,7 @@ public interface ${simpleName} {
     int insert(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 
     /**
+     * udpate
      * @param entity
      * @return affected rows
      */
@@ -59,6 +64,7 @@ public interface ${simpleName} {
     int update(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 
     /**
+     * delete
      * @param entity
      * @return affected rows
      */

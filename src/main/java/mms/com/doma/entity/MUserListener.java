@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 
 /**
- *
+ * MUserListenerクラス
  */
 public class MUserListener implements EntityListener<MUser> {
 
