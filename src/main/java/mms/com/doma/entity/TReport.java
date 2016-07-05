@@ -19,60 +19,59 @@ public class TReport {
     /** 申請者ID */
     @Id
     @Column(name = "applicant_id")
-    String applicantId;
+    private String applicantId;
 
     /** 対象年月(yyyymm) */
     @Id
     @Column(name = "target_ym")
-    Integer targetYm;
+    private Integer targetYm;
 
     /** 申請日 */
     @Column(name = "applicant_date")
-    LocalDateTime applicantDate;
+    private LocalDateTime applicantDate;
 
     /** 承認状況 */
     @Column(name = "status")
-    String status;
+    private String status;
 
     /** 承認者１ID */
     @Column(name = "approver1_id")
-    String approver1Id;
+    private String approver1Id;
 
     /** 承認者２ID */
     @Column(name = "approver2_id")
-    String approver2Id;
+    private String approver2Id;
 
     /** 承認者３ID */
     @Column(name = "approver3_id")
-    String approver3Id;
+    private String approver3Id;
 
     /** 月報ファイルパス */
     @Column(name = "file_path")
-    String filePath;
+    private String filePath;
 
     /** 削除フラグ */
     @Column(name = "del_flg")
-    Integer delFlg;
+    private Integer delFlg;
 
     /** 登録日時 */
     @Column(name = "ins_date")
-    LocalDateTime insDate;
+    private LocalDateTime insDate;
 
     /** 登録ID */
     @Column(name = "ins_id")
-    String insId;
+    private String insId;
 
     /** 更新日時 */
     @Column(name = "upd_date")
-    LocalDateTime updDate;
+    private LocalDateTime updDate;
 
     /** 更新ID */
     @Column(name = "upd_id")
-    String updId;
+    private String updId;
 
     /**
      * 申請者IDを取得します.
-     *
      * @return 申請者ID
      */
     public String getApplicantId() {
@@ -81,7 +80,6 @@ public class TReport {
 
     /**
      * 申請者IDを設定します.
-     *
      * @param applicantId 申請者ID
      */
     public void setApplicantId(String applicantId) {
@@ -90,7 +88,6 @@ public class TReport {
 
     /**
      * 対象年月(yyyymm)を取得します.
-     *
      * @return 対象年月(yyyymm)
      */
     public Integer getTargetYm() {
@@ -99,7 +96,6 @@ public class TReport {
 
     /**
      * 対象年月(yyyymm)を設定します.
-     *
      * @param targetYm 対象年月(yyyymm)
      */
     public void setTargetYm(Integer targetYm) {
@@ -108,7 +104,6 @@ public class TReport {
 
     /**
      * 申請日を取得します.
-     *
      * @return 申請日
      */
     public LocalDateTime getApplicantDate() {
@@ -117,7 +112,6 @@ public class TReport {
 
     /**
      * 申請日を設定します.
-     *
      * @param applicantDate 申請日
      */
     public void setApplicantDate(LocalDateTime applicantDate) {
@@ -126,7 +120,6 @@ public class TReport {
 
     /**
      * 承認状況を取得します.
-     *
      * @return 承認状況
      */
     public String getStatus() {
@@ -135,7 +128,6 @@ public class TReport {
 
     /**
      * 承認状況を設定します.
-     *
      * @param status 承認状況
      */
     public void setStatus(String status) {
@@ -144,7 +136,6 @@ public class TReport {
 
     /**
      * 承認者１IDを取得します.
-     *
      * @return 承認者１ID
      */
     public String getApprover1Id() {
@@ -153,7 +144,6 @@ public class TReport {
 
     /**
      * 承認者１IDを設定します.
-     *
      * @param approver1Id 承認者１ID
      */
     public void setApprover1Id(String approver1Id) {
@@ -162,7 +152,6 @@ public class TReport {
 
     /**
      * 承認者２IDを取得します.
-     *
      * @return 承認者２ID
      */
     public String getApprover2Id() {
@@ -171,7 +160,6 @@ public class TReport {
 
     /**
      * 承認者２IDを設定します.
-     *
      * @param approver2Id 承認者２ID
      */
     public void setApprover2Id(String approver2Id) {
@@ -180,7 +168,6 @@ public class TReport {
 
     /**
      * 承認者３IDを取得します.
-     *
      * @return 承認者３ID
      */
     public String getApprover3Id() {
@@ -189,7 +176,6 @@ public class TReport {
 
     /**
      * 承認者３IDを設定します.
-     *
      * @param approver3Id 承認者３ID
      */
     public void setApprover3Id(String approver3Id) {
@@ -198,7 +184,6 @@ public class TReport {
 
     /**
      * 月報ファイルパスを取得します.
-     *
      * @return 月報ファイルパス
      */
     public String getFilePath() {
@@ -207,7 +192,6 @@ public class TReport {
 
     /**
      * 月報ファイルパスを設定します.
-     *
      * @param filePath 月報ファイルパス
      */
     public void setFilePath(String filePath) {
@@ -216,7 +200,6 @@ public class TReport {
 
     /**
      * 削除フラグを取得します.
-     *
      * @return 削除フラグ
      */
     public Integer getDelFlg() {
@@ -225,7 +208,6 @@ public class TReport {
 
     /**
      * 削除フラグを設定します.
-     *
      * @param delFlg 削除フラグ
      */
     public void setDelFlg(Integer delFlg) {
@@ -234,7 +216,6 @@ public class TReport {
 
     /**
      * 登録日時を取得します.
-     *
      * @return 登録日時
      */
     public LocalDateTime getInsDate() {
@@ -243,7 +224,6 @@ public class TReport {
 
     /**
      * 登録日時を設定します.
-     *
      * @param insDate 登録日時
      */
     public void setInsDate(LocalDateTime insDate) {
@@ -252,7 +232,6 @@ public class TReport {
 
     /**
      * 登録IDを取得します.
-     *
      * @return 登録ID
      */
     public String getInsId() {
@@ -261,7 +240,6 @@ public class TReport {
 
     /**
      * 登録IDを設定します.
-     *
      * @param insId 登録ID
      */
     public void setInsId(String insId) {
@@ -270,7 +248,6 @@ public class TReport {
 
     /**
      * 更新日時を取得します.
-     *
      * @return 更新日時
      */
     public LocalDateTime getUpdDate() {
@@ -279,7 +256,6 @@ public class TReport {
 
     /**
      * 更新日時を設定します.
-     *
      * @param updDate 更新日時
      */
     public void setUpdDate(LocalDateTime updDate) {
@@ -288,7 +264,6 @@ public class TReport {
 
     /**
      * 更新IDを取得します.
-     *
      * @return 更新ID
      */
     public String getUpdId() {
@@ -297,7 +272,6 @@ public class TReport {
 
     /**
      * 更新IDを設定します.
-     *
      * @param updId 更新ID
      */
     public void setUpdId(String updId) {
@@ -307,5 +281,4 @@ public class TReport {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
-
 }

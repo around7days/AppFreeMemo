@@ -10,11 +10,8 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * ${simpleName}クラス
 <#if showDbComment && comment??>
  * ${comment}
 </#if>
@@ -32,7 +29,7 @@ public class <#if entityPrefix??>${entityPrefix}</#if>${simpleName}<#if supercla
   <#if showDbComment && property.comment??>
     /** ${property.comment} */
   <#else>
-    /** ${property.name} */
+    /** */
   </#if>
   <#if property.id>
     @Id
@@ -51,7 +48,7 @@ public class <#if entityPrefix??>${entityPrefix}</#if>${simpleName}<#if supercla
   <#if property.showColumnName && property.columnName??>
     @Column(name = "${property.columnName}")
   </#if>
-    <#if !useAccessor>public <#else>private </#if>${property.propertyClassSimpleName} ${property.name};
+    <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name};
 </#list>
 <#if originalStatesPropertyName??>
 
@@ -62,35 +59,23 @@ public class <#if entityPrefix??>${entityPrefix}</#if>${simpleName}<#if supercla
 <#if useAccessor>
   <#list ownEntityPropertyDescs as property>
 
-    /**
-  <#if property.comment??>
-     * ${property.comment}を取得します.
-     * @return ${property.comment}
-  <#else>
-     * ${property.name}を取得します.
-     * @return ${property.name}
-  </#if>
+    /** 
+     * Returns the ${property.name}.
+     * 
+     * @return the ${property.name}
      */
     public ${property.propertyClassSimpleName} get${property.name?cap_first}() {
         return ${property.name};
     }
 
-    /**
-  <#if property.comment??>
-     * ${property.comment}を設定します.
-     * @param ${property.name} ${property.comment}
-  <#else>
-     * ${property.name}を設定します.
-     * @param ${property.name} ${property.name}
-  </#if>
+    /** 
+     * Sets the ${property.name}.
+     * 
+     * @param ${property.name} the ${property.name}
      */
     public void set${property.name?cap_first}(${property.propertyClassSimpleName} ${property.name}) {
         this.${property.name} = ${property.name};
     }
   </#list>
-
 </#if>
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
 }

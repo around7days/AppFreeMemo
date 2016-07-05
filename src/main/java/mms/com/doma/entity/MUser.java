@@ -19,43 +19,42 @@ public class MUser {
     /** ユーザーID */
     @Id
     @Column(name = "user_id")
-    String userId;
+    private String userId;
 
     /** ユーザー名 */
     @Column(name = "user_nm")
-    String userNm;
+    private String userNm;
 
     /** パスワード */
     @Column(name = "password")
-    String password;
+    private String password;
 
     /** メールアドレス */
     @Column(name = "email")
-    String email;
+    private String email;
 
     /** 削除フラグ */
     @Column(name = "del_flg")
-    Integer delFlg;
+    private Integer delFlg;
 
     /** 登録日時 */
     @Column(name = "ins_date")
-    LocalDateTime insDate;
+    private LocalDateTime insDate;
 
     /** 登録ID */
     @Column(name = "ins_id")
-    String insId;
+    private String insId;
 
     /** 更新日時 */
     @Column(name = "upd_date")
-    LocalDateTime updDate;
+    private LocalDateTime updDate;
 
     /** 更新ID */
     @Column(name = "upd_id")
-    String updId;
+    private String updId;
 
     /**
      * ユーザーIDを取得します.
-     *
      * @return ユーザーID
      */
     public String getUserId() {
@@ -64,7 +63,6 @@ public class MUser {
 
     /**
      * ユーザーIDを設定します.
-     *
      * @param userId ユーザーID
      */
     public void setUserId(String userId) {
@@ -73,7 +71,6 @@ public class MUser {
 
     /**
      * ユーザー名を取得します.
-     *
      * @return ユーザー名
      */
     public String getUserNm() {
@@ -82,7 +79,6 @@ public class MUser {
 
     /**
      * ユーザー名を設定します.
-     *
      * @param userNm ユーザー名
      */
     public void setUserNm(String userNm) {
@@ -91,7 +87,6 @@ public class MUser {
 
     /**
      * パスワードを取得します.
-     *
      * @return パスワード
      */
     public String getPassword() {
@@ -100,7 +95,6 @@ public class MUser {
 
     /**
      * パスワードを設定します.
-     *
      * @param password パスワード
      */
     public void setPassword(String password) {
@@ -109,7 +103,6 @@ public class MUser {
 
     /**
      * メールアドレスを取得します.
-     *
      * @return メールアドレス
      */
     public String getEmail() {
@@ -118,7 +111,6 @@ public class MUser {
 
     /**
      * メールアドレスを設定します.
-     *
      * @param email メールアドレス
      */
     public void setEmail(String email) {
@@ -127,7 +119,6 @@ public class MUser {
 
     /**
      * 削除フラグを取得します.
-     *
      * @return 削除フラグ
      */
     public Integer getDelFlg() {
@@ -136,7 +127,6 @@ public class MUser {
 
     /**
      * 削除フラグを設定します.
-     *
      * @param delFlg 削除フラグ
      */
     public void setDelFlg(Integer delFlg) {
@@ -145,7 +135,6 @@ public class MUser {
 
     /**
      * 登録日時を取得します.
-     *
      * @return 登録日時
      */
     public LocalDateTime getInsDate() {
@@ -154,7 +143,6 @@ public class MUser {
 
     /**
      * 登録日時を設定します.
-     *
      * @param insDate 登録日時
      */
     public void setInsDate(LocalDateTime insDate) {
@@ -163,7 +151,6 @@ public class MUser {
 
     /**
      * 登録IDを取得します.
-     *
      * @return 登録ID
      */
     public String getInsId() {
@@ -172,7 +159,6 @@ public class MUser {
 
     /**
      * 登録IDを設定します.
-     *
      * @param insId 登録ID
      */
     public void setInsId(String insId) {
@@ -181,7 +167,6 @@ public class MUser {
 
     /**
      * 更新日時を取得します.
-     *
      * @return 更新日時
      */
     public LocalDateTime getUpdDate() {
@@ -190,7 +175,6 @@ public class MUser {
 
     /**
      * 更新日時を設定します.
-     *
      * @param updDate 更新日時
      */
     public void setUpdDate(LocalDateTime updDate) {
@@ -199,7 +183,6 @@ public class MUser {
 
     /**
      * 更新IDを取得します.
-     *
      * @return 更新ID
      */
     public String getUpdId() {
@@ -208,7 +191,6 @@ public class MUser {
 
     /**
      * 更新IDを設定します.
-     *
      * @param updId 更新ID
      */
     public void setUpdId(String updId) {
@@ -218,5 +200,4 @@ public class MUser {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
-
 }

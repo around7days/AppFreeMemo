@@ -1,5 +1,7 @@
 package mms.uniq.tran.report.search;
 
+import java.util.List;
+
 import org.seasar.doma.jdbc.SelectOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,32 +49,15 @@ public class ReportSearchService extends mms.com.abstracts.AbstractService {
         PageInfo pageInfo = form.getPageInfo();
         SelectOptions options = SelectOptionsUtil.get(pageInfo);
 
-        //        // 検索処理
-        //        List<MUser> result = reportSearchDao.searchUser(form, options);
-        //        logger.debug("検索結果(全件)：{}件", options.getCount());
-        //        logger.debug("検索結果：{}件", result.size());
-        //        result.forEach(obj -> logger.debug(ToStringBuilder.reflectionToString(obj)));
-        //
-        //        // 検索結果格納
-        //        pageInfo.setTotalSize(options.getCount());
-        //        form.setResultList(result);
+        // 検索処理
+        List<SearchReportEntity> resultList = reportSearchDao.searchReport(form.getCondition(), options);
+        logger.debug("検索結果(全件) -> {}件", options.getCount());
+        logger.debug("検索結果 -> {}件", resultList.size());
+        resultList.forEach(result -> logger.debug(result.toString()));
 
-    }
-
-    /**
-     * ダウンロード処理
-     * @param form
-     */
-    public void download(ReportSearchForm form) {
-
-    }
-
-    /**
-     * 一括ダウンロード処理
-     * @param form
-     */
-    public void downloadBulk(ReportSearchForm form) {
-
+        // 検索結果格納
+        pageInfo.setTotalSize(options.getCount());
+        form.setResultList(resultList);
     }
 
 }

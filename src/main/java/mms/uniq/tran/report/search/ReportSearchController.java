@@ -1,5 +1,14 @@
 package mms.uniq.tran.report.search;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +79,7 @@ public class ReportSearchController extends mms.com.abstracts.AbstractController
     public String search(@Validated ReportSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -97,7 +106,7 @@ public class ReportSearchController extends mms.com.abstracts.AbstractController
     @RequestMapping(value = DEFAULT_URL, params = "reSearch")
     public String reSearch(ReportSearchForm form,
                            Model model) {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         // 検索処理
         reportSearchService.search(form);
@@ -136,12 +145,40 @@ public class ReportSearchController extends mms.com.abstracts.AbstractController
     }
 
     /**
-     * ユーザ新規処理
+     * 月報DL処理
+     * @param form
+     * @param index
+     * @param response
+     * @param model
      * @return
+     * @throws IOException
      */
-    @RequestMapping(value = DEFAULT_URL, params = "insert")
-    public String selectInsert() {
-        return redirect("/mst/user/regist", "initInsert");
+    @RequestMapping(value = DEFAULT_URL + "/{index}", params = "download")
+    public String download(ReportSearchForm form,
+                           @PathVariable int index,
+                           HttpServletResponse response,
+                           Model model) throws IOException {
+        logger.debug("選択値 -> {}", index);
+
+        // 選択した月報情報
+        SearchReportEntity result = form.getResultList().get(index);
+        logger.debug("選択月報情報 -> {}", result.toString());
+
+        /*
+         * ファイルダウンロード処理
+         */
+        // ダウンロードファイルパス・ファイル名の生成
+        Path filePath = Paths.get("./upload_file", result.getFilePath());
+        String encodeFileNm = URLEncoder.encode(filePath.toFile().getName(), StandardCharsets.UTF_8.name());
+        logger.debug("ダウンロードファイル -> {}", filePath.toAbsolutePath().toString());
+
+        // ヘッダ設定
+        response.addHeader("Content-Disposition", "attachment; filename*=UTF-8''" + encodeFileNm);
+
+        // ファイル出力
+        Files.copy(filePath, response.getOutputStream());
+
+        return null;
     }
 
     /**
@@ -155,11 +192,11 @@ public class ReportSearchController extends mms.com.abstracts.AbstractController
     public String select(ReportSearchForm form,
                          @PathVariable int index,
                          Model model) {
-        logger.debug("選択値：{}", index);
+        logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportSearchResultForm resultForm = form.getResultList().get(index);
-        logger.debug("選択月報情報：{}", resultForm.toString());
+        SearchReportEntity result = form.getResultList().get(index);
+        logger.debug("選択月報情報 -> {}", result.toString());
 
         return "";
     }

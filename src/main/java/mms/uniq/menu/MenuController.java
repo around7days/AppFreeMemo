@@ -52,15 +52,14 @@ public class MenuController extends mms.com.abstracts.AbstractController {
                        MenuForm form,
                        HttpSession session,
                        Model model) {
-        logger.debug("ユーザID：{}", userInfo.getUserId());
-        logger.debug("ユーザ名：{}", userInfo.getUserNm());
+        logger.debug("ユーザID -> {}", userInfo.getUserId());
+        logger.debug("ユーザ名 -> {}", userInfo.getUserNm());
 
         // TODO どっかのタイミングできれいにする
         // 個別セッションの破棄
         Enumeration<String> e = session.getAttributeNames();
         while (e.hasMoreElements()) {
             String key = e.nextElement();
-            logger.info("session key: {}", key);
             if (!"SPRING_SECURITY_CONTEXT".equals(key)
                 && !"org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN".equals(key)) {
                 session.removeAttribute(key);

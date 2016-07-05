@@ -88,7 +88,7 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
     //        // 更新初期画面表示情報の取得
     //        reportApplicantService.initUpdate(form, userId);
     //
-    //        logger.debug("フォーム情報：{}", form.toString());
+    //        logger.debug("フォーム情報 -> {}", form.toString());
     //
     //        return DEFAULT_PAGE;
     //    }
@@ -110,7 +110,7 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) throws IllegalStateException, IOException {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -142,7 +142,7 @@ public class ReportApplicantController extends mms.com.abstracts.AbstractControl
     //                         BindingResult bindingResult,
     //                         RedirectAttributes redirectAttr,
     //                         Model model) {
-    //        logger.debug("フォーム情報：{}", form.toString());
+    //        logger.debug("フォーム情報 -> {}", form.toString());
     //
     //        // 入力チェック
     //        if (bindingResult.hasErrors()) {

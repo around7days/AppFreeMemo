@@ -82,7 +82,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
         // 更新初期画面表示情報の取得
         userRegistService.initUpdate(form, userId);
 
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         return DEFAULT_PAGE;
     }
@@ -100,7 +100,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -133,7 +133,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -175,7 +175,7 @@ public class UserRegistController extends mms.com.abstracts.AbstractController {
     public String reDisplay(UserRegistForm form,
                             BindingResult bindingResult,
                             Model model) {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
         bindingResult.reject("", "ああああああああああああ");
         return DEFAULT_PAGE;
     }

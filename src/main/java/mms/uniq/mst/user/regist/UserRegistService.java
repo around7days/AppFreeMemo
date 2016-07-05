@@ -50,7 +50,7 @@ public class UserRegistService extends mms.com.abstracts.AbstractService {
         MUser mUser = new MUser();
         BeanUtils.copyProperties(form, mUser);
         mUser.setPassword("pass"); //TODO
-        logger.debug("登録情報：{}", mUser.toString());
+        logger.debug("登録情報 -> {}", mUser.toString());
 
         // 登録処理
         mUserDao.insert(mUser);
@@ -65,7 +65,7 @@ public class UserRegistService extends mms.com.abstracts.AbstractService {
         // 更新情報の生成
         MUser mUser = new MUser();
         BeanUtils.copyProperties(form, mUser);
-        logger.debug("更新情報：{}", mUser.toString());
+        logger.debug("更新情報 -> {}", mUser.toString());
 
         // 更新処理
         mUserDao.update(mUser);

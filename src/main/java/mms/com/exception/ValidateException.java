@@ -38,7 +38,7 @@ public class ValidateException extends RuntimeException {
     public ValidateException(String... errorMessages) {
         super();
         this.errorMessages = errorMessages;
-        logger.debug("errorMessages:{}", errorMessages.toString());
+        logger.debug("errorMessages -> {}", errorMessages.toString());
     }
 
     /**
@@ -47,7 +47,7 @@ public class ValidateException extends RuntimeException {
     public ValidateException(BindingResult bindingResult) {
         super();
         this.bindingResult = bindingResult;
-        logger.debug("errorMessages:{}", bindingResult.getAllErrors().toString());
+        logger.debug("errorMessages -> {}", bindingResult.getAllErrors().toString());
     }
 
     /**

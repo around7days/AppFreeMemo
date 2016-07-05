@@ -34,7 +34,7 @@ public class ErrorControllerImpl implements ErrorController {
     @RequestMapping(PATH)
     public String error(HttpSession session) {
         if (session != null && !session.isNew()) {
-            logger.error("exception session invalidate to {}", session.getId());
+            logger.error("exception session invalidate -> {}", session.getId());
             session.invalidate();
         }
         return PageIdConst.ERROR;

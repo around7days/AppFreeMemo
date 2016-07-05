@@ -69,7 +69,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     public String search(@Validated UserSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -96,7 +96,7 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     @RequestMapping(value = DEFAULT_URL, params = "reSearch")
     public String reSearch(UserSearchForm form,
                            Model model) {
-        logger.debug("フォーム情報：{}", form.toString());
+        logger.debug("フォーム情報 -> {}", form.toString());
 
         // 検索処理
         userSearchService.search(form);
@@ -154,11 +154,11 @@ public class UserSearchController extends mms.com.abstracts.AbstractController {
     public String select(UserSearchForm form,
                          @PathVariable int index,
                          Model model) {
-        logger.debug("選択値：{}", index);
+        logger.debug("選択値 -> {}", index);
 
         // 選択したユーザ情報
         MUser user = form.getResultList().get(index);
-        logger.debug("選択ユーザ情報：{}", user.toString());
+        logger.debug("選択ユーザ情報 -> {}", user.toString());
 
         return redirect("/mst/user/regist/" + user.getUserId(), "initUpdate");
     }

@@ -19,14 +19,6 @@ public interface UserSearchDao {
     /**
      * ユーザ検索処理
      * @param form
-     * @return
-     */
-    @Select
-    List<MUser> searchUser(UserSearchForm form);
-
-    /**
-     * ユーザ検索処理
-     * @param form
      * @param options
      * @return
      */
