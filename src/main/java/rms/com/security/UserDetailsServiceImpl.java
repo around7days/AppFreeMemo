@@ -1,0 +1,28 @@
+package rms.com.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+
+import rms.com.doma.dao.MUserDao;
+import rms.com.doma.entity.MUser;
+
+@Component
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+    @Autowired
+    private MUserDao mUserDao;
+
+    @Override
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+
+        MUser mUser = mUserDao.selectById(id);
+        if (mUser == null) {
+            throw new UsernameNotFoundException("ログインに失敗しました");
+        }
+
+        return new UserInfo(mUser);
+    }
+}
