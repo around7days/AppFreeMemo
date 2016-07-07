@@ -18,7 +18,6 @@ public class UserInfo extends User {
     private static final long serialVersionUID = 1L;
 
     /** logger */
-    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserInfo.class);
 
     /*

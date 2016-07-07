@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.com.consts.PageIdConst;
 import rms.web.com.auth.UserInfo;
-import rms.web.mst.user.regist.UserRegistForm;
 
 /**
  * 月報申請画面コントローラー
@@ -57,13 +56,7 @@ public class ReportApplicantController extends rms.com.abstracts.AbstractControl
     @RequestMapping(value = DEFAULT_URL, params = "initInsert")
     public String initInsert(Model model) {
         // 初期値設定
-        ReportApplicantForm form = new ReportApplicantForm();
-        form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
-
-        //
-        form.setApprover3Id("user03");
-        form.setApprover3Nm("ゆーざー０３");
-
+        ReportApplicantForm form = setupForm();
         reportApplicantService.initInsert(form);
         // 格納
         model.addAttribute(form);

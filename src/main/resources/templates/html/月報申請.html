@@ -65,30 +65,25 @@
 					<label for="approver1Id" class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
 						<select name="approver1Id" id="approver1Id" class="form-control">
-							<option th:each="job : ${jobList}" th:value="${job.id}" th:selected="${job.id == id}" th:inline="text">[[${job.name}]]</option>
+							<option value=""></option>
+							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver1Id}" th:text="${obj.value}"></option>
 						</select>
 					</div>
 					<!-- 承認者2 -->
-					<label for="approver2Nm" class="col-sm-3 control-label">承認者２</label>
+					<label for="approver2Id" class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
-						<div class="input-group">
-							<input type="hidden" name="approver2Id" id="approver2Id" th:value="*{approver2Id}" />
-							<input type="text" name ="approver2Nm" id="approver2Nm" th:value="*{approver2Nm}" class="form-control" placeholder="承認者２" disabled="disabled" />
-							<span class="input-group-btn">
-								<button type="button" id="approver2IdBtn" class="btn btn-default">？</button>
-							</span>
-						</div>
+						<select name="approver2Id" id="approver2Id" class="form-control">
+							<option value=""></option>
+							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver2Id}" th:text="${obj.value}"></option>
+						</select>
 					</div>
 					<!-- 承認者3 -->
-					<label for="approver3Nm" class="col-sm-3 control-label">承認者３</label>
+					<label for="approver3Id" class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
-						<div class="input-group">
-							<input type="hidden" name="approver3Id" id="approver3Id" th:value="*{approver3Id}" />
-							<input type="text" name ="approver3Nm" id="approver3Nm" th:value="*{approver3Nm}" class="form-control" placeholder="承認者３" disabled="disabled" />
-							<span class="input-group-btn">
-								<button type="button" id="approver3IdBtn" class="btn btn-default">？</button>
-							</span>
-						</div>
+						<select name="approver3Id" id="approver3Id" class="form-control">
+							<option value=""></option>
+							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver3Id}" th:text="${obj.value}"></option>
+						</select>
 					</div>
 				</div>
 				<!-- 申請ボタン -->

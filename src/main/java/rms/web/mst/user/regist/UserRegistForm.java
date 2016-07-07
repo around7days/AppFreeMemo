@@ -28,6 +28,7 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     /* 変数宣言 ------------------------------------------------------------- */
     /** 画面表示モード */
     private String viewMode;
+
     /** ユーザID */
     @NotEmpty(message = "ユーザIDは{NotEmpty.message}", groups = { Insert.class, Update.class })
     @Size(max = 10, message = "ユーザIDは{Size.message}", groups = { Insert.class, Update.class })
@@ -49,8 +50,6 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     private String approvalKbn;
     /** 管理者区分 */
     private String adminKbn;
-    /** 承認者リスト(selectbox用) */
-    private String selectboxApprover;
 
     /**
      * 画面表示モードを取得します。

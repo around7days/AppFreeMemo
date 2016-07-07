@@ -1,6 +1,10 @@
 package rms.web.tran.report.applicant;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
+
+import rms.web.com.entity.SelectOptionEntity;
 
 /**
  * 月報申請画面フォーム
@@ -8,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
 
+    /* 入力チェック宣言 ----------------------------------------------------- */
     //@formatter:off
     /** 入力チェック：新規 */
     protected static interface Insert{};
@@ -15,37 +20,35 @@ public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
     protected static interface Update{};
     //@formatter:on
 
+    /* 定数宣言 ------------------------------------------------------------- */
     /** 画面表示モード：新規 */
     public static final String VIEW_MODE_INSERT = "insert";
     /** 画面表示モード：更新 */
     public static final String VIEW_MODE_UPDATE = "update";
 
+    /* 変数宣言 ------------------------------------------------------------- */
     /** 画面表示モード */
     private String viewMode;
 
     /** 年月 */
     private String targetYm;
-
     /** 月報ファイル */
     private MultipartFile file;
-
     /** 承認者１ID */
     private String approver1Id;
-
     /** 承認者１名称 */
     private String approver1Nm;
-
     /** 承認者２ID */
     private String approver2Id;
-
     /** 承認者２名称 */
     private String approver2Nm;
-
     /** 承認者３ID */
     private String approver3Id;
-
     /** 承認者３名称 */
     private String approver3Nm;
+
+    /** 承認者リスト(selectbox用) */
+    private List<SelectOptionEntity> approverList;
 
     /**
      * 画面表示モードを取得します。
@@ -189,6 +192,22 @@ public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
      */
     public void setApprover3Nm(String approver3Nm) {
         this.approver3Nm = approver3Nm;
+    }
+
+    /**
+     * 承認者リスト(selectbox用)を取得します。
+     * @return 承認者リスト(selectbox用)
+     */
+    public List<SelectOptionEntity> getApproverList() {
+        return approverList;
+    }
+
+    /**
+     * 承認者リスト(selectbox用)を設定します。
+     * @param approverList 承認者リスト(selectbox用)
+     */
+    public void setApproverList(List<SelectOptionEntity> approverList) {
+        this.approverList = approverList;
     }
 
 }

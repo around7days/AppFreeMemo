@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,8 @@ import rms.com.consts.MCodeConst;
 import rms.com.doma.dao.TReportDao;
 import rms.com.doma.entity.TReport;
 import rms.web.com.auth.UserInfo;
+import rms.web.com.entity.SelectOptionEntity;
+import rms.web.mst.user.regist.UserRegistForm;
 
 /**
  * 月報申請画面サービス
@@ -43,9 +46,15 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
      * @param form
      */
     public void initInsert(ReportApplicantForm form) {
+        // 表示モードの設定
+        form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
+
         // 年月のセット
         String targetYm = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
         form.setTargetYm(targetYm);
+
+        // セレクトボックスの設定
+        setSelectBox(form);
     }
 
     /**
@@ -95,6 +104,18 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
 
         // 登録処理
         tReportDao.insert(entity);
+    }
+
+    /**
+     * セレクトボックスの設定
+     * @param form
+     */
+    private void setSelectBox(ReportApplicantForm form) {
+        // セレクトボックス用 承認者一覧の取得
+        List<SelectOptionEntity> approverList = reportApplicantDao.selectboxApprover();
+        approverList.forEach(entity -> logger.debug(entity.toString()));
+        // 格納
+        form.setApproverList(approverList);
     }
 
     //    /**

@@ -46,10 +46,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     /** ユーザ登録画面フォーム */
     @ModelAttribute
     UserRegistForm setupForm() {
-        UserRegistForm form = new UserRegistForm();
-        // selectboxの設定
-        userRegistService.setSelectBox(form);
-        return form;
+        return new UserRegistForm();
     }
 
     /**

@@ -1,6 +1,6 @@
 SELECT
-    A.user_id as 'id'
-  , A.user_nm as 'name'
+    A.user_id as 'key'
+  , A.user_nm as 'value'
 FROM
   m_user A
 WHERE

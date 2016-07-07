@@ -18,7 +18,7 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistService.class);
 
-    /** ユーザ登録画面Dao */
+    /** ユーザマスタDao */
     @Autowired
     MUserDao mUserDao;
 
@@ -72,11 +72,4 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
         mUserDao.update(mUser);
     }
 
-    /**
-     * セレクトボックスの設定
-     * @param form
-     */
-    public void setSelectBox(UserRegistForm form) {
-
-    }
 }
