@@ -62,15 +62,11 @@
 				<!-- 承認者 -->
 				<div class="form-group">
 					<!-- 承認者1 -->
-					<label for="approver1Nm" class="col-sm-3 control-label">承認者１</label>
+					<label for="approver1Id" class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
-						<div class="input-group">
-							<input type="hidden" name="approver1Id" id="approver1Id" th:value="*{approver1Id}" />
-							<input type="text" name ="approver1Nm" id="approver1Nm" th:value="*{approver1Nm}" class="form-control" placeholder="承認者１" disabled="disabled" />
-							<span class="input-group-btn">
-								<button type="button" id="approver1IdBtn" class="btn btn-default">？</button>
-							</span>
-						</div>
+						<select name="approver1Id" id="approver1Id" class="form-control">
+							<option th:each="job : ${jobList}" th:value="${job.id}" th:selected="${job.id == id}" th:inline="text">[[${job.name}]]</option>
+						</select>
 					</div>
 					<!-- 承認者2 -->
 					<label for="approver2Nm" class="col-sm-3 control-label">承認者２</label>

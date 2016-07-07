@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rms.com.doma.dao.TReportDao;
-import rms.com.page.PageInfo;
-import rms.com.utils.SelectOptionsUtil;
+import rms.web.com.page.PageInfo;
+import rms.web.com.utils.SelectOptionsUtil;
 
 /**
  * 月報状況一覧画面サービス

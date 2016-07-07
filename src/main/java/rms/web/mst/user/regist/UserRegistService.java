@@ -65,9 +65,18 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
         // 更新情報の生成
         MUser mUser = new MUser();
         BeanUtils.copyProperties(form, mUser);
+
         logger.debug("更新情報 -> {}", mUser.toString());
 
         // 更新処理
         mUserDao.update(mUser);
+    }
+
+    /**
+     * セレクトボックスの設定
+     * @param form
+     */
+    public void setSelectBox(UserRegistForm form) {
+
     }
 }

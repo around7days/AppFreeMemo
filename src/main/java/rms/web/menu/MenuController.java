@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import rms.com.consts.PageIdConst;
-import rms.com.security.UserInfo;
 
 /**
  * メニュー登録画面コントローラー
@@ -25,6 +23,7 @@ import rms.com.security.UserInfo;
 public class MenuController extends rms.com.abstracts.AbstractController {
 
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
     /** デフォルトマッピングURL */
@@ -41,19 +40,15 @@ public class MenuController extends rms.com.abstracts.AbstractController {
 
     /**
      * メニュー画面初期表示
-     * @param userInfo
      * @param form
      * @param session
      * @param model
      * @return
      */
     @RequestMapping(value = DEFAULT_URL)
-    public String init(@AuthenticationPrincipal UserInfo userInfo,
-                       MenuForm form,
+    public String init(MenuForm form,
                        HttpSession session,
                        Model model) {
-        logger.debug("ユーザID -> {}", userInfo.getUserId());
-        logger.debug("ユーザ名 -> {}", userInfo.getUserNm());
 
         // TODO どっかのタイミングできれいにする
         // 個別セッションの破棄
@@ -71,42 +66,62 @@ public class MenuController extends rms.com.abstracts.AbstractController {
 
     /**
      * ユーザ一覧画面に遷移
+     * @param form
      * @param model
      * @return
      */
     @RequestMapping(value = DEFAULT_URL, params = "m001")
-    public String M001(Model model) {
+    public String M001(MenuForm form,
+                       Model model) {
         return redirect("/mst/user/search", "init");
     }
 
     /**
      * ユーザ登録画面に遷移
+     * @param form
      * @param model
      * @return
      */
     @RequestMapping(value = DEFAULT_URL, params = "m002")
-    public String M002(Model model) {
+    public String M002(MenuForm form,
+                       Model model) {
         return redirect("/mst/user/regist", "initInsert");
     }
 
+    /**
+     * 月報状況一覧画面に遷移
+     * @param form
+     * @param model
+     * @return
+     */
     @RequestMapping(value = DEFAULT_URL, params = "t001")
-    public String T001(Model model) {
+    public String T001(MenuForm form,
+                       Model model) {
         return redirect("/tran/report/search", "init");
     }
 
+    /**
+     * 月報申請画面に遷移
+     * @param form
+     * @param model
+     * @return
+     */
     @RequestMapping(value = DEFAULT_URL, params = "t002")
-    public String T002(Model model) {
+    public String T002(MenuForm form,
+                       Model model) {
         return redirect("/tran/report/applicant", "initInsert");
     }
 
     @RequestMapping(value = DEFAULT_URL, params = "t003")
-    public String T003(Model model) {
+    public String T003(MenuForm form,
+                       Model model) {
         return "html/月報承認";
     }
 
     @SuppressWarnings("unused")
     @RequestMapping(value = DEFAULT_URL, params = "e001")
-    public String T004(Model model) throws Exception {
+    public String T004(MenuForm form,
+                       Model model) throws Exception {
         if (true) {
             throw new Exception("意図的な強制Exception");
         }

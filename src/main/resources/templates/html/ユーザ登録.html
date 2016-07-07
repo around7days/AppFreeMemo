@@ -73,6 +73,21 @@
 						<input type="text" th:value="*{email}" name="email" id="email" class="form-control" placeholder="xxxx@gmail.com" />
 					</div>
 				</div>
+				<!-- 権限 -->
+				<div class="form-group">
+					<label for="email" class="col-sm-3 control-label">権限</label>
+					<div class="col-sm-9">
+						<label class="checkbox-inline">
+							<input type="checkbox" name="applicantKbn" id="applicantKbn" th:field="*{applicantKbn}" th:value="${T(rms.com.consts.MCodeConst).B001_1}" /> 申請者
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="approvalKbn" id="approvalKbn" th:field="*{approvalKbn}" th:value="${T(rms.com.consts.MCodeConst).C001_1}" /> 承認者
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="adminKbn" id="adminKbn" th:field="*{adminKbn}" th:value="${T(rms.com.consts.MCodeConst).D001_1}" /> 管理者
+						</label>
+					</div>
+				</div>
 
 				<!-- 登録・更新ボタン -->
 				<div class="text-center">

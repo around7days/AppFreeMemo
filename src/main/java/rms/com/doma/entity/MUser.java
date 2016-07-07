@@ -16,12 +16,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table(name = "m_user")
 public class MUser {
 
-    /** ユーザーID */
+    /** ユーザID */
     @Id
     @Column(name = "user_id")
     private String userId;
 
-    /** ユーザー名 */
+    /** ユーザ名 */
     @Column(name = "user_nm")
     private String userNm;
 
@@ -32,6 +32,18 @@ public class MUser {
     /** メールアドレス */
     @Column(name = "email")
     private String email;
+
+    /** 申請者区分 */
+    @Column(name = "applicant_kbn")
+    private String applicantKbn;
+
+    /** 承認者区分 */
+    @Column(name = "approval_kbn")
+    private String approvalKbn;
+
+    /** 管理者区分 */
+    @Column(name = "admin_kbn")
+    private String adminKbn;
 
     /** 削除フラグ */
     @Column(name = "del_flg")
@@ -54,32 +66,32 @@ public class MUser {
     private String updId;
 
     /**
-     * ユーザーIDを取得します.
-     * @return ユーザーID
+     * ユーザIDを取得します.
+     * @return ユーザID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * ユーザーIDを設定します.
-     * @param userId ユーザーID
+     * ユーザIDを設定します.
+     * @param userId ユーザID
      */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
     /**
-     * ユーザー名を取得します.
-     * @return ユーザー名
+     * ユーザ名を取得します.
+     * @return ユーザ名
      */
     public String getUserNm() {
         return userNm;
     }
 
     /**
-     * ユーザー名を設定します.
-     * @param userNm ユーザー名
+     * ユーザ名を設定します.
+     * @param userNm ユーザ名
      */
     public void setUserNm(String userNm) {
         this.userNm = userNm;
@@ -115,6 +127,54 @@ public class MUser {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * 申請者区分を取得します.
+     * @return 申請者区分
+     */
+    public String getApplicantKbn() {
+        return applicantKbn;
+    }
+
+    /**
+     * 申請者区分を設定します.
+     * @param applicantKbn 申請者区分
+     */
+    public void setApplicantKbn(String applicantKbn) {
+        this.applicantKbn = applicantKbn;
+    }
+
+    /**
+     * 承認者区分を取得します.
+     * @return 承認者区分
+     */
+    public String getApprovalKbn() {
+        return approvalKbn;
+    }
+
+    /**
+     * 承認者区分を設定します.
+     * @param approvalKbn 承認者区分
+     */
+    public void setApprovalKbn(String approvalKbn) {
+        this.approvalKbn = approvalKbn;
+    }
+
+    /**
+     * 管理者区分を取得します.
+     * @return 管理者区分
+     */
+    public String getAdminKbn() {
+        return adminKbn;
+    }
+
+    /**
+     * 管理者区分を設定します.
+     * @param adminKbn 管理者区分
+     */
+    public void setAdminKbn(String adminKbn) {
+        this.adminKbn = adminKbn;
     }
 
     /**

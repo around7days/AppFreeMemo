@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class UserRegistForm extends rms.com.abstracts.AbstractForm {
 
+    /* 入力チェック宣言 ----------------------------------------------------- */
     //@formatter:off
     /** 入力チェック：新規 */
     protected static interface Insert{};
@@ -18,32 +19,38 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     protected static interface Update{};
     //@formatter:on
 
+    /* 定数宣言 ------------------------------------------------------------- */
     /** 画面表示モード：新規 */
     public static final String VIEW_MODE_INSERT = "insert";
     /** 画面表示モード：更新 */
     public static final String VIEW_MODE_UPDATE = "update";
 
+    /* 変数宣言 ------------------------------------------------------------- */
     /** 画面表示モード */
     private String viewMode;
-
     /** ユーザID */
     @NotEmpty(message = "ユーザIDは{NotEmpty.message}", groups = { Insert.class, Update.class })
     @Size(max = 10, message = "ユーザIDは{Size.message}", groups = { Insert.class, Update.class })
     private String userId;
-
     /** パスワード */
     @NotEmpty(message = "パスワードは{NotEmpty.message}", groups = { Insert.class })
     @Size(max = 10, message = "パスワードは{Size.message}", groups = { Insert.class })
     private String password;
-
     /** ユーザ名 */
     @NotEmpty(message = "ユーザ名は{NotEmpty.message}", groups = { Insert.class, Update.class })
     @Size(max = 10, message = "ユーザ名は{Size.message}", groups = { Insert.class, Update.class })
     private String userNm;
-
     /** メールアドレス */
     @Email(message = "メールアドレスの{Email.message}", groups = { Insert.class, Update.class })
     private String email;
+    /** 申請者区分 */
+    private String applicantKbn;
+    /** 承認者区分 */
+    private String approvalKbn;
+    /** 管理者区分 */
+    private String adminKbn;
+    /** 承認者リスト(selectbox用) */
+    private String selectboxApprover;
 
     /**
      * 画面表示モードを取得します。
@@ -123,6 +130,54 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * 申請者区分を取得します。
+     * @return 申請者区分
+     */
+    public String getApplicantKbn() {
+        return applicantKbn;
+    }
+
+    /**
+     * 申請者区分を設定します。
+     * @param applicantKbn 申請者区分
+     */
+    public void setApplicantKbn(String applicantKbn) {
+        this.applicantKbn = applicantKbn;
+    }
+
+    /**
+     * 承認者区分を取得します。
+     * @return 承認者区分
+     */
+    public String getApprovalKbn() {
+        return approvalKbn;
+    }
+
+    /**
+     * 承認者区分を設定します。
+     * @param approvalKbn 承認者区分
+     */
+    public void setApprovalKbn(String approvalKbn) {
+        this.approvalKbn = approvalKbn;
+    }
+
+    /**
+     * 管理者区分を取得します。
+     * @return 管理者区分
+     */
+    public String getAdminKbn() {
+        return adminKbn;
+    }
+
+    /**
+     * 管理者区分を設定します。
+     * @param adminKbn 管理者区分
+     */
+    public void setAdminKbn(String adminKbn) {
+        this.adminKbn = adminKbn;
     }
 
 }

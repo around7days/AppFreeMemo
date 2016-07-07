@@ -1,4 +1,4 @@
-package rms.com.security;
+package rms.web.com.auth;
 
 import java.util.ArrayList;
 
@@ -44,6 +44,7 @@ public class UserInfo extends User {
         this.userId = user.getUserId();
         this.userNm = user.getUserNm();
         this.email = user.getEmail();
+        logger.debug("ユーザ情報 -> {}", this.toString());
     }
 
     /**
@@ -68,6 +69,15 @@ public class UserInfo extends User {
      */
     public String getEmail() {
         return email;
+    }
+
+    /**
+     * ユーザIDを取得します。
+     * @deprecated IDと名称が紛らわしいので非推奨
+     * @see UserInfo#getUserId()
+     */
+    public String getUsername() {
+        return super.getUsername();
     }
 
     public String toString() {

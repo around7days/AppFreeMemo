@@ -2,6 +2,7 @@
 --論理名：コードマスタ
 --物理名：m_code
 --------------------------------------------
+drop table m_code;
 create table m_code (
 	code_kbn			varchar(20)		comment 'コード区分'			not null,
 	code_kbn_nm		varchar(255)	comment 'コード区分名称'	not null,

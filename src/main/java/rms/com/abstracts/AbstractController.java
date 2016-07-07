@@ -5,7 +5,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 
-import rms.com.security.UserInfo;
+import rms.web.com.auth.UserInfo;
 
 /**
  * @author

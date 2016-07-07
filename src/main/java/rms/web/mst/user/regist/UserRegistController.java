@@ -46,7 +46,10 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     /** ユーザ登録画面フォーム */
     @ModelAttribute
     UserRegistForm setupForm() {
-        return new UserRegistForm();
+        UserRegistForm form = new UserRegistForm();
+        // selectboxの設定
+        userRegistService.setSelectBox(form);
+        return form;
     }
 
     /**
@@ -57,7 +60,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     @RequestMapping(value = DEFAULT_URL, params = "initInsert")
     public String initInsert(Model model) {
         // 初期値設定
-        UserRegistForm form = new UserRegistForm();
+        UserRegistForm form = setupForm();
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
         // 格納
         model.addAttribute(form);
@@ -140,6 +143,13 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             logger.debug(bindingResult.getAllErrors().toString());
             return DEFAULT_PAGE;
         }
+
+        // チェックボックスを更新処理に含める
+        //@formatter:off
+        if(form.getApplicantKbn() == null) form.setApplicantKbn("");
+        if(form.getApprovalKbn() == null) form.setApprovalKbn("");
+        if(form.getAdminKbn() == null) form.setAdminKbn("");
+        //@formatter:on
 
         // 更新処理
         userRegistService.update(form);

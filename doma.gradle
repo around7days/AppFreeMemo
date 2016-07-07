@@ -11,8 +11,8 @@ def templateDir = 'domaGenTemplates'
  * 共通ソースコード自動生成
  */
 task domaGen << {
-	def entityPkg         = 'mms.com.doma.entity'
-	def daoPkg            = 'mms.com.doma.dao'
+	def entityPkg         = 'rms.com.doma.entity'
+	def daoPkg            = 'rms.com.doma.dao'
 	def entityOverwrite   = true
 	def entityUseAccessor = true
 	def listenerOverwrite = true
@@ -31,7 +31,7 @@ task domaGen << {
  * 個別ソースコード自動生成
  */
 task domaGenEntity << {
-	def entityPkg         = 'mms.uniq.tran.report.search'
+	def entityPkg         = 'rms.web.tran.report.search'
 	def entityNm          = 'SearchReportEntity'
 	def entityOverwrite   = true
 	def entityUseAccessor = true

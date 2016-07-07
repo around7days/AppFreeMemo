@@ -1,4 +1,4 @@
-package rms.com.security;
+package rms.web.com.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Component;
+
+import rms.com.doma.dao.MUserDao;
+import rms.com.doma.entity.MUser;
 
 /**
  * Spring Security設定クラス.
@@ -58,16 +65,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/fw/**", "/js/**", "/css/**", "/image/**", "/webjars/**");
     }
 
-    // @Autowired
-    // public void configAuthentication(AuthenticationManagerBuilder auth)
-    // throws Exception {
-    // auth.userDetailsService(userDetailsService);
-    // }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // 独自認証
         auth.userDetailsService(userDetailsService);
     }
+}
 
+/**
+ * 独自認証処理
+ * @author
+ */
+@Component
+class UserDetailsServiceImpl implements UserDetailsService {
+
+    @Autowired
+    private MUserDao mUserDao;
+
+    @Override
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+
+        MUser mUser = mUserDao.selectById(id);
+        if (mUser == null) {
+            throw new UsernameNotFoundException("ログインに失敗しました");
+        }
+
+        return new UserInfo(mUser);
+    }
 }

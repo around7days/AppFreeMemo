@@ -5,9 +5,8 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
-import org.seasar.doma.boot.ConfigAutowireable;
-
 import rms.com.doma.entity.MCode;
+import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
  * MCodeDaoクラス

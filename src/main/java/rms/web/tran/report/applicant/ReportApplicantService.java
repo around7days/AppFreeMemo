@@ -18,7 +18,7 @@ import org.thymeleaf.util.StringUtils;
 import rms.com.consts.MCodeConst;
 import rms.com.doma.dao.TReportDao;
 import rms.com.doma.entity.TReport;
-import rms.com.security.UserInfo;
+import rms.web.com.auth.UserInfo;
 
 /**
  * 月報申請画面サービス

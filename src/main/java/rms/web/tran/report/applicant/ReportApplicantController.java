@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.com.consts.PageIdConst;
-import rms.com.security.UserInfo;
+import rms.web.com.auth.UserInfo;
 import rms.web.mst.user.regist.UserRegistForm;
 
 /**

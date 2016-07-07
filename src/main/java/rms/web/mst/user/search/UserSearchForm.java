@@ -2,10 +2,8 @@ package rms.web.mst.user.search;
 
 import java.util.List;
 
-import javax.validation.constraints.Size;
-
 import rms.com.doma.entity.MUser;
-import rms.com.page.PageInfo;
+import rms.web.com.page.PageInfo;
 
 /**
  * ユーザ一覧画面フォーム
@@ -13,71 +11,40 @@ import rms.com.page.PageInfo;
  */
 public class UserSearchForm extends rms.com.abstracts.AbstractForm {
 
-    /*
-     * 検索条件
-     */
-    /** ユーザID */
-    @Size(max = 10, message = "ユーザIDは{Size.message}")
-    private String userId;
-
-    /** ユーザ名 */
-    @Size(max = 10, message = "ユーザ名は{Size.message}")
-    private String userNm;
-
-    /*
-     * ページ情報
-     */
+    /** 検索条件 */
+    private UserSearchConditionForm condition = new UserSearchConditionForm();
+    /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
-
-    /*
-     * 検索結果
-     */
     /** 検索結果リスト */
     private List<MUser> resultList;
 
     /**
-     * ユーザIDを取得します。
-     * @return ユーザID
+     * 検索条件を取得します。
+     * @return 検索条件
      */
-    public String getUserId() {
-        return userId;
+    public UserSearchConditionForm getCondition() {
+        return condition;
     }
 
     /**
-     * ユーザIDを設定します。
-     * @param userId ユーザID
+     * 検索条件を設定します。
+     * @param condition 検索条件
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCondition(UserSearchConditionForm condition) {
+        this.condition = condition;
     }
 
     /**
-     * ユーザ名を取得します。
-     * @return ユーザ名
-     */
-    public String getUserNm() {
-        return userNm;
-    }
-
-    /**
-     * ユーザ名を設定します。
-     * @param userNm ユーザ名
-     */
-    public void setUserNm(String userNm) {
-        this.userNm = userNm;
-    }
-
-    /**
-     * pageInfoを取得します。
-     * @return pageInfo
+     * ページ情報を取得します。
+     * @return ページ情報
      */
     public PageInfo getPageInfo() {
         return pageInfo;
     }
 
     /**
-     * pageInfoを設定します。
-     * @param pageInfo pageInfo
+     * ページ情報を設定します。
+     * @param pageInfo ページ情報
      */
     public void setPageInfo(PageInfo pageInfo) {
         this.pageInfo = pageInfo;
@@ -98,4 +65,5 @@ public class UserSearchForm extends rms.com.abstracts.AbstractForm {
     public void setResultList(List<MUser> resultList) {
         this.resultList = resultList;
     }
+
 }

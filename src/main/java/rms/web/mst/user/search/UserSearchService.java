@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rms.com.doma.entity.MUser;
-import rms.com.page.PageInfo;
-import rms.com.utils.SelectOptionsUtil;
+import rms.web.com.page.PageInfo;
+import rms.web.com.utils.SelectOptionsUtil;
 
 /**
  * ユーザ一覧画面サービス
@@ -35,7 +35,7 @@ public class UserSearchService extends rms.com.abstracts.AbstractService {
         SelectOptions options = SelectOptionsUtil.get(pageInfo);
 
         // 検索処理
-        List<MUser> resultList = userSearchDao.searchUser(form, options);
+        List<MUser> resultList = userSearchDao.searchUser(form.getCondition(), options);
         logger.debug("検索結果(全件) -> {}件", options.getCount());
         logger.debug("検索結果 -> {}件", resultList.size());
         resultList.forEach(result -> logger.debug(result.toString()));

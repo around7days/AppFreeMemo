@@ -23,7 +23,7 @@ public interface UserSearchDao {
      * @return
      */
     @Select
-    List<MUser> searchUser(UserSearchForm form,
+    List<MUser> searchUser(UserSearchConditionForm form,
                            SelectOptions options);
 
 }

@@ -60,7 +60,7 @@
 		○条件分岐（定数）
 		△条件分岐（Enum）→出来るけど長い　 T(mms.uniq.mst.user.regist.UserRegistForm.ViewMode).NEW
 		○text
-		×checkbox
+		△checkbox	→checkboxがoffの時に値が空ではなくnullになるけどOK？
 		×selectbox
 		×radio
 
@@ -74,7 +74,7 @@
 
 	◆その他
 		×二重押下対策
-
+		×子画面表示
 
 
 

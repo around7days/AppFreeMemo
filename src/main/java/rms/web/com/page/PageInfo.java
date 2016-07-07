@@ -1,4 +1,4 @@
-package rms.com.page;
+package rms.web.com.page;
 
 import java.math.BigDecimal;
 
