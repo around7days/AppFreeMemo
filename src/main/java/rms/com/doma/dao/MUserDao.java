@@ -5,8 +5,9 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
-import rms.com.doma.entity.MUser;
 import org.seasar.doma.boot.ConfigAutowireable;
+
+import rms.com.doma.entity.MUser;
 
 /**
  * MUserDaoクラス
@@ -20,7 +21,7 @@ public interface MUserDao {
      * @param userId
      * @return the MUser entity
      */
-    @Select(ensureResult = true)
+    @Select
     MUser selectById(String userId);
 
     /**

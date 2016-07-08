@@ -1,12 +1,15 @@
 package rms.web.mst.user.regist;
 
+import java.util.Enumeration;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -15,11 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+
 import rms.com.consts.PageIdConst;
-import rms.com.exception.ValidateException;
+import rms.com.exception.BusinessException;
 
 /**
  * ユーザ登録画面コントローラー
@@ -105,7 +109,6 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            //            throw new ValidateException("aaa");
             return DEFAULT_PAGE;
         }
 
@@ -167,37 +170,33 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     }
 
     // ----------------------------------------------------------------------------------------
-    // TODO ここはもう少しどうにかしないと・・・エラーメッセージをどう表示するかな
-    /** デフォルトエラーView名 */
-    public static final String ERROR_VIEW = "redirect:" + DEFAULT_URL + "/?reDisplay";
-
+    // TODO やりたいことは成功。でも汚い。
     /**
-     * 再表示処理
-     * @param form
-     * @param bindingResult
+     * BusinessExceptionのエラーハンドリング
+     * @param e
+     * @param session
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "reDisplay")
-    public String reDisplay(UserRegistForm form,
-                            BindingResult bindingResult,
-                            Model model) {
-        logger.debug("フォーム情報 -> {}", form.toString());
-        bindingResult.reject("", "ああああああああああああ");
+    @ExceptionHandler(BusinessException.class)
+    public String handlerException(BusinessException e,
+                                   HttpSession session,
+                                   Model model) {
+        ExtendedModelMap modelMap = new ExtendedModelMap();
+        modelMap.addAttribute("errorMessages", e.getErrorMessage());
+        model.addAllAttributes(modelMap);
+
+        Enumeration<String> enumeration = session.getAttributeNames();
+        while (enumeration.hasMoreElements()) {
+            String key = enumeration.nextElement();
+            Object obj = session.getAttribute(key);
+            if (obj instanceof UserRegistForm) {
+                model.addAttribute(obj);
+                break;
+            }
+        }
+
         return DEFAULT_PAGE;
-    }
-
-    /**
-     * ValidateExceptionのエラーハンドリング
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(ValidateException.class)
-    public ModelAndView handlerException(ValidateException e) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName(DEFAULT_PAGE);
-
-        return mv;
     }
     // ----------------------------------------------------------------------------------------
 }

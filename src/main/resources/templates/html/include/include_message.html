@@ -3,10 +3,15 @@
 
 <!-- メッセージ -->
 <div th:fragment="message">
-	<!-- エラー -->
+	<!-- エラー(入力チェック) -->
 	<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
 		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
 		<ul><li th:each="err : ${#fields.allErrors()}" th:text="${err}" /></ul>
+	</div>
+	<!-- エラー(業務ロジックチェック) -->
+	<div th:if="${errorMessages}" class="alert alert-danger">
+		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
+		<ul><li th:text="${errorMessages}" /></ul>
 	</div>
 	<!-- 通常 -->
 	<div th:if="${successMessages}" class="alert alert-success">
