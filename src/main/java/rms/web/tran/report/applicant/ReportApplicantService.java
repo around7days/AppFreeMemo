@@ -50,8 +50,9 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
 
         // 年月のセット
-        String targetYm = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
-        form.setTargetYm(targetYm);
+        LocalDateTime date = LocalDateTime.now();
+        form.setTargetYear(String.valueOf(date.getYear()));
+        form.setTargetMonth(date.format(DateTimeFormatter.ofPattern("MM")));
 
         // セレクトボックスの設定
         setSelectBox(form);
@@ -83,7 +84,7 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
         // 登録用Entityの生成
         TReport entity = new TReport();
         entity.setApplicantId(userInfo.getUserId());
-        entity.setTargetYm(Integer.valueOf(form.getTargetYm().replace("-", "")));
+        entity.setTargetYm(Integer.valueOf(form.getTargetYear() + form.getTargetMonth()));
         entity.setApplicantDate(LocalDateTime.now());
         entity.setApprover1Id(form.getApprover1Id());
         entity.setApprover2Id(form.getApprover2Id());

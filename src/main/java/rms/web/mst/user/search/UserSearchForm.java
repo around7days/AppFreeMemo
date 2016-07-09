@@ -11,6 +11,7 @@ import rms.web.com.page.PageInfo;
  */
 public class UserSearchForm extends rms.com.abstracts.AbstractForm {
 
+    /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
     private UserSearchConditionForm condition = new UserSearchConditionForm();
     /** ページ情報 */
@@ -18,6 +19,7 @@ public class UserSearchForm extends rms.com.abstracts.AbstractForm {
     /** 検索結果リスト */
     private List<MUser> resultList;
 
+    /* getter/setter -------------------------------------------------------- */
     /**
      * 検索条件を取得します。
      * @return 検索条件

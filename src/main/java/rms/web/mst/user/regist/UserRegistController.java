@@ -118,7 +118,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // TODO MessageResorceが使いにくい。どこかで改良。
         // TODO 完了メッセージをどこかで定数にする。
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.001", null, Locale.getDefault()));
 
         return redirect("/mst/user/search", "reSearch");
     }
@@ -155,7 +155,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         userRegistService.update(form);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.002", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.002", null, Locale.getDefault()));
 
         return redirect("/mst/user/search", "reSearch");
     }
@@ -183,7 +183,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
                                    HttpSession session,
                                    Model model) {
         ExtendedModelMap modelMap = new ExtendedModelMap();
-        modelMap.addAttribute("errorMessages", e.getErrorMessage());
+        modelMap.addAttribute("errorMessage", e.getErrorMessage());
         model.addAllAttributes(modelMap);
 
         Enumeration<String> enumeration = session.getAttributeNames();

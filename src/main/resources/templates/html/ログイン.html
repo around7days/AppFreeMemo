@@ -41,15 +41,15 @@
 				<!-- ID -->
 				<div class="form-group">
 					<label class="control-label">ID</label>
-					<input type="text" th:value="*{userId}" name="userId" id="userId" class="form-control" placeholder="ID" autofocus="autofocus" />
+					<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
 				</div>
 				<!-- パスワード -->
 				<div class="form-group">
 					<label class="control-label">パスワード</label>
-					<input type="password" th:value="*{password}" name="password" id="password" class="form-control" placeholder="パスワード" autocomplete="off" />
+					<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" autocomplete="off" />
 				</div>
 				<!-- ログイン -->
-				<button type="button" id="login" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
+				<button type="submit" id="login" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div><!-- /サインイン -->
 
 		</div><!-- /画面サイズ指定 -->

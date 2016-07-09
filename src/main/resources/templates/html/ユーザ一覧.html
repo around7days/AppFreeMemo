@@ -77,7 +77,7 @@
 					<!-- 明細 -->
 					<tbody>
 						<tr th:each="result,iteStatus : *{resultList}">
-							<td><button type="button" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
+							<td><button type="submit" formnovalidate="formnovalidate" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
 							<td th:text="${result.userId}">id0000</td>
 							<td th:text="${result.userNm}">月報太郎</td>
 							<td th:text="${result.email}">xxxxxxx@xxx.xx.xx</td>

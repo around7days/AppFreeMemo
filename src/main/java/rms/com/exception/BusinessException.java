@@ -31,7 +31,7 @@ public class BusinessException extends RuntimeException {
     public BusinessException(String errorMessage) {
         super();
         this.errorMessage = errorMessage;
-        logger.debug("errorMessages -> {}", errorMessage);
+        logger.debug("errorMessage -> {}", errorMessage);
     }
 
     /**

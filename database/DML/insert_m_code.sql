@@ -1,3 +1,4 @@
+DELETE m_code;
 --承認状況：A001
 INSERT INTO m_code( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ( 'A001', '承認状況', 'Y01', '承認待ち１', '', '', '', 0, now(), 'system', now(), 'system');
 INSERT INTO m_code( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ( 'A001', '承認状況', 'Y02', '承認待ち２', '', '', '', 0, now(), 'system', now(), 'system');

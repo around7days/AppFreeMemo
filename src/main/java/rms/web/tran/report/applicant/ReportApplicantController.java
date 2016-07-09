@@ -117,7 +117,7 @@ public class ReportApplicantController extends rms.com.abstracts.AbstractControl
         reportApplicantService.saveFile(form.getFile());
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.001", null, Locale.getDefault()));
 
         return redirect("/menu");
     }
@@ -147,7 +147,7 @@ public class ReportApplicantController extends rms.com.abstracts.AbstractControl
     //        reportApplicantService.update(form);
     //
     //        // 完了メッセージ
-    //        redirectAttr.addFlashAttribute("successMessages", message.getMessage("info.002", null, Locale.getDefault()));
+    //        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.002", null, Locale.getDefault()));
     //
     //        return redirect("/mst/user/search", "reSearch");
     //    }

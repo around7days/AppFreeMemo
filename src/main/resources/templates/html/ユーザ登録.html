@@ -44,7 +44,7 @@
 					<div class="col-sm-9">
 						<div th:switch="*{viewMode}">
 							<div th:case="*{VIEW_MODE_INSERT}"><!-- 新規時 -->
-								<input type="text" th:value="*{userId}" name="userId" id="userId" class="form-control" placeholder="ユーザID" autofocus="autofocus" />
+								<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
 							</div>
 							<div th:case="*{VIEW_MODE_UPDATE}"><!-- 更新時 -->
 								<pre th:text="*{userId}">更新表示時のユーザ名</pre>
@@ -56,21 +56,21 @@
 				<div th:if="*{viewMode == VIEW_MODE_INSERT}" class="form-group">
 					<label for="password" class="col-sm-3 control-label">パスワード</label>
 					<div class="col-sm-9">
-						<input type="password" name="password" id="password" class="form-control" placeholder="パスワード" />
+						<input type="password" name="password" id="password" required="required" class="form-control" />
 					</div>
 				</div>
 				<!-- ユーザ名 -->
 				<div class="form-group">
 					<label for="userNm" class="col-sm-3 control-label">ユーザ名</label>
 					<div class="col-sm-9">
-						<input type="text" th:value="*{userNm}" name="userNm" id="userNm" class="form-control" placeholder="ユーザ名" />
+						<input type="text" th:value="*{userNm}" name="userNm" id="userNm" required="required" class="form-control" />
 					</div>
 				</div>
 				<!-- メールアドレス -->
 				<div class="form-group">
 					<label for="email" class="col-sm-3 control-label">メールアドレス</label>
 					<div class="col-sm-9">
-						<input type="text" th:value="*{email}" name="email" id="email" class="form-control" placeholder="xxxx@gmail.com" />
+						<input type="email" th:value="*{email}" name="email" id="email" class="form-control" placeholder="xxxx@gmail.com" />
 					</div>
 				</div>
 				<!-- 権限 -->
@@ -91,9 +91,9 @@
 
 				<!-- 登録・更新ボタン -->
 				<div class="text-center">
-					<button type="button" id="back" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-					<button type="button" id="insert" th:if="*{viewMode == VIEW_MODE_INSERT}" class="btn btn-primary">登録<span class="glyphicon glyphicon-chevron-right"></span></button>
-					<button type="button" id="update" th:if="*{viewMode == VIEW_MODE_UPDATE}" class="btn btn-primary">更新<span class="glyphicon glyphicon-chevron-right"></span></button>
+					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
+					<button type="submit" id="insert" th:if="*{viewMode == VIEW_MODE_INSERT}" class="btn btn-primary">登録<span class="glyphicon glyphicon-chevron-right"></span></button>
+					<button type="submit" id="update" th:if="*{viewMode == VIEW_MODE_UPDATE}" class="btn btn-primary">更新<span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 
 			</div><!-- /ユーザ登録 -->

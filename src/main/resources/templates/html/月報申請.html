@@ -49,14 +49,19 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9">
-						<input type="month" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control" value="2016-06" />
+						<div class="input-group">
+							<input type="text" th:value="*{targetYear}" name="targetYear" id="targetYear" class="form-control" required="required" placeholder="yyyy" />
+							<div class="input-group-addon">年</div>
+							<input type="text" th:value="*{targetMonth}" name="targetMonth" id="targetMonth" class="form-control" required="required" placeholder="mm" />
+							<div class="input-group-addon">月</div>
+						</div>
 					</div>
 				</div>
 				<!-- 月報 -->
 				<div class="form-group">
 					<label for="file" class="col-sm-3 control-label">月報</label>
 					<div class="col-sm-9">
-						<input type="file" name="file" id="file" class="form-control" />
+						<input type="file" name="file" id="file" required="required" class="form-control" />
 					</div>
 				</div>
 				<!-- 承認者 -->
@@ -80,7 +85,7 @@
 					<!-- 承認者3 -->
 					<label for="approver3Id" class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
-						<select name="approver3Id" id="approver3Id" class="form-control">
+						<select name="approver3Id" id="approver3Id" required="required" class="form-control">
 							<option value=""></option>
 							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver3Id}" th:text="${obj.value}"></option>
 						</select>
@@ -89,8 +94,8 @@
 				<!-- 申請ボタン -->
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<button type="button" id="back" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-						<button type="button" id="applicant" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
+						<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
+						<button type="submit" id="applicant" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
 					</div>
 				</div>
 			</div><!-- /月報申請 -->

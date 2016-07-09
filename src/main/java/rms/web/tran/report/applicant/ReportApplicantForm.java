@@ -2,8 +2,10 @@ package rms.web.tran.report.applicant;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import rms.com.validator.annotation.UploadFileNotEmpty;
 import rms.web.com.entity.SelectOptionEntity;
 
 /**
@@ -30,25 +32,27 @@ public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
     /** 画面表示モード */
     private String viewMode;
 
-    /** 年月 */
-    private String targetYm;
+    /** 年月：年 */
+    @NotEmpty(message = "年月：年は{NotEmpty.message}", groups = { Insert.class, Update.class })
+    private String targetYear;
+    /** 年月：月 */
+    @NotEmpty(message = "年月：月は{NotEmpty.message}", groups = { Insert.class, Update.class })
+    private String targetMonth;
     /** 月報ファイル */
+    @UploadFileNotEmpty(message = "月報は{UploadFileNotEmpty.message}", groups = { Insert.class, Update.class })
     private MultipartFile file;
     /** 承認者１ID */
     private String approver1Id;
-    /** 承認者１名称 */
-    private String approver1Nm;
     /** 承認者２ID */
     private String approver2Id;
-    /** 承認者２名称 */
-    private String approver2Nm;
     /** 承認者３ID */
+    @NotEmpty(message = "承認者３は{NotEmpty.message}", groups = { Insert.class, Update.class })
     private String approver3Id;
-    /** 承認者３名称 */
-    private String approver3Nm;
 
     /** 承認者リスト(selectbox用) */
     private List<SelectOptionEntity> approverList;
+
+    /* getter/setter -------------------------------------------------------- */
 
     /**
      * 画面表示モードを取得します。
@@ -67,19 +71,35 @@ public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
     }
 
     /**
-     * 年月を取得します。
-     * @return 年月
+     * 年月：年を取得します。
+     * @return 年月：年
      */
-    public String getTargetYm() {
-        return targetYm;
+    public String getTargetYear() {
+        return targetYear;
     }
 
     /**
-     * 年月を設定します。
-     * @param targetYm 年月
+     * 年月：年を設定します。
+     * @param targetYear 年月：年
      */
-    public void setTargetYm(String targetYm) {
-        this.targetYm = targetYm;
+    public void setTargetYear(String targetYear) {
+        this.targetYear = targetYear;
+    }
+
+    /**
+     * 年月：月を取得します。
+     * @return 年月：月
+     */
+    public String getTargetMonth() {
+        return targetMonth;
+    }
+
+    /**
+     * 年月：月を設定します。
+     * @param targetMonth 年月：月
+     */
+    public void setTargetMonth(String targetMonth) {
+        this.targetMonth = targetMonth;
     }
 
     /**
@@ -115,22 +135,6 @@ public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
     }
 
     /**
-     * 承認者１名称を取得します。
-     * @return 承認者１名称
-     */
-    public String getApprover1Nm() {
-        return approver1Nm;
-    }
-
-    /**
-     * 承認者１名称を設定します。
-     * @param approver1Nm 承認者１名称
-     */
-    public void setApprover1Nm(String approver1Nm) {
-        this.approver1Nm = approver1Nm;
-    }
-
-    /**
      * 承認者２IDを取得します。
      * @return 承認者２ID
      */
@@ -147,22 +151,6 @@ public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
     }
 
     /**
-     * 承認者２名称を取得します。
-     * @return 承認者２名称
-     */
-    public String getApprover2Nm() {
-        return approver2Nm;
-    }
-
-    /**
-     * 承認者２名称を設定します。
-     * @param approver2Nm 承認者２名称
-     */
-    public void setApprover2Nm(String approver2Nm) {
-        this.approver2Nm = approver2Nm;
-    }
-
-    /**
      * 承認者３IDを取得します。
      * @return 承認者３ID
      */
@@ -176,22 +164,6 @@ public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
      */
     public void setApprover3Id(String approver3Id) {
         this.approver3Id = approver3Id;
-    }
-
-    /**
-     * 承認者３名称を取得します。
-     * @return 承認者３名称
-     */
-    public String getApprover3Nm() {
-        return approver3Nm;
-    }
-
-    /**
-     * 承認者３名称を設定します。
-     * @param approver3Nm 承認者３名称
-     */
-    public void setApprover3Nm(String approver3Nm) {
-        this.approver3Nm = approver3Nm;
     }
 
     /**

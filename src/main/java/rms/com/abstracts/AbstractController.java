@@ -37,13 +37,37 @@ public abstract class AbstractController {
      */
     protected String redirect(String url,
                               String param) {
-        StringBuilder redirecUrl = new StringBuilder();
-        redirecUrl.append("redirect:");
-        redirecUrl.append(url);
+        StringBuilder redirectUrl = new StringBuilder();
+        redirectUrl.append("redirect:");
+        redirectUrl.append(url);
         if (!StringUtils.isEmpty(param)) {
-            redirecUrl.append("?").append(param);
+            redirectUrl.append("?").append(param);
         }
-        return redirecUrl.toString();
+        return redirectUrl.toString();
+    }
+
+    /**
+     * フォワードURLの生成
+     * @param url
+     */
+    protected String forward(String url) {
+        return forward(url, null);
+    }
+
+    /**
+     * フォワードURLの生成
+     * @param url
+     * @param param
+     */
+    protected String forward(String url,
+                             String param) {
+        StringBuilder forwardUrl = new StringBuilder();
+        forwardUrl.append("forward:");
+        forwardUrl.append(url);
+        if (!StringUtils.isEmpty(param)) {
+            forwardUrl.append("?").append(param);
+        }
+        return forwardUrl.toString();
     }
 
 }

@@ -18,7 +18,7 @@ import rms.com.consts.PageIdConst;
  */
 @Controller
 @SessionAttributes(types = LoginForm.class)
-public class LoginController {
+public class LoginController extends rms.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -67,7 +67,7 @@ public class LoginController {
         }
 
         // ログイン認証処理にフォワード
-        return "forward:/login_auth";
+        return forward("login_auth");
     }
 
     /**

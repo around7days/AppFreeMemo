@@ -6,6 +6,7 @@ package rms.web.tran.report.search;
  */
 public class ReportSearchConditionForm extends rms.com.abstracts.AbstractForm {
 
+    /* 変数宣言 ------------------------------------------------------------- */
     /** 申請者ID */
     private String applicantId;
     /** 申請者名 */
@@ -15,6 +16,7 @@ public class ReportSearchConditionForm extends rms.com.abstracts.AbstractForm {
     /** 承認状況：承認済み */
     private String statusApprove;
 
+    /* getter/setter -------------------------------------------------------- */
     /**
      * 申請者IDを取得します。
      * @return 申請者ID

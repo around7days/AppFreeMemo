@@ -18,7 +18,7 @@ $(function() {
 		}
 		var url = defaultUrl + "?insert";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 	/**
@@ -30,7 +30,7 @@ $(function() {
 		}
 		var url = defaultUrl + "?update";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 	/**
@@ -39,7 +39,7 @@ $(function() {
 	$("#back").on("click", function() {
 		var url = defaultUrl + "?back";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 });

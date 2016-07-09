@@ -1,3 +1,4 @@
+DELETE m_user;
 INSERT INTO m_user(user_id, user_nm, password, email, applicant_kbn, approval_kbn, admin_kbn, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', '申請者０１', 'pass', 'xxx@xxx.xx', '1', '', '', 0, now(), 'system', now(), 'system');
 INSERT INTO m_user(user_id, user_nm, password, email, applicant_kbn, approval_kbn, admin_kbn, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user02', '申請者０２', 'pass', 'xxx@xxx.xx', '1', '', '', 0, now(), 'system', now(), 'system');
 INSERT INTO m_user(user_id, user_nm, password, email, applicant_kbn, approval_kbn, admin_kbn, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user03', '申請者０３', 'pass', 'xxx@xxx.xx', '1', '', '', 0, now(), 'system', now(), 'system');

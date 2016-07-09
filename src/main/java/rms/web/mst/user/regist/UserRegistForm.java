@@ -51,6 +51,7 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     /** 管理者区分 */
     private String adminKbn;
 
+    /* getter/setter -------------------------------------------------------- */
     /**
      * 画面表示モードを取得します。
      * @return 画面表示モード

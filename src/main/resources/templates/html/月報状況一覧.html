@@ -93,12 +93,12 @@
 					<tbody>
 						<!-- -->
 						<tr th:each="result,iteStatus : *{resultList}">
-							<td><button type="button" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
+							<td><button type="submit" formnovalidate="formnovalidate" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
 							<td th:text="${result.targetYm}">2016/06</td>
 							<td th:text="${result.applicantNm}">月報太郎</td>
 							<td th:text="${result.department}">2SOL</td>
 							<td th:text="${result.statusNm}">○○承認待ち</td>
-							<td><button type="button" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
+							<td><button type="submit" formnovalidate="formnovalidate" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
 					</tbody>
 				</table>

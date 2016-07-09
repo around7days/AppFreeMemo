@@ -15,7 +15,7 @@ $(function() {
 	$("#search").on("click", function() {
 		var url = defaultUrl + "?search";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 	/**
@@ -24,7 +24,7 @@ $(function() {
 	$("#insert").on("click", function() {
 		var url = defaultUrl + "?insert";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 	/**
@@ -35,7 +35,7 @@ $(function() {
 		var index = $(this).val();
 		var url = defaultUrl + "/" + index + "?select";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 	/**
@@ -44,7 +44,7 @@ $(function() {
 	$("#pagePrev").on("click", function() {
 		var url = defaultUrl + "?pagePrev";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 	/**
@@ -53,7 +53,7 @@ $(function() {
 	$("#pageNext").on("click", function() {
 		var url = defaultUrl + "?pageNext";
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 
 });

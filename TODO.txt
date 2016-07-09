@@ -20,7 +20,7 @@
 		○標準Validateチェックの実装
 		○独自Validateチェックの実装（単項目）
 		×独自Validateチェックの実装（相関）
-		×独自Validateチェックの実装（業務）
+		△独自Validateチェックの実装（業務） → 出来たけど汚い・・・
 		○入力チェックの条件別判定（登録時と更新時のチェック項目が異なるパターン）
 		×入力チェック順の指定
 
@@ -61,7 +61,7 @@
 		△条件分岐（Enum）→出来るけど長い　 T(mms.uniq.mst.user.regist.UserRegistForm.ViewMode).NEW
 		○text
 		△checkbox	→checkboxがoffの時に値が空ではなくnullになるけどOK？
-		×selectbox
+		△selectbox	→あとは前回選択値が表示されることの確認
 		×radio
 
 	◆メッセージ出力(HTML側)
@@ -85,6 +85,8 @@
 	◆ソースコード自動生成
 	×htmlファイルへのパス定義の自動生成
 	×Formの自動生成
+
+	◆サーバチェックとクライアントチェックの2重チェックを簡単に行う方法検討
 
 【メモ】------------------------------------------------------
 redirectとforwardの使い分けどうしよう

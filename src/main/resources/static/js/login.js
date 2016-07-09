@@ -15,6 +15,6 @@ $(function() {
 	$("#login").on("click", function() {
 		var url = defaultUrl;
 		fmMain.attr("action", url);
-		fmMain.submit();
+		return true;
 	});
 });
