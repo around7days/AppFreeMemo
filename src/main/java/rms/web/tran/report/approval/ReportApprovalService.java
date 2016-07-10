@@ -1,14 +1,16 @@
 package rms.web.tran.report.approval;
 
+import rms.com.consts.MCodeConst;
+import rms.com.doma.dao.TReportDao;
+import rms.com.doma.entity.TReport;
+import rms.web.com.auth.UserInfo;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import rms.com.doma.dao.TReportDao;
-import rms.web.com.auth.UserInfo;
 
 /**
  * 月報承認画面サービス
@@ -44,6 +46,19 @@ public class ReportApprovalService extends rms.com.abstracts.AbstractService {
      */
     public void approval(ReportApprovalForm form,
                          UserInfo userInfo) {
+        /*
+         * 承認用情報の生成
+         */
+        TReport entity = new TReport();
+        entity.setApplicantId(form.getApplicantId());
+        entity.setTargetYm(Integer.valueOf(form.getTargetYm()));
+        entity.setStatus(MCodeConst.A001_100); // 承認済み
+        logger.debug("承認情報 -> {}", entity.toString());
+
+        /*
+         * 更新処理
+         */
+        tReportDao.update(entity);
     }
 
     /**
@@ -53,6 +68,19 @@ public class ReportApprovalService extends rms.com.abstracts.AbstractService {
      */
     public void denial(ReportApprovalForm form,
                        UserInfo userInfo) {
+        /*
+         * 承認用情報の生成
+         */
+        TReport entity = new TReport();
+        entity.setApplicantId(form.getApplicantId());
+        entity.setTargetYm(Integer.valueOf(form.getTargetYm()));
+        entity.setStatus(MCodeConst.A001_N03); // 否認
+        logger.debug("否認情報 -> {}", entity.toString());
+
+        /*
+         * 更新処理
+         */
+        tReportDao.update(entity);
     }
 
 }
