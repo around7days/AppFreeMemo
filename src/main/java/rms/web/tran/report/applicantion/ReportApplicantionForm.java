@@ -1,4 +1,4 @@
-package rms.web.tran.report.applicant;
+package rms.web.tran.report.applicantion;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import rms.web.com.entity.SelectOptionEntity;
  * 月報申請画面フォーム
  * @author
  */
-public class ReportApplicantForm extends rms.com.abstracts.AbstractForm {
+public class ReportApplicantionForm extends rms.com.abstracts.AbstractForm {
 
     /* 入力チェック宣言 ----------------------------------------------------- */
     //@formatter:off

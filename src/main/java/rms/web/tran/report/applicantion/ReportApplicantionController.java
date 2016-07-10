@@ -1,4 +1,4 @@
-package rms.web.tran.report.applicant;
+package rms.web.tran.report.applicantion;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -26,26 +26,26 @@ import rms.web.com.auth.UserInfo;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(types = ReportApplicantForm.class)
-public class ReportApplicantController extends rms.com.abstracts.AbstractController {
+@SessionAttributes(types = ReportApplicantionForm.class)
+public class ReportApplicantionController extends rms.com.abstracts.AbstractController {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(ReportApplicantController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionController.class);
 
     /** デフォルトマッピングURL */
-    public static final String DEFAULT_URL = "/tran/report/applicant";
+    public static final String DEFAULT_URL = "/tran/report/applicantion";
 
     /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.TRAN_REPROT_APPLICANT;
+    private static final String DEFAULT_PAGE = PageIdConst.TRAN_REPROT_APPLICANTION;
 
     /** 月報申請画面サービス */
     @Autowired
-    ReportApplicantService reportApplicantService;
+    ReportApplicantionService reportApplicantionService;
 
     /** 月報申請画面フォーム */
     @ModelAttribute
-    ReportApplicantForm setupForm() {
-        return new ReportApplicantForm();
+    ReportApplicantionForm setupForm() {
+        return new ReportApplicantionForm();
     }
 
     /**
@@ -56,8 +56,8 @@ public class ReportApplicantController extends rms.com.abstracts.AbstractControl
     @RequestMapping(value = DEFAULT_URL, params = "initInsert")
     public String initInsert(Model model) {
         // 初期値設定
-        ReportApplicantForm form = setupForm();
-        reportApplicantService.initInsert(form);
+        ReportApplicantionForm form = setupForm();
+        reportApplicantionService.initInsert(form);
         // 格納
         model.addAttribute(form);
 
@@ -99,7 +99,7 @@ public class ReportApplicantController extends rms.com.abstracts.AbstractControl
      */
     @RequestMapping(value = DEFAULT_URL, params = "insert")
     public String insert(@AuthenticationPrincipal UserInfo userInfo,
-                         @Validated(ReportApplicantForm.Insert.class) ReportApplicantForm form,
+                         @Validated(ReportApplicantionForm.Insert.class) ReportApplicantionForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) throws IllegalStateException, IOException {
@@ -112,9 +112,9 @@ public class ReportApplicantController extends rms.com.abstracts.AbstractControl
         }
 
         // 登録処理
-        reportApplicantService.insert(form, userInfo);
+        reportApplicantionService.insert(form, userInfo);
         // ファイル保存処理
-        reportApplicantService.saveFile(form.getFile());
+        reportApplicantionService.saveFile(form.getFile());
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.001", null, Locale.getDefault()));

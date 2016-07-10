@@ -1,4 +1,4 @@
-package rms.web.tran.report.applicant;
+package rms.web.tran.report.applicantion;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import rms.web.com.entity.SelectOptionEntity;
  */
 @Dao
 @ConfigAutowireable
-public interface ReportApplicantDao {
+public interface ReportApplicantionDao {
 
     /**
      * 承認者一覧の取得<br>

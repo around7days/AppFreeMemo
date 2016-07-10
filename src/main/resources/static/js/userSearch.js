@@ -44,7 +44,7 @@ $(function() {
 	$("#pagePrev").on("click", function() {
 		var url = defaultUrl + "?pagePrev";
 		fmMain.attr("action", url);
-		return true;
+		fmMain.submit();
 	});
 
 	/**
@@ -53,7 +53,7 @@ $(function() {
 	$("#pageNext").on("click", function() {
 		var url = defaultUrl + "?pageNext";
 		fmMain.attr("action", url);
-		return true;
+		fmMain.submit();
 	});
 
 });

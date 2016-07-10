@@ -21,7 +21,7 @@ public interface TReportDao {
      * @param targetYm
      * @return the TReport entity
      */
-    @Select(ensureResult = true)
+    @Select
     TReport selectById(String applicantId, Integer targetYm);
 
     /**

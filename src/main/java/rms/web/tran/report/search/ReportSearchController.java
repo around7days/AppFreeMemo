@@ -198,7 +198,8 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
         SearchReportEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result.toString());
 
-        return "";
+        // 月報承認画面
+        return redirect("/tran/report/approval" + "/" + result.getApplicantId() + "/" + result.getTargetYm(), "init");
     }
 
 }

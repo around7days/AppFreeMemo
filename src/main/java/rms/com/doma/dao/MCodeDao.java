@@ -21,7 +21,7 @@ public interface MCodeDao {
      * @param code
      * @return the MCode entity
      */
-    @Select(ensureResult = true)
+    @Select
     MCode selectById(String codeKbn, String code);
 
     /**

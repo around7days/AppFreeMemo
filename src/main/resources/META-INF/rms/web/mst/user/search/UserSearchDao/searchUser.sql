@@ -3,7 +3,7 @@ select
 	,A.user_nm
 	,A.email
 	,A.applicant_kbn
-	,A.approval_kbn
+	,A.approver_kbn
 	,A.admin_kbn
 from
 	m_user A

@@ -38,8 +38,8 @@ public class MUser {
     private String applicantKbn;
 
     /** 承認者区分 */
-    @Column(name = "approval_kbn")
-    private String approvalKbn;
+    @Column(name = "approver_kbn")
+    private String approverKbn;
 
     /** 管理者区分 */
     @Column(name = "admin_kbn")
@@ -149,16 +149,16 @@ public class MUser {
      * 承認者区分を取得します.
      * @return 承認者区分
      */
-    public String getApprovalKbn() {
-        return approvalKbn;
+    public String getApproverKbn() {
+        return approverKbn;
     }
 
     /**
      * 承認者区分を設定します.
-     * @param approvalKbn 承認者区分
+     * @param approverKbn 承認者区分
      */
-    public void setApprovalKbn(String approvalKbn) {
-        this.approvalKbn = approvalKbn;
+    public void setApproverKbn(String approverKbn) {
+        this.approverKbn = approverKbn;
     }
 
     /**

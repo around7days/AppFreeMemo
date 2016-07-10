@@ -1,4 +1,4 @@
-package rms.web.tran.report.applicant;
+package rms.web.tran.report.applicantion;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,10 +28,10 @@ import rms.web.mst.user.regist.UserRegistForm;
  * @author
  */
 @Service
-public class ReportApplicantService extends rms.com.abstracts.AbstractService {
+public class ReportApplicantionService extends rms.com.abstracts.AbstractService {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(ReportApplicantService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionService.class);
 
     /** 月報管理テーブルDao */
     @Autowired
@@ -39,13 +39,13 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
 
     /** 月報申請画面Dao */
     @Autowired
-    ReportApplicantDao reportApplicantDao;
+    ReportApplicantionDao reportApplicantionDao;
 
     /**
      * 新規初期処理
      * @param form
      */
-    public void initInsert(ReportApplicantForm form) {
+    public void initInsert(ReportApplicantionForm form) {
         // 表示モードの設定
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
 
@@ -79,7 +79,7 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
      * @param form
      * @param userInfo
      */
-    public void insert(ReportApplicantForm form,
+    public void insert(ReportApplicantionForm form,
                        UserInfo userInfo) {
         // 登録用Entityの生成
         TReport entity = new TReport();
@@ -100,9 +100,6 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
             entity.setStatus(MCodeConst.A001_Y03);
         }
 
-        // TODO
-        tReportDao.delete(entity);
-
         // 登録処理
         tReportDao.insert(entity);
     }
@@ -111,9 +108,9 @@ public class ReportApplicantService extends rms.com.abstracts.AbstractService {
      * セレクトボックスの設定
      * @param form
      */
-    private void setSelectBox(ReportApplicantForm form) {
+    private void setSelectBox(ReportApplicantionForm form) {
         // セレクトボックス用 承認者一覧の取得
-        List<SelectOptionEntity> approverList = reportApplicantDao.selectboxApprover();
+        List<SelectOptionEntity> approverList = reportApplicantionDao.selectboxApprover();
         approverList.forEach(entity -> logger.debug(entity.toString()));
         // 格納
         form.setApproverList(approverList);

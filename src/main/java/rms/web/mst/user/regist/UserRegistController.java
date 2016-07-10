@@ -3,9 +3,10 @@ package rms.web.mst.user.regist;
 import java.util.Enumeration;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpSession;
 
 import rms.com.consts.PageIdConst;
 import rms.com.exception.BusinessException;
@@ -147,7 +146,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // チェックボックスを更新処理に含める
         //@formatter:off
         if(form.getApplicantKbn() == null) form.setApplicantKbn("");
-        if(form.getApprovalKbn() == null) form.setApprovalKbn("");
+        if(form.getApproverKbn() == null) form.setApproverKbn("");
         if(form.getAdminKbn() == null) form.setAdminKbn("");
         //@formatter:on
 

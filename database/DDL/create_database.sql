@@ -1,1 +1,1 @@
-CREATE DATABASE mmsdb;
+create database mmsdb;

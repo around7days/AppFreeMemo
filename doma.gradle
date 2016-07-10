@@ -4,20 +4,20 @@
 def dbUrl       = 'jdbc:mysql://localhost:3306/mmsdb'
 def dbUser      = 'mms01'
 def dbPass      = 'mms01'
-def tableTypes  = 'TABLE,VIEW'
+def tableTypes  = 'TABLE'
 def templateDir = 'domaGenTemplates'
 
 /*
  * 共通ソースコード自動生成
  */
 task domaGen << {
-	def entityPkg         = 'rms.com.doma.entity'
-	def daoPkg            = 'rms.com.doma.dao'
-	def entityOverwrite   = true
-	def entityUseAccessor = true
-	def listenerOverwrite = true
-	def DaoOverwrite      = true
-	def SqlConfgOverwrite = true
+    def entityPkg         = 'rms.com.doma.entity'
+    def daoPkg            = 'rms.com.doma.dao'
+    def entityOverwrite   = true
+    def entityUseAccessor = true
+    def listenerOverwrite = true
+    def DaoOverwrite      = true
+    def SqlConfgOverwrite = true
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
     ant.gen(url: dbUrl, user: dbUser, password: dbPass, tableTypes: tableTypes, templatePrimaryDir: templateDir) {
@@ -31,29 +31,30 @@ task domaGen << {
  * 個別ソースコード自動生成
  */
 task domaGenEntity << {
-	def entityPkg         = 'rms.web.tran.report.search'
-	def entityNm          = 'SearchReportEntity'
-	def entityOverwrite   = true
-	def entityUseAccessor = true
-	def sql               =
+    def entityPkg         = 'rms.web.tran.report.approval'
+    def entityNm          = 'ReportApprovalEntity'
+    def entityOverwrite   = true
+    def entityUseAccessor = true
+    def sql               =
 '''
-SELECT
-    A.applicant_id
-  ,(select U.user_nm from m_user U where A.applicant_id = U.user_id) as applicant_nm
-  , A.target_ym
-  , '' as department
-  , A.applicant_date
-  , A.status
-  ,(select A001.code_nm from m_code A001 where A001.code_kbn = 'A001' and A001.code = A.status)  as status_nm
-  , A.approver1_id
-  ,(select U.user_nm from m_user U where A.approver1_id = U.user_id) as approver1_nm
-  , A.approver2_id
-  ,(select U.user_nm from m_user U where A.approver2_id = U.user_id) as approver2_nm
-  , A.approver3_id
-  ,(select U.user_nm from m_user U where A.approver3_id = U.user_id) as approver3_nm
-  , A.file_path
-FROM
-  t_report A
+select
+  R.applicant_id
+  , (select U.user_nm from M_USER U where R.applicant_id = U.user_id) as applicant_nm
+  , R.target_ym
+  , left(R.target_ym, 4) as target_year
+  , right(R.target_ym, 2) as target_month
+  , R.applicant_date
+  , R.status
+  , (select C.code_nm from M_CODE C where C.code_kbn = 'A001' and R.status = C.code) as status_nm
+  , R.approver1_id
+  , (select U.user_nm from M_USER U where R.approver1_id = U.user_id) as approver1_nm
+  , R.approver2_id
+  , (select U.user_nm from M_USER U where R.approver2_id = U.user_id) as approver2_nm
+  , R.approver3_id
+  , (select U.user_nm from M_USER U where R.approver3_id = U.user_id) as approver3_nm
+  , R.file_path
+from
+  t_report R
 '''
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)

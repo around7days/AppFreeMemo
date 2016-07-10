@@ -109,13 +109,19 @@ public class MenuController extends rms.com.abstracts.AbstractController {
     @RequestMapping(value = DEFAULT_URL, params = "t002")
     public String T002(MenuForm form,
                        Model model) {
-        return redirect("/tran/report/applicant", "initInsert");
+        return redirect("/tran/report/applicantion", "initInsert");
     }
 
+    /**
+     * 月報承認画面に遷移
+     * @param form
+     * @param model
+     * @return
+     */
     @RequestMapping(value = DEFAULT_URL, params = "t003")
     public String T003(MenuForm form,
                        Model model) {
-        return "html/月報承認";
+        return redirect("/tran/report/approval/user01/201607", "init");
     }
 
     @SuppressWarnings("unused")
