@@ -1,23 +1,25 @@
-package rms.com.aop;
+package rms.web.com.base;
+
+import org.springframework.stereotype.Component;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
- * TraceInterceptorクラス
+ * TraceControllerInterceptorクラス
  * @author
  */
 @Aspect
 @Component
-public class TraceInterceptor {
+public class TraceControllerInterceptor {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(TraceInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(TraceControllerInterceptor.class);
 
     /**
      * Controllerクラス内のメソッド開始時にログを出力

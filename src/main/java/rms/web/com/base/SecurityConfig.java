@@ -1,4 +1,4 @@
-package rms.web.com.auth;
+package rms.web.com.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

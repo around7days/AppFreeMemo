@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.com.consts.PageIdConst;
-import rms.com.exception.BusinessException;
+import rms.web.com.base.BusinessException;
 
 /**
  * ユーザ登録画面コントローラー

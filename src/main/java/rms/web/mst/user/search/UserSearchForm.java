@@ -3,7 +3,7 @@ package rms.web.mst.user.search;
 import java.util.List;
 
 import rms.com.doma.entity.MUser;
-import rms.web.com.page.PageInfo;
+import rms.web.com.base.PageInfo;
 
 /**
  * ユーザ一覧画面フォーム

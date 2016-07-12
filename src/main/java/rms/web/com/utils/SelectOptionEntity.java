@@ -1,4 +1,4 @@
-package rms.web.com.entity;
+package rms.web.com.utils;
 
 import org.seasar.doma.Entity;
 

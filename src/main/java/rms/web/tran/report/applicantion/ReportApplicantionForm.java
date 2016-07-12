@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import rms.com.validator.annotation.UploadFileNotEmpty;
-import rms.web.com.entity.SelectOptionEntity;
+import rms.web.com.utils.SelectOptionEntity;
 
 /**
  * 月報申請画面フォーム

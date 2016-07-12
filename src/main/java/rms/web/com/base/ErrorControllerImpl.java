@@ -1,4 +1,4 @@
-package rms.com.exception;
+package rms.web.com.base;
 
 import javax.servlet.http.HttpSession;
 

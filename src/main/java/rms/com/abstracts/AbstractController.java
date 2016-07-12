@@ -1,11 +1,11 @@
 package rms.com.abstracts;
 
+import rms.web.com.base.UserInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
-
-import rms.web.com.auth.UserInfo;
 
 /**
  * @author

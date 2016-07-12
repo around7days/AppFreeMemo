@@ -3,7 +3,7 @@ package rms.web.tran.report.approval;
 import rms.com.consts.MCodeConst;
 import rms.com.doma.dao.TReportDao;
 import rms.com.doma.entity.TReport;
-import rms.web.com.auth.UserInfo;
+import rms.web.com.base.UserInfo;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

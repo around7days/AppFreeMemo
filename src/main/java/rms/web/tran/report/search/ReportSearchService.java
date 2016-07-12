@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rms.com.doma.dao.TReportDao;
-import rms.web.com.page.PageInfo;
+import rms.web.com.base.PageInfo;
 import rms.web.com.utils.SelectOptionsUtil;
 
 /**

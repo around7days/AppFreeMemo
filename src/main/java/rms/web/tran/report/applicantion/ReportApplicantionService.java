@@ -19,8 +19,8 @@ import org.thymeleaf.util.StringUtils;
 import rms.com.consts.MCodeConst;
 import rms.com.doma.dao.TReportDao;
 import rms.com.doma.entity.TReport;
-import rms.web.com.auth.UserInfo;
-import rms.web.com.entity.SelectOptionEntity;
+import rms.web.com.base.UserInfo;
+import rms.web.com.utils.SelectOptionEntity;
 import rms.web.mst.user.regist.UserRegistForm;
 
 /**

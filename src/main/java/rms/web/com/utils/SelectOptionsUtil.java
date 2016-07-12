@@ -1,8 +1,8 @@
 package rms.web.com.utils;
 
-import org.seasar.doma.jdbc.SelectOptions;
+import rms.web.com.base.PageInfo;
 
-import rms.web.com.page.PageInfo;
+import org.seasar.doma.jdbc.SelectOptions;
 
 /**
  * SelectOptionsUtilクラス

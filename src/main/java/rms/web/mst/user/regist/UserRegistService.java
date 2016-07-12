@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import rms.com.doma.dao.MUserDao;
 import rms.com.doma.entity.MUser;
-import rms.com.exception.BusinessException;
+import rms.web.com.base.BusinessException;
 
 /**
  * ユーザ登録画面サービス

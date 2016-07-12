@@ -2,7 +2,7 @@ package rms.web.tran.report.search;
 
 import java.util.List;
 
-import rms.web.com.page.PageInfo;
+import rms.web.com.base.PageInfo;
 
 /**
  * 月報状況一覧画面フォーム

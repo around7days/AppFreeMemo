@@ -1,4 +1,4 @@
-package rms.com.exception;
+package rms.web.com.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,11 +2,11 @@ package rms.web.tran.report.applicantion;
 
 import java.util.List;
 
+import rms.web.com.utils.SelectOptionEntity;
+
 import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
-
-import rms.web.com.entity.SelectOptionEntity;
 
 /**
  * 月報申請画面Dao

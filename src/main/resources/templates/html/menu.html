@@ -18,7 +18,7 @@
 	<script th:src="@{/js/userSearch.js}" src="../../static/js/userSearch.js"></script>
 </head>
 <body>
-<form th:action="@{/menu}" th:object="${menuForm}" id="formMain" method="post">
+<form th:action="@{/menu}" th:object="${menuForm}" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>

@@ -18,7 +18,7 @@
 	<script th:src="@{/js/reportApplicantion.js}" src="../../static/js/reportApplicantion.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApplicantionForm}" enctype="multipart/form-data" id="formMain" method="post">
+<form th:action="dummy" th:object="${reportApplicantionForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>

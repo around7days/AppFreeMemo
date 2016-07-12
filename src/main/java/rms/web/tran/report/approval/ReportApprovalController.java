@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletResponse;
 
 import rms.com.consts.PageIdConst;
-import rms.web.com.auth.UserInfo;
+import rms.web.com.base.UserInfo;
 
 /**
  * 月報承認画面コントローラー

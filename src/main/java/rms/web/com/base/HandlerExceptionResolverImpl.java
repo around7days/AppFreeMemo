@@ -1,11 +1,11 @@
-package rms.com.exception;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package rms.web.com.base;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +33,7 @@ public class HandlerExceptionResolverImpl implements HandlerExceptionResolver {
     //        return 0;
     //    }
 
+    // TODO このクラスの扱いが問題ないのか気になる
     @Override
     public ModelAndView resolveException(HttpServletRequest request,
                                          HttpServletResponse response,
