@@ -5,6 +5,7 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
+import org.seasar.doma.Version;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -44,6 +45,11 @@ public class MUser {
     /** 管理者区分 */
     @Column(name = "admin_kbn")
     private String adminKbn;
+
+    /** バージョン */
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     /** 削除フラグ */
     @Column(name = "del_flg")
@@ -175,6 +181,22 @@ public class MUser {
      */
     public void setAdminKbn(String adminKbn) {
         this.adminKbn = adminKbn;
+    }
+
+    /**
+     * バージョンを取得します.
+     * @return バージョン
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * バージョンを設定します.
+     * @param version バージョン
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     /**

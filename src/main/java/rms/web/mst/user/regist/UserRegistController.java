@@ -3,10 +3,9 @@ package rms.web.mst.user.regist;
 import java.util.Enumeration;
 import java.util.Locale;
 
-import javax.servlet.http.HttpSession;
+import rms.com.consts.PageIdConst;
+import rms.web.com.base.BusinessException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import rms.com.consts.PageIdConst;
-import rms.web.com.base.BusinessException;
+import org.seasar.doma.jdbc.OptimisticLockException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * ユーザ登録画面コントローラー
@@ -53,7 +56,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     }
 
     /**
-     * 新規初期処理
+     * 初期表示処理（新規時）
      * @param model
      * @return
      */
@@ -69,7 +72,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     }
 
     /**
-     * 更新初期処理
+     * 初期表示処理（更新時）
      * @param form
      * @param userId
      * @param model
@@ -171,7 +174,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     // ----------------------------------------------------------------------------------------
     // TODO やりたいことは成功。でも汚い。
     /**
-     * BusinessExceptionのエラーハンドリング
+     * 業務エラー（BusinessException）のエラーハンドリング
      * @param e
      * @param session
      * @param model
@@ -181,6 +184,8 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     public String handlerException(BusinessException e,
                                    HttpSession session,
                                    Model model) {
+        logger.debug("業務エラー -> {}", e.getErrorMessage());
+
         ExtendedModelMap modelMap = new ExtendedModelMap();
         modelMap.addAttribute("errorMessage", e.getErrorMessage());
         model.addAllAttributes(modelMap);
@@ -197,5 +202,36 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
 
         return DEFAULT_PAGE;
     }
+
+    /**
+     * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
+     * @param e
+     * @param session
+     * @param model
+     * @return
+     */
+    @ExceptionHandler(OptimisticLockException.class)
+    public String handlerException(OptimisticLockException e,
+                                   HttpSession session,
+                                   Model model) {
+        logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
+
+        ExtendedModelMap modelMap = new ExtendedModelMap();
+        modelMap.addAttribute("errorMessage", "既に更新されています。");
+        model.addAllAttributes(modelMap);
+
+        Enumeration<String> enumeration = session.getAttributeNames();
+        while (enumeration.hasMoreElements()) {
+            String key = enumeration.nextElement();
+            Object obj = session.getAttribute(key);
+            if (obj instanceof UserRegistForm) {
+                model.addAttribute(obj);
+                break;
+            }
+        }
+
+        return DEFAULT_PAGE;
+    }
+
     // ----------------------------------------------------------------------------------------
 }

@@ -25,6 +25,10 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     /** 画面表示モード：更新 */
     public static final String VIEW_MODE_UPDATE = "update";
 
+    /* 排他制御用 ----------------------------------------------------------- */
+    /** バージョン */
+    private int version;
+
     /* 変数宣言 ------------------------------------------------------------- */
     /** 画面表示モード */
     private String viewMode;
@@ -52,6 +56,22 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     private String adminKbn;
 
     /* getter/setter -------------------------------------------------------- */
+    /**
+     * バージョンを取得します。
+     * @return バージョン
+     */
+    public int getVersion() {
+        return version;
+    }
+
+    /**
+     * バージョンを設定します。
+     * @param version バージョン
+     */
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
     /**
      * 画面表示モードを取得します。
      * @return 画面表示モード

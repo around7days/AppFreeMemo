@@ -12,6 +12,7 @@ create table t_report (
 	approver2_id			varchar(20)		comment '承認者２ID',
 	approver3_id			varchar(20)		comment '承認者３ID'				not null,
 	file_path					varchar(100)	comment '月報ファイルパス'	not null,
+	version						int						comment 'バージョン'				not null,
 	del_flg						int						comment '削除フラグ'				not null,
 	ins_date					timestamp			comment '登録日時'					not null,
 	ins_id						varchar(20)		comment '登録ID'						not null,

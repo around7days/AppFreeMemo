@@ -9,19 +9,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.StringUtils;
-
 import rms.com.consts.MCodeConst;
 import rms.com.doma.dao.TReportDao;
 import rms.com.doma.entity.TReport;
 import rms.web.com.base.UserInfo;
 import rms.web.com.utils.SelectOptionEntity;
 import rms.web.mst.user.regist.UserRegistForm;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.thymeleaf.util.StringUtils;
 
 /**
  * 月報申請画面サービス
@@ -42,7 +44,7 @@ public class ReportApplicantionService extends rms.com.abstracts.AbstractService
     ReportApplicantionDao reportApplicantionDao;
 
     /**
-     * 新規初期処理
+     * 初期表示処理（新規時）
      * @param form
      */
     public void initInsert(ReportApplicantionForm form) {

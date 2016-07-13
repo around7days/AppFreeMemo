@@ -3,8 +3,9 @@ package rms.web.tran.report.applicantion;
 import java.io.IOException;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import rms.com.consts.PageIdConst;
+import rms.web.com.base.UserInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import rms.com.consts.PageIdConst;
-import rms.web.com.base.UserInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 月報申請画面コントローラー
@@ -49,7 +50,7 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
     }
 
     /**
-     * 新規初期処理
+     * 初期表示処理（新規時）
      * @param model
      * @return
      */
@@ -63,28 +64,6 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
 
         return DEFAULT_PAGE;
     }
-
-    //    /**
-    //     * 更新初期処理
-    //     * @param form
-    //     * @param userId
-    //     * @param model
-    //     * @return
-    //     */
-    //    @RequestMapping(value = DEFAULT_URL + "/{userId}", params = "initUpdate")
-    //    public String initUpdate(ReportApplicantForm form,
-    //                             @PathVariable String userId,
-    //                             Model model) {
-    //        // 初期値設定
-    //        form.setViewMode(ReportApplicantForm.VIEW_MODE_UPDATE);
-    //
-    //        // 更新初期画面表示情報の取得
-    //        reportApplicantService.initUpdate(form, userId);
-    //
-    //        logger.debug("フォーム情報 -> {}", form.toString());
-    //
-    //        return DEFAULT_PAGE;
-    //    }
 
     /**
      * 新規登録処理
@@ -121,36 +100,6 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
 
         return redirect("/menu");
     }
-
-    //    /**
-    //     * 更新処理
-    //     * @param form
-    //     * @param bindingResult
-    //     * @param redirectAttr
-    //     * @param model
-    //     * @return
-    //     */
-    //    @RequestMapping(value = DEFAULT_URL, params = "update")
-    //    public String update(@Validated(ReportApplicantForm.Update.class) ReportApplicantForm form,
-    //                         BindingResult bindingResult,
-    //                         RedirectAttributes redirectAttr,
-    //                         Model model) {
-    //        logger.debug("フォーム情報 -> {}", form.toString());
-    //
-    //        // 入力チェック
-    //        if (bindingResult.hasErrors()) {
-    //            logger.debug(bindingResult.getAllErrors().toString());
-    //            return DEFAULT_PAGE;
-    //        }
-    //
-    //        // 更新処理
-    //        reportApplicantService.update(form);
-    //
-    //        // 完了メッセージ
-    //        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.002", null, Locale.getDefault()));
-    //
-    //        return redirect("/mst/user/search", "reSearch");
-    //    }
 
     /**
      * 戻る処理

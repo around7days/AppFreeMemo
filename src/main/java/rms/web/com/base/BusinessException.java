@@ -1,9 +1,9 @@
 package rms.web.com.base;
 
+import org.springframework.stereotype.Component;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Component;
 
 /**
  * 業務ロジックチェックException<br>
@@ -15,6 +15,7 @@ public class BusinessException extends RuntimeException {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(BusinessException.class);
 
+    // TODO メッセージIDからも取得できるようにしたい。
     /** エラーメッセージ */
     private String errorMessage;
 

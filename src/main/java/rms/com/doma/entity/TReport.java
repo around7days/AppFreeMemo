@@ -5,6 +5,7 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
+import org.seasar.doma.Version;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -49,6 +50,11 @@ public class TReport {
     /** 月報ファイルパス */
     @Column(name = "file_path")
     private String filePath;
+
+    /** バージョン */
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     /** 削除フラグ */
     @Column(name = "del_flg")
@@ -196,6 +202,22 @@ public class TReport {
      */
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    /**
+     * バージョンを取得します.
+     * @return バージョン
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * バージョンを設定します.
+     * @param version バージョン
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     /**

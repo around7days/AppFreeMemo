@@ -1,7 +1,8 @@
 package rms.web.mst.user.search;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import rms.com.consts.PageIdConst;
+import rms.com.doma.entity.MUser;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import rms.com.consts.PageIdConst;
-import rms.com.doma.entity.MUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ユーザ一覧画面コントローラー
@@ -45,7 +46,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
     }
 
     /**
-     * 初期処理
+     * 初期表示処理
      * @param form
      * @param model
      * @return

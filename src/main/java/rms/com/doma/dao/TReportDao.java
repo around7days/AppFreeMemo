@@ -6,6 +6,8 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 import rms.com.doma.entity.TReport;
+import org.seasar.doma.jdbc.NoResultException;
+import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
@@ -16,7 +18,7 @@ import org.seasar.doma.boot.ConfigAutowireable;
 public interface TReportDao {
 
     /**
-     * selectById
+     * 1件取得
      * @param applicantId
      * @param targetYm
      * @return the TReport entity
@@ -25,23 +27,44 @@ public interface TReportDao {
     TReport selectById(String applicantId, Integer targetYm);
 
     /**
-     * insert
+     * 1件取得
+     * @param applicantId
+     * @param targetYm
+     * @param version
+     * @throws NoResultException
+     * @return the TReport entity
+     */
+    @Select(ensureResult = true)
+    TReport selectByIdAndVersion(String applicantId, Integer targetYm, Integer version) throws NoResultException;
+
+    /**
+     * 挿入
      * @param entity
      * @return affected rows
      */
     @Insert(excludeNull = true)
     int insert(TReport entity);
 
+
     /**
-     * udpate
+     * 更新（楽観的排他制御）<br>
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Update(excludeNull = true)
+    int update(TReport entity) throws OptimisticLockException;
+
+    /**
+     * 更新
      * @param entity
      * @return affected rows
      */
-    @Update(excludeNull = true)
-    int update(TReport entity);
+    @Update(excludeNull = true, ignoreVersion = true)
+    int updateNoOptimisticLockException(TReport entity);
 
     /**
-     * delete
+     * 削除
      * @param entity
      * @return affected rows
      */

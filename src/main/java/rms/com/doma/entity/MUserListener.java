@@ -22,35 +22,24 @@ public class MUserListener implements EntityListener<MUser> {
                                                                               .getPrincipal();
     @Override
     public void preInsert(MUser entity, PreInsertContext<MUser> context) {
+        //@formatter:off
         LocalDateTime now = LocalDateTime.now();
-
-        if (entity.getDelFlg() == null) {
-            entity.setDelFlg(0);
-        }
-        if (entity.getInsId() == null) {
-            entity.setInsId(principal.getUsername());
-        }
-        if (entity.getInsDate() == null) {
-            entity.setInsDate(now);
-        }
-        if (entity.getUpdId() == null) {
-            entity.setUpdId(principal.getUsername());
-        }
-        if (entity.getUpdDate() == null) {
-            entity.setUpdDate(now);
-        }
+        if (entity.getVersion() == null) entity.setVersion(0);
+        if (entity.getDelFlg() == null)  entity.setDelFlg(0);
+        if (entity.getInsId() == null)   entity.setInsId(principal.getUsername());
+        if (entity.getInsDate() == null) entity.setInsDate(now);
+        if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
+        if (entity.getUpdDate() == null) entity.setUpdDate(now);
+        //@formatter:on
     }
 
     @Override
     public void preUpdate(MUser entity, PreUpdateContext<MUser> context) {
+        //@formatter:off
         LocalDateTime now = LocalDateTime.now();
-
-        if (entity.getUpdId() == null) {
-            entity.setUpdId(principal.getUsername());
-        }
-        if (entity.getUpdDate() == null) {
-            entity.setUpdDate(now);
-        }
+        if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
+        if (entity.getUpdDate() == null) entity.setUpdDate(now);
+        //@formatter:on
     }
 
     @Override

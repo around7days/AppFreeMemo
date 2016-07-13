@@ -1,29 +1,41 @@
 /*
  * DB接続定義
  */
-def dbUrl       = 'jdbc:mysql://localhost:3306/mmsdb'
-def dbUser      = 'mms01'
-def dbPass      = 'mms01'
-def tableTypes  = 'TABLE'
-def templateDir = 'domaGenTemplates'
+def genUrl                       = 'jdbc:mysql://localhost:3306/mmsdb'
+def genUser                      = 'mms01'
+def genPassword                  = 'mms01'
+def genTableTypes                = 'TABLE'
+def genTemplatePrimaryDir        = 'domaGenTemplates'
+def genVersionColumnNamePattern  = 'version'
 
 /*
  * 共通ソースコード自動生成
  */
 task domaGen << {
-    def entityPkg         = 'rms.com.doma.entity'
-    def daoPkg            = 'rms.com.doma.dao'
-    def entityOverwrite   = true
-    def entityUseAccessor = true
-    def listenerOverwrite = true
-    def DaoOverwrite      = true
-    def SqlConfgOverwrite = true
+    // entity
+    def entityPackageName        = 'rms.com.doma.entity'
+    def entityOverwrite          = true
+    def entityOverwriteListener  = true
+    def entityUseAccessor        = true
+    // dao
+    def daoPackageName           = 'rms.com.doma.dao'
+    def daoOverwrite             = true
+    // sql
+    def SqlOverwrite             = true
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
-    ant.gen(url: dbUrl, user: dbUser, password: dbPass, tableTypes: tableTypes, templatePrimaryDir: templateDir) {
-        entityConfig(packageName: entityPkg, overwrite: entityOverwrite, overwriteListener: listenerOverwrite, useAccessor: entityUseAccessor)
-        daoConfig(packageName: daoPkg, overwrite: DaoOverwrite)
-        sqlConfig(overwrite: SqlConfgOverwrite)
+    ant.gen(url: genUrl,
+            user: genUser,
+            password: genPassword,
+            tableTypes: genTableTypes,
+            templatePrimaryDir: genTemplatePrimaryDir,
+            versionColumnNamePattern: genVersionColumnNamePattern) {
+        entityConfig(packageName: entityPackageName,
+                     overwrite: entityOverwrite,
+                     overwriteListener: entityOverwriteListener,
+                     useAccessor: entityUseAccessor)
+        daoConfig(packageName: daoPackageName, overwrite: daoOverwrite)
+        sqlConfig(overwrite: SqlOverwrite)
     }
 }
 
@@ -31,11 +43,11 @@ task domaGen << {
  * 個別ソースコード自動生成
  */
 task domaGenEntity << {
-    def entityPkg         = 'rms.web.tran.report.approval'
-    def entityNm          = 'ReportApprovalEntity'
+    def entityPackageName = 'src/main/java'
+    def entityEntityName  = 'Example'
     def entityOverwrite   = true
     def entityUseAccessor = true
-    def sql               =
+    def entitySql         =
 '''
 select
   R.applicant_id
@@ -58,7 +70,15 @@ from
 '''
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
-    ant.gen(url: dbUrl, user: dbUser, password: dbPass, tableTypes: tableTypes, templatePrimaryDir: templateDir) {
-        entityConfig(packageName: entityPkg, entityName: entityNm, overwrite: entityOverwrite, useAccessor: entityUseAccessor, sql: sql)
+    ant.gen(url: genUrl,
+            user: genUser,
+            password: genPassword,
+            tableTypes: genTableTypes,
+            templatePrimaryDir: genTemplatePrimaryDir) {
+        entityConfig(packageName: entityPackageName,
+                     entityName: entityEntityName,
+                     overwrite: entityOverwrite,
+                     useAccessor: entityUseAccessor,
+                     sql: sql)
     }
 }

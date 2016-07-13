@@ -1,15 +1,15 @@
 package rms.web.mst.user.regist;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import rms.com.doma.dao.MUserDao;
+import rms.com.doma.entity.MUser;
+import rms.web.com.base.BusinessException;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rms.com.doma.dao.MUserDao;
-import rms.com.doma.entity.MUser;
-import rms.web.com.base.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ユーザ登録画面サービス
@@ -25,7 +25,7 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
     MUserDao mUserDao;
 
     /**
-     * 更新初期処理
+     * 初期表示処理（更新時）
      * @param form
      * @param userId
      */
@@ -50,7 +50,6 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
         // 登録情報の生成
         MUser mUser = new MUser();
         BeanUtils.copyProperties(form, mUser);
-        mUser.setPassword("pass"); //TODO
         logger.debug("登録情報 -> {}", mUser.toString());
 
         // TODO 存在チェック用の共通SQLがほしい（削除フラグも）
@@ -75,7 +74,7 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
 
         logger.debug("更新情報 -> {}", mUser.toString());
 
-        // 更新処理
+        // 更新処理（楽観的排他制御）
         mUserDao.update(mUser);
     }
 

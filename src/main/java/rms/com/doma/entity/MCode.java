@@ -5,6 +5,7 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
+import org.seasar.doma.Version;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -45,6 +46,11 @@ public class MCode {
     /** 属性３ */
     @Column(name = "attr3")
     private String attr3;
+
+    /** バージョン */
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     /** 削除フラグ */
     @Column(name = "del_flg")
@@ -176,6 +182,22 @@ public class MCode {
      */
     public void setAttr3(String attr3) {
         this.attr3 = attr3;
+    }
+
+    /**
+     * バージョンを取得します.
+     * @return バージョン
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * バージョンを設定します.
+     * @param version バージョン
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     /**

@@ -6,6 +6,8 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 import rms.com.doma.entity.MCode;
+import org.seasar.doma.jdbc.NoResultException;
+import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
@@ -16,7 +18,7 @@ import org.seasar.doma.boot.ConfigAutowireable;
 public interface MCodeDao {
 
     /**
-     * selectById
+     * 1件取得
      * @param codeKbn
      * @param code
      * @return the MCode entity
@@ -25,23 +27,44 @@ public interface MCodeDao {
     MCode selectById(String codeKbn, String code);
 
     /**
-     * insert
+     * 1件取得
+     * @param codeKbn
+     * @param code
+     * @param version
+     * @throws NoResultException
+     * @return the MCode entity
+     */
+    @Select(ensureResult = true)
+    MCode selectByIdAndVersion(String codeKbn, String code, Integer version) throws NoResultException;
+
+    /**
+     * 挿入
      * @param entity
      * @return affected rows
      */
     @Insert(excludeNull = true)
     int insert(MCode entity);
 
+
     /**
-     * udpate
+     * 更新（楽観的排他制御）<br>
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Update(excludeNull = true)
+    int update(MCode entity) throws OptimisticLockException;
+
+    /**
+     * 更新
      * @param entity
      * @return affected rows
      */
-    @Update(excludeNull = true)
-    int update(MCode entity);
+    @Update(excludeNull = true, ignoreVersion = true)
+    int updateNoOptimisticLockException(MCode entity);
 
     /**
-     * delete
+     * 削除
      * @param entity
      * @return affected rows
      */

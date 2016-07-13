@@ -10,6 +10,8 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
+import org.seasar.doma.jdbc.NoResultException;
+import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
@@ -24,7 +26,7 @@ public interface ${simpleName} {
 
 <#if entityDesc.idEntityPropertyDescs?size gt 0>
     /**
-     * selectById
+     * 1件取得
 <#list entityDesc.idEntityPropertyDescs as property>
      * @param ${property.name}
 </#list>
@@ -36,35 +38,46 @@ public interface ${simpleName} {
 </#if>
 <#if entityDesc.idEntityPropertyDescs?size gt 0 && entityDesc.versionEntityPropertyDesc??>
     /**
-     * selectByIdAndVersion
+     * 1件取得
 <#list entityDesc.idEntityPropertyDescs as property>
      * @param ${property.name}
 </#list>
      * @param ${entityDesc.versionEntityPropertyDesc.name}
+     * @throws NoResultException
      * @return the <#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity
      */
     @Select(ensureResult = true)
-    <#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} selectByIdAndVersion(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}, </#list>${entityDesc.versionEntityPropertyDesc.propertyClassSimpleName} ${entityDesc.versionEntityPropertyDesc.name});
+    <#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} selectByIdAndVersion(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}, </#list>${entityDesc.versionEntityPropertyDesc.propertyClassSimpleName} ${entityDesc.versionEntityPropertyDesc.name}) throws NoResultException;
 
 </#if>
     /**
-     * insert
+     * 挿入
      * @param entity
      * @return affected rows
      */
     @Insert(excludeNull = true)
     int insert(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 
+
     /**
-     * udpate
+     * 更新（楽観的排他制御）<br>
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Update(excludeNull = true)
+    int update(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity) throws OptimisticLockException;
+
+    /**
+     * 更新
      * @param entity
      * @return affected rows
      */
-    @Update(excludeNull = true)
-    int update(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
+    @Update(excludeNull = true, ignoreVersion = true)
+    int updateNoOptimisticLockException(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 
     /**
-     * delete
+     * 削除
      * @param entity
      * @return affected rows
      */
