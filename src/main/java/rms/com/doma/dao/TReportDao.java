@@ -8,6 +8,7 @@ import org.seasar.doma.Update;
 import rms.com.doma.entity.TReport;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
+import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
@@ -25,6 +26,16 @@ public interface TReportDao {
      */
     @Select
     TReport selectById(String applicantId, Integer targetYm);
+
+    /**
+     * 1件取得
+     * @param applicantId
+     * @param targetYm
+     * @param options
+     * @return the TReport entity
+     */
+    @Select
+    TReport selectById(String applicantId, Integer targetYm, SelectOptions options);
 
     /**
      * 1件取得

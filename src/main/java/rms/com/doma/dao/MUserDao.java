@@ -8,6 +8,7 @@ import org.seasar.doma.Update;
 import rms.com.doma.entity.MUser;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
+import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
@@ -24,6 +25,15 @@ public interface MUserDao {
      */
     @Select
     MUser selectById(String userId);
+
+    /**
+     * 1件取得
+     * @param userId
+     * @param options
+     * @return the MUser entity
+     */
+    @Select
+    MUser selectById(String userId, SelectOptions options);
 
     /**
      * 1件取得

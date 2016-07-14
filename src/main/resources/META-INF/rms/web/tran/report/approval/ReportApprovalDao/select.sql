@@ -14,6 +14,7 @@ select
   , R.approver3_id
   , (select U.user_nm from M_USER U where R.approver3_id = U.user_id) as approver3_nm
   , R.file_path
+  , R.version
 from
   t_report R
 where

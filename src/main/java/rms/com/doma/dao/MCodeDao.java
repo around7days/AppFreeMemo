@@ -8,6 +8,7 @@ import org.seasar.doma.Update;
 import rms.com.doma.entity.MCode;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
+import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
@@ -25,6 +26,16 @@ public interface MCodeDao {
      */
     @Select
     MCode selectById(String codeKbn, String code);
+
+    /**
+     * 1件取得
+     * @param codeKbn
+     * @param code
+     * @param options
+     * @return the MCode entity
+     */
+    @Select
+    MCode selectById(String codeKbn, String code, SelectOptions options);
 
     /**
      * 1件取得

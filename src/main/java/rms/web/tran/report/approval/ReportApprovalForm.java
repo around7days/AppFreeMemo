@@ -6,6 +6,10 @@ package rms.web.tran.report.approval;
  */
 public class ReportApprovalForm extends rms.com.abstracts.AbstractForm {
 
+    /* 排他制御用 ----------------------------------------------------------- */
+    /** バージョン */
+    private int version;
+
     /* 変数宣言 ------------------------------------------------------------- */
     /** 月報ファイルパス */
     private String filePath;
@@ -23,6 +27,22 @@ public class ReportApprovalForm extends rms.com.abstracts.AbstractForm {
     private String approver3Nm;
 
     /* getter/setter -------------------------------------------------------- */
+    /**
+     * バージョンを取得します。
+     * @return バージョン
+     */
+    public int getVersion() {
+        return version;
+    }
+
+    /**
+     * バージョンを設定します。
+     * @param version バージョン
+     */
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
     /**
      * 月報ファイルパスを取得します。
      * @return 月報ファイルパス

@@ -31,7 +31,7 @@ public class LoginController extends rms.com.abstracts.AbstractController {
     private static final String PAGE_URL = "html/login";
 
     /** ログイン画面フォーム */
-    @ModelAttribute(value = "loginForm")
+    @ModelAttribute
     LoginForm setupForm() {
         return new LoginForm();
     }

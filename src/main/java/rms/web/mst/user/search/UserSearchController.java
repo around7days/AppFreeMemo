@@ -40,7 +40,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
     UserSearchService userSearchService;
 
     /** ユーザ一覧画面フォーム */
-    @ModelAttribute(value = "userSearchForm")
+    @ModelAttribute
     UserSearchForm setupForm() {
         return new UserSearchForm();
     }

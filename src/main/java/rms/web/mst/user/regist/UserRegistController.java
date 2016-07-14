@@ -1,15 +1,14 @@
 package rms.web.mst.user.regist;
 
-import java.util.Enumeration;
 import java.util.Locale;
 
+import rms.com.consts.MessageConst;
 import rms.web.com.base.BusinessException;
 import rms.web.tran.report.search.ReportSearchController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -65,6 +64,11 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // 初期値設定
         UserRegistForm form = setupForm();
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
+
+        form.setUserId("user01");
+        form.setPassword("x");
+        form.setUserNm("x");
+
         // 格納
         model.addAttribute(form);
 
@@ -120,7 +124,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // TODO MessageResorceが使いにくい。どこかで改良。
         // TODO 完了メッセージをどこかで定数にする。
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
 
         return redirect(ReportSearchController.MAPPING_URL, "reSearch");
     }
@@ -157,7 +161,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         userRegistService.update(form);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.002", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));
 
         return redirect(ReportSearchController.MAPPING_URL, "reSearch");
     }
@@ -186,19 +190,10 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
                                    Model model) {
         logger.debug("業務エラー -> {}", e.getErrorMessage());
 
-        ExtendedModelMap modelMap = new ExtendedModelMap();
-        modelMap.addAttribute("errorMessage", e.getErrorMessage());
-        model.addAllAttributes(modelMap);
-
-        Enumeration<String> enumeration = session.getAttributeNames();
-        while (enumeration.hasMoreElements()) {
-            String key = enumeration.nextElement();
-            Object obj = session.getAttribute(key);
-            if (obj instanceof UserRegistForm) {
-                model.addAttribute(obj);
-                break;
-            }
-        }
+        // メッセージを反映
+        model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
+        // セッションからフォーム情報を取得して反映
+        model.addAttribute(getSessionForm(session, UserRegistForm.class));
 
         return PAGE_URL;
     }
@@ -216,19 +211,10 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
                                    Model model) {
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
-        ExtendedModelMap modelMap = new ExtendedModelMap();
-        modelMap.addAttribute("errorMessage", "既に更新されています。");
-        model.addAllAttributes(modelMap);
-
-        Enumeration<String> enumeration = session.getAttributeNames();
-        while (enumeration.hasMoreElements()) {
-            String key = enumeration.nextElement();
-            Object obj = session.getAttribute(key);
-            if (obj instanceof UserRegistForm) {
-                model.addAttribute(obj);
-                break;
-            }
-        }
+        // メッセージとフォーム情報を反映
+        model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
+        // セッションからフォーム情報を取得して反映
+        model.addAttribute(getSessionForm(session, UserRegistForm.class));
 
         return PAGE_URL;
     }

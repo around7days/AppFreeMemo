@@ -3,6 +3,7 @@ package rms.web.tran.report.applicantion;
 import java.io.IOException;
 import java.util.Locale;
 
+import rms.com.consts.MessageConst;
 import rms.web.com.base.UserInfo;
 import rms.web.menu.MenuController;
 
@@ -96,7 +97,8 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
         reportApplicantionService.saveFile(form.getFile());
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS,
+                                       message.getMessage("info.001", null, Locale.getDefault()));
 
         return redirect(MenuController.MAPPING_URL);
     }

@@ -3,6 +3,7 @@ package rms.web.tran.report.approval;
 import java.io.IOException;
 import java.util.Locale;
 
+import rms.com.consts.MessageConst;
 import rms.web.com.base.UserInfo;
 import rms.web.menu.MenuController;
 
@@ -94,7 +95,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
         reportApprovalService.approval(form, userInfo);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.004", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.004", null, Locale.getDefault()));
 
         return redirect(MenuController.MAPPING_URL);
     }
@@ -120,7 +121,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
         reportApprovalService.denial(form, userInfo);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.005", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
 
         return redirect(MenuController.MAPPING_URL);
     }

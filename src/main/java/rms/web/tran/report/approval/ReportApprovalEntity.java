@@ -1,8 +1,10 @@
 package rms.web.tran.report.approval;
 
 import java.time.LocalDateTime;
+
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -71,6 +73,10 @@ public class ReportApprovalEntity {
     /** filePath */
     @Column(name = "file_path")
     private String filePath;
+
+    /** version */
+    @Column(name = "version")
+    private int version;
 
     /**
      * applicantIdを取得します.
@@ -312,7 +318,24 @@ public class ReportApprovalEntity {
         this.filePath = filePath;
     }
 
+    /**
+     * versionを取得します。
+     * @return version
+     */
+    public int getVersion() {
+        return version;
+    }
+
+    /**
+     * versionを設定します。
+     * @param version version
+     */
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+
 }
