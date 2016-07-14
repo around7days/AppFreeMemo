@@ -7,13 +7,13 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/login_validate";
+	var defaultUrl = "/login";
 
 	/**
 	 * ログインボタン押下
 	 */
 	$("#login").on("click", function() {
-		var url = defaultUrl;
+		var url = defaultUrl + "?validate";
 		fmMain.attr("action", url);
 		return true;
 	});

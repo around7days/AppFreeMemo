@@ -3,8 +3,8 @@ package rms.web.mst.user.regist;
 import java.util.Enumeration;
 import java.util.Locale;
 
-import rms.com.consts.PageIdConst;
 import rms.web.com.base.BusinessException;
+import rms.web.tran.report.search.ReportSearchController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,11 +39,11 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);
 
-    /** デフォルトマッピングURL */
-    public static final String DEFAULT_URL = "/mst/user/regist";
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/mst/user/regist";
 
-    /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.MST_USER_REGIST;
+    /** ページURL */
+    private static final String PAGE_URL = "html/userRegist";
 
     /** ユーザ登録画面サービス */
     @Autowired
@@ -60,7 +60,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "initInsert")
+    @RequestMapping(value = MAPPING_URL, params = "initInsert")
     public String initInsert(Model model) {
         // 初期値設定
         UserRegistForm form = setupForm();
@@ -68,7 +68,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // 格納
         model.addAttribute(form);
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -78,7 +78,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL + "/{userId}", params = "initUpdate")
+    @RequestMapping(value = MAPPING_URL + "/{userId}", params = "initUpdate")
     public String initUpdate(UserRegistForm form,
                              @PathVariable String userId,
                              Model model) {
@@ -90,7 +90,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
 
         logger.debug("フォーム情報 -> {}", form.toString());
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -101,7 +101,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "insert")
+    @RequestMapping(value = MAPPING_URL, params = "insert")
     public String insert(@Validated(UserRegistForm.Insert.class) UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
@@ -111,7 +111,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
         // 登録処理
@@ -122,7 +122,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.001", null, Locale.getDefault()));
 
-        return redirect("/mst/user/search", "reSearch");
+        return redirect(ReportSearchController.MAPPING_URL, "reSearch");
     }
 
     /**
@@ -133,7 +133,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "update")
+    @RequestMapping(value = MAPPING_URL, params = "update")
     public String update(@Validated(UserRegistForm.Update.class) UserRegistForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
@@ -143,7 +143,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
         // チェックボックスを更新処理に含める
@@ -159,16 +159,16 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.002", null, Locale.getDefault()));
 
-        return redirect("/mst/user/search", "reSearch");
+        return redirect(ReportSearchController.MAPPING_URL, "reSearch");
     }
 
     /**
      * 戻る処理
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "back")
+    @RequestMapping(value = MAPPING_URL, params = "back")
     public String back() {
-        return redirect("/mst/user/search", "reSearch");
+        return redirect(ReportSearchController.MAPPING_URL, "reSearch");
     }
 
     // ----------------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             }
         }
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -230,7 +230,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             }
         }
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     // ----------------------------------------------------------------------------------------

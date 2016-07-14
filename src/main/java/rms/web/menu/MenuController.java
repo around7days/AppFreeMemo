@@ -2,17 +2,22 @@ package rms.web.menu;
 
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpSession;
+import rms.web.mst.user.regist.UserRegistController;
+import rms.web.mst.user.search.UserSearchController;
+import rms.web.tran.report.applicantion.ReportApplicantionController;
+import rms.web.tran.report.approval.ReportApprovalController;
+import rms.web.tran.report.search.ReportSearchController;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import rms.com.consts.PageIdConst;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * メニュー登録画面コントローラー
@@ -26,11 +31,11 @@ public class MenuController extends rms.com.abstracts.AbstractController {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
-    /** デフォルトマッピングURL */
-    public static final String DEFAULT_URL = "/menu";
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/menu";
 
-    /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.MENU;
+    /** ページURL */
+    private static final String PAGE_URL = "html/menu";
 
     /** メニュー画面フォーム */
     @ModelAttribute
@@ -45,7 +50,7 @@ public class MenuController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL)
+    @RequestMapping(value = MAPPING_URL)
     public String init(MenuForm form,
                        HttpSession session,
                        Model model) {
@@ -61,7 +66,7 @@ public class MenuController extends rms.com.abstracts.AbstractController {
             }
         }
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -70,10 +75,10 @@ public class MenuController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "m001")
+    @RequestMapping(value = MAPPING_URL, params = "m001")
     public String M001(MenuForm form,
                        Model model) {
-        return redirect("/mst/user/search", "init");
+        return redirect(UserSearchController.MAPPING_URL, "init");
     }
 
     /**
@@ -82,10 +87,10 @@ public class MenuController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "m002")
+    @RequestMapping(value = MAPPING_URL, params = "m002")
     public String M002(MenuForm form,
                        Model model) {
-        return redirect("/mst/user/regist", "initInsert");
+        return redirect(UserRegistController.MAPPING_URL, "initInsert");
     }
 
     /**
@@ -94,10 +99,10 @@ public class MenuController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "t001")
+    @RequestMapping(value = MAPPING_URL, params = "t001")
     public String T001(MenuForm form,
                        Model model) {
-        return redirect("/tran/report/search", "init");
+        return redirect(ReportSearchController.MAPPING_URL, "init");
     }
 
     /**
@@ -106,10 +111,10 @@ public class MenuController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "t002")
+    @RequestMapping(value = MAPPING_URL, params = "t002")
     public String T002(MenuForm form,
                        Model model) {
-        return redirect("/tran/report/applicantion", "initInsert");
+        return redirect(ReportApplicantionController.MAPPING_URL, "initInsert");
     }
 
     /**
@@ -118,14 +123,14 @@ public class MenuController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "t003")
+    @RequestMapping(value = MAPPING_URL, params = "t003")
     public String T003(MenuForm form,
                        Model model) {
-        return redirect("/tran/report/approval/user01/201607", "init");
+        return redirect(ReportApprovalController.MAPPING_URL + "/user01/201606", "init");
     }
 
     @SuppressWarnings("unused")
-    @RequestMapping(value = DEFAULT_URL, params = "e001")
+    @RequestMapping(value = MAPPING_URL, params = "e001")
     public String T004(MenuForm form,
                        Model model) throws Exception {
         if (true) {

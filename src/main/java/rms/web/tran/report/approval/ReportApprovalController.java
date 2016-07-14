@@ -3,6 +3,9 @@ package rms.web.tran.report.approval;
 import java.io.IOException;
 import java.util.Locale;
 
+import rms.web.com.base.UserInfo;
+import rms.web.menu.MenuController;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,9 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletResponse;
 
-import rms.com.consts.PageIdConst;
-import rms.web.com.base.UserInfo;
-
 /**
  * 月報承認画面コントローラー
  * @author
@@ -34,11 +34,11 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApprovalController.class);
 
-    /** デフォルトマッピングURL */
-    public static final String DEFAULT_URL = "/tran/report/approval";
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/tran/report/approval";
 
-    /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.TRAN_REPROT_APPROVAL;
+    /** ページURL */
+    private static final String PAGE_URL = "html/reportApproval";
 
     /** 月報承認画面サービス */
     @Autowired
@@ -57,7 +57,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL + "/{applicantId}/{targetYm}", params = "init")
+    @RequestMapping(value = MAPPING_URL + "/{applicantId}/{targetYm}", params = "init")
     public String init(@PathVariable String applicantId,
                        @PathVariable String targetYm,
                        Model model) {
@@ -68,8 +68,9 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
         reportApprovalService.init(form);
         // 格納
         model.addAttribute(form);
+        logger.debug("承認情報 -> {}", form.toString());
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -82,7 +83,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
      * @throws IOException
      * @throws IllegalStateException
      */
-    @RequestMapping(value = DEFAULT_URL, params = "approval")
+    @RequestMapping(value = MAPPING_URL, params = "approval")
     public String approval(@AuthenticationPrincipal UserInfo userInfo,
                            ReportApprovalForm form,
                            RedirectAttributes redirectAttr,
@@ -95,7 +96,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.004", null, Locale.getDefault()));
 
-        return redirect("/menu");
+        return redirect(MenuController.MAPPING_URL);
     }
 
     /**
@@ -108,7 +109,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
      * @throws IOException
      * @throws IllegalStateException
      */
-    @RequestMapping(value = DEFAULT_URL, params = "denial")
+    @RequestMapping(value = MAPPING_URL, params = "denial")
     public String denial(@AuthenticationPrincipal UserInfo userInfo,
                          ReportApprovalForm form,
                          RedirectAttributes redirectAttr,
@@ -121,7 +122,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
         // 完了メッセージ
         redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.005", null, Locale.getDefault()));
 
-        return redirect("/menu");
+        return redirect(MenuController.MAPPING_URL);
     }
 
     /**
@@ -132,7 +133,7 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = DEFAULT_URL, params = "download")
+    @RequestMapping(value = MAPPING_URL, params = "download")
     public String download(ReportApprovalForm form,
                            HttpServletResponse response,
                            Model model) throws IOException {
@@ -162,9 +163,9 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
      * 戻る処理
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "back")
+    @RequestMapping(value = MAPPING_URL, params = "back")
     public String back() {
-        return redirect("/menu");
+        return redirect(MenuController.MAPPING_URL);
     }
 
 }

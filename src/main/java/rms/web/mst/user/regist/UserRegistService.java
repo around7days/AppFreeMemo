@@ -52,7 +52,7 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
         BeanUtils.copyProperties(form, mUser);
         logger.debug("登録情報 -> {}", mUser.toString());
 
-        // TODO 存在チェック用の共通SQLがほしい（削除フラグも）
+        // TODO 存在チェック用の共通SQLがほしい（削除フラグ判断込みで）
         // ユーザーIDの重複チェック
         if (mUserDao.selectById(mUser.getUserId()) != null) {
             throw new BusinessException("ユーザIDが重複しています。");

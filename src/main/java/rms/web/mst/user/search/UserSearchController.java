@@ -1,7 +1,7 @@
 package rms.web.mst.user.search;
 
-import rms.com.consts.PageIdConst;
 import rms.com.doma.entity.MUser;
+import rms.web.mst.user.regist.UserRegistController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,11 +29,11 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSearchController.class);
 
-    /** デフォルトマッピングURL */
-    public static final String DEFAULT_URL = "/mst/user/search";
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/mst/user/search";
 
-    /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.MST_USER_SEARCH;
+    /** ページURL */
+    private static final String PAGE_URL = "html/userSearch";
 
     /** ユーザ一覧画面サービス */
     @Autowired
@@ -51,12 +51,12 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "init")
+    @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(UserSearchForm form,
                        Model model) {
         // 初期値設定
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -66,7 +66,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "search")
+    @RequestMapping(value = MAPPING_URL, params = "search")
     public String search(@Validated UserSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
@@ -75,17 +75,17 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
         // 検索処理
         userSearchService.search(form);
         if (form.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -94,7 +94,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "reSearch")
+    @RequestMapping(value = MAPPING_URL, params = "reSearch")
     public String reSearch(UserSearchForm form,
                            Model model) {
         logger.debug("フォーム情報 -> {}", form.toString());
@@ -102,7 +102,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
         // 検索処理
         userSearchService.search(form);
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -111,13 +111,13 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "pagePrev")
+    @RequestMapping(value = MAPPING_URL, params = "pagePrev")
     public String pagePrev(UserSearchForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().prev();
 
-        return redirect("/mst/user/search", "reSearch");
+        return redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -126,22 +126,22 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "pageNext")
+    @RequestMapping(value = MAPPING_URL, params = "pageNext")
     public String pageNext(UserSearchForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().next();
 
-        return redirect("/mst/user/search", "reSearch");
+        return redirect(MAPPING_URL, "reSearch");
     }
 
     /**
      * ユーザ新規処理
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "insert")
+    @RequestMapping(value = MAPPING_URL, params = "insert")
     public String selectInsert() {
-        return redirect("/mst/user/regist", "initInsert");
+        return redirect(UserRegistController.MAPPING_URL, "initInsert");
     }
 
     /**
@@ -151,7 +151,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL + "/{index}", params = "select")
+    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
     public String select(UserSearchForm form,
                          @PathVariable int index,
                          Model model) {
@@ -161,6 +161,6 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
         MUser user = form.getResultList().get(index);
         logger.debug("選択ユーザ情報 -> {}", user.toString());
 
-        return redirect("/mst/user/regist/" + user.getUserId(), "initUpdate");
+        return redirect(UserRegistController.MAPPING_URL + "/" + user.getUserId(), "initUpdate");
     }
 }
