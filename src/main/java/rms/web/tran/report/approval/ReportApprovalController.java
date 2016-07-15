@@ -35,11 +35,11 @@ public class ReportApprovalController extends rms.com.abstracts.AbstractControll
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApprovalController.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/approval";
-
     /** ページURL */
     private static final String PAGE_URL = "html/reportApproval";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/tran/report/approval";
 
     /** 月報承認画面サービス */
     @Autowired

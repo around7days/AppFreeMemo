@@ -34,11 +34,11 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionController.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/applicantion";
-
     /** ページURL */
     private static final String PAGE_URL = "html/reportApplication";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/tran/report/applicantion";
 
     /** 月報申請画面サービス */
     @Autowired
@@ -97,8 +97,7 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
         reportApplicantionService.saveFile(form.getFile());
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS,
-                                       message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
 
         return redirect(MenuController.MAPPING_URL);
     }

@@ -19,11 +19,11 @@ public class ErrorControllerImpl implements ErrorController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ErrorControllerImpl.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/error";
-
     /** ページURL */
     private static final String PAGE_URL = "html/error";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/error";
 
     /*
      * (非 Javadoc)

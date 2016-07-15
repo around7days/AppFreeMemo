@@ -38,11 +38,11 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/mst/user/regist";
-
     /** ページURL */
     private static final String PAGE_URL = "html/userRegist";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/mst/user/regist";
 
     /** ユーザ登録画面サービス */
     @Autowired
@@ -150,7 +150,7 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             return PAGE_URL;
         }
 
-        // チェックボックスを更新処理に含める
+        // チェックボックスを更新対象に含める
         //@formatter:off
         if(form.getApplicantKbn() == null) form.setApplicantKbn("");
         if(form.getApproverKbn() == null) form.setApproverKbn("");

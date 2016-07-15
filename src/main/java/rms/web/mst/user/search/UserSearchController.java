@@ -29,11 +29,11 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSearchController.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/mst/user/search";
-
     /** ページURL */
     private static final String PAGE_URL = "html/userSearch";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/mst/user/search";
 
     /** ユーザ一覧画面サービス */
     @Autowired

@@ -24,11 +24,11 @@ public class LoginController extends rms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/login";
-
     /** ページURL */
     private static final String PAGE_URL = "html/login";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/login";
 
     /** ログイン画面フォーム */
     @ModelAttribute

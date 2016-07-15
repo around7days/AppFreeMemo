@@ -37,11 +37,11 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportSearchController.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/search";
-
     /** ページURL */
     private static final String PAGE_URL = "html/reportSearch";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/tran/report/search";
 
     /** 月報状況一覧画面サービス */
     @Autowired

@@ -31,11 +31,11 @@ public class MenuController extends rms.com.abstracts.AbstractController {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
-    /** マッピングURL */
-    public static final String MAPPING_URL = "/menu";
-
     /** ページURL */
     private static final String PAGE_URL = "html/menu";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/menu";
 
     /** メニュー画面フォーム */
     @ModelAttribute
