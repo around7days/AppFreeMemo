@@ -1,0 +1,212 @@
+﻿# A5:ER FORMAT:10
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=月報管理システム
+Author=
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",5,"A4Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=5
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=9
+PaperSize=A4Landscape
+HeaderLeft=%ProjectName%
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=5
+RDBMSTypeName=MySQL
+CommonField="バージョン","version","int","NOT NULL",,"","",$FFFFFFFF
+CommonField="削除フラグ","del_flg","int","NOT NULL",,"","",$FFFFFFFF
+CommonField="登録日時","ins_date","timestamp","NOT NULL",,"","",$FFFFFFFF
+CommonField="登録ID","ins_id","varchar(20)","NOT NULL",,"","",$FFFFFFFF
+CommonField="更新日時","upd_date","timestamp","NOT NULL",,"","",$FFFFFFFF
+CommonField="更新ID","upd_id","varchar(20)","NOT NULL",,"","",$FFFFFFFF
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Comment]
+Comment=業務
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=9
+FontColor=$000000
+LineColor=$000000
+BkColor=$C0DCC0
+Page=Main
+Left=100
+Top=900
+Width=250
+Height=89
+
+[Comment]
+Comment=マスタ
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=9
+FontColor=$000000
+LineColor=$000000
+BkColor=$C0DCC0
+Page=Main
+Left=100
+Top=100
+Width=250
+Height=89
+
+[Relation]
+Entity1=M_ROLE
+Entity2=M_USER_ROLE
+RelationType1=2
+RelationType2=3
+Fields1=role_id
+Fields2=role_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4908,7201,2638,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=491
+Bar2=720
+Bar3=264
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=M_USER
+Entity2=M_USER_ROLE
+RelationType1=2
+RelationType2=3
+Fields1=user_id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3915,4988,2965,R,R
+Dependence=1
+Caption=
+PName=
+ModifiedDateTime=20160716194048
+LineMode=0
+Bar1=392
+Bar2=499
+Bar3=296
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=M_ROLE
+LName=役割マスタ
+Comment=
+TableOption=
+Page=MAIN
+Left=1200
+Top=600
+Field="役割ID","role_id","int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="役割","role","varchar(40)","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","varchar(255)",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160716195151
+Position="MAIN",1200,600
+
+[Entity]
+PName=M_USER_ROLE
+LName=ユーザ役割マスタ
+Comment=
+TableOption=
+Page=MAIN
+Left=650
+Top=600
+Field="ユーザID","user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="役割ID","role_id","varchar(20)","NOT NULL",1,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160716195110
+Position="MAIN",650,600
+
+[Entity]
+PName=M_CODE
+LName=コードマスタ
+Comment=
+TableOption=
+Page=MAIN
+Left=100
+Top=250
+Field="コード区分","code_kbn","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="コード区分名称","code_kbn_nm","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="コード","code","varchar(20)","NOT NULL",1,"","",$FFFFFFFF,""
+Field="コード名称","code_nm","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="属性１","attr1","varchar(255)",,,"","",$FFFFFFFF,""
+Field="属性２","attr2","varchar(255)",,,"","",$FFFFFFFF,""
+Field="属性３","attr3","varchar(255)",,,"","",$FFFFFFFF,""
+Field="説明","description","varchar(255)",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160716195816
+Position="MAIN",100,250
+
+[Entity]
+PName=M_USER
+LName=ユーザマスタ
+Comment=
+TableOption=
+Page=MAIN
+Left=650
+Top=250
+Field="ユーザID","user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ユーザ名","user_nm","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワード","password","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="メールアドレス","email","varchar(255)",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160716195834
+Position="MAIN",650,250
+
+[Entity]
+PName=T_REPORT
+LName=月報管理テーブル
+Comment=
+TableOption=
+Page=MAIN
+Left=100
+Top=1050
+Field="申請者ID","applicant_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="対象年月(yyyymm)","target_ym","int","NOT NULL",1,"","",$FFFFFFFF,""
+Field="申請日","applicant_date","timestamp","NOT NULL",,"CURRENT_TIMESTAMP","",$FFFFFFFF,""
+Field="承認状況","status","varchar(3)","NOT NULL",,"","",$FFFFFFFF,""
+Field="承認者１ID","approver1_id","varchar(20)",,,"","",$FFFFFFFF,""
+Field="承認者２ID","approver2_id","varchar(20)",,,"","",$FFFFFFFF,""
+Field="承認者３ID","approver3_id","varchar(20)","NOT NULL",,"","",$FFFFFFFF,""
+Field="月報ファイルパス","file_path","varchar(100)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160716195823
+Position="MAIN",100,1050
