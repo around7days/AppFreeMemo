@@ -1,5 +1,9 @@
 package rms.web.mst.user.regist;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import rms.com.doma.dao.MUserDao;
 import rms.com.doma.entity.MUser;
 import rms.web.com.base.BusinessException;
@@ -52,10 +56,13 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
         BeanUtils.copyProperties(form, mUser);
         logger.debug("登録情報 -> {}", mUser.toString());
 
-        // TODO 存在チェック用の共通SQLがほしい（削除フラグも）
+        // TODO 存在チェック用の共通SQLがほしい（削除フラグ判断込みで）
         // ユーザーIDの重複チェック
         if (mUserDao.selectById(mUser.getUserId()) != null) {
-            throw new BusinessException("ユーザIDが重複しています。");
+            // TODO 汚い・・・
+            List<Object> params = new ArrayList<Object>();
+            params.add("ユーザIDが");
+            throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
         }
 
         // 登録処理

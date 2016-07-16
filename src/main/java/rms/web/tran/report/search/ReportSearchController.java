@@ -7,10 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.servlet.http.HttpServletResponse;
+import rms.web.tran.report.approval.ReportApprovalController;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import rms.com.consts.PageIdConst;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 月報状況一覧画面コントローラー
@@ -36,11 +37,11 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportSearchController.class);
 
-    /** デフォルトマッピングURL */
-    public static final String DEFAULT_URL = "/tran/report/search";
+    /** ページURL */
+    private static final String PAGE_URL = "html/reportSearch";
 
-    /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.TRAN_REPROT_SEARCH;
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/tran/report/search";
 
     /** 月報状況一覧画面サービス */
     @Autowired
@@ -57,7 +58,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "init")
+    @RequestMapping(value = MAPPING_URL, params = "init")
     public String initInsert(Model model) {
         // 初期値設定
         ReportSearchForm form = new ReportSearchForm();
@@ -65,7 +66,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
         // 格納
         model.addAttribute(form);
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -75,7 +76,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "search")
+    @RequestMapping(value = MAPPING_URL, params = "search")
     public String search(@Validated ReportSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
@@ -84,17 +85,17 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
         // 検索処理
         reportSearchService.search(form);
         if (form.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -103,7 +104,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "reSearch")
+    @RequestMapping(value = MAPPING_URL, params = "reSearch")
     public String reSearch(ReportSearchForm form,
                            Model model) {
         logger.debug("フォーム情報 -> {}", form.toString());
@@ -111,7 +112,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
         // 検索処理
         reportSearchService.search(form);
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -120,13 +121,13 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "pagePrev")
+    @RequestMapping(value = MAPPING_URL, params = "pagePrev")
     public String pagePrev(ReportSearchForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().prev();
 
-        return redirect(DEFAULT_URL, "reSearch");
+        return redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -135,13 +136,13 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "pageNext")
+    @RequestMapping(value = MAPPING_URL, params = "pageNext")
     public String pageNext(ReportSearchForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().next();
 
-        return redirect(DEFAULT_URL, "reSearch");
+        return redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -153,7 +154,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = DEFAULT_URL + "/{index}", params = "download")
+    @RequestMapping(value = MAPPING_URL + "/{index}", params = "download")
     public String download(ReportSearchForm form,
                            @PathVariable int index,
                            HttpServletResponse response,
@@ -188,7 +189,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL + "/{index}", params = "select")
+    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
     public String select(ReportSearchForm form,
                          @PathVariable int index,
                          Model model) {
@@ -199,7 +200,8 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
         logger.debug("選択月報情報 -> {}", result.toString());
 
         // 月報承認画面
-        return redirect("/tran/report/approval" + "/" + result.getApplicantId() + "/" + result.getTargetYm(), "init");
+        return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplicantId() + "/"
+                        + result.getTargetYm(), "init");
     }
 
 }

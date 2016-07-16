@@ -1,16 +1,16 @@
 package rms.web.com.base;
 
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import rms.com.consts.PageIdConst;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpSession;
 
 /**
+ * エラー画面コントローラー
  * @author
  */
 @Controller
@@ -19,8 +19,11 @@ public class ErrorControllerImpl implements ErrorController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ErrorControllerImpl.class);
 
-    /** エラーページマッピング */
-    private static final String PATH = "/error";
+    /** ページURL */
+    private static final String PAGE_URL = "html/error";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/error";
 
     /*
      * (非 Javadoc)
@@ -28,15 +31,15 @@ public class ErrorControllerImpl implements ErrorController {
      */
     @Override
     public String getErrorPath() {
-        return PATH;
+        return MAPPING_URL;
     }
 
-    @RequestMapping(PATH)
+    @RequestMapping(MAPPING_URL)
     public String error(HttpSession session) {
         if (session != null && !session.isNew()) {
             logger.error("exception session invalidate -> {}", session.getId());
             session.invalidate();
         }
-        return PageIdConst.ERROR;
+        return PAGE_URL;
     }
 }

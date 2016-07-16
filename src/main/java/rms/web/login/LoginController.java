@@ -1,7 +1,7 @@
 package rms.web.login;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import rms.web.com.base.SecurityConfig;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import rms.com.consts.PageIdConst;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ログイン画面コントローラー
@@ -23,11 +24,14 @@ public class LoginController extends rms.com.abstracts.AbstractController {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.LOGIN;
+    /** ページURL */
+    private static final String PAGE_URL = "html/login";
+
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/login";
 
     /** ログイン画面フォーム */
-    @ModelAttribute(value = "loginForm")
+    @ModelAttribute
     LoginForm setupForm() {
         return new LoginForm();
     }
@@ -38,14 +42,14 @@ public class LoginController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping(value = MAPPING_URL)
     public String init(LoginForm form,
                        Model model) {
         // 初期処理
         form.setUserId("user01");
         form.setPassword("pass");
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -56,18 +60,18 @@ public class LoginController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping("/login_validate")
+    @RequestMapping(value = MAPPING_URL, params = "validate")
     public String login(@Validated LoginForm form,
                         BindingResult bindingResult,
                         Model model) {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
         // ログイン認証処理にフォワード
-        return forward("login_auth");
+        return forward(SecurityConfig.AUTH_MAPPING_URL);
     }
 
     /**
@@ -78,12 +82,12 @@ public class LoginController extends rms.com.abstracts.AbstractController {
      * @param model
      * @return
      */
-    @RequestMapping("/login_error")
+    @RequestMapping(value = MAPPING_URL, params = "error")
     public String loginError(LoginForm form,
                              BindingResult bindingResult,
                              Model model) {
         bindingResult.reject("", "ログインに失敗しました");
         logger.debug(bindingResult.getAllErrors().toString());
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 }

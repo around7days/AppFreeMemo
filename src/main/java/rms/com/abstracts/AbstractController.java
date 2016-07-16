@@ -1,11 +1,15 @@
 package rms.com.abstracts;
 
+import java.util.Enumeration;
+
 import rms.web.com.base.UserInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author
@@ -68,6 +72,27 @@ public abstract class AbstractController {
             forwardUrl.append("?").append(param);
         }
         return forwardUrl.toString();
+    }
+
+    /**
+     * セッションからフォーム情報の取得
+     * @param session
+     * @param cls
+     * @param model
+     */
+    @SuppressWarnings("unchecked")
+    protected <T> T getSessionForm(HttpSession session,
+                                   Class<T> cls) {
+        // TODO クラス名のキャメル式で取得するか、クラス呼び出し時にセッションキーを保持しておきたい
+        Enumeration<String> enumeration = session.getAttributeNames();
+        while (enumeration.hasMoreElements()) {
+            String key = enumeration.nextElement();
+            Object obj = session.getAttribute(key);
+            if (obj.getClass() == cls) {
+                return (T) obj;
+            }
+        }
+        return null;
     }
 
 }

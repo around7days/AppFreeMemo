@@ -12,6 +12,7 @@ import ${importName};
 </#list>
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
+import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
@@ -34,6 +35,19 @@ public interface ${simpleName} {
      */
     @Select
     <#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} selectById(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}<#if property_has_next>, </#if></#list>);
+
+</#if>
+<#if entityDesc.idEntityPropertyDescs?size gt 0>
+    /**
+     * 1件取得
+<#list entityDesc.idEntityPropertyDescs as property>
+     * @param ${property.name}
+</#list>
+     * @param options
+     * @return the <#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity
+     */
+    @Select
+    <#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} selectById(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}<#if property_has_next>, </#if></#list>, SelectOptions options);
 
 </#if>
 <#if entityDesc.idEntityPropertyDescs?size gt 0 && entityDesc.versionEntityPropertyDesc??>

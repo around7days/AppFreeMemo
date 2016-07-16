@@ -3,8 +3,9 @@ package rms.web.tran.report.applicantion;
 import java.io.IOException;
 import java.util.Locale;
 
-import rms.com.consts.PageIdConst;
+import rms.com.consts.MessageConst;
 import rms.web.com.base.UserInfo;
+import rms.web.menu.MenuController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -33,11 +34,11 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionController.class);
 
-    /** デフォルトマッピングURL */
-    public static final String DEFAULT_URL = "/tran/report/applicantion";
+    /** ページURL */
+    private static final String PAGE_URL = "html/reportApplication";
 
-    /** デフォルトページID */
-    private static final String DEFAULT_PAGE = PageIdConst.TRAN_REPROT_APPLICANTION;
+    /** マッピングURL */
+    public static final String MAPPING_URL = "/tran/report/applicantion";
 
     /** 月報申請画面サービス */
     @Autowired
@@ -54,7 +55,7 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
      * @param model
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "initInsert")
+    @RequestMapping(value = MAPPING_URL, params = "initInsert")
     public String initInsert(Model model) {
         // 初期値設定
         ReportApplicantionForm form = setupForm();
@@ -62,7 +63,7 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
         // 格納
         model.addAttribute(form);
 
-        return DEFAULT_PAGE;
+        return PAGE_URL;
     }
 
     /**
@@ -76,7 +77,7 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
      * @throws IOException
      * @throws IllegalStateException
      */
-    @RequestMapping(value = DEFAULT_URL, params = "insert")
+    @RequestMapping(value = MAPPING_URL, params = "insert")
     public String insert(@AuthenticationPrincipal UserInfo userInfo,
                          @Validated(ReportApplicantionForm.Insert.class) ReportApplicantionForm form,
                          BindingResult bindingResult,
@@ -87,7 +88,7 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug(bindingResult.getAllErrors().toString());
-            return DEFAULT_PAGE;
+            return PAGE_URL;
         }
 
         // 登録処理
@@ -96,18 +97,18 @@ public class ReportApplicantionController extends rms.com.abstracts.AbstractCont
         reportApplicantionService.saveFile(form.getFile());
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute("successMessage", message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
 
-        return redirect("/menu");
+        return redirect(MenuController.MAPPING_URL);
     }
 
     /**
      * 戻る処理
      * @return
      */
-    @RequestMapping(value = DEFAULT_URL, params = "back")
+    @RequestMapping(value = MAPPING_URL, params = "back")
     public String back() {
-        return redirect("/menu");
+        return redirect(MenuController.MAPPING_URL);
     }
 
 }
