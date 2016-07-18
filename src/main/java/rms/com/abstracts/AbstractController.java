@@ -1,13 +1,15 @@
 package rms.com.abstracts;
 
-import java.util.Enumeration;
-
 import rms.web.com.base.UserInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.core.Conventions;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,10 @@ import javax.servlet.http.HttpSession;
  * @author
  */
 public abstract class AbstractController {
+
+    /** logger */
+    private static final Logger logger = LoggerFactory.getLogger(AbstractController.class);
+
     @Autowired
     protected MessageSource message;
 
@@ -83,14 +89,24 @@ public abstract class AbstractController {
     @SuppressWarnings("unchecked")
     protected <T> T getSessionForm(HttpSession session,
                                    Class<T> cls) {
-        // TODO クラス名のキャメル式で取得するか、クラス呼び出し時にセッションキーを保持しておきたい
-        Enumeration<String> enumeration = session.getAttributeNames();
-        while (enumeration.hasMoreElements()) {
-            String key = enumeration.nextElement();
+
+        try {
+            String key = Conventions.getVariableName(cls.newInstance());
             Object obj = session.getAttribute(key);
             if (obj.getClass() == cls) {
                 return (T) obj;
             }
+            // TODO クラス名のキャメル式で取得するか、クラス呼び出し時にセッションキーを保持しておきたい
+            //            Enumeration<String> enumeration = session.getAttributeNames();
+            //            while (enumeration.hasMoreElements()) {
+            //                String key = enumeration.nextElement();
+            //
+            //                if (obj.getClass() == cls) {
+            //                    return (T) obj;
+            //                }
+            //            }
+        } catch (Exception e) {
+            logger.warn("class instance error", e.getMessage());
         }
         return null;
     }
