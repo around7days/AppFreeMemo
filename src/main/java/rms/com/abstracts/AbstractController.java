@@ -91,20 +91,13 @@ public abstract class AbstractController {
                                    Class<T> cls) {
 
         try {
+            // クラスオブジェクトからSpringの自動生成keyを取得
             String key = Conventions.getVariableName(cls.newInstance());
+            // セッションから取得
             Object obj = session.getAttribute(key);
-            if (obj.getClass() == cls) {
+            if (obj != null && obj.getClass() == cls) {
                 return (T) obj;
             }
-            // TODO クラス名のキャメル式で取得するか、クラス呼び出し時にセッションキーを保持しておきたい
-            //            Enumeration<String> enumeration = session.getAttributeNames();
-            //            while (enumeration.hasMoreElements()) {
-            //                String key = enumeration.nextElement();
-            //
-            //                if (obj.getClass() == cls) {
-            //                    return (T) obj;
-            //                }
-            //            }
         } catch (Exception e) {
             logger.warn("class instance error", e.getMessage());
         }
