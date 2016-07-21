@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import rms.domain.tran.report.entity.ReportSearchConditionEntity;
+import rms.domain.tran.report.service.ReportSearchService;
 import rms.web.tran.report.approval.ReportApprovalController;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,7 +164,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        SearchReportEntity result = form.getResultList().get(index);
+        ReportSearchConditionEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result.toString());
 
         /*
@@ -196,7 +198,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        SearchReportEntity result = form.getResultList().get(index);
+        ReportSearchConditionEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result.toString());
 
         // 月報承認画面

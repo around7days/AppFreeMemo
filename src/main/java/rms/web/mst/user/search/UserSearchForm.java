@@ -2,8 +2,10 @@ package rms.web.mst.user.search;
 
 import java.util.List;
 
-import rms.com.doma.entity.MUser;
-import rms.web.com.base.PageInfo;
+import rms.com.base.PageInfo;
+import rms.domain.mst.user.entity.UserSearchResultEntity;
+
+import javax.validation.Valid;
 
 /**
  * ユーザ一覧画面フォーム
@@ -13,11 +15,12 @@ public class UserSearchForm extends rms.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
+    @Valid
     private UserSearchConditionForm condition = new UserSearchConditionForm();
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
-    private List<MUser> resultList;
+    private List<UserSearchResultEntity> resultList;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -56,7 +59,7 @@ public class UserSearchForm extends rms.com.abstracts.AbstractForm {
      * 検索結果リストを取得します。
      * @return 検索結果リスト
      */
-    public List<MUser> getResultList() {
+    public List<UserSearchResultEntity> getResultList() {
         return resultList;
     }
 
@@ -64,7 +67,7 @@ public class UserSearchForm extends rms.com.abstracts.AbstractForm {
      * 検索結果リストを設定します。
      * @param resultList 検索結果リスト
      */
-    public void setResultList(List<MUser> resultList) {
+    public void setResultList(List<UserSearchResultEntity> resultList) {
         this.resultList = resultList;
     }
 

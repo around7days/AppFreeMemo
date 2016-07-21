@@ -3,8 +3,9 @@ package rms.web.tran.report.applicantion;
 import java.io.IOException;
 import java.util.Locale;
 
+import rms.com.base.UserInfo;
 import rms.com.consts.MessageConst;
-import rms.web.com.base.UserInfo;
+import rms.domain.tran.report.service.ReportApplicantionService;
 import rms.web.menu.MenuController;
 
 import org.springframework.beans.factory.annotation.Autowired;

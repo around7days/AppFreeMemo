@@ -1,6 +1,6 @@
 package rms.web.login;
 
-import rms.web.com.base.SecurityConfig;
+import rms.com.base.SecurityConfig;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

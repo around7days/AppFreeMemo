@@ -16,15 +16,6 @@ public class UserSearchConditionForm extends rms.com.abstracts.AbstractForm {
     @Size(max = 10, message = "ユーザ名は{Size.message}")
     private String userNm;
 
-    /** 申請者区分 */
-    private String applicantKbn;
-
-    /** 承認者区分 */
-    private String approvalKbn;
-
-    /** 管理者区分 */
-    private String adminKbn;
-
     /**
      * ユーザIDを取得します。
      * @return ユーザID
@@ -56,53 +47,4 @@ public class UserSearchConditionForm extends rms.com.abstracts.AbstractForm {
     public void setUserNm(String userNm) {
         this.userNm = userNm;
     }
-
-    /**
-     * 申請者区分を取得します。
-     * @return 申請者区分
-     */
-    public String getApplicantKbn() {
-        return applicantKbn;
-    }
-
-    /**
-     * 申請者区分を設定します。
-     * @param applicantKbn 申請者区分
-     */
-    public void setApplicantKbn(String applicantKbn) {
-        this.applicantKbn = applicantKbn;
-    }
-
-    /**
-     * 承認者区分を取得します。
-     * @return 承認者区分
-     */
-    public String getApprovalKbn() {
-        return approvalKbn;
-    }
-
-    /**
-     * 承認者区分を設定します。
-     * @param approvalKbn 承認者区分
-     */
-    public void setApprovalKbn(String approvalKbn) {
-        this.approvalKbn = approvalKbn;
-    }
-
-    /**
-     * 管理者区分を取得します。
-     * @return 管理者区分
-     */
-    public String getAdminKbn() {
-        return adminKbn;
-    }
-
-    /**
-     * 管理者区分を設定します。
-     * @param adminKbn 管理者区分
-     */
-    public void setAdminKbn(String adminKbn) {
-        this.adminKbn = adminKbn;
-    }
-
 }

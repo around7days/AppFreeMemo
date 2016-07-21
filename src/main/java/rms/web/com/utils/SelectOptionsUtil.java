@@ -1,6 +1,6 @@
 package rms.web.com.utils;
 
-import rms.web.com.base.PageInfo;
+import rms.com.base.PageInfo;
 
 import org.seasar.doma.jdbc.SelectOptions;
 

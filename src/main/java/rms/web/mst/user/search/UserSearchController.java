@@ -1,8 +1,12 @@
 package rms.web.mst.user.search;
 
-import rms.com.doma.entity.MUser;
+import rms.com.base.SearchResultEntity;
+import rms.domain.mst.user.entity.UserSearchConditionEntity;
+import rms.domain.mst.user.entity.UserSearchResultEntity;
+import rms.domain.mst.user.service.UserServiceSelect;
 import rms.web.mst.user.regist.UserRegistController;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +39,9 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
     /** マッピングURL */
     public static final String MAPPING_URL = "/mst/user/search";
 
-    /** ユーザ一覧画面サービス */
+    /** ユーザ情報サービス */
     @Autowired
-    UserSearchService userSearchService;
+    UserServiceSelect userService;
 
     /** ユーザ一覧画面フォーム */
     @ModelAttribute
@@ -54,8 +58,6 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(UserSearchForm form,
                        Model model) {
-        // 初期値設定
-
         return PAGE_URL;
     }
 
@@ -78,12 +80,21 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
             return PAGE_URL;
         }
 
+        // 検索条件の生成
+        UserSearchConditionEntity condition = new UserSearchConditionEntity();
+        BeanUtils.copyProperties(form, condition);
+
         // 検索処理
-        userSearchService.search(form);
-        if (form.getResultList().isEmpty()) {
+        SearchResultEntity<UserSearchResultEntity> searchResultEntity = userService.getUserInfoList(condition,
+                                                                                                    form.getPageInfo());
+        if (searchResultEntity.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
             return PAGE_URL;
         }
+
+        // 検索結果をフォームに反映
+        form.setResultList(searchResultEntity.getResultList());
+        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
 
         return PAGE_URL;
     }
@@ -99,8 +110,17 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
                            Model model) {
         logger.debug("フォーム情報 -> {}", form.toString());
 
+        // 検索条件の生成
+        UserSearchConditionEntity condition = new UserSearchConditionEntity();
+        BeanUtils.copyProperties(form, condition);
+
         // 検索処理
-        userSearchService.search(form);
+        SearchResultEntity<UserSearchResultEntity> searchResultEntity = userService.getUserInfoList(condition,
+                                                                                                    form.getPageInfo());
+
+        // 検索結果をフォームに反映
+        form.setResultList(searchResultEntity.getResultList());
+        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
 
         return PAGE_URL;
     }
@@ -136,7 +156,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
     }
 
     /**
-     * ユーザ新規処理
+     * ユーザ新規登録画面遷移処理
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "insert")
@@ -158,7 +178,7 @@ public class UserSearchController extends rms.com.abstracts.AbstractController {
         logger.debug("選択値 -> {}", index);
 
         // 選択したユーザ情報
-        MUser user = form.getResultList().get(index);
+        UserSearchResultEntity user = form.getResultList().get(index);
         logger.debug("選択ユーザ情報 -> {}", user.toString());
 
         return redirect(UserRegistController.MAPPING_URL + "/" + user.getUserId(), "initUpdate");

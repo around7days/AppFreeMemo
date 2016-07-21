@@ -73,18 +73,18 @@
 						<input type="email" th:value="*{email}" name="email" id="email" class="form-control" placeholder="xxxx@gmail.com" />
 					</div>
 				</div>
-				<!-- 権限 -->
+				<!-- 役割 -->
 				<div class="form-group">
-					<label for="email" class="col-sm-3 control-label">権限</label>
+					<label for="email" class="col-sm-3 control-label">役割</label>
 					<div class="col-sm-9">
 						<label class="checkbox-inline">
-							<input type="checkbox" name="applicantKbn" id="applicantKbn" th:field="*{applicantKbn}" th:value="${T(rms.com.consts.MCodeConst).B001_1}" /> 申請者
+							<input type="checkbox" name="applicantKbn" id="applicantKbn" th:field="*{applicantKbn}" th:value="${T(rms.com.consts.MRoleConst).ID_1}" /> 申請者
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="approverKbn" id="approverKbn" th:field="*{approverKbn}" th:value="${T(rms.com.consts.MCodeConst).C001_1}" /> 承認者
+							<input type="checkbox" name="approverKbn" id="approverKbn" th:field="*{approverKbn}" th:value="${T(rms.com.consts.MRoleConst).ID_2}" /> 承認者
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="adminKbn" id="adminKbn" th:field="*{adminKbn}" th:value="${T(rms.com.consts.MCodeConst).D001_1}" /> 管理者
+							<input type="checkbox" name="adminKbn" id="adminKbn" th:field="*{adminKbn}" th:value="${T(rms.com.consts.MRoleConst).ID_3}" /> 管理者
 						</label>
 					</div>
 				</div>

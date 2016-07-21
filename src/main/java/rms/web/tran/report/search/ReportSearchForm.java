@@ -2,7 +2,8 @@ package rms.web.tran.report.search;
 
 import java.util.List;
 
-import rms.web.com.base.PageInfo;
+import rms.com.base.PageInfo;
+import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 
 /**
  * 月報状況一覧画面フォーム
@@ -16,7 +17,7 @@ public class ReportSearchForm extends rms.com.abstracts.AbstractForm {
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
-    private List<SearchReportEntity> resultList;
+    private List<ReportSearchConditionEntity> resultList;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -55,7 +56,7 @@ public class ReportSearchForm extends rms.com.abstracts.AbstractForm {
      * 検索結果リストを取得します。
      * @return 検索結果リスト
      */
-    public List<SearchReportEntity> getResultList() {
+    public List<ReportSearchConditionEntity> getResultList() {
         return resultList;
     }
 
@@ -63,7 +64,7 @@ public class ReportSearchForm extends rms.com.abstracts.AbstractForm {
      * 検索結果リストを設定します。
      * @param resultList 検索結果リスト
      */
-    public void setResultList(List<SearchReportEntity> resultList) {
+    public void setResultList(List<ReportSearchConditionEntity> resultList) {
         this.resultList = resultList;
     }
 }

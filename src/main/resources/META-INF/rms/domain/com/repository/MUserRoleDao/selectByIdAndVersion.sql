@@ -1,0 +1,1 @@
+select /*%expand*/* from m_user_role where  user_id = /* userId */'a' and  role_id = /* roleId */'a' and   version = /* version */1 

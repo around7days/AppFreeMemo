@@ -2,10 +2,14 @@ package rms.web.mst.user.regist;
 
 import java.util.Locale;
 
+import rms.com.base.BusinessException;
 import rms.com.consts.MessageConst;
-import rms.web.com.base.BusinessException;
-import rms.web.tran.report.search.ReportSearchController;
+import rms.domain.com.entity.MUser;
+import rms.domain.mst.user.service.UserServiceRegist;
+import rms.domain.mst.user.service.UserServiceSelect;
+import rms.web.mst.user.search.UserSearchController;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,9 +48,13 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     /** マッピングURL */
     public static final String MAPPING_URL = "/mst/user/regist";
 
-    /** ユーザ登録画面サービス */
+    /** ユーザ情報取得サービス */
     @Autowired
-    UserRegistService userRegistService;
+    UserServiceSelect userServiceSelect;
+
+    /** ユーザ情報登録サービス */
+    @Autowired
+    UserServiceRegist userServiceRegist;
 
     /** ユーザ登録画面フォーム */
     @ModelAttribute
@@ -61,15 +69,18 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = MAPPING_URL, params = "initInsert")
     public String initInsert(Model model) {
-        // 初期値設定
+        // フォーム情報の新規生成
         UserRegistForm form = setupForm();
-        form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
 
+        // 初期値の設定
+        // 画面表示モードを「新規」に設定
+        form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
+        // XXX ダミー値
         form.setUserId("user01");
         form.setPassword("x");
         form.setUserNm("x");
 
-        // 格納
+        // フォーム情報の格納
         model.addAttribute(form);
 
         return PAGE_URL;
@@ -86,11 +97,15 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     public String initUpdate(UserRegistForm form,
                              @PathVariable String userId,
                              Model model) {
-        // 初期値設定
+        // TODO やり直し
+        // 画面表示モードを「更新」に設定
         form.setViewMode(UserRegistForm.VIEW_MODE_UPDATE);
 
         // 更新初期画面表示情報の取得
-        userRegistService.initUpdate(form, userId);
+        MUser mUser = userServiceSelect.getUserInfo(userId);
+
+        // 取得した情報をフォームに反映
+        BeanUtils.copyProperties(mUser, form);
 
         logger.debug("フォーム情報 -> {}", form.toString());
 
@@ -110,6 +125,8 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) {
+        // TODO やり直し
+
         logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
@@ -118,15 +135,39 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             return PAGE_URL;
         }
 
-        // 登録処理
-        userRegistService.insert(form);
+        //        /*
+        //         * ユーザマスタ
+        //         */
+        //        // ユーザマスタ登録情報の生成
+        //        MUser mUser = new MUser();
+        //        BeanUtils.copyProperties(form, mUser);
+        //
+        //        // ユーザマスタ登録処理
+        //        userService.insertUser(mUser);
+        //
+        //        /*
+        //         * ユーザ役割マスタ
+        //         */
+        //        // ユーザ役割マスタ更新情報の生成
+        //        MUserRole mUserRole = new MUserRole();
+        //        BeanUtils.copyProperties(form, mUserRole);
+        //
+        //        // ユーザ役割マスタ更新処理
+        //        userService.updateUser(mUser);
+        //
+        //        // 登録情報の生成
+        //        MUser mUser = new MUser();
+        //        BeanUtils.copyProperties(form, mUser);
+        //
+        //        // 登録処理
+        //        userService.insert(mUser);
 
         // TODO MessageResorceが使いにくい。どこかで改良。
         // TODO 完了メッセージをどこかで定数にする。
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
 
-        return redirect(ReportSearchController.MAPPING_URL, "reSearch");
+        return redirect(UserSearchController.MAPPING_URL, "reSearch");
     }
 
     /**
@@ -142,6 +183,8 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) {
+        // TODO フォームでリクエスト情報を受け取る場合に、ユーザーID等の想定外の情報まで受け取る可能性があるのが気になる。
+        // TODO やり直し
         logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
@@ -150,20 +193,10 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             return PAGE_URL;
         }
 
-        // チェックボックスを更新対象に含める
-        //@formatter:off
-        if(form.getApplicantKbn() == null) form.setApplicantKbn("");
-        if(form.getApproverKbn() == null) form.setApproverKbn("");
-        if(form.getAdminKbn() == null) form.setAdminKbn("");
-        //@formatter:on
-
-        // 更新処理
-        userRegistService.update(form);
-
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));
 
-        return redirect(ReportSearchController.MAPPING_URL, "reSearch");
+        return redirect(UserSearchController.MAPPING_URL, "reSearch");
     }
 
     /**
@@ -172,11 +205,10 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
     public String back() {
-        return redirect(ReportSearchController.MAPPING_URL, "reSearch");
+        return redirect(UserSearchController.MAPPING_URL, "reSearch");
     }
 
     // ----------------------------------------------------------------------------------------
-    // TODO やりたいことは成功。でも汚い。
     /**
      * 業務エラー（BusinessException）のエラーハンドリング
      * @param e

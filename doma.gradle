@@ -14,13 +14,13 @@ def genVersionColumnNamePattern  = 'version'
  */
 task domaGen << {
     // entity
-    def entityPackageName        = 'rms.com.doma.entity'
+    def entityPackageName        = 'rms.domain.com.entity'
     def entityOverwrite          = true
     def entityOverwriteListener  = true
     def entityUseAccessor        = true
 //    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
     // dao
-    def daoPackageName           = 'rms.com.doma.dao'
+    def daoPackageName           = 'rms.domain.com.repository'
     def daoOverwrite             = true
     // sql
     def SqlOverwrite             = true
@@ -46,30 +46,30 @@ task domaGen << {
  * 個別ソースコード自動生成
  */
 task domaGenEntity << {
-    def entityPackageName = 'src/main/java'
+    def entityPackageName = 'example'
     def entityEntityName  = 'Example'
     def entityOverwrite   = true
     def entityUseAccessor = true
     def entitySql         =
 '''
 select
-  R.applicant_id
-  , (select U.user_nm from M_USER U where R.applicant_id = U.user_id) as applicant_nm
-  , R.target_ym
-  , left(R.target_ym, 4) as target_year
-  , right(R.target_ym, 2) as target_month
-  , R.applicant_date
-  , R.status
-  , (select C.code_nm from M_CODE C where C.code_kbn = 'A001' and R.status = C.code) as status_nm
-  , R.approver1_id
-  , (select U.user_nm from M_USER U where R.approver1_id = U.user_id) as approver1_nm
-  , R.approver2_id
-  , (select U.user_nm from M_USER U where R.approver2_id = U.user_id) as approver2_nm
-  , R.approver3_id
-  , (select U.user_nm from M_USER U where R.approver3_id = U.user_id) as approver3_nm
-  , R.file_path
+	u.user_id
+	,u.user_nm
+	,u.email
+	,mr1.role_nm as role_nm1
+	,mr2.role_nm as role_nm2
+	,mr3.role_nm as role_nm3
 from
-  t_report R
+	m_user u
+	left join v_m_user_role mr1
+		on u.user_id = mr1.user_id
+		and mr1.role_id = 1
+	left join v_m_user_role mr2
+		on u.user_id = mr2.user_id
+		and mr2.role_id = 2
+	left join v_m_user_role mr3
+		on u.user_id = mr3.user_id
+		and mr3.role_id = 3
 '''
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
@@ -82,6 +82,6 @@ from
                      entityName: entityEntityName,
                      overwrite: entityOverwrite,
                      useAccessor: entityUseAccessor,
-                     sql: sql)
+                     sql: entitySql)
     }
 }
