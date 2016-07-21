@@ -1,0 +1,13 @@
+DELETE FROM M_USER_ROLE;
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', 1, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user02', 1, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user03', 1, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user04', 1, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user05', 1, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user06', 2, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user07', 2, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user08', 2, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user09', 2, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user10', 2, 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_ROLE(user_id, role_id, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user11', 3, 0, 0, now(), 'system', now(), 'system');
+commit;
