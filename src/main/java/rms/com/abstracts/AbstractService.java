@@ -1,7 +1,10 @@
 package rms.com.abstracts;
 
+import rms.com.base.UserInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,4 +20,12 @@ public abstract class AbstractService {
 
     @Autowired
     protected MessageSource message;
+
+    // TODO DIの書き方に変更予定　※Listnerクラスも
+    /**
+     * 認証情報
+     */
+    protected UserInfo getPrincipal() {
+        return (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 }

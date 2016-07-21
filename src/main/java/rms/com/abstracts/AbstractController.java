@@ -1,11 +1,8 @@
 package rms.com.abstracts;
 
-import rms.web.com.base.UserInfo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.Conventions;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 
 import org.slf4j.Logger;
@@ -23,14 +20,6 @@ public abstract class AbstractController {
 
     @Autowired
     protected MessageSource message;
-
-    // TODO いる・・・？どっちかというとサービスクラス以降にほしい？
-    /**
-     * 認証情報
-     */
-    protected UserInfo getPrincipal() {
-        return (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
 
     /**
      * リダイレクトURLの生成
