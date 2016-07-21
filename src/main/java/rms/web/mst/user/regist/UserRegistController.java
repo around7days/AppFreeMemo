@@ -4,9 +4,9 @@ import java.util.Locale;
 
 import rms.com.base.BusinessException;
 import rms.com.consts.MessageConst;
-import rms.domain.com.entity.MUser;
-import rms.domain.mst.user.service.UserServiceRegist;
-import rms.domain.mst.user.service.UserServiceSelect;
+import rms.domain.mst.user.entity.UserEntity;
+import rms.domain.mst.user.service.UserRegistService;
+import rms.domain.mst.user.service.UserSelectService;
 import rms.web.mst.user.search.UserSearchController;
 
 import org.springframework.beans.BeanUtils;
@@ -50,11 +50,11 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
 
     /** ユーザ情報取得サービス */
     @Autowired
-    UserServiceSelect userServiceSelect;
+    UserSelectService userSelectService;
 
     /** ユーザ情報登録サービス */
     @Autowired
-    UserServiceRegist userServiceRegist;
+    UserRegistService userRegistService;
 
     /** ユーザ登録画面フォーム */
     @ModelAttribute
@@ -97,15 +97,16 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
     public String initUpdate(UserRegistForm form,
                              @PathVariable String userId,
                              Model model) {
-        // TODO やり直し
         // 画面表示モードを「更新」に設定
         form.setViewMode(UserRegistForm.VIEW_MODE_UPDATE);
 
         // 更新初期画面表示情報の取得
-        MUser mUser = userServiceSelect.getUserInfo(userId);
+        UserEntity userEntity = userSelectService.getUserInfo(userId);
 
         // 取得した情報をフォームに反映
-        BeanUtils.copyProperties(mUser, form);
+        // TODO ちょい手抜きで・・・
+        BeanUtils.copyProperties(userEntity, form);
+        BeanUtils.copyProperties(userEntity.getMUser(), form);
 
         logger.debug("フォーム情報 -> {}", form.toString());
 

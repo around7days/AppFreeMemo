@@ -7,7 +7,7 @@ import java.util.Locale;
 import rms.com.base.BusinessException;
 import rms.domain.com.entity.MUser;
 import rms.domain.com.repository.MUserDao;
-import rms.domain.mst.user.repository.UserDao;
+import rms.domain.mst.user.repository.UserSelectDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,9 @@ import org.slf4j.LoggerFactory;
  * @author
  */
 @Service
-public class UserServiceRegist extends rms.com.abstracts.AbstractService {
+public class UserRegistService extends rms.com.abstracts.AbstractService {
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceRegist.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserRegistService.class);
 
     /** ユーザマスタDao */
     @Autowired
@@ -30,7 +30,7 @@ public class UserServiceRegist extends rms.com.abstracts.AbstractService {
 
     /** ユーザ情報Dao */
     @Autowired
-    UserDao userDao;
+    UserSelectDao userDao;
 
     /**
      * ユーザーマスタ新規登録処理

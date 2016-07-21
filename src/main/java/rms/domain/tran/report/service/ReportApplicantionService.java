@@ -13,7 +13,7 @@ import rms.com.base.UserInfo;
 import rms.com.consts.MCodeConst;
 import rms.domain.com.entity.TReport;
 import rms.domain.com.repository.TReportDao;
-import rms.domain.mst.user.repository.UserDao;
+import rms.domain.mst.user.repository.UserSelectDao;
 import rms.domain.tran.report.repository.ReportDao;
 import rms.web.com.utils.SelectOptionEntity;
 import rms.web.mst.user.regist.UserRegistForm;
@@ -44,7 +44,7 @@ public class ReportApplicantionService extends rms.com.abstracts.AbstractService
 
     /** ユーザ情報Dao */
     @Autowired
-    UserDao userDao;
+    UserSelectDao userDao;
 
     /** 月報情報Dao */
     @Autowired
@@ -93,8 +93,9 @@ public class ReportApplicantionService extends rms.com.abstracts.AbstractService
         // 登録用Entityの生成
         TReport entity = new TReport();
         entity.setApplicantId(userInfo.getUserId());
-        entity.setTargetYm(Integer.valueOf(form.getTargetYear() + form.getTargetMonth()));
-        entity.setApplicantDate(LocalDateTime.now());
+        entity.setTargetYear(Integer.valueOf(form.getTargetYear()));
+        entity.setTargetMonth(Integer.valueOf(form.getTargetMonth()));
+        entity.setApplicationDate(LocalDateTime.now());
         entity.setApprover1Id(form.getApprover1Id());
         entity.setApprover2Id(form.getApprover2Id());
         entity.setApprover3Id(form.getApprover3Id());

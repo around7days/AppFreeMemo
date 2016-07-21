@@ -17,7 +17,7 @@ import org.seasar.doma.jdbc.SelectOptions;
  */
 @Dao
 @ConfigAutowireable
-public interface UserDao {
+public interface UserSelectDao {
 
     /**
      * ユーザIDに紐付く役割一覧を取得
@@ -29,11 +29,9 @@ public interface UserDao {
 
     /**
      * ユーザ検索処理
-     *
-     * <pre>
+     * <p>
      * 検索条件に一致したユーザ情報を取得する。
-     * </pre>
-     *
+     * </p>
      * @param condition
      * @param options
      * @return
@@ -43,8 +41,7 @@ public interface UserDao {
                                                      SelectOptions options);
 
     /**
-     * 承認者一覧の取得<br>
-     * selectbox用
+     * 承認者一覧の取得（selectbox専用）
      * @return
      */
     @Select

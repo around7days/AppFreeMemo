@@ -78,13 +78,13 @@
 					<label for="email" class="col-sm-3 control-label">役割</label>
 					<div class="col-sm-9">
 						<label class="checkbox-inline">
-							<input type="checkbox" name="applicantKbn" id="applicantKbn" th:field="*{applicantKbn}" th:value="${T(rms.com.consts.MRoleConst).ID_1}" /> 申請者
+							<input type="checkbox" name="roleApplicantFlg" id="roleApplicantFlg" th:field="*{roleApplicantFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 申請者
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="approverKbn" id="approverKbn" th:field="*{approverKbn}" th:value="${T(rms.com.consts.MRoleConst).ID_2}" /> 承認者
+							<input type="checkbox" name="roleApproverFlg" id="roleApproverFlg" th:field="*{roleApproverFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 承認者
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="adminKbn" id="adminKbn" th:field="*{adminKbn}" th:value="${T(rms.com.consts.MRoleConst).ID_3}" /> 管理者
+							<input type="checkbox" name="roleAdminFlg" id="roleAdminFlg" th:field="*{roleAdminFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 管理者
 						</label>
 					</div>
 				</div>

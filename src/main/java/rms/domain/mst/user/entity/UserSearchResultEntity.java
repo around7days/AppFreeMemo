@@ -6,136 +6,133 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * UserSearchResultEntityクラス
  */
 @Entity
-public class UserSearchResultEntity {
+public class UserSearchResultEntity extends rms.com.abstracts.AbstractEntity {
 
-    /** userId */
+    /** ユーザID */
     @Column(name = "user_id")
     private String userId;
 
-    /** userNm */
+    /** ユーザ名 */
     @Column(name = "user_nm")
     private String userNm;
 
-    /** email */
+    /** メールアドレス */
     @Column(name = "email")
     private String email;
 
-    /** roleNm1 */
+    /** 役割名１ */
     @Column(name = "role_nm1")
     private String roleNm1;
 
-    /** roleNm2 */
+    /** 役割名２ */
     @Column(name = "role_nm2")
     private String roleNm2;
 
-    /** roleNm3 */
+    /** 役割名３ */
     @Column(name = "role_nm3")
     private String roleNm3;
 
     /**
-     * userIdを取得します.
-     * @return userId
+     * ユーザIDを取得します。
+     * @return ユーザID
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * userIdを設定します.
-     * @param userId userId
+     * ユーザIDを設定します。
+     * @param userId ユーザID
      */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
     /**
-     * userNmを取得します.
-     * @return userNm
+     * ユーザ名を取得します。
+     * @return ユーザ名
      */
     public String getUserNm() {
         return userNm;
     }
 
     /**
-     * userNmを設定します.
-     * @param userNm userNm
+     * ユーザ名を設定します。
+     * @param userNm ユーザ名
      */
     public void setUserNm(String userNm) {
         this.userNm = userNm;
     }
 
     /**
-     * emailを取得します.
-     * @return email
+     * メールアドレスを取得します。
+     * @return メールアドレス
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * emailを設定します.
-     * @param email email
+     * メールアドレスを設定します。
+     * @param email メールアドレス
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * roleNm1を取得します.
-     * @return roleNm1
+     * 役割名１を取得します。
+     * @return 役割名１
      */
     public String getRoleNm1() {
         return roleNm1;
     }
 
     /**
-     * roleNm1を設定します.
-     * @param roleNm1 roleNm1
+     * 役割名１を設定します。
+     * @param roleNm1 役割名１
      */
     public void setRoleNm1(String roleNm1) {
         this.roleNm1 = roleNm1;
     }
 
     /**
-     * roleNm2を取得します.
-     * @return roleNm2
+     * 役割名２を取得します。
+     * @return 役割名２
      */
     public String getRoleNm2() {
         return roleNm2;
     }
 
     /**
-     * roleNm2を設定します.
-     * @param roleNm2 roleNm2
+     * 役割名２を設定します。
+     * @param roleNm2 役割名２
      */
     public void setRoleNm2(String roleNm2) {
         this.roleNm2 = roleNm2;
     }
 
     /**
-     * roleNm3を取得します.
-     * @return roleNm3
+     * 役割名３を取得します。
+     * @return 役割名３
      */
     public String getRoleNm3() {
         return roleNm3;
     }
 
     /**
-     * roleNm3を設定します.
-     * @param roleNm3 roleNm3
+     * 役割名３を設定します。
+     * @param roleNm3 役割名３
      */
     public void setRoleNm3(String roleNm3) {
         this.roleNm3 = roleNm3;
     }
 
-    // TODO 自動生成オブジェクトに追記するやり方はいいのかどうか・・・
     /**
      * 役割名を返却します
      * <p>
@@ -151,9 +148,5 @@ public class UserSearchResultEntity {
         if(!StringUtils.isEmpty(roleNm3)){ join.add(roleNm3); }
         //@formatter:on
         return join.toString();
-    }
-
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

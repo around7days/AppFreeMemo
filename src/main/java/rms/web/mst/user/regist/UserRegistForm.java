@@ -48,12 +48,12 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     /** メールアドレス */
     @Email(message = "メールアドレスの{Email.message}", groups = { Insert.class, Update.class })
     private String email;
-    /** 申請者区分 */
-    private String applicantKbn;
-    /** 承認者区分 */
-    private String approverKbn;
-    /** 管理者区分 */
-    private String adminKbn;
+    /** 役割：申請者フラグ */
+    private String roleApplicantFlg;
+    /** 役割：承認者フラグ */
+    private String roleApproverFlg;
+    /** 役割：管理者フラグ */
+    private String roleAdminFlg;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -153,51 +153,51 @@ public class UserRegistForm extends rms.com.abstracts.AbstractForm {
     }
 
     /**
-     * 申請者区分を取得します。
-     * @return 申請者区分
+     * 役割：申請者フラグを取得します。
+     * @return 役割：申請者フラグ
      */
-    public String getApplicantKbn() {
-        return applicantKbn;
+    public String getRoleApplicantFlg() {
+        return roleApplicantFlg;
     }
 
     /**
-     * 申請者区分を設定します。
-     * @param applicantKbn 申請者区分
+     * 役割：申請者フラグを設定します。
+     * @param roleApplicantFlg 役割：申請者フラグ
      */
-    public void setApplicantKbn(String applicantKbn) {
-        this.applicantKbn = applicantKbn;
+    public void setRoleApplicantFlg(String roleApplicantFlg) {
+        this.roleApplicantFlg = roleApplicantFlg;
     }
 
     /**
-     * 承認者区分を取得します。
-     * @return 承認者区分
+     * 役割：承認者フラグを取得します。
+     * @return 役割：承認者フラグ
      */
-    public String getApproverKbn() {
-        return approverKbn;
+    public String getRoleApproverFlg() {
+        return roleApproverFlg;
     }
 
     /**
-     * 承認者区分を設定します。
-     * @param approverKbn 承認者区分
+     * 役割：承認者フラグを設定します。
+     * @param roleApproverFlg 役割：承認者フラグ
      */
-    public void setApproverKbn(String approverKbn) {
-        this.approverKbn = approverKbn;
+    public void setRoleApproverFlg(String roleApproverFlg) {
+        this.roleApproverFlg = roleApproverFlg;
     }
 
     /**
-     * 管理者区分を取得します。
-     * @return 管理者区分
+     * 役割：管理者フラグを取得します。
+     * @return 役割：管理者フラグ
      */
-    public String getAdminKbn() {
-        return adminKbn;
+    public String getRoleAdminFlg() {
+        return roleAdminFlg;
     }
 
     /**
-     * 管理者区分を設定します。
-     * @param adminKbn 管理者区分
+     * 役割：管理者フラグを設定します。
+     * @param roleAdminFlg 役割：管理者フラグ
      */
-    public void setAdminKbn(String adminKbn) {
-        this.adminKbn = adminKbn;
+    public void setRoleAdminFlg(String roleAdminFlg) {
+        this.roleAdminFlg = roleAdminFlg;
     }
 
 }
