@@ -1,13 +1,5 @@
 package rms.com.base;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import rms.domain.com.entity.MUser;
-import rms.domain.com.entity.VMUserRole;
-import rms.domain.com.repository.MUserDao;
-import rms.domain.mst.user.repository.UserSelectDao;
 import rms.web.login.LoginController;
 import rms.web.menu.MenuController;
 
@@ -18,13 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.stereotype.Component;
 
 /**
  * Spring Security設定クラス.
@@ -92,39 +78,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // 独自認証
         auth.userDetailsService(userDetailsService);
-    }
-}
-
-/**
- * 独自認証処理
- * @author
- */
-@Component
-class UserDetailsServiceImpl implements UserDetailsService {
-
-    @Autowired
-    private MUserDao mUserDao;
-
-    @Autowired
-    private UserSelectDao userSelectDao;
-
-    @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-
-        // ユーザ情報の取得
-        MUser mUser = mUserDao.selectById(id);
-        if (mUser == null) {
-            throw new UsernameNotFoundException("ログインに失敗しました");
-        }
-
-        // ユーザ役割情報の取得
-        List<VMUserRole> mUserRoleList = userSelectDao.userRoleListByUserId(id);
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        for (VMUserRole mUserRole : mUserRoleList) {
-            authorities.add(new SimpleGrantedAuthority(mUserRole.getRole()));
-        }
-
-        // 認証ユーザ情報の返却
-        return new UserInfo(mUser, authorities);
     }
 }
