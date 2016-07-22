@@ -59,13 +59,13 @@ public class UserSelectService extends rms.com.abstracts.AbstractService {
         // 役割
         for (VMUserRole mUserRole : mUserRoleList) {
             switch (mUserRole.getRoleId()) {
-            case MRoleConst.ID_1: //申請者
+            case MRoleConst.APPLICANT_ID: //申請者
                 userEntity.setRoleApplicantFlg(Const.FLG_ON);
                 break;
-            case MRoleConst.ID_2: //承認者
+            case MRoleConst.APPROVER_ID: //承認者
                 userEntity.setRoleApproverFlg(Const.FLG_ON);
                 break;
-            case MRoleConst.ID_3: //管理者者
+            case MRoleConst.ADMIN_ID: //管理者者
                 userEntity.setRoleAdminFlg(Const.FLG_ON);
                 break;
             }

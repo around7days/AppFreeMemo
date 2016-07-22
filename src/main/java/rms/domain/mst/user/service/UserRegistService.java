@@ -89,17 +89,17 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
 
         // 申請者の登録
         if (Const.FLG_ON.equals(applicantFlg)) {
-            mUserRole.setRoleId(MRoleConst.ID_1);
+            mUserRole.setRoleId(MRoleConst.APPLICANT_ID);
             mUserRoleDao.insert(mUserRole);
         }
         // 承認者の登録
         if (Const.FLG_ON.equals(approverFlg)) {
-            mUserRole.setRoleId(MRoleConst.ID_2);
+            mUserRole.setRoleId(MRoleConst.APPROVER_ID);
             mUserRoleDao.insert(mUserRole);
         }
         // 管理者者の登録
         if (Const.FLG_ON.equals(adminFlg)) {
-            mUserRole.setRoleId(MRoleConst.ID_3);
+            mUserRole.setRoleId(MRoleConst.ADMIN_ID);
             mUserRoleDao.insert(mUserRole);
         }
     }
