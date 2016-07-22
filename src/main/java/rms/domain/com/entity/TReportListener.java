@@ -20,8 +20,10 @@ public class TReportListener implements EntityListener<TReport> {
     private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                                                                               .getAuthentication()
                                                                               .getPrincipal();
+
     @Override
-    public void preInsert(TReport entity, PreInsertContext<TReport> context) {
+    public void preInsert(TReport entity,
+                          PreInsertContext<TReport> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getVersion() == null) entity.setVersion(0);
@@ -34,7 +36,8 @@ public class TReportListener implements EntityListener<TReport> {
     }
 
     @Override
-    public void preUpdate(TReport entity, PreUpdateContext<TReport> context) {
+    public void preUpdate(TReport entity,
+                          PreUpdateContext<TReport> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
@@ -43,18 +46,22 @@ public class TReportListener implements EntityListener<TReport> {
     }
 
     @Override
-    public void preDelete(TReport entity, PreDeleteContext<TReport> context) {
+    public void preDelete(TReport entity,
+                          PreDeleteContext<TReport> context) {
     }
 
     @Override
-    public void postInsert(TReport entity, PostInsertContext<TReport> context) {
+    public void postInsert(TReport entity,
+                           PostInsertContext<TReport> context) {
     }
 
     @Override
-    public void postUpdate(TReport entity, PostUpdateContext<TReport> context) {
+    public void postUpdate(TReport entity,
+                           PostUpdateContext<TReport> context) {
     }
 
     @Override
-    public void postDelete(TReport entity, PostDeleteContext<TReport> context) {
+    public void postDelete(TReport entity,
+                           PostDeleteContext<TReport> context) {
     }
 }

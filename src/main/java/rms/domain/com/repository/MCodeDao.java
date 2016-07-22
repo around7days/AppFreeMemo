@@ -25,7 +25,8 @@ public interface MCodeDao {
      * @return the MCode entity
      */
     @Select
-    MCode selectById(String codeKbn, String code);
+    MCode selectById(String codeKbn,
+                     String code);
 
     /**
      * 1件取得
@@ -35,7 +36,9 @@ public interface MCodeDao {
      * @return the MCode entity
      */
     @Select
-    MCode selectById(String codeKbn, String code, SelectOptions options);
+    MCode selectById(String codeKbn,
+                     String code,
+                     SelectOptions options);
 
     /**
      * 1件取得
@@ -46,7 +49,9 @@ public interface MCodeDao {
      * @return the MCode entity
      */
     @Select(ensureResult = true)
-    MCode selectByIdAndVersion(String codeKbn, String code, Integer version) throws NoResultException;
+    MCode selectByIdAndVersion(String codeKbn,
+                               String code,
+                               Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -55,7 +60,6 @@ public interface MCodeDao {
      */
     @Insert(excludeNull = true)
     int insert(MCode entity);
-
 
     /**
      * 更新（楽観的排他制御）

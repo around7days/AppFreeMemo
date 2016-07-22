@@ -136,6 +136,7 @@ public abstract class AbstractTableEntity {
         this.updId = updId;
     }
 
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

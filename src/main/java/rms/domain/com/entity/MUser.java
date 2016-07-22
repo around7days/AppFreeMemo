@@ -11,7 +11,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * MUserクラス
- * 
  */
 @Entity(listener = MUserListener.class)
 @Table(name = "m_user")
@@ -279,6 +278,7 @@ public class MUser {
         this.updId = updId;
     }
 
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

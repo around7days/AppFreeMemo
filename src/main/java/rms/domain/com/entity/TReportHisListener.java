@@ -20,8 +20,10 @@ public class TReportHisListener implements EntityListener<TReportHis> {
     private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                                                                               .getAuthentication()
                                                                               .getPrincipal();
+
     @Override
-    public void preInsert(TReportHis entity, PreInsertContext<TReportHis> context) {
+    public void preInsert(TReportHis entity,
+                          PreInsertContext<TReportHis> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getVersion() == null) entity.setVersion(0);
@@ -34,7 +36,8 @@ public class TReportHisListener implements EntityListener<TReportHis> {
     }
 
     @Override
-    public void preUpdate(TReportHis entity, PreUpdateContext<TReportHis> context) {
+    public void preUpdate(TReportHis entity,
+                          PreUpdateContext<TReportHis> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
@@ -43,18 +46,22 @@ public class TReportHisListener implements EntityListener<TReportHis> {
     }
 
     @Override
-    public void preDelete(TReportHis entity, PreDeleteContext<TReportHis> context) {
+    public void preDelete(TReportHis entity,
+                          PreDeleteContext<TReportHis> context) {
     }
 
     @Override
-    public void postInsert(TReportHis entity, PostInsertContext<TReportHis> context) {
+    public void postInsert(TReportHis entity,
+                           PostInsertContext<TReportHis> context) {
     }
 
     @Override
-    public void postUpdate(TReportHis entity, PostUpdateContext<TReportHis> context) {
+    public void postUpdate(TReportHis entity,
+                           PostUpdateContext<TReportHis> context) {
     }
 
     @Override
-    public void postDelete(TReportHis entity, PostDeleteContext<TReportHis> context) {
+    public void postDelete(TReportHis entity,
+                           PostDeleteContext<TReportHis> context) {
     }
 }

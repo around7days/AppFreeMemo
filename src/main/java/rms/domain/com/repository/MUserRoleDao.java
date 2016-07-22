@@ -25,7 +25,8 @@ public interface MUserRoleDao {
      * @return the MUserRole entity
      */
     @Select
-    MUserRole selectById(String userId, String roleId);
+    MUserRole selectById(String userId,
+                         String roleId);
 
     /**
      * 1件取得
@@ -35,7 +36,9 @@ public interface MUserRoleDao {
      * @return the MUserRole entity
      */
     @Select
-    MUserRole selectById(String userId, String roleId, SelectOptions options);
+    MUserRole selectById(String userId,
+                         String roleId,
+                         SelectOptions options);
 
     /**
      * 1件取得
@@ -46,7 +49,9 @@ public interface MUserRoleDao {
      * @return the MUserRole entity
      */
     @Select(ensureResult = true)
-    MUserRole selectByIdAndVersion(String userId, String roleId, Integer version) throws NoResultException;
+    MUserRole selectByIdAndVersion(String userId,
+                                   String roleId,
+                                   Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -55,7 +60,6 @@ public interface MUserRoleDao {
      */
     @Insert(excludeNull = true)
     int insert(MUserRole entity);
-
 
     /**
      * 更新（楽観的排他制御）

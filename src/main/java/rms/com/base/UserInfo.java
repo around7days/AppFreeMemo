@@ -1,15 +1,17 @@
 package rms.com.base;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import rms.domain.com.entity.MUser;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 認証ユーザの情報を格納するクラス
@@ -29,20 +31,17 @@ public class UserInfo extends User {
     /** ユーザ名 */
     String userNm;
 
-    /** メールアドレス */
-    String email;
-
     /**
      * コンストラクタ
      * @param user
+     * @param authorities
      */
-    public UserInfo(MUser user) {
+    public UserInfo(MUser user, Collection<GrantedAuthority> authorities) {
         // スーパークラスのユーザID、パスワードに値をセットする
         // 実際の認証はスーパークラスのユーザID、パスワードで行われる
-        super(user.getUserId(), user.getPassword(), true, true, true, true, new ArrayList<GrantedAuthority>());
+        super(user.getUserId(), user.getPassword(), authorities);
         this.userId = user.getUserId();
         this.userNm = user.getUserNm();
-        this.email = user.getEmail();
         logger.debug("ユーザ情報 -> {}", this.toString());
     }
 
@@ -63,22 +62,17 @@ public class UserInfo extends User {
     }
 
     /**
-     * メールアドレスを取得します。
-     * @return メールアドレス
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
      * ユーザIDを取得します。
-     * @deprecated IDと名称が紛らわしいので非推奨
+     * @deprecated IDと名称が紛らわしいので非推奨(UserInfo#getUserId()を仕様すること)
      * @see UserInfo#getUserId()
      */
+    @Deprecated
+    @Override
     public String getUsername() {
         return super.getUsername();
     }
 
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

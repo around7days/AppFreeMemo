@@ -20,8 +20,10 @@ public class MRoleListener implements EntityListener<MRole> {
     private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                                                                               .getAuthentication()
                                                                               .getPrincipal();
+
     @Override
-    public void preInsert(MRole entity, PreInsertContext<MRole> context) {
+    public void preInsert(MRole entity,
+                          PreInsertContext<MRole> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getVersion() == null) entity.setVersion(0);
@@ -34,7 +36,8 @@ public class MRoleListener implements EntityListener<MRole> {
     }
 
     @Override
-    public void preUpdate(MRole entity, PreUpdateContext<MRole> context) {
+    public void preUpdate(MRole entity,
+                          PreUpdateContext<MRole> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
@@ -43,18 +46,22 @@ public class MRoleListener implements EntityListener<MRole> {
     }
 
     @Override
-    public void preDelete(MRole entity, PreDeleteContext<MRole> context) {
+    public void preDelete(MRole entity,
+                          PreDeleteContext<MRole> context) {
     }
 
     @Override
-    public void postInsert(MRole entity, PostInsertContext<MRole> context) {
+    public void postInsert(MRole entity,
+                           PostInsertContext<MRole> context) {
     }
 
     @Override
-    public void postUpdate(MRole entity, PostUpdateContext<MRole> context) {
+    public void postUpdate(MRole entity,
+                           PostUpdateContext<MRole> context) {
     }
 
     @Override
-    public void postDelete(MRole entity, PostDeleteContext<MRole> context) {
+    public void postDelete(MRole entity,
+                           PostDeleteContext<MRole> context) {
     }
 }

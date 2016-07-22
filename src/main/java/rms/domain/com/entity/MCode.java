@@ -11,7 +11,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * MCodeクラス
- * 
  */
 @Entity(listener = MCodeListener.class)
 @Table(name = "m_code")
@@ -300,6 +299,7 @@ public class MCode {
         this.updId = updId;
     }
 
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

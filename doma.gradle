@@ -4,7 +4,7 @@
 def genUrl                       = 'jdbc:mysql://localhost:3306/mmsdb'
 def genUser                      = 'mms01'
 def genPassword                  = 'mms01'
-def genTableTypes                = 'TABLE'
+def genTableTypes                = 'TABLE, VIEW'
 def genTemplatePrimaryDir        = 'domaGenTemplates'
 def genVersionColumnNamePattern  = 'version'
 //def genSqlFilePattern            = 'META-INF/**/*.sql'

@@ -33,7 +33,8 @@ public interface MRoleDao {
      * @return the MRole entity
      */
     @Select
-    MRole selectById(Integer roleId, SelectOptions options);
+    MRole selectById(Integer roleId,
+                     SelectOptions options);
 
     /**
      * 1件取得
@@ -43,7 +44,8 @@ public interface MRoleDao {
      * @return the MRole entity
      */
     @Select(ensureResult = true)
-    MRole selectByIdAndVersion(Integer roleId, Integer version) throws NoResultException;
+    MRole selectByIdAndVersion(Integer roleId,
+                               Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -52,7 +54,6 @@ public interface MRoleDao {
      */
     @Insert(excludeNull = true)
     int insert(MRole entity);
-
 
     /**
      * 更新（楽観的排他制御）

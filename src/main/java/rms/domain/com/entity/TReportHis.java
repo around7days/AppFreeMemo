@@ -11,7 +11,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * TReportHisクラス
- * 
  */
 @Entity(listener = TReportHisListener.class)
 @Table(name = "t_report_his")
@@ -362,6 +361,7 @@ public class TReportHis {
         this.updId = updId;
     }
 
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

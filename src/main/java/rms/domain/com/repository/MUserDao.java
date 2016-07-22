@@ -33,7 +33,8 @@ public interface MUserDao {
      * @return the MUser entity
      */
     @Select
-    MUser selectById(String userId, SelectOptions options);
+    MUser selectById(String userId,
+                     SelectOptions options);
 
     /**
      * 1件取得
@@ -43,7 +44,8 @@ public interface MUserDao {
      * @return the MUser entity
      */
     @Select(ensureResult = true)
-    MUser selectByIdAndVersion(String userId, Integer version) throws NoResultException;
+    MUser selectByIdAndVersion(String userId,
+                               Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -52,7 +54,6 @@ public interface MUserDao {
      */
     @Insert(excludeNull = true)
     int insert(MUser entity);
-
 
     /**
      * 更新（楽観的排他制御）

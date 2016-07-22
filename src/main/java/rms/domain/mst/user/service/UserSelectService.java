@@ -7,7 +7,7 @@ import rms.com.base.SearchResultEntity;
 import rms.com.consts.Const;
 import rms.com.consts.MRoleConst;
 import rms.domain.com.entity.MUser;
-import rms.domain.com.entity.MUserRole;
+import rms.domain.com.entity.VMUserRole;
 import rms.domain.com.repository.MUserDao;
 import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
@@ -50,14 +50,14 @@ public class UserSelectService extends rms.com.abstracts.AbstractService {
         MUser mUser = mUserDao.selectById(userId);
 
         // ユーザ役割マスタ情報の取得
-        List<MUserRole> mUserRoleList = userSelectDao.userRoleListByUserId(userId);
+        List<VMUserRole> mUserRoleList = userSelectDao.userRoleListByUserId(userId);
 
         // 返却用ユーザ情報の生成
         UserEntity userEntity = new UserEntity();
         // ユーザマスタ情報
         userEntity.setMUser(mUser);
         // 役割
-        for (MUserRole mUserRole : mUserRoleList) {
+        for (VMUserRole mUserRole : mUserRoleList) {
             switch (mUserRole.getRoleId()) {
             case MRoleConst.ID_1: //申請者
                 userEntity.setRoleApplicantFlg(Const.FLG_ON);

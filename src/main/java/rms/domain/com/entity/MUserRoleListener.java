@@ -20,8 +20,10 @@ public class MUserRoleListener implements EntityListener<MUserRole> {
     private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                                                                               .getAuthentication()
                                                                               .getPrincipal();
+
     @Override
-    public void preInsert(MUserRole entity, PreInsertContext<MUserRole> context) {
+    public void preInsert(MUserRole entity,
+                          PreInsertContext<MUserRole> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getVersion() == null) entity.setVersion(0);
@@ -34,7 +36,8 @@ public class MUserRoleListener implements EntityListener<MUserRole> {
     }
 
     @Override
-    public void preUpdate(MUserRole entity, PreUpdateContext<MUserRole> context) {
+    public void preUpdate(MUserRole entity,
+                          PreUpdateContext<MUserRole> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
@@ -43,18 +46,22 @@ public class MUserRoleListener implements EntityListener<MUserRole> {
     }
 
     @Override
-    public void preDelete(MUserRole entity, PreDeleteContext<MUserRole> context) {
+    public void preDelete(MUserRole entity,
+                          PreDeleteContext<MUserRole> context) {
     }
 
     @Override
-    public void postInsert(MUserRole entity, PostInsertContext<MUserRole> context) {
+    public void postInsert(MUserRole entity,
+                           PostInsertContext<MUserRole> context) {
     }
 
     @Override
-    public void postUpdate(MUserRole entity, PostUpdateContext<MUserRole> context) {
+    public void postUpdate(MUserRole entity,
+                           PostUpdateContext<MUserRole> context) {
     }
 
     @Override
-    public void postDelete(MUserRole entity, PostDeleteContext<MUserRole> context) {
+    public void postDelete(MUserRole entity,
+                           PostDeleteContext<MUserRole> context) {
     }
 }

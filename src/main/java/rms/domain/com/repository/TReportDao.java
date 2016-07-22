@@ -26,7 +26,9 @@ public interface TReportDao {
      * @return the TReport entity
      */
     @Select
-    TReport selectById(String applicantId, Integer targetYear, Integer targetMonth);
+    TReport selectById(String applicantId,
+                       Integer targetYear,
+                       Integer targetMonth);
 
     /**
      * 1件取得
@@ -37,7 +39,10 @@ public interface TReportDao {
      * @return the TReport entity
      */
     @Select
-    TReport selectById(String applicantId, Integer targetYear, Integer targetMonth, SelectOptions options);
+    TReport selectById(String applicantId,
+                       Integer targetYear,
+                       Integer targetMonth,
+                       SelectOptions options);
 
     /**
      * 1件取得
@@ -49,7 +54,10 @@ public interface TReportDao {
      * @return the TReport entity
      */
     @Select(ensureResult = true)
-    TReport selectByIdAndVersion(String applicantId, Integer targetYear, Integer targetMonth, Integer version) throws NoResultException;
+    TReport selectByIdAndVersion(String applicantId,
+                                 Integer targetYear,
+                                 Integer targetMonth,
+                                 Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -58,7 +66,6 @@ public interface TReportDao {
      */
     @Insert(excludeNull = true)
     int insert(TReport entity);
-
 
     /**
      * 更新（楽観的排他制御）

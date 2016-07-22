@@ -3,28 +3,33 @@ package rms.domain.com.entity;
 import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
-import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * MUserRoleクラス
+ * VMUserRoleクラス
  */
-@Entity(listener = MUserRoleListener.class)
-@Table(name = "m_user_role")
-public class MUserRole {
+@Entity(listener = VMUserRoleListener.class)
+@Table(name = "v_m_user_role")
+public class VMUserRole {
 
     /** ユーザID */
-    @Id
     @Column(name = "user_id")
     private String userId;
 
     /** 役割ID */
-    @Id
     @Column(name = "role_id")
     private String roleId;
+
+    /** 役割名 */
+    @Column(name = "role_nm")
+    private String roleNm;
+
+    /** 役割 */
+    @Column(name = "role")
+    private String role;
 
     /** バージョン */
     @Version
@@ -81,6 +86,38 @@ public class MUserRole {
      */
     public void setRoleId(String roleId) {
         this.roleId = roleId;
+    }
+
+    /**
+     * 役割名を取得します.
+     * @return 役割名
+     */
+    public String getRoleNm() {
+        return roleNm;
+    }
+
+    /**
+     * 役割名を設定します.
+     * @param roleNm 役割名
+     */
+    public void setRoleNm(String roleNm) {
+        this.roleNm = roleNm;
+    }
+
+    /**
+     * 役割を取得します.
+     * @return 役割
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * 役割を設定します.
+     * @param role 役割
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**

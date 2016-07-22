@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 
 /**
- * MUserListenerクラス
+ * VMUserRoleListenerクラス
  */
-public class MUserListener implements EntityListener<MUser> {
+public class VMUserRoleListener implements EntityListener<VMUserRole> {
 
     // 認証情報
     private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
@@ -22,8 +22,8 @@ public class MUserListener implements EntityListener<MUser> {
                                                                               .getPrincipal();
 
     @Override
-    public void preInsert(MUser entity,
-                          PreInsertContext<MUser> context) {
+    public void preInsert(VMUserRole entity,
+                          PreInsertContext<VMUserRole> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getVersion() == null) entity.setVersion(0);
@@ -36,8 +36,8 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preUpdate(MUser entity,
-                          PreUpdateContext<MUser> context) {
+    public void preUpdate(VMUserRole entity,
+                          PreUpdateContext<VMUserRole> context) {
         //@formatter:off
         LocalDateTime now = LocalDateTime.now();
         if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
@@ -46,22 +46,22 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preDelete(MUser entity,
-                          PreDeleteContext<MUser> context) {
+    public void preDelete(VMUserRole entity,
+                          PreDeleteContext<VMUserRole> context) {
     }
 
     @Override
-    public void postInsert(MUser entity,
-                           PostInsertContext<MUser> context) {
+    public void postInsert(VMUserRole entity,
+                           PostInsertContext<VMUserRole> context) {
     }
 
     @Override
-    public void postUpdate(MUser entity,
-                           PostUpdateContext<MUser> context) {
+    public void postUpdate(VMUserRole entity,
+                           PostUpdateContext<VMUserRole> context) {
     }
 
     @Override
-    public void postDelete(MUser entity,
-                           PostDeleteContext<MUser> context) {
+    public void postDelete(VMUserRole entity,
+                           PostDeleteContext<VMUserRole> context) {
     }
 }
