@@ -2,7 +2,7 @@ package rms.domain.mst.user.repository;
 
 import java.util.List;
 
-import rms.domain.com.entity.VMUserRole;
+import rms.domain.com.entity.MUserRole;
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
 import rms.web.com.utils.SelectOptionEntity;
@@ -25,7 +25,7 @@ public interface UserSelectDao {
      * @return the MUserRole entity
      */
     @Select
-    List<VMUserRole> userRoleListByUserId(String userId);
+    List<MUserRole> userRoleListByUserId(String userId);
 
     /**
      * ユーザ検索処理

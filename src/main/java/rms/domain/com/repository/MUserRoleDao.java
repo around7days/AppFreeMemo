@@ -21,36 +21,36 @@ public interface MUserRoleDao {
     /**
      * 1件取得
      * @param userId
-     * @param roleId
+     * @param role
      * @return the MUserRole entity
      */
     @Select
     MUserRole selectById(String userId,
-                         String roleId);
+                         String role);
 
     /**
      * 1件取得
      * @param userId
-     * @param roleId
+     * @param role
      * @param options
      * @return the MUserRole entity
      */
     @Select
     MUserRole selectById(String userId,
-                         String roleId,
+                         String role,
                          SelectOptions options);
 
     /**
      * 1件取得
      * @param userId
-     * @param roleId
+     * @param role
      * @param version
      * @throws NoResultException
      * @return the MUserRole entity
      */
     @Select(ensureResult = true)
     MUserRole selectByIdAndVersion(String userId,
-                                   String roleId,
+                                   String role,
                                    Integer version) throws NoResultException;
 
     /**

@@ -19,17 +19,13 @@ public class VMUserRole {
     @Column(name = "user_id")
     private String userId;
 
-    /** 役割ID */
-    @Column(name = "role_id")
-    private String roleId;
+    /** 役割 */
+    @Column(name = "role")
+    private String role;
 
     /** 役割名 */
     @Column(name = "role_nm")
     private String roleNm;
-
-    /** 役割 */
-    @Column(name = "role")
-    private String role;
 
     /** バージョン */
     @Version
@@ -73,19 +69,19 @@ public class VMUserRole {
     }
 
     /**
-     * 役割IDを取得します.
-     * @return 役割ID
+     * 役割を取得します.
+     * @return 役割
      */
-    public String getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
     /**
-     * 役割IDを設定します.
-     * @param roleId 役割ID
+     * 役割を設定します.
+     * @param role 役割
      */
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**
@@ -102,22 +98,6 @@ public class VMUserRole {
      */
     public void setRoleNm(String roleNm) {
         this.roleNm = roleNm;
-    }
-
-    /**
-     * 役割を取得します.
-     * @return 役割
-     */
-    public String getRole() {
-        return role;
-    }
-
-    /**
-     * 役割を設定します.
-     * @param role 役割
-     */
-    public void setRole(String role) {
-        this.role = role;
     }
 
     /**

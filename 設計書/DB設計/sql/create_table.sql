@@ -1,6 +1,6 @@
 -- Project Name : 月報管理システム
--- Date/Time    : 2016/07/21 10:01:00
--- Author       : 9EAFP
+-- Date/Time    : 2016/07/23 0:57:20
+-- Author       : 7days
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
@@ -28,14 +28,12 @@ create table T_REPORT_HIS (
   , constraint T_REPORT_HIS_PKC primary key (applicant_id,target_year,target_month,seq)
 ) comment '月報管理テーブル（履歴）' ;
 
-
 -- 役割マスタ
 drop table if exists M_ROLE cascade;
 
 create table M_ROLE (
-  role_id int not null comment '役割ID'
+  role varchar(40) not null comment '役割'
   , role_nm varchar(255) not null comment '役割名'
-  , role varchar(40) not null comment '役割'
   , description varchar(255) comment '説明'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
@@ -43,23 +41,22 @@ create table M_ROLE (
   , ins_id varchar(20) not null comment '登録ID'
   , upd_date timestamp not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
-  , constraint M_ROLE_PKC primary key (role_id)
+  , constraint M_ROLE_PKC primary key (role)
 ) comment '役割マスタ' ;
-
 
 -- ユーザ役割マスタ
 drop table if exists M_USER_ROLE cascade;
 
 create table M_USER_ROLE (
   user_id varchar(20) not null comment 'ユーザID'
-  , role_id varchar(20) not null comment '役割ID'
+  , role varchar(40) not null comment '役割'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
   , ins_date timestamp not null comment '登録日時'
   , ins_id varchar(20) not null comment '登録ID'
   , upd_date timestamp not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
-  , constraint M_USER_ROLE_PKC primary key (user_id,role_id)
+  , constraint M_USER_ROLE_PKC primary key (user_id,role)
 ) comment 'ユーザ役割マスタ' ;
 
 -- コードマスタ

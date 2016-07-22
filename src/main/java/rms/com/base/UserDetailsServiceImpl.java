@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import rms.domain.com.entity.MUser;
-import rms.domain.com.entity.VMUserRole;
+import rms.domain.com.entity.MUserRole;
 import rms.domain.com.repository.MUserDao;
 import rms.domain.mst.user.repository.UserSelectDao;
 
@@ -40,9 +40,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         // ユーザ役割情報の取得
-        List<VMUserRole> mUserRoleList = userSelectDao.userRoleListByUserId(id);
+        List<MUserRole> mUserRoleList = userSelectDao.userRoleListByUserId(id);
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        for (VMUserRole mUserRole : mUserRoleList) {
+        for (MUserRole mUserRole : mUserRoleList) {
             authorities.add(new SimpleGrantedAuthority(mUserRole.getRole()));
         }
 

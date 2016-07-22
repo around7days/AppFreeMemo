@@ -21,10 +21,10 @@ public class MUserRole {
     @Column(name = "user_id")
     private String userId;
 
-    /** 役割ID */
+    /** 役割 */
     @Id
-    @Column(name = "role_id")
-    private String roleId;
+    @Column(name = "role")
+    private String role;
 
     /** バージョン */
     @Version
@@ -68,19 +68,19 @@ public class MUserRole {
     }
 
     /**
-     * 役割IDを取得します.
-     * @return 役割ID
+     * 役割を取得します.
+     * @return 役割
      */
-    public String getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
     /**
-     * 役割IDを設定します.
-     * @param roleId 役割ID
+     * 役割を設定します.
+     * @param role 役割
      */
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**

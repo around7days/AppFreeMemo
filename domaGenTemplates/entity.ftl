@@ -90,6 +90,7 @@ public class <#if entityPrefix??>${entityPrefix}</#if>${simpleName}<#if supercla
   </#list>
 
 </#if>
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

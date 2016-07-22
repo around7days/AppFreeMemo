@@ -16,18 +16,14 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table(name = "m_role")
 public class MRole {
 
-    /** 役割ID */
+    /** 役割 */
     @Id
-    @Column(name = "role_id")
-    private Integer roleId;
+    @Column(name = "role")
+    private String role;
 
     /** 役割名 */
     @Column(name = "role_nm")
     private String roleNm;
-
-    /** 役割 */
-    @Column(name = "role")
-    private String role;
 
     /** 説明 */
     @Column(name = "description")
@@ -59,19 +55,19 @@ public class MRole {
     private String updId;
 
     /**
-     * 役割IDを取得します.
-     * @return 役割ID
+     * 役割を取得します.
+     * @return 役割
      */
-    public Integer getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
     /**
-     * 役割IDを設定します.
-     * @param roleId 役割ID
+     * 役割を設定します.
+     * @param role 役割
      */
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**
@@ -88,22 +84,6 @@ public class MRole {
      */
     public void setRoleNm(String roleNm) {
         this.roleNm = roleNm;
-    }
-
-    /**
-     * 役割を取得します.
-     * @return 役割
-     */
-    public String getRole() {
-        return role;
-    }
-
-    /**
-     * 役割を設定します.
-     * @param role 役割
-     */
-    public void setRole(String role) {
-        this.role = role;
     }
 
     /**

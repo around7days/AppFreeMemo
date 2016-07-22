@@ -5,7 +5,7 @@ FROM
   m_user A
   inner join m_user_role B
     on A.user_id = B.user_id
-    and B.role_id = 1
+    and B.role = 'ROLE_APPROVER'
 WHERE
   A.del_flg = 0
 ORDER BY

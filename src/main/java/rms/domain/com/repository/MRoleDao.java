@@ -20,31 +20,31 @@ public interface MRoleDao {
 
     /**
      * 1件取得
-     * @param roleId
+     * @param role
      * @return the MRole entity
      */
     @Select
-    MRole selectById(Integer roleId);
+    MRole selectById(String role);
 
     /**
      * 1件取得
-     * @param roleId
+     * @param role
      * @param options
      * @return the MRole entity
      */
     @Select
-    MRole selectById(Integer roleId,
+    MRole selectById(String role,
                      SelectOptions options);
 
     /**
      * 1件取得
-     * @param roleId
+     * @param role
      * @param version
      * @throws NoResultException
      * @return the MRole entity
      */
     @Select(ensureResult = true)
-    MRole selectByIdAndVersion(Integer roleId,
+    MRole selectByIdAndVersion(String role,
                                Integer version) throws NoResultException;
 
     /**
