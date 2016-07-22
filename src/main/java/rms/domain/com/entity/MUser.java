@@ -34,6 +34,18 @@ public class MUser {
     @Column(name = "email")
     private String email;
 
+    /** 承認者１ID */
+    @Column(name = "approver1_id")
+    private String approver1Id;
+
+    /** 承認者２ID */
+    @Column(name = "approver2_id")
+    private String approver2Id;
+
+    /** 承認者３ID */
+    @Column(name = "approver3_id")
+    private String approver3Id;
+
     /** バージョン */
     @Version
     @Column(name = "version")
@@ -121,6 +133,54 @@ public class MUser {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * 承認者１IDを取得します.
+     * @return 承認者１ID
+     */
+    public String getApprover1Id() {
+        return approver1Id;
+    }
+
+    /**
+     * 承認者１IDを設定します.
+     * @param approver1Id 承認者１ID
+     */
+    public void setApprover1Id(String approver1Id) {
+        this.approver1Id = approver1Id;
+    }
+
+    /**
+     * 承認者２IDを取得します.
+     * @return 承認者２ID
+     */
+    public String getApprover2Id() {
+        return approver2Id;
+    }
+
+    /**
+     * 承認者２IDを設定します.
+     * @param approver2Id 承認者２ID
+     */
+    public void setApprover2Id(String approver2Id) {
+        this.approver2Id = approver2Id;
+    }
+
+    /**
+     * 承認者３IDを取得します.
+     * @return 承認者３ID
+     */
+    public String getApprover3Id() {
+        return approver3Id;
+    }
+
+    /**
+     * 承認者３IDを設定します.
+     * @param approver3Id 承認者３ID
+     */
+    public void setApprover3Id(String approver3Id) {
+        this.approver3Id = approver3Id;
     }
 
     /**
