@@ -54,7 +54,7 @@ public class LoginController extends rms.com.abstracts.AbstractController {
 
     /**
      * ログイン処理<br>
-     * ログイン認証/ログアウト処理はSecurityConfigで実施
+     * 備考：ログイン認証/ログアウト処理はSecurityConfigで実施
      * @param form
      * @param bindingResult
      * @param model
@@ -76,7 +76,7 @@ public class LoginController extends rms.com.abstracts.AbstractController {
 
     /**
      * ログイン失敗処理<br>
-     * SpringConfigで設定したログインできなかった場合の処理を定義する
+     * 備考：SpringConfigで設定したログインできなかった場合の処理を定義する
      * @param form
      * @param bindingResult
      * @param model

@@ -33,10 +33,32 @@ public class UserRegistService extends rms.com.abstracts.AbstractService {
     UserSelectDao userDao;
 
     /**
-     * ユーザーマスタ新規登録処理
+     * ユーザマスタ新規登録処理<br>
+     * 説明：ユーザIDの重複チェックを行い、問題なければ新規登録を行います。
      * @param mUser
      */
     public void insertUserMst(MUser mUser) {
+        logger.debug("登録情報 -> {}", mUser.toString());
+
+        // TODO 存在チェック用の共通SQLがほしい（削除フラグ判断込みで）
+        // ユーザIDの重複チェック
+        if (mUserDao.selectById(mUser.getUserId()) != null) {
+            // TODO 汚い・・・
+            List<Object> params = new ArrayList<Object>();
+            params.add("ユーザIDが");
+            throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
+        }
+
+        // 登録処理
+        mUserDao.insert(mUser);
+    }
+
+    /**
+     * ユーザ役割マスタ登録処理<br>
+     * 説明：ユーザに紐付く役割マスタを全て削除してから新規登録を行います。
+     * @param mUser
+     */
+    public void deleteInsertUserRoleMst(MUser mUser) {
         logger.debug("登録情報 -> {}", mUser.toString());
 
         // TODO 存在チェック用の共通SQLがほしい（削除フラグ判断込みで）

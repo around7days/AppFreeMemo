@@ -118,7 +118,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
     }
 
     /**
-     * 前ページング処理<br>
+     * 前ページング処理
      * @param form
      * @param model
      * @return
@@ -133,7 +133,7 @@ public class ReportSearchController extends rms.com.abstracts.AbstractController
     }
 
     /**
-     * 次ページング処理<br>
+     * 次ページング処理
      * @param form
      * @param model
      * @return

@@ -28,7 +28,8 @@ repositories {
 }
 
 javadoc {
-    options.charSet = 'UTF-8'
+    destinationDir   = new File("${projectDir}\\docs\\javadoc")
+    options.charSet  = 'UTF-8'
     options.encoding = 'UTF-8'
 }
 

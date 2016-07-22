@@ -64,7 +64,7 @@ public interface TReportHisDao {
 
 
     /**
-     * 更新（楽観的排他制御）<br>
+     * 更新（楽観的排他制御）
      * @param entity
      * @return affected rows
      * @throws OptimisticLockException

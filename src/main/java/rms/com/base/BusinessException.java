@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 業務ロジックチェックException<br>
- * 業務上想定内のエラー発生時に使用する。
+ * 説明：業務上想定内のエラー発生時に使用する。
  * @author
  */
 @Component

@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import rms.com.base.BusinessException;
 import rms.com.consts.MessageConst;
+import rms.domain.com.entity.MUser;
 import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.service.UserRegistService;
 import rms.domain.mst.user.service.UserSelectService;
@@ -77,7 +78,6 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
         // XXX ダミー値
         form.setUserId("user01");
-        form.setPassword("x");
         form.setUserNm("x");
 
         // フォーム情報の格納
@@ -136,15 +136,15 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             return PAGE_URL;
         }
 
-        //        /*
-        //         * ユーザマスタ
-        //         */
-        //        // ユーザマスタ登録情報の生成
-        //        MUser mUser = new MUser();
-        //        BeanUtils.copyProperties(form, mUser);
-        //
-        //        // ユーザマスタ登録処理
-        //        userService.insertUser(mUser);
+        /*
+         * ユーザマスタ
+         */
+        // ユーザマスタ登録情報の生成
+        MUser mUser = new MUser();
+        BeanUtils.copyProperties(form, mUser);
+
+        // ユーザマスタ登録処理
+        userRegistService.insertUserMst(mUser);
         //
         //        /*
         //         * ユーザ役割マスタ
