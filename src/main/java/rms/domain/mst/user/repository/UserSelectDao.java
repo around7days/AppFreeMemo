@@ -13,7 +13,7 @@ import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.SelectOptions;
 
 /**
- * ユーザ一覧画面Dao
+ * ユーザ情報取得Dao
  */
 @Dao
 @ConfigAutowireable

@@ -71,6 +71,8 @@ public class UserSelectService extends rms.com.abstracts.AbstractService {
             }
         }
 
+        logger.debug("取得情報 -> {}", userEntity.toString());
+
         return userEntity;
     }
 
@@ -95,7 +97,7 @@ public class UserSelectService extends rms.com.abstracts.AbstractService {
         resultList.forEach(result -> logger.debug(result.toString()));
 
         // 検索結果格納
-        SearchResultEntity<UserSearchResultEntity> searchResultEntity = new SearchResultEntity<UserSearchResultEntity>();
+        SearchResultEntity<UserSearchResultEntity> searchResultEntity = new SearchResultEntity<>();
         searchResultEntity.setResultList(resultList);
         searchResultEntity.setCount(options.getCount());
 

@@ -126,8 +126,6 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) {
-        // TODO やり直し
-
         logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
@@ -142,26 +140,17 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
         // ユーザマスタ登録情報の生成
         MUser mUser = new MUser();
         BeanUtils.copyProperties(form, mUser);
-
         // ユーザマスタ登録処理
         userRegistService.insertUserMst(mUser);
-        //
-        //        /*
-        //         * ユーザ役割マスタ
-        //         */
-        //        // ユーザ役割マスタ更新情報の生成
-        //        MUserRole mUserRole = new MUserRole();
-        //        BeanUtils.copyProperties(form, mUserRole);
-        //
-        //        // ユーザ役割マスタ更新処理
-        //        userService.updateUser(mUser);
-        //
-        //        // 登録情報の生成
-        //        MUser mUser = new MUser();
-        //        BeanUtils.copyProperties(form, mUser);
-        //
-        //        // 登録処理
-        //        userService.insert(mUser);
+
+        /*
+         * ユーザ役割マスタ
+         */
+        // ユーザ役割マスタ登録処理
+        userRegistService.deleteInsertUserRoleMst(form.getUserId(),
+                                                  form.getRoleApplicantFlg(),
+                                                  form.getRoleApproverFlg(),
+                                                  form.getRoleAdminFlg());
 
         // TODO MessageResorceが使いにくい。どこかで改良。
         // TODO 完了メッセージをどこかで定数にする。
@@ -185,7 +174,6 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
                          RedirectAttributes redirectAttr,
                          Model model) {
         // TODO フォームでリクエスト情報を受け取る場合に、ユーザーID等の想定外の情報まで受け取る可能性があるのが気になる。
-        // TODO やり直し
         logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
@@ -193,6 +181,24 @@ public class UserRegistController extends rms.com.abstracts.AbstractController {
             logger.debug(bindingResult.getAllErrors().toString());
             return PAGE_URL;
         }
+
+        /*
+         * ユーザマスタ
+         */
+        // ユーザマスタ更新情報の生成
+        MUser mUser = new MUser();
+        BeanUtils.copyProperties(form, mUser);
+        // ユーザマスタ登録処理
+        userRegistService.updateUserMst(mUser);
+
+        /*
+         * ユーザ役割マスタ
+         */
+        // ユーザ役割マスタ登録処理
+        userRegistService.deleteInsertUserRoleMst(form.getUserId(),
+                                                  form.getRoleApplicantFlg(),
+                                                  form.getRoleApproverFlg(),
+                                                  form.getRoleAdminFlg());
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));
