@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * ログイン画面フォーム
  * @author
  */
-public class LoginForm extends rms.com.abstracts.AbstractForm {
+public class LoginForm extends rms.web.com.abstracts.AbstractForm {
 
     /** ユーザID */
     @NotEmpty(message = "ユーザIDは{NotEmpty.message}")

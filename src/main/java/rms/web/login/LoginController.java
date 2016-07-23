@@ -1,6 +1,6 @@
 package rms.web.login;
 
-import rms.com.base.SecurityConfig;
+import rms.web.base.SecurityConfig;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  */
 @Controller
 @SessionAttributes(types = LoginForm.class)
-public class LoginController extends rms.com.abstracts.AbstractController {
+public class LoginController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);

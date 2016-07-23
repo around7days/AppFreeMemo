@@ -2,14 +2,14 @@ package rms.web.tran.report.search;
 
 import java.util.List;
 
-import rms.com.base.PageInfo;
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
+import rms.web.com.utils.PageInfo;
 
 /**
  * 月報状況一覧画面フォーム
  * @author
  */
-public class ReportSearchForm extends rms.com.abstracts.AbstractForm {
+public class ReportSearchForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */

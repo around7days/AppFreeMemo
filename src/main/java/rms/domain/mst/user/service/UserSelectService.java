@@ -2,8 +2,6 @@ package rms.domain.mst.user.service;
 
 import java.util.List;
 
-import rms.com.base.PageInfo;
-import rms.com.base.SearchResultEntity;
 import rms.com.consts.Const;
 import rms.com.consts.MRoleConst;
 import rms.domain.com.entity.MUser;
@@ -13,7 +11,9 @@ import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
 import rms.domain.mst.user.repository.UserSelectDao;
-import rms.web.com.utils.SelectOptionsUtil;
+import rms.web.base.SearchResultEntity;
+import rms.web.com.utils.PageInfo;
+import rms.web.com.utils.SelectOptionsUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * @author
  */
 @Service
-public class UserSelectService extends rms.com.abstracts.AbstractService {
+public class UserSelectService extends rms.domain.com.abstracts.AbstractService {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSelectService.class);
 
@@ -88,7 +88,7 @@ public class UserSelectService extends rms.com.abstracts.AbstractService {
         logger.debug("ページ情報 -> {}", pageInfo.toString());
 
         // ページング設定
-        SelectOptions options = SelectOptionsUtil.get(pageInfo);
+        SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
         List<UserSearchResultEntity> resultList = userSelectDao.userListByCondition(condition, options);

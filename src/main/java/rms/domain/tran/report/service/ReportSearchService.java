@@ -2,11 +2,11 @@ package rms.domain.tran.report.service;
 
 import java.util.List;
 
-import rms.com.base.PageInfo;
 import rms.domain.com.repository.TReportDao;
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.repository.ReportDao;
-import rms.web.com.utils.SelectOptionsUtil;
+import rms.web.com.utils.PageInfo;
+import rms.web.com.utils.SelectOptionsUtils;
 import rms.web.tran.report.search.ReportSearchConditionForm;
 import rms.web.tran.report.search.ReportSearchForm;
 
@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * @author
  */
 @Service
-public class ReportSearchService extends rms.com.abstracts.AbstractService {
+public class ReportSearchService extends rms.domain.com.abstracts.AbstractService {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportSearchService.class);
@@ -53,7 +53,7 @@ public class ReportSearchService extends rms.com.abstracts.AbstractService {
     public void search(ReportSearchForm form) {
         // ページング設定
         PageInfo pageInfo = form.getPageInfo();
-        SelectOptions options = SelectOptionsUtil.get(pageInfo);
+        SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
         List<ReportSearchConditionEntity> resultList = reportDao.searchReport(form.getCondition(), options);

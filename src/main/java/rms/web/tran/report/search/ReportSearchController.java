@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = ReportSearchForm.class)
-public class ReportSearchController extends rms.com.abstracts.AbstractController {
+public class ReportSearchController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportSearchController.class);

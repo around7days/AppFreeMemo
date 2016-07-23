@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
  * @author
  */
 @Service
-public class UserRegistService extends rms.com.abstracts.AbstractService {
+public class UserRegistService extends rms.domain.com.abstracts.AbstractService {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistService.class);
 

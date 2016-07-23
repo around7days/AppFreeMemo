@@ -3,9 +3,9 @@ package rms.web.tran.report.approval;
 import java.io.IOException;
 import java.util.Locale;
 
-import rms.com.base.UserInfo;
 import rms.com.consts.MessageConst;
 import rms.domain.tran.report.service.ReportApprovalService;
+import rms.web.base.UserInfo;
 import rms.web.menu.MenuController;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = ReportApprovalForm.class)
-public class ReportApprovalController extends rms.com.abstracts.AbstractController {
+public class ReportApprovalController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApprovalController.class);

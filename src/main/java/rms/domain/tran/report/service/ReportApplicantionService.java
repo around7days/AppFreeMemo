@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import rms.com.base.UserInfo;
 import rms.com.consts.MCodeConst;
 import rms.domain.com.entity.TReport;
 import rms.domain.com.repository.TReportDao;
 import rms.domain.mst.user.repository.UserSelectDao;
 import rms.domain.tran.report.repository.ReportDao;
+import rms.web.base.UserInfo;
 import rms.web.com.utils.SelectOptionEntity;
 import rms.web.mst.user.regist.UserRegistForm;
 import rms.web.tran.report.applicantion.ReportApplicantionForm;
@@ -33,7 +33,7 @@ import org.thymeleaf.util.StringUtils;
  * @author
  */
 @Service
-public class ReportApplicantionService extends rms.com.abstracts.AbstractService {
+public class ReportApplicantionService extends rms.domain.com.abstracts.AbstractService {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionService.class);

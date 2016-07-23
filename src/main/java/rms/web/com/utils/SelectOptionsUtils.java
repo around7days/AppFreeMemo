@@ -1,14 +1,12 @@
 package rms.web.com.utils;
 
-import rms.com.base.PageInfo;
-
 import org.seasar.doma.jdbc.SelectOptions;
 
 /**
  * SelectOptionsUtilクラス
  * @author
  */
-public class SelectOptionsUtil {
+public class SelectOptionsUtils {
 
     /**
      * ページ情報からSelectOptionsを生成

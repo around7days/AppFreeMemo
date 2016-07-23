@@ -1,11 +1,11 @@
 package rms.domain.tran.report.service;
 
-import rms.com.base.UserInfo;
 import rms.com.consts.MCodeConst;
 import rms.domain.com.entity.TReport;
 import rms.domain.com.repository.TReportDao;
 import rms.domain.tran.report.entity.ReportApprovalEntity;
 import rms.domain.tran.report.repository.ReportDao;
+import rms.web.base.UserInfo;
 import rms.web.tran.report.approval.ReportApprovalForm;
 
 import org.springframework.beans.BeanUtils;
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * @author
  */
 @Service
-public class ReportApprovalService extends rms.com.abstracts.AbstractService {
+public class ReportApprovalService extends rms.domain.com.abstracts.AbstractService {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApprovalService.class);

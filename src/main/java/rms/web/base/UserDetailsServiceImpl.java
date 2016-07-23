@@ -1,4 +1,4 @@
-package rms.com.base;
+package rms.web.base;
 
 import java.util.ArrayList;
 import java.util.Collection;

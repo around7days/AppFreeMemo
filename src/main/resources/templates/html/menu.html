@@ -51,7 +51,9 @@
 					<button type="submit" name="t001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報状況一覧</button>
 					<button type="submit" name="t002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
 					<button type="submit" name="t003" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認</button>
-					<button type="submit" name="e001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　Exception</button>
+					<div sec:authorize="${hasRole(T(rms.com.consts.MRoleConst).ADMIN)}">
+						<button type="submit" name="e001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　Exception</button>
+					</div>
 				</div>
 			</div><!-- /メニュー -->
 

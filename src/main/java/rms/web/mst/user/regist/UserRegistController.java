@@ -38,7 +38,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = UserRegistForm.class)
-public class UserRegistController extends rms.com.abstracts.AbstractController {
+public class UserRegistController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistController.class);

@@ -1,6 +1,6 @@
-package rms.com.abstracts;
+package rms.domain.com.abstracts;
 
-import rms.com.base.UserInfo;
+import rms.web.base.UserInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

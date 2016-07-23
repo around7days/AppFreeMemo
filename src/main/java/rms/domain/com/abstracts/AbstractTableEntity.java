@@ -1,4 +1,4 @@
-package rms.com.abstracts;
+package rms.domain.com.abstracts;
 
 import java.time.LocalDateTime;
 

@@ -7,7 +7,7 @@ import org.seasar.doma.Entity;
  * @author
  */
 @Entity
-public class SelectOptionEntity extends rms.com.abstracts.AbstractTableEntity {
+public class SelectOptionEntity extends rms.domain.com.abstracts.AbstractTableEntity {
 
     /** 区切り文字 */
     private static final String DELIMITER = " - ";

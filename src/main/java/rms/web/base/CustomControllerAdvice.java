@@ -1,4 +1,4 @@
-package rms.com.base;
+package rms.web.base;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;

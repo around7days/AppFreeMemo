@@ -1,4 +1,4 @@
-package rms.com.abstracts;
+package rms.web.com.abstracts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

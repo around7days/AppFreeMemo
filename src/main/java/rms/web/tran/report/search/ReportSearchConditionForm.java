@@ -4,7 +4,7 @@ package rms.web.tran.report.search;
  * 月報状況一覧（検索条件）画面フォーム
  * @author
  */
-public class ReportSearchConditionForm extends rms.com.abstracts.AbstractForm {
+public class ReportSearchConditionForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 申請者ID */

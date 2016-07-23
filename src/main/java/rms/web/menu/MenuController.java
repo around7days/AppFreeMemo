@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @SessionAttributes(types = MenuForm.class)
-public class MenuController extends rms.com.abstracts.AbstractController {
+public class MenuController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
     @SuppressWarnings("unused")

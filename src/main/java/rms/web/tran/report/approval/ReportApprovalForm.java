@@ -4,7 +4,7 @@ package rms.web.tran.report.approval;
  * 月報承認画面フォーム
  * @author
  */
-public class ReportApprovalForm extends rms.com.abstracts.AbstractForm {
+public class ReportApprovalForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 排他制御用 ----------------------------------------------------------- */
     /** バージョン */

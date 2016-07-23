@@ -3,9 +3,9 @@ package rms.web.tran.report.applicantion;
 import java.io.IOException;
 import java.util.Locale;
 
-import rms.com.base.UserInfo;
 import rms.com.consts.MessageConst;
 import rms.domain.tran.report.service.ReportApplicantionService;
+import rms.web.base.UserInfo;
 import rms.web.menu.MenuController;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = ReportApplicantionForm.class)
-public class ReportApplicantionController extends rms.com.abstracts.AbstractController {
+public class ReportApplicantionController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionController.class);

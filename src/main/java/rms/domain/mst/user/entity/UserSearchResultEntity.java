@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
  * UserSearchResultEntityクラス
  */
 @Entity
-public class UserSearchResultEntity extends rms.com.abstracts.AbstractEntity {
+public class UserSearchResultEntity extends rms.domain.com.abstracts.AbstractEntity {
 
     /** ユーザID */
     @Column(name = "user_id")

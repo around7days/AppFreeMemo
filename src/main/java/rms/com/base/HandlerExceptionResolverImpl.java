@@ -32,7 +32,7 @@ public class HandlerExceptionResolverImpl implements HandlerExceptionResolver {
     //        return 0;
     //    }
 
-    // TODO このクラスの扱いが問題ないのか気になる
+    // TODO このクラスの扱いが問題ないのか気になる。画面を表示しようとしてる時点でWebに依存している
     @Override
     public ModelAndView resolveException(HttpServletRequest request,
                                          HttpServletResponse response,

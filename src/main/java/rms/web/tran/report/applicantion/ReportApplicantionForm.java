@@ -12,7 +12,7 @@ import rms.web.com.utils.SelectOptionEntity;
  * 月報申請画面フォーム
  * @author
  */
-public class ReportApplicantionForm extends rms.com.abstracts.AbstractForm {
+public class ReportApplicantionForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 入力チェック宣言 ----------------------------------------------------- */
     //@formatter:off

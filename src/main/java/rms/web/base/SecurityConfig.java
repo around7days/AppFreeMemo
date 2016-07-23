@@ -1,4 +1,4 @@
-package rms.com.base;
+package rms.web.base;
 
 import rms.web.login.LoginController;
 import rms.web.menu.MenuController;

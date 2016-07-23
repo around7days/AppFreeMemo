@@ -1,4 +1,4 @@
-package rms.com.base;
+package rms.web.base;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;

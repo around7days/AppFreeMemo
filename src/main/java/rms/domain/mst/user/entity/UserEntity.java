@@ -6,7 +6,7 @@ import rms.domain.com.entity.MUser;
  * ユーザ情報Entity
  * @author
  */
-public class UserEntity extends rms.com.abstracts.AbstractEntity {
+public class UserEntity extends rms.domain.com.abstracts.AbstractEntity {
 
     /** ユーザマスタ情報 */
     private MUser MUser;

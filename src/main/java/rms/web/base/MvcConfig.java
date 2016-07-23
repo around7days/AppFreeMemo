@@ -1,4 +1,4 @@
-package rms.com.base;
+package rms.web.base;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

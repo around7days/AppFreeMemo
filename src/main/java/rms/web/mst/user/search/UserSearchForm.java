@@ -2,8 +2,8 @@ package rms.web.mst.user.search;
 
 import java.util.List;
 
-import rms.com.base.PageInfo;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
+import rms.web.com.utils.PageInfo;
 
 import javax.validation.Valid;
 
@@ -11,7 +11,7 @@ import javax.validation.Valid;
  * ユーザ一覧画面フォーム
  * @author
  */
-public class UserSearchForm extends rms.com.abstracts.AbstractForm {
+public class UserSearchForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */

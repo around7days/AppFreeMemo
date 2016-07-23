@@ -1,10 +1,10 @@
 package rms.web.mst.user.search;
 
-import rms.com.base.PageInfo;
-import rms.com.base.SearchResultEntity;
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
 import rms.domain.mst.user.service.UserSelectService;
+import rms.web.base.SearchResultEntity;
+import rms.web.com.utils.PageInfo;
 import rms.web.mst.user.regist.UserRegistController;
 
 import org.springframework.beans.BeanUtils;
@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 @Controller
 @Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = UserSearchForm.class)
-public class UserSearchController extends rms.com.abstracts.AbstractController {
+public class UserSearchController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSearchController.class);
