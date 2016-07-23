@@ -44,7 +44,10 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
     @Autowired
     UserSelectService userSelectService;
 
-    /** ユーザ一覧画面フォーム */
+    /**
+     * ユーザ一覧画面フォームの初期化
+     * @return
+     */
     @ModelAttribute
     UserSearchForm setupForm() {
         return new UserSearchForm();

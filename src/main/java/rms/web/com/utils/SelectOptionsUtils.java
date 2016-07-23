@@ -2,11 +2,18 @@ package rms.web.com.utils;
 
 import org.seasar.doma.jdbc.SelectOptions;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * SelectOptionsUtilクラス
  * @author
  */
 public class SelectOptionsUtils {
+
+    /** logger */
+    @SuppressWarnings("unused")
+    private static final Logger logger = LoggerFactory.getLogger(SelectOptionsUtils.class);
 
     /**
      * ページ情報からSelectOptionsを生成

@@ -1,5 +1,6 @@
 package rms.web.mst.user.regist;
 
+import java.util.List;
 import java.util.Locale;
 
 import rms.com.base.BusinessException;
@@ -8,6 +9,7 @@ import rms.domain.com.entity.MUser;
 import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.service.UserRegistService;
 import rms.domain.mst.user.service.UserSelectService;
+import rms.web.com.utils.SelectOptionEntity;
 import rms.web.mst.user.search.UserSearchController;
 
 import org.springframework.beans.BeanUtils;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.seasar.doma.jdbc.OptimisticLockException;
@@ -57,31 +60,32 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
     @Autowired
     UserRegistService userRegistService;
 
-    /** ユーザ登録画面フォーム */
+    /**
+     * ユーザ登録画面フォームの初期化
+     * @return
+     */
     @ModelAttribute
     UserRegistForm setupForm() {
-        return new UserRegistForm();
+        UserRegistForm form = new UserRegistForm();
+
+        // selectbox用 承認者一覧の取得
+        List<SelectOptionEntity> approverList = userSelectService.getSelectboxApprover();
+        form.setApproverList(approverList);
+
+        return form;
     }
 
     /**
      * 初期表示処理（新規時）
+     * @param form
      * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "initInsert")
-    public String initInsert(Model model) {
-        // フォーム情報の新規生成
-        UserRegistForm form = setupForm();
-
-        // 初期値の設定
+    public String initInsert(UserRegistForm form,
+                             Model model) {
         // 画面表示モードを「新規」に設定
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
-        // XXX ダミー値
-        form.setUserId("user01");
-        form.setUserNm("x");
-
-        // フォーム情報の格納
-        model.addAttribute(form);
 
         return PAGE_URL;
     }
@@ -117,15 +121,18 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
      * 新規登録処理
      * @param form
      * @param bindingResult
+     * @param sessionStatus
      * @param redirectAttr
      * @param model
      * @return
+     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "insert")
     public String insert(@Validated(UserRegistForm.Insert.class) UserRegistForm form,
                          BindingResult bindingResult,
+                         SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
-                         Model model) {
+                         Model model) throws BusinessException {
         logger.debug("フォーム情報 -> {}", form.toString());
 
         // 入力チェック
@@ -133,6 +140,14 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
             logger.debug(bindingResult.getAllErrors().toString());
             return PAGE_URL;
         }
+
+        /*
+         * 業務ロジックチェック
+         */
+        // ユーザIDの重複チェック
+        userSelectService.checkUniquUserId(form.getUserId());
+        // 承認ルート設定チェック
+        userSelectService.checkApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
 
         /*
          * ユーザマスタ
@@ -156,6 +171,8 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // TODO 完了メッセージをどこかで定数にする。
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        // セッション破棄
+        sessionStatus.setComplete();
 
         return redirect(UserSearchController.MAPPING_URL, "reSearch");
     }
@@ -164,15 +181,18 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
      * 更新処理
      * @param form
      * @param bindingResult
+     * @param sessionStatus
      * @param redirectAttr
      * @param model
      * @return
+     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "update")
     public String update(@Validated(UserRegistForm.Update.class) UserRegistForm form,
                          BindingResult bindingResult,
+                         SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
-                         Model model) {
+                         Model model) throws BusinessException {
         // TODO フォームでリクエスト情報を受け取る場合に、ユーザーID等の想定外の情報まで受け取る可能性があるのが気になる。
         logger.debug("フォーム情報 -> {}", form.toString());
 
@@ -181,6 +201,13 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
             logger.debug(bindingResult.getAllErrors().toString());
             return PAGE_URL;
         }
+
+        // TODO 別のところに持って行けへんかな？
+        /*
+         * 業務ロジックチェック
+         */
+        // 承認ルート設定チェック
+        userSelectService.checkApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
 
         /*
          * ユーザマスタ
@@ -202,16 +229,23 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));
+        // セッション破棄
+        sessionStatus.setComplete();
 
         return redirect(UserSearchController.MAPPING_URL, "reSearch");
     }
 
     /**
      * 戻る処理
+     * @param form
+     * @param sessionStatus
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
-    public String back() {
+    public String back(UserRegistForm form,
+                       SessionStatus sessionStatus) {
+        // セッション破棄
+        sessionStatus.setComplete();
         return redirect(UserSearchController.MAPPING_URL, "reSearch");
     }
 

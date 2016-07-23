@@ -1,10 +1,5 @@
 package rms.domain.mst.user.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import rms.com.base.BusinessException;
 import rms.com.consts.Const;
 import rms.com.consts.MRoleConst;
 import rms.domain.com.entity.MUser;
@@ -46,21 +41,11 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
     UserRegistDao userRegistDao;
 
     /**
-     * ユーザマスタ新規登録処理<br>
-     * 説明：ユーザIDの重複チェックを行い、問題なければ新規登録を行います。
+     * ユーザマスタ新規登録処理
      * @param mUser
      */
     public void insertUserMst(MUser mUser) {
         logger.debug("登録情報 -> {}", mUser.toString());
-
-        // TODO 存在チェック用の共通SQLがほしい（削除フラグ判断込みで）
-        // ユーザIDの重複チェック
-        if (mUserDao.selectById(mUser.getUserId()) != null) {
-            // TODO 汚い・・・
-            List<Object> params = new ArrayList<Object>();
-            params.add("ユーザIDが");
-            throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
-        }
 
         // 登録処理
         mUserDao.insert(mUser);
@@ -114,5 +99,4 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
         // 更新処理（楽観的排他制御）
         mUserDao.update(mUser);
     }
-
 }

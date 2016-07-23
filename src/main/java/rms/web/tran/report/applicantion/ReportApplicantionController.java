@@ -45,7 +45,10 @@ public class ReportApplicantionController extends rms.web.com.abstracts.Abstract
     @Autowired
     ReportApplicantionService reportApplicantionService;
 
-    /** 月報申請画面フォーム */
+    /**
+     * 月報申請画面フォームの初期化
+     * @return
+     */
     @ModelAttribute
     ReportApplicantionForm setupForm() {
         return new ReportApplicantionForm();

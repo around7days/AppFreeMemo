@@ -1,5 +1,9 @@
 package rms.web.mst.user.regist;
 
+import java.util.List;
+
+import rms.web.com.utils.SelectOptionEntity;
+
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -48,12 +52,23 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
     /** メールアドレス */
     @Email(message = "メールアドレスの{Email.message}", groups = { Insert.class, Update.class })
     private String email;
+
+    /** 承認者１ID */
+    private String approver1Id;
+    /** 承認者２ID */
+    private String approver2Id;
+    /** 承認者３ID */
+    private String approver3Id;
+
     /** 役割：申請者フラグ */
     private String roleApplicantFlg;
     /** 役割：承認者フラグ */
     private String roleApproverFlg;
     /** 役割：管理者フラグ */
     private String roleAdminFlg;
+
+    /** 承認者リスト(selectbox用) */
+    private List<SelectOptionEntity> approverList;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -153,6 +168,54 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
     }
 
     /**
+     * 承認者１IDを取得します。
+     * @return 承認者１ID
+     */
+    public String getApprover1Id() {
+        return approver1Id;
+    }
+
+    /**
+     * 承認者１IDを設定します。
+     * @param approver1Id 承認者１ID
+     */
+    public void setApprover1Id(String approver1Id) {
+        this.approver1Id = approver1Id;
+    }
+
+    /**
+     * 承認者２IDを取得します。
+     * @return 承認者２ID
+     */
+    public String getApprover2Id() {
+        return approver2Id;
+    }
+
+    /**
+     * 承認者２IDを設定します。
+     * @param approver2Id 承認者２ID
+     */
+    public void setApprover2Id(String approver2Id) {
+        this.approver2Id = approver2Id;
+    }
+
+    /**
+     * 承認者３IDを取得します。
+     * @return 承認者３ID
+     */
+    public String getApprover3Id() {
+        return approver3Id;
+    }
+
+    /**
+     * 承認者３IDを設定します。
+     * @param approver3Id 承認者３ID
+     */
+    public void setApprover3Id(String approver3Id) {
+        this.approver3Id = approver3Id;
+    }
+
+    /**
      * 役割：申請者フラグを取得します。
      * @return 役割：申請者フラグ
      */
@@ -198,6 +261,22 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
      */
     public void setRoleAdminFlg(String roleAdminFlg) {
         this.roleAdminFlg = roleAdminFlg;
+    }
+
+    /**
+     * 承認者リスト(selectbox用)を取得します。
+     * @return 承認者リスト(selectbox用)
+     */
+    public List<SelectOptionEntity> getApproverList() {
+        return approverList;
+    }
+
+    /**
+     * 承認者リスト(selectbox用)を設定します。
+     * @param approverList 承認者リスト(selectbox用)
+     */
+    public void setApproverList(List<SelectOptionEntity> approverList) {
+        this.approverList = approverList;
     }
 
 }

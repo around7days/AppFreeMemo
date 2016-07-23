@@ -24,6 +24,7 @@ public abstract class AbstractService {
     // TODO DIの書き方に変更予定　※Listnerクラスも
     /**
      * 認証情報
+     * @return
      */
     protected UserInfo getPrincipal() {
         return (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

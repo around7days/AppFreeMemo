@@ -46,7 +46,10 @@ public class ReportApprovalController extends rms.web.com.abstracts.AbstractCont
     @Autowired
     ReportApprovalService reportApprovalService;
 
-    /** 月報承認画面フォーム */
+    /**
+     * 月報承認画面フォームの初期化
+     * @return
+     */
     @ModelAttribute
     ReportApprovalForm setupForm() {
         return new ReportApprovalForm();

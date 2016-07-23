@@ -1,7 +1,6 @@
 package rms.web.menu;
 
-import java.util.Enumeration;
-
+import rms.web.com.utils.SessionUtils;
 import rms.web.mst.user.regist.UserRegistController;
 import rms.web.mst.user.search.UserSearchController;
 import rms.web.tran.report.applicantion.ReportApplicantionController;
@@ -37,7 +36,10 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     /** マッピングURL */
     public static final String MAPPING_URL = "/menu";
 
-    /** メニュー画面フォーム */
+    /**
+     * メニュー画面フォームの初期化
+     * @return
+     */
     @ModelAttribute
     MenuForm setupForm() {
         return new MenuForm();
@@ -54,17 +56,8 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     public String init(MenuForm form,
                        HttpSession session,
                        Model model) {
-
-        // TODO どっかのタイミングできれいにする
         // 個別セッションの破棄
-        Enumeration<String> e = session.getAttributeNames();
-        while (e.hasMoreElements()) {
-            String key = e.nextElement();
-            if (!"SPRING_SECURITY_CONTEXT".equals(key)
-                && !"org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN".equals(key)) {
-                session.removeAttribute(key);
-            }
-        }
+        SessionUtils.remove(session);
 
         return PAGE_URL;
     }

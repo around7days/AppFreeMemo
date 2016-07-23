@@ -17,7 +17,8 @@
 		△エラー画面
 
 	◆役割（ロール）
-		○導入
+		○処理制御（サーバ側）
+		○処理制御（HTML側）
 
 	◆セッション管理
 		△セッションタイムアウト設定
@@ -38,7 +39,7 @@
 		○検索(select)
 		○登録(insert)
 		○更新(update)
-		×削除(delete)
+		○削除(delete)
 		○楽観的排他制御
 		×ストリーム検索
 		×一括実行
@@ -74,7 +75,7 @@
 		△条件分岐（Enum）→出来るけど長い　 T(mms.uniq.mst.user.regist.UserRegistForm.ViewMode).NEW
 		○text
 		△checkbox	→checkboxがoffの時に値が空ではなくnullになるけどOK？
-		△selectbox	→あとは前回選択値が表示されることの確認
+		○selectbox
 		×radio
 
 	◆メッセージ出力(HTML側)

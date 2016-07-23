@@ -24,6 +24,7 @@ public abstract class AbstractController {
     /**
      * リダイレクトURLの生成
      * @param url
+     * @return
      */
     protected String redirect(String url) {
         return redirect(url, null);
@@ -33,6 +34,7 @@ public abstract class AbstractController {
      * リダイレクトURLの生成
      * @param url
      * @param param
+     * @return
      */
     protected String redirect(String url,
                               String param) {
@@ -48,6 +50,7 @@ public abstract class AbstractController {
     /**
      * フォワードURLの生成
      * @param url
+     * @return
      */
     protected String forward(String url) {
         return forward(url, null);
@@ -57,6 +60,7 @@ public abstract class AbstractController {
      * フォワードURLの生成
      * @param url
      * @param param
+     * @return
      */
     protected String forward(String url,
                              String param) {
@@ -73,6 +77,7 @@ public abstract class AbstractController {
      * セッションからフォーム情報の取得
      * @param session
      * @param cls
+     * @return
      */
     @SuppressWarnings("unchecked")
     protected <T> T getSessionForm(HttpSession session,

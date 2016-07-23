@@ -49,7 +49,10 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
     @Autowired
     ReportSearchService reportSearchService;
 
-    /** 月報状況一覧画面フォーム */
+    /**
+     * 月報状況一覧画面フォームの初期化
+     * @return
+     */
     @ModelAttribute
     ReportSearchForm setupForm() {
         return new ReportSearchForm();

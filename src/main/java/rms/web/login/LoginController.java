@@ -30,7 +30,10 @@ public class LoginController extends rms.web.com.abstracts.AbstractController {
     /** マッピングURL */
     public static final String MAPPING_URL = "/login";
 
-    /** ログイン画面フォーム */
+    /**
+     * ログイン画面フォームの初期化
+     * @return
+     */
     @ModelAttribute
     LoginForm setupForm() {
         return new LoginForm();
@@ -46,6 +49,7 @@ public class LoginController extends rms.web.com.abstracts.AbstractController {
     public String init(LoginForm form,
                        Model model) {
         // 初期処理
+        // XXX ダミー値
         form.setUserId("user01");
         form.setPassword("pass");
 
