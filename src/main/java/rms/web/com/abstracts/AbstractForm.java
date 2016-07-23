@@ -1,8 +1,7 @@
 package rms.web.com.abstracts;
 
 import rms.web.base.UserInfo;
-
-import org.springframework.security.core.context.SecurityContextHolder;
+import rms.web.com.utils.AuthenticationUtils;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,12 +12,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public abstract class AbstractForm {
 
     /**
-     * ユーザ認証情報の取得
+     * 認証ユーザ情報の取得
      * @return
      */
-    public UserInfo getPrincipal() {
-        UserInfo userInfo = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userInfo;
+    UserInfo getPrincipal() {
+        return AuthenticationUtils.getPrincipal();
     }
 
     @Override

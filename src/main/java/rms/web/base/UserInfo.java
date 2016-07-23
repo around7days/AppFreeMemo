@@ -1,7 +1,10 @@
 package rms.web.base;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import rms.com.consts.MRoleConst;
 import rms.domain.com.entity.MUser;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -26,10 +29,13 @@ public class UserInfo extends User {
      * ユーザ情報
      */
     /** ユーザID */
-    String userId;
+    private String userId;
 
     /** ユーザ名 */
-    String userNm;
+    private String userNm;
+
+    /** ユーザ役割名一覧 */
+    private List<String> roleList = new ArrayList<>();
 
     /**
      * コンストラクタ
@@ -42,6 +48,8 @@ public class UserInfo extends User {
         super(user.getUserId(), user.getPassword(), authorities);
         this.userId = user.getUserId();
         this.userNm = user.getUserNm();
+        authorities.forEach(auth -> this.roleList.add(auth.toString()));
+
         logger.debug("ユーザ情報 -> {}", this.toString());
     }
 
@@ -59,6 +67,30 @@ public class UserInfo extends User {
      */
     public String getUserNm() {
         return userNm;
+    }
+
+    /**
+     * 役割：申請者？
+     * @return
+     */
+    public boolean isRoleApplicant() {
+        return roleList.contains(MRoleConst.APPLICANT);
+    }
+
+    /**
+     * 役割：承認者？
+     * @return
+     */
+    public boolean isRoleApprover() {
+        return roleList.contains(MRoleConst.APPROVER);
+    }
+
+    /**
+     * 役割：管理者？
+     * @return
+     */
+    public boolean isRoleAdmin() {
+        return roleList.contains(MRoleConst.ADMIN);
     }
 
     /**

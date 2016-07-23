@@ -9,4 +9,10 @@ public class AppConfig {
     //    MessageSourceAccessor messageSourceAccessorResolver() {
     //        return new MessageSourceAccessorResolver().resolve();
     //    }
+
+    //    @Bean
+    //    UserInfo userInfoResolver() {
+    //        return new UserInfoResolverImpl().resolve();
+    //    }
+
 }

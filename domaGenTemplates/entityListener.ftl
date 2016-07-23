@@ -10,8 +10,8 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import rms.web.base.UserInfo;
+import rms.web.com.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
@@ -23,19 +23,16 @@ import java.time.LocalDateTime;
 public class ${simpleName}<#if superclassSimpleName??> extends ${superclassSimpleName}<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}><#else> implements EntityListener<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}></#if> {
 <#if !superclassSimpleName??>
 
-    // 認証情報
-    private static UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
-                                                                              .getAuthentication()
-                                                                              .getPrincipal();
     @Override
     public void preInsert(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName} entity, PreInsertContext<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}> context) {
         //@formatter:off
+        UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
         if (entity.getVersion() == null) entity.setVersion(0);
         if (entity.getDelFlg() == null)  entity.setDelFlg(0);
-        if (entity.getInsId() == null)   entity.setInsId(principal.getUsername());
+        if (entity.getInsId() == null)   entity.setInsId(userInfo.getUserId());
         if (entity.getInsDate() == null) entity.setInsDate(now);
-        if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
+        if (entity.getUpdId() == null)   entity.setUpdId(userInfo.getUserId());
         if (entity.getUpdDate() == null) entity.setUpdDate(now);
         //@formatter:on
     }
@@ -43,8 +40,9 @@ public class ${simpleName}<#if superclassSimpleName??> extends ${superclassSimpl
     @Override
     public void preUpdate(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName} entity, PreUpdateContext<<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityClassSimpleName}> context) {
         //@formatter:off
+        UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
-        if (entity.getUpdId() == null)   entity.setUpdId(principal.getUsername());
+        if (entity.getUpdId() == null)   entity.setUpdId(userInfo.getUserId());
         if (entity.getUpdDate() == null) entity.setUpdDate(now);
         //@formatter:on
     }
