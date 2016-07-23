@@ -15,7 +15,7 @@ public abstract class AbstractForm {
      * 認証ユーザ情報の取得
      * @return
      */
-    UserInfo getPrincipal() {
+    public UserInfo getPrincipal() {
         return AuthenticationUtils.getPrincipal();
     }
 
