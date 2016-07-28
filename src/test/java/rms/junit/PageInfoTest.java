@@ -1,6 +1,3 @@
-/**
- *
- */
 package rms.junit;
 
 import static org.junit.Assert.*;
@@ -13,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 /**
- * @author 9EAFP
  */
 public class PageInfoTest {
 
@@ -129,12 +125,12 @@ public class PageInfoTest {
     }
 
     private void printLog(PageInfo page) {
-        logger.debug("page.getPage()       : {}", page.getPage());
-        logger.debug("page.getTotalPage()  : {}", page.getTotalPage());
-        logger.debug("page.getStartIndex() : {}", page.getStartIndex());
-        logger.debug("page.getEndIndex()   : {}", page.getEndIndex());
-        logger.debug("page.getHasPrev()    : {}", page.getHasPrev());
-        logger.debug("page.getHasNext()    : {}", page.getHasNext());
+        logger.debug("page.getPage()       -> {}", page.getPage());
+        logger.debug("page.getTotalPage()  -> {}", page.getTotalPage());
+        logger.debug("page.getStartIndex() -> {}", page.getStartIndex());
+        logger.debug("page.getEndIndex()   -> {}", page.getEndIndex());
+        logger.debug("page.getHasPrev()    -> {}", page.getHasPrev());
+        logger.debug("page.getHasNext()    -> {}", page.getHasNext());
     }
 
 }
