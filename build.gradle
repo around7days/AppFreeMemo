@@ -63,6 +63,11 @@ dependencies {
 
 	// test用
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java',           version: '+'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver',  version: '+'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '+'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver',      version: '+'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-edge-driver',    version: '+'
 
 	// generator用
 	compile group: 'org.freemarker', name: 'freemarker', version: '+'
