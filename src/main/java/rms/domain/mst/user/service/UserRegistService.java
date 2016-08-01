@@ -45,7 +45,7 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
      * @param mUser
      */
     public void insertUserMst(MUser mUser) {
-        logger.debug("登録情報 -> {}", mUser.toString());
+        logger.debug("登録情報 -> {}", mUser);
 
         // 登録処理
         mUserDao.insert(mUser);
@@ -94,7 +94,7 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
      * @param mUser
      */
     public void updateUserMst(MUser mUser) {
-        logger.debug("更新情報 -> {}", mUser.toString());
+        logger.debug("更新情報 -> {}", mUser);
 
         // 更新処理（楽観的排他制御）
         mUserDao.update(mUser);

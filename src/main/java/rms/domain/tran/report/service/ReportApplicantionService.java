@@ -76,7 +76,7 @@ public class ReportApplicantionService extends rms.domain.com.abstracts.Abstract
     public void saveFile(MultipartFile file) throws IllegalStateException, IOException {
         // ファイルの保存先パスを生成
         Path outputPath = Paths.get("./upload_file", file.getOriginalFilename());
-        logger.debug("ファイル保存先 -> {}", outputPath.normalize().toAbsolutePath().toString());
+        logger.debug("ファイル保存先 -> {}", outputPath.normalize().toAbsolutePath());
 
         // ファイル保存
         //        file.transferTo(outputPath.toFile());
@@ -135,7 +135,7 @@ public class ReportApplicantionService extends rms.domain.com.abstracts.Abstract
     //        // 更新情報の生成
     //        MUser mUser = new MUser();
     //        BeanUtils.copyProperties(form, mUser);
-    //        logger.debug("更新情報 -> {}", mUser.toString());
+    //        logger.debug("更新情報 -> {}", mUser);
     //
     //        // 更新処理
     //        mUserDao.update(mUser);

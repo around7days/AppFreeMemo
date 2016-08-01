@@ -77,7 +77,7 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
             }
         }
 
-        logger.debug("取得情報 -> {}", userEntity.toString());
+        logger.debug("取得情報 -> {}", userEntity);
 
         return userEntity;
     }
@@ -90,8 +90,8 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
      */
     public SearchResultEntity<UserSearchResultEntity> getUserInfoList(UserSearchConditionEntity condition,
                                                                       PageInfo pageInfo) {
-        logger.debug("検索条件 -> {}", condition.toString());
-        logger.debug("ページ情報 -> {}", pageInfo.toString());
+        logger.debug("検索条件 -> {}", condition);
+        logger.debug("ページ情報 -> {}", pageInfo);
 
         // ページング設定
         SelectOptions options = SelectOptionsUtils.get(pageInfo);

@@ -112,7 +112,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         BeanUtils.copyProperties(userEntity, form);
         BeanUtils.copyProperties(userEntity.getMUser(), form);
 
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         return PAGE_URL;
     }
@@ -133,7 +133,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
                          SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
                          Model model) throws BusinessException {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -194,7 +194,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
                          RedirectAttributes redirectAttr,
                          Model model) throws BusinessException {
         // TODO フォームでリクエスト情報を受け取る場合に、ユーザーID等の想定外の情報まで受け取る可能性があるのが気になる。
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {

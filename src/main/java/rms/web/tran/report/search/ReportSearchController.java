@@ -85,7 +85,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
     public String search(@Validated ReportSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -112,7 +112,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
     @RequestMapping(value = MAPPING_URL, params = "reSearch")
     public String reSearch(ReportSearchForm form,
                            Model model) {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 検索処理
         reportSearchService.search(form);
@@ -168,7 +168,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
 
         // 選択した月報情報
         ReportSearchConditionEntity result = form.getResultList().get(index);
-        logger.debug("選択月報情報 -> {}", result.toString());
+        logger.debug("選択月報情報 -> {}", result);
 
         /*
          * ファイルダウンロード処理
@@ -202,7 +202,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
 
         // 選択した月報情報
         ReportSearchConditionEntity result = form.getResultList().get(index);
-        logger.debug("選択月報情報 -> {}", result.toString());
+        logger.debug("選択月報情報 -> {}", result);
 
         // 月報承認画面
         return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplicantId() + "/"

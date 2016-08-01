@@ -73,7 +73,7 @@ public class ReportApprovalController extends rms.web.com.abstracts.AbstractCont
         reportApprovalService.init(form);
         // 格納
         model.addAttribute(form);
-        logger.debug("承認情報 -> {}", form.toString());
+        logger.debug("承認情報 -> {}", form);
 
         return PAGE_URL;
     }
@@ -93,7 +93,7 @@ public class ReportApprovalController extends rms.web.com.abstracts.AbstractCont
                            ReportApprovalForm form,
                            RedirectAttributes redirectAttr,
                            Model model) throws IllegalStateException, IOException {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 承認処理
         reportApprovalService.approval(form, userInfo);
@@ -119,7 +119,7 @@ public class ReportApprovalController extends rms.web.com.abstracts.AbstractCont
                          ReportApprovalForm form,
                          RedirectAttributes redirectAttr,
                          Model model) throws IllegalStateException, IOException {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 否認処理
         reportApprovalService.denial(form, userInfo);
@@ -145,7 +145,7 @@ public class ReportApprovalController extends rms.web.com.abstracts.AbstractCont
 
         //        // 選択した月報情報
         //        SearchReportEntity result = form.getResultList().get(index);
-        //        logger.debug("選択月報情報 -> {}", result.toString());
+        //        logger.debug("選択月報情報 -> {}", result);
         //
         //        /*
         //         * ファイルダウンロード処理
@@ -153,7 +153,7 @@ public class ReportApprovalController extends rms.web.com.abstracts.AbstractCont
         //        // ダウンロードファイルパス・ファイル名の生成
         //        Path filePath = Paths.get("./upload_file", result.getFilePath());
         //        String encodeFileNm = URLEncoder.encode(filePath.toFile().getName(), StandardCharsets.UTF_8.name());
-        //        logger.debug("ダウンロードファイル -> {}", filePath.toAbsolutePath().toString());
+        //        logger.debug("ダウンロードファイル -> {}", filePath.toAbsolutePath());
         //
         //        // ヘッダ設定
         //        response.addHeader("Content-Disposition", "attachment; filename*=UTF-8''" + encodeFileNm);

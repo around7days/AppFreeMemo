@@ -87,7 +87,7 @@ public class ReportApplicantionController extends rms.web.com.abstracts.Abstract
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttr,
                          Model model) throws IllegalStateException, IOException {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {

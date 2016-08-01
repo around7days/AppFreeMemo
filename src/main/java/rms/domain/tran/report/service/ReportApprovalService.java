@@ -56,7 +56,7 @@ public class ReportApprovalService extends rms.domain.com.abstracts.AbstractServ
         entity.setApplicantId(form.getApplicantId());
         entity.setTargetYear(Integer.valueOf(form.getTargetYm()));
         entity.setStatus(MCodeConst.A001_100); // 承認済み
-        logger.debug("承認情報 -> {}", entity.toString());
+        logger.debug("承認情報 -> {}", entity);
 
         /*
          * 更新処理
@@ -78,7 +78,7 @@ public class ReportApprovalService extends rms.domain.com.abstracts.AbstractServ
         entity.setApplicantId(form.getApplicantId());
         entity.setTargetYear(Integer.valueOf(form.getTargetYm()));
         entity.setStatus(MCodeConst.A001_N03); // 否認
-        logger.debug("否認情報 -> {}", entity.toString());
+        logger.debug("否認情報 -> {}", entity);
 
         /*
          * 更新処理

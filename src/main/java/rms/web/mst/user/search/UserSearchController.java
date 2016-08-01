@@ -76,7 +76,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
     public String search(@Validated UserSearchForm form,
                          BindingResult bindingResult,
                          Model model) {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -116,7 +116,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
     @RequestMapping(value = MAPPING_URL, params = "reSearch")
     public String reSearch(UserSearchForm form,
                            Model model) {
-        logger.debug("フォーム情報 -> {}", form.toString());
+        logger.debug("フォーム情報 -> {}", form);
 
         // 検索条件の生成
         UserSearchConditionEntity condition = new UserSearchConditionEntity();
@@ -187,7 +187,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
 
         // 選択したユーザ情報
         UserSearchResultEntity user = form.getResultList().get(index);
-        logger.debug("選択ユーザ情報 -> {}", user.toString());
+        logger.debug("選択ユーザ情報 -> {}", user);
 
         return redirect(UserRegistController.MAPPING_URL + "/" + user.getUserId(), "initUpdate");
     }
