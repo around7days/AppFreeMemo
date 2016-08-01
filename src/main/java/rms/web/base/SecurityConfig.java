@@ -40,8 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         /* ログイン前の認証設定 */
         // OK(アクセス許可)
         http.authorizeRequests()
-            .antMatchers("/", AUTH_MAPPING_URL, LOGIN_MAPPING_URL, LOGOUT_MAPPING_URL, ERROR_MAPPING_URL)
-            .permitAll();
+            .antMatchers("/", AUTH_MAPPING_URL, LOGIN_MAPPING_URL, LOGOUT_MAPPING_URL, ERROR_MAPPING_URL) //
+            .permitAll() //
+        ;
         // NG（それ以外は全て認証無しの場合アクセス拒否）
         http.authorizeRequests().anyRequest().authenticated();
 
@@ -61,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         /* ログアウト設定 */
         http.logout()
             .logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_MAPPING_URL)) // ログアウト処理のパス
-            .logoutSuccessUrl(LoginController.MAPPING_URL) // ログアウト完了時のパス
+            .logoutSuccessUrl(LOGIN_MAPPING_URL) // ログアウト完了時のパス
             .deleteCookies("JSESSIONID") // cookiesの削除
             .invalidateHttpSession(true) // セッション破棄
         ;

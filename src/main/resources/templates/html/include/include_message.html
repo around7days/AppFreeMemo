@@ -3,20 +3,25 @@
 
 <!-- メッセージ -->
 <div th:fragment="message">
-	<!-- エラー(入力チェック) -->
-	<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
-		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
-		<ul><li th:each="err : ${#fields.allErrors()}" th:text="${err}" /></ul>
-	</div>
-	<!-- エラー(業務ロジックチェック) -->
-	<div th:if="${errorMessage}" class="alert alert-danger">
-		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
-		<ul><li th:text="${errorMessage}" /></ul>
+	<!-- エラー -->
+	<div id="alert-danger">
+		<!-- エラー(入力チェック) -->
+		<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
+			<ul><li th:each="err : ${#fields.allErrors()}" th:text="${err}" /></ul>
+		</div>
+		<!-- エラー(業務ロジックチェック) -->
+		<div th:if="${errorMessage}" class="alert alert-danger">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
+			<ul><li th:text="${errorMessage}" /></ul>
+		</div>
 	</div>
 	<!-- 通常 -->
-	<div th:if="${successMessage}" class="alert alert-success">
-		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　成功
-		<ul><li th:text="${successMessage}" /></ul>
+	<div id="alert-success">
+		<div th:if="${successMessage}" class="alert alert-success">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　成功
+			<ul><li th:text="${successMessage}" /></ul>
+		</div>
 	</div>
 </div>
 </html>

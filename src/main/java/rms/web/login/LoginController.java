@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * ログイン画面コントローラー
  * @author
@@ -42,12 +44,19 @@ public class LoginController extends rms.web.com.abstracts.AbstractController {
     /**
      * 初期処理
      * @param form
+     * @param session
      * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL)
     public String init(LoginForm form,
+                       HttpSession session,
                        Model model) {
+        // セッションが存在する場合は一度ログアウト処理を実施
+        if (!session.isNew()) {
+            return forward(SecurityConfig.LOGOUT_MAPPING_URL);
+        }
+
         // 初期処理
         // XXX ダミー値
         form.setUserId("user01");
