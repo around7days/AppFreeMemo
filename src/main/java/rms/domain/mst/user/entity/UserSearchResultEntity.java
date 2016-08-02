@@ -8,7 +8,7 @@ import org.seasar.doma.Entity;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * UserSearchResultEntityクラス
+ * ユーザ一覧（検索結果）Entity
  */
 @Entity
 public class UserSearchResultEntity extends rms.domain.com.abstracts.AbstractEntity {
@@ -254,10 +254,8 @@ public class UserSearchResultEntity extends rms.domain.com.abstracts.AbstractEnt
     }
 
     /**
-     * 役割名を返却します
-     * <p>
-     * 役割が複数存在する場合は「/」で結合して返却
-     * </p>
+     * 役割名を返却します<br>
+     * 備考：役割が複数存在する場合は「/」で結合して返却
      * @return
      */
     public String getRoleNm() {

@@ -3,7 +3,4 @@
 /.factorypath
 /bin/
 /build/
-/upload_file
-/gradle
-/docs/
-/capture/
+/file_storage/
