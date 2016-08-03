@@ -1,3 +1,5 @@
+package rms.domain.tran.report.service;
+
 //package rms.domain.tran.report.service;
 //
 //import java.io.IOException;
@@ -17,7 +19,7 @@
 //import rms.web.base.UserInfo;
 //import rms.web.com.utils.SelectOptionEntity;
 //import rms.web.mst.user.regist.UserRegistForm;
-//import rms.web.tran.report.applicantion.ReportApplicantionForm;
+//import rms.web.tran.report.application.ReportApplicationForm;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
@@ -33,10 +35,10 @@
 // * @author
 // */
 //@Service
-//public class ReportApplicantionService extends rms.domain.com.abstracts.AbstractService {
+//public class ReportApplicationService extends rms.domain.com.abstracts.AbstractService {
 //
 //    /** logger */
-//    private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionService.class);
+//    private static final Logger logger = LoggerFactory.getLogger(ReportApplicationService.class);
 //
 //    /** 月報管理テーブルDao */
 //    @Autowired
@@ -54,7 +56,7 @@
 //     * 初期表示処理（新規時）
 //     * @param form
 //     */
-//    public void initInsert(ReportApplicantionForm form) {
+//    public void initInsert(ReportApplicationForm form) {
 //        // 表示モードの設定
 //        form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
 //
@@ -88,7 +90,7 @@
 //     * @param form
 //     * @param userInfo
 //     */
-//    public void insert(ReportApplicantionForm form,
+//    public void insert(ReportApplicationForm form,
 //                       UserInfo userInfo) {
 //        // 登録用Entityの生成
 //        TReport entity = new TReport();
@@ -118,7 +120,7 @@
 //     * セレクトボックスの設定
 //     * @param form
 //     */
-//    private void setSelectBox(ReportApplicantionForm form) {
+//    private void setSelectBox(ReportApplicationForm form) {
 //        // セレクトボックス用 承認者一覧の取得
 //        List<SelectOptionEntity> approverList = userDao.selectboxApprover();
 //        approverList.forEach(entity -> logger.debug(entity.toString()));

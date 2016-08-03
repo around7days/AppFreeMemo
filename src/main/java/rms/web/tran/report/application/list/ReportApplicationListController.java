@@ -1,4 +1,4 @@
-package rms.web.tran.report.list;
+package rms.web.tran.report.application.list;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -8,17 +8,16 @@ import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.entity.ReportSearchResultEntity;
 import rms.domain.tran.report.service.ReportSelectService;
 import rms.web.base.SearchResultEntity;
+import rms.web.base.UserInfo;
 import rms.web.com.utils.FileUtils;
 import rms.web.com.utils.PageInfo;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,22 +29,22 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 月報一覧画面コントローラー
+ * 月報申請状況一覧画面コントローラー
  * @author
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(types = ReportListForm.class)
-public class ReportListController extends rms.web.com.abstracts.AbstractController {
+@SessionAttributes(types = ReportApplicationListForm.class)
+public class ReportApplicationListController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(ReportListController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportApplicationListController.class);
 
     /** ページURL */
-    private static final String PAGE_URL = "html/reportList";
+    private static final String PAGE_URL = "html/reportApplicationList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/list";
+    public static final String MAPPING_URL = "/tran/report/application/list";
 
     /** 月報格納ベースディレクトリ */
     @Value("${myapp.report.storage}")
@@ -56,12 +55,12 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
     ReportSelectService reportSelectService;
 
     /**
-     * 月報一覧画面フォームの初期化
+     * 月報承認状況一覧画面フォームの初期化
      * @return
      */
     @ModelAttribute
-    ReportListForm setupForm() {
-        return new ReportListForm();
+    ReportApplicationListForm setupForm() {
+        return new ReportApplicationListForm();
     }
 
     /**
@@ -71,67 +70,31 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "init")
-    public String initInsert(ReportListForm form,
+    public String initInsert(ReportApplicationListForm form,
                              Model model) {
-        return PAGE_URL;
+        // 検索結果・ページ情報の初期化
+        form.setPageInfo(new PageInfo());
+        form.setResultList(null);
+
+        return redirect(MAPPING_URL, "search");
     }
 
     /**
      * 検索処理
      * @param form
-     * @param bindingResult
+     * @param userInfo
      * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "search")
-    public String search(@Validated ReportListForm form,
-                         BindingResult bindingResult,
+    public String search(ReportApplicationListForm form,
+                         @AuthenticationPrincipal UserInfo userInfo,
                          Model model) {
         logger.debug("フォーム情報 -> {}", form);
 
-        // 入力チェック
-        if (bindingResult.hasErrors()) {
-            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
-            return PAGE_URL;
-        }
-
-        // 検索結果・ページ情報の初期化
-        form.setPageInfo(new PageInfo());
-        form.setResultList(null);
-
         // 検索条件の生成
         ReportSearchConditionEntity condition = new ReportSearchConditionEntity();
-        BeanUtils.copyProperties(form.getCondition(), condition);
-
-        // 検索処理
-        SearchResultEntity<ReportSearchResultEntity> searchResultEntity = reportSelectService.getReportList(condition,
-                                                                                                            form.getPageInfo());
-        if (searchResultEntity.getResultList().isEmpty()) {
-            bindingResult.reject("", "検索結果は存在しません");
-            return PAGE_URL;
-        }
-
-        // 検索結果をフォームに反映
-        form.setResultList(searchResultEntity.getResultList());
-        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
-
-        return PAGE_URL;
-    }
-
-    /**
-     * 再検索処理
-     * @param form
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = MAPPING_URL, params = "reSearch")
-    public String reSearch(ReportListForm form,
-                           Model model) {
-        logger.debug("フォーム情報 -> {}", form);
-
-        // 検索条件の生成
-        ReportSearchConditionEntity condition = new ReportSearchConditionEntity();
-        BeanUtils.copyProperties(form.getCondition(), condition);
+        condition.setApplicantId(userInfo.getUserId());
 
         // 検索処理
         SearchResultEntity<ReportSearchResultEntity> searchResultEntity = reportSelectService.getReportList(condition,
@@ -151,12 +114,12 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pagePrev")
-    public String pagePrev(ReportListForm form,
+    public String pagePrev(ReportApplicationListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().prev();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return redirect(MAPPING_URL, "search");
     }
 
     /**
@@ -166,12 +129,12 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pageNext")
-    public String pageNext(ReportListForm form,
+    public String pageNext(ReportApplicationListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().next();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return redirect(MAPPING_URL, "search");
     }
 
     /**
@@ -184,7 +147,7 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "download")
-    public String download(ReportListForm form,
+    public String download(ReportApplicationListForm form,
                            @PathVariable int index,
                            HttpServletResponse response,
                            Model model) throws IOException {
@@ -207,4 +170,27 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
 
         return null;
     }
+
+    //    /**
+    //     * 月報選択処理
+    //     * @param form
+    //     * @param index
+    //     * @param model
+    //     * @return
+    //     */
+    //    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
+    //    public String select(ReportSearchForm form,
+    //                         @PathVariable int index,
+    //                         Model model) {
+    //        logger.debug("選択値 -> {}", index);
+    //
+    //        // 選択した月報情報
+    //        ReportSearchResultEntity result = form.getResultList().get(index);
+    //        logger.debug("選択月報情報 -> {}", result);
+    //
+    //        // 月報承認画面
+    //        return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplicantId() + "/"
+    //                        + result.getTargetYm(), "init");
+    //    }
+
 }

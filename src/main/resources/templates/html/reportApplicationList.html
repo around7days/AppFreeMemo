@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>月報一覧画面</title>
+	<title>月報申請状況一覧画面</title>
 
 
 	<!-- bootstrap CSS -->
@@ -19,10 +19,10 @@
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<!-- 個別 JS -->
-	<script th:src="@{/js/reportList.js}" src="../../static/js/reportList.js"></script>
+	<script th:src="@{/js/reportApplicationList.js}" src="../../static/js/reportApplicationList.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportListForm}" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApplicationListForm}" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -30,40 +30,15 @@
 	<!-- container -->
 	<div class="container">
 		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 60em">
+		<div class="row" style="max-width: 80em">
 
 			<!-- ヘッダ -->
 			<div class="page-header">
-				<h2>月報一覧画面</h2>
+				<h2>月報申請状況一覧画面</h2>
 			</div>
 
 			<!-- メッセージ -->
 			<div th:replace="@{/html/include/include_message}::message" ></div>
-
-			<!--
-				検索条件
-			 -->
-			<div class="form-horizontal">
-				<!-- 年月 -->
-				<div class="form-group">
-					<label for="user" class="col-sm-3 control-label">年月</label>
-					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" placeholder="yyyymm" class="form-control datepicker-ym" readonly="readonly" />
-					</div>
-				</div>
-				<!-- 申請者 -->
-				<div class="form-group">
-					<label for="user" class="col-sm-3 control-label">申請者</label>
-					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.applicantId}" name="condition.applicantId" id="condition.applicantId" placeholder="申請者ID（完全一致）" class="form-control" />
-						<input type="text" th:value="*{condition.applicantNm}" name="condition.applicantNm" id="condition.applicantNm" placeholder="申請者名（部分一致）" class="form-control" />
-					</div>
-				</div>
-				<!-- 検索・新規ボタン -->
-				<div class="text-center">
-					<button type="submit" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
-				</div>
-			</div><!-- /検索条件 -->
 
 			<!--
 				検索結果
@@ -77,18 +52,26 @@
 					<!-- ヘッダ -->
 					<thead class="thead-default">
 						<tr>
+							<th>選択</th>
 							<th>年月</th>
-							<th>申請者</th>
-							<th>部署</th>
+							<th>申請日</th>
+							<th>承認者１</th>
+							<th>承認者２</th>
+							<th>承認者３</th>
+							<th>承認状況</th>
 							<th>月報</th>
 						</tr>
 					</thead>
 					<!-- 明細 -->
 					<tbody>
 						<tr th:each="result,iteStatus : *{resultList}">
+							<td><button type="submit" formnovalidate="formnovalidate" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
 							<td th:text="${result.targetYm}">201606</td>
-							<td th:text="${result.applicantNm}">月報太郎</td>
-							<td>2SOL</td>
+							<td th:text="${result.applicationDate}">2016/05/31 20:23</td>
+							<td th:text="${result.approver1Nm}">承認者１</td>
+							<td th:text="${result.approver2Nm}">承認者２</td>
+							<td th:text="${result.approver3Nm}">承認者３</td>
+							<td th:text="${result.statusNm}">承認済み</td>
 							<td><button type="submit" formnovalidate="formnovalidate" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
 					</tbody>

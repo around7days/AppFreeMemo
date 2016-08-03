@@ -1,4 +1,6 @@
-//package rms.web.tran.report.applicantion;
+package rms.web.tran.report.application.regist;
+
+//package rms.web.tran.report.application;
 //
 //import java.util.List;
 //
@@ -12,7 +14,7 @@
 // * 月報申請画面フォーム
 // * @author
 // */
-//public class ReportApplicantionForm extends rms.web.com.abstracts.AbstractForm {
+//public class ReportApplicationForm extends rms.web.com.abstracts.AbstractForm {
 //
 //    /* 入力チェック宣言 ----------------------------------------------------- */
 //    //@formatter:off

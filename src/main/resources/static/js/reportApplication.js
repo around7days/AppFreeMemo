@@ -7,12 +7,12 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/report/applicantion";
+	var defaultUrl = "/tran/report/application";
 
 	/**
 	 * 申請ボタン押下
 	 */
-	$("#applicantion").on("click", function() {
+	$("#application").on("click", function() {
 		if (!window.confirm("申請しますか？")) {
 			return false;
 		}

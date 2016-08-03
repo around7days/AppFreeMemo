@@ -2,10 +2,11 @@ package rms.web.com.utils;
 
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * ページ情報
@@ -26,6 +27,21 @@ public class PageInfo {
 
     /** 合計表示件数 */
     private int totalSize = 0;
+
+    /*-----------------------------------------------------------------------*/
+    /**
+     * コンストラクタ
+     */
+    public PageInfo() {
+    }
+
+    /**
+     * コンストラクタ
+     * @param limit
+     */
+    public PageInfo(int limit) {
+        setLimit(limit);
+    }
 
     /*-----------------------------------------------------------------------*/
     /**

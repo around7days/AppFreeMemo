@@ -15,10 +15,10 @@
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<!-- 個別 JS -->
-	<script th:src="@{/js/reportApplicantion.js}" src="../../static/js/reportApplicantion.js"></script>
+	<script th:src="@{/js/reportApplication.js}" src="../../static/js/reportApplication.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApplicantionForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApplicationForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -95,7 +95,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
 						<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-						<button type="submit" id="applicantion" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
+						<button type="submit" id="application" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
 					</div>
 				</div>
 			</div><!-- /月報申請 -->

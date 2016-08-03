@@ -1,10 +1,12 @@
-//package rms.web.tran.report.applicantion;
+package rms.web.tran.report.application.regist;
+
+//package rms.web.tran.report.application;
 //
 //import java.io.IOException;
 //import java.util.Locale;
 //
 //import rms.com.consts.MessageConst;
-//import rms.domain.tran.report.service.ReportApplicantionService;
+//import rms.domain.tran.report.service.ReportApplicationService;
 //import rms.web.base.UserInfo;
 //import rms.web.menu.MenuController;
 //
@@ -29,29 +31,29 @@
 // */
 //@Controller
 //@Transactional(rollbackFor = Exception.class)
-//@SessionAttributes(types = ReportApplicantionForm.class)
-//public class ReportApplicantionController extends rms.web.com.abstracts.AbstractController {
+//@SessionAttributes(types = ReportApplicationForm.class)
+//public class ReportApplicationController extends rms.web.com.abstracts.AbstractController {
 //
 //    /** logger */
-//    private static final Logger logger = LoggerFactory.getLogger(ReportApplicantionController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(ReportApplicationController.class);
 //
 //    /** ページURL */
 //    private static final String PAGE_URL = "html/reportApplication";
 //
 //    /** マッピングURL */
-//    public static final String MAPPING_URL = "/tran/report/applicantion";
+//    public static final String MAPPING_URL = "/tran/report/application";
 //
 //    /** 月報申請画面サービス */
 //    @Autowired
-//    ReportApplicantionService reportApplicantionService;
+//    ReportApplicationService reportApplicationService;
 //
 //    /**
 //     * 月報申請画面フォームの初期化
 //     * @return
 //     */
 //    @ModelAttribute
-//    ReportApplicantionForm setupForm() {
-//        return new ReportApplicantionForm();
+//    ReportApplicationForm setupForm() {
+//        return new ReportApplicationForm();
 //    }
 //
 //    /**
@@ -62,8 +64,8 @@
 //    @RequestMapping(value = MAPPING_URL, params = "initInsert")
 //    public String initInsert(Model model) {
 //        // 初期値設定
-//        ReportApplicantionForm form = setupForm();
-//        reportApplicantionService.initInsert(form);
+//        ReportApplicationForm form = setupForm();
+//        reportApplicationService.initInsert(form);
 //        // 格納
 //        model.addAttribute(form);
 //
@@ -83,7 +85,7 @@
 //     */
 //    @RequestMapping(value = MAPPING_URL, params = "insert")
 //    public String insert(@AuthenticationPrincipal UserInfo userInfo,
-//                         @Validated(ReportApplicantionForm.Insert.class) ReportApplicantionForm form,
+//                         @Validated(ReportApplicationForm.Insert.class) ReportApplicationForm form,
 //                         BindingResult bindingResult,
 //                         RedirectAttributes redirectAttr,
 //                         Model model) throws IllegalStateException, IOException {
@@ -96,9 +98,9 @@
 //        }
 //
 //        // 登録処理
-//        reportApplicantionService.insert(form, userInfo);
+//        reportApplicationService.insert(form, userInfo);
 //        // ファイル保存処理
-//        reportApplicantionService.saveFile(form.getFile());
+//        reportApplicationService.saveFile(form.getFile());
 //
 //        // 完了メッセージ
 //        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));

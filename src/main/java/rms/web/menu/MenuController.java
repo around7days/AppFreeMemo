@@ -3,6 +3,7 @@ package rms.web.menu;
 import rms.web.com.utils.SessionUtils;
 import rms.web.mst.user.list.UserListController;
 import rms.web.mst.user.regist.UserRegistController;
+import rms.web.tran.report.application.list.ReportApplicationListController;
 import rms.web.tran.report.list.ReportListController;
 
 import org.springframework.stereotype.Controller;
@@ -85,7 +86,7 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     }
 
     /**
-     * 月報状況一覧画面に遷移
+     * 月報一覧画面に遷移
      * @param form
      * @param model
      * @return
@@ -94,6 +95,18 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     public String T001(MenuForm form,
                        Model model) {
         return redirect(ReportListController.MAPPING_URL, "init");
+    }
+
+    /**
+     * 月報申請状況一覧画面に遷移
+     * @param form
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "t004")
+    public String T004(MenuForm form,
+                       Model model) {
+        return redirect(ReportApplicationListController.MAPPING_URL, "init");
     }
 
     //    /**
@@ -105,7 +118,7 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     //    @RequestMapping(value = MAPPING_URL, params = "t002")
     //    public String T002(MenuForm form,
     //                       Model model) {
-    //        return redirect(ReportApplicantionController.MAPPING_URL, "initInsert");
+    //        return redirect(ReportApplicationController.MAPPING_URL, "initInsert");
     //    }
     //
     //    /**
@@ -122,7 +135,7 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
 
     @SuppressWarnings("unused")
     @RequestMapping(value = MAPPING_URL, params = "e001")
-    public String T004(MenuForm form,
+    public String E001(MenuForm form,
                        Model model) throws Exception {
         if (true) {
             throw new Exception("意図的な強制Exception");

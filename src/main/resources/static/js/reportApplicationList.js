@@ -1,5 +1,5 @@
 /**
- * 月報一覧画面JS
+ * 月報申請状況一覧画面JS
  */
 $(function() {
 
@@ -7,13 +7,15 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/report/list";
+	var defaultUrl = "/tran/report/application/list";
 
 	/**
-	 * 検索ボタン押下
+	 * 選択ボタン押下<br>
+	 * (テーブル明細内)
 	 */
-	$("#search").on("click", function() {
-		var url = defaultUrl + "?search";
+	$("#resultTable button[name='select']").on("click", function() {
+		var index = $(this).val();
+		var url = defaultUrl + "/" + index + "?select";
 		fmMain.attr("action", url);
 		return true;
 	});
@@ -45,16 +47,5 @@ $(function() {
 		var url = defaultUrl + "?pageNext";
 		fmMain.attr("action", url);
 		fmMain.submit();
-	});
-
-	// TODO common.jsに入れたい
-	/**
-	 * 年月カレンダー表示
-	 */
-	$('.datepicker-ym').datepicker({
-		format : "yyyymm",
-		language : "ja",
-		minViewMode : "months",
-		autoclose : true
 	});
 });
