@@ -19,14 +19,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 月報状況一覧画面サービス
+ * 月報一覧画面サービス
  * @author
  */
 @Service
-public class ReportSearchService extends rms.domain.com.abstracts.AbstractService {
+public class ReportSelectService extends rms.domain.com.abstracts.AbstractService {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(ReportSearchService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportSelectService.class);
 
     /** 月報管理テーブルDao */
     @Autowired
@@ -59,7 +59,7 @@ public class ReportSearchService extends rms.domain.com.abstracts.AbstractServic
         List<ReportSearchConditionEntity> resultList = reportDao.searchReport(form.getCondition(), options);
         logger.debug("検索結果(全件) -> {}件", options.getCount());
         logger.debug("検索結果 -> {}件", resultList.size());
-        resultList.forEach(result -> logger.debug(result.toString()));
+        resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
         pageInfo.setTotalSize(options.getCount());

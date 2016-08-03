@@ -19,15 +19,6 @@ $(function() {
 	});
 
 	/**
-	 * 一括DLボタン押下
-	 */
-	$("#downloadBulk").on("click", function() {
-		var url = defaultUrl + "?search";
-		fmMain.attr("action", url);
-		return true;
-	});
-
-	/**
 	 * 選択ボタン押下<br>
 	 * (テーブル明細内)
 	 */
@@ -67,4 +58,14 @@ $(function() {
 		fmMain.submit();
 	});
 
+	// TODO common.jsに入れたい
+	/**
+	 * 年月カレンダー表示
+	 */
+	$('.datepicker-ym').datepicker({
+		format : "yyyy/mm",
+		language : "ja",
+		minViewMode : "months",
+		autoclose : true
+	});
 });

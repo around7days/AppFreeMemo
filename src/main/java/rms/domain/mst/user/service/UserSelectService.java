@@ -1,10 +1,7 @@
 package rms.domain.mst.user.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import rms.com.base.BusinessException;
 import rms.com.consts.Const;
 import rms.com.consts.MRoleConst;
 import rms.domain.com.entity.MUser;
@@ -26,8 +23,6 @@ import org.seasar.doma.jdbc.SelectOptions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.mysql.jdbc.StringUtils;
 
 /**
  * ユーザ情報取得サービス
@@ -100,7 +95,7 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
         List<UserSearchResultEntity> resultList = userSelectDao.userListByCondition(condition, options);
         logger.debug("検索結果(全件) -> {}件", options.getCount());
         logger.debug("検索結果 -> {}件", resultList.size());
-        resultList.forEach(result -> logger.debug(result.toString()));
+        resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
         SearchResultEntity<UserSearchResultEntity> searchResultEntity = new SearchResultEntity<>();
@@ -119,35 +114,5 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
         List<SelectOptionEntity> approverList = userSelectDao.selectboxApprover();
 
         return approverList;
-    }
-
-    /**
-     * ユーザIDの重複チェック<br>
-     * 重複している場合はBusinessExceptionを発生
-     * @param userId
-     * @throws BusinessException
-     */
-    public void checkUniquUserId(String userId) throws BusinessException {
-        if (mUserDao.selectById(userId) != null) {
-            // TODO 汚い・・・
-            List<Object> params = new ArrayList<Object>();
-            params.add("ユーザIDが");
-            throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
-        }
-    }
-
-    /**
-     * 承認ルート設定チェック<br>
-     * 役割に申請者を保持している場合、承認者３は必須入力になります。 <br>
-     * 未入力の場合はBusinessExceptionを発生させます。
-     * @param roleApplicantFlg
-     * @param approver3Id
-     * @throws BusinessException
-     */
-    public void checkApprovalRoute(String roleApplicantFlg,
-                                   String approver3Id) throws BusinessException {
-        if (Const.FLG_ON.equals(roleApplicantFlg) && StringUtils.isNullOrEmpty(approver3Id)) {
-            throw new BusinessException("役割が申請者の場合、承認者３は必須です。");
-        }
     }
 }

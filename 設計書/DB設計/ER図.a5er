@@ -45,6 +45,22 @@ SqlSeparator=0
 ShowTag=1
 ShowCommonAttributes=0
 
+[Comment]
+Comment=【課題】\n・履歴をどの単位で残すのか？\n・アップロードされた月報は上書きになる？
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=9
+FontColor=$000000
+LineColor=$000000
+BkColor=$FFFFFF
+Page=Main
+Left=1600
+Top=1600
+Width=1251
+Height=331
+
 [Relation]
 Entity1=T_REPORT
 Entity2=T_REPORT_HIS
@@ -73,7 +89,7 @@ Comment=
 TableOption=
 Page=MAIN
 Left=1100
-Top=1200
+Top=1050
 Field="申請者ID","applicant_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="対象年","target_year","int","NOT NULL",1,"","",$FFFFFFFF,""
 Field="対象月","target_month","int","NOT NULL",2,"","",$FFFFFFFF,""
@@ -89,7 +105,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160723005711
-Position="MAIN",1100,1200
+Position="MAIN",1100,1050
 
 [Comment]
 Comment=業務
@@ -103,7 +119,7 @@ LineColor=$000000
 BkColor=$C0DCC0
 Page=Main
 Left=100
-Top=1050
+Top=900
 Width=250
 Height=89
 
@@ -248,7 +264,7 @@ Comment=
 TableOption=
 Page=MAIN
 Left=100
-Top=1200
+Top=1050
 Field="申請者ID","applicant_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="対象年","target_year","int","NOT NULL",1,"","",$FFFFFFFF,""
 Field="対象月","target_month","int","NOT NULL",2,"","",$FFFFFFFF,""
@@ -263,4 +279,4 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160723005706
-Position="MAIN",100,1200
+Position="MAIN",100,1050

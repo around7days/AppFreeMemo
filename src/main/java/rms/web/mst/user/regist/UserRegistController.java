@@ -9,6 +9,7 @@ import rms.domain.com.entity.MUser;
 import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.service.UserRegistService;
 import rms.domain.mst.user.service.UserSelectService;
+import rms.domain.mst.user.service.UserValidateService;
 import rms.web.com.utils.SelectOptionEntity;
 import rms.web.mst.user.search.UserSearchController;
 
@@ -55,6 +56,10 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
     /** ユーザ情報取得サービス */
     @Autowired
     UserSelectService userSelectService;
+
+    /** ユーザ情報検証サービス */
+    @Autowired
+    UserValidateService userValidateService;
 
     /** ユーザ情報登録サービス */
     @Autowired
@@ -137,7 +142,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
-            logger.debug(bindingResult.getAllErrors().toString());
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
             return PAGE_URL;
         }
 
@@ -145,9 +150,9 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          * 業務ロジックチェック
          */
         // ユーザIDの重複チェック
-        userSelectService.checkUniquUserId(form.getUserId());
+        userValidateService.validateUniquUserId(form.getUserId());
         // 承認ルート設定チェック
-        userSelectService.checkApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
+        userValidateService.validateApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
 
         /*
          * ユーザマスタ
@@ -198,7 +203,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
-            logger.debug(bindingResult.getAllErrors().toString());
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
             return PAGE_URL;
         }
 
@@ -207,7 +212,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          * 業務ロジックチェック
          */
         // 承認ルート設定チェック
-        userSelectService.checkApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
+        userValidateService.validateApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
 
         /*
          * ユーザマスタ

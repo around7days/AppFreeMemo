@@ -91,7 +91,7 @@ public class ReportApplicantionController extends rms.web.com.abstracts.Abstract
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
-            logger.debug(bindingResult.getAllErrors().toString());
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
             return PAGE_URL;
         }
 

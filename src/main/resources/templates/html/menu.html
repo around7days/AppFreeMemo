@@ -40,23 +40,32 @@
 			<div>
 				<!-- メニュータブ -->
 				<ul class="nav nav-tabs">
-					<li role="presentation" class="active"><a href="#">タブ１</a></li>
-					<li role="presentation"><a href="#">タブ２</a></li>
-					<li role="presentation"><a href="#">タブ３</a></li>
+					<li role="presentation" class="active"><a href="#">申請者</a></li>
+					<li role="presentation"><a href="#">承認者</a></li>
+					<li role="presentation"><a href="#">管理者</a></li>
 				</ul>
 				<!-- メニュー明細 -->
 				<div class="list-group">
 					<button type="submit" name="m001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ一覧</button>
 					<button type="submit" name="m002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ登録</button>
-					<button type="submit" name="t001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報状況一覧</button>
-					<button type="submit" name="t002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
-					<button type="submit" name="t003" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認</button>
+					<button type="submit" name="t001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧</button>
+
+					<div th:if="*{principal.roleApplicant}">
+						<button type="submit" name="t002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
+					</div>
+
+					<div th:if="*{principal.roleApprover}">
+						<button type="submit" name="t003" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認</button>
+					</div>
+
+					<!-- /* テスト用 */-->
 					<div sec:authorize="${hasRole(T(rms.com.consts.MRoleConst).ADMIN)}">
 						<button type="submit" name="e001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　Exception ver1</button>
 					</div>
 					<div th:if="*{principal.roleAdmin}">
-						<button type="submit" name="e001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　Exception ver2</button>
+						<button type="submit" name="e002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　Exception ver2</button>
 					</div>
+
 				</div>
 			</div><!-- /メニュー -->
 

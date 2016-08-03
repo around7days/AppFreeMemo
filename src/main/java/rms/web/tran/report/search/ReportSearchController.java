@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
-import rms.domain.tran.report.service.ReportSearchService;
+import rms.domain.tran.report.service.ReportSelectService;
 import rms.web.tran.report.approval.ReportApprovalController;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 月報状況一覧画面コントローラー
+ * 月報一覧画面コントローラー
  * @author
  */
 @Controller
@@ -45,12 +45,12 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/report/search";
 
-    /** 月報状況一覧画面サービス */
+    /** 月報情報取得サービス */
     @Autowired
-    ReportSearchService reportSearchService;
+    ReportSelectService reportSelectService;
 
     /**
-     * 月報状況一覧画面フォームの初期化
+     * 月報一覧画面フォームの初期化
      * @return
      */
     @ModelAttribute
@@ -67,7 +67,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
     public String initInsert(Model model) {
         // 初期値設定
         ReportSearchForm form = new ReportSearchForm();
-        reportSearchService.init(form);
+        reportSelectService.init(form);
         // 格納
         model.addAttribute(form);
 
@@ -89,12 +89,12 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
-            logger.debug(bindingResult.getAllErrors().toString());
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
             return PAGE_URL;
         }
 
         // 検索処理
-        reportSearchService.search(form);
+        reportSelectService.search(form);
         if (form.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
             return PAGE_URL;
@@ -115,7 +115,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
         logger.debug("フォーム情報 -> {}", form);
 
         // 検索処理
-        reportSearchService.search(form);
+        reportSelectService.search(form);
 
         return PAGE_URL;
     }

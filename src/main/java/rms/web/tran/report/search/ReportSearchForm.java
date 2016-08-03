@@ -6,7 +6,7 @@ import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.web.com.utils.PageInfo;
 
 /**
- * 月報状況一覧画面フォーム
+ * 月報一覧画面フォーム
  * @author
  */
 public class ReportSearchForm extends rms.web.com.abstracts.AbstractForm {

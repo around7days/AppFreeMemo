@@ -9,4 +9,7 @@ INSERT INTO M_CODE( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, v
 INSERT INTO M_CODE( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ( 'A001', '承認状況', '000', '仮登録'    , '', '', '', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO M_CODE( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ( 'A001', '承認状況', '100', '承認済み'  , '', '', '', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO M_CODE( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ( 'A001', '承認状況', '900', '取消'      , '', '', '', 0, 0, now(), 'system', now(), 'system');
+--公開有無：B001
+INSERT INTO M_CODE( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ( 'B001', '公開有無', '0', '非公開', '', '', '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_CODE( code_kbn, code_kbn_nm, code, code_nm, attr1, attr2, attr3, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ( 'B001', '公開有無', '1', '公開'  , '', '', '', 0, 0, now(), 'system', now(), 'system');
 commit;

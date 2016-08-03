@@ -79,7 +79,7 @@ public class LoginController extends rms.web.com.abstracts.AbstractController {
                         Model model) {
         // 入力チェック
         if (bindingResult.hasErrors()) {
-            logger.debug(bindingResult.getAllErrors().toString());
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
             return PAGE_URL;
         }
 
@@ -100,7 +100,7 @@ public class LoginController extends rms.web.com.abstracts.AbstractController {
                              BindingResult bindingResult,
                              Model model) {
         bindingResult.reject("", "ログインに失敗しました");
-        logger.debug(bindingResult.getAllErrors().toString());
+        logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
         return PAGE_URL;
     }
 }

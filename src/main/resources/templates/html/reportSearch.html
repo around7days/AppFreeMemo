@@ -4,14 +4,18 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title></title>
+	<title>月報一覧画面</title>
+
 
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker.css" href="../../static/fw/datepicker/css/bootstrap-datepicker.css" />
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
+	<script th:src="@{/fw/datepicker/js/bootstrap-datepicker.js" src="../../static/fw/datepicker/js/bootstrap-datepicker.js"></script>
+	<script th:src="@{/fw/datepicker/locales/bootstrap-datepicker.ja.min.js" src="../../static/fw/datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<!-- 個別 JS -->
@@ -26,11 +30,11 @@
 	<!-- container -->
 	<div class="container">
 		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 80em">
+		<div class="row" style="max-width: 60em">
 
 			<!-- ヘッダ -->
 			<div class="page-header">
-				<h2>月報状況一覧画面</h2>
+				<h2>月報一覧画面</h2>
 			</div>
 
 			<!-- メッセージ -->
@@ -40,6 +44,13 @@
 				検索条件
 			 -->
 			<div class="form-horizontal">
+				<!-- 年月 -->
+				<div class="form-group">
+					<label for="user" class="col-sm-3 control-label">年月</label>
+					<div class="col-sm-9 form-inline">
+						<input type="text" th:value="*{condition.targetYear}" name="targetYear" id="targetYear" placeholder="yyyy/mm" class="form-control datepicker-ym" />
+					</div>
+				</div>
 				<!-- 申請者 -->
 				<div class="form-group">
 					<label for="user" class="col-sm-3 control-label">申請者</label>
@@ -48,24 +59,9 @@
 						<input type="text" th:value="*{condition.applicantNm}" name="applicantNm" id="applicantNm" placeholder="申請者名（部分一致）" class="form-control" />
 					</div>
 				</div>
-				<!-- 承認状況-->
-				<div class="form-group">
-					<label for="c" class="col-sm-3 control-label">承認状況</label>
-					<div class="col-sm-9">
-						<label class="checkbox-inline">
-							<input type="checkbox" name="statusUnApprove" id="statusUnApprove" th:field="*{condition.statusUnApprove}" value="on" /> 未承認
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="statusApprove" id="statusApprove" th:field="*{condition.statusApprove}" value="on" /> 承認済み
-						</label>
-					</div>
-				</div>
-				<!-- 検索 -->
-				<div class="form-group">
-					<div class="col-sm-offset-3 col-sm-9">
-						<button type="submit" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
-						<button type="submit" id="downloadBulk" class="btn btn-primary">一括DL <span class="glyphicon glyphicon-download"></span></button>
-					</div>
+				<!-- 検索・新規ボタン -->
+				<div class="text-center">
+					<button type="submit" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
 				</div>
 			</div><!-- /検索条件 -->
 
@@ -81,23 +77,18 @@
 					<!-- ヘッダ -->
 					<thead class="thead-default">
 						<tr>
-							<th>選択</th>
 							<th>年月</th>
 							<th>申請者</th>
 							<th>部署</th>
-							<th>状況</th>
 							<th>月報</th>
 						</tr>
 					</thead>
 					<!-- 明細 -->
 					<tbody>
-						<!-- -->
 						<tr th:each="result,iteStatus : *{resultList}">
-							<td><button type="submit" formnovalidate="formnovalidate" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
 							<td th:text="${result.targetYm}">2016/06</td>
 							<td th:text="${result.applicantNm}">月報太郎</td>
 							<td th:text="${result.department}">2SOL</td>
-							<td th:text="${result.statusNm}">○○承認待ち</td>
 							<td><button type="submit" formnovalidate="formnovalidate" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
 					</tbody>

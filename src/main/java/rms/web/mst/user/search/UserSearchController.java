@@ -80,7 +80,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
-            logger.debug(bindingResult.getAllErrors().toString());
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
             return PAGE_URL;
         }
 
