@@ -9,13 +9,13 @@
 
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
-	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker.css" href="../../static/fw/datepicker/css/bootstrap-datepicker.css" />
+	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker.css}" href="../../static/fw/datepicker/css/bootstrap-datepicker.css" />
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
-	<script th:src="@{/fw/datepicker/js/bootstrap-datepicker.js" src="../../static/fw/datepicker/js/bootstrap-datepicker.js"></script>
-	<script th:src="@{/fw/datepicker/locales/bootstrap-datepicker.ja.min.js" src="../../static/fw/datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
+	<script th:src="@{/fw/datepicker/js/bootstrap-datepicker.js}" src="../../static/fw/datepicker/js/bootstrap-datepicker.js"></script>
+	<script th:src="@{/fw/datepicker/locales/bootstrap-datepicker.ja.min.js}" src="../../static/fw/datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<!-- 個別 JS -->
@@ -48,15 +48,15 @@
 				<div class="form-group">
 					<label for="user" class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.targetYear}" name="targetYear" id="targetYear" placeholder="yyyy/mm" class="form-control datepicker-ym" />
+						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" placeholder="yyyymm" class="form-control datepicker-ym" readonly="readonly" />
 					</div>
 				</div>
 				<!-- 申請者 -->
 				<div class="form-group">
 					<label for="user" class="col-sm-3 control-label">申請者</label>
 					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.applicantId}" name="applicantId" id="applicantId" placeholder="申請者ID（完全一致）" class="form-control" />
-						<input type="text" th:value="*{condition.applicantNm}" name="applicantNm" id="applicantNm" placeholder="申請者名（部分一致）" class="form-control" />
+						<input type="text" th:value="*{condition.applicantId}" name="condition.applicantId" id="condition.applicantId" placeholder="申請者ID（完全一致）" class="form-control" />
+						<input type="text" th:value="*{condition.applicantNm}" name="condition.applicantNm" id="condition.applicantNm" placeholder="申請者名（部分一致）" class="form-control" />
 					</div>
 				</div>
 				<!-- 検索・新規ボタン -->
@@ -68,7 +68,7 @@
 			<!--
 				検索結果
 			 -->
-			<div>
+			<div th:if="*{#lists.isEmpty(resultList) == false}">
 				<!-- ページング -->
 				<div th:replace="@{/html/include/include_page}::pageing" ></div>
 
@@ -88,7 +88,7 @@
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td th:text="${result.targetYm}">2016/06</td>
 							<td th:text="${result.applicantNm}">月報太郎</td>
-							<td th:text="${result.department}">2SOL</td>
+							<td>2SOL</td>
 							<td><button type="submit" formnovalidate="formnovalidate" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
 					</tbody>

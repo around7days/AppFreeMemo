@@ -28,10 +28,7 @@ public interface UserSelectDao {
     List<MUserRole> userRoleListByUserId(String userId);
 
     /**
-     * ユーザ検索処理
-     * <p>
-     * 検索条件に一致したユーザ情報を取得する。
-     * </p>
+     * ユーザ一覧の取得<br>
      * @param condition
      * @param options
      * @return

@@ -4,11 +4,11 @@ import java.util.List;
 
 import rms.domain.com.repository.TReportDao;
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
-import rms.domain.tran.report.repository.ReportDao;
+import rms.domain.tran.report.entity.ReportSearchResultEntity;
+import rms.domain.tran.report.repository.ReportSelectDao;
+import rms.web.base.SearchResultEntity;
 import rms.web.com.utils.PageInfo;
 import rms.web.com.utils.SelectOptionsUtils;
-import rms.web.tran.report.search.ReportSearchConditionForm;
-import rms.web.tran.report.search.ReportSearchForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,38 +32,34 @@ public class ReportSelectService extends rms.domain.com.abstracts.AbstractServic
     @Autowired
     TReportDao tReportDao;
 
-    /** 月報情報Dao */
+    /** 月報情報取得Dao */
     @Autowired
-    ReportDao reportDao;
+    ReportSelectDao reportSelectDao;
 
     /**
-     * 初期処理
-     * @param form
+     * 月報情報一覧取得
+     * @param condition
+     * @param pageInfo
+     * @return
      */
-    public void init(ReportSearchForm form) {
-        // 検索条件の初期値設定
-        ReportSearchConditionForm searchForm = form.getCondition();
-        searchForm.setStatusUnApprove("on");
-    }
-
-    /**
-     * 検索処理
-     * @param form
-     */
-    public void search(ReportSearchForm form) {
+    public SearchResultEntity<ReportSearchResultEntity> getReportList(ReportSearchConditionEntity condition,
+                                                                      PageInfo pageInfo) {
         // ページング設定
-        PageInfo pageInfo = form.getPageInfo();
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
-        List<ReportSearchConditionEntity> resultList = reportDao.searchReport(form.getCondition(), options);
+        List<ReportSearchResultEntity> resultList = reportSelectDao.reportListByCondition(condition, options);
         logger.debug("検索結果(全件) -> {}件", options.getCount());
         logger.debug("検索結果 -> {}件", resultList.size());
         resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
-        pageInfo.setTotalSize(options.getCount());
-        form.setResultList(resultList);
+        SearchResultEntity<ReportSearchResultEntity> searchResultEntity = new SearchResultEntity<>();
+        searchResultEntity.setResultList(resultList);
+        searchResultEntity.setCount(options.getCount());
+
+        return searchResultEntity;
+
     }
 
 }

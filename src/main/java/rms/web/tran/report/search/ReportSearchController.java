@@ -1,16 +1,18 @@
 package rms.web.tran.report.search;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
+import rms.domain.tran.report.entity.ReportSearchResultEntity;
 import rms.domain.tran.report.service.ReportSelectService;
-import rms.web.tran.report.approval.ReportApprovalController;
+import rms.web.base.SearchResultEntity;
+import rms.web.com.utils.FileUtils;
+import rms.web.com.utils.PageInfo;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +47,10 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/report/search";
 
+    /** application.properties */
+    @Autowired
+    private Properties applicationProperties;
+
     /** 月報情報取得サービス */
     @Autowired
     ReportSelectService reportSelectService;
@@ -60,17 +66,13 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
 
     /**
      * 初期処理
+     * @param form
      * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "init")
-    public String initInsert(Model model) {
-        // 初期値設定
-        ReportSearchForm form = new ReportSearchForm();
-        reportSelectService.init(form);
-        // 格納
-        model.addAttribute(form);
-
+    public String initInsert(ReportSearchForm form,
+                             Model model) {
         return PAGE_URL;
     }
 
@@ -93,12 +95,25 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
             return PAGE_URL;
         }
 
+        // 検索結果・ページ情報の初期化
+        form.setPageInfo(new PageInfo());
+        form.setResultList(null);
+
+        // 検索条件の生成
+        ReportSearchConditionEntity condition = new ReportSearchConditionEntity();
+        BeanUtils.copyProperties(form.getCondition(), condition);
+
         // 検索処理
-        reportSelectService.search(form);
-        if (form.getResultList().isEmpty()) {
+        SearchResultEntity<ReportSearchResultEntity> searchResultEntity = reportSelectService.getReportList(condition,
+                                                                                                            form.getPageInfo());
+        if (searchResultEntity.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
             return PAGE_URL;
         }
+
+        // 検索結果をフォームに反映
+        form.setResultList(searchResultEntity.getResultList());
+        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
 
         return PAGE_URL;
     }
@@ -114,8 +129,17 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
                            Model model) {
         logger.debug("フォーム情報 -> {}", form);
 
+        // 検索条件の生成
+        ReportSearchConditionEntity condition = new ReportSearchConditionEntity();
+        BeanUtils.copyProperties(form.getCondition(), condition);
+
         // 検索処理
-        reportSelectService.search(form);
+        SearchResultEntity<ReportSearchResultEntity> searchResultEntity = reportSelectService.getReportList(condition,
+                                                                                                            form.getPageInfo());
+
+        // 検索結果をフォームに反映
+        form.setResultList(searchResultEntity.getResultList());
+        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
 
         return PAGE_URL;
     }
@@ -167,46 +191,44 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportSearchConditionEntity result = form.getResultList().get(index);
+        ReportSearchResultEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result);
 
         /*
          * ファイルダウンロード処理
          */
         // ダウンロードファイルパス・ファイル名の生成
-        Path filePath = Paths.get("./upload_file", result.getFilePath());
-        String encodeFileNm = URLEncoder.encode(filePath.toFile().getName(), StandardCharsets.UTF_8.name());
-        logger.debug("ダウンロードファイル -> {}", filePath.toAbsolutePath().toString());
+        // TODO ファイル名の規則を決める
+        String baseDir = applicationProperties.getProperty("myapp.report.storage");
+        String relativePath = "月報.xlsx";
+        Path filePath = Paths.get(baseDir, relativePath);
 
-        // ヘッダ設定
-        response.addHeader("Content-Disposition", "attachment; filename*=UTF-8''" + encodeFileNm);
-
-        // ファイル出力
-        Files.copy(filePath, response.getOutputStream());
+        // 月報ダウンロード
+        FileUtils.reportDownload(response, filePath);
 
         return null;
     }
 
-    /**
-     * 月報選択処理
-     * @param form
-     * @param index
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
-    public String select(ReportSearchForm form,
-                         @PathVariable int index,
-                         Model model) {
-        logger.debug("選択値 -> {}", index);
-
-        // 選択した月報情報
-        ReportSearchConditionEntity result = form.getResultList().get(index);
-        logger.debug("選択月報情報 -> {}", result);
-
-        // 月報承認画面
-        return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplicantId() + "/"
-                        + result.getTargetYm(), "init");
-    }
+    //    /**
+    //     * 月報選択処理
+    //     * @param form
+    //     * @param index
+    //     * @param model
+    //     * @return
+    //     */
+    //    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
+    //    public String select(ReportSearchForm form,
+    //                         @PathVariable int index,
+    //                         Model model) {
+    //        logger.debug("選択値 -> {}", index);
+    //
+    //        // 選択した月報情報
+    //        ReportSearchResultEntity result = form.getResultList().get(index);
+    //        logger.debug("選択月報情報 -> {}", result);
+    //
+    //        // 月報承認画面
+    //        return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplicantId() + "/"
+    //                        + result.getTargetYm(), "init");
+    //    }
 
 }

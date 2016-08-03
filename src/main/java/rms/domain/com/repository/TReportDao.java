@@ -21,42 +21,36 @@ public interface TReportDao {
     /**
      * 1件取得
      * @param applicantId
-     * @param targetYear
-     * @param targetMonth
+     * @param targetYm
      * @return the TReport entity
      */
     @Select
     TReport selectById(String applicantId,
-                       Integer targetYear,
-                       Integer targetMonth);
+                       Integer targetYm);
 
     /**
      * 1件取得
      * @param applicantId
-     * @param targetYear
-     * @param targetMonth
+     * @param targetYm
      * @param options
      * @return the TReport entity
      */
     @Select
     TReport selectById(String applicantId,
-                       Integer targetYear,
-                       Integer targetMonth,
+                       Integer targetYm,
                        SelectOptions options);
 
     /**
      * 1件取得
      * @param applicantId
-     * @param targetYear
-     * @param targetMonth
+     * @param targetYm
      * @param version
      * @throws NoResultException
      * @return the TReport entity
      */
     @Select(ensureResult = true)
     TReport selectByIdAndVersion(String applicantId,
-                                 Integer targetYear,
-                                 Integer targetMonth,
+                                 Integer targetYm,
                                  Integer version) throws NoResultException;
 
     /**

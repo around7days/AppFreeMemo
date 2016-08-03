@@ -63,7 +63,7 @@ $(function() {
 	 * 年月カレンダー表示
 	 */
 	$('.datepicker-ym').datepicker({
-		format : "yyyy/mm",
+		format : "yyyymm",
 		language : "ja",
 		minViewMode : "months",
 		autoclose : true

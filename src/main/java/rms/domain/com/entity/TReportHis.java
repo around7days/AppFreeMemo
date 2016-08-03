@@ -21,15 +21,10 @@ public class TReportHis {
     @Column(name = "applicant_id")
     private String applicantId;
 
-    /** 対象年 */
+    /** 対象年月 */
     @Id
-    @Column(name = "target_year")
-    private Integer targetYear;
-
-    /** 対象月 */
-    @Id
-    @Column(name = "target_month")
-    private Integer targetMonth;
+    @Column(name = "target_ym")
+    private Integer targetYm;
 
     /** 連番 */
     @Id
@@ -106,35 +101,19 @@ public class TReportHis {
     }
 
     /**
-     * 対象年を取得します.
-     * @return 対象年
+     * 対象年月を取得します.
+     * @return 対象年月
      */
-    public Integer getTargetYear() {
-        return targetYear;
+    public Integer getTargetYm() {
+        return targetYm;
     }
 
     /**
-     * 対象年を設定します.
-     * @param targetYear 対象年
+     * 対象年月を設定します.
+     * @param targetYm 対象年月
      */
-    public void setTargetYear(Integer targetYear) {
-        this.targetYear = targetYear;
-    }
-
-    /**
-     * 対象月を取得します.
-     * @return 対象月
-     */
-    public Integer getTargetMonth() {
-        return targetMonth;
-    }
-
-    /**
-     * 対象月を設定します.
-     * @param targetMonth 対象月
-     */
-    public void setTargetMonth(Integer targetMonth) {
-        this.targetMonth = targetMonth;
+    public void setTargetYm(Integer targetYm) {
+        this.targetYm = targetYm;
     }
 
     /**

@@ -59,7 +59,7 @@
 			<!--
 				検索結果
 			 -->
-			<div>
+			<div th:if="*{#lists.isEmpty(resultList) == false}">
 				<!-- ページング -->
 				<div th:replace="@{/html/include/include_page}::pageing" ></div>
 

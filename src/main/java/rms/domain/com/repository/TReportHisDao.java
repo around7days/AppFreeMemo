@@ -21,38 +21,33 @@ public interface TReportHisDao {
     /**
      * 1件取得
      * @param applicantId
-     * @param targetYear
-     * @param targetMonth
+     * @param targetYm
      * @param seq
      * @return the TReportHis entity
      */
     @Select
     TReportHis selectById(String applicantId,
-                          Integer targetYear,
-                          Integer targetMonth,
+                          Integer targetYm,
                           Integer seq);
 
     /**
      * 1件取得
      * @param applicantId
-     * @param targetYear
-     * @param targetMonth
+     * @param targetYm
      * @param seq
      * @param options
      * @return the TReportHis entity
      */
     @Select
     TReportHis selectById(String applicantId,
-                          Integer targetYear,
-                          Integer targetMonth,
+                          Integer targetYm,
                           Integer seq,
                           SelectOptions options);
 
     /**
      * 1件取得
      * @param applicantId
-     * @param targetYear
-     * @param targetMonth
+     * @param targetYm
      * @param seq
      * @param version
      * @throws NoResultException
@@ -60,8 +55,7 @@ public interface TReportHisDao {
      */
     @Select(ensureResult = true)
     TReportHis selectByIdAndVersion(String applicantId,
-                                    Integer targetYear,
-                                    Integer targetMonth,
+                                    Integer targetYm,
                                     Integer seq,
                                     Integer version) throws NoResultException;
 

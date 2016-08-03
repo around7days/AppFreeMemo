@@ -3,8 +3,6 @@ package rms.web.menu;
 import rms.web.com.utils.SessionUtils;
 import rms.web.mst.user.regist.UserRegistController;
 import rms.web.mst.user.search.UserSearchController;
-import rms.web.tran.report.applicantion.ReportApplicantionController;
-import rms.web.tran.report.approval.ReportApprovalController;
 import rms.web.tran.report.search.ReportSearchController;
 
 import org.springframework.stereotype.Controller;
@@ -98,29 +96,29 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
         return redirect(ReportSearchController.MAPPING_URL, "init");
     }
 
-    /**
-     * 月報申請画面に遷移
-     * @param form
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = MAPPING_URL, params = "t002")
-    public String T002(MenuForm form,
-                       Model model) {
-        return redirect(ReportApplicantionController.MAPPING_URL, "initInsert");
-    }
-
-    /**
-     * 月報承認画面に遷移
-     * @param form
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = MAPPING_URL, params = "t003")
-    public String T003(MenuForm form,
-                       Model model) {
-        return redirect(ReportApprovalController.MAPPING_URL + "/user01/201606", "init");
-    }
+    //    /**
+    //     * 月報申請画面に遷移
+    //     * @param form
+    //     * @param model
+    //     * @return
+    //     */
+    //    @RequestMapping(value = MAPPING_URL, params = "t002")
+    //    public String T002(MenuForm form,
+    //                       Model model) {
+    //        return redirect(ReportApplicantionController.MAPPING_URL, "initInsert");
+    //    }
+    //
+    //    /**
+    //     * 月報承認画面に遷移
+    //     * @param form
+    //     * @param model
+    //     * @return
+    //     */
+    //    @RequestMapping(value = MAPPING_URL, params = "t003")
+    //    public String T003(MenuForm form,
+    //                       Model model) {
+    //        return redirect(ReportApprovalController.MAPPING_URL + "/user01/201606", "init");
+    //    }
 
     @SuppressWarnings("unused")
     @RequestMapping(value = MAPPING_URL, params = "e001")

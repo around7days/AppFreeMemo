@@ -53,7 +53,7 @@ task domaGenEntity << {
     def entitySql         =
 '''
 select
-	1
+	'X'
 from
 	dual
 '''
