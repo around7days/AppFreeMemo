@@ -1,10 +1,10 @@
-package rms.web.tran.report.search;
+package rms.web.tran.report.list;
 
 /**
  * 月報一覧（検索条件）画面フォーム
  * @author
  */
-public class ReportSearchConditionForm extends rms.web.com.abstracts.AbstractForm {
+public class ReportListConditionForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 対象年月 */

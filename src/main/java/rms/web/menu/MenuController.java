@@ -1,9 +1,9 @@
 package rms.web.menu;
 
 import rms.web.com.utils.SessionUtils;
+import rms.web.mst.user.list.UserListController;
 import rms.web.mst.user.regist.UserRegistController;
-import rms.web.mst.user.search.UserSearchController;
-import rms.web.tran.report.search.ReportSearchController;
+import rms.web.tran.report.list.ReportListController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +69,7 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "m001")
     public String M001(MenuForm form,
                        Model model) {
-        return redirect(UserSearchController.MAPPING_URL, "init");
+        return redirect(UserListController.MAPPING_URL, "init");
     }
 
     /**
@@ -93,7 +93,7 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "t001")
     public String T001(MenuForm form,
                        Model model) {
-        return redirect(ReportSearchController.MAPPING_URL, "init");
+        return redirect(ReportListController.MAPPING_URL, "init");
     }
 
     //    /**

@@ -11,7 +11,7 @@ import rms.domain.mst.user.service.UserRegistService;
 import rms.domain.mst.user.service.UserSelectService;
 import rms.domain.mst.user.service.UserValidateService;
 import rms.web.com.utils.SelectOptionEntity;
-import rms.web.mst.user.search.UserSearchController;
+import rms.web.mst.user.list.UserListController;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,7 +179,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(UserSearchController.MAPPING_URL, "reSearch");
+        return redirect(UserListController.MAPPING_URL, "reSearch");
     }
 
     /**
@@ -237,7 +237,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(UserSearchController.MAPPING_URL, "reSearch");
+        return redirect(UserListController.MAPPING_URL, "reSearch");
     }
 
     /**
@@ -251,7 +251,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
                        SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(UserSearchController.MAPPING_URL, "reSearch");
+        return redirect(UserListController.MAPPING_URL, "reSearch");
     }
 
     // ----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-package rms.web.mst.user.search;
+package rms.web.mst.user.list;
 
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
@@ -28,17 +28,17 @@ import org.slf4j.LoggerFactory;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(types = UserSearchForm.class)
-public class UserSearchController extends rms.web.com.abstracts.AbstractController {
+@SessionAttributes(types = UserListForm.class)
+public class UserListController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(UserSearchController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserListController.class);
 
     /** ページURL */
-    private static final String PAGE_URL = "html/userSearch";
+    private static final String PAGE_URL = "html/userList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/mst/user/search";
+    public static final String MAPPING_URL = "/mst/user/list";
 
     /** ユーザ情報取得サービス */
     @Autowired
@@ -49,8 +49,8 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @ModelAttribute
-    UserSearchForm setupForm() {
-        return new UserSearchForm();
+    UserListForm setupForm() {
+        return new UserListForm();
     }
 
     /**
@@ -60,7 +60,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "init")
-    public String init(UserSearchForm form,
+    public String init(UserListForm form,
                        Model model) {
         return PAGE_URL;
     }
@@ -73,7 +73,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "search")
-    public String search(@Validated UserSearchForm form,
+    public String search(@Validated UserListForm form,
                          BindingResult bindingResult,
                          Model model) {
         logger.debug("フォーム情報 -> {}", form);
@@ -114,7 +114,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "reSearch")
-    public String reSearch(UserSearchForm form,
+    public String reSearch(UserListForm form,
                            Model model) {
         logger.debug("フォーム情報 -> {}", form);
 
@@ -140,7 +140,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pagePrev")
-    public String pagePrev(UserSearchForm form,
+    public String pagePrev(UserListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().prev();
@@ -155,7 +155,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pageNext")
-    public String pageNext(UserSearchForm form,
+    public String pageNext(UserListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().next();
@@ -180,7 +180,7 @@ public class UserSearchController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
-    public String select(UserSearchForm form,
+    public String select(UserListForm form,
                          @PathVariable int index,
                          Model model) {
         logger.debug("選択値 -> {}", index);

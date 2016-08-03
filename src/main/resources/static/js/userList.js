@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/mst/user/search";
+	var defaultUrl = "/mst/user/list";
 
 	/**
 	 * 検索ボタン押下

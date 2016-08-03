@@ -1,4 +1,4 @@
-package rms.web.tran.report.search;
+package rms.web.tran.report.list;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -35,17 +35,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(types = ReportSearchForm.class)
-public class ReportSearchController extends rms.web.com.abstracts.AbstractController {
+@SessionAttributes(types = ReportListForm.class)
+public class ReportListController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(ReportSearchController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportListController.class);
 
     /** ページURL */
-    private static final String PAGE_URL = "html/reportSearch";
+    private static final String PAGE_URL = "html/reportList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/search";
+    public static final String MAPPING_URL = "/tran/report/list";
 
     /** 月報格納ベースディレクトリ */
     @Value("${myapp.report.storage}")
@@ -60,8 +60,8 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
      * @return
      */
     @ModelAttribute
-    ReportSearchForm setupForm() {
-        return new ReportSearchForm();
+    ReportListForm setupForm() {
+        return new ReportListForm();
     }
 
     /**
@@ -71,7 +71,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "init")
-    public String initInsert(ReportSearchForm form,
+    public String initInsert(ReportListForm form,
                              Model model) {
         return PAGE_URL;
     }
@@ -84,7 +84,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "search")
-    public String search(@Validated ReportSearchForm form,
+    public String search(@Validated ReportListForm form,
                          BindingResult bindingResult,
                          Model model) {
         logger.debug("フォーム情報 -> {}", form);
@@ -125,7 +125,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "reSearch")
-    public String reSearch(ReportSearchForm form,
+    public String reSearch(ReportListForm form,
                            Model model) {
         logger.debug("フォーム情報 -> {}", form);
 
@@ -151,7 +151,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pagePrev")
-    public String pagePrev(ReportSearchForm form,
+    public String pagePrev(ReportListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().prev();
@@ -166,7 +166,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pageNext")
-    public String pageNext(ReportSearchForm form,
+    public String pageNext(ReportListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().next();
@@ -184,7 +184,7 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "download")
-    public String download(ReportSearchForm form,
+    public String download(ReportListForm form,
                            @PathVariable int index,
                            HttpServletResponse response,
                            Model model) throws IOException {

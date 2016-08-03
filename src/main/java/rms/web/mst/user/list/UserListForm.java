@@ -1,33 +1,33 @@
-package rms.web.tran.report.search;
+package rms.web.mst.user.list;
 
 import java.util.List;
 
-import rms.domain.tran.report.entity.ReportSearchResultEntity;
+import rms.domain.mst.user.entity.UserSearchResultEntity;
 import rms.web.com.utils.PageInfo;
 
 import javax.validation.Valid;
 
 /**
- * 月報一覧画面フォーム
+ * ユーザ一覧画面フォーム
  * @author
  */
-public class ReportSearchForm extends rms.web.com.abstracts.AbstractForm {
+public class UserListForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
     @Valid
-    private ReportSearchConditionForm condition = new ReportSearchConditionForm();
+    private UserListConditionForm condition = new UserListConditionForm();
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
-    private List<ReportSearchResultEntity> resultList;
+    private List<UserSearchResultEntity> resultList;
 
     /* getter/setter -------------------------------------------------------- */
     /**
      * 検索条件を取得します。
      * @return 検索条件
      */
-    public ReportSearchConditionForm getCondition() {
+    public UserListConditionForm getCondition() {
         return condition;
     }
 
@@ -35,7 +35,7 @@ public class ReportSearchForm extends rms.web.com.abstracts.AbstractForm {
      * 検索条件を設定します。
      * @param condition 検索条件
      */
-    public void setCondition(ReportSearchConditionForm condition) {
+    public void setCondition(UserListConditionForm condition) {
         this.condition = condition;
     }
 
@@ -59,7 +59,7 @@ public class ReportSearchForm extends rms.web.com.abstracts.AbstractForm {
      * 検索結果リストを取得します。
      * @return 検索結果リスト
      */
-    public List<ReportSearchResultEntity> getResultList() {
+    public List<UserSearchResultEntity> getResultList() {
         return resultList;
     }
 
@@ -67,7 +67,8 @@ public class ReportSearchForm extends rms.web.com.abstracts.AbstractForm {
      * 検索結果リストを設定します。
      * @param resultList 検索結果リスト
      */
-    public void setResultList(List<ReportSearchResultEntity> resultList) {
+    public void setResultList(List<UserSearchResultEntity> resultList) {
         this.resultList = resultList;
     }
+
 }

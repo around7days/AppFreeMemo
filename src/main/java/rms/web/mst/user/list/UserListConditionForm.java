@@ -1,4 +1,4 @@
-package rms.web.mst.user.search;
+package rms.web.mst.user.list;
 
 import javax.validation.constraints.Size;
 
@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
  * ユーザ一覧（検索条件）画面フォーム
  * @author
  */
-public class UserSearchConditionForm extends rms.web.com.abstracts.AbstractForm {
+public class UserListConditionForm extends rms.web.com.abstracts.AbstractForm {
 
     /** ユーザID */
     @Size(max = 10, message = "ユーザIDは{Size.message}")

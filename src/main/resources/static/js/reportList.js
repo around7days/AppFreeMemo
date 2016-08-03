@@ -1,5 +1,5 @@
 /**
- * 月報状況一覧画面JS
+ * 月報一覧画面JS
  */
 $(function() {
 
@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/report/search";
+	var defaultUrl = "/tran/report/list";
 
 	/**
 	 * 検索ボタン押下
