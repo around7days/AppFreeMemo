@@ -3,7 +3,6 @@ package rms.web.tran.report.search;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Properties;
 
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.entity.ReportSearchResultEntity;
@@ -14,6 +13,7 @@ import rms.web.com.utils.PageInfo;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -47,16 +47,16 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/report/search";
 
-    /** application.properties */
-    @Autowired
-    private Properties applicationProperties;
+    /** 月報格納ベースディレクトリ */
+    @Value("${myapp.report.storage}")
+    private String reportStorage;
 
     /** 月報情報取得サービス */
     @Autowired
     ReportSelectService reportSelectService;
 
     /**
-     * 月報一覧画面フォームの初期化
+     * 月報検索画面フォームの初期化
      * @return
      */
     @ModelAttribute
@@ -199,9 +199,8 @@ public class ReportSearchController extends rms.web.com.abstracts.AbstractContro
          */
         // ダウンロードファイルパス・ファイル名の生成
         // TODO ファイル名の規則を決める
-        String baseDir = applicationProperties.getProperty("myapp.report.storage");
         String relativePath = "月報.xlsx";
-        Path filePath = Paths.get(baseDir, relativePath);
+        Path filePath = Paths.get(reportStorage, relativePath);
 
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);

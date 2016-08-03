@@ -31,7 +31,7 @@ public class FileUtils {
                                       Path filePath) throws UnsupportedEncodingException, IOException {
         // 月報ファイルパスの生成
         String encodeFileNm = URLEncoder.encode(filePath.toFile().getName(), StandardCharsets.UTF_8.name());
-        logger.debug("月報ファイル -> {}", filePath.toAbsolutePath());
+        logger.debug("月報ファイル -> {}", filePath.toAbsolutePath().normalize());
 
         // ヘッダ設定
         response.addHeader("Content-Disposition", "attachment; filename*=UTF-8''" + encodeFileNm);
