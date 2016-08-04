@@ -23,11 +23,11 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserRegistService.class);
 
-    /** ユーザマスタDao */
+    /** MUserDao */
     @Autowired
     MUserDao mUserDao;
 
-    /** ユーザ役割マスタDao */
+    /** MUserRoleDao */
     @Autowired
     MUserRoleDao mUserRoleDao;
 

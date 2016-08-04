@@ -1,12 +1,11 @@
 package rms.domain.com.repository;
 
-import org.seasar.doma.Dao;
-import org.seasar.doma.Delete;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Update;
 import rms.domain.com.entity.VMUserRole;
-import org.seasar.doma.jdbc.OptimisticLockException;
+
+import org.seasar.doma.Dao;
+import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
+import org.seasar.doma.jdbc.SelectOptions;
 
 /**
  * VMUserRoleDaoクラス
@@ -16,35 +15,25 @@ import org.seasar.doma.boot.ConfigAutowireable;
 public interface VMUserRoleDao {
 
     /**
-     * 挿入
-     * @param entity
-     * @return affected rows
+     * 1件取得
+     * @param userId
+     * @param role
+     * @return the MUserRole entity
      */
-    @Insert(excludeNull = true)
-    int insert(VMUserRole entity);
+    @Select
+    VMUserRole selectById(String userId,
+                          String role);
 
     /**
-     * 更新（楽観的排他制御）
-     * @param entity
-     * @return affected rows
-     * @throws OptimisticLockException
+     * 1件取得
+     * @param userId
+     * @param role
+     * @param options
+     * @return the MUserRole entity
      */
-    @Update(excludeNull = true)
-    int update(VMUserRole entity) throws OptimisticLockException;
+    @Select
+    VMUserRole selectById(String userId,
+                          String role,
+                          SelectOptions options);
 
-    /**
-     * 更新
-     * @param entity
-     * @return affected rows
-     */
-    @Update(excludeNull = true, ignoreVersion = true)
-    int updateNoOptimisticLockException(VMUserRole entity);
-
-    /**
-     * 削除
-     * @param entity
-     * @return affected rows
-     */
-    @Delete
-    int delete(VMUserRole entity);
 }

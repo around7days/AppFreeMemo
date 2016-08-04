@@ -3,6 +3,7 @@ package rms.domain.tran.report.service;
 import java.util.List;
 
 import rms.domain.com.entity.VTReport;
+import rms.domain.com.repository.VTReportDao;
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.entity.ReportSearchResultEntity;
 import rms.domain.tran.report.repository.ReportSelectDao;
@@ -28,6 +29,10 @@ public class ReportSelectService extends rms.domain.com.abstracts.AbstractServic
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportSelectService.class);
 
+    /** VTReportDao */
+    @Autowired
+    VTReportDao vTReportDao;
+
     /** 月報情報取得Dao */
     @Autowired
     ReportSelectDao reportSelectDao;
@@ -41,7 +46,7 @@ public class ReportSelectService extends rms.domain.com.abstracts.AbstractServic
     public VTReport getReportInfo(String applyUserId,
                                   String targetYm) {
         // 月報情報の取得
-        VTReport entity = reportSelectDao.reportById(applyUserId, Integer.valueOf(targetYm));
+        VTReport entity = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
         logger.debug("取得情報 -> {}", entity);
 
         return entity;

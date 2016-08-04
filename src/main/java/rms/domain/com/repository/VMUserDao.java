@@ -1,12 +1,11 @@
 package rms.domain.com.repository;
 
-import org.seasar.doma.Dao;
-import org.seasar.doma.Delete;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Update;
 import rms.domain.com.entity.VMUser;
-import org.seasar.doma.jdbc.OptimisticLockException;
+
+import org.seasar.doma.Dao;
+import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
+import org.seasar.doma.jdbc.SelectOptions;
 
 /**
  * VMUserDaoクラス
@@ -16,35 +15,21 @@ import org.seasar.doma.boot.ConfigAutowireable;
 public interface VMUserDao {
 
     /**
-     * 挿入
-     * @param entity
-     * @return affected rows
+     * 1件取得
+     * @param userId
+     * @return the VMUser entity
      */
-    @Insert(excludeNull = true)
-    int insert(VMUser entity);
+    @Select
+    VMUser selectById(String userId);
 
     /**
-     * 更新（楽観的排他制御）
-     * @param entity
-     * @return affected rows
-     * @throws OptimisticLockException
+     * 1件取得
+     * @param userId
+     * @param options
+     * @return the VMUser entity
      */
-    @Update(excludeNull = true)
-    int update(VMUser entity) throws OptimisticLockException;
+    @Select
+    VMUser selectById(String userId,
+                      SelectOptions options);
 
-    /**
-     * 更新
-     * @param entity
-     * @return affected rows
-     */
-    @Update(excludeNull = true, ignoreVersion = true)
-    int updateNoOptimisticLockException(VMUser entity);
-
-    /**
-     * 削除
-     * @param entity
-     * @return affected rows
-     */
-    @Delete
-    int delete(VMUser entity);
 }

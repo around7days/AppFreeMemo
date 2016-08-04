@@ -6,6 +6,7 @@ import rms.com.consts.Const;
 import rms.com.consts.MRoleConst;
 import rms.domain.com.entity.MUserRole;
 import rms.domain.com.entity.VMUser;
+import rms.domain.com.repository.VMUserDao;
 import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
@@ -32,7 +33,11 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSelectService.class);
 
-    /** ユーザ情報Dao */
+    /** VMUserDao */
+    @Autowired
+    VMUserDao vMUserDao;
+
+    /** ユーザ情報取得Dao */
     @Autowired
     UserSelectDao userSelectDao;
 
@@ -43,7 +48,7 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
      */
     public UserEntity getUserInfo(String userId) {
         // ユーザマスタ情報の取得
-        VMUser vMUser = userSelectDao.userById(userId);
+        VMUser vMUser = vMUserDao.selectById(userId);
 
         // ユーザ役割マスタ情報の取得
         List<MUserRole> mUserRoleList = userSelectDao.userRoleListByUserId(userId);

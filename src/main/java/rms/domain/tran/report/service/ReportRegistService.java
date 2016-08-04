@@ -24,7 +24,7 @@ public class ReportRegistService extends rms.domain.com.abstracts.AbstractServic
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportRegistService.class);
 
-    /** 月報管理テーブルDao */
+    /** TReportDao */
     @Autowired
     TReportDao tReportDao;
 

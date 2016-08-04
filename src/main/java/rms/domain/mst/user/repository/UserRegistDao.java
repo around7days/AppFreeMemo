@@ -5,7 +5,7 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
- * ユーザ情報削除Dao
+ * ユーザ情報登録Dao
  */
 @Dao
 @ConfigAutowireable

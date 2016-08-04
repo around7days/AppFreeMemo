@@ -4,20 +4,22 @@
 def genUrl                       = 'jdbc:mysql://localhost:3306/mmsdb'
 def genUser                      = 'mms01'
 def genPassword                  = 'mms01'
-def genTableTypes                = 'TABLE, VIEW'
-def genTemplatePrimaryDir        = 'generator/templates_doma'
 def genVersionColumnNamePattern  = 'version'
 //def genSqlFilePattern            = 'META-INF/**/*.sql'
 
 /*
- * 共通ソースコード自動生成
+ * テーブル共通ソースコード自動生成
  */
-task domaGen << {
+task domaGenByTable << {
+    // gen
+    def genTableTypes                = 'TABLE'
+    def genTemplatePrimaryDir        = 'generator/templates_doma'
     // entity
     def entityPackageName        = 'rms.domain.com.entity'
     def entityOverwrite          = true
     def entityOverwriteListener  = true
     def entityUseAccessor        = true
+    def entityUseListener        = true
 //    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
     // dao
     def daoPackageName           = 'rms.domain.com.repository'
@@ -36,11 +38,46 @@ task domaGen << {
                      overwrite: entityOverwrite,
                      overwriteListener: entityOverwriteListener,
 //                     superclassName: entitySuperclassName,
+                     useListener: entityUseListener,
                      useAccessor: entityUseAccessor)
         daoConfig(packageName: daoPackageName, overwrite: daoOverwrite)
         sqlConfig(overwrite: SqlOverwrite)
     }
 }
+
+/*
+ * ビュー共通ソースコード自動生成
+ */
+task domaGenByView << {
+    // gen
+    def genTableTypes                = 'VIEW'
+    def genTemplatePrimaryDir        = 'generator/templates_doma/view'
+    // entity
+    def entityPackageName        = 'rms.domain.com.entity'
+    def entityOverwrite          = true
+    def entityUseAccessor        = true
+    def entityUseListener        = false
+//    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
+    // dao
+    def daoPackageName           = 'rms.domain.com.repository'
+    def daoOverwrite             = false
+
+    ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
+    ant.gen(url: genUrl,
+            user: genUser,
+            password: genPassword,
+            tableTypes: genTableTypes,
+            templatePrimaryDir: genTemplatePrimaryDir,
+            versionColumnNamePattern: genVersionColumnNamePattern) {
+        entityConfig(packageName: entityPackageName,
+                     overwrite: entityOverwrite,
+//                     superclassName: entitySuperclassName,
+                     useListener: entityUseListener,
+                     useAccessor: entityUseAccessor)
+        daoConfig(packageName: daoPackageName, overwrite: daoOverwrite)
+    }
+}
+
 
 /*
  * 個別ソースコード自動生成

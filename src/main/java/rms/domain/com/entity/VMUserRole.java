@@ -11,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * VMUserRoleクラス
  */
-@Entity(listener = VMUserRoleListener.class)
+@Entity
 @Table(name = "v_m_user_role")
 public class VMUserRole {
 

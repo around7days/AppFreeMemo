@@ -2,7 +2,6 @@ package rms.domain.tran.report.repository;
 
 import java.util.List;
 
-import rms.domain.com.entity.VTReport;
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.entity.ReportSearchResultEntity;
 
@@ -12,21 +11,11 @@ import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.SelectOptions;
 
 /**
- * 月報情報Dao
+ * 月報情報取得Dao
  */
 @Dao
 @ConfigAutowireable
 public interface ReportSelectDao {
-
-    /**
-     * 月報情報の取得
-     * @param applyUserId
-     * @param targetYm
-     * @return
-     */
-    @Select
-    VTReport reportById(String applyUserId,
-                        Integer targetYm);
 
     /**
      * 月報情報一覧の取得

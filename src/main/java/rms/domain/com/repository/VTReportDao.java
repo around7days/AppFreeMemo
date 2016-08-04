@@ -1,12 +1,11 @@
 package rms.domain.com.repository;
 
-import org.seasar.doma.Dao;
-import org.seasar.doma.Delete;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Update;
 import rms.domain.com.entity.VTReport;
-import org.seasar.doma.jdbc.OptimisticLockException;
+
+import org.seasar.doma.Dao;
+import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
+import org.seasar.doma.jdbc.SelectOptions;
 
 /**
  * VTReportDaoクラス
@@ -16,35 +15,25 @@ import org.seasar.doma.boot.ConfigAutowireable;
 public interface VTReportDao {
 
     /**
-     * 挿入
-     * @param entity
-     * @return affected rows
+     * 1件取得
+     * @param applyUserId
+     * @param targetYm
+     * @return the TReport entity
      */
-    @Insert(excludeNull = true)
-    int insert(VTReport entity);
+    @Select
+    VTReport selectById(String applyUserId,
+                        Integer targetYm);
 
     /**
-     * 更新（楽観的排他制御）
-     * @param entity
-     * @return affected rows
-     * @throws OptimisticLockException
+     * 1件取得
+     * @param applyUserId
+     * @param targetYm
+     * @param options
+     * @return the TReport entity
      */
-    @Update(excludeNull = true)
-    int update(VTReport entity) throws OptimisticLockException;
+    @Select
+    VTReport selectById(String applyUserId,
+                        Integer targetYm,
+                        SelectOptions options);
 
-    /**
-     * 更新
-     * @param entity
-     * @return affected rows
-     */
-    @Update(excludeNull = true, ignoreVersion = true)
-    int updateNoOptimisticLockException(VTReport entity);
-
-    /**
-     * 削除
-     * @param entity
-     * @return affected rows
-     */
-    @Delete
-    int delete(VTReport entity);
 }

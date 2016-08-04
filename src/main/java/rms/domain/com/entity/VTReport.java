@@ -11,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * VTReportクラス
  */
-@Entity(listener = VTReportListener.class)
+@Entity
 @Table(name = "v_t_report")
 public class VTReport {
 

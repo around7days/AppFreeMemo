@@ -27,11 +27,11 @@ public class UserValidateService extends rms.domain.com.abstracts.AbstractServic
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserValidateService.class);
 
-    /** ユーザマスタDao */
+    /** MUserDao */
     @Autowired
     MUserDao mUserDao;
 
-    /** ユーザ情報Dao */
+    /** ユーザ情報取得Dao */
     @Autowired
     UserSelectDao userSelectDao;
 
@@ -59,7 +59,7 @@ public class UserValidateService extends rms.domain.com.abstracts.AbstractServic
      * @throws BusinessException
      */
     public void validateApprovalRoute(String roleApplyFlg,
-                                   String approveUserId3) throws BusinessException {
+                                      String approveUserId3) throws BusinessException {
         if (Const.FLG_ON.equals(roleApplyFlg) && StringUtils.isNullOrEmpty(approveUserId3)) {
             throw new BusinessException("役割が申請者の場合、承認者３は必須です。");
         }
