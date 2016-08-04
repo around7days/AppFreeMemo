@@ -4,9 +4,8 @@ import java.util.List;
 
 import rms.com.consts.Const;
 import rms.com.consts.MRoleConst;
-import rms.domain.com.entity.MUser;
 import rms.domain.com.entity.MUserRole;
-import rms.domain.com.repository.MUserDao;
+import rms.domain.com.entity.VMUser;
 import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
@@ -33,10 +32,6 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(UserSelectService.class);
 
-    /** ユーザマスタDao */
-    @Autowired
-    MUserDao mUserDao;
-
     /** ユーザ情報Dao */
     @Autowired
     UserSelectDao userSelectDao;
@@ -48,16 +43,19 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
      */
     public UserEntity getUserInfo(String userId) {
         // ユーザマスタ情報の取得
-        MUser mUser = mUserDao.selectById(userId);
+        VMUser vMUser = userSelectDao.userById(userId);
 
         // ユーザ役割マスタ情報の取得
         List<MUserRole> mUserRoleList = userSelectDao.userRoleListByUserId(userId);
 
         // 返却用ユーザ情報の生成
         UserEntity userEntity = new UserEntity();
+
         // ユーザマスタ情報
-        userEntity.setMUser(mUser);
-        // 役割
+        userEntity.setUser(vMUser);
+        // ユーザ役割マスタ情報
+        userEntity.setUserRoleList(mUserRoleList);
+        // 役割情報
         for (MUserRole mUserRole : mUserRoleList) {
             switch (mUserRole.getRole()) {
             case MRoleConst.APPLICANT: //申請者

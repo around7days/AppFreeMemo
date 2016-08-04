@@ -1,4 +1,5 @@
 package rms.web.tran.report.approval.regist;
+
 //package rms.web.tran.report.approval;
 //
 //import java.io.IOException;
@@ -86,14 +87,13 @@ package rms.web.tran.report.approval.regist;
 //     * @param model
 //     * @return
 //     * @throws IOException
-//     * @throws IllegalStateException
 //     */
 //    @RequestMapping(value = MAPPING_URL, params = "approval")
 //    public String approval(@AuthenticationPrincipal UserInfo userInfo,
 //                           ReportApprovalForm form,
 //                           RedirectAttributes redirectAttr,
-//                           Model model) throws IllegalStateException, IOException {
-//        logger.debug("フォーム情報 -> {}", form);
+//                           Model model) throws IOException {
+//        logger.debug("入力フォーム情報 -> {}", form);
 //
 //        // 承認処理
 //        reportApprovalService.approval(form, userInfo);
@@ -112,14 +112,13 @@ package rms.web.tran.report.approval.regist;
 //     * @param model
 //     * @return
 //     * @throws IOException
-//     * @throws IllegalStateException
 //     */
 //    @RequestMapping(value = MAPPING_URL, params = "denial")
 //    public String denial(@AuthenticationPrincipal UserInfo userInfo,
 //                         ReportApprovalForm form,
 //                         RedirectAttributes redirectAttr,
-//                         Model model) throws IllegalStateException, IOException {
-//        logger.debug("フォーム情報 -> {}", form);
+//                         Model model) throws IOException {
+//        logger.debug("入力フォーム情報 -> {}", form);
 //
 //        // 否認処理
 //        reportApprovalService.denial(form, userInfo);

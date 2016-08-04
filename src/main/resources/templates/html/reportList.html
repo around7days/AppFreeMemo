@@ -46,14 +46,14 @@
 			<div class="form-horizontal">
 				<!-- 年月 -->
 				<div class="form-group">
-					<label for="user" class="col-sm-3 control-label">年月</label>
-					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" placeholder="yyyymm" class="form-control datepicker-ym" readonly="readonly" />
+					<label class="col-sm-3 control-label">年月</label>
+					<div class="col-sm-9">
+						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" />
 					</div>
 				</div>
 				<!-- 申請者 -->
 				<div class="form-group">
-					<label for="user" class="col-sm-3 control-label">申請者</label>
+					<label class="col-sm-3 control-label">申請者</label>
 					<div class="col-sm-9 form-inline">
 						<input type="text" th:value="*{condition.applicantId}" name="condition.applicantId" id="condition.applicantId" placeholder="申請者ID（完全一致）" class="form-control" />
 						<input type="text" th:value="*{condition.applicantNm}" name="condition.applicantNm" id="condition.applicantNm" placeholder="申請者名（部分一致）" class="form-control" />

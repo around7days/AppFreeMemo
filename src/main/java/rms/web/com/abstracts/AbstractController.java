@@ -2,20 +2,19 @@ package rms.web.com.abstracts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.core.Conventions;
 import org.springframework.util.StringUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpSession;
-
 /**
+ * AbstractController
  * @author
  */
 public abstract class AbstractController {
 
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(AbstractController.class);
 
     @Autowired
@@ -72,29 +71,4 @@ public abstract class AbstractController {
         }
         return forwardUrl.toString();
     }
-
-    /**
-     * セッションからフォーム情報の取得
-     * @param session
-     * @param cls
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    protected <T> T getSessionForm(HttpSession session,
-                                   Class<T> cls) {
-
-        try {
-            // クラスオブジェクトからSpringの自動生成keyを取得
-            String key = Conventions.getVariableName(cls.newInstance());
-            // セッションから取得
-            Object obj = session.getAttribute(key);
-            if (obj != null && obj.getClass() == cls) {
-                return (T) obj;
-            }
-        } catch (Exception e) {
-            logger.warn("class instance error", e.getMessage());
-        }
-        return null;
-    }
-
 }

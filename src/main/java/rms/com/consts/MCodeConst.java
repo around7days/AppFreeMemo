@@ -29,21 +29,10 @@ public class MCodeConst {
     public static final String A001_900 = "900";
 
     /*
-     * 申請者区分：B001
+     * 公開有無：B001
      */
-    /** 申請者区分：申請者 */
+    /** 公開有無：公開 */
     public static final String B001_1 = "1";
-
-    /*
-     * 承認者区分：C001
-     */
-    /** 承認者区分：承認者 */
-    public static final String C001_1 = "1";
-
-    /*
-     * 管理者区分：D001
-     */
-    /** 管理者区分：管理者 */
-    public static final String D001_1 = "1";
-
+    /** 公開有無：非公開 */
+    public static final String B001_0 = "0";
 }

@@ -28,5 +28,5 @@ and A.applicant_nm like /* @infix(condition.applicantNm) */'%申請者%'
 and A.target_ym = /* condition.targetYm */'201606'
 /*%end */
 ORDER BY
-  A.target_ym
+  A.target_ym desc
   , A.applicant_id

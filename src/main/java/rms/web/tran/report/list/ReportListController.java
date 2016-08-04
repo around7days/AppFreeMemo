@@ -87,7 +87,7 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
     public String search(@Validated ReportListForm form,
                          BindingResult bindingResult,
                          Model model) {
-        logger.debug("フォーム情報 -> {}", form);
+        logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {

@@ -1,6 +1,9 @@
 package rms.domain.mst.user.entity;
 
-import rms.domain.com.entity.MUser;
+import java.util.List;
+
+import rms.domain.com.entity.MUserRole;
+import rms.domain.com.entity.VMUser;
 
 /**
  * ユーザ情報Entity
@@ -8,8 +11,11 @@ import rms.domain.com.entity.MUser;
  */
 public class UserEntity extends rms.domain.com.abstracts.AbstractEntity {
 
-    /** ユーザマスタ情報 */
-    private MUser MUser;
+    /** ユーザマスタビュー情報 */
+    private VMUser user;
+    /** ユーザ役割一覧情報 */
+    private List<MUserRole> userRoleList;
+
     /** 役割：申請者フラグ */
     private String roleApplicantFlg;
     /** 役割：承認者フラグ */
@@ -18,19 +24,35 @@ public class UserEntity extends rms.domain.com.abstracts.AbstractEntity {
     private String roleAdminFlg;
 
     /**
-     * ユーザマスタ情報を取得します。
-     * @return ユーザマスタ情報
+     * ユーザマスタビュー情報を取得します。
+     * @return ユーザマスタビュー情報
      */
-    public MUser getMUser() {
-        return MUser;
+    public VMUser getUser() {
+        return user;
     }
 
     /**
-     * ユーザマスタ情報を設定します。
-     * @param MUser ユーザマスタ情報
+     * ユーザマスタビュー情報を設定します。
+     * @param user ユーザマスタビュー情報
      */
-    public void setMUser(MUser MUser) {
-        this.MUser = MUser;
+    public void setUser(VMUser user) {
+        this.user = user;
+    }
+
+    /**
+     * ユーザ役割一覧情報を取得します。
+     * @return ユーザ役割一覧情報
+     */
+    public List<MUserRole> getUserRoleList() {
+        return userRoleList;
+    }
+
+    /**
+     * ユーザ役割一覧情報を設定します。
+     * @param userRoleList ユーザ役割一覧情報
+     */
+    public void setUserRoleList(List<MUserRole> userRoleList) {
+        this.userRoleList = userRoleList;
     }
 
     /**

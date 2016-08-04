@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
+import org.springframework.core.Conventions;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,5 +43,29 @@ public class SessionUtils {
                 session.removeAttribute(key);
             }
         }
+    }
+
+    /**
+     * セッションから指定されたクラスのフォーム情報の取得
+     * @param session
+     * @param cls
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T getSessionForm(HttpSession session,
+                                       Class<T> cls) {
+
+        try {
+            // クラスオブジェクトからSpringの自動生成keyを取得
+            String key = Conventions.getVariableName(cls.newInstance());
+            // セッションから取得
+            Object obj = session.getAttribute(key);
+            if (obj != null && obj.getClass() == cls) {
+                return (T) obj;
+            }
+        } catch (Exception e) {
+            logger.warn("class instance error", e.getMessage());
+        }
+        return null;
     }
 }

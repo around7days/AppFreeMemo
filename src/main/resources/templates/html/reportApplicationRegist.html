@@ -8,17 +8,22 @@
 
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
-	<!-- jQuery -->
+	<!-- datepicker CSS -->
+	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker.css}" href="../../static/fw/datepicker/css/bootstrap-datepicker.css" />
+	<!-- jQuery JS -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
+	<!-- datepicker JS -->
+	<script th:src="@{/fw/datepicker/js/bootstrap-datepicker.js}" src="../../static/fw/datepicker/js/bootstrap-datepicker.js"></script>
+	<script th:src="@{/fw/datepicker/locales/bootstrap-datepicker.ja.min.js}" src="../../static/fw/datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<!-- 個別 JS -->
-	<script th:src="@{/js/reportApplication.js}" src="../../static/js/reportApplication.js"></script>
+	<script th:src="@{/js/reportApplicationRegist.js}" src="../../static/js/reportApplicationRegist.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApplicationForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApplicationRegistForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -36,7 +41,9 @@
 			<!-- メッセージ -->
 			<div th:replace="@{/html/include/include_message}::message" ></div>
 
-			<!-- 月報申請 -->
+			<!--
+				月報申請
+			-->
 			<div class="form-horizontal">
 				<!-- 申請者 -->
 				<div class="form-group">
@@ -49,53 +56,51 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9">
-						<div class="input-group">
-							<input type="text" th:value="*{targetYear}" name="targetYear" id="targetYear" class="form-control" required="required" placeholder="yyyy" />
-							<div class="input-group-addon">年</div>
-							<input type="text" th:value="*{targetMonth}" name="targetMonth" id="targetMonth" class="form-control" required="required" placeholder="mm" />
-							<div class="input-group-addon">月</div>
-						</div>
+						<input type="text" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control datepicker-ym" required="required" />
 					</div>
 				</div>
 				<!-- 月報 -->
 				<div class="form-group">
-					<label for="file" class="col-sm-3 control-label">月報</label>
+					<label class="col-sm-3 control-label">月報</label>
 					<div class="col-sm-9">
 						<input type="file" name="file" id="file" required="required" class="form-control" />
+					</div>
+				</div>
+				<!-- 公開有無 -->
+				<div class="form-group">
+					<label class="col-sm-3 control-label">公開有無</label>
+					<div class="col-sm-9">
+						<label class="radio-inline">
+							<input type="radio" name="publishFlg" id="publishFlgOff" th:value="${T(rms.com.consts.MCodeConst).B001_0}" th:field="*{publishFlg}" />非公開
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="publishFlg" id="publishFlgOn"  th:value="${T(rms.com.consts.MCodeConst).B001_1}" th:field="*{publishFlg}" />公開
+						</label>
 					</div>
 				</div>
 				<!-- 承認者 -->
 				<div class="form-group">
 					<!-- 承認者1 -->
-					<label for="approver1Id" class="col-sm-3 control-label">承認者１</label>
+					<label class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
-						<select name="approver1Id" id="approver1Id" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver1Id}" th:text="${obj.value}"></option>
-						</select>
+						<pre th:text="*{approver1Nm}">承認太郎</pre>
 					</div>
 					<!-- 承認者2 -->
-					<label for="approver2Id" class="col-sm-3 control-label">承認者２</label>
+					<label class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
-						<select name="approver2Id" id="approver2Id" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver2Id}" th:text="${obj.value}"></option>
-						</select>
+						<pre th:text="*{approver2Nm}">承認花子</pre>
 					</div>
 					<!-- 承認者3 -->
-					<label for="approver3Id" class="col-sm-3 control-label">承認者３</label>
+					<label class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
-						<select name="approver3Id" id="approver3Id" required="required" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver3Id}" th:text="${obj.value}"></option>
-						</select>
+						<pre th:text="*{approver3Nm}">承認一郎</pre>
 					</div>
 				</div>
 				<!-- 申請ボタン -->
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
 						<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-						<button type="submit" id="application" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
+						<button type="submit" id="regist" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
 					</div>
 				</div>
 			</div><!-- /月報申請 -->

@@ -90,7 +90,7 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
     public String search(ReportApplicationListForm form,
                          @AuthenticationPrincipal UserInfo userInfo,
                          Model model) {
-        logger.debug("フォーム情報 -> {}", form);
+        logger.debug("入力フォーム情報 -> {}", form);
 
         // 検索条件の生成
         ReportSearchConditionEntity condition = new ReportSearchConditionEntity();

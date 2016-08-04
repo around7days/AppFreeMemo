@@ -41,7 +41,7 @@
 
 				<div class="form-group">
 					<!-- ユーザID -->
-					<label for="userId" class="col-sm-3 control-label">ユーザID</label>
+					<label class="col-sm-3 control-label">ユーザID</label>
 					<div class="col-sm-9">
 						<div th:switch="*{viewMode}">
 							<div th:case="*{VIEW_MODE_INSERT}"><!-- 新規時 -->
@@ -53,17 +53,17 @@
 						</div>
 					</div>
 					<!-- パスワード -->
-					<label for="password" class="col-sm-3 control-label">パスワード</label>
+					<label class="col-sm-3 control-label">パスワード</label>
 					<div class="col-sm-9">
 						<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" />
 					</div>
 					<!-- ユーザ名 -->
-					<label for="userNm" class="col-sm-3 control-label">ユーザ名</label>
+					<label class="col-sm-3 control-label">ユーザ名</label>
 					<div class="col-sm-9">
 						<input type="text" th:value="*{userNm}" name="userNm" id="userNm" required="required" class="form-control" />
 					</div>
 					<!-- メールアドレス -->
-					<label for="email" class="col-sm-3 control-label">メールアドレス</label>
+					<label class="col-sm-3 control-label">メールアドレス</label>
 					<div class="col-sm-9">
 						<input type="email" th:value="*{email}" name="email" id="email" class="form-control" placeholder="xxxx@gmail.com" />
 					</div>
@@ -71,7 +71,7 @@
 
 				<div class="form-group">
 					<!-- 承認者1 -->
-					<label for="approver1Id" class="col-sm-3 control-label">承認者１</label>
+					<label class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
 						<select name="approver1Id" id="approver1Id" class="form-control">
 							<option value=""></option>
@@ -79,7 +79,7 @@
 						</select>
 					</div>
 					<!-- 承認者2 -->
-					<label for="approver2Id" class="col-sm-3 control-label">承認者２</label>
+					<label class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
 						<select name="approver2Id" id="approver2Id" class="form-control">
 							<option value=""></option>
@@ -87,7 +87,7 @@
 						</select>
 					</div>
 					<!-- 承認者3 -->
-					<label for="approver3Id" class="col-sm-3 control-label">承認者３</label>
+					<label class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
 						<select name="approver3Id" id="approver3Id" class="form-control">
 							<option value=""></option>
@@ -98,7 +98,7 @@
 
 				<!-- 役割 -->
 				<div class="form-group">
-					<label for="email" class="col-sm-3 control-label">役割</label>
+					<label class="col-sm-3 control-label">役割</label>
 					<div class="col-sm-9">
 						<label class="checkbox-inline">
 							<input type="checkbox" name="roleApplicantFlg" id="roleApplicantFlg" th:field="*{roleApplicantFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 申請者

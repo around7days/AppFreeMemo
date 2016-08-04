@@ -7,7 +7,6 @@ import rms.domain.com.entity.MUserRole;
 import rms.domain.com.repository.MUserDao;
 import rms.domain.com.repository.MUserRoleDao;
 import rms.domain.mst.user.repository.UserRegistDao;
-import rms.domain.mst.user.repository.UserSelectDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,10 +30,6 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
     /** ユーザ役割マスタDao */
     @Autowired
     MUserRoleDao mUserRoleDao;
-
-    /** ユーザ情報取得Dao */
-    @Autowired
-    UserSelectDao userSelectDao;
 
     /** ユーザ情報登録Dao */
     @Autowired

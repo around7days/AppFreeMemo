@@ -4,6 +4,7 @@ import rms.web.com.utils.SessionUtils;
 import rms.web.mst.user.list.UserListController;
 import rms.web.mst.user.regist.UserRegistController;
 import rms.web.tran.report.application.list.ReportApplicationListController;
+import rms.web.tran.report.application.regist.ReportApplicationRegistController;
 import rms.web.tran.report.list.ReportListController;
 
 import org.springframework.stereotype.Controller;
@@ -109,17 +110,17 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
         return redirect(ReportApplicationListController.MAPPING_URL, "init");
     }
 
-    //    /**
-    //     * 月報申請画面に遷移
-    //     * @param form
-    //     * @param model
-    //     * @return
-    //     */
-    //    @RequestMapping(value = MAPPING_URL, params = "t002")
-    //    public String T002(MenuForm form,
-    //                       Model model) {
-    //        return redirect(ReportApplicationController.MAPPING_URL, "initInsert");
-    //    }
+    /**
+     * 月報申請画面に遷移
+     * @param form
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "t002")
+    public String T002(MenuForm form,
+                       Model model) {
+        return redirect(ReportApplicationRegistController.MAPPING_URL, "initInsert");
+    }
     //
     //    /**
     //     * 月報承認画面に遷移

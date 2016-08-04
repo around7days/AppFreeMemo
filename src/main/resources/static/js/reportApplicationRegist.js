@@ -7,12 +7,12 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/report/application";
+	var defaultUrl = "/tran/report/application/regist";
 
 	/**
 	 * 申請ボタン押下
 	 */
-	$("#application").on("click", function() {
+	$("#regist").on("click", function() {
 		if (!window.confirm("申請しますか？")) {
 			return false;
 		}
@@ -30,4 +30,14 @@ $(function() {
 		return true;
 	});
 
+	// TODO common.jsに入れたい
+	/**
+	 * 年月カレンダー表示
+	 */
+	$('.datepicker-ym').datepicker({
+		format : "yyyymm",
+		language : "ja",
+		minViewMode : "months",
+		autoclose : true
+	});
 });

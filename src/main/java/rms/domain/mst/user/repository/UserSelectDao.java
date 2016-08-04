@@ -3,6 +3,7 @@ package rms.domain.mst.user.repository;
 import java.util.List;
 
 import rms.domain.com.entity.MUserRole;
+import rms.domain.com.entity.VMUser;
 import rms.domain.mst.user.entity.UserSearchConditionEntity;
 import rms.domain.mst.user.entity.UserSearchResultEntity;
 import rms.web.com.utils.SelectOptionEntity;
@@ -18,6 +19,14 @@ import org.seasar.doma.jdbc.SelectOptions;
 @Dao
 @ConfigAutowireable
 public interface UserSelectDao {
+
+    /**
+     * ユーザ情報の取得
+     * @param userId
+     * @return the VMUser entity
+     */
+    @Select
+    VMUser userById(String userId);
 
     /**
      * ユーザIDに紐付く役割一覧を取得

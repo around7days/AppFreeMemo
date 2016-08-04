@@ -11,6 +11,7 @@ import rms.domain.mst.user.service.UserRegistService;
 import rms.domain.mst.user.service.UserSelectService;
 import rms.domain.mst.user.service.UserValidateService;
 import rms.web.com.utils.SelectOptionEntity;
+import rms.web.com.utils.SessionUtils;
 import rms.web.mst.user.list.UserListController;
 
 import org.springframework.beans.BeanUtils;
@@ -115,9 +116,9 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // 取得した情報をフォームに反映
         // TODO ちょい手抜きで・・・
         BeanUtils.copyProperties(userEntity, form);
-        BeanUtils.copyProperties(userEntity.getMUser(), form);
+        BeanUtils.copyProperties(userEntity.getUser(), form);
 
-        logger.debug("フォーム情報 -> {}", form);
+        logger.debug("出力フォーム情報 -> {}", form);
 
         return PAGE_URL;
     }
@@ -138,7 +139,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
                          SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
                          Model model) throws BusinessException {
-        logger.debug("フォーム情報 -> {}", form);
+        logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -199,7 +200,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
                          RedirectAttributes redirectAttr,
                          Model model) throws BusinessException {
         // TODO フォームでリクエスト情報を受け取る場合に、ユーザーID等の想定外の情報まで受け取る可能性があるのが気になる。
-        logger.debug("フォーム情報 -> {}", form);
+        logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
         if (bindingResult.hasErrors()) {
@@ -271,7 +272,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // メッセージを反映
         model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
         // セッションからフォーム情報を取得して反映
-        model.addAttribute(getSessionForm(session, UserRegistForm.class));
+        model.addAttribute(SessionUtils.getSessionForm(session, UserRegistForm.class));
 
         return PAGE_URL;
     }
@@ -292,7 +293,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // メッセージとフォーム情報を反映
         model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
         // セッションからフォーム情報を取得して反映
-        model.addAttribute(getSessionForm(session, UserRegistForm.class));
+        model.addAttribute(SessionUtils.getSessionForm(session, UserRegistForm.class));
 
         return PAGE_URL;
     }

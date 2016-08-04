@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 月報一覧画面サービス
+ * 月報情報取得サービス
  * @author
  */
 @Service

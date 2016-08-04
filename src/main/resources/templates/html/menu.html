@@ -50,6 +50,7 @@
 					<button type="submit" name="m002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ登録</button>
 
 					<button type="submit" name="t001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧</button>
+
 					<div th:if="*{principal.roleApplicant}">
 						<button type="submit" name="t002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
 						<button type="submit" name="t004" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請状況一覧</button>
