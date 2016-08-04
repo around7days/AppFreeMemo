@@ -43,7 +43,7 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     @Column(name = "status_nm")
     private String statusNm;
 
-    /** 承認者１ID */
+    /** 承認者ID1 */
     @Column(name = "approve_user_id1")
     private String approveUserId1;
 
@@ -51,7 +51,7 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     @Column(name = "approve_user_nm1")
     private String approveUserNm1;
 
-    /** 承認者２ID */
+    /** 承認者ID2 */
     @Column(name = "approve_user_id2")
     private String approveUserId2;
 
@@ -59,7 +59,7 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     @Column(name = "approve_user_nm2")
     private String approveUserNm2;
 
-    /** 承認者３ID */
+    /** 承認者ID3 */
     @Column(name = "approve_user_id3")
     private String approveUserId3;
 
@@ -200,16 +200,16 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     }
 
     /**
-     * 承認者１IDを取得します。
-     * @return 承認者１ID
+     * 承認者ID1を取得します。
+     * @return 承認者ID1
      */
     public String getApproveUserId1() {
         return approveUserId1;
     }
 
     /**
-     * 承認者１IDを設定します。
-     * @param approveUserId1 承認者１ID
+     * 承認者ID1を設定します。
+     * @param approveUserId1 承認者ID1
      */
     public void setApproveUserId1(String approveUserId1) {
         this.approveUserId1 = approveUserId1;
@@ -232,16 +232,16 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     }
 
     /**
-     * 承認者２IDを取得します。
-     * @return 承認者２ID
+     * 承認者ID2を取得します。
+     * @return 承認者ID2
      */
     public String getApproveUserId2() {
         return approveUserId2;
     }
 
     /**
-     * 承認者２IDを設定します。
-     * @param approveUserId2 承認者２ID
+     * 承認者ID2を設定します。
+     * @param approveUserId2 承認者ID2
      */
     public void setApproveUserId2(String approveUserId2) {
         this.approveUserId2 = approveUserId2;
@@ -264,16 +264,16 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     }
 
     /**
-     * 承認者３IDを取得します。
-     * @return 承認者３ID
+     * 承認者ID3を取得します。
+     * @return 承認者ID3
      */
     public String getApproveUserId3() {
         return approveUserId3;
     }
 
     /**
-     * 承認者３IDを設定します。
-     * @param approveUserId3 承認者３ID
+     * 承認者ID3を設定します。
+     * @param approveUserId3 承認者ID3
      */
     public void setApproveUserId3(String approveUserId3) {
         this.approveUserId3 = approveUserId3;

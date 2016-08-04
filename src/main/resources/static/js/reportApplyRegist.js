@@ -12,7 +12,7 @@ $(function() {
 	/**
 	 * 申請ボタン押下
 	 */
-	$("#regist").on("click", function() {
+	$("#insert").on("click", function() {
 		if (!window.confirm("申請しますか？")) {
 			return false;
 		}

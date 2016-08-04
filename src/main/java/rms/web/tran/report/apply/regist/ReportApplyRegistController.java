@@ -9,6 +9,7 @@ import rms.com.base.BusinessException;
 import rms.com.consts.MCodeConst;
 import rms.com.consts.MessageConst;
 import rms.domain.com.entity.TReport;
+import rms.domain.com.entity.VTReport;
 import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.service.UserSelectService;
 import rms.domain.tran.report.service.ReportRegistService;
@@ -18,6 +19,7 @@ import rms.web.base.UserInfo;
 import rms.web.com.utils.FileUtils;
 import rms.web.com.utils.SessionUtils;
 import rms.web.menu.MenuController;
+import rms.web.tran.report.apply.list.ReportApplyListController;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.seasar.doma.jdbc.OptimisticLockException;
@@ -135,8 +138,11 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
         // 画面表示モードを「新規」に設定
         form.setViewMode(ReportApplyRegistForm.VIEW_MODE_UPDATE);
 
-        //
-        reportSelectService.getReportInfo(applyUserId, targetYm);
+        // 月報情報の取得
+        VTReport reportEntity = reportSelectService.getReportInfo(applyUserId, targetYm);
+
+        // 値を設定
+        BeanUtils.copyProperties(reportEntity, form);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -161,6 +167,7 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
      * @param userInfo
      * @param form
      * @param bindingResult
+     * @param sessionStatus
      * @param redirectAttr
      * @param model
      * @return
@@ -172,6 +179,7 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
     public String insert(@Validated(ReportApplyRegistForm.Insert.class) ReportApplyRegistForm form,
                          BindingResult bindingResult,
                          @AuthenticationPrincipal UserInfo userInfo,
+                         SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
                          Model model) throws IOException, NumberFormatException, BusinessException {
         logger.debug("入力フォーム情報 -> {}", form);
@@ -216,6 +224,8 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        // セッション破棄
+        sessionStatus.setComplete();
 
         return redirect(MenuController.MAPPING_URL);
     }
@@ -226,7 +236,7 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
     public String back() {
-        return redirect(MenuController.MAPPING_URL);
+        return redirect(ReportApplyListController.MAPPING_URL, "search");
     }
 
     // ----------------------------------------------------------------------------------------

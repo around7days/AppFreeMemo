@@ -96,12 +96,11 @@
 						<pre th:text="*{approveUserNm3}">承認一郎</pre>
 					</div>
 				</div>
+
 				<!-- 申請ボタン -->
-				<div class="form-group">
-					<div class="col-sm-offset-3 col-sm-9">
-						<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-						<button type="submit" id="regist" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
-					</div>
+				<div class="text-center">
+					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
+					<button type="submit" id="insert" th:if="*{viewMode == VIEW_MODE_INSERT}" class="btn btn-primary">申請<span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 			</div><!-- /月報申請 -->
 

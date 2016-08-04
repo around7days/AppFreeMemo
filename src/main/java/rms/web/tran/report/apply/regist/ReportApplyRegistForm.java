@@ -38,17 +38,17 @@ public class ReportApplyRegistForm extends rms.web.com.abstracts.AbstractForm {
     private MultipartFile file;
     /** 公開有無 */
     private String publishFlg;
-    /** 承認者１ID */
+    /** 承認者ID1 */
     private String approveUserId1;
-    /** 承認者２ID */
+    /** 承認者ID2 */
     private String approveUserId2;
-    /** 承認者３ID */
+    /** 承認者ID3 */
     private String approveUserId3;
-    /** 承認者１名 */
+    /** 承認者名1 */
     private String approveUserNm1;
-    /** 承認者２名 */
+    /** 承認者名2 */
     private String approveUserNm2;
-    /** 承認者３名 */
+    /** 承認者名3 */
     private String approveUserNm3;
 
     /* getter/setter -------------------------------------------------------- */
@@ -118,96 +118,96 @@ public class ReportApplyRegistForm extends rms.web.com.abstracts.AbstractForm {
     }
 
     /**
-     * 承認者１IDを取得します。
-     * @return 承認者１ID
+     * 承認者ID1を取得します。
+     * @return 承認者ID1
      */
     public String getApproveUserId1() {
         return approveUserId1;
     }
 
     /**
-     * 承認者１IDを設定します。
-     * @param approveUserId1 承認者１ID
+     * 承認者ID1を設定します。
+     * @param approveUserId1 承認者ID1
      */
     public void setApproveUserId1(String approveUserId1) {
         this.approveUserId1 = approveUserId1;
     }
 
     /**
-     * 承認者２IDを取得します。
-     * @return 承認者２ID
+     * 承認者ID2を取得します。
+     * @return 承認者ID2
      */
     public String getApproveUserId2() {
         return approveUserId2;
     }
 
     /**
-     * 承認者２IDを設定します。
-     * @param approveUserId2 承認者２ID
+     * 承認者ID2を設定します。
+     * @param approveUserId2 承認者ID2
      */
     public void setApproveUserId2(String approveUserId2) {
         this.approveUserId2 = approveUserId2;
     }
 
     /**
-     * 承認者３IDを取得します。
-     * @return 承認者３ID
+     * 承認者ID3を取得します。
+     * @return 承認者ID3
      */
     public String getApproveUserId3() {
         return approveUserId3;
     }
 
     /**
-     * 承認者３IDを設定します。
-     * @param approveUserId3 承認者３ID
+     * 承認者ID3を設定します。
+     * @param approveUserId3 承認者ID3
      */
     public void setApproveUserId3(String approveUserId3) {
         this.approveUserId3 = approveUserId3;
     }
 
     /**
-     * 承認者１名を取得します。
-     * @return 承認者１名
+     * 承認者名1を取得します。
+     * @return 承認者名1
      */
     public String getApproveUserNm1() {
         return approveUserNm1;
     }
 
     /**
-     * 承認者１名を設定します。
-     * @param approveUserNm1 承認者１名
+     * 承認者名1を設定します。
+     * @param approveUserNm1 承認者名1
      */
     public void setApproveUserNm1(String approveUserNm1) {
         this.approveUserNm1 = approveUserNm1;
     }
 
     /**
-     * 承認者２名を取得します。
-     * @return 承認者２名
+     * 承認者名2を取得します。
+     * @return 承認者名2
      */
     public String getApproveUserNm2() {
         return approveUserNm2;
     }
 
     /**
-     * 承認者２名を設定します。
-     * @param approveUserNm2 承認者２名
+     * 承認者名2を設定します。
+     * @param approveUserNm2 承認者名2
      */
     public void setApproveUserNm2(String approveUserNm2) {
         this.approveUserNm2 = approveUserNm2;
     }
 
     /**
-     * 承認者３名を取得します。
-     * @return 承認者３名
+     * 承認者名3を取得します。
+     * @return 承認者名3
      */
     public String getApproveUserNm3() {
         return approveUserNm3;
     }
 
     /**
-     * 承認者３名を設定します。
-     * @param approveUserNm3 承認者３名
+     * 承認者名3を設定します。
+     * @param approveUserNm3 承認者名3
      */
     public void setApproveUserNm3(String approveUserNm3) {
         this.approveUserNm3 = approveUserNm3;

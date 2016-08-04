@@ -20,11 +20,11 @@ package rms.web.tran.report.approve.regist;
 //    private String applyUserId;
 //    /** 申請者名称 */
 //    private String applyNm;
-//    /** 承認者１名称 */
+//    /** 承認者名1称 */
 //    private String approveUserNm1;
-//    /** 承認者２名称 */
+//    /** 承認者名2称 */
 //    private String approveUserNm2;
-//    /** 承認者３名称 */
+//    /** 承認者名3称 */
 //    private String approveUserNm3;
 //
 //    /* getter/setter -------------------------------------------------------- */
@@ -109,48 +109,48 @@ package rms.web.tran.report.approve.regist;
 //    }
 //
 //    /**
-//     * 承認者１名称を取得します。
-//     * @return 承認者１名称
+//     * 承認者名1称を取得します。
+//     * @return 承認者名1称
 //     */
 //    public String getApproveUserNm1() {
 //        return approveUserNm1;
 //    }
 //
 //    /**
-//     * 承認者１名称を設定します。
-//     * @param approveUserNm1 承認者１名称
+//     * 承認者名1称を設定します。
+//     * @param approveUserNm1 承認者名1称
 //     */
 //    public void setApproveUserNm1(String approveUserNm1) {
 //        this.approveUserNm1 = approveUserNm1;
 //    }
 //
 //    /**
-//     * 承認者２名称を取得します。
-//     * @return 承認者２名称
+//     * 承認者名2称を取得します。
+//     * @return 承認者名2称
 //     */
 //    public String getApproveUserNm2() {
 //        return approveUserNm2;
 //    }
 //
 //    /**
-//     * 承認者２名称を設定します。
-//     * @param approveUserNm2 承認者２名称
+//     * 承認者名2称を設定します。
+//     * @param approveUserNm2 承認者名2称
 //     */
 //    public void setApproveUserNm2(String approveUserNm2) {
 //        this.approveUserNm2 = approveUserNm2;
 //    }
 //
 //    /**
-//     * 承認者３名称を取得します。
-//     * @return 承認者３名称
+//     * 承認者名3称を取得します。
+//     * @return 承認者名3称
 //     */
 //    public String getApproveUserNm3() {
 //        return approveUserNm3;
 //    }
 //
 //    /**
-//     * 承認者３名称を設定します。
-//     * @param approveUserNm3 承認者３名称
+//     * 承認者名3称を設定します。
+//     * @param approveUserNm3 承認者名3称
 //     */
 //    public void setApproveUserNm3(String approveUserNm3) {
 //        this.approveUserNm3 = approveUserNm3;
