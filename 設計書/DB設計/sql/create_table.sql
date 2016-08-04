@@ -7,9 +7,9 @@ create table M_USER (
   , user_nm varchar(255) not null comment 'ユーザ名'
   , password varchar(255) not null comment 'パスワード'
   , email varchar(255) comment 'メールアドレス'
-  , approver1_id varchar(20) comment '承認者１ID'
-  , approver2_id varchar(20) comment '承認者２ID'
-  , approver3_id varchar(20) comment '承認者３ID'
+  , approve_user_id1 varchar(20) comment '承認者ID1'
+  , approve_user_id2 varchar(20) comment '承認者ID2'
+  , approve_user_id3 varchar(20) comment '承認者ID3'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
   , ins_date timestamp not null comment '登録日時'
@@ -83,14 +83,14 @@ create table M_CODE (
 --
 drop table if exists T_REPORT cascade;
 create table T_REPORT (
-  applicant_id varchar(20) not null comment '申請者ID'
+  apply_user_id varchar(20) not null comment '申請者ID'
   , target_ym int not null comment '対象年月'
-  , application_date timestamp not null comment '申請日'
+  , apply_date timestamp not null comment '申請日'
   , publish_flg varchar(1) not null comment '公開有無'
   , status varchar(3) not null comment '承認状況'
-  , approver1_id varchar(20) comment '承認者１ID'
-  , approver2_id varchar(20) comment '承認者２ID'
-  , approver3_id varchar(20) not null comment '承認者３ID'
+  , approve_user_id1 varchar(20) comment '承認者ID1'
+  , approve_user_id2 varchar(20) comment '承認者ID2'
+  , approve_user_id3 varchar(20) not null comment '承認者ID3'
   , file_path varchar(255) not null comment '月報ファイルパス'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
@@ -98,9 +98,8 @@ create table T_REPORT (
   , ins_id varchar(20) not null comment '登録ID'
   , upd_date timestamp not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
-  , constraint T_REPORT_PKC primary key (applicant_id,target_ym)
+  , constraint T_REPORT_PKC primary key (apply_user_id,target_ym)
 ) comment '月報管理テーブル' ;
-
 
 
 --
@@ -108,15 +107,15 @@ create table T_REPORT (
 --
 drop table if exists T_REPORT_HIS cascade;
 create table T_REPORT_HIS (
-  applicant_id varchar(20) not null comment '申請者ID'
+  apply_user_id varchar(20) not null comment '申請者ID'
   , target_ym int not null comment '対象年月'
   , seq int not null comment '連番'
-  , application_date timestamp not null comment '申請日'
+  , apply_date timestamp not null comment '申請日'
   , publish_flg varchar(1) not null comment '公開有無'
   , status varchar(3) not null comment '承認状況'
-  , approver1_id varchar(20) comment '承認者１ID'
-  , approver2_id varchar(20) comment '承認者２ID'
-  , approver3_id varchar(20) not null comment '承認者３ID'
+  , approve_user_id1 varchar(20) comment '承認者ID1'
+  , approve_user_id2 varchar(20) comment '承認者ID2'
+  , approve_user_id3 varchar(20) not null comment '承認者ID3'
   , file_path varchar(255) not null comment '月報ファイルパス'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
@@ -124,5 +123,5 @@ create table T_REPORT_HIS (
   , ins_id varchar(20) not null comment '登録ID'
   , upd_date timestamp not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
-  , constraint T_REPORT_HIS_PKC primary key (applicant_id,target_ym,seq)
+  , constraint T_REPORT_HIS_PKC primary key (apply_user_id,target_ym,seq)
 ) comment '月報管理テーブル（履歴）' ;

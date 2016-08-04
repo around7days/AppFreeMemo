@@ -7,12 +7,12 @@ SELECT
   , U.user_nm
   , U.password
   , U.email
-  , U.approver1_id
-  , A1.user_nm as approver1_nm
-  , U.approver2_id
-  , A2.user_nm as approver2_nm
-  , U.approver3_id
-  , A3.user_nm as approver3_nm
+  , U.approve_user_id1
+  , A1.user_nm as approve_user_nm1
+  , U.approve_user_id2
+  , A2.user_nm as approve_user_nm2
+  , U.approve_user_id3
+  , A3.user_nm as approve_user_nm3
   , U.version
   , U.del_flg
   , U.ins_date
@@ -22,11 +22,11 @@ SELECT
 FROM
   m_user U
   left join m_user A1
-    on U.approver1_id = A1.user_id
+    on U.approve_user_id1 = A1.user_id
   left join m_user A2
-    on U.approver2_id = A2.user_id
+    on U.approve_user_id2 = A2.user_id
   left join m_user A3
-    on U.approver3_id = A3.user_id
+    on U.approve_user_id3 = A3.user_id
 ;
 
 
@@ -56,20 +56,20 @@ from
 --
 create or replace view V_T_REPORT as
 SELECT
-    A.applicant_id
-  , U0.user_nm as applicant_nm
+    A.apply_user_id
+  , U0.user_nm as apply_nm
   , A.target_ym
-  , A.application_date
+  , A.apply_date
   , A.publish_flg
   , B001.code_nm as publish_nm
   , A.status
   , A001.code_nm as status_nm
-  , A.approver1_id
-  , U1.user_nm as approver1_nm
-  , A.approver2_id
-  , U2.user_nm as approver2_nm
-  , A.approver3_id
-  , U3.user_nm as approver3_nm
+  , A.approve_user_id1
+  , U1.user_nm as approve_user_nm1
+  , A.approve_user_id2
+  , U2.user_nm as approve_user_nm2
+  , A.approve_user_id3
+  , U3.user_nm as approve_user_nm3
   , A.file_path
   , A.version
   , A.del_flg
@@ -80,13 +80,13 @@ SELECT
 FROM
   t_report A
   left join m_user U0
-    on A.applicant_id = U0.user_id
+    on A.apply_user_id = U0.user_id
   left join m_user U1
-    on A.approver1_id = U1.user_id
+    on A.approve_user_id1 = U1.user_id
   left join m_user U2
-    on A.approver2_id = U2.user_id
+    on A.approve_user_id2 = U2.user_id
   left join m_user U3
-    on A.approver3_id = U3.user_id
+    on A.approve_user_id3 = U3.user_id
   left join m_code A001
     on A.status = A001.code
     and A001.code_kbn = 'A001'
