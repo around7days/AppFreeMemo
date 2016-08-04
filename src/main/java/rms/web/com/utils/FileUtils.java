@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.slf4j.Logger;
@@ -20,6 +21,34 @@ import javax.servlet.http.HttpServletResponse;
 public class FileUtils {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(FileUtils.class);
+
+    /**
+     * 月報ファイルパスの生成
+     * @param storageDir
+     * @param applicantId
+     * @param targetYm
+     * @return
+     */
+    public static Path createReportFilePath(String storageDir,
+                                            String applicantId,
+                                            Integer targetYm) {
+        return createReportFilePath(storageDir, applicantId, String.valueOf(targetYm));
+    }
+
+    /**
+     * 月報ファイルパスの生成
+     * @param storageDir
+     * @param applicantId
+     * @param targetYm
+     * @return
+     */
+    public static Path createReportFilePath(String storageDir,
+                                            String applicantId,
+                                            String targetYm) {
+        String filePath = targetYm + "_" + applicantId + ".xlsx";
+        return Paths.get(storageDir, filePath);
+
+    }
 
     /**
      * 月報ダウンロード

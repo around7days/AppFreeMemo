@@ -2,7 +2,6 @@ package rms.web.tran.report.application.list;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.entity.ReportSearchResultEntity;
@@ -160,11 +159,8 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
         /*
          * ファイルダウンロード処理
          */
-        // ダウンロードファイルパス・ファイル名の生成
-        // TODO ファイル名の規則を決める
-        String relativePath = "月報.xlsx";
-        Path filePath = Paths.get(reportStorage, relativePath);
-
+        // ダウンロードファイルパスの生成
+        Path filePath = FileUtils.createReportFilePath(reportStorage, result.getApplicantId(), result.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 

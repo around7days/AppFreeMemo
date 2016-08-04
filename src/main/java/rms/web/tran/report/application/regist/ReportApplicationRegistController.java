@@ -2,7 +2,6 @@ package rms.web.tran.report.application.regist;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
@@ -182,9 +181,9 @@ public class ReportApplicationRegistController extends rms.web.com.abstracts.Abs
         /*
          * 月報ファイル保存処理
          */
-        // TODO ファイル名の規則を決める必要がある
-        String fileNm = form.getTargetYm() + "_" + userInfo.getUserId() + ".xlsx";
-        Path filePath = Paths.get(reportStorage, fileNm);
+        // 月報保存ファイルパスの生成
+        Path filePath = FileUtils.createReportFilePath(reportStorage, userInfo.getUserId(), form.getTargetYm());
+        // 月報保存処理
         FileUtils.reportSave(form.getFile().getInputStream(), filePath);
 
         // 完了メッセージ
