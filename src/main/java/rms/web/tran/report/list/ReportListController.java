@@ -197,7 +197,7 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
          * ファイルダウンロード処理
          */
         // ダウンロードファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(reportStorage, result.getApplicantId(), result.getTargetYm());
+        Path filePath = FileUtils.createReportFilePath(reportStorage, result.getApplyUserId(), result.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 

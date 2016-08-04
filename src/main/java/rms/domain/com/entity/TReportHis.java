@@ -18,8 +18,8 @@ public class TReportHis {
 
     /** 申請者ID */
     @Id
-    @Column(name = "applicant_id")
-    private String applicantId;
+    @Column(name = "apply_user_id")
+    private String applyUserId;
 
     /** 対象年月 */
     @Id
@@ -32,8 +32,8 @@ public class TReportHis {
     private Integer seq;
 
     /** 申請日 */
-    @Column(name = "application_date")
-    private LocalDateTime applicationDate;
+    @Column(name = "apply_date")
+    private LocalDateTime applyDate;
 
     /** 公開有無 */
     @Column(name = "publish_flg")
@@ -43,17 +43,17 @@ public class TReportHis {
     @Column(name = "status")
     private String status;
 
-    /** 承認者１ID */
-    @Column(name = "approver1_id")
-    private String approver1Id;
+    /** 承認者ID1 */
+    @Column(name = "approve_user_id1")
+    private String approveUserId1;
 
-    /** 承認者２ID */
-    @Column(name = "approver2_id")
-    private String approver2Id;
+    /** 承認者ID2 */
+    @Column(name = "approve_user_id2")
+    private String approveUserId2;
 
-    /** 承認者３ID */
-    @Column(name = "approver3_id")
-    private String approver3Id;
+    /** 承認者ID3 */
+    @Column(name = "approve_user_id3")
+    private String approveUserId3;
 
     /** 月報ファイルパス */
     @Column(name = "file_path")
@@ -88,16 +88,16 @@ public class TReportHis {
      * 申請者IDを取得します.
      * @return 申請者ID
      */
-    public String getApplicantId() {
-        return applicantId;
+    public String getApplyUserId() {
+        return applyUserId;
     }
 
     /**
      * 申請者IDを設定します.
-     * @param applicantId 申請者ID
+     * @param applyUserId 申請者ID
      */
-    public void setApplicantId(String applicantId) {
-        this.applicantId = applicantId;
+    public void setApplyUserId(String applyUserId) {
+        this.applyUserId = applyUserId;
     }
 
     /**
@@ -136,16 +136,16 @@ public class TReportHis {
      * 申請日を取得します.
      * @return 申請日
      */
-    public LocalDateTime getApplicationDate() {
-        return applicationDate;
+    public LocalDateTime getApplyDate() {
+        return applyDate;
     }
 
     /**
      * 申請日を設定します.
-     * @param applicationDate 申請日
+     * @param applyDate 申請日
      */
-    public void setApplicationDate(LocalDateTime applicationDate) {
-        this.applicationDate = applicationDate;
+    public void setApplyDate(LocalDateTime applyDate) {
+        this.applyDate = applyDate;
     }
 
     /**
@@ -181,51 +181,51 @@ public class TReportHis {
     }
 
     /**
-     * 承認者１IDを取得します.
-     * @return 承認者１ID
+     * 承認者ID1を取得します.
+     * @return 承認者ID1
      */
-    public String getApprover1Id() {
-        return approver1Id;
+    public String getApproveUserId1() {
+        return approveUserId1;
     }
 
     /**
-     * 承認者１IDを設定します.
-     * @param approver1Id 承認者１ID
+     * 承認者ID1を設定します.
+     * @param approveUserId1 承認者ID1
      */
-    public void setApprover1Id(String approver1Id) {
-        this.approver1Id = approver1Id;
+    public void setApproveUserId1(String approveUserId1) {
+        this.approveUserId1 = approveUserId1;
     }
 
     /**
-     * 承認者２IDを取得します.
-     * @return 承認者２ID
+     * 承認者ID2を取得します.
+     * @return 承認者ID2
      */
-    public String getApprover2Id() {
-        return approver2Id;
+    public String getApproveUserId2() {
+        return approveUserId2;
     }
 
     /**
-     * 承認者２IDを設定します.
-     * @param approver2Id 承認者２ID
+     * 承認者ID2を設定します.
+     * @param approveUserId2 承認者ID2
      */
-    public void setApprover2Id(String approver2Id) {
-        this.approver2Id = approver2Id;
+    public void setApproveUserId2(String approveUserId2) {
+        this.approveUserId2 = approveUserId2;
     }
 
     /**
-     * 承認者３IDを取得します.
-     * @return 承認者３ID
+     * 承認者ID3を取得します.
+     * @return 承認者ID3
      */
-    public String getApprover3Id() {
-        return approver3Id;
+    public String getApproveUserId3() {
+        return approveUserId3;
     }
 
     /**
-     * 承認者３IDを設定します.
-     * @param approver3Id 承認者３ID
+     * 承認者ID3を設定します.
+     * @param approveUserId3 承認者ID3
      */
-    public void setApprover3Id(String approver3Id) {
-        this.approver3Id = approver3Id;
+    public void setApproveUserId3(String approveUserId3) {
+        this.approveUserId3 = approveUserId3;
     }
 
     /**

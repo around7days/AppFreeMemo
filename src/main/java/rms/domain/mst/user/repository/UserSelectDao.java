@@ -51,5 +51,5 @@ public interface UserSelectDao {
      * @return
      */
     @Select
-    List<SelectOptionEntity> selectboxApprover();
+    List<SelectOptionEntity> selectboxApproveUser();
 }

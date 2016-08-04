@@ -20,10 +20,10 @@
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<!-- 個別 JS -->
-	<script th:src="@{/js/reportApplicationList.js}" src="../../static/js/reportApplicationList.js"></script>
+	<script th:src="@{/js/reportApplyList.js}" src="../../static/js/reportApplyList.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApplicationListForm}" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApplyListForm}" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -68,10 +68,10 @@
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td><button type="submit" formnovalidate="formnovalidate" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
 							<td th:text="${result.targetYm}">201606</td>
-							<td th:text="${result.applicationDate}">2016/05/31 20:23</td>
-							<td th:text="${result.approver1Nm}">承認者１</td>
-							<td th:text="${result.approver2Nm}">承認者２</td>
-							<td th:text="${result.approver3Nm}">承認者３</td>
+							<td th:text="${result.applyDate}">2016/05/31 20:23</td>
+							<td th:text="${result.approveUserNm1}">承認者１</td>
+							<td th:text="${result.approveUserNm2}">承認者２</td>
+							<td th:text="${result.approveUserNm3}">承認者３</td>
 							<td th:text="${result.statusNm}">承認済み</td>
 							<td><button type="submit" formnovalidate="formnovalidate" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>

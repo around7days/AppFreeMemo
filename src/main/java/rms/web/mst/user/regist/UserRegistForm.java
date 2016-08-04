@@ -54,21 +54,21 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
     private String email;
 
     /** 承認者１ID */
-    private String approver1Id;
+    private String approveUserId1;
     /** 承認者２ID */
-    private String approver2Id;
+    private String approveUserId2;
     /** 承認者３ID */
-    private String approver3Id;
+    private String approveUserId3;
 
     /** 役割：申請者フラグ */
-    private String roleApplicantFlg;
+    private String roleApplyFlg;
     /** 役割：承認者フラグ */
-    private String roleApproverFlg;
+    private String roleApproveFlg;
     /** 役割：管理者フラグ */
     private String roleAdminFlg;
 
     /** 承認者リスト(selectbox用) */
-    private List<SelectOptionEntity> approverList;
+    private List<SelectOptionEntity> approveList;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -171,80 +171,80 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
      * 承認者１IDを取得します。
      * @return 承認者１ID
      */
-    public String getApprover1Id() {
-        return approver1Id;
+    public String getApproveUserId1() {
+        return approveUserId1;
     }
 
     /**
      * 承認者１IDを設定します。
-     * @param approver1Id 承認者１ID
+     * @param approveUserId1 承認者１ID
      */
-    public void setApprover1Id(String approver1Id) {
-        this.approver1Id = approver1Id;
+    public void setApproveUserId1(String approveUserId1) {
+        this.approveUserId1 = approveUserId1;
     }
 
     /**
      * 承認者２IDを取得します。
      * @return 承認者２ID
      */
-    public String getApprover2Id() {
-        return approver2Id;
+    public String getApproveUserId2() {
+        return approveUserId2;
     }
 
     /**
      * 承認者２IDを設定します。
-     * @param approver2Id 承認者２ID
+     * @param approveUserId2 承認者２ID
      */
-    public void setApprover2Id(String approver2Id) {
-        this.approver2Id = approver2Id;
+    public void setApproveUserId2(String approveUserId2) {
+        this.approveUserId2 = approveUserId2;
     }
 
     /**
      * 承認者３IDを取得します。
      * @return 承認者３ID
      */
-    public String getApprover3Id() {
-        return approver3Id;
+    public String getApproveUserId3() {
+        return approveUserId3;
     }
 
     /**
      * 承認者３IDを設定します。
-     * @param approver3Id 承認者３ID
+     * @param approveUserId3 承認者３ID
      */
-    public void setApprover3Id(String approver3Id) {
-        this.approver3Id = approver3Id;
+    public void setApproveUserId3(String approveUserId3) {
+        this.approveUserId3 = approveUserId3;
     }
 
     /**
      * 役割：申請者フラグを取得します。
      * @return 役割：申請者フラグ
      */
-    public String getRoleApplicantFlg() {
-        return roleApplicantFlg;
+    public String getRoleApplyFlg() {
+        return roleApplyFlg;
     }
 
     /**
      * 役割：申請者フラグを設定します。
-     * @param roleApplicantFlg 役割：申請者フラグ
+     * @param roleApplyFlg 役割：申請者フラグ
      */
-    public void setRoleApplicantFlg(String roleApplicantFlg) {
-        this.roleApplicantFlg = roleApplicantFlg;
+    public void setRoleApplyFlg(String roleApplyFlg) {
+        this.roleApplyFlg = roleApplyFlg;
     }
 
     /**
      * 役割：承認者フラグを取得します。
      * @return 役割：承認者フラグ
      */
-    public String getRoleApproverFlg() {
-        return roleApproverFlg;
+    public String getRoleApproveFlg() {
+        return roleApproveFlg;
     }
 
     /**
      * 役割：承認者フラグを設定します。
-     * @param roleApproverFlg 役割：承認者フラグ
+     * @param roleApproveFlg 役割：承認者フラグ
      */
-    public void setRoleApproverFlg(String roleApproverFlg) {
-        this.roleApproverFlg = roleApproverFlg;
+    public void setRoleApproveFlg(String roleApproveFlg) {
+        this.roleApproveFlg = roleApproveFlg;
     }
 
     /**
@@ -267,16 +267,16 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
      * 承認者リスト(selectbox用)を取得します。
      * @return 承認者リスト(selectbox用)
      */
-    public List<SelectOptionEntity> getApproverList() {
-        return approverList;
+    public List<SelectOptionEntity> getApproveList() {
+        return approveList;
     }
 
     /**
      * 承認者リスト(selectbox用)を設定します。
-     * @param approverList 承認者リスト(selectbox用)
+     * @param approveList 承認者リスト(selectbox用)
      */
-    public void setApproverList(List<SelectOptionEntity> approverList) {
-        this.approverList = approverList;
+    public void setApproveList(List<SelectOptionEntity> approveList) {
+        this.approveList = approveList;
     }
 
 }

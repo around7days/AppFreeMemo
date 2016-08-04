@@ -6,9 +6,9 @@
 // */
 //public enum MRoleEnum {
 //    /** 申請者 */
-//    APPLICANT("1", "ROLE_APPLICANT"),
+//    APPLY("1", "ROLE_APPLY"),
 //    /** 承認者 */
-//    APPROVER("2", "ROLE_APPROVER"),
+//    APPROVE("2", "ROLE_APPROVE"),
 //    /** 管理者 */
 //    ADMIN("3", "ROLE_ADMIN");
 //

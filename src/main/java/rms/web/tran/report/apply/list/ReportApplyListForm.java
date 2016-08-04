@@ -1,4 +1,4 @@
-package rms.web.tran.report.application.list;
+package rms.web.tran.report.apply.list;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import rms.web.com.utils.PageInfo;
  * 月報一覧画面フォーム
  * @author
  */
-public class ReportApplicationListForm extends rms.web.com.abstracts.AbstractForm {
+public class ReportApplyListForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** ページ情報 */

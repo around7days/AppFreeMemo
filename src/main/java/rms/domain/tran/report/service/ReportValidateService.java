@@ -34,13 +34,13 @@ public class ReportValidateService extends rms.domain.com.abstracts.AbstractServ
     /**
      * 月報の重複チェック<br>
      * 重複している場合はBusinessExceptionを発生
-     * @param applicantId
+     * @param applyUserId
      * @param targetYm
      * @throws BusinessException
      */
-    public void validateUniquReport(String applicantId,
+    public void validateUniquReport(String applyUserId,
                                     Integer targetYm) throws BusinessException {
-        if (tReportDao.selectById(applicantId, targetYm) != null) {
+        if (tReportDao.selectById(applyUserId, targetYm) != null) {
             // 「対象年月の月報は既に登録されています」
             throw new BusinessException(message.getMessage("error.003", null, Locale.getDefault()));
         }

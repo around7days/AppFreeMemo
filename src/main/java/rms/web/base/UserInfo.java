@@ -73,16 +73,16 @@ public class UserInfo extends User {
      * 役割：申請者？
      * @return
      */
-    public boolean isRoleApplicant() {
-        return roleList.contains(MRoleConst.APPLICANT);
+    public boolean isRoleApply() {
+        return roleList.contains(MRoleConst.APPLY);
     }
 
     /**
      * 役割：承認者？
      * @return
      */
-    public boolean isRoleApprover() {
-        return roleList.contains(MRoleConst.APPROVER);
+    public boolean isRoleApprove() {
+        return roleList.contains(MRoleConst.APPROVE);
     }
 
     /**

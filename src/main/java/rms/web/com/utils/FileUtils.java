@@ -25,27 +25,27 @@ public class FileUtils {
     /**
      * 月報ファイルパスの生成
      * @param storageDir
-     * @param applicantId
+     * @param applyUserId
      * @param targetYm
      * @return
      */
     public static Path createReportFilePath(String storageDir,
-                                            String applicantId,
+                                            String applyUserId,
                                             Integer targetYm) {
-        return createReportFilePath(storageDir, applicantId, String.valueOf(targetYm));
+        return createReportFilePath(storageDir, applyUserId, String.valueOf(targetYm));
     }
 
     /**
      * 月報ファイルパスの生成
      * @param storageDir
-     * @param applicantId
+     * @param applyUserId
      * @param targetYm
      * @return
      */
     public static Path createReportFilePath(String storageDir,
-                                            String applicantId,
+                                            String applyUserId,
                                             String targetYm) {
-        String filePath = targetYm + "_" + applicantId + ".xlsx";
+        String filePath = targetYm + "_" + applyUserId + ".xlsx";
         return Paths.get(storageDir, filePath);
 
     }

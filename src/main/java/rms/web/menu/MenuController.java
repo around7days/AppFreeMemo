@@ -3,8 +3,8 @@ package rms.web.menu;
 import rms.web.com.utils.SessionUtils;
 import rms.web.mst.user.list.UserListController;
 import rms.web.mst.user.regist.UserRegistController;
-import rms.web.tran.report.application.list.ReportApplicationListController;
-import rms.web.tran.report.application.regist.ReportApplicationRegistController;
+import rms.web.tran.report.apply.list.ReportApplyListController;
+import rms.web.tran.report.apply.regist.ReportApplyRegistController;
 import rms.web.tran.report.list.ReportListController;
 
 import org.springframework.stereotype.Controller;
@@ -107,7 +107,7 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "t004")
     public String T004(MenuForm form,
                        Model model) {
-        return redirect(ReportApplicationListController.MAPPING_URL, "init");
+        return redirect(ReportApplyListController.MAPPING_URL, "init");
     }
 
     /**
@@ -119,7 +119,7 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "t002")
     public String T002(MenuForm form,
                        Model model) {
-        return redirect(ReportApplicationRegistController.MAPPING_URL, "initInsert");
+        return redirect(ReportApplyRegistController.MAPPING_URL, "initInsert");
     }
     //
     //    /**

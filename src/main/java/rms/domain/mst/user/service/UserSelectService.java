@@ -58,11 +58,11 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
         // 役割情報
         for (MUserRole mUserRole : mUserRoleList) {
             switch (mUserRole.getRole()) {
-            case MRoleConst.APPLICANT: //申請者
-                userEntity.setRoleApplicantFlg(Const.FLG_ON);
+            case MRoleConst.APPLY: //申請者
+                userEntity.setRoleApplyFlg(Const.FLG_ON);
                 break;
-            case MRoleConst.APPROVER: //承認者
-                userEntity.setRoleApproverFlg(Const.FLG_ON);
+            case MRoleConst.APPROVE: //承認者
+                userEntity.setRoleApproveFlg(Const.FLG_ON);
                 break;
             case MRoleConst.ADMIN: //管理者者
                 userEntity.setRoleAdminFlg(Const.FLG_ON);
@@ -107,10 +107,10 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
      * セレクトボックス用 承認者一覧情報の取得
      * @return
      */
-    public List<SelectOptionEntity> getSelectboxApprover() {
+    public List<SelectOptionEntity> getSelectboxApprove() {
         // セレクトボックス用 承認者一覧の取得
-        List<SelectOptionEntity> approverList = userSelectDao.selectboxApprover();
+        List<SelectOptionEntity> approveList = userSelectDao.selectboxApproveUser();
 
-        return approverList;
+        return approveList;
     }
 }

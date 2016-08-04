@@ -1,4 +1,4 @@
-package rms.web.tran.report.approval.regist;
+package rms.web.tran.report.approve.regist;
 //package rms.web.tran.report.approval;
 //
 ///**
@@ -17,15 +17,15 @@ package rms.web.tran.report.approval.regist;
 //    /** 年月 */
 //    private String targetYm;
 //    /** 申請者ID */
-//    private String applicantId;
+//    private String applyUserId;
 //    /** 申請者名称 */
-//    private String applicantNm;
+//    private String applyNm;
 //    /** 承認者１名称 */
-//    private String approver1Nm;
+//    private String approveUserNm1;
 //    /** 承認者２名称 */
-//    private String approver2Nm;
+//    private String approveUserNm2;
 //    /** 承認者３名称 */
-//    private String approver3Nm;
+//    private String approveUserNm3;
 //
 //    /* getter/setter -------------------------------------------------------- */
 //    /**
@@ -80,80 +80,80 @@ package rms.web.tran.report.approval.regist;
 //     * 申請者IDを取得します。
 //     * @return 申請者ID
 //     */
-//    public String getApplicantId() {
-//        return applicantId;
+//    public String getApplyUserId() {
+//        return applyUserId;
 //    }
 //
 //    /**
 //     * 申請者IDを設定します。
-//     * @param applicantId 申請者ID
+//     * @param applyUserId 申請者ID
 //     */
-//    public void setApplicantId(String applicantId) {
-//        this.applicantId = applicantId;
+//    public void setApplyUserId(String applyUserId) {
+//        this.applyUserId = applyUserId;
 //    }
 //
 //    /**
 //     * 申請者名称を取得します。
 //     * @return 申請者名称
 //     */
-//    public String getApplicantNm() {
-//        return applicantNm;
+//    public String getApplyNm() {
+//        return applyNm;
 //    }
 //
 //    /**
 //     * 申請者名称を設定します。
-//     * @param applicantNm 申請者名称
+//     * @param applyNm 申請者名称
 //     */
-//    public void setApplicantNm(String applicantNm) {
-//        this.applicantNm = applicantNm;
+//    public void setApplyNm(String applyNm) {
+//        this.applyNm = applyNm;
 //    }
 //
 //    /**
 //     * 承認者１名称を取得します。
 //     * @return 承認者１名称
 //     */
-//    public String getApprover1Nm() {
-//        return approver1Nm;
+//    public String getApproveUserNm1() {
+//        return approveUserNm1;
 //    }
 //
 //    /**
 //     * 承認者１名称を設定します。
-//     * @param approver1Nm 承認者１名称
+//     * @param approveUserNm1 承認者１名称
 //     */
-//    public void setApprover1Nm(String approver1Nm) {
-//        this.approver1Nm = approver1Nm;
+//    public void setApproveUserNm1(String approveUserNm1) {
+//        this.approveUserNm1 = approveUserNm1;
 //    }
 //
 //    /**
 //     * 承認者２名称を取得します。
 //     * @return 承認者２名称
 //     */
-//    public String getApprover2Nm() {
-//        return approver2Nm;
+//    public String getApproveUserNm2() {
+//        return approveUserNm2;
 //    }
 //
 //    /**
 //     * 承認者２名称を設定します。
-//     * @param approver2Nm 承認者２名称
+//     * @param approveUserNm2 承認者２名称
 //     */
-//    public void setApprover2Nm(String approver2Nm) {
-//        this.approver2Nm = approver2Nm;
+//    public void setApproveUserNm2(String approveUserNm2) {
+//        this.approveUserNm2 = approveUserNm2;
 //    }
 //
 //    /**
 //     * 承認者３名称を取得します。
 //     * @return 承認者３名称
 //     */
-//    public String getApprover3Nm() {
-//        return approver3Nm;
+//    public String getApproveUserNm3() {
+//        return approveUserNm3;
 //    }
 //
 //    /**
 //     * 承認者３名称を設定します。
-//     * @param approver3Nm 承認者３名称
+//     * @param approveUserNm3 承認者３名称
 //     */
-//    public void setApprover3Nm(String approver3Nm) {
-//        this.approver3Nm = approver3Nm;
+//    public void setApproveUserNm3(String approveUserNm3) {
+//        this.approveUserNm3 = approveUserNm3;
 //    }
 //
 //}

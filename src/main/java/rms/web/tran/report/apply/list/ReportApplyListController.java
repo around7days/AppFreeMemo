@@ -1,4 +1,4 @@
-package rms.web.tran.report.application.list;
+package rms.web.tran.report.apply.list;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -33,17 +33,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(types = ReportApplicationListForm.class)
-public class ReportApplicationListController extends rms.web.com.abstracts.AbstractController {
+@SessionAttributes(types = ReportApplyListForm.class)
+public class ReportApplyListController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(ReportApplicationListController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportApplyListController.class);
 
     /** ページURL */
-    private static final String PAGE_URL = "html/reportApplicationList";
+    private static final String PAGE_URL = "html/reportApplyList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/application/list";
+    public static final String MAPPING_URL = "/tran/report/apply/list";
 
     /** 月報格納ベースディレクトリ */
     @Value("${myapp.report.storage}")
@@ -58,8 +58,8 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
      * @return
      */
     @ModelAttribute
-    ReportApplicationListForm setupForm() {
-        return new ReportApplicationListForm();
+    ReportApplyListForm setupForm() {
+        return new ReportApplyListForm();
     }
 
     /**
@@ -69,7 +69,7 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "init")
-    public String initInsert(ReportApplicationListForm form,
+    public String initInsert(ReportApplyListForm form,
                              Model model) {
         // 検索結果・ページ情報の初期化
         form.setPageInfo(new PageInfo());
@@ -86,14 +86,14 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "search")
-    public String search(ReportApplicationListForm form,
+    public String search(ReportApplyListForm form,
                          @AuthenticationPrincipal UserInfo userInfo,
                          Model model) {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 検索条件の生成
         ReportSearchConditionEntity condition = new ReportSearchConditionEntity();
-        condition.setApplicantId(userInfo.getUserId());
+        condition.setApplyUserId(userInfo.getUserId());
 
         // 検索処理
         SearchResultEntity<ReportSearchResultEntity> searchResultEntity = reportSelectService.getReportList(condition,
@@ -113,7 +113,7 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pagePrev")
-    public String pagePrev(ReportApplicationListForm form,
+    public String pagePrev(ReportApplyListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().prev();
@@ -128,7 +128,7 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "pageNext")
-    public String pageNext(ReportApplicationListForm form,
+    public String pageNext(ReportApplyListForm form,
                            Model model) {
         // ページング設定
         form.getPageInfo().next();
@@ -146,7 +146,7 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "download")
-    public String download(ReportApplicationListForm form,
+    public String download(ReportApplyListForm form,
                            @PathVariable int index,
                            HttpServletResponse response,
                            Model model) throws IOException {
@@ -160,7 +160,7 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
          * ファイルダウンロード処理
          */
         // ダウンロードファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(reportStorage, result.getApplicantId(), result.getTargetYm());
+        Path filePath = FileUtils.createReportFilePath(reportStorage, result.getApplyUserId(), result.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 
@@ -185,7 +185,7 @@ public class ReportApplicationListController extends rms.web.com.abstracts.Abstr
     //        logger.debug("選択月報情報 -> {}", result);
     //
     //        // 月報承認画面
-    //        return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplicantId() + "/"
+    //        return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplyUserId() + "/"
     //                        + result.getTargetYm(), "init");
     //    }
 

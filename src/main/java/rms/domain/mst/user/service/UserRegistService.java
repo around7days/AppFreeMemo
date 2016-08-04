@@ -50,15 +50,15 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
      * ユーザ役割マスタ登録処理<br>
      * 説明：ユーザに紐付くユーザ役割マスタを全て削除してから新規登録を行います。
      * @param userId
-     * @param applicantFlg
-     * @param approverFlg
+     * @param applyFlg
+     * @param approveFlg
      * @param adminFlg
      */
     public void deleteInsertUserRoleMst(String userId,
-                                        String applicantFlg,
-                                        String approverFlg,
+                                        String applyFlg,
+                                        String approveFlg,
                                         String adminFlg) {
-        logger.debug("登録情報 -> 申請者:{}  承認者:{}  管理者:{}", applicantFlg, approverFlg, adminFlg);
+        logger.debug("登録情報 -> 申請者:{}  承認者:{}  管理者:{}", applyFlg, approveFlg, adminFlg);
 
         // ユーザに紐付く全役割の削除
         userRegistDao.deleteUserRoleByUserId(userId);
@@ -68,13 +68,13 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
         mUserRole.setUserId(userId);
 
         // 申請者の登録
-        if (Const.FLG_ON.equals(applicantFlg)) {
-            mUserRole.setRole(MRoleConst.APPLICANT);
+        if (Const.FLG_ON.equals(applyFlg)) {
+            mUserRole.setRole(MRoleConst.APPLY);
             mUserRoleDao.insert(mUserRole);
         }
         // 承認者の登録
-        if (Const.FLG_ON.equals(approverFlg)) {
-            mUserRole.setRole(MRoleConst.APPROVER);
+        if (Const.FLG_ON.equals(approveFlg)) {
+            mUserRole.setRole(MRoleConst.APPROVE);
             mUserRoleDao.insert(mUserRole);
         }
         // 管理者者の登録

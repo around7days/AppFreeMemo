@@ -53,7 +53,7 @@
 //         * 承認用情報の生成
 //         */
 //        TReport entity = new TReport();
-//        entity.setApplicantId(form.getApplicantId());
+//        entity.setApplyUserId(form.getApplyUserId());
 //        entity.setTargetYear(Integer.valueOf(form.getTargetYm()));
 //        entity.setStatus(MCodeConst.A001_100); // 承認済み
 //        logger.debug("承認情報 -> {}", entity);
@@ -75,7 +75,7 @@
 //         * 承認用情報の生成
 //         */
 //        TReport entity = new TReport();
-//        entity.setApplicantId(form.getApplicantId());
+//        entity.setApplyUserId(form.getApplyUserId());
 //        entity.setTargetYear(Integer.valueOf(form.getTargetYm()));
 //        entity.setStatus(MCodeConst.A001_N03); // 否認
 //        logger.debug("否認情報 -> {}", entity);

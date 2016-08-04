@@ -54,13 +54,13 @@ public class UserValidateService extends rms.domain.com.abstracts.AbstractServic
      * 承認ルート設定チェック<br>
      * 役割に申請者を保持している場合、承認者３は必須入力になります。 <br>
      * 未入力の場合はBusinessExceptionを発生させます。
-     * @param roleApplicantFlg
-     * @param approver3Id
+     * @param roleApplyFlg
+     * @param approveUserId3
      * @throws BusinessException
      */
-    public void validateApprovalRoute(String roleApplicantFlg,
-                                   String approver3Id) throws BusinessException {
-        if (Const.FLG_ON.equals(roleApplicantFlg) && StringUtils.isNullOrEmpty(approver3Id)) {
+    public void validateApprovalRoute(String roleApplyFlg,
+                                   String approveUserId3) throws BusinessException {
+        if (Const.FLG_ON.equals(roleApplyFlg) && StringUtils.isNullOrEmpty(approveUserId3)) {
             throw new BusinessException("役割が申請者の場合、承認者３は必須です。");
         }
     }

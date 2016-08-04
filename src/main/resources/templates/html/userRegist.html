@@ -73,25 +73,25 @@
 					<!-- 承認者1 -->
 					<label class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
-						<select name="approver1Id" id="approver1Id" class="form-control">
+						<select name="approveUserId1" id="approveUserId1" class="form-control">
 							<option value=""></option>
-							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver1Id}" th:text="${obj.value}"></option>
+							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId1}" th:text="${obj.value}"></option>
 						</select>
 					</div>
 					<!-- 承認者2 -->
 					<label class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
-						<select name="approver2Id" id="approver2Id" class="form-control">
+						<select name="approveUserId2" id="approveUserId2" class="form-control">
 							<option value=""></option>
-							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver2Id}" th:text="${obj.value}"></option>
+							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId2}" th:text="${obj.value}"></option>
 						</select>
 					</div>
 					<!-- 承認者3 -->
 					<label class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
-						<select name="approver3Id" id="approver3Id" class="form-control">
+						<select name="approveUserId3" id="approveUserId3" class="form-control">
 							<option value=""></option>
-							<option th:each="obj : *{approverList}" th:value="${obj.key}" th:selected="${obj.key} == *{approver3Id}" th:text="${obj.value}"></option>
+							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId3}" th:text="${obj.value}"></option>
 						</select>
 					</div>
 				</div>
@@ -101,10 +101,10 @@
 					<label class="col-sm-3 control-label">役割</label>
 					<div class="col-sm-9">
 						<label class="checkbox-inline">
-							<input type="checkbox" name="roleApplicantFlg" id="roleApplicantFlg" th:field="*{roleApplicantFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 申請者
+							<input type="checkbox" name="roleApplyFlg" id="roleApplyFlg" th:field="*{roleApplyFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 申請者
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="roleApproverFlg" id="roleApproverFlg" th:field="*{roleApproverFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 承認者
+							<input type="checkbox" name="roleApproveFlg" id="roleApproveFlg" th:field="*{roleApproveFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 承認者
 						</label>
 						<label class="checkbox-inline">
 							<input type="checkbox" name="roleAdminFlg" id="roleAdminFlg" th:field="*{roleAdminFlg}" th:value="${T(rms.com.consts.Const).FLG_ON}" /> 管理者

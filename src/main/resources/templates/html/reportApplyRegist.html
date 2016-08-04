@@ -20,10 +20,10 @@
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<!-- 個別 JS -->
-	<script th:src="@{/js/reportApplicationRegist.js}" src="../../static/js/reportApplicationRegist.js"></script>
+	<script th:src="@{/js/reportApplyRegist.js}" src="../../static/js/reportApplyRegist.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApplicationRegistForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApplyRegistForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -83,17 +83,17 @@
 					<!-- 承認者1 -->
 					<label class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
-						<pre th:text="*{approver1Nm}">承認太郎</pre>
+						<pre th:text="*{approveUserNm1}">承認太郎</pre>
 					</div>
 					<!-- 承認者2 -->
 					<label class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
-						<pre th:text="*{approver2Nm}">承認花子</pre>
+						<pre th:text="*{approveUserNm2}">承認花子</pre>
 					</div>
 					<!-- 承認者3 -->
 					<label class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
-						<pre th:text="*{approver3Nm}">承認一郎</pre>
+						<pre th:text="*{approveUserNm3}">承認一郎</pre>
 					</div>
 				</div>
 				<!-- 申請ボタン -->

@@ -1,4 +1,4 @@
-package rms.web.tran.report.application.regist;
+package rms.web.tran.report.apply.regist;
 
 import rms.com.validator.annotation.UploadFileNotEmpty;
 
@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * 月報申請画面フォーム
  * @author
  */
-public class ReportApplicationRegistForm extends rms.web.com.abstracts.AbstractForm {
+public class ReportApplyRegistForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 入力チェック宣言 ----------------------------------------------------- */
     //@formatter:off
@@ -39,17 +39,17 @@ public class ReportApplicationRegistForm extends rms.web.com.abstracts.AbstractF
     /** 公開有無 */
     private String publishFlg;
     /** 承認者１ID */
-    private String approver1Id;
+    private String approveUserId1;
     /** 承認者２ID */
-    private String approver2Id;
+    private String approveUserId2;
     /** 承認者３ID */
-    private String approver3Id;
+    private String approveUserId3;
     /** 承認者１名 */
-    private String approver1Nm;
+    private String approveUserNm1;
     /** 承認者２名 */
-    private String approver2Nm;
+    private String approveUserNm2;
     /** 承認者３名 */
-    private String approver3Nm;
+    private String approveUserNm3;
 
     /* getter/setter -------------------------------------------------------- */
 
@@ -121,95 +121,95 @@ public class ReportApplicationRegistForm extends rms.web.com.abstracts.AbstractF
      * 承認者１IDを取得します。
      * @return 承認者１ID
      */
-    public String getApprover1Id() {
-        return approver1Id;
+    public String getApproveUserId1() {
+        return approveUserId1;
     }
 
     /**
      * 承認者１IDを設定します。
-     * @param approver1Id 承認者１ID
+     * @param approveUserId1 承認者１ID
      */
-    public void setApprover1Id(String approver1Id) {
-        this.approver1Id = approver1Id;
+    public void setApproveUserId1(String approveUserId1) {
+        this.approveUserId1 = approveUserId1;
     }
 
     /**
      * 承認者２IDを取得します。
      * @return 承認者２ID
      */
-    public String getApprover2Id() {
-        return approver2Id;
+    public String getApproveUserId2() {
+        return approveUserId2;
     }
 
     /**
      * 承認者２IDを設定します。
-     * @param approver2Id 承認者２ID
+     * @param approveUserId2 承認者２ID
      */
-    public void setApprover2Id(String approver2Id) {
-        this.approver2Id = approver2Id;
+    public void setApproveUserId2(String approveUserId2) {
+        this.approveUserId2 = approveUserId2;
     }
 
     /**
      * 承認者３IDを取得します。
      * @return 承認者３ID
      */
-    public String getApprover3Id() {
-        return approver3Id;
+    public String getApproveUserId3() {
+        return approveUserId3;
     }
 
     /**
      * 承認者３IDを設定します。
-     * @param approver3Id 承認者３ID
+     * @param approveUserId3 承認者３ID
      */
-    public void setApprover3Id(String approver3Id) {
-        this.approver3Id = approver3Id;
+    public void setApproveUserId3(String approveUserId3) {
+        this.approveUserId3 = approveUserId3;
     }
 
     /**
      * 承認者１名を取得します。
      * @return 承認者１名
      */
-    public String getApprover1Nm() {
-        return approver1Nm;
+    public String getApproveUserNm1() {
+        return approveUserNm1;
     }
 
     /**
      * 承認者１名を設定します。
-     * @param approver1Nm 承認者１名
+     * @param approveUserNm1 承認者１名
      */
-    public void setApprover1Nm(String approver1Nm) {
-        this.approver1Nm = approver1Nm;
+    public void setApproveUserNm1(String approveUserNm1) {
+        this.approveUserNm1 = approveUserNm1;
     }
 
     /**
      * 承認者２名を取得します。
      * @return 承認者２名
      */
-    public String getApprover2Nm() {
-        return approver2Nm;
+    public String getApproveUserNm2() {
+        return approveUserNm2;
     }
 
     /**
      * 承認者２名を設定します。
-     * @param approver2Nm 承認者２名
+     * @param approveUserNm2 承認者２名
      */
-    public void setApprover2Nm(String approver2Nm) {
-        this.approver2Nm = approver2Nm;
+    public void setApproveUserNm2(String approveUserNm2) {
+        this.approveUserNm2 = approveUserNm2;
     }
 
     /**
      * 承認者３名を取得します。
      * @return 承認者３名
      */
-    public String getApprover3Nm() {
-        return approver3Nm;
+    public String getApproveUserNm3() {
+        return approveUserNm3;
     }
 
     /**
      * 承認者３名を設定します。
-     * @param approver3Nm 承認者３名
+     * @param approveUserNm3 承認者３名
      */
-    public void setApprover3Nm(String approver3Nm) {
-        this.approver3Nm = approver3Nm;
+    public void setApproveUserNm3(String approveUserNm3) {
+        this.approveUserNm3 = approveUserNm3;
     }
 }

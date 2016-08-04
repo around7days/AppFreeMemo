@@ -20,33 +20,33 @@ public interface TReportHisDao {
 
     /**
      * 1件取得
-     * @param applicantId
+     * @param applyUserId
      * @param targetYm
      * @param seq
      * @return the TReportHis entity
      */
     @Select
-    TReportHis selectById(String applicantId,
+    TReportHis selectById(String applyUserId,
                           Integer targetYm,
                           Integer seq);
 
     /**
      * 1件取得
-     * @param applicantId
+     * @param applyUserId
      * @param targetYm
      * @param seq
      * @param options
      * @return the TReportHis entity
      */
     @Select
-    TReportHis selectById(String applicantId,
+    TReportHis selectById(String applyUserId,
                           Integer targetYm,
                           Integer seq,
                           SelectOptions options);
 
     /**
      * 1件取得
-     * @param applicantId
+     * @param applyUserId
      * @param targetYm
      * @param seq
      * @param version
@@ -54,7 +54,7 @@ public interface TReportHisDao {
      * @return the TReportHis entity
      */
     @Select(ensureResult = true)
-    TReportHis selectByIdAndVersion(String applicantId,
+    TReportHis selectByIdAndVersion(String applyUserId,
                                     Integer targetYm,
                                     Integer seq,
                                     Integer version) throws NoResultException;

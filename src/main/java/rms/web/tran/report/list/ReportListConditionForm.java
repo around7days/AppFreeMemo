@@ -10,9 +10,9 @@ public class ReportListConditionForm extends rms.web.com.abstracts.AbstractForm 
     /** 対象年月 */
     private String targetYm;
     /** 申請者ID */
-    private String applicantId;
+    private String applyUserId;
     /** 申請者名 */
-    private String applicantNm;
+    private String applyNm;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -35,31 +35,31 @@ public class ReportListConditionForm extends rms.web.com.abstracts.AbstractForm 
      * 申請者IDを取得します。
      * @return 申請者ID
      */
-    public String getApplicantId() {
-        return applicantId;
+    public String getApplyUserId() {
+        return applyUserId;
     }
 
     /**
      * 申請者IDを設定します。
-     * @param applicantId 申請者ID
+     * @param applyUserId 申請者ID
      */
-    public void setApplicantId(String applicantId) {
-        this.applicantId = applicantId;
+    public void setApplyUserId(String applyUserId) {
+        this.applyUserId = applyUserId;
     }
 
     /**
      * 申請者名を取得します。
      * @return 申請者名
      */
-    public String getApplicantNm() {
-        return applicantNm;
+    public String getApplyNm() {
+        return applyNm;
     }
 
     /**
      * 申請者名を設定します。
-     * @param applicantNm 申請者名
+     * @param applyNm 申請者名
      */
-    public void setApplicantNm(String applicantNm) {
-        this.applicantNm = applicantNm;
+    public void setApplyNm(String applyNm) {
+        this.applyNm = applyNm;
     }
 }

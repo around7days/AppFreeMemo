@@ -17,9 +17,9 @@ public class UserEntity extends rms.domain.com.abstracts.AbstractEntity {
     private List<MUserRole> userRoleList;
 
     /** 役割：申請者フラグ */
-    private String roleApplicantFlg;
+    private String roleApplyFlg;
     /** 役割：承認者フラグ */
-    private String roleApproverFlg;
+    private String roleApproveFlg;
     /** 役割：管理者フラグ */
     private String roleAdminFlg;
 
@@ -59,32 +59,32 @@ public class UserEntity extends rms.domain.com.abstracts.AbstractEntity {
      * 役割：申請者フラグを取得します。
      * @return 役割：申請者フラグ
      */
-    public String getRoleApplicantFlg() {
-        return roleApplicantFlg;
+    public String getRoleApplyFlg() {
+        return roleApplyFlg;
     }
 
     /**
      * 役割：申請者フラグを設定します。
-     * @param roleApplicantFlg 役割：申請者フラグ
+     * @param roleApplyFlg 役割：申請者フラグ
      */
-    public void setRoleApplicantFlg(String roleApplicantFlg) {
-        this.roleApplicantFlg = roleApplicantFlg;
+    public void setRoleApplyFlg(String roleApplyFlg) {
+        this.roleApplyFlg = roleApplyFlg;
     }
 
     /**
      * 役割：承認者フラグを取得します。
      * @return 役割：承認者フラグ
      */
-    public String getRoleApproverFlg() {
-        return roleApproverFlg;
+    public String getRoleApproveFlg() {
+        return roleApproveFlg;
     }
 
     /**
      * 役割：承認者フラグを設定します。
-     * @param roleApproverFlg 役割：承認者フラグ
+     * @param roleApproveFlg 役割：承認者フラグ
      */
-    public void setRoleApproverFlg(String roleApproverFlg) {
-        this.roleApproverFlg = roleApproverFlg;
+    public void setRoleApproveFlg(String roleApproveFlg) {
+        this.roleApproveFlg = roleApproveFlg;
     }
 
     /**

@@ -75,8 +75,8 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         UserRegistForm form = new UserRegistForm();
 
         // selectbox用 承認者一覧の取得
-        List<SelectOptionEntity> approverList = userSelectService.getSelectboxApprover();
-        form.setApproverList(approverList);
+        List<SelectOptionEntity> approveList = userSelectService.getSelectboxApprove();
+        form.setApproveList(approveList);
 
         return form;
     }
@@ -153,7 +153,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // ユーザIDの重複チェック
         userValidateService.validateUniquUserId(form.getUserId());
         // 承認ルート設定チェック
-        userValidateService.validateApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
+        userValidateService.validateApprovalRoute(form.getRoleApplyFlg(), form.getApproveUserId3());
 
         /*
          * ユーザマスタ
@@ -169,8 +169,8 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          */
         // ユーザ役割マスタ登録処理
         userRegistService.deleteInsertUserRoleMst(form.getUserId(),
-                                                  form.getRoleApplicantFlg(),
-                                                  form.getRoleApproverFlg(),
+                                                  form.getRoleApplyFlg(),
+                                                  form.getRoleApproveFlg(),
                                                   form.getRoleAdminFlg());
 
         // TODO MessageResorceが使いにくい。どこかで改良。
@@ -213,7 +213,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          * 業務ロジックチェック
          */
         // 承認ルート設定チェック
-        userValidateService.validateApprovalRoute(form.getRoleApplicantFlg(), form.getApprover3Id());
+        userValidateService.validateApprovalRoute(form.getRoleApplyFlg(), form.getApproveUserId3());
 
         /*
          * ユーザマスタ
@@ -229,8 +229,8 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          */
         // ユーザ役割マスタ登録処理
         userRegistService.deleteInsertUserRoleMst(form.getUserId(),
-                                                  form.getRoleApplicantFlg(),
-                                                  form.getRoleApproverFlg(),
+                                                  form.getRoleApplyFlg(),
+                                                  form.getRoleApproveFlg(),
                                                   form.getRoleAdminFlg());
 
         // 完了メッセージ

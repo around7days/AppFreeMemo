@@ -12,20 +12,20 @@ import org.seasar.doma.Entity;
 public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractEntity {
 
     /** 申請者ID */
-    @Column(name = "applicant_id")
-    private String applicantId;
+    @Column(name = "apply_user_id")
+    private String applyUserId;
 
     /** ユーザ名 */
-    @Column(name = "applicant_nm")
-    private String applicantNm;
+    @Column(name = "apply_nm")
+    private String applyNm;
 
     /** 対象年月 */
     @Column(name = "target_ym")
     private Integer targetYm;
 
     /** 申請日 */
-    @Column(name = "application_date")
-    private LocalDateTime applicationDate;
+    @Column(name = "apply_date")
+    private LocalDateTime applyDate;
 
     /** 公開有無 */
     @Column(name = "publish_flg")
@@ -44,28 +44,28 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     private String statusNm;
 
     /** 承認者１ID */
-    @Column(name = "approver1_id")
-    private String approver1Id;
+    @Column(name = "approve_user_id1")
+    private String approveUserId1;
 
     /** ユーザ名 */
-    @Column(name = "approver1_nm")
-    private String approver1Nm;
+    @Column(name = "approve_user_nm1")
+    private String approveUserNm1;
 
     /** 承認者２ID */
-    @Column(name = "approver2_id")
-    private String approver2Id;
+    @Column(name = "approve_user_id2")
+    private String approveUserId2;
 
     /** ユーザ名 */
-    @Column(name = "approver2_nm")
-    private String approver2Nm;
+    @Column(name = "approve_user_nm2")
+    private String approveUserNm2;
 
     /** 承認者３ID */
-    @Column(name = "approver3_id")
-    private String approver3Id;
+    @Column(name = "approve_user_id3")
+    private String approveUserId3;
 
     /** ユーザ名 */
-    @Column(name = "approver3_nm")
-    private String approver3Nm;
+    @Column(name = "approve_user_nm3")
+    private String approveUserNm3;
 
     /** 月報ファイルパス */
     @Column(name = "file_path")
@@ -75,32 +75,32 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
      * 申請者IDを取得します。
      * @return 申請者ID
      */
-    public String getApplicantId() {
-        return applicantId;
+    public String getApplyUserId() {
+        return applyUserId;
     }
 
     /**
      * 申請者IDを設定します。
-     * @param applicantId 申請者ID
+     * @param applyUserId 申請者ID
      */
-    public void setApplicantId(String applicantId) {
-        this.applicantId = applicantId;
+    public void setApplyUserId(String applyUserId) {
+        this.applyUserId = applyUserId;
     }
 
     /**
      * ユーザ名を取得します。
      * @return ユーザ名
      */
-    public String getApplicantNm() {
-        return applicantNm;
+    public String getApplyNm() {
+        return applyNm;
     }
 
     /**
      * ユーザ名を設定します。
-     * @param applicantNm ユーザ名
+     * @param applyNm ユーザ名
      */
-    public void setApplicantNm(String applicantNm) {
-        this.applicantNm = applicantNm;
+    public void setApplyNm(String applyNm) {
+        this.applyNm = applyNm;
     }
 
     /**
@@ -123,16 +123,16 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
      * 申請日を取得します。
      * @return 申請日
      */
-    public LocalDateTime getApplicationDate() {
-        return applicationDate;
+    public LocalDateTime getApplyDate() {
+        return applyDate;
     }
 
     /**
      * 申請日を設定します。
-     * @param applicationDate 申請日
+     * @param applyDate 申請日
      */
-    public void setApplicationDate(LocalDateTime applicationDate) {
-        this.applicationDate = applicationDate;
+    public void setApplyDate(LocalDateTime applyDate) {
+        this.applyDate = applyDate;
     }
 
     /**
@@ -203,96 +203,96 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
      * 承認者１IDを取得します。
      * @return 承認者１ID
      */
-    public String getApprover1Id() {
-        return approver1Id;
+    public String getApproveUserId1() {
+        return approveUserId1;
     }
 
     /**
      * 承認者１IDを設定します。
-     * @param approver1Id 承認者１ID
+     * @param approveUserId1 承認者１ID
      */
-    public void setApprover1Id(String approver1Id) {
-        this.approver1Id = approver1Id;
+    public void setApproveUserId1(String approveUserId1) {
+        this.approveUserId1 = approveUserId1;
     }
 
     /**
      * ユーザ名を取得します。
      * @return ユーザ名
      */
-    public String getApprover1Nm() {
-        return approver1Nm;
+    public String getApproveUserNm1() {
+        return approveUserNm1;
     }
 
     /**
      * ユーザ名を設定します。
-     * @param approver1Nm ユーザ名
+     * @param approveUserNm1 ユーザ名
      */
-    public void setApprover1Nm(String approver1Nm) {
-        this.approver1Nm = approver1Nm;
+    public void setApproveUserNm1(String approveUserNm1) {
+        this.approveUserNm1 = approveUserNm1;
     }
 
     /**
      * 承認者２IDを取得します。
      * @return 承認者２ID
      */
-    public String getApprover2Id() {
-        return approver2Id;
+    public String getApproveUserId2() {
+        return approveUserId2;
     }
 
     /**
      * 承認者２IDを設定します。
-     * @param approver2Id 承認者２ID
+     * @param approveUserId2 承認者２ID
      */
-    public void setApprover2Id(String approver2Id) {
-        this.approver2Id = approver2Id;
+    public void setApproveUserId2(String approveUserId2) {
+        this.approveUserId2 = approveUserId2;
     }
 
     /**
      * ユーザ名を取得します。
      * @return ユーザ名
      */
-    public String getApprover2Nm() {
-        return approver2Nm;
+    public String getApproveUserNm2() {
+        return approveUserNm2;
     }
 
     /**
      * ユーザ名を設定します。
-     * @param approver2Nm ユーザ名
+     * @param approveUserNm2 ユーザ名
      */
-    public void setApprover2Nm(String approver2Nm) {
-        this.approver2Nm = approver2Nm;
+    public void setApproveUserNm2(String approveUserNm2) {
+        this.approveUserNm2 = approveUserNm2;
     }
 
     /**
      * 承認者３IDを取得します。
      * @return 承認者３ID
      */
-    public String getApprover3Id() {
-        return approver3Id;
+    public String getApproveUserId3() {
+        return approveUserId3;
     }
 
     /**
      * 承認者３IDを設定します。
-     * @param approver3Id 承認者３ID
+     * @param approveUserId3 承認者３ID
      */
-    public void setApprover3Id(String approver3Id) {
-        this.approver3Id = approver3Id;
+    public void setApproveUserId3(String approveUserId3) {
+        this.approveUserId3 = approveUserId3;
     }
 
     /**
      * ユーザ名を取得します。
      * @return ユーザ名
      */
-    public String getApprover3Nm() {
-        return approver3Nm;
+    public String getApproveUserNm3() {
+        return approveUserNm3;
     }
 
     /**
      * ユーザ名を設定します。
-     * @param approver3Nm ユーザ名
+     * @param approveUserNm3 ユーザ名
      */
-    public void setApprover3Nm(String approver3Nm) {
-        this.approver3Nm = approver3Nm;
+    public void setApproveUserNm3(String approveUserNm3) {
+        this.approveUserNm3 = approveUserNm3;
     }
 
     /**

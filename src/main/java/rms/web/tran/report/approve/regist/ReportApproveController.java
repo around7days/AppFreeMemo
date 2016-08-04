@@ -1,4 +1,4 @@
-package rms.web.tran.report.approval.regist;
+package rms.web.tran.report.approve.regist;
 
 //package rms.web.tran.report.approval;
 //
@@ -58,18 +58,18 @@ package rms.web.tran.report.approval.regist;
 //
 //    /**
 //     * 初期処理
-//     * @param applicantId
+//     * @param applyUserId
 //     * @param targetYm
 //     * @param model
 //     * @return
 //     */
-//    @RequestMapping(value = MAPPING_URL + "/{applicantId}/{targetYm}", params = "init")
-//    public String init(@PathVariable String applicantId,
+//    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "init")
+//    public String init(@PathVariable String applyUserId,
 //                       @PathVariable String targetYm,
 //                       Model model) {
 //        // 初期値設定
 //        ReportApprovalForm form = setupForm();
-//        form.setApplicantId(applicantId);
+//        form.setApplyUserId(applyUserId);
 //        form.setTargetYm(targetYm);
 //        reportApprovalService.init(form);
 //        // 格納

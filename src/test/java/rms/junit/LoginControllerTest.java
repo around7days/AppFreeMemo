@@ -2,11 +2,11 @@
 //
 //import static org.junit.Assert.*;
 //
-//import rms.Application;
+//import rms.Apply;
 //import rms.web.login.LoginController;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.ApplyContext;
 //import org.springframework.mock.web.MockHttpServletRequest;
 //import org.springframework.mock.web.MockHttpServletResponse;
 //import org.springframework.test.context.ContextConfiguration;
@@ -28,11 +28,11 @@
 // */
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@WebAppConfiguration
-//@ContextConfiguration(classes = Application.class)
+//@ContextConfiguration(classes = Apply.class)
 //public class LoginControllerTest {
 //
 //    @Autowired
-//    protected ApplicationContext context;
+//    protected ApplyContext context;
 //
 //    protected MockHttpServletRequest request;
 //    protected MockHttpServletResponse response;

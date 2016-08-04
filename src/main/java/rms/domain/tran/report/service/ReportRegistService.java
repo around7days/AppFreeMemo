@@ -41,9 +41,9 @@ public class ReportRegistService extends rms.domain.com.abstracts.AbstractServic
 
         // 登録用Entityの生成
         // 承認者の有無に合わせてステータスを設定
-        if (!StringUtils.isEmpty(entity.getApprover1Id())) {
+        if (!StringUtils.isEmpty(entity.getApproveUserId1())) {
             entity.setStatus(MCodeConst.A001_Y01);
-        } else if (!StringUtils.isEmpty(entity.getApprover2Id())) {
+        } else if (!StringUtils.isEmpty(entity.getApproveUserId2())) {
             entity.setStatus(MCodeConst.A001_Y02);
         } else {
             entity.setStatus(MCodeConst.A001_Y03);
@@ -57,7 +57,7 @@ public class ReportRegistService extends rms.domain.com.abstracts.AbstractServic
     //     * 更新処理
     //     * @param form
     //     */
-    //    public void update(ReportApplicantForm form) {
+    //    public void update(ReportApplyForm form) {
     //
     //        // 更新情報の生成
     //        MUser mUser = new MUser();
