@@ -30,6 +30,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -59,6 +60,7 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/report/apply/regist";
 
+    // TODO application.propertiesをAbstractControllerに持ちたい
     /** 月報格納ベースディレクトリ */
     @Value("${myapp.report.storage}")
     private String reportStorage;
@@ -109,6 +111,32 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
 
         // 値を設定
         BeanUtils.copyProperties(userEntity.getUser(), form);
+
+        logger.debug("出力フォーム情報 -> {}", form);
+
+        return PAGE_URL;
+    }
+
+    /**
+     * 初期表示処理（更新時）
+     * @param form
+     * @param applyUserId
+     * @param targetYm
+     * @param userInfo
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initUpdate")
+    public String initUpdate(ReportApplyRegistForm form,
+                             @PathVariable String applyUserId,
+                             @PathVariable String targetYm,
+                             @AuthenticationPrincipal UserInfo userInfo,
+                             Model model) {
+        // 画面表示モードを「新規」に設定
+        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_UPDATE);
+
+        //
+        reportSelectService.getReportInfo(applyUserId, targetYm);
 
         logger.debug("出力フォーム情報 -> {}", form);
 

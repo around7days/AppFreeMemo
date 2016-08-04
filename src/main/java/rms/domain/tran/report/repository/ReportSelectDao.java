@@ -2,6 +2,7 @@ package rms.domain.tran.report.repository;
 
 import java.util.List;
 
+import rms.domain.com.entity.VTReport;
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.entity.ReportSearchResultEntity;
 
@@ -18,7 +19,17 @@ import org.seasar.doma.jdbc.SelectOptions;
 public interface ReportSelectDao {
 
     /**
-     * 月報一覧の取得
+     * 月報情報の取得
+     * @param applyUserId
+     * @param targetYm
+     * @return
+     */
+    @Select
+    VTReport reportById(String applyUserId,
+                        Integer targetYm);
+
+    /**
+     * 月報情報一覧の取得
      * @param condition
      * @param options
      * @return

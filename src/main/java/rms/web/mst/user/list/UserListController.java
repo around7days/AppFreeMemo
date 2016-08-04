@@ -93,16 +93,16 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
         BeanUtils.copyProperties(form.getCondition(), condition);
 
         // 検索処理
-        SearchResultEntity<UserSearchResultEntity> searchResultEntity = userSelectService.getUserInfoList(condition,
-                                                                                                          form.getPageInfo());
-        if (searchResultEntity.getResultList().isEmpty()) {
+        SearchResultEntity<UserSearchResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
+                                                                                                    form.getPageInfo());
+        if (resultEntity.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
             return PAGE_URL;
         }
 
         // 検索結果をフォームに反映
-        form.setResultList(searchResultEntity.getResultList());
-        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
+        form.setResultList(resultEntity.getResultList());
+        form.getPageInfo().setTotalSize(resultEntity.getCount());
 
         return PAGE_URL;
     }
@@ -123,12 +123,12 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
         BeanUtils.copyProperties(form, condition);
 
         // 検索処理
-        SearchResultEntity<UserSearchResultEntity> searchResultEntity = userSelectService.getUserInfoList(condition,
-                                                                                                          form.getPageInfo());
+        SearchResultEntity<UserSearchResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
+                                                                                                    form.getPageInfo());
 
         // 検索結果をフォームに反映
-        form.setResultList(searchResultEntity.getResultList());
-        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
+        form.setResultList(resultEntity.getResultList());
+        form.getPageInfo().setTotalSize(resultEntity.getCount());
 
         return PAGE_URL;
     }

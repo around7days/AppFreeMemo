@@ -83,10 +83,7 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
      */
     public SearchResultEntity<UserSearchResultEntity> getUserInfoList(UserSearchConditionEntity condition,
                                                                       PageInfo pageInfo) {
-        logger.debug("検索条件 -> {}", condition);
-        logger.debug("ページ情報 -> {}", pageInfo);
-
-        // ページング設定
+        // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
@@ -96,11 +93,11 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
         resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
-        SearchResultEntity<UserSearchResultEntity> searchResultEntity = new SearchResultEntity<>();
-        searchResultEntity.setResultList(resultList);
-        searchResultEntity.setCount(options.getCount());
+        SearchResultEntity<UserSearchResultEntity> resultEntity = new SearchResultEntity<>();
+        resultEntity.setResultList(resultList);
+        resultEntity.setCount(options.getCount());
 
-        return searchResultEntity;
+        return resultEntity;
     }
 
     /**

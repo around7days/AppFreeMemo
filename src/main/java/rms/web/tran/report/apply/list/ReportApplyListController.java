@@ -10,6 +10,7 @@ import rms.web.base.SearchResultEntity;
 import rms.web.base.UserInfo;
 import rms.web.com.utils.FileUtils;
 import rms.web.com.utils.PageInfo;
+import rms.web.tran.report.apply.regist.ReportApplyRegistController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -96,12 +97,12 @@ public class ReportApplyListController extends rms.web.com.abstracts.AbstractCon
         condition.setApplyUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultEntity<ReportSearchResultEntity> searchResultEntity = reportSelectService.getReportList(condition,
-                                                                                                            form.getPageInfo());
+        SearchResultEntity<ReportSearchResultEntity> resultEntity = reportSelectService.getReportList(condition,
+                                                                                                      form.getPageInfo());
 
         // 検索結果をフォームに反映
-        form.setResultList(searchResultEntity.getResultList());
-        form.getPageInfo().setTotalSize(searchResultEntity.getCount());
+        form.setResultList(resultEntity.getResultList());
+        form.getPageInfo().setTotalSize(resultEntity.getCount());
 
         return PAGE_URL;
     }
@@ -167,26 +168,26 @@ public class ReportApplyListController extends rms.web.com.abstracts.AbstractCon
         return null;
     }
 
-    //    /**
-    //     * 月報選択処理
-    //     * @param form
-    //     * @param index
-    //     * @param model
-    //     * @return
-    //     */
-    //    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
-    //    public String select(ReportSearchForm form,
-    //                         @PathVariable int index,
-    //                         Model model) {
-    //        logger.debug("選択値 -> {}", index);
-    //
-    //        // 選択した月報情報
-    //        ReportSearchResultEntity result = form.getResultList().get(index);
-    //        logger.debug("選択月報情報 -> {}", result);
-    //
-    //        // 月報承認画面
-    //        return redirect(ReportApprovalController.MAPPING_URL + "/" + result.getApplyUserId() + "/"
-    //                        + result.getTargetYm(), "init");
-    //    }
+    /**
+     * 月報選択処理
+     * @param form
+     * @param index
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
+    public String select(ReportApplyListForm form,
+                         @PathVariable int index,
+                         Model model) {
+        logger.debug("選択値 -> {}", index);
+
+        // 選択した月報情報
+        ReportSearchResultEntity result = form.getResultList().get(index);
+        logger.debug("選択月報情報 -> {}", result);
+
+        // 月報申請画面
+        return redirect(ReportApplyRegistController.MAPPING_URL + "/" + result.getApplyUserId() + "/"
+                        + result.getTargetYm(), "initUpdate");
+    }
 
 }

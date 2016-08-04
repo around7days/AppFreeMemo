@@ -2,7 +2,7 @@ package rms.domain.tran.report.service;
 
 import java.util.List;
 
-import rms.domain.com.repository.TReportDao;
+import rms.domain.com.entity.VTReport;
 import rms.domain.tran.report.entity.ReportSearchConditionEntity;
 import rms.domain.tran.report.entity.ReportSearchResultEntity;
 import rms.domain.tran.report.repository.ReportSelectDao;
@@ -28,13 +28,24 @@ public class ReportSelectService extends rms.domain.com.abstracts.AbstractServic
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ReportSelectService.class);
 
-    /** 月報管理テーブルDao */
-    @Autowired
-    TReportDao tReportDao;
-
     /** 月報情報取得Dao */
     @Autowired
     ReportSelectDao reportSelectDao;
+
+    /**
+     * 月報情報の取得
+     * @param applyUserId
+     * @param targetYm
+     * @return
+     */
+    public VTReport getReportInfo(String applyUserId,
+                                  String targetYm) {
+        // 月報情報の取得
+        VTReport entity = reportSelectDao.reportById(applyUserId, Integer.valueOf(targetYm));
+        logger.debug("取得情報 -> {}", entity);
+
+        return entity;
+    }
 
     /**
      * 月報情報一覧取得
@@ -44,7 +55,7 @@ public class ReportSelectService extends rms.domain.com.abstracts.AbstractServic
      */
     public SearchResultEntity<ReportSearchResultEntity> getReportList(ReportSearchConditionEntity condition,
                                                                       PageInfo pageInfo) {
-        // ページング設定
+        // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
@@ -54,11 +65,11 @@ public class ReportSelectService extends rms.domain.com.abstracts.AbstractServic
         resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
-        SearchResultEntity<ReportSearchResultEntity> searchResultEntity = new SearchResultEntity<>();
-        searchResultEntity.setResultList(resultList);
-        searchResultEntity.setCount(options.getCount());
+        SearchResultEntity<ReportSearchResultEntity> resultEntity = new SearchResultEntity<>();
+        resultEntity.setResultList(resultList);
+        resultEntity.setCount(options.getCount());
 
-        return searchResultEntity;
+        return resultEntity;
 
     }
 
