@@ -23,7 +23,6 @@ import rms.web.tran.report.apply.list.ReportApplyListController;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,11 +61,6 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/report/apply/regist";
-
-    // TODO application.propertiesをAbstractControllerに持ちたい
-    /** 月報格納ベースディレクトリ */
-    @Value("${myapp.report.storage}")
-    private String reportStorage;
 
     /** ユーザ情報取得サービス */
     @Autowired
@@ -149,19 +143,6 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
         return PAGE_URL;
     }
 
-    //    /**
-    //     * 初期表示処理（更新時）
-    //     * @param form
-    //     * @param model
-    //     * @return
-    //     */
-    //    @RequestMapping(value = MAPPING_URL, params = "initUpdate")
-    //    public String initUpdate(ReportApplyRegistForm form,
-    //                             Model model) {
-    //        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_UPDATE);
-    //        return PAGE_URL;
-    //    }
-
     /**
      * 新規登録処理
      * @param userInfo
@@ -218,7 +199,9 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
          * 月報ファイル保存処理
          */
         // 月報保存ファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(reportStorage, userInfo.getUserId(), form.getTargetYm());
+        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
+                                                       userInfo.getUserId(),
+                                                       form.getTargetYm());
         // 月報保存処理
         FileUtils.reportSave(form.getFile().getInputStream(), filePath);
 

@@ -1,5 +1,7 @@
 package rms.web.com.abstracts;
 
+import rms.com.base.ApplicationProperties;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.util.StringUtils;
@@ -19,6 +21,9 @@ public abstract class AbstractController {
 
     @Autowired
     protected MessageSource message;
+
+    /** application.properties */
+    protected ApplicationProperties properties = ApplicationProperties.INSTANCE;
 
     /**
      * リダイレクトURLの生成

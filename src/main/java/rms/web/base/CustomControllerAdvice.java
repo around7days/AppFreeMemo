@@ -1,6 +1,7 @@
 package rms.web.base;
 
-import org.springframework.beans.factory.annotation.Value;
+import rms.com.base.ApplicationProperties;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,9 +16,8 @@ import org.slf4j.LoggerFactory;
 @ControllerAdvice
 public class CustomControllerAdvice {
 
-    /** クライアント入力チェック有無 */
-    @Value("${myapp.html5.novalidate}")
-    boolean html5novalidate;
+    /** application.properties */
+    private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;
 
     /** logger */
     @SuppressWarnings("unused")
@@ -32,7 +32,7 @@ public class CustomControllerAdvice {
     @ModelAttribute
     public void addOneObject(Model model) {
         // クライアント入力チェック有無
-        model.addAttribute("novalidate", html5novalidate);
+        model.addAttribute("novalidate", properties.getBoolean("myapp.html5.novalidate"));
     }
 
     //    @ExceptionHandler

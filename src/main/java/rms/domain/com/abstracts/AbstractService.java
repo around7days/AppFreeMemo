@@ -1,5 +1,6 @@
 package rms.domain.com.abstracts;
 
+import rms.com.base.ApplicationProperties;
 import rms.web.base.UserInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public abstract class AbstractService {
 
     @Autowired
     protected MessageSource message;
+
+    /** application.properties */
+    protected ApplicationProperties properties = ApplicationProperties.INSTANCE;
 
     // TODO DIの書き方に変更予定　※Listnerクラスも
     /**

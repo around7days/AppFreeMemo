@@ -13,7 +13,6 @@ import rms.web.com.utils.PageInfo;
 import rms.web.tran.report.apply.regist.ReportApplyRegistController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,10 +44,6 @@ public class ReportApplyListController extends rms.web.com.abstracts.AbstractCon
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/report/apply/list";
-
-    /** 月報格納ベースディレクトリ */
-    @Value("${myapp.report.storage}")
-    private String reportStorage;
 
     /** 月報情報取得サービス */
     @Autowired
@@ -161,7 +156,9 @@ public class ReportApplyListController extends rms.web.com.abstracts.AbstractCon
          * ファイルダウンロード処理
          */
         // ダウンロードファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(reportStorage, result.getApplyUserId(), result.getTargetYm());
+        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
+                                                       result.getApplyUserId(),
+                                                       result.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 
