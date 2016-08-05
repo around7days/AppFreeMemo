@@ -5,6 +5,7 @@ import rms.web.mst.user.list.UserListController;
 import rms.web.mst.user.regist.UserRegistController;
 import rms.web.tran.report.apply.list.ReportApplyListController;
 import rms.web.tran.report.apply.regist.ReportApplyRegistController;
+import rms.web.tran.report.approve.list.ReportApproveListController;
 import rms.web.tran.report.list.ReportListController;
 
 import org.springframework.stereotype.Controller;
@@ -133,6 +134,18 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
     //                       Model model) {
     //        return redirect(ReportApprovalController.MAPPING_URL + "/user01/201606", "init");
     //    }
+
+    /**
+     * 月報承認状況一覧画面に遷移
+     * @param form
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "t005")
+    public String T005(MenuForm form,
+                       Model model) {
+        return redirect(ReportApproveListController.MAPPING_URL, "init");
+    }
 
     @SuppressWarnings("unused")
     @RequestMapping(value = MAPPING_URL, params = "e001")

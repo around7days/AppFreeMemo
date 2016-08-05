@@ -12,7 +12,7 @@ public class ReportSearchConditionEntity extends rms.domain.com.abstracts.Abstra
     /** 申請者ID */
     private String applyUserId;
     /** 申請者名 */
-    private String applyNm;
+    private String applyUserNm;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -51,15 +51,15 @@ public class ReportSearchConditionEntity extends rms.domain.com.abstracts.Abstra
      * 申請者名を取得します。
      * @return 申請者名
      */
-    public String getApplyNm() {
-        return applyNm;
+    public String getApplyUserNm() {
+        return applyUserNm;
     }
 
     /**
      * 申請者名を設定します。
-     * @param applyNm 申請者名
+     * @param applyUserNm 申請者名
      */
-    public void setApplyNm(String applyNm) {
-        this.applyNm = applyNm;
+    public void setApplyUserNm(String applyUserNm) {
+        this.applyUserNm = applyUserNm;
     }
 }

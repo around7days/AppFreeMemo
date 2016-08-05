@@ -57,7 +57,7 @@
 					<label class="col-sm-3 control-label">申請者</label>
 					<div class="col-sm-9 form-inline">
 						<input type="text" th:value="*{condition.applyUserId}" name="condition.applyUserId" id="condition.applyUserId" placeholder="申請者ID（完全一致）" class="form-control" />
-						<input type="text" th:value="*{condition.applyNm}" name="condition.applyNm" id="condition.applyNm" placeholder="申請者名（部分一致）" class="form-control" />
+						<input type="text" th:value="*{condition.applyUserNm}" name="condition.applyUserNm" id="condition.applyUserNm" placeholder="申請者名（部分一致）" class="form-control" />
 					</div>
 				</div>
 				<!-- 検索・新規ボタン -->
@@ -88,7 +88,7 @@
 					<tbody>
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td th:text="${result.targetYm}">201606</td>
-							<td th:text="${result.applyNm}">月報太郎</td>
+							<td th:text="${result.applyUserNm}">月報太郎</td>
 							<td>2SOL</td>
 							<td><button type="submit" formnovalidate="formnovalidate" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>

@@ -9,8 +9,10 @@ ProjectName=月報管理システム
 Author=
 MaxEntityRowShow=1000
 ReadOnlyRecommend=0
-Page=Main
-PageInfo="Main",7,"A4Landscape",$FFFFFF
+Page=Table
+PageInfo="Table",7,"A4Landscape",$FFFFFF
+Page=View
+PageInfo="View",2,"A4Landscape",$FFFFFF
 LogicalView=1
 DecodeDomain=0
 ViewModePageIndividually=1
@@ -45,6 +47,46 @@ SqlSeparator=0
 ShowTag=1
 ShowCommonAttributes=0
 
+[View]
+PName=v_t_report
+LName=v_t_report
+Comment=
+ViewOption=
+Query=select `a`.`apply_user_id` AS `apply_user_id`,`u0`.`user_nm` AS `apply_user_nm`,`a`.`target_ym` AS `target_ym`,`a`.`apply_date` AS `apply_date`,`a`.`publish_flg` AS `publish_flg`,`b001`.`code_nm` AS `publish_nm`,`a`.`status` AS `status`,`a001`.`code_nm` AS `status_nm`,`a`.`approve_user_id1` AS `approve_user_id1`,`u1`.`user_nm` AS `approve_user_nm1`,`a`.`approve_user_id2` AS `approve_user_id2`,`u2`.`user_nm` AS `approve_user_nm2`,`a`.`approve_user_id3` AS `approve_user_id3`,`u3`.`user_nm` AS `approve_user_nm3`,`a`.`file_path` AS `file_path`,`a`.`version` AS `version`,`a`.`del_flg` AS `del_flg`,`a`.`ins_date` AS `ins_date`,`a`.`ins_id` AS `ins_id`,`a`.`upd_date` AS `upd_date`,`a`.`upd_id` AS `upd_id` from ((((((`t_report` `a` left join `m_user` `u0` on((`a`.`apply_user_id` = `u0`.`user_id`))) left join `m_user` `u1` on((`a`.`approve_user_id1` = `u1`.`user_id`))) left join `m_user` `u2` on((`a`.`approve_user_id2` = `u2`.`user_id`))) left join `m_user` `u3` on((`a`.`approve_user_id3` = `u3`.`user_id`))) left join `m_code` `a001` on(((`a`.`status` = `a001`.`code`) and (`a001`.`code_kbn` = \qA001\q)))) left join `m_code` `b001` on(((`a`.`publish_flg` = `b001`.`code`) and (`b001`.`code_kbn` = \qB001\q))))
+Color=$000000
+BkColor=$FFFFFF
+Position="VIEW",800,200
+Page=VIEW
+Left=800
+Top=200
+
+[View]
+PName=v_m_user_role
+LName=v_m_user_role
+Comment=
+ViewOption=
+Query=CREATE ALGORITHM=UNDEFINED DEFINER=`mms01`@`%` SQL SECURITY DEFINER VIEW `v_m_user_role` AS select `a`.`user_id` AS `user_id`,`b`.`role` AS `role`,`b`.`role_nm` AS `role_nm`,`a`.`version` AS `version`,`a`.`del_flg` AS `del_flg`,`a`.`ins_date` AS `ins_date`,`a`.`ins_id` AS `ins_id`,`a`.`upd_date` AS `upd_date`,`a`.`upd_id` AS `upd_id` from (`m_user_role` `a` join `m_role` `b` on((`a`.`role` = `b`.`role`)))
+Color=$000000
+BkColor=$FFFFFF
+Position="VIEW",500,200
+Page=VIEW
+Left=500
+Top=200
+
+[View]
+PName=v_m_user
+LName=v_m_user
+Comment=
+ViewOption=
+Query=CREATE ALGORITHM=UNDEFINED DEFINER=`mms01`@`%` SQL SECURITY DEFINER VIEW `v_m_user` AS select `u`.`user_id` AS `user_id`,`u`.`user_nm` AS `user_nm`,`u`.`password` AS `password`,`u`.`email` AS `email`,`u`.`approve_user_id1` AS `approve_user_id1`,`a1`.`user_nm` AS `approve_user_nm1`,`u`.`approve_user_id2` AS `approve_user_id2`,`a2`.`user_nm` AS `approve_user_nm2`,`u`.`approve_user_id3` AS `approve_user_id3`,`a3`.`user_nm` AS `approve_user_nm3`,`u`.`version` AS `version`,`u`.`del_flg` AS `del_flg`,`u`.`ins_date` AS `ins_date`,`u`.`ins_id` AS `ins_id`,`u`.`upd_date` AS `upd_date`,`u`.`upd_id` AS `upd_id` from (((`m_user` `u` left join `m_user` `a1` on((`u`.`approve_user_id1` = `a1`.`user_id`))) left join `m_user` `a2` on((`u`.`approve_user_id2` = `a2`.`user_id`))) left join `m_user` `a3` on((`u`.`approve_user_id3` = `a3`.`user_id`)))
+LNameByComment=1
+Color=$000000
+BkColor=$FFFFFF
+Position="VIEW",100,200
+Page=VIEW
+Left=100
+Top=200
+
 [Comment]
 Comment=【課題】\n・履歴をどの単位で残すのか？\n・アップロードされた月報は上書きになる？
 FontName=Tahoma
@@ -55,7 +97,7 @@ FontSize=9
 FontColor=$000000
 LineColor=$000000
 BkColor=$FFFFFF
-Page=Main
+Page=TABLE
 Left=1600
 Top=1600
 Width=1251
@@ -70,7 +112,7 @@ Fields1=apply_user_id,target_ym
 Fields2=apply_user_id,target_ym
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,6976,3024,6869,R,R
+Position="TABLE",0,6976,3024,6869,R,R
 Dependence=1
 Caption=
 PName=
@@ -87,7 +129,7 @@ PName=T_REPORT_HIS
 LName=月報管理テーブル（履歴）
 Comment=
 TableOption=
-Page=MAIN
+Page=TABLE
 Left=1100
 Top=1050
 Field="申請者ID","apply_user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
@@ -104,7 +146,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160804170117
-Position="MAIN",1100,1050
+Position="TABLE",1100,1050
 
 [Comment]
 Comment=業務
@@ -116,7 +158,7 @@ FontSize=9
 FontColor=$000000
 LineColor=$000000
 BkColor=$C0DCC0
-Page=Main
+Page=TABLE
 Left=100
 Top=900
 Width=250
@@ -132,7 +174,7 @@ FontSize=9
 FontColor=$000000
 LineColor=$000000
 BkColor=$C0DCC0
-Page=Main
+Page=TABLE
 Left=100
 Top=100
 Width=250
@@ -147,7 +189,7 @@ Fields1=role
 Fields2=role
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,4908,7201,5000,R,R
+Position="TABLE",0,4908,7201,5000,R,R
 Dependence=1
 Caption=
 PName=
@@ -168,7 +210,7 @@ Fields1=user_id
 Fields2=user_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,3915,4988,2965,R,R
+Position="TABLE",0,3915,4988,2965,R,R
 Dependence=1
 Caption=
 PName=
@@ -185,7 +227,7 @@ PName=M_ROLE
 LName=役割マスタ
 Comment=
 TableOption=
-Page=MAIN
+Page=TABLE
 Left=1550
 Top=700
 Field="役割","role","varchar(40)","NOT NULL",0,"","",$FFFFFFFF,""
@@ -195,14 +237,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160723005148
-Position="MAIN",1550,700
+Position="TABLE",1550,700
 
 [Entity]
 PName=M_USER_ROLE
 LName=ユーザ役割マスタ
 Comment=
 TableOption=
-Page=MAIN
+Page=TABLE
 Left=900
 Top=700
 Field="ユーザID","user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
@@ -211,14 +253,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160723005050
-Position="MAIN",900,700
+Position="TABLE",900,700
 
 [Entity]
 PName=M_CODE
 LName=コードマスタ
 Comment=
 TableOption=
-Page=MAIN
+Page=TABLE
 Left=100
 Top=250
 Field="コード区分","code_kbn","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
@@ -233,14 +275,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160716195816
-Position="MAIN",100,250
+Position="TABLE",100,250
 
 [Entity]
 PName=M_USER
 LName=ユーザマスタ
 Comment=
 TableOption=
-Page=MAIN
+Page=TABLE
 Left=900
 Top=250
 Field="ユーザID","user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
@@ -254,14 +296,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160804165629
-Position="MAIN",900,250
+Position="TABLE",900,250
 
 [Entity]
 PName=T_REPORT
 LName=月報管理テーブル
 Comment=
 TableOption=
-Page=MAIN
+Page=TABLE
 Left=100
 Top=1050
 Field="申請者ID","apply_user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
@@ -277,4 +319,4 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160804165720
-Position="MAIN",100,1050
+Position="TABLE",100,1050

@@ -1,6 +1,6 @@
 SELECT
     A.apply_user_id
-  , A.apply_nm
+  , A.apply_user_nm
   , A.target_ym
   , A.apply_date
   , A.publish_flg
@@ -21,8 +21,8 @@ WHERE
 /*%if @isNotEmpty(condition.applyUserId) */
 and A.apply_user_id = /* condition.applyUserId */'user01'
 /*%end */
-/*%if @isNotEmpty(condition.applyNm) */
-and A.apply_nm like /* @infix(condition.applyNm) */'%申請者%'
+/*%if @isNotEmpty(condition.applyUserNm) */
+and A.apply_user_nm like /* @infix(condition.applyUserNm) */'%申請者%'
 /*%end */
 /*%if @isNotEmpty(condition.targetYm) */
 and A.target_ym = /* condition.targetYm */'201606'

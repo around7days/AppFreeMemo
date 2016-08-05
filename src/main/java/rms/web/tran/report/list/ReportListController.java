@@ -65,8 +65,8 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "init")
-    public String initInsert(ReportListForm form,
-                             Model model) {
+    public String init(ReportListForm form,
+                       Model model) {
         return PAGE_URL;
     }
 

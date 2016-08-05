@@ -16,8 +16,8 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
     private String applyUserId;
 
     /** ユーザ名 */
-    @Column(name = "apply_nm")
-    private String applyNm;
+    @Column(name = "apply_user_nm")
+    private String applyUserNm;
 
     /** 対象年月 */
     @Column(name = "target_ym")
@@ -91,16 +91,16 @@ public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractE
      * ユーザ名を取得します。
      * @return ユーザ名
      */
-    public String getApplyNm() {
-        return applyNm;
+    public String getApplyUserNm() {
+        return applyUserNm;
     }
 
     /**
      * ユーザ名を設定します。
-     * @param applyNm ユーザ名
+     * @param applyUserNm ユーザ名
      */
-    public void setApplyNm(String applyNm) {
-        this.applyNm = applyNm;
+    public void setApplyUserNm(String applyUserNm) {
+        this.applyUserNm = applyUserNm;
     }
 
     /**
