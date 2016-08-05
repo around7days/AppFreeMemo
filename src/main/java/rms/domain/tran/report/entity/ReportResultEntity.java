@@ -6,10 +6,11 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 
 /**
- * 月報一覧（検索結果）クラス
+ * 月報一覧（検索結果）クラス<br>
+ * 月報一覧、月報申請状況一覧、月報承認状況一覧で共通
  */
 @Entity
-public class ReportSearchResultEntity extends rms.domain.com.abstracts.AbstractEntity {
+public class ReportResultEntity extends rms.domain.com.abstracts.AbstractEntity {
 
     /** 申請者ID */
     @Column(name = "apply_user_id")

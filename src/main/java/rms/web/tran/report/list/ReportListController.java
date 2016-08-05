@@ -3,8 +3,8 @@ package rms.web.tran.report.list;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import rms.domain.tran.report.entity.ReportSearchConditionEntity;
-import rms.domain.tran.report.entity.ReportSearchResultEntity;
+import rms.domain.tran.report.entity.ReportListConditionEntity;
+import rms.domain.tran.report.entity.ReportResultEntity;
 import rms.domain.tran.report.service.ReportSelectService;
 import rms.web.base.SearchResultEntity;
 import rms.web.com.utils.FileUtils;
@@ -94,11 +94,11 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
         form.setResultList(null);
 
         // 検索条件の生成
-        ReportSearchConditionEntity condition = new ReportSearchConditionEntity();
+        ReportListConditionEntity condition = new ReportListConditionEntity();
         BeanUtils.copyProperties(form.getCondition(), condition);
 
         // 検索処理
-        SearchResultEntity<ReportSearchResultEntity> resultEntity = reportSelectService.getReportList(condition,
+        SearchResultEntity<ReportResultEntity> resultEntity = reportSelectService.getReportList(condition,
                                                                                                       form.getPageInfo());
         if (resultEntity.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
@@ -124,11 +124,11 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
         logger.debug("フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        ReportSearchConditionEntity condition = new ReportSearchConditionEntity();
+        ReportListConditionEntity condition = new ReportListConditionEntity();
         BeanUtils.copyProperties(form.getCondition(), condition);
 
         // 検索処理
-        SearchResultEntity<ReportSearchResultEntity> resultEntity = reportSelectService.getReportList(condition,
+        SearchResultEntity<ReportResultEntity> resultEntity = reportSelectService.getReportList(condition,
                                                                                                       form.getPageInfo());
 
         // 検索結果をフォームに反映
@@ -185,7 +185,7 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportSearchResultEntity result = form.getResultList().get(index);
+        ReportResultEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result);
 
         /*

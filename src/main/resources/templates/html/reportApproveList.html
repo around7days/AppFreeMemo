@@ -49,7 +49,7 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9">
-						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" />
+						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" required="required" />
 					</div>
 				</div>
 				<!-- 検索・新規ボタン -->
@@ -71,7 +71,7 @@
 					<thead class="thead-default">
 						<tr>
 							<th>選択</th>
-							<th>年月</th>
+							<th>申請者</th>
 							<th>申請日</th>
 							<th>承認者１</th>
 							<th>承認者２</th>
@@ -84,7 +84,7 @@
 					<tbody>
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td><button type="submit" formnovalidate="formnovalidate" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
-							<td th:text="${result.targetYm}">201606</td>
+							<td th:text="${result.applyUserNm}">申請者</td>
 							<td th:text="${result.applyDate}">2016/05/31 20:23</td>
 							<td th:text="${result.approveUserNm1}">承認者１</td>
 							<td th:text="${result.approveUserNm2}">承認者２</td>

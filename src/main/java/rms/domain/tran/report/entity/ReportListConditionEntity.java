@@ -4,7 +4,7 @@ package rms.domain.tran.report.entity;
  * 月報一覧（検索条件）Entity
  * @author
  */
-public class ReportSearchConditionEntity extends rms.domain.com.abstracts.AbstractEntity {
+public class ReportListConditionEntity extends rms.domain.com.abstracts.AbstractEntity {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 対象年月 */

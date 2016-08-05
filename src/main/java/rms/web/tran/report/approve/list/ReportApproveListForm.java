@@ -1,23 +1,44 @@
-package rms.web.tran.report.apply.list;
+package rms.web.tran.report.approve.list;
 
 import java.util.List;
 
 import rms.domain.tran.report.entity.ReportResultEntity;
 import rms.web.com.utils.PageInfo;
 
+import javax.validation.Valid;
+
 /**
- * 月報一覧画面フォーム
+ * 月報承認状況一覧画面フォーム
  * @author
  */
-public class ReportApplyListForm extends rms.web.com.abstracts.AbstractForm {
+public class ReportApproveListForm extends rms.web.com.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
+    /** 検索条件 */
+    @Valid
+    private ReportApproveListConditionForm condition = new ReportApproveListConditionForm();
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
     private List<ReportResultEntity> resultList;
 
     /* getter/setter -------------------------------------------------------- */
+    /**
+     * 検索条件を取得します。
+     * @return 検索条件
+     */
+    public ReportApproveListConditionForm getCondition() {
+        return condition;
+    }
+
+    /**
+     * 検索条件を設定します。
+     * @param condition 検索条件
+     */
+    public void setCondition(ReportApproveListConditionForm condition) {
+        this.condition = condition;
+    }
+
     /**
      * ページ情報を取得します。
      * @return ページ情報
