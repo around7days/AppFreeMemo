@@ -7,16 +7,16 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/report/approval";
+	var defaultUrl = "/tran/report/approve/regist";
 
 	/**
 	 * 承認ボタン押下
 	 */
-	$("#approval").on("click", function() {
+	$("#approve").on("click", function() {
 		if (!window.confirm("承認しますか？")) {
 			return false;
 		}
-		var url = defaultUrl + "?approval";
+		var url = defaultUrl + "?approve";
 		fmMain.attr("action", url);
 		return true;
 	});
@@ -24,21 +24,11 @@ $(function() {
 	/**
 	 * 否認ボタン押下
 	 */
-	$("#denial").on("click", function() {
+	$("#deny").on("click", function() {
 		if (!window.confirm("否認しますか？")) {
 			return false;
 		}
-		var url = defaultUrl + "?denial";
-		fmMain.attr("action", url);
-		return true;
-	});
-
-	/**
-	 * 月報DLボタン押下
-	 */
-	$("#download").on("click", function() {
-		var index = $(this).val();
-		var url = defaultUrl + "?download";
+		var url = defaultUrl + "?deny";
 		fmMain.attr("action", url);
 		return true;
 	});
@@ -51,5 +41,4 @@ $(function() {
 		fmMain.attr("action", url);
 		return true;
 	});
-
 });

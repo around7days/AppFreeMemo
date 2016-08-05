@@ -205,4 +205,27 @@ public class ReportApproveListController extends rms.web.com.abstracts.AbstractC
 
         return null;
     }
+
+    /**
+     * 月報選択処理
+     * @param form
+     * @param index
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
+    public String select(ReportApproveListForm form,
+                         @PathVariable int index,
+                         Model model) {
+        logger.debug("選択値 -> {}", index);
+
+        // 選択した月報情報
+        ReportApproveListResultEntity result = form.getResultList().get(index);
+        logger.debug("選択月報情報 -> {}", result);
+
+        // 月報承認画面
+        return redirect(ReportApproveListController.MAPPING_URL + "/" + result.getApplyUserId() + "/"
+                        + result.getTargetYm(), "init");
+    }
+
 }

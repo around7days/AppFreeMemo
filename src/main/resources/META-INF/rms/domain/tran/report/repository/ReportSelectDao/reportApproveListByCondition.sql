@@ -42,8 +42,8 @@ select
   , null
   , null
   , null
-  , null
-  , '未提出'
+  , 'XXX'
+  , (select A001.code_nm from m_code A001 where A001.code_kbn = 'A001' and A001.code = 'XXX')
   , M.approve_user_id1
   , M.approve_user_nm1
   , M.approve_user_id2

@@ -1,16 +1,12 @@
-package rms.web.tran.report.apply.regist;
+package rms.web.tran.report.approve.regist;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.Locale;
 
 import rms.com.base.BusinessException;
-import rms.com.consts.MCodeConst;
 import rms.com.consts.MessageConst;
-import rms.domain.com.entity.TReport;
 import rms.domain.com.entity.VTReport;
-import rms.domain.mst.user.entity.UserEntity;
 import rms.domain.mst.user.service.UserSelectService;
 import rms.domain.tran.report.service.ReportRegistService;
 import rms.domain.tran.report.service.ReportSelectService;
@@ -45,22 +41,22 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpSession;
 
 /**
- * 月報申請画面コントローラー
+ * 月報承認画面コントローラー
  * @author
  */
 @Controller
 @Transactional(rollbackFor = Exception.class)
-@SessionAttributes(types = ReportApplyRegistForm.class)
-public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractController {
+@SessionAttributes(types = ReportApproveRegistForm.class)
+public class ReportApproveRegistController extends rms.web.com.abstracts.AbstractController {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(ReportApplyRegistController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportApproveRegistController.class);
 
     /** ページURL */
-    private static final String PAGE_URL = "html/reportApplyRegist";
+    private static final String PAGE_URL = "html/reportApproveRegist";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/apply/regist";
+    public static final String MAPPING_URL = "/tran/report/approve/regist";
 
     /** ユーザ情報取得サービス */
     @Autowired
@@ -79,39 +75,12 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
     ReportValidateService reportValidateService;
 
     /**
-     * 月報申請画面フォームの初期化
+     * 月報承認画面フォームの初期化
      * @return
      */
     @ModelAttribute
-    ReportApplyRegistForm setupForm() {
-        return new ReportApplyRegistForm();
-    }
-
-    /**
-     * 初期表示処理（新規時）
-     * @param form
-     * @param userInfo
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = MAPPING_URL, params = "initInsert")
-    public String initInsert(ReportApplyRegistForm form,
-                             @AuthenticationPrincipal UserInfo userInfo,
-                             Model model) {
-        // 画面表示モードを「新規」に設定
-        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_INSERT);
-        // 公開有無を「公開」に設定
-        form.setPublishFlg(MCodeConst.B001_1);
-
-        // 申請者のユーザ情報を取得
-        UserEntity userEntity = userSelectService.getUserInfo(userInfo.getUserId());
-
-        // 値を設定
-        BeanUtils.copyProperties(userEntity.getUser(), form);
-
-        logger.debug("出力フォーム情報 -> {}", form);
-
-        return PAGE_URL;
+    ReportApproveRegistForm setupForm() {
+        return new ReportApproveRegistForm();
     }
 
     /**
@@ -123,14 +92,14 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initUpdate")
-    public String initUpdate(ReportApplyRegistForm form,
-                             @PathVariable String applyUserId,
-                             @PathVariable String targetYm,
-                             @AuthenticationPrincipal UserInfo userInfo,
-                             Model model) {
+    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "init")
+    public String init(ReportApproveRegistForm form,
+                       @PathVariable String applyUserId,
+                       @PathVariable String targetYm,
+                       @AuthenticationPrincipal UserInfo userInfo,
+                       Model model) {
         // 画面表示モードを「更新」に設定
-        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_UPDATE);
+        form.setViewMode(ReportApproveRegistForm.VIEW_MODE_UPDATE);
 
         // 月報情報の取得
         VTReport reportEntity = reportSelectService.getReportInfo(applyUserId, targetYm);
@@ -144,7 +113,7 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
     }
 
     /**
-     * 新規登録処理
+     * 承認処理
      * @param userInfo
      * @param form
      * @param bindingResult
@@ -156,8 +125,8 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
      * @throws BusinessException
      * @throws NumberFormatException
      */
-    @RequestMapping(value = MAPPING_URL, params = "insert")
-    public String insert(@Validated(ReportApplyRegistForm.Insert.class) ReportApplyRegistForm form,
+    @RequestMapping(value = MAPPING_URL, params = "approve")
+    public String insert(@Validated(ReportApproveRegistForm.Insert.class) ReportApproveRegistForm form,
                          BindingResult bindingResult,
                          @AuthenticationPrincipal UserInfo userInfo,
                          SessionStatus sessionStatus,
@@ -174,26 +143,12 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
         /*
          * 業務ロジックチェック
          */
-        // 月報の重複チェック
-        reportValidateService.validateUniquReport(userInfo.getUserId(), Integer.valueOf(form.getTargetYm()));
 
         /*
-         * 月報申請処理
+         * 承認処理
          */
-        // 申請情報の生成
-        TReport entity = new TReport();
-        entity.setApplyUserId(userInfo.getUserId());
-        entity.setTargetYm(Integer.valueOf(form.getTargetYm()));
-        entity.setApplyDate(LocalDateTime.now());
-        // entity.setStatus("");
-        entity.setPublishFlg(form.getPublishFlg());
-        entity.setApproveUserId1(form.getApproveUserId1());
-        entity.setApproveUserId2(form.getApproveUserId2());
-        entity.setApproveUserId3(form.getApproveUserId3());
-        entity.setFilePath("");
-
-        // 申請処理
-        reportRegistService.apply(entity);
+        // 承認処理
+        //        reportRegistService.approve(entity);
 
         /*
          * 月報ファイル保存処理
@@ -239,7 +194,7 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
         // メッセージを反映
         model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
         // セッションからフォーム情報を取得して反映
-        model.addAttribute(SessionUtils.getSessionForm(session, ReportApplyRegistForm.class));
+        model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistForm.class));
 
         return PAGE_URL;
     }
@@ -260,7 +215,7 @@ public class ReportApplyRegistController extends rms.web.com.abstracts.AbstractC
         // メッセージとフォーム情報を反映
         model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
         // セッションからフォーム情報を取得して反映
-        model.addAttribute(SessionUtils.getSessionForm(session, ReportApplyRegistForm.class));
+        model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistForm.class));
 
         return PAGE_URL;
     }

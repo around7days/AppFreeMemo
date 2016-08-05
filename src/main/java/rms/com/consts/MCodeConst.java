@@ -9,6 +9,8 @@ public class MCodeConst {
     /*
      * 承認状況：A001
      */
+    /** 承認状況：未提出 */
+    public static final String A001_XXX = "XXX";
     /** 承認状況：承認待ち１ */
     public static final String A001_Y01 = "Y01";
     /** 承認状況：承認待ち２ */
@@ -21,12 +23,8 @@ public class MCodeConst {
     public static final String A001_N02 = "N02";
     /** 承認状況：否認３ */
     public static final String A001_N03 = "N03";
-    /** 承認状況：仮登録 */
-    public static final String A001_000 = "000";
     /** 承認状況：承認済み */
     public static final String A001_100 = "100";
-    /** 承認状況：取消 */
-    public static final String A001_900 = "900";
 
     /*
      * 公開有無：B001

@@ -33,13 +33,12 @@ public class ReportRegistService extends rms.domain.com.abstracts.AbstractServic
     ReportSelectDao reportSelectDao;
 
     /**
-     * 月報情報の新規登録処理<br>
+     * 月報情報の申請処理<br>
      * 補足：承認状況はメソッド内で自動設定
      * @param entity
      */
-    public void insertReportMst(TReport entity) {
+    public void apply(TReport entity) {
 
-        // 登録用Entityの生成
         // 承認者の有無に合わせてステータスを設定
         if (!StringUtils.isEmpty(entity.getApproveUserId1())) {
             entity.setStatus(MCodeConst.A001_Y01);
@@ -51,6 +50,26 @@ public class ReportRegistService extends rms.domain.com.abstracts.AbstractServic
 
         // 登録処理
         tReportDao.insert(entity);
+    }
+
+    /**
+     * 月報情報の承認処理<br>
+     * 補足：承認状況はメソッド内で自動設定
+     * @param entity
+     */
+    public void approve(TReport entity) {
+
+        //        // 承認者の有無に合わせてステータスを設定
+        //        if (!StringUtils.isEmpty(entity.getApproveUserId1())) {
+        //            entity.setStatus(MCodeConst.A001_Y01);
+        //        } else if (!StringUtils.isEmpty(entity.getApproveUserId2())) {
+        //            entity.setStatus(MCodeConst.A001_Y02);
+        //        } else {
+        //            entity.setStatus(MCodeConst.A001_Y03);
+        //        }
+        //
+        //        // 登録処理
+        //        tReportDao.insert(entity);
     }
 
     //    /**
