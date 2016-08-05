@@ -3,9 +3,11 @@ package rms.domain.tran.report.repository;
 import java.util.List;
 
 import rms.domain.tran.report.entity.ReportApplyListConditionEntity;
+import rms.domain.tran.report.entity.ReportApplyListResultEntity;
 import rms.domain.tran.report.entity.ReportApproveListConditionEntity;
+import rms.domain.tran.report.entity.ReportApproveListResultEntity;
 import rms.domain.tran.report.entity.ReportListConditionEntity;
-import rms.domain.tran.report.entity.ReportResultEntity;
+import rms.domain.tran.report.entity.ReportListResultEntity;
 
 import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
@@ -26,8 +28,8 @@ public interface ReportSelectDao {
      * @return
      */
     @Select
-    List<ReportResultEntity> reportListByCondition(ReportListConditionEntity condition,
-                                                   SelectOptions options);
+    List<ReportListResultEntity> reportListByCondition(ReportListConditionEntity condition,
+                                                       SelectOptions options);
 
     /**
      * 月報情報一覧の取得（申請者用）
@@ -36,8 +38,8 @@ public interface ReportSelectDao {
      * @return
      */
     @Select
-    List<ReportResultEntity> reportApplyListByCondition(ReportApplyListConditionEntity condition,
-                                                        SelectOptions options);
+    List<ReportApplyListResultEntity> reportApplyListByCondition(ReportApplyListConditionEntity condition,
+                                                                 SelectOptions options);
 
     /**
      * 月報情報一覧の取得（承認者用）
@@ -46,7 +48,7 @@ public interface ReportSelectDao {
      * @return
      */
     @Select
-    List<ReportResultEntity> reportApproveListByCondition(ReportApproveListConditionEntity condition,
-                                                          SelectOptions options);
+    List<ReportApproveListResultEntity> reportApproveListByCondition(ReportApproveListConditionEntity condition,
+                                                                     SelectOptions options);
 
 }

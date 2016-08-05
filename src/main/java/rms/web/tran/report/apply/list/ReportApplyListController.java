@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import rms.domain.tran.report.entity.ReportApplyListConditionEntity;
-import rms.domain.tran.report.entity.ReportResultEntity;
+import rms.domain.tran.report.entity.ReportApplyListResultEntity;
 import rms.domain.tran.report.service.ReportSelectService;
 import rms.web.base.SearchResultEntity;
 import rms.web.base.UserInfo;
@@ -92,8 +92,8 @@ public class ReportApplyListController extends rms.web.com.abstracts.AbstractCon
         condition.setApplyUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultEntity<ReportResultEntity> resultEntity = reportSelectService.getReportApplyList(condition,
-                                                                                                     form.getPageInfo());
+        SearchResultEntity<ReportApplyListResultEntity> resultEntity = reportSelectService.getReportApplyList(condition,
+                                                                                                              form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultEntity.getResultList());
@@ -149,7 +149,7 @@ public class ReportApplyListController extends rms.web.com.abstracts.AbstractCon
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportResultEntity result = form.getResultList().get(index);
+        ReportApplyListResultEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result);
 
         /*
@@ -179,7 +179,7 @@ public class ReportApplyListController extends rms.web.com.abstracts.AbstractCon
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportResultEntity result = form.getResultList().get(index);
+        ReportApplyListResultEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result);
 
         // 月報申請画面

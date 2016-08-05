@@ -3,8 +3,8 @@ package rms.domain.mst.user.repository;
 import java.util.List;
 
 import rms.domain.com.entity.MUserRole;
-import rms.domain.mst.user.entity.UserSearchConditionEntity;
-import rms.domain.mst.user.entity.UserSearchResultEntity;
+import rms.domain.mst.user.entity.UserListConditionEntity;
+import rms.domain.mst.user.entity.UserListResultEntity;
 import rms.web.com.utils.SelectOptionEntity;
 
 import org.seasar.doma.Dao;
@@ -34,7 +34,7 @@ public interface UserSelectDao {
      * @return
      */
     @Select
-    List<UserSearchResultEntity> userListByCondition(UserSearchConditionEntity condition,
+    List<UserListResultEntity> userListByCondition(UserListConditionEntity condition,
                                                      SelectOptions options);
 
     /**

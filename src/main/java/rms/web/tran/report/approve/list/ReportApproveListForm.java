@@ -2,7 +2,7 @@ package rms.web.tran.report.approve.list;
 
 import java.util.List;
 
-import rms.domain.tran.report.entity.ReportResultEntity;
+import rms.domain.tran.report.entity.ReportApproveListResultEntity;
 import rms.web.com.utils.PageInfo;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ public class ReportApproveListForm extends rms.web.com.abstracts.AbstractForm {
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
-    private List<ReportResultEntity> resultList;
+    private List<ReportApproveListResultEntity> resultList;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -59,7 +59,7 @@ public class ReportApproveListForm extends rms.web.com.abstracts.AbstractForm {
      * 検索結果リストを取得します。
      * @return 検索結果リスト
      */
-    public List<ReportResultEntity> getResultList() {
+    public List<ReportApproveListResultEntity> getResultList() {
         return resultList;
     }
 
@@ -67,7 +67,7 @@ public class ReportApproveListForm extends rms.web.com.abstracts.AbstractForm {
      * 検索結果リストを設定します。
      * @param resultList 検索結果リスト
      */
-    public void setResultList(List<ReportResultEntity> resultList) {
+    public void setResultList(List<ReportApproveListResultEntity> resultList) {
         this.resultList = resultList;
     }
 }

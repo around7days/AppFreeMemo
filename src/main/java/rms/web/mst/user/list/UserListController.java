@@ -1,7 +1,7 @@
 package rms.web.mst.user.list;
 
-import rms.domain.mst.user.entity.UserSearchConditionEntity;
-import rms.domain.mst.user.entity.UserSearchResultEntity;
+import rms.domain.mst.user.entity.UserListConditionEntity;
+import rms.domain.mst.user.entity.UserListResultEntity;
 import rms.domain.mst.user.service.UserSelectService;
 import rms.web.base.SearchResultEntity;
 import rms.web.com.utils.PageInfo;
@@ -89,11 +89,11 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
         form.setResultList(null);
 
         // 検索条件の生成
-        UserSearchConditionEntity condition = new UserSearchConditionEntity();
+        UserListConditionEntity condition = new UserListConditionEntity();
         BeanUtils.copyProperties(form.getCondition(), condition);
 
         // 検索処理
-        SearchResultEntity<UserSearchResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
+        SearchResultEntity<UserListResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
                                                                                                     form.getPageInfo());
         if (resultEntity.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
@@ -119,11 +119,11 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        UserSearchConditionEntity condition = new UserSearchConditionEntity();
+        UserListConditionEntity condition = new UserListConditionEntity();
         BeanUtils.copyProperties(form, condition);
 
         // 検索処理
-        SearchResultEntity<UserSearchResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
+        SearchResultEntity<UserListResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
                                                                                                     form.getPageInfo());
 
         // 検索結果をフォームに反映
@@ -186,7 +186,7 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
         logger.debug("選択値 -> {}", index);
 
         // 選択したユーザ情報
-        UserSearchResultEntity user = form.getResultList().get(index);
+        UserListResultEntity user = form.getResultList().get(index);
         logger.debug("選択ユーザ情報 -> {}", user);
 
         return redirect(UserRegistController.MAPPING_URL + "/" + user.getUserId(), "initUpdate");

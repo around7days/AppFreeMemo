@@ -2,7 +2,7 @@ package rms.web.mst.user.list;
 
 import java.util.List;
 
-import rms.domain.mst.user.entity.UserSearchResultEntity;
+import rms.domain.mst.user.entity.UserListResultEntity;
 import rms.web.com.utils.PageInfo;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ public class UserListForm extends rms.web.com.abstracts.AbstractForm {
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
-    private List<UserSearchResultEntity> resultList;
+    private List<UserListResultEntity> resultList;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -59,7 +59,7 @@ public class UserListForm extends rms.web.com.abstracts.AbstractForm {
      * 検索結果リストを取得します。
      * @return 検索結果リスト
      */
-    public List<UserSearchResultEntity> getResultList() {
+    public List<UserListResultEntity> getResultList() {
         return resultList;
     }
 
@@ -67,7 +67,7 @@ public class UserListForm extends rms.web.com.abstracts.AbstractForm {
      * 検索結果リストを設定します。
      * @param resultList 検索結果リスト
      */
-    public void setResultList(List<UserSearchResultEntity> resultList) {
+    public void setResultList(List<UserListResultEntity> resultList) {
         this.resultList = resultList;
     }
 

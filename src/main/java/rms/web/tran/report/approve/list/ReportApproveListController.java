@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import rms.domain.tran.report.entity.ReportApproveListConditionEntity;
-import rms.domain.tran.report.entity.ReportResultEntity;
+import rms.domain.tran.report.entity.ReportApproveListResultEntity;
 import rms.domain.tran.report.service.ReportSelectService;
 import rms.web.base.SearchResultEntity;
 import rms.web.base.UserInfo;
@@ -103,8 +103,8 @@ public class ReportApproveListController extends rms.web.com.abstracts.AbstractC
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultEntity<ReportResultEntity> resultEntity = reportSelectService.getReportApproveList(condition,
-                                                                                                       form.getPageInfo());
+        SearchResultEntity<ReportApproveListResultEntity> resultEntity = reportSelectService.getReportApproveList(condition,
+                                                                                                                  form.getPageInfo());
         if (resultEntity.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
             return PAGE_URL;
@@ -133,8 +133,8 @@ public class ReportApproveListController extends rms.web.com.abstracts.AbstractC
         BeanUtils.copyProperties(form.getCondition(), condition);
 
         // 検索処理
-        SearchResultEntity<ReportResultEntity> resultEntity = reportSelectService.getReportApproveList(condition,
-                                                                                                       form.getPageInfo());
+        SearchResultEntity<ReportApproveListResultEntity> resultEntity = reportSelectService.getReportApproveList(condition,
+                                                                                                                  form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultEntity.getResultList());
@@ -190,7 +190,7 @@ public class ReportApproveListController extends rms.web.com.abstracts.AbstractC
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportResultEntity result = form.getResultList().get(index);
+        ReportApproveListResultEntity result = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", result);
 
         /*

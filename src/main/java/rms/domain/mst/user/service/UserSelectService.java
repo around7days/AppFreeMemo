@@ -8,8 +8,8 @@ import rms.domain.com.entity.MUserRole;
 import rms.domain.com.entity.VMUser;
 import rms.domain.com.repository.VMUserDao;
 import rms.domain.mst.user.entity.UserEntity;
-import rms.domain.mst.user.entity.UserSearchConditionEntity;
-import rms.domain.mst.user.entity.UserSearchResultEntity;
+import rms.domain.mst.user.entity.UserListConditionEntity;
+import rms.domain.mst.user.entity.UserListResultEntity;
 import rms.domain.mst.user.repository.UserSelectDao;
 import rms.web.base.SearchResultEntity;
 import rms.web.com.utils.PageInfo;
@@ -86,19 +86,19 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
      * @param pageInfo
      * @return
      */
-    public SearchResultEntity<UserSearchResultEntity> getUserInfoList(UserSearchConditionEntity condition,
+    public SearchResultEntity<UserListResultEntity> getUserInfoList(UserListConditionEntity condition,
                                                                       PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
-        List<UserSearchResultEntity> resultList = userSelectDao.userListByCondition(condition, options);
+        List<UserListResultEntity> resultList = userSelectDao.userListByCondition(condition, options);
         logger.debug("検索結果(全件) -> {}件", options.getCount());
         logger.debug("検索結果 -> {}件", resultList.size());
         resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
-        SearchResultEntity<UserSearchResultEntity> resultEntity = new SearchResultEntity<>();
+        SearchResultEntity<UserListResultEntity> resultEntity = new SearchResultEntity<>();
         resultEntity.setResultList(resultList);
         resultEntity.setCount(options.getCount());
 
