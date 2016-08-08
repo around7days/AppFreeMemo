@@ -10,6 +10,7 @@ import rms.web.base.SearchResultEntity;
 import rms.web.base.UserInfo;
 import rms.web.com.utils.FileUtils;
 import rms.web.com.utils.PageInfo;
+import rms.web.tran.report.approve.regist.ReportApproveRegistController;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -224,7 +225,7 @@ public class ReportApproveListController extends rms.web.com.abstracts.AbstractC
         logger.debug("選択月報情報 -> {}", result);
 
         // 月報承認画面
-        return redirect(ReportApproveListController.MAPPING_URL + "/" + result.getApplyUserId() + "/"
+        return redirect(ReportApproveRegistController.MAPPING_URL + "/" + result.getApplyUserId() + "/"
                         + result.getTargetYm(), "init");
     }
 

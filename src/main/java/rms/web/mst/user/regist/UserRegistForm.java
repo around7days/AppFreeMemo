@@ -2,6 +2,7 @@ package rms.web.mst.user.regist;
 
 import java.util.List;
 
+import rms.domain.com.entity.VMUser;
 import rms.web.com.utils.SelectOptionEntity;
 
 import javax.validation.constraints.Size;
@@ -29,9 +30,9 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
     /** 画面表示モード：更新 */
     public static final String VIEW_MODE_UPDATE = "update";
 
-    /* 排他制御用 ----------------------------------------------------------- */
-    /** バージョン */
-    private int version;
+    /* 更新制御用 ----------------------------------------------------------- */
+    /** 更新制御用 月報管理情報 */
+    private VMUser updateEntity;
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 画面表示モード */
@@ -71,20 +72,21 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
     private List<SelectOptionEntity> approveList;
 
     /* getter/setter -------------------------------------------------------- */
+
     /**
-     * バージョンを取得します。
-     * @return バージョン
+     * 更新制御用 月報管理情報を取得します。
+     * @return 更新制御用 月報管理情報
      */
-    public int getVersion() {
-        return version;
+    public VMUser getUpdateEntity() {
+        return updateEntity;
     }
 
     /**
-     * バージョンを設定します。
-     * @param version バージョン
+     * 更新制御用 月報管理情報を設定します。
+     * @param updateEntity 更新制御用 月報管理情報
      */
-    public void setVersion(int version) {
-        this.version = version;
+    public void setUpdateEntity(VMUser updateEntity) {
+        this.updateEntity = updateEntity;
     }
 
     /**

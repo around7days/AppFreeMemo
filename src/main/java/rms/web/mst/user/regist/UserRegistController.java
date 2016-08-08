@@ -117,6 +117,8 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // TODO ちょい手抜きで・・・
         BeanUtils.copyProperties(userEntity, form);
         BeanUtils.copyProperties(userEntity.getUser(), form);
+        // 更新制御用
+        form.setUpdateEntity(userEntity.getUser());
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -153,7 +155,10 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // ユーザIDの重複チェック
         userValidateService.validateUniquUserId(form.getUserId());
         // 承認ルート設定チェック
-        userValidateService.validateApprovalRoute(form.getRoleApplyFlg(), form.getApproveUserId3());
+        userValidateService.validateApprovalRoute(form.getRoleApplyFlg(),
+                                                  form.getApproveUserId1(),
+                                                  form.getApproveUserId2(),
+                                                  form.getApproveUserId3());
 
         /*
          * ユーザマスタ
@@ -162,16 +167,16 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         MUser mUser = new MUser();
         BeanUtils.copyProperties(form, mUser);
         // ユーザマスタ登録処理
-        userRegistService.insertUserMst(mUser);
+        userRegistService.userRegist(mUser);
 
         /*
          * ユーザ役割マスタ
          */
         // ユーザ役割マスタ登録処理
-        userRegistService.deleteInsertUserRoleMst(form.getUserId(),
-                                                  form.getRoleApplyFlg(),
-                                                  form.getRoleApproveFlg(),
-                                                  form.getRoleAdminFlg());
+        userRegistService.userRoleRegist(form.getUserId(),
+                                         form.getRoleApplyFlg(),
+                                         form.getRoleApproveFlg(),
+                                         form.getRoleAdminFlg());
 
         // TODO MessageResorceが使いにくい。どこかで改良。
         // TODO 完了メッセージをどこかで定数にする。
@@ -213,25 +218,29 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          * 業務ロジックチェック
          */
         // 承認ルート設定チェック
-        userValidateService.validateApprovalRoute(form.getRoleApplyFlg(), form.getApproveUserId3());
+        userValidateService.validateApprovalRoute(form.getRoleApplyFlg(),
+                                                  form.getApproveUserId1(),
+                                                  form.getApproveUserId2(),
+                                                  form.getApproveUserId3());
 
         /*
          * ユーザマスタ
          */
         // ユーザマスタ更新情報の生成
         MUser mUser = new MUser();
+        BeanUtils.copyProperties(form.getUpdateEntity(), mUser);
         BeanUtils.copyProperties(form, mUser);
-        // ユーザマスタ登録処理
-        userRegistService.updateUserMst(mUser);
+        // ユーザマスタ更新処理
+        userRegistService.userUpdate(mUser);
 
         /*
          * ユーザ役割マスタ
          */
         // ユーザ役割マスタ登録処理
-        userRegistService.deleteInsertUserRoleMst(form.getUserId(),
-                                                  form.getRoleApplyFlg(),
-                                                  form.getRoleApproveFlg(),
-                                                  form.getRoleAdminFlg());
+        userRegistService.userRoleRegist(form.getUserId(),
+                                         form.getRoleApplyFlg(),
+                                         form.getRoleApproveFlg(),
+                                         form.getRoleAdminFlg());
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));

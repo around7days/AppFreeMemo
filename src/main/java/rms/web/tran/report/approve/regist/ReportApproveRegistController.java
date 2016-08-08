@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import rms.com.base.BusinessException;
 import rms.com.consts.MessageConst;
+import rms.domain.com.entity.TReport;
 import rms.domain.com.entity.VTReport;
 import rms.domain.mst.user.service.UserSelectService;
 import rms.domain.tran.report.service.ReportRegistService;
@@ -15,7 +16,7 @@ import rms.web.base.UserInfo;
 import rms.web.com.utils.FileUtils;
 import rms.web.com.utils.SessionUtils;
 import rms.web.menu.MenuController;
-import rms.web.tran.report.apply.list.ReportApplyListController;
+import rms.web.tran.report.approve.list.ReportApproveListController;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +38,7 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -84,7 +85,7 @@ public class ReportApproveRegistController extends rms.web.com.abstracts.Abstrac
     }
 
     /**
-     * 初期表示処理（更新時）
+     * 初期表示処理
      * @param form
      * @param applyUserId
      * @param targetYm
@@ -98,14 +99,16 @@ public class ReportApproveRegistController extends rms.web.com.abstracts.Abstrac
                        @PathVariable String targetYm,
                        @AuthenticationPrincipal UserInfo userInfo,
                        Model model) {
-        // 画面表示モードを「更新」に設定
-        form.setViewMode(ReportApproveRegistForm.VIEW_MODE_UPDATE);
-
         // 月報情報の取得
         VTReport reportEntity = reportSelectService.getReportInfo(applyUserId, targetYm);
 
-        // 値を設定
+        /*
+         * 値を設定
+         */
+        // 画面表示用
         BeanUtils.copyProperties(reportEntity, form);
+        // 更新制御用
+        form.setUpdateEntity(reportEntity);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -126,12 +129,12 @@ public class ReportApproveRegistController extends rms.web.com.abstracts.Abstrac
      * @throws NumberFormatException
      */
     @RequestMapping(value = MAPPING_URL, params = "approve")
-    public String insert(@Validated(ReportApproveRegistForm.Insert.class) ReportApproveRegistForm form,
-                         BindingResult bindingResult,
-                         @AuthenticationPrincipal UserInfo userInfo,
-                         SessionStatus sessionStatus,
-                         RedirectAttributes redirectAttr,
-                         Model model) throws IOException, NumberFormatException, BusinessException {
+    public String approve(ReportApproveRegistForm form,
+                          BindingResult bindingResult,
+                          @AuthenticationPrincipal UserInfo userInfo,
+                          SessionStatus sessionStatus,
+                          RedirectAttributes redirectAttr,
+                          Model model) throws IOException, NumberFormatException, BusinessException {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
@@ -148,7 +151,9 @@ public class ReportApproveRegistController extends rms.web.com.abstracts.Abstrac
          * 承認処理
          */
         // 承認処理
-        //        reportRegistService.approve(entity);
+        TReport entity = new TReport();
+        BeanUtils.copyProperties(form.getUpdateEntity(), entity);
+        reportRegistService.approve(entity);
 
         /*
          * 月報ファイル保存処理
@@ -169,12 +174,37 @@ public class ReportApproveRegistController extends rms.web.com.abstracts.Abstrac
     }
 
     /**
+     * 月報DL処理
+     * @param form
+     * @param response
+     * @param model
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = MAPPING_URL, params = "download")
+    public String download(ReportApproveRegistForm form,
+                           HttpServletResponse response,
+                           Model model) throws IOException {
+        /*
+         * ファイルダウンロード処理
+         */
+        // ダウンロードファイルパスの生成
+        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
+                                                       form.getApplyUserId(),
+                                                       form.getTargetYm());
+        // 月報ダウンロード
+        FileUtils.reportDownload(response, filePath);
+
+        return null;
+    }
+
+    /**
      * 戻る処理
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
     public String back() {
-        return redirect(ReportApplyListController.MAPPING_URL, "search");
+        return redirect(ReportApproveListController.MAPPING_URL, "search");
     }
 
     // ----------------------------------------------------------------------------------------

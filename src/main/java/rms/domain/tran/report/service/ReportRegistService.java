@@ -1,5 +1,6 @@
 package rms.domain.tran.report.service;
 
+import rms.com.base.BusinessException;
 import rms.com.consts.MCodeConst;
 import rms.domain.com.entity.TReport;
 import rms.domain.com.repository.TReportDao;
@@ -56,34 +57,59 @@ public class ReportRegistService extends rms.domain.com.abstracts.AbstractServic
      * 月報情報の承認処理<br>
      * 補足：承認状況はメソッド内で自動設定
      * @param entity
+     * @throws BusinessException
      */
-    public void approve(TReport entity) {
+    public void approve(TReport entity) throws BusinessException {
 
-        //        // 承認者の有無に合わせてステータスを設定
-        //        if (!StringUtils.isEmpty(entity.getApproveUserId1())) {
-        //            entity.setStatus(MCodeConst.A001_Y01);
-        //        } else if (!StringUtils.isEmpty(entity.getApproveUserId2())) {
-        //            entity.setStatus(MCodeConst.A001_Y02);
-        //        } else {
-        //            entity.setStatus(MCodeConst.A001_Y03);
-        //        }
-        //
-        //        // 登録処理
-        //        tReportDao.insert(entity);
+        // 現在の承認状況と承認者の有無に合わせてステータスを設定
+        String newStatus;
+        switch (entity.getStatus()) {
+        case MCodeConst.A001_Y01:
+            newStatus = MCodeConst.A001_Y02;
+            if (StringUtils.isEmpty(entity.getApproveUserId2())) {
+                newStatus = MCodeConst.A001_Y03;
+            }
+            break;
+        case MCodeConst.A001_Y02:
+            newStatus = MCodeConst.A001_Y03;
+            break;
+        case MCodeConst.A001_Y03:
+            newStatus = MCodeConst.A001_100;
+            break;
+        default:
+            throw new BusinessException("例外エラー");
+        }
+        entity.setStatus(newStatus);
+
+        // 更新処理
+        tReportDao.update(entity);
     }
 
-    //    /**
-    //     * 更新処理
-    //     * @param form
-    //     */
-    //    public void update(ReportApplyForm form) {
-    //
-    //        // 更新情報の生成
-    //        MUser mUser = new MUser();
-    //        BeanUtils.copyProperties(form, mUser);
-    //        logger.debug("更新情報 -> {}", mUser);
-    //
-    //        // 更新処理
-    //        mUserDao.update(mUser);
-    //    }
+    /**
+     * 月報情報の否認処理<br>
+     * 補足：承認状況はメソッド内で自動設定
+     * @param entity
+     * @throws BusinessException
+     */
+    public void deny(TReport entity) throws BusinessException {
+        // 現在の承認状況に合わせてステータスを設定
+        String newStatus;
+        switch (entity.getStatus()) {
+        case MCodeConst.A001_Y01:
+            newStatus = MCodeConst.A001_N01;
+            break;
+        case MCodeConst.A001_Y02:
+            newStatus = MCodeConst.A001_N02;
+            break;
+        case MCodeConst.A001_Y03:
+            newStatus = MCodeConst.A001_N03;
+            break;
+        default:
+            throw new BusinessException("例外エラー");
+        }
+        entity.setStatus(newStatus);
+
+        // 更新処理
+        tReportDao.update(entity);
+    }
 }

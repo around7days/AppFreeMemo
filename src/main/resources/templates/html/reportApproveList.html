@@ -96,7 +96,8 @@
 							<td th:text="${result.statusNm}">承認済み</td>
 							<td>
 								<button type="submit" name="download" formnovalidate="formnovalidate"
-												th:if="${result.approveReportStatus == T(rms.com.consts.Const).APPROVE_REPORT_STATUS_TURN}"
+												th:if="${result.approveReportStatus == T(rms.com.consts.Const).APPROVE_REPORT_STATUS_TURN ||
+																 result.approveReportStatus == T(rms.com.consts.Const).APPROVE_REPORT_STATUS_COMPLETE}"
 												th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button>
 							</td>
 						</tr>

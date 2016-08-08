@@ -39,7 +39,7 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
      * ユーザマスタ新規登録処理
      * @param mUser
      */
-    public void insertUserMst(MUser mUser) {
+    public void userRegist(MUser mUser) {
         logger.debug("登録情報 -> {}", mUser);
 
         // 登録処理
@@ -54,7 +54,7 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
      * @param approveFlg
      * @param adminFlg
      */
-    public void deleteInsertUserRoleMst(String userId,
+    public void userRoleRegist(String userId,
                                         String applyFlg,
                                         String approveFlg,
                                         String adminFlg) {
@@ -88,7 +88,7 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
      * 更新処理
      * @param mUser
      */
-    public void updateUserMst(MUser mUser) {
+    public void userUpdate(MUser mUser) {
         logger.debug("更新情報 -> {}", mUser);
 
         // 更新処理（楽観的排他制御）

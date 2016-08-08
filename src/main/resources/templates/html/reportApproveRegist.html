@@ -23,7 +23,7 @@
 	<script th:src="@{/js/reportApproveRegist.js}" src="../../static/js/reportApproveRegist.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApplyRegistForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApproveRegistForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -59,18 +59,25 @@
 						<pre th:text="*{targetYm}">201608</pre>
 					</div>
 				</div>
-				<!-- 月報 -->
+				<!-- 申請者月報 -->
 				<div class="form-group">
-					<label class="col-sm-3 control-label">月報</label>
+					<label class="col-sm-3 control-label">申請者月報</label>
 					<div class="col-sm-9">
-						<button type="submit" name="download" formnovalidate="formnovalidate" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button>
+						<button type="submit" id="download" formnovalidate="formnovalidate" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button>
+					</div>
+				</div>
+				<!-- 承認者月報 -->
+				<div class="form-group">
+					<label class="col-sm-3 control-label">承認者月報</label>
+					<div class="col-sm-9">
+						<input type="file" name="file" id="file" required="required" class="form-control" />
 					</div>
 				</div>
 				<!-- 公開有無 -->
 				<div class="form-group">
 					<label class="col-sm-3 control-label">公開有無</label>
 					<div class="col-sm-9">
-						<pre th:text="*{publishFlgNm}">公開</pre>
+						<pre th:text="*{publishNm}">公開</pre>
 					</div>
 				</div>
 				<!-- 承認者 -->

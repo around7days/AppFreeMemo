@@ -1,10 +1,9 @@
 package rms.web.tran.report.approve.regist;
 
 import rms.com.validator.annotation.UploadFileNotEmpty;
+import rms.domain.com.entity.VTReport;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 月報承認画面フォーム
@@ -12,38 +11,22 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm {
 
-    /* 入力チェック宣言 ----------------------------------------------------- */
-    //@formatter:off
-    /** 入力チェック：新規 */
-    protected static interface Insert{};
-    /** 入力チェック：更新 */
-    protected static interface Update{};
-    //@formatter:on
-
-    /* 定数宣言 ------------------------------------------------------------- */
-    /** 画面表示モード：新規 */
-    public static final String VIEW_MODE_INSERT = "insert";
-    /** 画面表示モード：更新 */
-    public static final String VIEW_MODE_UPDATE = "update";
+    /* 更新制御用 ----------------------------------------------------------- */
+    /** 更新制御用 月報管理情報 */
+    private VTReport updateEntity;
 
     /* 変数宣言 ------------------------------------------------------------- */
-    /** 画面表示モード */
-    private String viewMode;
-
+    /** 申請者ID */
+    private String applyUserId;
+    /** 申請者名 */
+    private String applyUserNm;
     /** 年月 */
-    @NotEmpty(message = "年月は{NotEmpty.message}", groups = { Insert.class, Update.class })
     private String targetYm;
     /** 月報ファイル */
-    @UploadFileNotEmpty(message = "月報は{UploadFileNotEmpty.message}", groups = { Insert.class, Update.class })
+    @UploadFileNotEmpty(message = "月報は{UploadFileNotEmpty.message}")
     private MultipartFile file;
-    /** 公開有無 */
-    private String publishFlg;
-    /** 承認者ID1 */
-    private String approveUserId1;
-    /** 承認者ID2 */
-    private String approveUserId2;
-    /** 承認者ID3 */
-    private String approveUserId3;
+    /** 公開有無名称 */
+    private String publishNm;
     /** 承認者名1 */
     private String approveUserNm1;
     /** 承認者名2 */
@@ -52,21 +35,52 @@ public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm 
     private String approveUserNm3;
 
     /* getter/setter -------------------------------------------------------- */
-
     /**
-     * 画面表示モードを取得します。
-     * @return 画面表示モード
+     * 更新制御用 月報管理情報を取得します。
+     * @return 更新制御用 月報管理情報
      */
-    public String getViewMode() {
-        return viewMode;
+    public VTReport getUpdateEntity() {
+        return updateEntity;
     }
 
     /**
-     * 画面表示モードを設定します。
-     * @param viewMode 画面表示モード
+     * 更新制御用 月報管理情報を設定します。
+     * @param updateEntity 更新制御用 月報管理情報
      */
-    public void setViewMode(String viewMode) {
-        this.viewMode = viewMode;
+    public void setUpdateEntity(VTReport updateEntity) {
+        this.updateEntity = updateEntity;
+    }
+
+    /**
+     * 申請者IDを取得します。
+     * @return 申請者ID
+     */
+    public String getApplyUserId() {
+        return applyUserId;
+    }
+
+    /**
+     * 申請者IDを設定します。
+     * @param applyUserId 申請者ID
+     */
+    public void setApplyUserId(String applyUserId) {
+        this.applyUserId = applyUserId;
+    }
+
+    /**
+     * 申請者名を取得します。
+     * @return 申請者名
+     */
+    public String getApplyUserNm() {
+        return applyUserNm;
+    }
+
+    /**
+     * 申請者名を設定します。
+     * @param applyUserNm 申請者名
+     */
+    public void setApplyUserNm(String applyUserNm) {
+        this.applyUserNm = applyUserNm;
     }
 
     /**
@@ -102,67 +116,19 @@ public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm 
     }
 
     /**
-     * 公開有無を取得します。
-     * @return 公開有無
+     * 公開有無名称を取得します。
+     * @return 公開有無名称
      */
-    public String getPublishFlg() {
-        return publishFlg;
+    public String getPublishNm() {
+        return publishNm;
     }
 
     /**
-     * 公開有無を設定します。
-     * @param publishFlg 公開有無
+     * 公開有無名称を設定します。
+     * @param publishNm 公開有無名称
      */
-    public void setPublishFlg(String publishFlg) {
-        this.publishFlg = publishFlg;
-    }
-
-    /**
-     * 承認者ID1を取得します。
-     * @return 承認者ID1
-     */
-    public String getApproveUserId1() {
-        return approveUserId1;
-    }
-
-    /**
-     * 承認者ID1を設定します。
-     * @param approveUserId1 承認者ID1
-     */
-    public void setApproveUserId1(String approveUserId1) {
-        this.approveUserId1 = approveUserId1;
-    }
-
-    /**
-     * 承認者ID2を取得します。
-     * @return 承認者ID2
-     */
-    public String getApproveUserId2() {
-        return approveUserId2;
-    }
-
-    /**
-     * 承認者ID2を設定します。
-     * @param approveUserId2 承認者ID2
-     */
-    public void setApproveUserId2(String approveUserId2) {
-        this.approveUserId2 = approveUserId2;
-    }
-
-    /**
-     * 承認者ID3を取得します。
-     * @return 承認者ID3
-     */
-    public String getApproveUserId3() {
-        return approveUserId3;
-    }
-
-    /**
-     * 承認者ID3を設定します。
-     * @param approveUserId3 承認者ID3
-     */
-    public void setApproveUserId3(String approveUserId3) {
-        this.approveUserId3 = approveUserId3;
+    public void setPublishNm(String publishNm) {
+        this.publishNm = publishNm;
     }
 
     /**
@@ -212,4 +178,5 @@ public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm 
     public void setApproveUserNm3(String approveUserNm3) {
         this.approveUserNm3 = approveUserNm3;
     }
+
 }

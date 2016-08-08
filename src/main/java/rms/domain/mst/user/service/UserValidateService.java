@@ -11,11 +11,10 @@ import rms.domain.mst.user.repository.UserSelectDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.mysql.jdbc.StringUtils;
 
 /**
  * ユーザ情報検証サービス
@@ -55,12 +54,29 @@ public class UserValidateService extends rms.domain.com.abstracts.AbstractServic
      * 役割に申請者を保持している場合、承認者３は必須入力になります。 <br>
      * 未入力の場合はBusinessExceptionを発生させます。
      * @param roleApplyFlg
+     * @param approveUserId1
+     * @param approveUserId2
      * @param approveUserId3
      * @throws BusinessException
      */
     public void validateApprovalRoute(String roleApplyFlg,
+                                      String approveUserId1,
+                                      String approveUserId2,
                                       String approveUserId3) throws BusinessException {
-        if (Const.FLG_ON.equals(roleApplyFlg) && StringUtils.isNullOrEmpty(approveUserId3)) {
+        if (!StringUtils.isEmpty(approveUserId1)) {
+            if (approveUserId1.equals(approveUserId2)) {
+                throw new BusinessException("承認者１、２に同一ユーザは設定できません。");
+            }
+            if (approveUserId1.equals(approveUserId3)) {
+                throw new BusinessException("承認者１、３に同一ユーザは設定できません。");
+            }
+        }
+        if (!StringUtils.isEmpty(approveUserId2)) {
+            if (approveUserId2.equals(approveUserId3)) {
+                throw new BusinessException("承認者２、３に同一ユーザは設定できません。");
+            }
+        }
+        if (Const.FLG_ON.equals(roleApplyFlg) && StringUtils.isEmpty(approveUserId3)) {
             throw new BusinessException("役割が申請者の場合、承認者３は必須です。");
         }
     }

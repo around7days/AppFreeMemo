@@ -34,6 +34,17 @@ $(function() {
 	});
 
 	/**
+	 * 月報DLボタン押下<br>
+	 * (テーブル明細内)
+	 */
+	$("#download").on("click", function() {
+		var index = $(this).val();
+		var url = defaultUrl + "?download";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
 	 * 戻るボタン押下
 	 */
 	$("#back").on("click", function() {

@@ -122,18 +122,6 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
                        Model model) {
         return redirect(ReportApplyRegistController.MAPPING_URL, "initInsert");
     }
-    //
-    //    /**
-    //     * 月報承認画面に遷移
-    //     * @param form
-    //     * @param model
-    //     * @return
-    //     */
-    //    @RequestMapping(value = MAPPING_URL, params = "t003")
-    //    public String T003(MenuForm form,
-    //                       Model model) {
-    //        return redirect(ReportApprovalController.MAPPING_URL + "/user01/201606", "init");
-    //    }
 
     /**
      * 月報承認状況一覧画面に遷移
@@ -146,15 +134,4 @@ public class MenuController extends rms.web.com.abstracts.AbstractController {
                        Model model) {
         return redirect(ReportApproveListController.MAPPING_URL, "init");
     }
-
-    @SuppressWarnings("unused")
-    @RequestMapping(value = MAPPING_URL, params = "e001")
-    public String E001(MenuForm form,
-                       Model model) throws Exception {
-        if (true) {
-            throw new Exception("意図的な強制Exception");
-        }
-        return "";
-    }
-
 }

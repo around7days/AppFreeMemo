@@ -30,6 +30,17 @@ $(function() {
 	});
 
 	/**
+	 * 選択ボタン押下<br>
+	 * (テーブル明細内)
+	 */
+	$("#resultTable button[name='select']").on("click", function() {
+		var index = $(this).val();
+		var url = defaultUrl + "/" + index + "?select";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
 	 * Prevアンカー押下
 	 */
 	$("#pagePrev").on("click", function() {
