@@ -1,5 +1,5 @@
 /*----------------------------------------------------------
-union使用時のdomaのlimit対策として全体をサブクエリとして囲む
+union使用時のlimit対策として全体をサブクエリとして囲む
 ----------------------------------------------------------*/
 select AAA.*
 from
@@ -16,6 +16,32 @@ select
   , A.publish_nm
   , A.status
   , A.status_nm
+  , case
+      when A.approve_user_id1 = /* condition.approveUserId */'user07' then
+        case A.status
+          when 'Y01' then '2'         -- 入力中
+          when 'Y02' then '3'         -- 入力済み
+          when 'Y03' then '3'         -- 入力済み
+          when '100' then '3'         -- 入力済み
+          else            '1'         -- 依頼待ち
+        end
+      when A.approve_user_id2 = /* condition.approveUserId */'user07' then
+        case A.status
+          when 'Y01' then '1'         -- 依頼待ち
+          when 'Y02' then '2'         -- 入力中
+          when 'Y03' then '3'         -- 入力済み
+          when '100' then '3'         -- 入力済み
+          else            '1'         -- 依頼待ち
+        end
+      when A.approve_user_id3 = /* condition.approveUserId */'user07' then
+        case A.status
+          when 'Y01' then '1'         -- 依頼待ち
+          when 'Y02' then '1'         -- 依頼待ち
+          when 'Y03' then '2'         -- 入力中
+          when '100' then '3'         -- 入力済み
+          else            '1'         -- 依頼待ち
+        end
+    end as approve_report_status -- 承認状況（承認者視点）
   , A.approve_user_id1
   , A.approve_user_nm1
   , A.approve_user_id2
@@ -29,6 +55,7 @@ where
   A.del_flg = 0
   and A.target_ym = /* condition.targetYm */'201606'
   and /* condition.approveUserId */'user07' in (A.approve_user_id1, A.approve_user_id2, A.approve_user_id3)
+
 
 union all
 
@@ -44,6 +71,7 @@ select
   , null
   , 'XXX'
   , (select A001.code_nm from m_code A001 where A001.code_kbn = 'A001' and A001.code = 'XXX')
+  , '1' -- 承認状況（承認者視点） 依頼待ち
   , M.approve_user_id1
   , M.approve_user_nm1
   , M.approve_user_id2

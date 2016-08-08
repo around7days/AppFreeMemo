@@ -83,14 +83,22 @@
 					<!-- 明細 -->
 					<tbody>
 						<tr th:each="result,iteStatus : *{resultList}">
-							<td><button type="submit" formnovalidate="formnovalidate" name="select" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
+							<td>
+								<button type="submit" name="select" formnovalidate="formnovalidate"
+												th:disabled="${result.approveReportStatus != T(rms.com.consts.Const).APPROVE_REPORT_STATUS_TURN}"
+												th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button>
+							</td>
 							<td th:text="${result.applyUserNm}">申請者</td>
 							<td th:text="${result.applyDate}">2016/05/31 20:23</td>
 							<td th:text="${result.approveUserNm1}">承認者１</td>
 							<td th:text="${result.approveUserNm2}">承認者２</td>
 							<td th:text="${result.approveUserNm3}">承認者３</td>
 							<td th:text="${result.statusNm}">承認済み</td>
-							<td><button type="submit" formnovalidate="formnovalidate" name="download" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
+							<td>
+								<button type="submit" name="download" formnovalidate="formnovalidate"
+												th:if="${result.approveReportStatus == T(rms.com.consts.Const).APPROVE_REPORT_STATUS_TURN}"
+												th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button>
+							</td>
 						</tr>
 					</tbody>
 				</table>

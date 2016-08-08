@@ -43,6 +43,10 @@ public class ReportApproveListResultEntity extends rms.domain.com.abstracts.Abst
     @Column(name = "status_nm")
     private String statusNm;
 
+    /** 承認状況（承認者視点） */
+    @Column(name = "approve_report_status")
+    private String approveReportStatus;
+
     /** 承認者ID1 */
     @Column(name = "approve_user_id1")
     private String approveUserId1;
@@ -197,6 +201,22 @@ public class ReportApproveListResultEntity extends rms.domain.com.abstracts.Abst
      */
     public void setStatusNm(String statusNm) {
         this.statusNm = statusNm;
+    }
+
+    /**
+     * 承認状況（承認者視点）を取得します。
+     * @return 承認状況（承認者視点）
+     */
+    public String getApproveReportStatus() {
+        return approveReportStatus;
+    }
+
+    /**
+     * 承認状況（承認者視点）を設定します。
+     * @param approveReportStatus 承認状況（承認者視点）
+     */
+    public void setApproveReportStatus(String approveReportStatus) {
+        this.approveReportStatus = approveReportStatus;
     }
 
     /**

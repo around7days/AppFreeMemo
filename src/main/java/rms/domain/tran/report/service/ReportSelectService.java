@@ -121,12 +121,6 @@ public class ReportSelectService extends rms.domain.com.abstracts.AbstractServic
         List<ReportApproveListResultEntity> resultList = reportSelectDao.reportApproveListByCondition(condition,
                                                                                                       options);
         logger.debug("検索結果(全件) -> {}件", options.getCount());
-
-        // 検索結果の加工
-        resultList.forEach(entity -> {
-
-        });
-
         logger.debug("検索結果 -> {}件", resultList.size());
         resultList.forEach(result -> logger.debug("{}", result));
 
