@@ -61,9 +61,9 @@ select
   , A.target_ym                                   -- 年月
   , A.apply_date                                  -- 申請日
   , A.publish_flg                                 -- 公開有無
-  , B001.code_nm as publish_nm                    -- 公開有無名
+  , B001.code_nm as publish_flg_nm                -- 公開有無名称
   , A.status                                      -- 承認状況
-  , A001.code_nm as status_nm                     -- 承認状況名
+  , A001.code_nm as status_nm                     -- 承認状況名称
   , A.approve_user_id1                            -- 承認者ID1
   , U1.user_nm   as approve_user_nm1              -- 承認者名1
   , A.approve_user_id2                            -- 承認者ID2

@@ -26,7 +26,7 @@ public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm 
     @UploadFileNotEmpty(message = "月報は{UploadFileNotEmpty.message}")
     private MultipartFile file;
     /** 公開有無名称 */
-    private String publishNm;
+    private String publishFlgNm;
     /** 承認者名1 */
     private String approveUserNm1;
     /** 承認者名2 */
@@ -119,16 +119,16 @@ public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm 
      * 公開有無名称を取得します。
      * @return 公開有無名称
      */
-    public String getPublishNm() {
-        return publishNm;
+    public String getPublishFlgNm() {
+        return publishFlgNm;
     }
 
     /**
      * 公開有無名称を設定します。
-     * @param publishNm 公開有無名称
+     * @param publishFlgNm 公開有無名称
      */
-    public void setPublishNm(String publishNm) {
-        this.publishNm = publishNm;
+    public void setPublishFlgNm(String publishFlgNm) {
+        this.publishFlgNm = publishFlgNm;
     }
 
     /**

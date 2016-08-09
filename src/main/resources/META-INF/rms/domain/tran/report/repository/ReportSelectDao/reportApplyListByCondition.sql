@@ -4,7 +4,7 @@ select
   , A.target_ym
   , A.apply_date
   , A.publish_flg
-  , A.publish_nm
+  , A.publish_flg_nm
   , A.status
   , A.status_nm
   , A.approve_user_id1

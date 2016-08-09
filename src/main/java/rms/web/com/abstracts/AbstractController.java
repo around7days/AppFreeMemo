@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractController {
 
     /** logger */
-    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(AbstractController.class);
 
     @Autowired
@@ -48,6 +47,7 @@ public abstract class AbstractController {
         if (!StringUtils.isEmpty(param)) {
             redirectUrl.append("?").append(param);
         }
+        logger.debug("URL -> {}", redirectUrl);
         return redirectUrl.toString();
     }
 
@@ -74,6 +74,7 @@ public abstract class AbstractController {
         if (!StringUtils.isEmpty(param)) {
             forwardUrl.append("?").append(param);
         }
+        logger.debug("URL -> {}", forwardUrl);
         return forwardUrl.toString();
     }
 }

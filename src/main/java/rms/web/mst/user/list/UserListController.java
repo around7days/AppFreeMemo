@@ -94,7 +94,7 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
 
         // 検索処理
         SearchResultEntity<UserListResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
-                                                                                                    form.getPageInfo());
+                                                                                                  form.getPageInfo());
         if (resultEntity.getResultList().isEmpty()) {
             bindingResult.reject("", "検索結果は存在しません");
             return PAGE_URL;
@@ -120,11 +120,11 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
 
         // 検索条件の生成
         UserListConditionEntity condition = new UserListConditionEntity();
-        BeanUtils.copyProperties(form, condition);
+        BeanUtils.copyProperties(form.getCondition(), condition);
 
         // 検索処理
         SearchResultEntity<UserListResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
-                                                                                                    form.getPageInfo());
+                                                                                                  form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultEntity.getResultList());

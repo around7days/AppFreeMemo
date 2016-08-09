@@ -36,8 +36,8 @@ public class VTReport {
     private String publishFlg;
 
     /** コード名称 */
-    @Column(name = "publish_nm")
-    private String publishNm;
+    @Column(name = "publish_flg_nm")
+    private String publishFlgNm;
 
     /** 承認状況 */
     @Column(name = "status")
@@ -184,16 +184,16 @@ public class VTReport {
      * コード名称を取得します.
      * @return コード名称
      */
-    public String getPublishNm() {
-        return publishNm;
+    public String getPublishFlgNm() {
+        return publishFlgNm;
     }
 
     /**
      * コード名称を設定します.
-     * @param publishNm コード名称
+     * @param publishFlgNm コード名称
      */
-    public void setPublishNm(String publishNm) {
-        this.publishNm = publishNm;
+    public void setPublishFlgNm(String publishFlgNm) {
+        this.publishFlgNm = publishFlgNm;
     }
 
     /**
