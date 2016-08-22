@@ -110,7 +110,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         // 画面表示モードを「更新」に設定
         form.setViewMode(UserRegistForm.VIEW_MODE_UPDATE);
 
-        // 更新初期画面表示情報の取得
+        // 選択されたユーザIDに紐付くユーザ情報を取得
         UserEntity userEntity = userSelectService.getUserInfo(userId);
 
         // 取得した情報をフォームに反映

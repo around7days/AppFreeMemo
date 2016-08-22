@@ -55,9 +55,9 @@ public class UserRegistService extends rms.domain.com.abstracts.AbstractService 
      * @param adminFlg
      */
     public void userRoleRegist(String userId,
-                                        String applyFlg,
-                                        String approveFlg,
-                                        String adminFlg) {
+                               String applyFlg,
+                               String approveFlg,
+                               String adminFlg) {
         logger.debug("登録情報 -> 申請者:{}  承認者:{}  管理者:{}", applyFlg, approveFlg, adminFlg);
 
         // ユーザに紐付く全役割の削除
