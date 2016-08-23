@@ -35,7 +35,7 @@ public interface UserSelectDao {
      */
     @Select
     List<UserListResultEntity> userListByCondition(UserListConditionEntity condition,
-                                                     SelectOptions options);
+                                                   SelectOptions options);
 
     /**
      * 承認者一覧の取得（selectbox専用）

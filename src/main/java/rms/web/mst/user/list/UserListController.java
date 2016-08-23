@@ -1,5 +1,7 @@
 package rms.web.mst.user.list;
 
+import java.util.Locale;
+
 import rms.domain.mst.user.entity.UserListConditionEntity;
 import rms.domain.mst.user.entity.UserListResultEntity;
 import rms.domain.mst.user.service.UserSelectService;
@@ -96,7 +98,8 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
         SearchResultEntity<UserListResultEntity> resultEntity = userSelectService.getUserInfoList(condition,
                                                                                                   form.getPageInfo());
         if (resultEntity.getResultList().isEmpty()) {
-            bindingResult.reject("", "検索結果は存在しません");
+            // 検索結果が見つかりません
+            bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
             return PAGE_URL;
         }
 

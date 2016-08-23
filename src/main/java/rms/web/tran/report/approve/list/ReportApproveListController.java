@@ -2,6 +2,7 @@ package rms.web.tran.report.approve.list;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Locale;
 
 import rms.domain.tran.report.entity.ReportApproveListConditionEntity;
 import rms.domain.tran.report.entity.ReportApproveListResultEntity;
@@ -107,7 +108,8 @@ public class ReportApproveListController extends rms.web.com.abstracts.AbstractC
         SearchResultEntity<ReportApproveListResultEntity> resultEntity = reportSelectService.getReportApproveList(condition,
                                                                                                                   form.getPageInfo());
         if (resultEntity.getResultList().isEmpty()) {
-            bindingResult.reject("", "検索結果は存在しません");
+            // 検索結果が見つかりません
+            bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
             return PAGE_URL;
         }
 

@@ -63,21 +63,33 @@ public class UserValidateService extends rms.domain.com.abstracts.AbstractServic
                                       String approveUserId1,
                                       String approveUserId2,
                                       String approveUserId3) throws BusinessException {
-        if (!StringUtils.isEmpty(approveUserId1)) {
-            if (approveUserId1.equals(approveUserId2)) {
-                throw new BusinessException("承認者１、２に同一ユーザは設定できません。");
-            }
-            if (approveUserId1.equals(approveUserId3)) {
-                throw new BusinessException("承認者１、３に同一ユーザは設定できません。");
-            }
+        //@formatter:off
+        if (isValueEquals(approveUserId1, approveUserId2) ||
+            isValueEquals(approveUserId1, approveUserId3) ||
+            isValueEquals(approveUserId2, approveUserId3)) {
+            // 承認者１～３に同じ承認者は設定できません
+            throw new BusinessException(message.getMessage("error.004", null, Locale.getDefault()));
         }
-        if (!StringUtils.isEmpty(approveUserId2)) {
-            if (approveUserId2.equals(approveUserId3)) {
-                throw new BusinessException("承認者２、３に同一ユーザは設定できません。");
-            }
-        }
+        //@formatter:on
+
         if (Const.FLG_ON.equals(roleApplyFlg) && StringUtils.isEmpty(approveUserId3)) {
-            throw new BusinessException("役割が申請者の場合、承認者３は必須です。");
+            // 役割が申請者の場合、承認者３は必須です
+            throw new BusinessException(message.getMessage("error.005", null, Locale.getDefault()));
         }
+    }
+
+    /**
+     * 値の同一チェック<br>
+     * （どちらかの値が空白の場合はfalseとする）
+     * @param value1
+     * @param value2
+     * @return true:同じ false:異なる
+     */
+    private boolean isValueEquals(String value1,
+                                  String value2) {
+        if (StringUtils.isEmpty(value1) || StringUtils.isEmpty(value2)) {
+            return false;
+        }
+        return value1.equals(value2);
     }
 }

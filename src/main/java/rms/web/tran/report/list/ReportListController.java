@@ -2,6 +2,7 @@ package rms.web.tran.report.list;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Locale;
 
 import rms.domain.tran.report.entity.ReportListConditionEntity;
 import rms.domain.tran.report.entity.ReportListResultEntity;
@@ -99,9 +100,10 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
 
         // 検索処理
         SearchResultEntity<ReportListResultEntity> resultEntity = reportSelectService.getReportList(condition,
-                                                                                                      form.getPageInfo());
+                                                                                                    form.getPageInfo());
         if (resultEntity.getResultList().isEmpty()) {
-            bindingResult.reject("", "検索結果は存在しません");
+            // 検索結果が見つかりません
+            bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
             return PAGE_URL;
         }
 
@@ -129,7 +131,7 @@ public class ReportListController extends rms.web.com.abstracts.AbstractControll
 
         // 検索処理
         SearchResultEntity<ReportListResultEntity> resultEntity = reportSelectService.getReportList(condition,
-                                                                                                      form.getPageInfo());
+                                                                                                    form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultEntity.getResultList());

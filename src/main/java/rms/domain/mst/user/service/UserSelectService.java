@@ -87,7 +87,7 @@ public class UserSelectService extends rms.domain.com.abstracts.AbstractService 
      * @return
      */
     public SearchResultEntity<UserListResultEntity> getUserInfoList(UserListConditionEntity condition,
-                                                                      PageInfo pageInfo) {
+                                                                    PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
