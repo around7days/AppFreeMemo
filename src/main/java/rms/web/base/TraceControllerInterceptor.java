@@ -45,16 +45,30 @@ public class TraceControllerInterceptor {
         /*
          * 処理実行後のログ出力
          */
-        if (retVal != null && retVal instanceof String) {
-            String url = retVal.toString();
-            // TODO
-            if (url.startsWith("html") || url.startsWith("redirect") || url.startsWith("forward")) {
-                logger.info("Return URL -> {}", retVal);
-            }
+        if (isURL(retVal)) {
+            logger.info("Return URL -> {}", retVal);
         }
         logger.debug("[AOP after ] called {}#{}", classNm, methodNm);
 
         return retVal;
+    }
+
+    /**
+     * URLかチェック
+     * @param retVal
+     * @return true:URL false:URL以外
+     */
+    private boolean isURL(Object retVal) {
+        if (retVal != null && retVal instanceof String) {
+            String url = retVal.toString();
+            // TODO
+            if (url.startsWith("html") || url.startsWith("redirect") || url.startsWith("forward")) {
+                // URL
+                return true;
+            }
+        }
+        // URL以外
+        return false;
     }
 
     //

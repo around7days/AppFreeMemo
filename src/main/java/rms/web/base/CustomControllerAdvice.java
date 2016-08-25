@@ -30,7 +30,7 @@ public class CustomControllerAdvice {
     //    }
 
     @ModelAttribute
-    public void addOneObject(Model model) {
+    public void addAttribute(Model model) {
         // クライアント入力チェック有無
         model.addAttribute("novalidate", properties.getBoolean("myapp.html5.novalidate"));
     }
