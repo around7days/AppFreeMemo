@@ -34,6 +34,14 @@ $(function() {
 	});
 
 	/**
+	 * 削除ボタン押下
+	 */
+	$("#delete").on("click", function() {
+		alert("実装していません");
+		return false;
+	});
+
+	/**
 	 * 戻るボタン押下
 	 */
 	$("#back").on("click", function() {

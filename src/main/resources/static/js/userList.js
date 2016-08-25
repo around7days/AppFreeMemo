@@ -10,6 +10,15 @@ $(function() {
 	var defaultUrl = "/mst/user/list";
 
 	/**
+	 * 戻るボタン押下
+	 */
+	$("#back").on("click", function() {
+		var url = defaultUrl + "?back";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
 	 * 検索ボタン押下
 	 */
 	$("#search").on("click", function() {
@@ -56,4 +65,22 @@ $(function() {
 		fmMain.submit();
 	});
 
+	/**
+	 * 検索ボタン押下
+	 */
+	$("#search").on("click", function() {
+		var url = defaultUrl + "?search";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
+	 * Enterキーで検索ボタン押下<br>
+	 * ※control.jsの処理を上書き？
+	 */
+	$("input").keydown(function(e) {
+		if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+			$("#search").click();
+		}
+	});
 });

@@ -7,6 +7,7 @@ import rms.domain.mst.user.entity.UserListResultEntity;
 import rms.domain.mst.user.service.UserSelectService;
 import rms.web.base.SearchResultEntity;
 import rms.web.com.utils.PageInfo;
+import rms.web.menu.MenuController;
 import rms.web.mst.user.regist.UserRegistController;
 
 import org.springframework.beans.BeanUtils;
@@ -164,6 +165,19 @@ public class UserListController extends rms.web.com.abstracts.AbstractController
         form.getPageInfo().next();
 
         return redirect(MAPPING_URL, "reSearch");
+    }
+
+    /**
+     * 戻る処理
+     * @param form
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "back")
+    public String back(UserListForm form,
+                       Model model) {
+        // メニュー画面に遷移
+        return redirect(MenuController.MAPPING_URL);
     }
 
     /**
