@@ -25,12 +25,14 @@ $(function() {
 	 * 否認ボタン押下
 	 */
 	$("#deny").on("click", function() {
-		if (!window.confirm("否認しますか？")) {
-			return false;
-		}
-		var url = defaultUrl + "?deny";
-		fmMain.attr("action", url);
-		return true;
+		alert("実装していません");
+		return false;
+		//		if (!window.confirm("否認しますか？")) {
+		//			return false;
+		//		}
+		//		var url = defaultUrl + "?deny";
+		//		fmMain.attr("action", url);
+		//		return true;
 	});
 
 	/**

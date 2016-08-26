@@ -1,7 +1,6 @@
 package rms.web.tran.report.approve.regist;
 
 import rms.com.validator.annotation.UploadFileNotEmpty;
-import rms.domain.com.entity.VTReport;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,9 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm {
 
-    /* 更新制御用 ----------------------------------------------------------- */
-    /** 更新制御用 月報管理情報 */
-    private VTReport updateEntity;
+    /* 排他制御用 ----------------------------------------------------------- */
+    /** 月報管理テーブル 排他制御用バージョン */
+    private Integer lockVersion;
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 申請者ID */
@@ -35,20 +34,21 @@ public class ReportApproveRegistForm extends rms.web.com.abstracts.AbstractForm 
     private String approveUserNm3;
 
     /* getter/setter -------------------------------------------------------- */
+
     /**
-     * 更新制御用 月報管理情報を取得します。
-     * @return 更新制御用 月報管理情報
+     * 月報管理テーブル 排他制御用バージョンを取得します。
+     * @return 月報管理テーブル 排他制御用バージョン
      */
-    public VTReport getUpdateEntity() {
-        return updateEntity;
+    public Integer getLockVersion() {
+        return lockVersion;
     }
 
     /**
-     * 更新制御用 月報管理情報を設定します。
-     * @param updateEntity 更新制御用 月報管理情報
+     * 月報管理テーブル 排他制御用バージョンを設定します。
+     * @param lockVersion 月報管理テーブル 排他制御用バージョン
      */
-    public void setUpdateEntity(VTReport updateEntity) {
-        this.updateEntity = updateEntity;
+    public void setLockVersion(Integer lockVersion) {
+        this.lockVersion = lockVersion;
     }
 
     /**

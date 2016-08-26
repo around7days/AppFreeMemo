@@ -114,11 +114,13 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
         UserEntity userEntity = userSelectService.getUserInfo(userId);
 
         // 取得した情報をフォームに反映
-        // TODO ちょい手抜きで・・・
-        BeanUtils.copyProperties(userEntity, form);
         BeanUtils.copyProperties(userEntity.getUser(), form);
-        // 更新制御用
-        form.setUpdateEntity(userEntity.getUser());
+        form.setRoleApplyFlg(userEntity.getRoleApplyFlg());
+        form.setRoleApproveFlg(userEntity.getRoleApproveFlg());
+        form.setRoleAdminFlg(userEntity.getRoleAdminFlg());
+
+        // 排他制御用バージョンの設定
+        form.setLockVersion(userEntity.getUser().getVersion());
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -165,6 +167,7 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          */
         // ユーザマスタ登録情報の生成
         MUser mUser = new MUser();
+        // 画面の値を反映
         BeanUtils.copyProperties(form, mUser);
         // ユーザマスタ登録処理
         userRegistService.userRegist(mUser);
@@ -228,8 +231,10 @@ public class UserRegistController extends rms.web.com.abstracts.AbstractControll
          */
         // ユーザマスタ更新情報の生成
         MUser mUser = new MUser();
-        BeanUtils.copyProperties(form.getUpdateEntity(), mUser);
+        // 画面の値を反映
         BeanUtils.copyProperties(form, mUser);
+        // 排他制御用バージョンを設定
+        mUser.setVersion(form.getLockVersion());
         // ユーザマスタ更新処理
         userRegistService.userUpdate(mUser);
 

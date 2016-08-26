@@ -108,7 +108,7 @@ public class ReportApproveRegistController extends rms.web.com.abstracts.Abstrac
         // 画面表示用
         BeanUtils.copyProperties(reportEntity, form);
         // 更新制御用
-        form.setUpdateEntity(reportEntity);
+        form.setLockVersion(reportEntity.getVersion());
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -152,7 +152,9 @@ public class ReportApproveRegistController extends rms.web.com.abstracts.Abstrac
          */
         // 承認処理
         TReport entity = new TReport();
-        BeanUtils.copyProperties(form.getUpdateEntity(), entity);
+        // 更新制御用
+        BeanUtils.copyProperties(form.getLockVersion(), entity);
+        // 承認処理の実行
         reportRegistService.approve(entity);
 
         /*

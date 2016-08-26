@@ -2,7 +2,6 @@ package rms.web.mst.user.regist;
 
 import java.util.List;
 
-import rms.domain.com.entity.VMUser;
 import rms.web.com.utils.SelectOptionEntity;
 
 import javax.validation.constraints.Size;
@@ -30,9 +29,9 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
     /** 画面表示モード：更新 */
     public static final String VIEW_MODE_UPDATE = "update";
 
-    /* 更新制御用 ----------------------------------------------------------- */
-    /** 更新制御用 月報管理情報 */
-    private VMUser updateEntity;
+    /* 排他制御用 ----------------------------------------------------------- */
+    /** ユーザマスタ 排他制御用バージョン */
+    private Integer lockVersion;
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 画面表示モード */
@@ -74,19 +73,19 @@ public class UserRegistForm extends rms.web.com.abstracts.AbstractForm {
     /* getter/setter -------------------------------------------------------- */
 
     /**
-     * 更新制御用 月報管理情報を取得します。
-     * @return 更新制御用 月報管理情報
+     * ユーザマスタ 排他制御用バージョンを取得します。
+     * @return ユーザマスタ 排他制御用バージョン
      */
-    public VMUser getUpdateEntity() {
-        return updateEntity;
+    public Integer getLockVersion() {
+        return lockVersion;
     }
 
     /**
-     * 更新制御用 月報管理情報を設定します。
-     * @param updateEntity 更新制御用 月報管理情報
+     * ユーザマスタ 排他制御用バージョンを設定します。
+     * @param lockVersion ユーザマスタ 排他制御用バージョン
      */
-    public void setUpdateEntity(VMUser updateEntity) {
-        this.updateEntity = updateEntity;
+    public void setLockVersion(Integer lockVersion) {
+        this.lockVersion = lockVersion;
     }
 
     /**
