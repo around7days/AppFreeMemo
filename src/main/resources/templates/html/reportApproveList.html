@@ -86,7 +86,7 @@
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td>
 								<button type="submit" name="select" formnovalidate="formnovalidate"
-												th:disabled="${result.approveReportStatus != T(rms.com.consts.Const).APPROVE_REPORT_STATUS_TURN}"
+												th:disabled="${result.approveReportStatus != T(rms.common.consts.Const).APPROVE_REPORT_STATUS_TURN}"
 												th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button>
 							</td>
 							<td th:text="${result.applyUserNm}">申請者</td>
@@ -97,8 +97,8 @@
 							<td th:text="${result.statusNm}">承認済み</td>
 							<td>
 								<button type="submit" name="download" formnovalidate="formnovalidate"
-												th:if="${result.approveReportStatus == T(rms.com.consts.Const).APPROVE_REPORT_STATUS_TURN ||
-																 result.approveReportStatus == T(rms.com.consts.Const).APPROVE_REPORT_STATUS_COMPLETE}"
+												th:if="${result.approveReportStatus == T(rms.common.consts.Const).APPROVE_REPORT_STATUS_TURN ||
+																 result.approveReportStatus == T(rms.common.consts.Const).APPROVE_REPORT_STATUS_COMPLETE}"
 												th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button>
 							</td>
 						</tr>

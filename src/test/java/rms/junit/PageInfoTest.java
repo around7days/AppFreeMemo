@@ -2,7 +2,7 @@ package rms.junit;
 
 import static org.junit.Assert.*;
 
-import rms.web.com.utils.PageInfo;
+import rms.common.utils.PageInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
