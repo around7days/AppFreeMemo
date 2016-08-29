@@ -2,7 +2,7 @@ package rms.web.app.tran.reportapproveregist;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.validator.annotation.UploadFileNotEmpty;
+import rms.common.validator.UploadFileNotEmptyAnnotation;
 
 /**
  * 月報承認画面フォーム
@@ -22,7 +22,7 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     /** 年月 */
     private String targetYm;
     /** 月報ファイル */
-    @UploadFileNotEmpty(message = "月報は{UploadFileNotEmpty.message}")
+    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}")
     private MultipartFile file;
     /** 公開有無名称 */
     private String publishFlgNm;

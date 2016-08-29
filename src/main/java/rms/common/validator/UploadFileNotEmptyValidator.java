@@ -3,15 +3,13 @@ package rms.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import rms.common.validator.annotation.UploadFileNotEmpty;
-
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * ファイルアップロードチェック 独自Validator
  * @author
  */
-public class UploadFileNotEmptyValidator implements ConstraintValidator<UploadFileNotEmpty, MultipartFile> {
+public class UploadFileNotEmptyValidator implements ConstraintValidator<UploadFileNotEmptyAnnotation, MultipartFile> {
 
     @Override
     public boolean isValid(MultipartFile multipartFile,
@@ -34,7 +32,7 @@ public class UploadFileNotEmptyValidator implements ConstraintValidator<UploadFi
      * @see javax.validation.ConstraintValidator#initialize(java.lang.annotation.Annotation)
      */
     @Override
-    public void initialize(UploadFileNotEmpty constraintAnnotation) {
+    public void initialize(UploadFileNotEmptyAnnotation constraintAnnotation) {
 
     }
 }

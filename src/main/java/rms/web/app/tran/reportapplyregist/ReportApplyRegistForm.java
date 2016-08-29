@@ -3,7 +3,7 @@ package rms.web.app.tran.reportapplyregist;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.validator.annotation.UploadFileNotEmpty;
+import rms.common.validator.UploadFileNotEmptyAnnotation;
 
 /**
  * 月報申請画面フォーム
@@ -35,7 +35,7 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     @NotEmpty(message = "年月は{NotEmpty.message}", groups = { Insert.class, Update.class })
     private String targetYm;
     /** 月報ファイル */
-    @UploadFileNotEmpty(message = "月報は{UploadFileNotEmpty.message}", groups = { Insert.class, Update.class })
+    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}", groups = { Insert.class, Update.class })
     private MultipartFile file;
     /** 公開有無 */
     private String publishFlg;
