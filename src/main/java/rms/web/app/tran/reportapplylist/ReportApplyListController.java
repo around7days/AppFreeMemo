@@ -155,7 +155,8 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
          */
         // ダウンロードファイルパスの生成
         Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       result.getApplyUserId(), result.getTargetYm());
+                                                       result.getApplyUserId(),
+                                                       result.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 

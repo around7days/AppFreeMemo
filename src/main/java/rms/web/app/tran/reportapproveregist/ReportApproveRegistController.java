@@ -152,7 +152,8 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
          */
         // ダウンロードファイルパスの生成
         Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       form.getApplyUserId(), form.getTargetYm());
+                                                       form.getApplyUserId(),
+                                                       form.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 

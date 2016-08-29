@@ -98,8 +98,10 @@ public class UserRegistService extends rms.common.abstracts.AbstractService {
         // ユーザIDの重複チェック
         validateUniquUserId(userRegistEntity.getUserId());
         // 承認ルート設定チェック
-        validateApprovalRoute(userRegistEntity.getRoleApplyFlg(), userRegistEntity.getApproveUserId1(),
-                              userRegistEntity.getApproveUserId2(), userRegistEntity.getApproveUserId3());
+        validateApprovalRoute(userRegistEntity.getRoleApplyFlg(),
+                              userRegistEntity.getApproveUserId1(),
+                              userRegistEntity.getApproveUserId2(),
+                              userRegistEntity.getApproveUserId3());
 
         /*
          * ユーザマスタ登録
@@ -123,8 +125,10 @@ public class UserRegistService extends rms.common.abstracts.AbstractService {
          * 業務ロジックチェック
          */
         // 承認ルート設定チェック
-        validateApprovalRoute(userRegistEntity.getRoleApplyFlg(), userRegistEntity.getApproveUserId1(),
-                              userRegistEntity.getApproveUserId2(), userRegistEntity.getApproveUserId3());
+        validateApprovalRoute(userRegistEntity.getRoleApplyFlg(),
+                              userRegistEntity.getApproveUserId1(),
+                              userRegistEntity.getApproveUserId2(),
+                              userRegistEntity.getApproveUserId3());
 
         /*
          * ユーザマスタ更新

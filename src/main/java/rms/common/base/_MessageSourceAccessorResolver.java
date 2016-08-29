@@ -1,4 +1,5 @@
 package rms.common.base;
+
 //package rms.com.base;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
