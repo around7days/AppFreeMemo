@@ -1,6 +1,6 @@
 package rms.domain.app.mst.userregist;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -212,10 +212,9 @@ public class UserRegistService extends rms.common.abstracts.AbstractService {
      * @throws BusinessException
      */
     private void validateUniquUserId(String userId) throws BusinessException {
-        if (mUserDao.selectById(userId) != null) {
-            // TODO 汚い・・・
-            List<Object> params = new ArrayList<Object>();
-            params.add("ユーザIDが");
+        MUser mUser = mUserDao.selectById(userId);
+        if (mUser != null) {
+            List<Object> params = Arrays.asList("ユーザIDが");
             throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
         }
     }

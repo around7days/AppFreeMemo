@@ -46,15 +46,4 @@ $(function() {
 		fmMain.attr("action", url);
 		fmMain.submit();
 	});
-
-	// TODO common.jsに入れたい
-	/**
-	 * 年月カレンダー表示
-	 */
-	$('.datepicker-ym').datepicker({
-		format : "yyyymm",
-		language : "ja",
-		minViewMode : "months",
-		autoclose : true
-	});
 });
