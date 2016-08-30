@@ -1,5 +1,5 @@
 --
---ユーザマスタ情報ビュー
+--ユーザマスタビュー
 --
 create or replace view V_M_USER as
 select
@@ -21,22 +21,22 @@ select
   , U.upd_id                                      -- 更新ID
 from
   m_user U
-  left join m_user A1
+  inner join m_user A1
     on U.approve_user_id1 = A1.user_id
-  left join m_user A2
+  inner join m_user A2
     on U.approve_user_id2 = A2.user_id
-  left join m_user A3
+  inner join m_user A3
     on U.approve_user_id3 = A3.user_id
 ;
 
 
 --
---ユーザ役割マスタ情報ビュー
+--ユーザ役割マスタビュー
 --
 create or replace view V_M_USER_ROLE as
 select
     A.user_id                                     -- ユーザID
-  , B.role                                        -- 役割
+  , A.role                                        -- 役割
   , B.role_nm                                     -- 役割名
   , A.version                                     -- バージョン
   , A.del_flg                                     -- 削除フラグ
@@ -79,18 +79,18 @@ select
   , A.upd_id                                      -- 更新ID
 from
   t_report A
-  left join m_user U0
+  inner join m_user U0
     on A.apply_user_id = U0.user_id
-  left join m_user U1
+  inner join m_user U1
     on A.approve_user_id1 = U1.user_id
-  left join m_user U2
+  inner join m_user U2
     on A.approve_user_id2 = U2.user_id
-  left join m_user U3
+  inner join m_user U3
     on A.approve_user_id3 = U3.user_id
-  left join m_code A001
+  inner join m_code A001
     on A.status = A001.code
     and A001.code_kbn = 'A001'
-  left join m_code B001
+  inner join m_code B001
     on A.publish_flg = B001.code
     and B001.code_kbn = 'B001'
 ;

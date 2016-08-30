@@ -83,7 +83,7 @@ public class ReportApproveRegistService extends rms.common.abstracts.AbstractSer
             newStatus = MCodeConst.A001_Y03;
             break;
         case MCodeConst.A001_Y03:
-            newStatus = MCodeConst.A001_100;
+            newStatus = MCodeConst.A001_ZZZ;
             break;
         default:
             throw new BusinessException("例外エラー");

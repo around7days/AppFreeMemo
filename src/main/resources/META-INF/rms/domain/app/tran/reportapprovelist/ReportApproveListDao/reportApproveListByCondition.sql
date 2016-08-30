@@ -22,7 +22,7 @@ select
           when 'Y01' then '2'         -- 入力中
           when 'Y02' then '3'         -- 入力済み
           when 'Y03' then '3'         -- 入力済み
-          when '100' then '3'         -- 入力済み
+          when 'ZZZ' then '3'         -- 入力済み
           else            '1'         -- 依頼待ち
         end
       when A.approve_user_id2 = /* condition.approveUserId */'user07' then
@@ -30,7 +30,7 @@ select
           when 'Y01' then '1'         -- 依頼待ち
           when 'Y02' then '2'         -- 入力中
           when 'Y03' then '3'         -- 入力済み
-          when '100' then '3'         -- 入力済み
+          when 'ZZZ' then '3'         -- 入力済み
           else            '1'         -- 依頼待ち
         end
       when A.approve_user_id3 = /* condition.approveUserId */'user07' then
@@ -38,7 +38,7 @@ select
           when 'Y01' then '1'         -- 依頼待ち
           when 'Y02' then '1'         -- 依頼待ち
           when 'Y03' then '2'         -- 入力中
-          when '100' then '3'         -- 入力済み
+          when 'ZZZ' then '3'         -- 入力済み
           else            '1'         -- 依頼待ち
         end
     end as approve_report_status -- 承認状況（承認者視点）
@@ -69,8 +69,8 @@ select
   , null
   , null
   , null
-  , 'XXX'
-  , (select A001.code_nm from m_code A001 where A001.code_kbn = 'A001' and A001.code = 'XXX')
+  , 'AAA'
+  , (select A001.code_nm from m_code A001 where A001.code_kbn = 'A001' and A001.code = 'AAA')
   , '1' -- 承認状況（承認者視点） 依頼待ち
   , M.approve_user_id1
   , M.approve_user_nm1
