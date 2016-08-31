@@ -1,3 +1,7 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
 buildscript {
 	ext {
 		springBootVersion = '1.4.0.RELEASE'
@@ -9,9 +13,6 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
-
-apply plugin: 'java'
-apply plugin: 'spring-boot'
 
 jar {
 	baseName = 'ReportManagementSystem'
@@ -28,9 +29,9 @@ repositories {
 }
 
 javadoc {
-    destinationDir   = new File("${projectDir}\\docs\\javadoc")
-    options.charSet  = 'UTF-8'
-    options.encoding = 'UTF-8'
+//	destinationDir   = new File("${projectDir}\\docs\\javadoc")
+	options.charSet  = 'UTF-8'
+	options.encoding = 'UTF-8'
 }
 
 // DomaのSQLファイルをコンパイルより前に出力先Dirにコピーするための設定
@@ -54,7 +55,6 @@ dependencies {
 	compile group: 'org.seasar.doma.boot', name: 'doma-spring-boot-starter', version: '1.+'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.+'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '+'
-//	compile group: 'org.apache.commons', name: 'commons-collections4', version: '+'
 	runtime group: 'mysql', name: 'mysql-connector-java'
 
 	// サーバ状態監視用

@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-public class ReportManagementApplicationTests {
+public class ApplicationTest {
 
     @Test
     public void contextLoads() {
