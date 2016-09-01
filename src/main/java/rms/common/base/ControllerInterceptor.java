@@ -1,13 +1,11 @@
 package rms.common.base;
 
-import org.springframework.stereotype.Component;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * TraceControllerInterceptorクラス
@@ -15,10 +13,10 @@ import org.aspectj.lang.annotation.Aspect;
  */
 @Aspect
 @Component
-public class TraceControllerInterceptor {
+public class ControllerInterceptor {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(TraceControllerInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(ControllerInterceptor.class);
 
     /**
      * Controllerクラス内のメソッド開始時にログを出力
@@ -61,7 +59,7 @@ public class TraceControllerInterceptor {
     private boolean isURL(Object retVal) {
         if (retVal != null && retVal instanceof String) {
             String url = retVal.toString();
-            // TODO
+            // TODO システム独自仕様
             if (url.startsWith("html") || url.startsWith("redirect") || url.startsWith("forward")) {
                 // URL
                 return true;
