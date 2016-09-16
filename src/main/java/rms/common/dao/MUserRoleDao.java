@@ -1,6 +1,6 @@
-package rms.common.repository;
+package rms.common.dao;
 
-import rms.common.model.TReport;
+import rms.common.model.MUserRole;
 
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
@@ -13,46 +13,46 @@ import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
- * TReportDaoクラス
+ * MUserRoleDaoクラス
  */
 @Dao
 @ConfigAutowireable
-public interface TReportDao {
+public interface MUserRoleDao {
 
     /**
      * 1件取得
-     * @param applyUserId
-     * @param targetYm
-     * @return the TReport entity
+     * @param userId
+     * @param role
+     * @return the MUserRole entity
      */
     @Select
-    TReport selectById(String applyUserId,
-                       Integer targetYm);
+    MUserRole selectById(String userId,
+                         String role);
 
     /**
      * 1件取得
-     * @param applyUserId
-     * @param targetYm
+     * @param userId
+     * @param role
      * @param options
-     * @return the TReport entity
+     * @return the MUserRole entity
      */
     @Select
-    TReport selectById(String applyUserId,
-                       Integer targetYm,
-                       SelectOptions options);
+    MUserRole selectById(String userId,
+                         String role,
+                         SelectOptions options);
 
     /**
      * 1件取得
-     * @param applyUserId
-     * @param targetYm
+     * @param userId
+     * @param role
      * @param version
      * @throws NoResultException
-     * @return the TReport entity
+     * @return the MUserRole entity
      */
     @Select(ensureResult = true)
-    TReport selectByIdAndVersion(String applyUserId,
-                                 Integer targetYm,
-                                 Integer version) throws NoResultException;
+    MUserRole selectByIdAndVersion(String userId,
+                                   String role,
+                                   Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -60,7 +60,7 @@ public interface TReportDao {
      * @return affected rows
      */
     @Insert(excludeNull = true)
-    int insert(TReport entity);
+    int insert(MUserRole entity);
 
     /**
      * 更新（楽観的排他制御）
@@ -69,7 +69,7 @@ public interface TReportDao {
      * @throws OptimisticLockException
      */
     @Update(excludeNull = true)
-    int update(TReport entity) throws OptimisticLockException;
+    int update(MUserRole entity) throws OptimisticLockException;
 
     /**
      * 更新
@@ -77,7 +77,7 @@ public interface TReportDao {
      * @return affected rows
      */
     @Update(excludeNull = true, ignoreVersion = true)
-    int updateNoOptimisticLockException(TReport entity);
+    int updateNoOptimisticLockException(MUserRole entity);
 
     /**
      * 削除
@@ -85,5 +85,5 @@ public interface TReportDao {
      * @return affected rows
      */
     @Delete
-    int delete(TReport entity);
+    int delete(MUserRole entity);
 }

@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author
  */
 @Entity
-public abstract class AbstractTableEntity {
+public abstract class AbstractModel {
 
     /** バージョン */
     @Version

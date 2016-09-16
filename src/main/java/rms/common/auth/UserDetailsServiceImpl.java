@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import rms.common.dao.MUserDao;
 import rms.common.model.MUser;
 import rms.common.model.MUserRole;
-import rms.common.repository.MUserDao;
 
 /**
  * 独自認証処理

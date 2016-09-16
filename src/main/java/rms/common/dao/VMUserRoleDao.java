@@ -1,4 +1,4 @@
-package rms.common.repository;
+package rms.common.dao;
 
 import rms.common.model.VMUserRole;
 

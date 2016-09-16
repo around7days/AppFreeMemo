@@ -22,7 +22,7 @@ task domaGenByTable << {
     def entityUseListener        = true
 //    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
     // dao
-    def daoPackageName           = 'rms.domain.com.repository'
+    def daoPackageName           = 'rms.domain.com.dao'
     def daoOverwrite             = true
     // sql
     def SqlOverwrite             = true

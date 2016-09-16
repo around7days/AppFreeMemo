@@ -1,6 +1,6 @@
-package rms.common.repository;
+package rms.common.dao;
 
-import rms.common.model.MCode;
+import rms.common.model.MUser;
 
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
@@ -13,45 +13,39 @@ import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
- * MCodeDaoクラス
+ * MUserDaoクラス
  */
 @Dao
 @ConfigAutowireable
-public interface MCodeDao {
+public interface MUserDao {
 
     /**
      * 1件取得
-     * @param codeKbn
-     * @param code
-     * @return the MCode entity
+     * @param userId
+     * @return the MUser entity
      */
     @Select
-    MCode selectById(String codeKbn,
-                     String code);
+    MUser selectById(String userId);
 
     /**
      * 1件取得
-     * @param codeKbn
-     * @param code
+     * @param userId
      * @param options
-     * @return the MCode entity
+     * @return the MUser entity
      */
     @Select
-    MCode selectById(String codeKbn,
-                     String code,
+    MUser selectById(String userId,
                      SelectOptions options);
 
     /**
      * 1件取得
-     * @param codeKbn
-     * @param code
+     * @param userId
      * @param version
      * @throws NoResultException
-     * @return the MCode entity
+     * @return the MUser entity
      */
     @Select(ensureResult = true)
-    MCode selectByIdAndVersion(String codeKbn,
-                               String code,
+    MUser selectByIdAndVersion(String userId,
                                Integer version) throws NoResultException;
 
     /**
@@ -60,7 +54,7 @@ public interface MCodeDao {
      * @return affected rows
      */
     @Insert(excludeNull = true)
-    int insert(MCode entity);
+    int insert(MUser entity);
 
     /**
      * 更新（楽観的排他制御）
@@ -69,7 +63,7 @@ public interface MCodeDao {
      * @throws OptimisticLockException
      */
     @Update(excludeNull = true)
-    int update(MCode entity) throws OptimisticLockException;
+    int update(MUser entity) throws OptimisticLockException;
 
     /**
      * 更新
@@ -77,7 +71,7 @@ public interface MCodeDao {
      * @return affected rows
      */
     @Update(excludeNull = true, ignoreVersion = true)
-    int updateNoOptimisticLockException(MCode entity);
+    int updateNoOptimisticLockException(MUser entity);
 
     /**
      * 削除
@@ -85,5 +79,5 @@ public interface MCodeDao {
      * @return affected rows
      */
     @Delete
-    int delete(MCode entity);
+    int delete(MUser entity);
 }
