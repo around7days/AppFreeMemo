@@ -1,0 +1,10 @@
+DELETE FROM T_REPORT_APPROVE_FLOW;
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', '201601', '1', 'user06', '2016-01-25', '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', '201601', '2', 'user07', '2016-01-26', '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', '201601', '3', 'user08', '2016-01-27', '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', '201609', '1', 'user06', null, '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', '201609', '2', 'user07', null, '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', '201609', '3', 'user08', null, '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user02', '201601', '2', 'user07', '2016-01-26', '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO t_report_approve_flow(apply_user_id, target_ym, approve_seq, approve_user_id, approve_date, comment, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user02', '201601', '3', 'user08', '2016-01-27', '', 0, 0, now(), 'system', now(), 'system');
+commit;

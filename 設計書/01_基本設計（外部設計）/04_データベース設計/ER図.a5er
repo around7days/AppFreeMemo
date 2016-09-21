@@ -12,7 +12,7 @@ ReadOnlyRecommend=0
 Page=Table
 PageInfo="Table",7,"A4Landscape",$FFFFFF
 Page=View
-PageInfo="View",2,"A4Landscape",$FFFFFF
+PageInfo="View",7,"A4Landscape",$FFFFFF
 LogicalView=1
 DecodeDomain=0
 ViewModePageIndividually=1
@@ -35,9 +35,9 @@ GenerateDropTableStatement=1
 DropTableIfExists=1
 CommonField="バージョン","version","int","NOT NULL",,"","",$FFFFFFFF
 CommonField="削除フラグ","del_flg","int","NOT NULL",,"","",$FFFFFFFF
-CommonField="登録日時","ins_date","timestamp","NOT NULL",,"","",$FFFFFFFF
+CommonField="登録日時","ins_date","datetime","NOT NULL",,"","",$FFFFFFFF
 CommonField="登録ID","ins_id","varchar(20)","NOT NULL",,"","",$FFFFFFFF
-CommonField="更新日時","upd_date","timestamp","NOT NULL",,"","",$FFFFFFFF
+CommonField="更新日時","upd_date","datetime","NOT NULL",,"","",$FFFFFFFF
 CommonField="更新ID","upd_id","varchar(20)","NOT NULL",,"","",$FFFFFFFF
 DefaultPkName=%0:s_PKC
 DefaultPkIndexName=%0:s_PKI
@@ -47,48 +47,141 @@ SqlSeparator=0
 ShowTag=1
 ShowCommonAttributes=0
 
+[Comment]
+Comment=【各テーブル共通項目定義】\nバージョン\n削除フラグ\n登録日\n登録ID\n更新日\n更新ID
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=9
+FontColor=$000000
+LineColor=$000000
+BkColor=$FFFFFF
+Page=Table
+Left=2200
+Top=700
+Width=496
+Height=331
+
+[Comment]
+Comment=ビュー
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=9
+FontColor=$000000
+LineColor=$000000
+BkColor=$C0DCC0
+Page=View
+Left=100
+Top=100
+Width=250
+Height=89
+
+[Relation]
+Entity1=T_REPORT
+Entity2=T_REPORT_APPROVE_FLOW
+RelationType1=2
+RelationType2=4
+Fields1=apply_user_id,target_ym
+Fields2=apply_user_id,target_ym
+Cardinarity1=
+Cardinarity2=
+Position="TABLE",0,4300,4320,6587,R,R
+Dependence=1
+Caption=
+PName=
+ModifiedDateTime=20160921113652
+LineMode=0
+Bar1=430
+Bar2=432
+Bar3=659
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=M_USER
+Entity2=M_USER_APPROVE_FLOW
+RelationType1=2
+RelationType2=3
+Fields1=user_id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="TABLE",0,6043,4474,1941,R,R
+Dependence=1
+Caption=
+PName=
+ModifiedDateTime=20160921111520
+LineMode=0
+Bar1=604
+Bar2=447
+Bar3=194
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=M_USER_APPROVE_FLOW
+LName=ユーザ承認フローマスタ
+Comment=
+TableOption=
+Page=TABLE
+Left=1700
+Top=300
+Field="ユーザID","user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="承認SEQ","approve_seq","int","NOT NULL",1,"","",$FFFFFFFF,""
+Field="承認者ID","approve_user_id","varchar(20)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160921140800
+Position="TABLE",1700,300
+
 [View]
 PName=v_t_report
-LName=v_t_report
+LName=月報管理テーブルビュー
 Comment=
 ViewOption=
-Query=select `a`.`apply_user_id` AS `apply_user_id`,`u0`.`user_nm` AS `apply_user_nm`,`a`.`target_ym` AS `target_ym`,`a`.`apply_date` AS `apply_date`,`a`.`publish_flg` AS `publish_flg`,`b001`.`code_nm` AS `publish_flg_nm`,`a`.`status` AS `status`,`a001`.`code_nm` AS `status_nm`,`a`.`approve_user_id1` AS `approve_user_id1`,`u1`.`user_nm` AS `approve_user_nm1`,`a`.`approve_user_id2` AS `approve_user_id2`,`u2`.`user_nm` AS `approve_user_nm2`,`a`.`approve_user_id3` AS `approve_user_id3`,`u3`.`user_nm` AS `approve_user_nm3`,`a`.`file_path` AS `file_path`,`a`.`version` AS `version`,`a`.`del_flg` AS `del_flg`,`a`.`ins_date` AS `ins_date`,`a`.`ins_id` AS `ins_id`,`a`.`upd_date` AS `upd_date`,`a`.`upd_id` AS `upd_id` from ((((((`t_report` `a` left join `m_user` `u0` on((`a`.`apply_user_id` = `u0`.`user_id`))) left join `m_user` `u1` on((`a`.`approve_user_id1` = `u1`.`user_id`))) left join `m_user` `u2` on((`a`.`approve_user_id2` = `u2`.`user_id`))) left join `m_user` `u3` on((`a`.`approve_user_id3` = `u3`.`user_id`))) left join `m_code` `a001` on(((`a`.`status` = `a001`.`code`) and (`a001`.`code_kbn` = \qA001\q)))) left join `m_code` `b001` on(((`a`.`publish_flg` = `b001`.`code`) and (`b001`.`code_kbn` = \qB001\q))))
-Color=$000000
-BkColor=$FFFFFF
-Position="VIEW",800,200
-Page=VIEW
-Left=800
-Top=200
-
-[View]
-PName=v_m_user_role
-LName=v_m_user_role
-Comment=
-ViewOption=
-Query=CREATE ALGORITHM=UNDEFINED DEFINER=`mms01`@`%` SQL SECURITY DEFINER VIEW `v_m_user_role` AS select `a`.`user_id` AS `user_id`,`b`.`role` AS `role`,`b`.`role_nm` AS `role_nm`,`a`.`version` AS `version`,`a`.`del_flg` AS `del_flg`,`a`.`ins_date` AS `ins_date`,`a`.`ins_id` AS `ins_id`,`a`.`upd_date` AS `upd_date`,`a`.`upd_id` AS `upd_id` from (`m_user_role` `a` join `m_role` `b` on((`a`.`role` = `b`.`role`)))
-Color=$000000
-BkColor=$FFFFFF
-Position="VIEW",500,200
-Page=VIEW
-Left=500
-Top=200
-
-[View]
-PName=v_m_user
-LName=v_m_user
-Comment=
-ViewOption=
-Query=CREATE ALGORITHM=UNDEFINED DEFINER=`mms01`@`%` SQL SECURITY DEFINER VIEW `v_m_user` AS select `u`.`user_id` AS `user_id`,`u`.`user_nm` AS `user_nm`,`u`.`password` AS `password`,`u`.`email` AS `email`,`u`.`approve_user_id1` AS `approve_user_id1`,`a1`.`user_nm` AS `approve_user_nm1`,`u`.`approve_user_id2` AS `approve_user_id2`,`a2`.`user_nm` AS `approve_user_nm2`,`u`.`approve_user_id3` AS `approve_user_id3`,`a3`.`user_nm` AS `approve_user_nm3`,`u`.`version` AS `version`,`u`.`del_flg` AS `del_flg`,`u`.`ins_date` AS `ins_date`,`u`.`ins_id` AS `ins_id`,`u`.`upd_date` AS `upd_date`,`u`.`upd_id` AS `upd_id` from (((`m_user` `u` left join `m_user` `a1` on((`u`.`approve_user_id1` = `a1`.`user_id`))) left join `m_user` `a2` on((`u`.`approve_user_id2` = `a2`.`user_id`))) left join `m_user` `a3` on((`u`.`approve_user_id3` = `a3`.`user_id`)))
+Query=\n--\n--月報テーブルビュー\n--\ncreate or replace view V_T_REPORT as\nselect\n    A.apply_user_id                               -- 申請者ID\n  , U.user_nm   as apply_user_nm                  -- 申請者名\n  , A.target_ym                                   -- 年月\n  , A.apply_date                                  -- 申請日\n  , A.publish_flg                                 -- 公開有無\n  , B001.code_nm as publish_flg_nm                -- 公開有無名称\n  , F1.approve_user_id as approve_user_id1        -- 承認者ID1\n  , (select X.user_nm from m_user X where X.user_id = F1.approve_user_id) as approve_user_nm1 -- 承認者名1\n  , F1.approve_date as approve_date1              -- 承認日1\n  , F2.approve_user_id as approve_user_id2        -- 承認者ID2\n  , (select X.user_nm from m_user X where X.user_id = F2.approve_user_id) as approve_user_nm2 -- 承認者名2\n  , F2.approve_date as approve_date2              -- 承認日2\n  , F3.approve_user_id as approve_user_id3        -- 承認者ID3\n  , (select X.user_nm from m_user X where X.user_id = F3.approve_user_id) as approve_user_nm3 -- 承認者名3\n  , F3.approve_date as approve_date3              -- 承認日3\n  , A.file_path                                   -- 月報ファイルパス\n  , A.comment as apply_user_comment               -- 申請者コメント\n  , A.status                                      -- 承認状況\n  , A001.code_nm as status_nm                     -- 承認状況名称\n  , A.version                                     -- バージョン\n  , A.del_flg                                     -- 削除フラグ\n  , A.ins_date                                    -- 登録日時\n  , A.ins_id                                      -- 登録ID\n  , A.upd_date                                    -- 更新日時\n  , A.upd_id                                      -- 更新ID\nfrom\n  t_report A\n  inner join m_user U\n    on A.apply_user_id = U.user_id\n  left join t_report_approve_flow F1\n    on A.apply_user_id = F1.apply_user_id\n    and A.target_ym = F1.target_ym\n    and F1.approve_seq = 1\n  left join t_report_approve_flow F2\n    on A.apply_user_id = F2.apply_user_id\n    and A.target_ym = F2.target_ym\n    and F2.approve_seq = 2\n  left join t_report_approve_flow F3\n    on A.apply_user_id = F3.apply_user_id\n    and A.target_ym = F3.target_ym\n    and F3.approve_seq = 3\n  inner join m_code A001\n    on A001.code_kbn = \qA001\q\n    and A.status = A001.code\n  left join m_code B001\n    on B001.code_kbn = \qB001\q\n    and A.publish_flg = B001.code\n;
 LNameByComment=1
 Color=$000000
 BkColor=$FFFFFF
-Position="VIEW",100,200
+Position="VIEW",1400,300
+Page=VIEW
+Left=1400
+Top=300
+
+[View]
+PName=v_m_user_role
+LName=ユーザ役割マスタビュー
+Comment=
+ViewOption=
+Query=--\n--ユーザ役割マスタビュー\n--\ncreate or replace view V_M_USER_ROLE as\nselect\n    A.user_id                                     -- ユーザID\n  , A.role                                        -- 役割\n  , B.role_nm                                     -- 役割名\n  , A.version                                     -- バージョン\n  , A.del_flg                                     -- 削除フラグ\n  , A.ins_date                                    -- 登録日時\n  , A.ins_id                                      -- 登録ID\n  , A.upd_date                                    -- 更新日時\n  , A.upd_id                                      -- 更新ID\nfrom\n  m_user_role A\n  inner join m_role B\n    on A.role = B.role\n;
+LNameByComment=1
+Color=$000000
+BkColor=$FFFFFF
+Position="VIEW",800,300
+Page=VIEW
+Left=800
+Top=300
+
+[View]
+PName=v_m_user
+LName=ユーザマスタビュー
+Comment=
+ViewOption=
+Query=--\n--ユーザマスタビュー\n--\ncreate or replace view V_M_USER as\nselect\n    U.user_id                                     -- ユーザID\n  , U.user_nm                                     -- ユーザ名\n  , U.password                                    -- パスワード\n  , U.email                                       -- メールアドレス\n  , U.departmen_id                                -- 部署ID\n  , D001.code_nm as departmen_nm                  -- 部署名\n  , D001.attr1  as departmen_rnm                  -- 部署略称\n  , F1.approve_user_id as approve_user_id1        -- 承認者ID1\n  , (select X.user_nm from m_user X where X.user_id = F1.approve_user_id) as approve_user_nm1 -- 承認者名1\n  , F2.approve_user_id as approve_user_id2        -- 承認者ID2\n  , (select X.user_nm from m_user X where X.user_id = F2.approve_user_id) as approve_user_nm2 -- 承認者名2\n  , F3.approve_user_id as approve_user_id3        -- 承認者ID3\n  , (select X.user_nm from m_user X where X.user_id = F3.approve_user_id) as approve_user_nm3 -- 承認者名3\n  , U.version                                     -- バージョン\n  , U.del_flg                                     -- 削除フラグ\n  , U.ins_date                                    -- 登録日時\n  , U.ins_id                                      -- 登録ID\n  , U.upd_date                                    -- 更新日時\n  , U.upd_id                                      -- 更新ID\nfrom\n  m_user U\n  left join m_user_approve_flow F1\n    on U.user_id = F1.user_id\n    and F1.approve_seq = 1\n  left join m_user_approve_flow F2\n    on U.user_id = F2.user_id\n    and F2.approve_seq = 2\n  left join m_user_approve_flow F3\n    on U.user_id = F3.user_id\n    and F3.approve_seq = 3\n  left join m_code D001\n    on D001.code_kbn = \qD001\q\n    and U.departmen_id = D001.code\n;
+LNameByComment=1
+Color=$000000
+BkColor=$FFFFFF
+Position="VIEW",100,300
 Page=VIEW
 Left=100
-Top=200
+Top=300
 
 [Comment]
-Comment=【課題】\n・履歴をどの単位で残すのか？\n・アップロードされた月報は上書きになる？
+Comment=【課題】\n・履歴は残さない？\n・アップロードされた月報は上書きになる？
 FontName=Tahoma
 FontBold=0
 FontItalic=0
@@ -98,55 +191,30 @@ FontColor=$000000
 LineColor=$000000
 BkColor=$FFFFFF
 Page=TABLE
-Left=1600
-Top=1600
-Width=1251
+Left=2087
+Top=1101
+Width=718
 Height=331
 
-[Relation]
-Entity1=T_REPORT
-Entity2=T_REPORT_HIS
-RelationType1=2
-RelationType2=3
-Fields1=apply_user_id,target_ym
-Fields2=apply_user_id,target_ym
-Cardinarity1=
-Cardinarity2=
-Position="TABLE",0,6976,3024,6869,R,R
-Dependence=1
-Caption=
-PName=
-ModifiedDateTime=20160803173230
-LineMode=0
-Bar1=698
-Bar2=302
-Bar3=687
-TermPos1=R
-TermPos2=R
-
 [Entity]
-PName=T_REPORT_HIS
-LName=月報管理テーブル（履歴）
+PName=T_REPORT_APPROVE_FLOW
+LName=月報承認フローテーブル
 Comment=
 TableOption=
 Page=TABLE
 Left=1100
-Top=1050
+Top=1100
 Field="申請者ID","apply_user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="対象年月","target_ym","int","NOT NULL",1,"","",$FFFFFFFF,""
-Field="連番","seq","int","NOT NULL",2,"","",$FFFFFFFF,""
-Field="申請日","apply_date","timestamp","NOT NULL",,"","",$FFFFFFFF,""
-Field="公開有無","publish_flg","varchar(1)","NOT NULL",,"","",$FFFFFFFF,""
-Field="承認状況","status","varchar(3)","NOT NULL",,"","",$FFFFFFFF,""
-Field="承認者ID1","approve_user_id1","varchar(20)",,,"","",$FFFFFFFF,""
-Field="承認者ID2","approve_user_id2","varchar(20)",,,"","",$FFFFFFFF,""
-Field="承認者ID3","approve_user_id3","varchar(20)","NOT NULL",,"","",$FFFFFFFF,""
-Field="月報ファイルパス","file_path","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="承認SEQ","approve_seq","int","NOT NULL",2,"","",$FFFFFFFF,""
+Field="承認者ID","approve_user_id","varchar(20)","NOT NULL",,"","",$FFFFFFFF,""
+Field="承認日","approve_date","datetime",,,"","",$FFFFFFFF,""
+Field="コメント","comment","varchar(255)",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20160804170117
-Position="TABLE",1100,1050
+ModifiedDateTime=20160921151148
+Position="TABLE",1100,1100
 
 [Comment]
 Comment=業務
@@ -190,10 +258,10 @@ Fields2=role
 Cardinarity1=
 Cardinarity2=
 Position="TABLE",0,4908,7201,5000,R,R
-Dependence=1
+Dependence=0
 Caption=
 PName=
-ModifiedDateTime=20160723005156
+ModifiedDateTime=20160921111551
 LineMode=0
 Bar1=491
 Bar2=720
@@ -262,7 +330,7 @@ Comment=
 TableOption=
 Page=TABLE
 Left=100
-Top=250
+Top=300
 Field="コード区分","code_kbn","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="コード区分名称","code_kbn_nm","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="コード","code","varchar(20)","NOT NULL",1,"","",$FFFFFFFF,""
@@ -275,7 +343,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20160716195816
-Position="TABLE",100,250
+Position="TABLE",100,300
 
 [Entity]
 PName=M_USER
@@ -284,39 +352,35 @@ Comment=
 TableOption=
 Page=TABLE
 Left=900
-Top=250
+Top=300
 Field="ユーザID","user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="ユーザ名","user_nm","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="パスワード","password","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="メールアドレス","email","varchar(255)",,,"","",$FFFFFFFF,""
-Field="承認者ID1","approve_user_id1","varchar(20)",,,"","",$FFFFFFFF,""
-Field="承認者ID2","approve_user_id2","varchar(20)",,,"","",$FFFFFFFF,""
-Field="承認者ID3","approve_user_id3","varchar(20)",,,"","",$FFFFFFFF,""
+Field="部署ID","departmen_id","varchar(20)",,,"","コードマスタ：D001",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20160804165629
-Position="TABLE",900,250
+ModifiedDateTime=20160921133842
+Position="TABLE",900,300
 
 [Entity]
 PName=T_REPORT
-LName=月報管理テーブル
+LName=月報テーブル
 Comment=
 TableOption=
 Page=TABLE
 Left=100
-Top=1050
+Top=1100
 Field="申請者ID","apply_user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="対象年月","target_ym","int","NOT NULL",1,"","",$FFFFFFFF,""
-Field="申請日","apply_date","timestamp","NOT NULL",,"","",$FFFFFFFF,""
-Field="公開有無","publish_flg","varchar(1)","NOT NULL",,"","",$FFFFFFFF,""
-Field="承認状況","status","varchar(3)","NOT NULL",,"","",$FFFFFFFF,""
-Field="承認者ID1","approve_user_id1","varchar(20)",,,"","",$FFFFFFFF,""
-Field="承認者ID2","approve_user_id2","varchar(20)",,,"","",$FFFFFFFF,""
-Field="承認者ID3","approve_user_id3","varchar(20)","NOT NULL",,"","",$FFFFFFFF,""
-Field="月報ファイルパス","file_path","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="申請日","apply_date","datetime",,,"","",$FFFFFFFF,""
+Field="公開有無","publish_flg","varchar(1)",,,"","コードマスタ：B001",$FFFFFFFF,""
+Field="月報ファイルパス","file_path","varchar(255)",,,"","",$FFFFFFFF,""
+Field="コメント","comment","varchar(255)",,,"","",$FFFFFFFF,""
+Field="承認状況","status","varchar(3)","NOT NULL",,"","コードマスタ：A001",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20160804165720
-Position="TABLE",100,1050
+ModifiedDateTime=20160921140452
+Position="TABLE",100,1100

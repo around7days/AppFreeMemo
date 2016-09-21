@@ -7,17 +7,33 @@ create table M_USER (
   , user_nm varchar(255) not null comment 'ユーザ名'
   , password varchar(255) not null comment 'パスワード'
   , email varchar(255) comment 'メールアドレス'
-  , approve_user_id1 varchar(20) comment '承認者ID1'
-  , approve_user_id2 varchar(20) comment '承認者ID2'
-  , approve_user_id3 varchar(20) comment '承認者ID3'
+  , departmen_id varchar(20) comment '部署ID   コードマスタ：D001'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
-  , ins_date timestamp not null comment '登録日時'
+  , ins_date datetime not null comment '登録日時'
   , ins_id varchar(20) not null comment '登録ID'
-  , upd_date timestamp not null comment '更新日時'
+  , upd_date datetime not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
   , constraint M_USER_PKC primary key (user_id)
 ) comment 'ユーザマスタ' ;
+
+
+--
+-- ユーザ承認フローマスタ
+--
+drop table if exists M_USER_APPROVE_FLOW cascade;
+create table M_USER_APPROVE_FLOW (
+  user_id varchar(20) not null comment 'ユーザID'
+  , approve_seq int not null comment '承認SEQ'
+  , approve_user_id varchar(20) not null comment '承認者ID'
+  , version int not null comment 'バージョン'
+  , del_flg int not null comment '削除フラグ'
+  , ins_date datetime not null comment '登録日時'
+  , ins_id varchar(20) not null comment '登録ID'
+  , upd_date datetime not null comment '更新日時'
+  , upd_id varchar(20) not null comment '更新ID'
+  , constraint M_USER_APPROVE_FLOW_PKC primary key (user_id,approve_seq)
+) comment 'ユーザ承認フローマスタ' ;
 
 
 --
@@ -30,9 +46,9 @@ create table M_ROLE (
   , description varchar(255) comment '説明'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
-  , ins_date timestamp not null comment '登録日時'
+  , ins_date datetime not null comment '登録日時'
   , ins_id varchar(20) not null comment '登録ID'
-  , upd_date timestamp not null comment '更新日時'
+  , upd_date datetime not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
   , constraint M_ROLE_PKC primary key (role)
 ) comment '役割マスタ' ;
@@ -47,9 +63,9 @@ create table M_USER_ROLE (
   , role varchar(40) not null comment '役割'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
-  , ins_date timestamp not null comment '登録日時'
+  , ins_date datetime not null comment '登録日時'
   , ins_id varchar(20) not null comment '登録ID'
-  , upd_date timestamp not null comment '更新日時'
+  , upd_date datetime not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
   , constraint M_USER_ROLE_PKC primary key (user_id,role)
 ) comment 'ユーザ役割マスタ' ;
@@ -70,58 +86,54 @@ create table M_CODE (
   , description varchar(255) comment '説明'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
-  , ins_date timestamp not null comment '登録日時'
+  , ins_date datetime not null comment '登録日時'
   , ins_id varchar(20) not null comment '登録ID'
-  , upd_date timestamp not null comment '更新日時'
+  , upd_date datetime not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
   , constraint M_CODE_PKC primary key (code_kbn,code)
 ) comment 'コードマスタ' ;
 
 
 --
--- 月報管理テーブル
+-- 月報テーブル
 --
 drop table if exists T_REPORT cascade;
 create table T_REPORT (
   apply_user_id varchar(20) not null comment '申請者ID'
   , target_ym int not null comment '対象年月'
-  , apply_date timestamp not null comment '申請日'
-  , publish_flg varchar(1) not null comment '公開有無'
-  , status varchar(3) not null comment '承認状況'
-  , approve_user_id1 varchar(20) comment '承認者ID1'
-  , approve_user_id2 varchar(20) comment '承認者ID2'
-  , approve_user_id3 varchar(20) not null comment '承認者ID3'
-  , file_path varchar(255) not null comment '月報ファイルパス'
+  , apply_date datetime comment '申請日'
+  , publish_flg varchar(1) comment '公開有無   コードマスタ：B001'
+  , file_path varchar(255) comment '月報ファイルパス'
+  , comment varchar(255) comment 'コメント'
+  , status varchar(3) not null comment '承認状況   コードマスタ：A001'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
-  , ins_date timestamp not null comment '登録日時'
+  , ins_date datetime not null comment '登録日時'
   , ins_id varchar(20) not null comment '登録ID'
-  , upd_date timestamp not null comment '更新日時'
+  , upd_date datetime not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
   , constraint T_REPORT_PKC primary key (apply_user_id,target_ym)
-) comment '月報管理テーブル' ;
+) comment '月報テーブル' ;
 
 
 --
--- 月報管理テーブル（履歴）
+-- 月報承認フローテーブル
 --
-drop table if exists T_REPORT_HIS cascade;
-create table T_REPORT_HIS (
+drop table if exists T_REPORT_APPROVE_FLOW cascade;
+create table T_REPORT_APPROVE_FLOW (
   apply_user_id varchar(20) not null comment '申請者ID'
   , target_ym int not null comment '対象年月'
-  , seq int not null comment '連番'
-  , apply_date timestamp not null comment '申請日'
-  , publish_flg varchar(1) not null comment '公開有無'
-  , status varchar(3) not null comment '承認状況'
-  , approve_user_id1 varchar(20) comment '承認者ID1'
-  , approve_user_id2 varchar(20) comment '承認者ID2'
-  , approve_user_id3 varchar(20) not null comment '承認者ID3'
-  , file_path varchar(255) not null comment '月報ファイルパス'
+  , approve_seq int not null comment '承認SEQ'
+  , approve_user_id varchar(20) not null comment '承認者ID'
+--  , approve_kbn varchar(1) comment '承認区分  コードマスタ：C001'
+  , approve_date datetime comment '承認日'
+  , comment varchar(255) comment 'コメント'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
-  , ins_date timestamp not null comment '登録日時'
+  , ins_date datetime not null comment '登録日時'
   , ins_id varchar(20) not null comment '登録ID'
-  , upd_date timestamp not null comment '更新日時'
+  , upd_date datetime not null comment '更新日時'
   , upd_id varchar(20) not null comment '更新ID'
-  , constraint T_REPORT_HIS_PKC primary key (apply_user_id,target_ym,seq)
-) comment '月報管理テーブル（履歴）' ;
+  , constraint T_REPORT_APPROVE_FLOW_PKC primary key (apply_user_id,target_ym,approve_seq)
+) comment '月報承認フローテーブル' ;
+
