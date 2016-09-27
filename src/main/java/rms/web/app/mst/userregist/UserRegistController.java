@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -36,7 +35,6 @@ import rms.web.app.mst.userlist.UserListController;
  * @author
  */
 @Controller
-@Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = UserRegistForm.class)
 public class UserRegistController extends rms.common.abstracts.AbstractController {
 
@@ -63,9 +61,12 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
         // selectbox用 承認者一覧の取得
         List<SelectOptionEntity> approveList = service.getSelectboxApprove();
+        // selectbox用 部署一覧の取得
+        List<SelectOptionEntity> departmentList = service.getSelectboxDepartment();
 
         // 値の反映
         form.setApproveList(approveList);
+        form.setDepartmentList(departmentList);
 
         return form;
     }

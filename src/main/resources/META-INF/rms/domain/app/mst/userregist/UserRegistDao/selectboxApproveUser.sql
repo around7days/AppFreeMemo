@@ -1,12 +1,10 @@
 select
-    A.user_id as 'key'
-  , A.user_nm as 'value'
+    c.code  as 'key'
+  , c.attr1 as 'value'
 from
-  m_user A
-  inner join m_user_role B
-    on A.user_id = B.user_id
-    and B.role = 'ROLE_APPROVE'
+  m_code c
 where
-  A.del_flg = 0
+  c.code_kbn = 'D001'
+  and c.del_flg = 0
 order by
-  A.user_id
+  c.code

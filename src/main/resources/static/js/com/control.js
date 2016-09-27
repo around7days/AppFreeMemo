@@ -19,4 +19,5 @@ $(function() {
 		minViewMode : "months",
 		autoclose : true
 	});
+
 });

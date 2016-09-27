@@ -81,7 +81,7 @@
 						<tr>
 							<th>年月</th>
 							<th>申請者</th>
-							<th>部署</th>
+							<th>承認状況</th>
 							<th>月報</th>
 						</tr>
 					</thead>
@@ -90,7 +90,7 @@
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td th:text="${result.targetYm}">201606</td>
 							<td th:text="${result.applyUserNm}">月報太郎</td>
-							<td>2SOL</td>
+							<td th:text="${result.statusNm}">承認済み</td>
 							<td><button type="submit" name="download" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>
 					</tbody>

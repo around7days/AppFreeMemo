@@ -8,10 +8,15 @@
 
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
-	<!-- jQuery -->
+	<!-- datepicker CSS -->
+	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker.css}" href="../../static/fw/datepicker/css/bootstrap-datepicker.css" />
+	<!-- jQuery JS -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
 	<!-- bootstrap JS -->
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
+	<!-- datepicker JS -->
+	<script th:src="@{/fw/datepicker/js/bootstrap-datepicker.js}" src="../../static/fw/datepicker/js/bootstrap-datepicker.js"></script>
+	<script th:src="@{/fw/datepicker/locales/bootstrap-datepicker.ja.min.js}" src="../../static/fw/datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<script th:src="@{/js/com/control.js}" src="../../static/js/com/control.js"></script>
@@ -74,6 +79,7 @@
 							<th>ユーザID</th>
 							<th>ユーザ名</th>
 							<th>メールアドレス</th>
+							<th>部署</th>
 							<th>役割</th>
 						</tr>
 					</thead>
@@ -84,6 +90,7 @@
 							<td th:text="${result.userId}">id0000</td>
 							<td th:text="${result.userNm}">月報太郎</td>
 							<td th:text="${result.email}">xxxxxxx@xxx.xx.xx</td>
+							<td th:text="${result.departmentRnm}">1SOL</td>
 							<td th:text="${result.roleNm}">申請者</td>
 						</tr>
 					</tbody>

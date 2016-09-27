@@ -27,6 +27,14 @@ public interface UserRegistDao {
     List<MUserRole> userRoleListByUserId(String userId);
 
     /**
+     * ユーザIDに紐付く承認フローを全て削除
+     * @param userId
+     * @return
+     */
+    @Delete(sqlFile = true)
+    int deleteUserApproveFlowByUserId(String userId);
+
+    /**
      * ユーザIDに紐付く役割を全て削除
      * @param userId
      * @return
@@ -40,5 +48,12 @@ public interface UserRegistDao {
      */
     @Select
     List<SelectOptionEntity> selectboxApproveUser();
+
+    /**
+     * 部署一覧の取得（selectbox専用）
+     * @return
+     */
+    @Select
+    List<SelectOptionEntity> selectboxDepartment();
 
 }

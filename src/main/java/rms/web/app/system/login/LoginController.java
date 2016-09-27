@@ -1,7 +1,9 @@
 package rms.web.app.system.login;
 
-import rms.common.base.SecurityConfig;
+import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,10 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.HttpSession;
+import rms.common.base.SecurityConfig;
 
 /**
  * ログイン画面コントローラー
@@ -59,7 +58,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
 
         // 初期処理
         // XXX ダミー値
-        form.setUserId("user11");
+        form.setUserId("user06");
         form.setPassword("pass");
 
         return PAGE_URL;

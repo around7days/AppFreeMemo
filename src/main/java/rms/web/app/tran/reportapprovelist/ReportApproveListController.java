@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -35,7 +34,6 @@ import rms.web.app.tran.reportapproveregist.ReportApproveRegistController;
  * @author
  */
 @Controller
-@Transactional(rollbackFor = Exception.class)
 @SessionAttributes(types = ReportApproveListForm.class)
 public class ReportApproveListController extends rms.common.abstracts.AbstractController {
 

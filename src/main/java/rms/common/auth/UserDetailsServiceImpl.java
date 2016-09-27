@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.dao.MUserDao;
 import rms.common.model.MUser;
@@ -21,6 +22,7 @@ import rms.common.model.MUserRole;
  * @author
  */
 @Component
+@Transactional(rollbackFor = Exception.class)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

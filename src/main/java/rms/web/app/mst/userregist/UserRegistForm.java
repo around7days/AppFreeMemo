@@ -52,6 +52,8 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
     /** メールアドレス */
     @Email(message = "メールアドレスの{Email.message}", groups = { Insert.class, Update.class })
     private String email;
+    /** 部署ID */
+    private String departmentId;
 
     /** 承認者ID1 */
     private String approveUserId1;
@@ -69,6 +71,8 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
 
     /** 承認者リスト(selectbox用) */
     private List<SelectOptionEntity> approveList;
+    /** 部署リスト(selectbox用) */
+    private List<SelectOptionEntity> departmentList;
 
     /* getter/setter -------------------------------------------------------- */
 
@@ -166,6 +170,22 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * 部署IDを取得します。
+     * @return 部署ID
+     */
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    /**
+     * 部署IDを設定します。
+     * @param departmentId 部署ID
+     */
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     /**
@@ -278,6 +298,22 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
      */
     public void setApproveList(List<SelectOptionEntity> approveList) {
         this.approveList = approveList;
+    }
+
+    /**
+     * 部署リスト(selectbox用)を取得します。
+     * @return 部署リスト(selectbox用)
+     */
+    public List<SelectOptionEntity> getDepartmentList() {
+        return departmentList;
+    }
+
+    /**
+     * 部署リスト(selectbox用)を設定します。
+     * @param departmentList 部署リスト(selectbox用)
+     */
+    public void setDepartmentList(List<SelectOptionEntity> departmentList) {
+        this.departmentList = departmentList;
     }
 
 }

@@ -25,6 +25,10 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
     @Column(name = "email")
     private String email;
 
+    /** 部署略称 */
+    @Column(name = "department_rnm")
+    private String departmentRnm;
+
     /** 承認者ID1 */
     @Column(name = "approve_user_id1")
     private String approveUserId1;
@@ -49,15 +53,15 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
     @Column(name = "approve_user_nm3")
     private String approveUserNm3;
 
-    /** 役割名１ */
+    /** 役割名1 */
     @Column(name = "role_nm1")
     private String roleNm1;
 
-    /** 役割名２ */
+    /** 役割名2 */
     @Column(name = "role_nm2")
     private String roleNm2;
 
-    /** 役割名３ */
+    /** 役割名3 */
     @Column(name = "role_nm3")
     private String roleNm3;
 
@@ -107,6 +111,22 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * 部署略称を取得します。
+     * @return 部署略称
+     */
+    public String getDepartmentRnm() {
+        return departmentRnm;
+    }
+
+    /**
+     * 部署略称を設定します。
+     * @param departmentRnm 部署略称
+     */
+    public void setDepartmentRnm(String departmentRnm) {
+        this.departmentRnm = departmentRnm;
     }
 
     /**
@@ -206,48 +226,48 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
     }
 
     /**
-     * 役割名１を取得します。
-     * @return 役割名１
+     * 役割名1を取得します。
+     * @return 役割名1
      */
     public String getRoleNm1() {
         return roleNm1;
     }
 
     /**
-     * 役割名１を設定します。
-     * @param roleNm1 役割名１
+     * 役割名1を設定します。
+     * @param roleNm1 役割名1
      */
     public void setRoleNm1(String roleNm1) {
         this.roleNm1 = roleNm1;
     }
 
     /**
-     * 役割名２を取得します。
-     * @return 役割名２
+     * 役割名2を取得します。
+     * @return 役割名2
      */
     public String getRoleNm2() {
         return roleNm2;
     }
 
     /**
-     * 役割名２を設定します。
-     * @param roleNm2 役割名２
+     * 役割名2を設定します。
+     * @param roleNm2 役割名2
      */
     public void setRoleNm2(String roleNm2) {
         this.roleNm2 = roleNm2;
     }
 
     /**
-     * 役割名３を取得します。
-     * @return 役割名３
+     * 役割名3を取得します。
+     * @return 役割名3
      */
     public String getRoleNm3() {
         return roleNm3;
     }
 
     /**
-     * 役割名３を設定します。
-     * @param roleNm3 役割名３
+     * 役割名3を設定します。
+     * @param roleNm3 役割名3
      */
     public void setRoleNm3(String roleNm3) {
         this.roleNm3 = roleNm3;

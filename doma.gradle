@@ -15,14 +15,14 @@ task domaGenByTable << {
     def genTableTypes                = 'TABLE'
     def genTemplatePrimaryDir        = 'generator/templates_doma'
     // entity
-    def entityPackageName        = 'rms.domain.com.entity'
+    def entityPackageName        = 'rms.common.model'
     def entityOverwrite          = true
     def entityOverwriteListener  = true
     def entityUseAccessor        = true
     def entityUseListener        = true
 //    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
     // dao
-    def daoPackageName           = 'rms.domain.com.dao'
+    def daoPackageName           = 'rms.common.dao'
     def daoOverwrite             = true
     // sql
     def SqlOverwrite             = true
@@ -53,13 +53,13 @@ task domaGenByView << {
     def genTableTypes                = 'VIEW'
     def genTemplatePrimaryDir        = 'generator/templates_doma/view'
     // entity
-    def entityPackageName        = 'rms.domain.com.entity'
+    def entityPackageName        = 'rms.common.model'
     def entityOverwrite          = true
     def entityUseAccessor        = true
     def entityUseListener        = false
 //    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
     // dao
-    def daoPackageName           = 'rms.domain.com.repository'
+    def daoPackageName           = 'rms.common.dao'
     def daoOverwrite             = false
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)

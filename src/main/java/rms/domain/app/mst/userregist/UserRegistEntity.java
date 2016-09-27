@@ -19,6 +19,8 @@ public class UserRegistEntity extends rms.common.abstracts.AbstractEntity {
     private String userNm;
     /** メールアドレス */
     private String email;
+    /** 部署ID */
+    private String departmentId;
 
     /** 承認者ID1 */
     private String approveUserId1;
@@ -114,6 +116,22 @@ public class UserRegistEntity extends rms.common.abstracts.AbstractEntity {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * 部署IDを取得します。
+     * @return 部署ID
+     */
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    /**
+     * 部署IDを設定します。
+     * @param departmentId 部署ID
+     */
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     /**

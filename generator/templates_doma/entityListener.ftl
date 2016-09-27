@@ -10,8 +10,8 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
-import rms.web.base.UserInfo;
-import rms.web.com.utils.AuthenticationUtils;
+import rms.common.auth.UserInfo;
+import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**

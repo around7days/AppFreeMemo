@@ -27,6 +27,7 @@ public class ControllerInterceptor {
     @Around("within(rms..*Controller*  && !rms.web.base..*))")
     public Object invokeControllerAround(ProceedingJoinPoint joinPoint) throws Throwable {
 
+        // クラス名・メソッド名の取得
         String classNm = joinPoint.getTarget().getClass().getName();
         String methodNm = joinPoint.getSignature().getName();
 

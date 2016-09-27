@@ -5,8 +5,6 @@ select
   , A.apply_date
   , A.publish_flg
   , A.publish_flg_nm
-  , A.status
-  , A.status_nm
   , A.approve_user_id1
   , A.approve_user_nm1
   , A.approve_user_id2
@@ -14,6 +12,8 @@ select
   , A.approve_user_id3
   , A.approve_user_nm3
   , A.file_path
+  , A.status
+  , A.status_nm
 from
   v_t_report A
 where

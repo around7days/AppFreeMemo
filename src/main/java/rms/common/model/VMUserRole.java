@@ -10,7 +10,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * VMUserRoleクラス
- * 
  */
 @Entity
 @Table(name = "v_m_user_role")

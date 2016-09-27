@@ -357,11 +357,11 @@ Field="ユーザID","user_id","varchar(20)","NOT NULL",0,"","",$FFFFFFFF,""
 Field="ユーザ名","user_nm","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="パスワード","password","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="メールアドレス","email","varchar(255)",,,"","",$FFFFFFFF,""
-Field="部署ID","departmen_id","varchar(20)",,,"","コードマスタ：D001",$FFFFFFFF,""
+Field="部署ID","department_id","varchar(20)",,,"","コードマスタ：D001",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20160921133842
+ModifiedDateTime=20160927140648
 Position="TABLE",900,300
 
 [Entity]
