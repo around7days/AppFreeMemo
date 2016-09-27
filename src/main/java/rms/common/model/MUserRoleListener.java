@@ -7,10 +7,8 @@ import org.seasar.doma.jdbc.entity.PostUpdateContext;
 import org.seasar.doma.jdbc.entity.PreDeleteContext;
 import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
-
 import rms.common.auth.UserInfo;
 import rms.common.utils.AuthenticationUtils;
-
 import java.time.LocalDateTime;
 
 /**

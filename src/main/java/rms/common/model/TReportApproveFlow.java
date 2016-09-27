@@ -10,11 +10,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * TReportHisクラス
+ * TReportApproveFlowクラス
  */
-@Entity(listener = TReportHisListener.class)
-@Table(name = "t_report_his")
-public class TReportHis {
+@Entity(listener = TReportApproveFlowListener.class)
+@Table(name = "t_report_approve_flow")
+public class TReportApproveFlow {
 
     /** 申請者ID */
     @Id
@@ -26,38 +26,22 @@ public class TReportHis {
     @Column(name = "target_ym")
     private Integer targetYm;
 
-    /** 連番 */
+    /** 承認SEQ */
     @Id
-    @Column(name = "seq")
-    private Integer seq;
+    @Column(name = "approve_seq")
+    private Integer approveSeq;
 
-    /** 申請日 */
-    @Column(name = "apply_date")
-    private LocalDateTime applyDate;
+    /** 承認者ID */
+    @Column(name = "approve_user_id")
+    private String approveUserId;
 
-    /** 公開有無 */
-    @Column(name = "publish_flg")
-    private String publishFlg;
+    /** 承認日 */
+    @Column(name = "approve_date")
+    private LocalDateTime approveDate;
 
-    /** 承認状況 */
-    @Column(name = "status")
-    private String status;
-
-    /** 承認者ID1 */
-    @Column(name = "approve_user_id1")
-    private String approveUserId1;
-
-    /** 承認者ID2 */
-    @Column(name = "approve_user_id2")
-    private String approveUserId2;
-
-    /** 承認者ID3 */
-    @Column(name = "approve_user_id3")
-    private String approveUserId3;
-
-    /** 月報ファイルパス */
-    @Column(name = "file_path")
-    private String filePath;
+    /** コメント */
+    @Column(name = "comment")
+    private String comment;
 
     /** バージョン */
     @Version
@@ -117,131 +101,67 @@ public class TReportHis {
     }
 
     /**
-     * 連番を取得します.
-     * @return 連番
+     * 承認SEQを取得します.
+     * @return 承認SEQ
      */
-    public Integer getSeq() {
-        return seq;
+    public Integer getApproveSeq() {
+        return approveSeq;
     }
 
     /**
-     * 連番を設定します.
-     * @param seq 連番
+     * 承認SEQを設定します.
+     * @param approveSeq 承認SEQ
      */
-    public void setSeq(Integer seq) {
-        this.seq = seq;
+    public void setApproveSeq(Integer approveSeq) {
+        this.approveSeq = approveSeq;
     }
 
     /**
-     * 申請日を取得します.
-     * @return 申請日
+     * 承認者IDを取得します.
+     * @return 承認者ID
      */
-    public LocalDateTime getApplyDate() {
-        return applyDate;
+    public String getApproveUserId() {
+        return approveUserId;
     }
 
     /**
-     * 申請日を設定します.
-     * @param applyDate 申請日
+     * 承認者IDを設定します.
+     * @param approveUserId 承認者ID
      */
-    public void setApplyDate(LocalDateTime applyDate) {
-        this.applyDate = applyDate;
+    public void setApproveUserId(String approveUserId) {
+        this.approveUserId = approveUserId;
     }
 
     /**
-     * 公開有無を取得します.
-     * @return 公開有無
+     * 承認日を取得します.
+     * @return 承認日
      */
-    public String getPublishFlg() {
-        return publishFlg;
+    public LocalDateTime getApproveDate() {
+        return approveDate;
     }
 
     /**
-     * 公開有無を設定します.
-     * @param publishFlg 公開有無
+     * 承認日を設定します.
+     * @param approveDate 承認日
      */
-    public void setPublishFlg(String publishFlg) {
-        this.publishFlg = publishFlg;
+    public void setApproveDate(LocalDateTime approveDate) {
+        this.approveDate = approveDate;
     }
 
     /**
-     * 承認状況を取得します.
-     * @return 承認状況
+     * コメントを取得します.
+     * @return コメント
      */
-    public String getStatus() {
-        return status;
+    public String getComment() {
+        return comment;
     }
 
     /**
-     * 承認状況を設定します.
-     * @param status 承認状況
+     * コメントを設定します.
+     * @param comment コメント
      */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
-     * 承認者ID1を取得します.
-     * @return 承認者ID1
-     */
-    public String getApproveUserId1() {
-        return approveUserId1;
-    }
-
-    /**
-     * 承認者ID1を設定します.
-     * @param approveUserId1 承認者ID1
-     */
-    public void setApproveUserId1(String approveUserId1) {
-        this.approveUserId1 = approveUserId1;
-    }
-
-    /**
-     * 承認者ID2を取得します.
-     * @return 承認者ID2
-     */
-    public String getApproveUserId2() {
-        return approveUserId2;
-    }
-
-    /**
-     * 承認者ID2を設定します.
-     * @param approveUserId2 承認者ID2
-     */
-    public void setApproveUserId2(String approveUserId2) {
-        this.approveUserId2 = approveUserId2;
-    }
-
-    /**
-     * 承認者ID3を取得します.
-     * @return 承認者ID3
-     */
-    public String getApproveUserId3() {
-        return approveUserId3;
-    }
-
-    /**
-     * 承認者ID3を設定します.
-     * @param approveUserId3 承認者ID3
-     */
-    public void setApproveUserId3(String approveUserId3) {
-        this.approveUserId3 = approveUserId3;
-    }
-
-    /**
-     * 月報ファイルパスを取得します.
-     * @return 月報ファイルパス
-     */
-    public String getFilePath() {
-        return filePath;
-    }
-
-    /**
-     * 月報ファイルパスを設定します.
-     * @param filePath 月報ファイルパス
-     */
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     /**

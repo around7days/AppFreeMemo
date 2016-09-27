@@ -1,64 +1,63 @@
 package rms.common.dao;
 
-import rms.common.model.TReportHis;
-
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import rms.common.model.TReportApproveFlow;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
- * TReportHisDaoクラス
+ * TReportApproveFlowDaoクラス
  */
 @Dao
 @ConfigAutowireable
-public interface TReportHisDao {
+public interface TReportApproveFlowDao {
 
     /**
      * 1件取得
      * @param applyUserId
      * @param targetYm
-     * @param seq
-     * @return the TReportHis entity
+     * @param approveSeq
+     * @return the TReportApproveFlow entity
      */
     @Select
-    TReportHis selectById(String applyUserId,
-                          Integer targetYm,
-                          Integer seq);
+    TReportApproveFlow selectById(String applyUserId,
+                                  Integer targetYm,
+                                  Integer approveSeq);
 
     /**
      * 1件取得
      * @param applyUserId
      * @param targetYm
-     * @param seq
+     * @param approveSeq
      * @param options
-     * @return the TReportHis entity
+     * @return the TReportApproveFlow entity
      */
     @Select
-    TReportHis selectById(String applyUserId,
-                          Integer targetYm,
-                          Integer seq,
-                          SelectOptions options);
+    TReportApproveFlow selectById(String applyUserId,
+                                  Integer targetYm,
+                                  Integer approveSeq,
+                                  SelectOptions options);
 
     /**
      * 1件取得
      * @param applyUserId
      * @param targetYm
-     * @param seq
+     * @param approveSeq
      * @param version
      * @throws NoResultException
-     * @return the TReportHis entity
+     * @return the TReportApproveFlow entity
      */
     @Select(ensureResult = true)
-    TReportHis selectByIdAndVersion(String applyUserId,
-                                    Integer targetYm,
-                                    Integer seq,
-                                    Integer version) throws NoResultException;
+    TReportApproveFlow selectByIdAndVersion(String applyUserId,
+                                            Integer targetYm,
+                                            Integer approveSeq,
+                                            Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -66,7 +65,7 @@ public interface TReportHisDao {
      * @return affected rows
      */
     @Insert(excludeNull = true)
-    int insert(TReportHis entity);
+    int insert(TReportApproveFlow entity);
 
     /**
      * 更新（楽観的排他制御）
@@ -75,7 +74,7 @@ public interface TReportHisDao {
      * @throws OptimisticLockException
      */
     @Update(excludeNull = true)
-    int update(TReportHis entity) throws OptimisticLockException;
+    int update(TReportApproveFlow entity) throws OptimisticLockException;
 
     /**
      * 更新
@@ -83,7 +82,7 @@ public interface TReportHisDao {
      * @return affected rows
      */
     @Update(excludeNull = true, ignoreVersion = true)
-    int updateNoOptimisticLockException(TReportHis entity);
+    int updateNoOptimisticLockException(TReportApproveFlow entity);
 
     /**
      * 削除
@@ -91,5 +90,5 @@ public interface TReportHisDao {
      * @return affected rows
      */
     @Delete
-    int delete(TReportHis entity);
+    int delete(TReportApproveFlow entity);
 }

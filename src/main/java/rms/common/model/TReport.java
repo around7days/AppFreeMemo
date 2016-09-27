@@ -30,29 +30,21 @@ public class TReport {
     @Column(name = "apply_date")
     private LocalDateTime applyDate;
 
-    /** 公開有無 */
+    /** 公開有無 コードマスタ：B001 */
     @Column(name = "publish_flg")
     private String publishFlg;
-
-    /** 承認状況 */
-    @Column(name = "status")
-    private String status;
-
-    /** 承認者ID1 */
-    @Column(name = "approve_user_id1")
-    private String approveUserId1;
-
-    /** 承認者ID2 */
-    @Column(name = "approve_user_id2")
-    private String approveUserId2;
-
-    /** 承認者ID3 */
-    @Column(name = "approve_user_id3")
-    private String approveUserId3;
 
     /** 月報ファイルパス */
     @Column(name = "file_path")
     private String filePath;
+
+    /** コメント */
+    @Column(name = "comment")
+    private String comment;
+
+    /** 承認状況 コードマスタ：A001 */
+    @Column(name = "status")
+    private String status;
 
     /** バージョン */
     @Version
@@ -128,83 +120,19 @@ public class TReport {
     }
 
     /**
-     * 公開有無を取得します.
-     * @return 公開有無
+     * 公開有無 コードマスタ：B001を取得します.
+     * @return 公開有無 コードマスタ：B001
      */
     public String getPublishFlg() {
         return publishFlg;
     }
 
     /**
-     * 公開有無を設定します.
-     * @param publishFlg 公開有無
+     * 公開有無 コードマスタ：B001を設定します.
+     * @param publishFlg 公開有無 コードマスタ：B001
      */
     public void setPublishFlg(String publishFlg) {
         this.publishFlg = publishFlg;
-    }
-
-    /**
-     * 承認状況を取得します.
-     * @return 承認状況
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * 承認状況を設定します.
-     * @param status 承認状況
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
-     * 承認者ID1を取得します.
-     * @return 承認者ID1
-     */
-    public String getApproveUserId1() {
-        return approveUserId1;
-    }
-
-    /**
-     * 承認者ID1を設定します.
-     * @param approveUserId1 承認者ID1
-     */
-    public void setApproveUserId1(String approveUserId1) {
-        this.approveUserId1 = approveUserId1;
-    }
-
-    /**
-     * 承認者ID2を取得します.
-     * @return 承認者ID2
-     */
-    public String getApproveUserId2() {
-        return approveUserId2;
-    }
-
-    /**
-     * 承認者ID2を設定します.
-     * @param approveUserId2 承認者ID2
-     */
-    public void setApproveUserId2(String approveUserId2) {
-        this.approveUserId2 = approveUserId2;
-    }
-
-    /**
-     * 承認者ID3を取得します.
-     * @return 承認者ID3
-     */
-    public String getApproveUserId3() {
-        return approveUserId3;
-    }
-
-    /**
-     * 承認者ID3を設定します.
-     * @param approveUserId3 承認者ID3
-     */
-    public void setApproveUserId3(String approveUserId3) {
-        this.approveUserId3 = approveUserId3;
     }
 
     /**
@@ -221,6 +149,38 @@ public class TReport {
      */
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    /**
+     * コメントを取得します.
+     * @return コメント
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * コメントを設定します.
+     * @param comment コメント
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    /**
+     * 承認状況 コードマスタ：A001を取得します.
+     * @return 承認状況 コードマスタ：A001
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * 承認状況 コードマスタ：A001を設定します.
+     * @param status 承認状況 コードマスタ：A001
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     /**

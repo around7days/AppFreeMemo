@@ -7,20 +7,18 @@ import org.seasar.doma.jdbc.entity.PostUpdateContext;
 import org.seasar.doma.jdbc.entity.PreDeleteContext;
 import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
-
 import rms.common.auth.UserInfo;
 import rms.common.utils.AuthenticationUtils;
-
 import java.time.LocalDateTime;
 
 /**
- * TReportHisListenerクラス
+ * MUserApproveFlowListenerクラス
  */
-public class TReportHisListener implements EntityListener<TReportHis> {
+public class MUserApproveFlowListener implements EntityListener<MUserApproveFlow> {
 
     @Override
-    public void preInsert(TReportHis entity,
-                          PreInsertContext<TReportHis> context) {
+    public void preInsert(MUserApproveFlow entity,
+                          PreInsertContext<MUserApproveFlow> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -34,8 +32,8 @@ public class TReportHisListener implements EntityListener<TReportHis> {
     }
 
     @Override
-    public void preUpdate(TReportHis entity,
-                          PreUpdateContext<TReportHis> context) {
+    public void preUpdate(MUserApproveFlow entity,
+                          PreUpdateContext<MUserApproveFlow> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -45,22 +43,22 @@ public class TReportHisListener implements EntityListener<TReportHis> {
     }
 
     @Override
-    public void preDelete(TReportHis entity,
-                          PreDeleteContext<TReportHis> context) {
+    public void preDelete(MUserApproveFlow entity,
+                          PreDeleteContext<MUserApproveFlow> context) {
     }
 
     @Override
-    public void postInsert(TReportHis entity,
-                           PostInsertContext<TReportHis> context) {
+    public void postInsert(MUserApproveFlow entity,
+                           PostInsertContext<MUserApproveFlow> context) {
     }
 
     @Override
-    public void postUpdate(TReportHis entity,
-                           PostUpdateContext<TReportHis> context) {
+    public void postUpdate(MUserApproveFlow entity,
+                           PostUpdateContext<MUserApproveFlow> context) {
     }
 
     @Override
-    public void postDelete(TReportHis entity,
-                           PostDeleteContext<TReportHis> context) {
+    public void postDelete(MUserApproveFlow entity,
+                           PostDeleteContext<MUserApproveFlow> context) {
     }
 }

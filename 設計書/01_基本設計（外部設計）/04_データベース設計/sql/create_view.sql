@@ -7,9 +7,9 @@ select
   , U.user_nm                                     -- ユーザ名
   , U.password                                    -- パスワード
   , U.email                                       -- メールアドレス
-  , U.departmen_id                                -- 部署ID
-  , D001.code_nm as departmen_nm                  -- 部署名
-  , D001.attr1  as departmen_rnm                  -- 部署略称
+  , U.department_id                                -- 部署ID
+  , D001.code_nm as department_nm                  -- 部署名
+  , D001.attr1  as department_rnm                  -- 部署略称
   , F1.approve_user_id as approve_user_id1        -- 承認者ID1
   , (select X.user_nm from m_user X where X.user_id = F1.approve_user_id) as approve_user_nm1 -- 承認者名1
   , F2.approve_user_id as approve_user_id2        -- 承認者ID2
@@ -35,7 +35,7 @@ from
     and F3.approve_seq = 3
   left join m_code D001
     on D001.code_kbn = 'D001'
-    and U.departmen_id = D001.code
+    and U.department_id = D001.code
 ;
 
 

@@ -5,53 +5,53 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
-import rms.common.model.MUserRole;
+import rms.common.model.MUserApproveFlow;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
- * MUserRoleDaoクラス
+ * MUserApproveFlowDaoクラス
  */
 @Dao
 @ConfigAutowireable
-public interface MUserRoleDao {
+public interface MUserApproveFlowDao {
 
     /**
      * 1件取得
      * @param userId
-     * @param role
-     * @return the MUserRole entity
+     * @param approveSeq
+     * @return the MUserApproveFlow entity
      */
     @Select
-    MUserRole selectById(String userId,
-                         String role);
+    MUserApproveFlow selectById(String userId,
+                                Integer approveSeq);
 
     /**
      * 1件取得
      * @param userId
-     * @param role
+     * @param approveSeq
      * @param options
-     * @return the MUserRole entity
+     * @return the MUserApproveFlow entity
      */
     @Select
-    MUserRole selectById(String userId,
-                         String role,
-                         SelectOptions options);
+    MUserApproveFlow selectById(String userId,
+                                Integer approveSeq,
+                                SelectOptions options);
 
     /**
      * 1件取得
      * @param userId
-     * @param role
+     * @param approveSeq
      * @param version
      * @throws NoResultException
-     * @return the MUserRole entity
+     * @return the MUserApproveFlow entity
      */
     @Select(ensureResult = true)
-    MUserRole selectByIdAndVersion(String userId,
-                                   String role,
-                                   Integer version) throws NoResultException;
+    MUserApproveFlow selectByIdAndVersion(String userId,
+                                          Integer approveSeq,
+                                          Integer version) throws NoResultException;
 
     /**
      * 挿入
@@ -59,7 +59,7 @@ public interface MUserRoleDao {
      * @return affected rows
      */
     @Insert(excludeNull = true)
-    int insert(MUserRole entity);
+    int insert(MUserApproveFlow entity);
 
     /**
      * 更新（楽観的排他制御）
@@ -68,7 +68,7 @@ public interface MUserRoleDao {
      * @throws OptimisticLockException
      */
     @Update(excludeNull = true)
-    int update(MUserRole entity) throws OptimisticLockException;
+    int update(MUserApproveFlow entity) throws OptimisticLockException;
 
     /**
      * 更新
@@ -76,7 +76,7 @@ public interface MUserRoleDao {
      * @return affected rows
      */
     @Update(excludeNull = true, ignoreVersion = true)
-    int updateNoOptimisticLockException(MUserRole entity);
+    int updateNoOptimisticLockException(MUserApproveFlow entity);
 
     /**
      * 削除
@@ -84,5 +84,5 @@ public interface MUserRoleDao {
      * @return affected rows
      */
     @Delete
-    int delete(MUserRole entity);
+    int delete(MUserApproveFlow entity);
 }

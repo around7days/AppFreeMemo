@@ -33,17 +33,9 @@ public class MUser {
     @Column(name = "email")
     private String email;
 
-    /** 承認者ID1 */
-    @Column(name = "approve_user_id1")
-    private String approveUserId1;
-
-    /** 承認者ID2 */
-    @Column(name = "approve_user_id2")
-    private String approveUserId2;
-
-    /** 承認者ID3 */
-    @Column(name = "approve_user_id3")
-    private String approveUserId3;
+    /** 部署ID コードマスタ：D001 */
+    @Column(name = "department_id")
+    private String departmentId;
 
     /** バージョン */
     @Version
@@ -135,51 +127,19 @@ public class MUser {
     }
 
     /**
-     * 承認者ID1を取得します.
-     * @return 承認者ID1
+     * 部署ID コードマスタ：D001を取得します.
+     * @return 部署ID コードマスタ：D001
      */
-    public String getApproveUserId1() {
-        return approveUserId1;
+    public String getDepartmentId() {
+        return departmentId;
     }
 
     /**
-     * 承認者ID1を設定します.
-     * @param approveUserId1 承認者ID1
+     * 部署ID コードマスタ：D001を設定します.
+     * @param departmentId 部署ID コードマスタ：D001
      */
-    public void setApproveUserId1(String approveUserId1) {
-        this.approveUserId1 = approveUserId1;
-    }
-
-    /**
-     * 承認者ID2を取得します.
-     * @return 承認者ID2
-     */
-    public String getApproveUserId2() {
-        return approveUserId2;
-    }
-
-    /**
-     * 承認者ID2を設定します.
-     * @param approveUserId2 承認者ID2
-     */
-    public void setApproveUserId2(String approveUserId2) {
-        this.approveUserId2 = approveUserId2;
-    }
-
-    /**
-     * 承認者ID3を取得します.
-     * @return 承認者ID3
-     */
-    public String getApproveUserId3() {
-        return approveUserId3;
-    }
-
-    /**
-     * 承認者ID3を設定します.
-     * @param approveUserId3 承認者ID3
-     */
-    public void setApproveUserId3(String approveUserId3) {
-        this.approveUserId3 = approveUserId3;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     /**

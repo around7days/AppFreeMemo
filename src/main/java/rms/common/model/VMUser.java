@@ -1,12 +1,13 @@
 package rms.common.model;
 
 import java.time.LocalDateTime;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * VMUserクラス
@@ -31,27 +32,39 @@ public class VMUser {
     @Column(name = "email")
     private String email;
 
-    /** 承認者ID1 */
+    /** 部署ID コードマスタ：D001 */
+    @Column(name = "department_id")
+    private String departmentId;
+
+    /** 部署名称 */
+    @Column(name = "department_nm")
+    private String departmentNm;
+
+    /** 属性１ */
+    @Column(name = "department_rnm")
+    private String departmentRnm;
+
+    /** 承認者ID１ */
     @Column(name = "approve_user_id1")
     private String approveUserId1;
 
-    /** ユーザ名 */
+    /** 承認者名１ */
     @Column(name = "approve_user_nm1")
     private String approveUserNm1;
 
-    /** 承認者ID2 */
+    /** 承認者ID２ */
     @Column(name = "approve_user_id2")
     private String approveUserId2;
 
-    /** ユーザ名 */
+    /** 承認者名２ */
     @Column(name = "approve_user_nm2")
     private String approveUserNm2;
 
-    /** 承認者ID3 */
+    /** 承認者ID３ */
     @Column(name = "approve_user_id3")
     private String approveUserId3;
 
-    /** ユーザ名 */
+    /** 承認者名３ */
     @Column(name = "approve_user_nm3")
     private String approveUserNm3;
 
@@ -81,7 +94,7 @@ public class VMUser {
     private String updId;
 
     /**
-     * ユーザIDを取得します.
+     * ユーザIDを取得します。
      * @return ユーザID
      */
     public String getUserId() {
@@ -89,7 +102,7 @@ public class VMUser {
     }
 
     /**
-     * ユーザIDを設定します.
+     * ユーザIDを設定します。
      * @param userId ユーザID
      */
     public void setUserId(String userId) {
@@ -97,7 +110,7 @@ public class VMUser {
     }
 
     /**
-     * ユーザ名を取得します.
+     * ユーザ名を取得します。
      * @return ユーザ名
      */
     public String getUserNm() {
@@ -105,7 +118,7 @@ public class VMUser {
     }
 
     /**
-     * ユーザ名を設定します.
+     * ユーザ名を設定します。
      * @param userNm ユーザ名
      */
     public void setUserNm(String userNm) {
@@ -113,7 +126,7 @@ public class VMUser {
     }
 
     /**
-     * パスワードを取得します.
+     * パスワードを取得します。
      * @return パスワード
      */
     public String getPassword() {
@@ -121,7 +134,7 @@ public class VMUser {
     }
 
     /**
-     * パスワードを設定します.
+     * パスワードを設定します。
      * @param password パスワード
      */
     public void setPassword(String password) {
@@ -129,7 +142,7 @@ public class VMUser {
     }
 
     /**
-     * メールアドレスを取得します.
+     * メールアドレスを取得します。
      * @return メールアドレス
      */
     public String getEmail() {
@@ -137,7 +150,7 @@ public class VMUser {
     }
 
     /**
-     * メールアドレスを設定します.
+     * メールアドレスを設定します。
      * @param email メールアドレス
      */
     public void setEmail(String email) {
@@ -145,103 +158,151 @@ public class VMUser {
     }
 
     /**
-     * 承認者ID1を取得します.
-     * @return 承認者ID1
+     * 部署ID コードマスタ：D001を取得します。
+     * @return 部署ID コードマスタ：D001
+     */
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    /**
+     * 部署ID コードマスタ：D001を設定します。
+     * @param departmentId 部署ID コードマスタ：D001
+     */
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    /**
+     * 部署名称を取得します。
+     * @return 部署名称
+     */
+    public String getDepartmentNm() {
+        return departmentNm;
+    }
+
+    /**
+     * 部署名称を設定します。
+     * @param departmentNm 部署名称
+     */
+    public void setDepartmentNm(String departmentNm) {
+        this.departmentNm = departmentNm;
+    }
+
+    /**
+     * 属性１を取得します。
+     * @return 属性１
+     */
+    public String getDepartmentRnm() {
+        return departmentRnm;
+    }
+
+    /**
+     * 属性１を設定します。
+     * @param departmentRnm 属性１
+     */
+    public void setDepartmentRnm(String departmentRnm) {
+        this.departmentRnm = departmentRnm;
+    }
+
+    /**
+     * 承認者ID１を取得します。
+     * @return 承認者ID１
      */
     public String getApproveUserId1() {
         return approveUserId1;
     }
 
     /**
-     * 承認者ID1を設定します.
-     * @param approveUserId1 承認者ID1
+     * 承認者ID１を設定します。
+     * @param approveUserId1 承認者ID１
      */
     public void setApproveUserId1(String approveUserId1) {
         this.approveUserId1 = approveUserId1;
     }
 
     /**
-     * ユーザ名を取得します.
-     * @return ユーザ名
+     * 承認者名１を取得します。
+     * @return 承認者名１
      */
     public String getApproveUserNm1() {
         return approveUserNm1;
     }
 
     /**
-     * ユーザ名を設定します.
-     * @param approveUserNm1 ユーザ名
+     * 承認者名１を設定します。
+     * @param approveUserNm1 承認者名１
      */
     public void setApproveUserNm1(String approveUserNm1) {
         this.approveUserNm1 = approveUserNm1;
     }
 
     /**
-     * 承認者ID2を取得します.
-     * @return 承認者ID2
+     * 承認者ID２を取得します。
+     * @return 承認者ID２
      */
     public String getApproveUserId2() {
         return approveUserId2;
     }
 
     /**
-     * 承認者ID2を設定します.
-     * @param approveUserId2 承認者ID2
+     * 承認者ID２を設定します。
+     * @param approveUserId2 承認者ID２
      */
     public void setApproveUserId2(String approveUserId2) {
         this.approveUserId2 = approveUserId2;
     }
 
     /**
-     * ユーザ名を取得します.
-     * @return ユーザ名
+     * 承認者名２を取得します。
+     * @return 承認者名２
      */
     public String getApproveUserNm2() {
         return approveUserNm2;
     }
 
     /**
-     * ユーザ名を設定します.
-     * @param approveUserNm2 ユーザ名
+     * 承認者名２を設定します。
+     * @param approveUserNm2 承認者名２
      */
     public void setApproveUserNm2(String approveUserNm2) {
         this.approveUserNm2 = approveUserNm2;
     }
 
     /**
-     * 承認者ID3を取得します.
-     * @return 承認者ID3
+     * 承認者ID３を取得します。
+     * @return 承認者ID３
      */
     public String getApproveUserId3() {
         return approveUserId3;
     }
 
     /**
-     * 承認者ID3を設定します.
-     * @param approveUserId3 承認者ID3
+     * 承認者ID３を設定します。
+     * @param approveUserId3 承認者ID３
      */
     public void setApproveUserId3(String approveUserId3) {
         this.approveUserId3 = approveUserId3;
     }
 
     /**
-     * ユーザ名を取得します.
-     * @return ユーザ名
+     * 承認者名３を取得します。
+     * @return 承認者名３
      */
     public String getApproveUserNm3() {
         return approveUserNm3;
     }
 
     /**
-     * ユーザ名を設定します.
-     * @param approveUserNm3 ユーザ名
+     * 承認者名３を設定します。
+     * @param approveUserNm3 承認者名３
      */
     public void setApproveUserNm3(String approveUserNm3) {
         this.approveUserNm3 = approveUserNm3;
     }
 
     /**
-     * バージョンを取得します.
+     * バージョンを取得します。
      * @return バージョン
      */
     public Integer getVersion() {
@@ -249,7 +310,7 @@ public class VMUser {
     }
 
     /**
-     * バージョンを設定します.
+     * バージョンを設定します。
      * @param version バージョン
      */
     public void setVersion(Integer version) {
@@ -257,7 +318,7 @@ public class VMUser {
     }
 
     /**
-     * 削除フラグを取得します.
+     * 削除フラグを取得します。
      * @return 削除フラグ
      */
     public Integer getDelFlg() {
@@ -265,7 +326,7 @@ public class VMUser {
     }
 
     /**
-     * 削除フラグを設定します.
+     * 削除フラグを設定します。
      * @param delFlg 削除フラグ
      */
     public void setDelFlg(Integer delFlg) {
@@ -273,7 +334,7 @@ public class VMUser {
     }
 
     /**
-     * 登録日時を取得します.
+     * 登録日時を取得します。
      * @return 登録日時
      */
     public LocalDateTime getInsDate() {
@@ -281,7 +342,7 @@ public class VMUser {
     }
 
     /**
-     * 登録日時を設定します.
+     * 登録日時を設定します。
      * @param insDate 登録日時
      */
     public void setInsDate(LocalDateTime insDate) {
@@ -289,7 +350,7 @@ public class VMUser {
     }
 
     /**
-     * 登録IDを取得します.
+     * 登録IDを取得します。
      * @return 登録ID
      */
     public String getInsId() {
@@ -297,7 +358,7 @@ public class VMUser {
     }
 
     /**
-     * 登録IDを設定します.
+     * 登録IDを設定します。
      * @param insId 登録ID
      */
     public void setInsId(String insId) {
@@ -305,7 +366,7 @@ public class VMUser {
     }
 
     /**
-     * 更新日時を取得します.
+     * 更新日時を取得します。
      * @return 更新日時
      */
     public LocalDateTime getUpdDate() {
@@ -313,7 +374,7 @@ public class VMUser {
     }
 
     /**
-     * 更新日時を設定します.
+     * 更新日時を設定します。
      * @param updDate 更新日時
      */
     public void setUpdDate(LocalDateTime updDate) {
@@ -321,7 +382,7 @@ public class VMUser {
     }
 
     /**
-     * 更新IDを取得します.
+     * 更新IDを取得します。
      * @return 更新ID
      */
     public String getUpdId() {
@@ -329,7 +390,7 @@ public class VMUser {
     }
 
     /**
-     * 更新IDを設定します.
+     * 更新IDを設定します。
      * @param updId 更新ID
      */
     public void setUpdId(String updId) {

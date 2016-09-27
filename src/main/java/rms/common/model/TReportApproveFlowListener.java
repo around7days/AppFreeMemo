@@ -12,13 +12,13 @@ import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
- * MUserListenerクラス
+ * TReportApproveFlowListenerクラス
  */
-public class MUserListener implements EntityListener<MUser> {
+public class TReportApproveFlowListener implements EntityListener<TReportApproveFlow> {
 
     @Override
-    public void preInsert(MUser entity,
-                          PreInsertContext<MUser> context) {
+    public void preInsert(TReportApproveFlow entity,
+                          PreInsertContext<TReportApproveFlow> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -32,8 +32,8 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preUpdate(MUser entity,
-                          PreUpdateContext<MUser> context) {
+    public void preUpdate(TReportApproveFlow entity,
+                          PreUpdateContext<TReportApproveFlow> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -43,22 +43,22 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preDelete(MUser entity,
-                          PreDeleteContext<MUser> context) {
+    public void preDelete(TReportApproveFlow entity,
+                          PreDeleteContext<TReportApproveFlow> context) {
     }
 
     @Override
-    public void postInsert(MUser entity,
-                           PostInsertContext<MUser> context) {
+    public void postInsert(TReportApproveFlow entity,
+                           PostInsertContext<TReportApproveFlow> context) {
     }
 
     @Override
-    public void postUpdate(MUser entity,
-                           PostUpdateContext<MUser> context) {
+    public void postUpdate(TReportApproveFlow entity,
+                           PostUpdateContext<TReportApproveFlow> context) {
     }
 
     @Override
-    public void postDelete(MUser entity,
-                           PostDeleteContext<MUser> context) {
+    public void postDelete(TReportApproveFlow entity,
+                           PostDeleteContext<TReportApproveFlow> context) {
     }
 }

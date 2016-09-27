@@ -7,7 +7,7 @@ create table M_USER (
   , user_nm varchar(255) not null comment 'ユーザ名'
   , password varchar(255) not null comment 'パスワード'
   , email varchar(255) comment 'メールアドレス'
-  , departmen_id varchar(20) comment '部署ID   コードマスタ：D001'
+  , department_id varchar(20) comment '部署ID   コードマスタ：D001'
   , version int not null comment 'バージョン'
   , del_flg int not null comment '削除フラグ'
   , ins_date datetime not null comment '登録日時'

@@ -1,11 +1,11 @@
 package rms.common.dao;
 
-import rms.common.model.VTReport;
-
 import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.SelectOptions;
+
+import rms.common.model.VTReport;
 
 /**
  * VTReportDaoクラス
@@ -18,7 +18,7 @@ public interface VTReportDao {
      * 1件取得
      * @param applyUserId
      * @param targetYm
-     * @return the TReport entity
+     * @return the VTReport entity
      */
     @Select
     VTReport selectById(String applyUserId,
@@ -29,11 +29,11 @@ public interface VTReportDao {
      * @param applyUserId
      * @param targetYm
      * @param options
-     * @return the TReport entity
+     * @return the VTReport entity
      */
     @Select
     VTReport selectById(String applyUserId,
-                        Integer targetYm,
+                        String targetYm,
                         SelectOptions options);
 
 }
