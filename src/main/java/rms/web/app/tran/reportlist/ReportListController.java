@@ -25,6 +25,7 @@ import rms.domain.app.shared.entity.SearchResultDto;
 import rms.domain.app.tran.reportlist.ReportListDtoCondition;
 import rms.domain.app.tran.reportlist.ReportListEntityResult;
 import rms.domain.app.tran.reportlist.ReportListService;
+import rms.web.app.system.menu.MenuController;
 
 /**
  * 月報一覧画面コントローラー
@@ -41,7 +42,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
     private static final String PAGE_URL = "html/reportList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/list";
+    public static final String MAPPING_URL = "/tran/reportlist";
 
     /** 月報一覧画面サービス */
     @Autowired
@@ -197,4 +198,15 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
 
         return null;
     }
+
+    /**
+     * 戻る処理
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "back")
+    public String back() {
+        // メニュー画面に遷移
+        return redirect(MenuController.MAPPING_URL);
+    }
+
 }

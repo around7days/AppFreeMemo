@@ -38,7 +38,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
     private static final String PAGE_URL = "html/userList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/mst/user/list";
+    public static final String MAPPING_URL = "/mst/userlist";
 
     /** ユーザ情報取得サービス */
     @Autowired
@@ -164,13 +164,10 @@ public class UserListController extends rms.common.abstracts.AbstractController 
 
     /**
      * 戻る処理
-     * @param form
-     * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
-    public String back(UserListForm form,
-                       Model model) {
+    public String back() {
         // メニュー画面に遷移
         return redirect(MenuController.MAPPING_URL);
     }

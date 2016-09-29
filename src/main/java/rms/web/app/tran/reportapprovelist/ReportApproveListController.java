@@ -27,6 +27,7 @@ import rms.domain.app.shared.entity.SearchResultDto;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListDtoCondition;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListService;
+import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapproveregist.ReportApproveRegistController;
 
 /**
@@ -44,7 +45,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     private static final String PAGE_URL = "html/reportApproveList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/approve/list";
+    public static final String MAPPING_URL = "/tran/reportapprovelist";
 
     /** 月報情報取得サービス */
     @Autowired
@@ -227,6 +228,16 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         // 月報承認画面
         return redirect(ReportApproveRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
                         + entity.getTargetYm(), "init");
+    }
+
+    /**
+     * 戻る処理
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "back")
+    public String back() {
+        // メニュー画面に遷移
+        return redirect(MenuController.MAPPING_URL);
     }
 
 }

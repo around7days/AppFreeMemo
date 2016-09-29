@@ -47,7 +47,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     private static final String PAGE_URL = "html/reportApplyRegist";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/apply/regist";
+    public static final String MAPPING_URL = "/tran/reportapplyregist";
 
     /** 月報申請画面サービス */
     @Autowired

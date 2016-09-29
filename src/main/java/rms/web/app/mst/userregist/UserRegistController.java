@@ -45,7 +45,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
     private static final String PAGE_URL = "html/userRegist";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/mst/user/regist";
+    public static final String MAPPING_URL = "/mst/userregist";
 
     /** ユーザ登録画面サービス */
     @Autowired
@@ -190,13 +190,11 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
     /**
      * 戻る処理
-     * @param form
      * @param sessionStatus
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
-    public String back(UserRegistForm form,
-                       SessionStatus sessionStatus) {
+    public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
         return redirect(UserListController.MAPPING_URL, "reSearch");

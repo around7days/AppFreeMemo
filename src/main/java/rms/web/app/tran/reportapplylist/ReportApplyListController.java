@@ -23,6 +23,7 @@ import rms.domain.app.shared.entity.SearchResultDto;
 import rms.domain.app.tran.reportapplylist.ReportApplyListDtoCondition;
 import rms.domain.app.tran.reportapplylist.ReportApplyListEntityResult;
 import rms.domain.app.tran.reportapplylist.ReportApplyListService;
+import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapplyregist.ReportApplyRegistController;
 
 /**
@@ -40,7 +41,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
     private static final String PAGE_URL = "html/reportApplyList";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/apply/list";
+    public static final String MAPPING_URL = "/tran/reportapplylist";
 
     /** 月報申請状況一覧画面サービス */
     @Autowired
@@ -181,6 +182,16 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         // 月報申請画面
         return redirect(ReportApplyRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
                         + entity.getTargetYm(), "initUpdate");
+    }
+
+    /**
+     * 戻る処理
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "back")
+    public String back() {
+        // メニュー画面に遷移
+        return redirect(MenuController.MAPPING_URL);
     }
 
 }

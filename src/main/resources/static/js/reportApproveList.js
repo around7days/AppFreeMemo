@@ -7,7 +7,16 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/report/approve/list";
+	var defaultUrl = "/tran/reportapprovelist";
+
+	/**
+	 * 戻るボタン押下
+	 */
+	$("#back").on("click", function() {
+		var url = defaultUrl + "?back";
+		fmMain.attr("action", url);
+		return true;
+	});
 
 	/**
 	 * 検索ボタン押下

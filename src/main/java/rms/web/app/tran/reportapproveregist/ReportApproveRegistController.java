@@ -50,7 +50,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     private static final String PAGE_URL = "html/reportApproveRegist";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/tran/report/approve/regist";
+    public static final String MAPPING_URL = "/tran/reportapproveregist";
 
     /** 月報承認画面サービス */
     @Autowired
@@ -160,10 +160,13 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
 
     /**
      * 戻る処理
+     * @param sessionStatus
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
-    public String back() {
+    public String back(SessionStatus sessionStatus) {
+        // セッション破棄
+        sessionStatus.setComplete();
         return redirect(ReportApproveListController.MAPPING_URL, "search");
     }
 
