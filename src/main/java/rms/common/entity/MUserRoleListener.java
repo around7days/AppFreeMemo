@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
@@ -12,13 +12,13 @@ import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
- * MUserApproveFlowListenerクラス
+ * MUserRoleListenerクラス
  */
-public class MUserApproveFlowListener implements EntityListener<MUserApproveFlow> {
+public class MUserRoleListener implements EntityListener<MUserRole> {
 
     @Override
-    public void preInsert(MUserApproveFlow entity,
-                          PreInsertContext<MUserApproveFlow> context) {
+    public void preInsert(MUserRole entity,
+                          PreInsertContext<MUserRole> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -32,8 +32,8 @@ public class MUserApproveFlowListener implements EntityListener<MUserApproveFlow
     }
 
     @Override
-    public void preUpdate(MUserApproveFlow entity,
-                          PreUpdateContext<MUserApproveFlow> context) {
+    public void preUpdate(MUserRole entity,
+                          PreUpdateContext<MUserRole> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -43,22 +43,22 @@ public class MUserApproveFlowListener implements EntityListener<MUserApproveFlow
     }
 
     @Override
-    public void preDelete(MUserApproveFlow entity,
-                          PreDeleteContext<MUserApproveFlow> context) {
+    public void preDelete(MUserRole entity,
+                          PreDeleteContext<MUserRole> context) {
     }
 
     @Override
-    public void postInsert(MUserApproveFlow entity,
-                           PostInsertContext<MUserApproveFlow> context) {
+    public void postInsert(MUserRole entity,
+                           PostInsertContext<MUserRole> context) {
     }
 
     @Override
-    public void postUpdate(MUserApproveFlow entity,
-                           PostUpdateContext<MUserApproveFlow> context) {
+    public void postUpdate(MUserRole entity,
+                           PostUpdateContext<MUserRole> context) {
     }
 
     @Override
-    public void postDelete(MUserApproveFlow entity,
-                           PostDeleteContext<MUserApproveFlow> context) {
+    public void postDelete(MUserRole entity,
+                           PostDeleteContext<MUserRole> context) {
     }
 }

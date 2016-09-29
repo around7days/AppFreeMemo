@@ -3,8 +3,8 @@ package rms.domain.app.tran.reportapplyregist;
 import java.io.IOException;
 
 import rms.common.base.BusinessException;
-import rms.common.model.VMUser;
-import rms.common.model.VTReport;
+import rms.common.entity.VMUser;
+import rms.common.entity.VTReport;
 
 /**
  * 月報申請画面サービス

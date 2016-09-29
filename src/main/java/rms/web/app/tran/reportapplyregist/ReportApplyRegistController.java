@@ -25,7 +25,7 @@ import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.MCodeConst;
 import rms.common.consts.MessageConst;
-import rms.common.model.VMUser;
+import rms.common.entity.VMUser;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.SessionUtils;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistEntity;

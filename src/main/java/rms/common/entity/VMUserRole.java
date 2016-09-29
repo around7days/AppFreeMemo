@@ -1,47 +1,31 @@
-package rms.common.model;
+package rms.common.entity;
 
 import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
-import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * TReportApproveFlowクラス
+ * VMUserRoleクラス
  */
-@Entity(listener = TReportApproveFlowListener.class)
-@Table(name = "t_report_approve_flow")
-public class TReportApproveFlow {
+@Entity
+@Table(name = "v_m_user_role")
+public class VMUserRole {
 
-    /** 申請者ID */
-    @Id
-    @Column(name = "apply_user_id")
-    private String applyUserId;
+    /** ユーザID */
+    @Column(name = "user_id")
+    private String userId;
 
-    /** 対象年月 */
-    @Id
-    @Column(name = "target_ym")
-    private Integer targetYm;
+    /** 役割 */
+    @Column(name = "role")
+    private String role;
 
-    /** 承認SEQ */
-    @Id
-    @Column(name = "approve_seq")
-    private Integer approveSeq;
-
-    /** 承認者ID */
-    @Column(name = "approve_user_id")
-    private String approveUserId;
-
-    /** 承認日 */
-    @Column(name = "approve_date")
-    private LocalDateTime approveDate;
-
-    /** コメント */
-    @Column(name = "comment")
-    private String comment;
+    /** 役割名 */
+    @Column(name = "role_nm")
+    private String roleNm;
 
     /** バージョン */
     @Version
@@ -69,99 +53,51 @@ public class TReportApproveFlow {
     private String updId;
 
     /**
-     * 申請者IDを取得します.
-     * @return 申請者ID
+     * ユーザIDを取得します.
+     * @return ユーザID
      */
-    public String getApplyUserId() {
-        return applyUserId;
+    public String getUserId() {
+        return userId;
     }
 
     /**
-     * 申請者IDを設定します.
-     * @param applyUserId 申請者ID
+     * ユーザIDを設定します.
+     * @param userId ユーザID
      */
-    public void setApplyUserId(String applyUserId) {
-        this.applyUserId = applyUserId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**
-     * 対象年月を取得します.
-     * @return 対象年月
+     * 役割を取得します.
+     * @return 役割
      */
-    public Integer getTargetYm() {
-        return targetYm;
+    public String getRole() {
+        return role;
     }
 
     /**
-     * 対象年月を設定します.
-     * @param targetYm 対象年月
+     * 役割を設定します.
+     * @param role 役割
      */
-    public void setTargetYm(Integer targetYm) {
-        this.targetYm = targetYm;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**
-     * 承認SEQを取得します.
-     * @return 承認SEQ
+     * 役割名を取得します.
+     * @return 役割名
      */
-    public Integer getApproveSeq() {
-        return approveSeq;
+    public String getRoleNm() {
+        return roleNm;
     }
 
     /**
-     * 承認SEQを設定します.
-     * @param approveSeq 承認SEQ
+     * 役割名を設定します.
+     * @param roleNm 役割名
      */
-    public void setApproveSeq(Integer approveSeq) {
-        this.approveSeq = approveSeq;
-    }
-
-    /**
-     * 承認者IDを取得します.
-     * @return 承認者ID
-     */
-    public String getApproveUserId() {
-        return approveUserId;
-    }
-
-    /**
-     * 承認者IDを設定します.
-     * @param approveUserId 承認者ID
-     */
-    public void setApproveUserId(String approveUserId) {
-        this.approveUserId = approveUserId;
-    }
-
-    /**
-     * 承認日を取得します.
-     * @return 承認日
-     */
-    public LocalDateTime getApproveDate() {
-        return approveDate;
-    }
-
-    /**
-     * 承認日を設定します.
-     * @param approveDate 承認日
-     */
-    public void setApproveDate(LocalDateTime approveDate) {
-        this.approveDate = approveDate;
-    }
-
-    /**
-     * コメントを取得します.
-     * @return コメント
-     */
-    public String getComment() {
-        return comment;
-    }
-
-    /**
-     * コメントを設定します.
-     * @param comment コメント
-     */
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setRoleNm(String roleNm) {
+        this.roleNm = roleNm;
     }
 
     /**

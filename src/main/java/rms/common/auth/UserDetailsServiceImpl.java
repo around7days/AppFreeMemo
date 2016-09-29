@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.dao.MUserDao;
-import rms.common.model.MUser;
-import rms.common.model.MUserRole;
+import rms.common.entity.MUser;
+import rms.common.entity.MUserRole;
 
 /**
  * 独自認証処理

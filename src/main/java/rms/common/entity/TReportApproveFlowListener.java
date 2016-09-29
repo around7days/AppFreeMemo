@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
@@ -12,13 +12,13 @@ import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
- * MCodeListenerクラス
+ * TReportApproveFlowListenerクラス
  */
-public class MCodeListener implements EntityListener<MCode> {
+public class TReportApproveFlowListener implements EntityListener<TReportApproveFlow> {
 
     @Override
-    public void preInsert(MCode entity,
-                          PreInsertContext<MCode> context) {
+    public void preInsert(TReportApproveFlow entity,
+                          PreInsertContext<TReportApproveFlow> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -32,8 +32,8 @@ public class MCodeListener implements EntityListener<MCode> {
     }
 
     @Override
-    public void preUpdate(MCode entity,
-                          PreUpdateContext<MCode> context) {
+    public void preUpdate(TReportApproveFlow entity,
+                          PreUpdateContext<TReportApproveFlow> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -43,22 +43,22 @@ public class MCodeListener implements EntityListener<MCode> {
     }
 
     @Override
-    public void preDelete(MCode entity,
-                          PreDeleteContext<MCode> context) {
+    public void preDelete(TReportApproveFlow entity,
+                          PreDeleteContext<TReportApproveFlow> context) {
     }
 
     @Override
-    public void postInsert(MCode entity,
-                           PostInsertContext<MCode> context) {
+    public void postInsert(TReportApproveFlow entity,
+                           PostInsertContext<TReportApproveFlow> context) {
     }
 
     @Override
-    public void postUpdate(MCode entity,
-                           PostUpdateContext<MCode> context) {
+    public void postUpdate(TReportApproveFlow entity,
+                           PostUpdateContext<TReportApproveFlow> context) {
     }
 
     @Override
-    public void postDelete(MCode entity,
-                           PostDeleteContext<MCode> context) {
+    public void postDelete(TReportApproveFlow entity,
+                           PostDeleteContext<TReportApproveFlow> context) {
     }
 }

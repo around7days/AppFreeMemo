@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import rms.common.consts.MRoleConst;
-import rms.common.model.MUser;
+import rms.common.entity.MUser;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

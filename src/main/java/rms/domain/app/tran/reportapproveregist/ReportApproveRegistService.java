@@ -3,7 +3,7 @@ package rms.domain.app.tran.reportapproveregist;
 import java.io.IOException;
 
 import rms.common.base.BusinessException;
-import rms.common.model.VTReport;
+import rms.common.entity.VTReport;
 
 /**
  * 月報承認画面サービス

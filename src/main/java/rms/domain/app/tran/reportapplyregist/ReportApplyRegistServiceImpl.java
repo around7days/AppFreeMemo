@@ -20,10 +20,10 @@ import rms.common.dao.TReportApproveFlowDao;
 import rms.common.dao.TReportDao;
 import rms.common.dao.VMUserDao;
 import rms.common.dao.VTReportDao;
-import rms.common.model.TReport;
-import rms.common.model.TReportApproveFlow;
-import rms.common.model.VMUser;
-import rms.common.model.VTReport;
+import rms.common.entity.TReport;
+import rms.common.entity.TReportApproveFlow;
+import rms.common.entity.VMUser;
+import rms.common.entity.VTReport;
 import rms.common.utils.FileUtils;
 import rms.common.utils.StringUtils;
 

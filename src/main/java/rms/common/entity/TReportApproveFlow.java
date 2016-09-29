@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import java.time.LocalDateTime;
 import org.seasar.doma.Column;
@@ -10,16 +10,21 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * MUserApproveFlowクラス
+ * TReportApproveFlowクラス
  */
-@Entity(listener = MUserApproveFlowListener.class)
-@Table(name = "m_user_approve_flow")
-public class MUserApproveFlow {
+@Entity(listener = TReportApproveFlowListener.class)
+@Table(name = "t_report_approve_flow")
+public class TReportApproveFlow {
 
-    /** ユーザID */
+    /** 申請者ID */
     @Id
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "apply_user_id")
+    private String applyUserId;
+
+    /** 対象年月 */
+    @Id
+    @Column(name = "target_ym")
+    private Integer targetYm;
 
     /** 承認SEQ */
     @Id
@@ -29,6 +34,14 @@ public class MUserApproveFlow {
     /** 承認者ID */
     @Column(name = "approve_user_id")
     private String approveUserId;
+
+    /** 承認日 */
+    @Column(name = "approve_date")
+    private LocalDateTime approveDate;
+
+    /** コメント */
+    @Column(name = "comment")
+    private String comment;
 
     /** バージョン */
     @Version
@@ -56,19 +69,35 @@ public class MUserApproveFlow {
     private String updId;
 
     /**
-     * ユーザIDを取得します.
-     * @return ユーザID
+     * 申請者IDを取得します.
+     * @return 申請者ID
      */
-    public String getUserId() {
-        return userId;
+    public String getApplyUserId() {
+        return applyUserId;
     }
 
     /**
-     * ユーザIDを設定します.
-     * @param userId ユーザID
+     * 申請者IDを設定します.
+     * @param applyUserId 申請者ID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setApplyUserId(String applyUserId) {
+        this.applyUserId = applyUserId;
+    }
+
+    /**
+     * 対象年月を取得します.
+     * @return 対象年月
+     */
+    public Integer getTargetYm() {
+        return targetYm;
+    }
+
+    /**
+     * 対象年月を設定します.
+     * @param targetYm 対象年月
+     */
+    public void setTargetYm(Integer targetYm) {
+        this.targetYm = targetYm;
     }
 
     /**
@@ -101,6 +130,38 @@ public class MUserApproveFlow {
      */
     public void setApproveUserId(String approveUserId) {
         this.approveUserId = approveUserId;
+    }
+
+    /**
+     * 承認日を取得します.
+     * @return 承認日
+     */
+    public LocalDateTime getApproveDate() {
+        return approveDate;
+    }
+
+    /**
+     * 承認日を設定します.
+     * @param approveDate 承認日
+     */
+    public void setApproveDate(LocalDateTime approveDate) {
+        this.approveDate = approveDate;
+    }
+
+    /**
+     * コメントを取得します.
+     * @return コメント
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * コメントを設定します.
+     * @param comment コメント
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     /**

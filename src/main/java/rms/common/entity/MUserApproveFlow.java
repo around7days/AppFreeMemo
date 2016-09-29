@@ -1,31 +1,34 @@
-package rms.common.model;
+package rms.common.entity;
 
 import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
+import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * VMUserRoleクラス
+ * MUserApproveFlowクラス
  */
-@Entity
-@Table(name = "v_m_user_role")
-public class VMUserRole {
+@Entity(listener = MUserApproveFlowListener.class)
+@Table(name = "m_user_approve_flow")
+public class MUserApproveFlow {
 
     /** ユーザID */
+    @Id
     @Column(name = "user_id")
     private String userId;
 
-    /** 役割 */
-    @Column(name = "role")
-    private String role;
+    /** 承認SEQ */
+    @Id
+    @Column(name = "approve_seq")
+    private Integer approveSeq;
 
-    /** 役割名 */
-    @Column(name = "role_nm")
-    private String roleNm;
+    /** 承認者ID */
+    @Column(name = "approve_user_id")
+    private String approveUserId;
 
     /** バージョン */
     @Version
@@ -69,35 +72,35 @@ public class VMUserRole {
     }
 
     /**
-     * 役割を取得します.
-     * @return 役割
+     * 承認SEQを取得します.
+     * @return 承認SEQ
      */
-    public String getRole() {
-        return role;
+    public Integer getApproveSeq() {
+        return approveSeq;
     }
 
     /**
-     * 役割を設定します.
-     * @param role 役割
+     * 承認SEQを設定します.
+     * @param approveSeq 承認SEQ
      */
-    public void setRole(String role) {
-        this.role = role;
+    public void setApproveSeq(Integer approveSeq) {
+        this.approveSeq = approveSeq;
     }
 
     /**
-     * 役割名を取得します.
-     * @return 役割名
+     * 承認者IDを取得します.
+     * @return 承認者ID
      */
-    public String getRoleNm() {
-        return roleNm;
+    public String getApproveUserId() {
+        return approveUserId;
     }
 
     /**
-     * 役割名を設定します.
-     * @param roleNm 役割名
+     * 承認者IDを設定します.
+     * @param approveUserId 承認者ID
      */
-    public void setRoleNm(String roleNm) {
-        this.roleNm = roleNm;
+    public void setApproveUserId(String approveUserId) {
+        this.approveUserId = approveUserId;
     }
 
     /**

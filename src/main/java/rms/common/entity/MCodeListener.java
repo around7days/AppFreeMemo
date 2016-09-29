@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
@@ -12,13 +12,13 @@ import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
- * TReportListenerクラス
+ * MCodeListenerクラス
  */
-public class TReportListener implements EntityListener<TReport> {
+public class MCodeListener implements EntityListener<MCode> {
 
     @Override
-    public void preInsert(TReport entity,
-                          PreInsertContext<TReport> context) {
+    public void preInsert(MCode entity,
+                          PreInsertContext<MCode> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -32,8 +32,8 @@ public class TReportListener implements EntityListener<TReport> {
     }
 
     @Override
-    public void preUpdate(TReport entity,
-                          PreUpdateContext<TReport> context) {
+    public void preUpdate(MCode entity,
+                          PreUpdateContext<MCode> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -43,22 +43,22 @@ public class TReportListener implements EntityListener<TReport> {
     }
 
     @Override
-    public void preDelete(TReport entity,
-                          PreDeleteContext<TReport> context) {
+    public void preDelete(MCode entity,
+                          PreDeleteContext<MCode> context) {
     }
 
     @Override
-    public void postInsert(TReport entity,
-                           PostInsertContext<TReport> context) {
+    public void postInsert(MCode entity,
+                           PostInsertContext<MCode> context) {
     }
 
     @Override
-    public void postUpdate(TReport entity,
-                           PostUpdateContext<TReport> context) {
+    public void postUpdate(MCode entity,
+                           PostUpdateContext<MCode> context) {
     }
 
     @Override
-    public void postDelete(TReport entity,
-                           PostDeleteContext<TReport> context) {
+    public void postDelete(MCode entity,
+                           PostDeleteContext<MCode> context) {
     }
 }

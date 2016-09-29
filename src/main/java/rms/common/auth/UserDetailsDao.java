@@ -6,7 +6,7 @@ import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
 
-import rms.common.model.MUserRole;
+import rms.common.entity.MUserRole;
 
 /**
  * 独自認証Dao

@@ -5,10 +5,12 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
-import rms.common.model.MUser;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
+
+import rms.common.entity.MUser;
+
 import org.seasar.doma.boot.ConfigAutowireable;
 
 /**

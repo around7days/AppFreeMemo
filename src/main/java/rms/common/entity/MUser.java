@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import java.time.LocalDateTime;
 import org.seasar.doma.Column;
@@ -10,21 +10,32 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * MUserRoleクラス
+ * MUserクラス
  */
-@Entity(listener = MUserRoleListener.class)
-@Table(name = "m_user_role")
-public class MUserRole {
+@Entity(listener = MUserListener.class)
+@Table(name = "m_user")
+public class MUser {
 
     /** ユーザID */
     @Id
     @Column(name = "user_id")
     private String userId;
 
-    /** 役割 */
-    @Id
-    @Column(name = "role")
-    private String role;
+    /** ユーザ名 */
+    @Column(name = "user_nm")
+    private String userNm;
+
+    /** パスワード */
+    @Column(name = "password")
+    private String password;
+
+    /** メールアドレス */
+    @Column(name = "email")
+    private String email;
+
+    /** 部署ID コードマスタ：D001 */
+    @Column(name = "department_id")
+    private String departmentId;
 
     /** バージョン */
     @Version
@@ -68,19 +79,67 @@ public class MUserRole {
     }
 
     /**
-     * 役割を取得します.
-     * @return 役割
+     * ユーザ名を取得します.
+     * @return ユーザ名
      */
-    public String getRole() {
-        return role;
+    public String getUserNm() {
+        return userNm;
     }
 
     /**
-     * 役割を設定します.
-     * @param role 役割
+     * ユーザ名を設定します.
+     * @param userNm ユーザ名
      */
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserNm(String userNm) {
+        this.userNm = userNm;
+    }
+
+    /**
+     * パスワードを取得します.
+     * @return パスワード
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * パスワードを設定します.
+     * @param password パスワード
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * メールアドレスを取得します.
+     * @return メールアドレス
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * メールアドレスを設定します.
+     * @param email メールアドレス
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * 部署ID コードマスタ：D001を取得します.
+     * @return 部署ID コードマスタ：D001
+     */
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    /**
+     * 部署ID コードマスタ：D001を設定します.
+     * @param departmentId 部署ID コードマスタ：D001
+     */
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     /**

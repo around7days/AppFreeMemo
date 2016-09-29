@@ -2,6 +2,7 @@ package rms.domain.app.tran.reportapproveregist;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,12 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.base.ApplicationProperties;
-import rms.common.base.BusinessException;
+import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
+import rms.common.dao.TReportApproveFlowDao;
 import rms.common.dao.TReportDao;
 import rms.common.dao.VTReportDao;
-import rms.common.model.TReport;
-import rms.common.model.VTReport;
+import rms.common.entity.TReport;
+import rms.common.entity.TReportApproveFlow;
+import rms.common.entity.VTReport;
 import rms.common.utils.FileUtils;
 import rms.common.utils.StringUtils;
 
@@ -36,6 +39,10 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     /** TReportDao */
     @Autowired
     TReportDao tReportDao;
+
+    /** TReportApproveFlowDao */
+    @Autowired
+    TReportApproveFlowDao tReportApproveFlowDao;
 
     /** VTReportDao */
     @Autowired
@@ -61,25 +68,41 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
      * 月報情報の承認処理<br>
      * 補足：承認状況はメソッド内で自動設定
      * @param reportApproveRegistEntity
-     * @throws BusinessException
      * @throws IOException
      */
     @Override
-    public void approve(ReportApproveRegistEntity reportApproveRegistEntity) throws BusinessException, IOException {
+    public void approve(ReportApproveRegistEntity reportApproveRegistEntity) throws IOException {
+
+        // 月報テーブル更新処理
+        updateReport(reportApproveRegistEntity);
+
+        // 月報承認フローテーブル登録処理
+        updateReportApproveFlow(reportApproveRegistEntity);
+
+        // 月報ファイル保存処理
+        saveReportFile(reportApproveRegistEntity);
+    }
+
+    /**
+     * 月報テーブル更新処理
+     * @param reportApproveRegistEntity
+     */
+    private void updateReport(ReportApproveRegistEntity reportApproveRegistEntity) {
+
+        TReport entity = new TReport();
 
         /*
-         * 承認処理
+         * 主キー
          */
-        // 承認情報の生成
-        TReport tReport = new TReport();
-        // 主キーの設定
-        tReport.setApplyUserId(reportApproveRegistEntity.getApplyUserId());
-        tReport.setTargetYm(Integer.valueOf(reportApproveRegistEntity.getTargetYm()));
-        // 排他制御用バージョンの設定
-        tReport.setVersion(reportApproveRegistEntity.getVersion());
+        entity.setApplyUserId(reportApproveRegistEntity.getApplyUserId());
+        entity.setTargetYm(Integer.valueOf(reportApproveRegistEntity.getTargetYm()));
+        entity.setVersion(reportApproveRegistEntity.getVersion()); // 排他制御用バージョン
 
-        // 現在の承認状況と承認者の有無に合わせてステータスを設定
-        String newStatus;
+        /*
+         * 更新項目
+         */
+        // 承認状況（現在の承認状況と承認者の有無で判断）
+        String newStatus = null;
         switch (reportApproveRegistEntity.getStatus()) {
         case MCodeConst.A001_Y01:
             newStatus = MCodeConst.A001_Y02;
@@ -93,17 +116,61 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         case MCodeConst.A001_Y03:
             newStatus = MCodeConst.A001_ZZZ;
             break;
-        default:
-            throw new BusinessException("例外エラー");
         }
-        tReport.setStatus(newStatus);
-
-        // 更新処理
-        tReportDao.update(tReport);
+        entity.setStatus(newStatus);
 
         /*
-         * 月報ファイル保存処理
+         * 更新処理
          */
+        tReportDao.update(entity);
+    }
+
+    /**
+     * 月報承認フローテーブル更新処理
+     * @param reportApproveRegistEntity
+     */
+    private void updateReportApproveFlow(ReportApproveRegistEntity reportApproveRegistEntity) {
+
+        TReportApproveFlow entity = new TReportApproveFlow();
+
+        /*
+         * 主キー
+         */
+        entity.setApplyUserId(reportApproveRegistEntity.getApplyUserId());
+        entity.setTargetYm(Integer.valueOf(reportApproveRegistEntity.getTargetYm()));
+        // SEQ（現在の承認状況で判断）
+        int approveSeq = -1;
+        switch (reportApproveRegistEntity.getStatus()) {
+        case MCodeConst.A001_Y01:
+            approveSeq = Const.APPROVE_FLOW_SEQ_1;
+            break;
+        case MCodeConst.A001_Y02:
+            approveSeq = Const.APPROVE_FLOW_SEQ_2;
+            break;
+        case MCodeConst.A001_Y03:
+            approveSeq = Const.APPROVE_FLOW_SEQ_3;
+            break;
+        }
+        entity.setApproveSeq(approveSeq);
+
+        /*
+         * 更新項目
+         */
+        // 承認日
+        entity.setApproveDate(LocalDateTime.now());
+
+        /*
+         * 更新処理（排他制御なし）
+         */
+        tReportApproveFlowDao.updateNoOptimisticLockException(entity);
+    }
+
+    /**
+     * 月報ファイル保存処理
+     * @param reportApproveRegistEntity
+     * @throws IOException
+     */
+    private void saveReportFile(ReportApproveRegistEntity reportApproveRegistEntity) throws IOException {
         // 月報保存ファイルパスの生成
         Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
                                                        reportApproveRegistEntity.getApplyUserId(),

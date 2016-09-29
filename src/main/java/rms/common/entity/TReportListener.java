@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
@@ -12,13 +12,13 @@ import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
- * MUserListenerクラス
+ * TReportListenerクラス
  */
-public class MUserListener implements EntityListener<MUser> {
+public class TReportListener implements EntityListener<TReport> {
 
     @Override
-    public void preInsert(MUser entity,
-                          PreInsertContext<MUser> context) {
+    public void preInsert(TReport entity,
+                          PreInsertContext<TReport> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -32,8 +32,8 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preUpdate(MUser entity,
-                          PreUpdateContext<MUser> context) {
+    public void preUpdate(TReport entity,
+                          PreUpdateContext<TReport> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -43,22 +43,22 @@ public class MUserListener implements EntityListener<MUser> {
     }
 
     @Override
-    public void preDelete(MUser entity,
-                          PreDeleteContext<MUser> context) {
+    public void preDelete(TReport entity,
+                          PreDeleteContext<TReport> context) {
     }
 
     @Override
-    public void postInsert(MUser entity,
-                           PostInsertContext<MUser> context) {
+    public void postInsert(TReport entity,
+                           PostInsertContext<TReport> context) {
     }
 
     @Override
-    public void postUpdate(MUser entity,
-                           PostUpdateContext<MUser> context) {
+    public void postUpdate(TReport entity,
+                           PostUpdateContext<TReport> context) {
     }
 
     @Override
-    public void postDelete(MUser entity,
-                           PostDeleteContext<MUser> context) {
+    public void postDelete(TReport entity,
+                           PostDeleteContext<TReport> context) {
     }
 }

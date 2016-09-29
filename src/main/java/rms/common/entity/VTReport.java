@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import java.time.LocalDateTime;
 

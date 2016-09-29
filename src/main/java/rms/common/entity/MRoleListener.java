@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
@@ -12,13 +12,13 @@ import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
- * TReportApproveFlowListenerクラス
+ * MRoleListenerクラス
  */
-public class TReportApproveFlowListener implements EntityListener<TReportApproveFlow> {
+public class MRoleListener implements EntityListener<MRole> {
 
     @Override
-    public void preInsert(TReportApproveFlow entity,
-                          PreInsertContext<TReportApproveFlow> context) {
+    public void preInsert(MRole entity,
+                          PreInsertContext<MRole> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -32,8 +32,8 @@ public class TReportApproveFlowListener implements EntityListener<TReportApprove
     }
 
     @Override
-    public void preUpdate(TReportApproveFlow entity,
-                          PreUpdateContext<TReportApproveFlow> context) {
+    public void preUpdate(MRole entity,
+                          PreUpdateContext<MRole> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -43,22 +43,22 @@ public class TReportApproveFlowListener implements EntityListener<TReportApprove
     }
 
     @Override
-    public void preDelete(TReportApproveFlow entity,
-                          PreDeleteContext<TReportApproveFlow> context) {
+    public void preDelete(MRole entity,
+                          PreDeleteContext<MRole> context) {
     }
 
     @Override
-    public void postInsert(TReportApproveFlow entity,
-                           PostInsertContext<TReportApproveFlow> context) {
+    public void postInsert(MRole entity,
+                           PostInsertContext<MRole> context) {
     }
 
     @Override
-    public void postUpdate(TReportApproveFlow entity,
-                           PostUpdateContext<TReportApproveFlow> context) {
+    public void postUpdate(MRole entity,
+                           PostUpdateContext<MRole> context) {
     }
 
     @Override
-    public void postDelete(TReportApproveFlow entity,
-                           PostDeleteContext<TReportApproveFlow> context) {
+    public void postDelete(MRole entity,
+                           PostDeleteContext<MRole> context) {
     }
 }

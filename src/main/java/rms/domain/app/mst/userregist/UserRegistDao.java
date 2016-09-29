@@ -7,7 +7,7 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
 
-import rms.common.model.MUserRole;
+import rms.common.entity.MUserRole;
 import rms.common.utils.SelectOptionEntity;
 
 /**

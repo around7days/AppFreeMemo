@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageConst;
-import rms.common.model.VTReport;
+import rms.common.entity.VTReport;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.SessionUtils;

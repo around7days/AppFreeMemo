@@ -1,4 +1,4 @@
-package rms.common.model;
+package rms.common.entity;
 
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
@@ -12,13 +12,13 @@ import rms.common.utils.AuthenticationUtils;
 import java.time.LocalDateTime;
 
 /**
- * MRoleListenerクラス
+ * MUserListenerクラス
  */
-public class MRoleListener implements EntityListener<MRole> {
+public class MUserListener implements EntityListener<MUser> {
 
     @Override
-    public void preInsert(MRole entity,
-                          PreInsertContext<MRole> context) {
+    public void preInsert(MUser entity,
+                          PreInsertContext<MUser> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -32,8 +32,8 @@ public class MRoleListener implements EntityListener<MRole> {
     }
 
     @Override
-    public void preUpdate(MRole entity,
-                          PreUpdateContext<MRole> context) {
+    public void preUpdate(MUser entity,
+                          PreUpdateContext<MUser> context) {
         //@formatter:off
         UserInfo userInfo = AuthenticationUtils.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
@@ -43,22 +43,22 @@ public class MRoleListener implements EntityListener<MRole> {
     }
 
     @Override
-    public void preDelete(MRole entity,
-                          PreDeleteContext<MRole> context) {
+    public void preDelete(MUser entity,
+                          PreDeleteContext<MUser> context) {
     }
 
     @Override
-    public void postInsert(MRole entity,
-                           PostInsertContext<MRole> context) {
+    public void postInsert(MUser entity,
+                           PostInsertContext<MUser> context) {
     }
 
     @Override
-    public void postUpdate(MRole entity,
-                           PostUpdateContext<MRole> context) {
+    public void postUpdate(MUser entity,
+                           PostUpdateContext<MUser> context) {
     }
 
     @Override
-    public void postDelete(MRole entity,
-                           PostDeleteContext<MRole> context) {
+    public void postDelete(MUser entity,
+                           PostDeleteContext<MUser> context) {
     }
 }

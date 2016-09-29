@@ -5,7 +5,7 @@ import org.seasar.doma.Select;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.SelectOptions;
 
-import rms.common.model.VMUserRole;
+import rms.common.entity.VMUserRole;
 
 /**
  * VMUserRoleDaoクラス
