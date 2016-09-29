@@ -3,7 +3,7 @@ package rms.domain.app.tran.reportapplyregist;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 月報情報Entity
+ * 月報情報クラス
  * @author
  */
 public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {

@@ -8,10 +8,10 @@ import org.seasar.doma.Entity;
 import rms.common.utils.StringUtils;
 
 /**
- * ユーザ一覧（検索結果）Entity
+ * ユーザ一覧（検索結果）クラス
  */
 @Entity
-public class UserListEntityResult extends rms.common.abstracts.AbstractDto {
+public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
 
     /** ユーザID */
     @Column(name = "user_id")

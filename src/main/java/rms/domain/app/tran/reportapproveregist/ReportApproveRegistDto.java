@@ -3,7 +3,7 @@ package rms.domain.app.tran.reportapproveregist;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 月報承認Entity
+ * 月報承認クラス
  */
 public class ReportApproveRegistDto extends rms.common.abstracts.AbstractDto {
 

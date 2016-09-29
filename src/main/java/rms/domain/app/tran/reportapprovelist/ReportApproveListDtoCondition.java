@@ -1,7 +1,7 @@
 package rms.domain.app.tran.reportapprovelist;
 
 /**
- * 月報承認状況一覧（検索条件）Entity
+ * 月報承認状況一覧（検索条件）クラス
  * @author
  */
 public class ReportApproveListDtoCondition extends rms.common.abstracts.AbstractDto {

@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 /**
  * application.propertiesクラス
- * @author
  */
 public enum ApplicationProperties {
     INSTANCE;

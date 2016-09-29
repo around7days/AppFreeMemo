@@ -1,7 +1,7 @@
 package rms.domain.app.mst.userregist;
 
 /**
- * ユーザ情報Entity
+ * ユーザ情報クラス
  * @author
  */
 public class UserRegistDto extends rms.common.abstracts.AbstractDto {
