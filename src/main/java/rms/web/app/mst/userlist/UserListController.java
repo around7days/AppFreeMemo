@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import rms.common.utils.BeanUtils;
 import rms.common.utils.PageInfo;
-import rms.domain.app.mst.userlist.UserListEntityCondition;
+import rms.domain.app.mst.userlist.UserListDtoCondition;
 import rms.domain.app.mst.userlist.UserListEntityResult;
 import rms.domain.app.mst.userlist.UserListService;
-import rms.domain.app.shared.entity.SearchResultEntity;
+import rms.domain.app.shared.entity.SearchResultDto;
 import rms.web.app.mst.userregist.UserRegistController;
 import rms.web.app.system.menu.MenuController;
 
@@ -89,20 +89,20 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         form.setResultList(null);
 
         // 検索条件の生成
-        UserListEntityCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                           UserListEntityCondition.class);
+        UserListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
+                                                                        UserListDtoCondition.class);
 
         // 検索処理
-        SearchResultEntity<UserListEntityResult> resultEntity = service.search(condition, form.getPageInfo());
-        if (resultEntity.getResultList().isEmpty()) {
+        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        if (resultDto.getResultList().isEmpty()) {
             // 検索結果が見つかりません
             bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
             return PAGE_URL;
         }
 
         // 検索結果をフォームに反映
-        form.setResultList(resultEntity.getResultList());
-        form.getPageInfo().setTotalSize(resultEntity.getCount());
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }
@@ -119,15 +119,15 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        UserListEntityCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                           UserListEntityCondition.class);
+        UserListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
+                                                                        UserListDtoCondition.class);
 
         // 検索処理
-        SearchResultEntity<UserListEntityResult> resultEntity = service.search(condition, form.getPageInfo());
+        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
-        form.setResultList(resultEntity.getResultList());
-        form.getPageInfo().setTotalSize(resultEntity.getCount());
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }
@@ -198,9 +198,9 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         logger.debug("選択値 -> {}", index);
 
         // 選択したユーザ情報
-        UserListEntityResult user = form.getResultList().get(index);
-        logger.debug("選択ユーザ情報 -> {}", user);
+        UserListEntityResult userEntity = form.getResultList().get(index);
+        logger.debug("選択ユーザ情報 -> {}", userEntity);
 
-        return redirect(UserRegistController.MAPPING_URL + "/" + user.getUserId(), "initUpdate");
+        return redirect(UserRegistController.MAPPING_URL + "/" + userEntity.getUserId(), "initUpdate");
     }
 }

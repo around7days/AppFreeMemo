@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.utils.PageInfo;
 import rms.common.utils.SelectOptionsUtils;
-import rms.domain.app.shared.entity.SearchResultEntity;
+import rms.domain.app.shared.entity.SearchResultDto;
 
 /**
  * ユーザ一覧画面サービス
@@ -34,8 +34,8 @@ public class UserListServiceImpl implements UserListService {
      * @return
      */
     @Override
-    public SearchResultEntity<UserListEntityResult> search(UserListEntityCondition condition,
-                                                           PageInfo pageInfo) {
+    public SearchResultDto<UserListEntityResult> search(UserListDtoCondition condition,
+                                                        PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
@@ -46,11 +46,11 @@ public class UserListServiceImpl implements UserListService {
         resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
-        SearchResultEntity<UserListEntityResult> resultEntity = new SearchResultEntity<>();
-        resultEntity.setResultList(resultList);
-        resultEntity.setCount(options.getCount());
+        SearchResultDto<UserListEntityResult> resultDto = new SearchResultDto<>();
+        resultDto.setResultList(resultList);
+        resultDto.setCount(options.getCount());
 
-        return resultEntity;
+        return resultDto;
     }
 
 }

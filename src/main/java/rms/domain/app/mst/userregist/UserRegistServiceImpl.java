@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MRoleConst;
+import rms.common.dao.MCodeDao;
 import rms.common.dao.MUserApproveFlowDao;
 import rms.common.dao.MUserDao;
 import rms.common.dao.MUserRoleDao;
@@ -40,6 +41,10 @@ public class UserRegistServiceImpl implements UserRegistService {
     @Autowired
     UserRegistDao dao;
 
+    /** MCodeDao */
+    @Autowired
+    MCodeDao mCodeDao;
+
     /** MUserDao */
     @Autowired
     MUserDao mUserDao;
@@ -65,187 +70,168 @@ public class UserRegistServiceImpl implements UserRegistService {
      * @return
      */
     @Override
-    public UserRegistEntity getUserInfo(String userId) {
-        // ユーザマスタ情報の取得
-        VMUser vMUser = vMUserDao.selectById(userId);
-
-        // ユーザ役割マスタ情報の取得
-        List<MUserRole> mUserRoleList = dao.userRoleListByUserId(userId);
+    public UserRegistDto getUserInfo(String userId) {
 
         // 返却用ユーザ情報の生成
-        UserRegistEntity userRegistEntity = new UserRegistEntity();
+        UserRegistDto dto = new UserRegistDto();
 
-        // 値の設定
-        // ユーザ情報
-        org.springframework.beans.BeanUtils.copyProperties(vMUser, userRegistEntity);
-        // 役割情報
+        // ユーザマスタ情報の取得
+        VMUser vMUser = vMUserDao.selectById(userId);
+        BeanUtils.copyProperties(vMUser, dto);
+
+        // ユーザ役割マスタ情報の取得
+        List<MUserRole> mUserRoleList = mUserRoleDao.selectListUserRoleByUserId(userId);
         for (MUserRole mUserRole : mUserRoleList) {
             switch (mUserRole.getRole()) {
             case MRoleConst.APPLY: //申請者
-                userRegistEntity.setRoleApplyFlg(Const.FLG_ON);
+                dto.setRoleApplyFlg(Const.FLG_ON);
                 break;
             case MRoleConst.APPROVE: //承認者
-                userRegistEntity.setRoleApproveFlg(Const.FLG_ON);
+                dto.setRoleApproveFlg(Const.FLG_ON);
                 break;
             case MRoleConst.ADMIN: //管理者者
-                userRegistEntity.setRoleAdminFlg(Const.FLG_ON);
+                dto.setRoleAdminFlg(Const.FLG_ON);
                 break;
             }
         }
 
-        logger.debug("取得情報 -> {}", userRegistEntity);
+        logger.debug("取得情報 -> {}", dto);
 
-        return userRegistEntity;
+        return dto;
     }
 
     /**
      * ユーザ情報登録処理
-     * @param userRegistEntity
+     * @param dto
      * @throws BusinessException
      */
     @Override
-    public void regist(UserRegistEntity userRegistEntity) throws BusinessException {
+    public void regist(UserRegistDto dto) throws BusinessException {
 
-        /*
-         * 業務ロジックチェック
-         */
         // ユーザIDの重複チェック
-        validateUniquUserId(userRegistEntity.getUserId());
+        validateUniquUserId(dto.getUserId());
         // 承認ルート設定チェック
-        validateApprovalRoute(userRegistEntity.getRoleApplyFlg(),
-                              userRegistEntity.getApproveUserId1(),
-                              userRegistEntity.getApproveUserId2(),
-                              userRegistEntity.getApproveUserId3());
+        validateApprovalRoute(dto.getRoleApplyFlg(),
+                              dto.getApproveUserId1(),
+                              dto.getApproveUserId2(),
+                              dto.getApproveUserId3());
 
-        /*
-         * ユーザマスタ登録
-         */
-        inserUser(userRegistEntity);
+        // ユーザマスタ登録
+        inserUser(dto);
 
-        /*
-         * ユーザ承認フローマスタ登録
-         */
-        deleteInsertUserApproveFlow(userRegistEntity);
+        // ユーザ承認フローマスタ登録
+        deleteInsertUserApproveFlow(dto);
 
-        /*
-         * ユーザ役割マスタ登録
-         */
-        deleteInsertUserRole(userRegistEntity);
+        // ユーザ役割マスタ登録
+        deleteInsertUserRole(dto);
     }
 
     /**
      * ユーザ情報更新処理
-     * @param userRegistEntity
+     * @param dto
      * @throws BusinessException
      */
     @Override
-    public void update(UserRegistEntity userRegistEntity) throws BusinessException {
+    public void update(UserRegistDto dto) throws BusinessException {
 
-        /*
-         * 業務ロジックチェック
-         */
         // 承認ルート設定チェック
-        validateApprovalRoute(userRegistEntity.getRoleApplyFlg(),
-                              userRegistEntity.getApproveUserId1(),
-                              userRegistEntity.getApproveUserId2(),
-                              userRegistEntity.getApproveUserId3());
+        validateApprovalRoute(dto.getRoleApplyFlg(),
+                              dto.getApproveUserId1(),
+                              dto.getApproveUserId2(),
+                              dto.getApproveUserId3());
 
-        /*
-         * ユーザマスタ更新
-         */
-        updateUser(userRegistEntity);
+        // ユーザマスタ更新
+        updateUser(dto);
 
-        /*
-         * ユーザ承認フローマスタ登録
-         */
-        deleteInsertUserApproveFlow(userRegistEntity);
+        // ユーザ承認フローマスタ登録
+        deleteInsertUserApproveFlow(dto);
 
-        /*
-         * ユーザ役割マスタ登録
-         */
-        deleteInsertUserRole(userRegistEntity);
+        // ユーザ役割マスタ登録
+        deleteInsertUserRole(dto);
     }
 
     /**
      * ユーザマスタ登録処理
-     * @param userRegistEntity
+     * @param dto
      */
-    private void inserUser(UserRegistEntity userRegistEntity) {
+    private void inserUser(UserRegistDto dto) {
         // 登録情報の生成
-        MUser mUser = BeanUtils.createCopyProperties(userRegistEntity, MUser.class);
+        MUser entity = BeanUtils.createCopyProperties(dto, MUser.class);
         // 登録処理
-        mUserDao.insert(mUser);
+        mUserDao.insert(entity);
     }
 
     /**
      * ユーザ承認フローマスタ登録処理<br>
      * 説明：ユーザIDに紐付く承認フローを全て削除してから新規登録を行います。
-     * @param userRegistEntity
+     * @param dto
      */
-    private void deleteInsertUserApproveFlow(UserRegistEntity userRegistEntity) {
+    private void deleteInsertUserApproveFlow(UserRegistDto dto) {
 
-        // ユーザに紐付く全承認フローの削除
-        dao.deleteUserApproveFlowByUserId(userRegistEntity.getUserId());
+        // ユーザIDに紐付くレコードを全て削除
+        mUserApproveFlowDao.deleteListByUserId(dto.getUserId());
 
         // ユーザ役割マスタ情報の生成
-        MUserApproveFlow mUserApproveFlow = new MUserApproveFlow();
-        mUserApproveFlow.setUserId(userRegistEntity.getUserId());
+        MUserApproveFlow entity = new MUserApproveFlow();
+        entity.setUserId(dto.getUserId());
 
-        // 承認者１
-        mUserApproveFlow.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
-        mUserApproveFlow.setApproveUserId(userRegistEntity.getApproveUserId1());
-        mUserApproveFlowDao.insert(mUserApproveFlow);
-        // 承認者２
-        mUserApproveFlow.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
-        mUserApproveFlow.setApproveUserId(userRegistEntity.getApproveUserId2());
-        mUserApproveFlowDao.insert(mUserApproveFlow);
-        // 承認者３
-        mUserApproveFlow.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
-        mUserApproveFlow.setApproveUserId(userRegistEntity.getApproveUserId3());
-        mUserApproveFlowDao.insert(mUserApproveFlow);
+        // 承認者１の登録
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
+        entity.setApproveUserId(dto.getApproveUserId1());
+        mUserApproveFlowDao.insert(entity);
+
+        // 承認者２の登録
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
+        entity.setApproveUserId(dto.getApproveUserId2());
+        mUserApproveFlowDao.insert(entity);
+
+        // 承認者３の登録
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
+        entity.setApproveUserId(dto.getApproveUserId3());
+        mUserApproveFlowDao.insert(entity);
     }
 
     /**
      * ユーザ役割マスタ登録処理<br>
      * 説明：ユーザに紐付くユーザ役割マスタを全て削除してから新規登録を行います。
-     * @param userRegistEntity
+     * @param dto
      */
-    private void deleteInsertUserRole(UserRegistEntity userRegistEntity) {
+    private void deleteInsertUserRole(UserRegistDto dto) {
 
-        // ユーザに紐付く全役割の削除
-        dao.deleteUserRoleByUserId(userRegistEntity.getUserId());
+        // ユーザIDに紐付くレコードを全て削除
+        mUserRoleDao.deleteListByUserId(dto.getUserId());
 
         // ユーザ役割マスタ情報の生成
-        MUserRole mUserRole = new MUserRole();
-        mUserRole.setUserId(userRegistEntity.getUserId());
+        MUserRole entity = new MUserRole();
+        entity.setUserId(dto.getUserId());
 
         // 申請者の登録
-        if (Const.FLG_ON.equals(userRegistEntity.getRoleApplyFlg())) {
-            mUserRole.setRole(MRoleConst.APPLY);
-            mUserRoleDao.insert(mUserRole);
+        if (Const.FLG_ON.equals(dto.getRoleApplyFlg())) {
+            entity.setRole(MRoleConst.APPLY);
+            mUserRoleDao.insert(entity);
         }
         // 承認者の登録
-        if (Const.FLG_ON.equals(userRegistEntity.getRoleApproveFlg())) {
-            mUserRole.setRole(MRoleConst.APPROVE);
-            mUserRoleDao.insert(mUserRole);
+        if (Const.FLG_ON.equals(dto.getRoleApproveFlg())) {
+            entity.setRole(MRoleConst.APPROVE);
+            mUserRoleDao.insert(entity);
         }
         // 管理者者の登録
-        if (Const.FLG_ON.equals(userRegistEntity.getRoleAdminFlg())) {
-            mUserRole.setRole(MRoleConst.ADMIN);
-            mUserRoleDao.insert(mUserRole);
+        if (Const.FLG_ON.equals(dto.getRoleAdminFlg())) {
+            entity.setRole(MRoleConst.ADMIN);
+            mUserRoleDao.insert(entity);
         }
     }
 
     /**
      * ユーザマスタ更新処理
-     * @param userRegistEntity
+     * @param dto
      */
-    private void updateUser(UserRegistEntity userRegistEntity) {
+    private void updateUser(UserRegistDto dto) {
         // 更新情報の生成
-        MUser mUser = BeanUtils.createCopyProperties(userRegistEntity, MUser.class);
+        MUser entity = BeanUtils.createCopyProperties(dto, MUser.class);
 
         // 更新処理（楽観的排他制御）
-        mUserDao.update(mUser);
+        mUserDao.update(entity);
     }
 
     /**
@@ -267,19 +253,21 @@ public class UserRegistServiceImpl implements UserRegistService {
     @Override
     public List<SelectOptionEntity> getSelectboxDepartment() {
         // セレクトボックス用 部署一覧の取得
-        List<SelectOptionEntity> departmentList = dao.selectboxApproveUser();
+        List<SelectOptionEntity> departmentList = mCodeDao.selectboxDepartmentRnm();
 
         return departmentList;
     }
 
     /**
-     * ユーザIDの重複チェック
+     * ユーザIDの重複チェック<br>
+     * 重複エラーでBusinessExceptionを発生させます<br>
      * @param userId
      * @throws BusinessException
      */
     private void validateUniquUserId(String userId) throws BusinessException {
-        MUser mUser = mUserDao.selectById(userId);
-        if (mUser != null) {
+        // TODO 存在チェック用のメソッドをDoma-genから自動で作りたい
+        MUser entity = mUserDao.selectById(userId);
+        if (entity != null) {
             List<Object> params = Arrays.asList("ユーザIDが");
             throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
         }
@@ -287,8 +275,10 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     /**
      * 承認ルート設定チェック<br>
-     * ・承認者１～３に同じ承認者は設定できません。<br>
-     * ・役割に申請者を保持している場合、承認者３は必須入力になります。
+     * 承認ルート設定エラーでBusinessExceptionを発生させます。<br>
+     * チェック内容は以下の二つ<br>
+     * ・承認者１～３に同じ承認者は設定できません<br>
+     * ・役割に申請者を保持している場合、承認者３は必須入力になります
      * @param roleApplyFlg
      * @param approveUserId1
      * @param approveUserId2

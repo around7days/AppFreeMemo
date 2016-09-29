@@ -7,7 +7,7 @@ import java.util.List;
  * @author
  * @param <T> Entity
  */
-public class SearchResultEntity<T> {
+public class SearchResultDto<T> {
 
     /** 検索結果一覧 */
     private List<T> resultList;

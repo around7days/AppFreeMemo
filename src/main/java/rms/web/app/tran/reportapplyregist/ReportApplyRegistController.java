@@ -28,7 +28,7 @@ import rms.common.consts.MessageConst;
 import rms.common.entity.VMUser;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.SessionUtils;
-import rms.domain.app.tran.reportapplyregist.ReportApplyRegistEntity;
+import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
 import rms.web.app.system.menu.MenuController;
 
@@ -74,10 +74,10 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
                              @AuthenticationPrincipal UserInfo userInfo,
                              Model model) {
         // 申請者のユーザ情報を取得
-        VMUser vMUser = service.getApplyUserInfo(userInfo.getUserId());
+        VMUser entity = service.getApplyUserInfo(userInfo.getUserId());
 
         // 値を設定
-        BeanUtils.copyProperties(vMUser, form);
+        BeanUtils.copyProperties(entity, form);
         // ユーザIDの設定
         form.setApplyUserId(userInfo.getUserId());
         // 初期値設定：公開有無を「公開」に設定
@@ -148,7 +148,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         }
 
         // 申請情報の生成
-        ReportApplyRegistEntity entity = BeanUtils.createCopyProperties(form, ReportApplyRegistEntity.class);
+        ReportApplyRegistDto entity = BeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
 
         // 申請処理
         service.apply(entity);

@@ -1,7 +1,7 @@
 package rms.domain.app.tran.reportapprovelist;
 
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.entity.SearchResultEntity;
+import rms.domain.app.shared.entity.SearchResultDto;
 
 /**
  * 月報承認状況一覧画面サービスインタフェース
@@ -15,7 +15,7 @@ public interface ReportApproveListService {
      * @param pageInfo
      * @return
      */
-    public SearchResultEntity<ReportApproveListEntityResult> search(ReportApproveListEntityCondition condition,
-                                                                    PageInfo pageInfo);
+    public SearchResultDto<ReportApproveListEntityResult> search(ReportApproveListDtoCondition condition,
+                                                                 PageInfo pageInfo);
 
 }

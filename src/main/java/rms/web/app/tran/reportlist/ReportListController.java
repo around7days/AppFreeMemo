@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.entity.SearchResultEntity;
-import rms.domain.app.tran.reportlist.ReportListEntityCondition;
+import rms.domain.app.shared.entity.SearchResultDto;
+import rms.domain.app.tran.reportlist.ReportListDtoCondition;
 import rms.domain.app.tran.reportlist.ReportListEntityResult;
 import rms.domain.app.tran.reportlist.ReportListService;
 
@@ -92,20 +92,20 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         form.setResultList(null);
 
         // 検索条件の生成
-        ReportListEntityCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                             ReportListEntityCondition.class);
+        ReportListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
+                                                                          ReportListDtoCondition.class);
 
         // 検索処理
-        SearchResultEntity<ReportListEntityResult> resultEntity = service.search(condition, form.getPageInfo());
-        if (resultEntity.getResultList().isEmpty()) {
+        SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        if (resultDto.getResultList().isEmpty()) {
             // 検索結果が見つかりません
             bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
             return PAGE_URL;
         }
 
         // 検索結果をフォームに反映
-        form.setResultList(resultEntity.getResultList());
-        form.getPageInfo().setTotalSize(resultEntity.getCount());
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }
@@ -122,15 +122,15 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         logger.debug("フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        ReportListEntityCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                             ReportListEntityCondition.class);
+        ReportListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
+                                                                          ReportListDtoCondition.class);
 
         // 検索処理
-        SearchResultEntity<ReportListEntityResult> resultEntity = service.search(condition, form.getPageInfo());
+        SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
-        form.setResultList(resultEntity.getResultList());
-        form.getPageInfo().setTotalSize(resultEntity.getCount());
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }
@@ -182,16 +182,16 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportListEntityResult result = form.getResultList().get(index);
-        logger.debug("選択月報情報 -> {}", result);
+        ReportListEntityResult entity = form.getResultList().get(index);
+        logger.debug("選択月報情報 -> {}", entity);
 
         /*
          * ファイルダウンロード処理
          */
         // ダウンロードファイルパスの生成
         Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       result.getApplyUserId(),
-                                                       result.getTargetYm());
+                                                       entity.getApplyUserId(),
+                                                       entity.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 

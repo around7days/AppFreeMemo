@@ -1,12 +1,13 @@
 package rms.common.abstracts;
 
-import rms.common.auth.UserInfo;
-import rms.common.utils.AuthenticationUtils;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import rms.common.auth.UserInfo;
+import rms.common.utils.AuthenticationUtils;
+
 /**
+ * AbstractForm
  * @author
  */
 public abstract class AbstractForm {

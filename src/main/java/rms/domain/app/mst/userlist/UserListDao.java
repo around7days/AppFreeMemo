@@ -21,6 +21,6 @@ public interface UserListDao {
      * @return
      */
     @Select
-    List<UserListEntityResult> userListByCondition(UserListEntityCondition condition,
+    List<UserListEntityResult> userListByCondition(UserListDtoCondition condition,
                                                    SelectOptions options);
 }

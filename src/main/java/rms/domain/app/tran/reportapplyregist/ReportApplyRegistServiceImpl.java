@@ -80,85 +80,34 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     public VTReport getReportInfo(String applyUserId,
                                   String targetYm) {
         // 月報情報の取得
-        VTReport vTReport = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
-        logger.debug("取得情報 -> {}", vTReport);
+        VTReport entity = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
+        logger.debug("取得情報 -> {}", entity);
 
-        return vTReport;
+        return entity;
     }
 
     /**
      * 月報情報の申請処理<br>
      * 補足：承認状況はメソッド内で自動設定
-     * @param reportApplyRegistEntity
+     * @param dto
      * @throws IOException
      * @throws BusinessException
      * @throws NumberFormatException
      */
     @Override
-    public void apply(ReportApplyRegistEntity reportApplyRegistEntity) throws IOException, NumberFormatException,
-                                                                       BusinessException {
+    public void apply(ReportApplyRegistDto dto) throws IOException, NumberFormatException, BusinessException {
 
-        /*
-         * 業務ロジックチェック
-         */
         // 月報の重複チェック
-        validateUniquReport(reportApplyRegistEntity.getApplyUserId(),
-                            Integer.valueOf(reportApplyRegistEntity.getTargetYm()));
+        validateUniquReport(dto.getApplyUserId(), Integer.valueOf(dto.getTargetYm()));
 
-        /*
-         * 月報申請処理
-         */
-        // 申請情報の生成
-        TReport tReport = new TReport();
-        tReport.setApplyUserId(reportApplyRegistEntity.getApplyUserId());
-        tReport.setTargetYm(Integer.valueOf(reportApplyRegistEntity.getTargetYm()));
-        tReport.setApplyDate(LocalDateTime.now());
-        tReport.setPublishFlg(reportApplyRegistEntity.getPublishFlg());
-        tReport.setFilePath("");
+        // 月報申請処理
+        insertReport(dto);
 
-        // 承認者の有無に合わせてステータスを設定
-        if (!StringUtils.isEmpty(reportApplyRegistEntity.getApproveUserId1())) {
-            tReport.setStatus(MCodeConst.A001_Y01);
-        } else if (!StringUtils.isEmpty(reportApplyRegistEntity.getApproveUserId2())) {
-            tReport.setStatus(MCodeConst.A001_Y02);
-        } else {
-            tReport.setStatus(MCodeConst.A001_Y03);
-        }
+        //月報承認フロー登録処理
+        insertReportApproveFlow(dto);
 
-        // 登録処理
-        tReportDao.insert(tReport);
-
-        /*
-         * 月報承認フロー登録処理
-         */
-        // 月報承認フロー情報の生成
-        TReportApproveFlow tReportApproveFlow = new TReportApproveFlow();
-        tReportApproveFlow.setApplyUserId(reportApplyRegistEntity.getApplyUserId());
-        tReportApproveFlow.setTargetYm(Integer.valueOf(reportApplyRegistEntity.getTargetYm()));
-
-        // 登録処理：承認者１
-        tReportApproveFlow.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
-        tReportApproveFlow.setApproveUserId(reportApplyRegistEntity.getApproveUserId1());
-        tReportApproveFlowDao.insert(tReportApproveFlow);
-        // 登録処理：承認者２
-        tReportApproveFlow.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
-        tReportApproveFlow.setApproveUserId(reportApplyRegistEntity.getApproveUserId2());
-        tReportApproveFlowDao.insert(tReportApproveFlow);
-        // 登録処理：承認者３
-        tReportApproveFlow.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
-        tReportApproveFlow.setApproveUserId(reportApplyRegistEntity.getApproveUserId3());
-        tReportApproveFlowDao.insert(tReportApproveFlow);
-
-        /*
-         * 月報ファイル保存処理
-         */
-        // 月報保存ファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       reportApplyRegistEntity.getApplyUserId(),
-                                                       reportApplyRegistEntity.getTargetYm());
-        // 月報保存処理
-        FileUtils.reportSave(reportApplyRegistEntity.getFile().getInputStream(), filePath);
-
+        // 月報ファイル保存処理
+        saveReportFile(dto);
     }
 
     /**
@@ -170,11 +119,75 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      */
     private void validateUniquReport(String applyUserId,
                                      Integer targetYm) throws BusinessException {
-        TReport tReport = tReportDao.selectById(applyUserId, targetYm);
-        if (tReport != null) {
+        TReport entity = tReportDao.selectById(applyUserId, targetYm);
+        if (entity != null) {
             // 「対象年月の月報は既に登録されています」
             throw new BusinessException(message.getMessage("error.003", null, Locale.getDefault()));
         }
+    }
+
+    /**
+     * 月報申請処理
+     * @param dto
+     */
+    private void insertReport(ReportApplyRegistDto dto) {
+        // 申請情報の生成
+        TReport entity = new TReport();
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setApplyDate(LocalDateTime.now());
+        entity.setPublishFlg(dto.getPublishFlg());
+        entity.setFilePath("");
+
+        // 承認者の有無に合わせてステータスを設定
+        if (!StringUtils.isEmpty(dto.getApproveUserId1())) {
+            entity.setStatus(MCodeConst.A001_Y01);
+        } else if (!StringUtils.isEmpty(dto.getApproveUserId2())) {
+            entity.setStatus(MCodeConst.A001_Y02);
+        } else {
+            entity.setStatus(MCodeConst.A001_Y03);
+        }
+
+        // 登録処理
+        tReportDao.insert(entity);
+    }
+
+    /**
+     * 月報承認フロー登録処理
+     * @param dto
+     */
+    private void insertReportApproveFlow(ReportApplyRegistDto dto) {
+        // 月報承認フロー情報の生成
+        TReportApproveFlow entity = new TReportApproveFlow();
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+
+        // 登録処理：承認者１
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
+        entity.setApproveUserId(dto.getApproveUserId1());
+        tReportApproveFlowDao.insert(entity);
+        // 登録処理：承認者２
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
+        entity.setApproveUserId(dto.getApproveUserId2());
+        tReportApproveFlowDao.insert(entity);
+        // 登録処理：承認者３の
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
+        entity.setApproveUserId(dto.getApproveUserId3());
+        tReportApproveFlowDao.insert(entity);
+    }
+
+    /**
+     * 月報ファイル保存処理
+     * @param dto
+     * @throws IOException
+     */
+    private void saveReportFile(ReportApplyRegistDto dto) throws IOException {
+        // 月報保存ファイルパスの生成
+        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
+                                                       dto.getApplyUserId(),
+                                                       dto.getTargetYm());
+        // 月報保存処理
+        FileUtils.reportSave(dto.getFile().getInputStream(), filePath);
     }
 
 }

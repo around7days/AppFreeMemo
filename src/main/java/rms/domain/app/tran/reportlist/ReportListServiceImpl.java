@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.utils.PageInfo;
 import rms.common.utils.SelectOptionsUtils;
-import rms.domain.app.shared.entity.SearchResultEntity;
+import rms.domain.app.shared.entity.SearchResultDto;
 
 /**
  * 月報一覧画面サービス
@@ -26,7 +26,7 @@ public class ReportListServiceImpl implements ReportListService {
 
     /** 月報情報取得Dao */
     @Autowired
-    ReportListDao reportListDao;
+    ReportListDao dao;
 
     /**
      * 月報情報一覧取得
@@ -35,23 +35,23 @@ public class ReportListServiceImpl implements ReportListService {
      * @return
      */
     @Override
-    public SearchResultEntity<ReportListEntityResult> search(ReportListEntityCondition condition,
-                                                             PageInfo pageInfo) {
+    public SearchResultDto<ReportListEntityResult> search(ReportListDtoCondition condition,
+                                                          PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
-        List<ReportListEntityResult> resultList = reportListDao.reportListByCondition(condition, options);
+        List<ReportListEntityResult> resultList = dao.reportListByCondition(condition, options);
         logger.debug("検索結果(全件) -> {}件", options.getCount());
         logger.debug("検索結果 -> {}件", resultList.size());
         resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
-        SearchResultEntity<ReportListEntityResult> resultEntity = new SearchResultEntity<>();
-        resultEntity.setResultList(resultList);
-        resultEntity.setCount(options.getCount());
+        SearchResultDto<ReportListEntityResult> resultDto = new SearchResultDto<>();
+        resultDto.setResultList(resultList);
+        resultDto.setCount(options.getCount());
 
-        return resultEntity;
+        return resultDto;
     }
 
 }

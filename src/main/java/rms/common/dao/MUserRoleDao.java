@@ -1,17 +1,18 @@
 package rms.common.dao;
 
+import java.util.List;
+
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import rms.common.entity.MUserRole;
-
-import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
  * MUserRoleDaoクラス
@@ -56,6 +57,14 @@ public interface MUserRoleDao {
                                    Integer version) throws NoResultException;
 
     /**
+     * ユーザIDに紐付く一覧を取得
+     * @param userId
+     * @return
+     */
+    @Select
+    List<MUserRole> selectListUserRoleByUserId(String userId);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows
@@ -87,4 +96,12 @@ public interface MUserRoleDao {
      */
     @Delete
     int delete(MUserRole entity);
+
+    /**
+     * ユーザIDに紐付くレコードを全て削除
+     * @param userId
+     * @return
+     */
+    @Delete(sqlFile = true)
+    int deleteListByUserId(String userId);
 }

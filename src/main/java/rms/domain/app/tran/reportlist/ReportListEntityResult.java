@@ -9,7 +9,7 @@ import org.seasar.doma.Entity;
  * 月報一覧（検索結果）クラス
  */
 @Entity
-public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity {
+public class ReportListEntityResult extends rms.common.abstracts.AbstractDto {
 
     /** 申請者ID */
     @Column(name = "apply_user_id")

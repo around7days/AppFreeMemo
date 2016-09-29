@@ -21,7 +21,7 @@ public interface ReportListDao {
      * @return
      */
     @Select
-    List<ReportListEntityResult> reportListByCondition(ReportListEntityCondition condition,
+    List<ReportListEntityResult> reportListByCondition(ReportListDtoCondition condition,
                                                        SelectOptions options);
 
 }

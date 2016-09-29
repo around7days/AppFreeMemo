@@ -13,6 +13,7 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import rms.common.entity.MCode;
+import rms.common.utils.SelectOptionEntity;
 
 /**
  * MCodeDaoクラス
@@ -65,7 +66,15 @@ public interface MCodeDao {
      * @return the MCode entity
      */
     @Select
-    List<MCode> codeListByCodeKbn(String codeKbn);
+    List<MCode> selectListByCodeKbn(String codeKbn);
+
+    /**
+     * 部署略称一覧を取得を取得（selectbox専用）<br>
+     * （ソート順はコードの昇順）
+     * @return
+     */
+    @Select
+    List<SelectOptionEntity> selectboxDepartmentRnm();
 
     /**
      * 挿入

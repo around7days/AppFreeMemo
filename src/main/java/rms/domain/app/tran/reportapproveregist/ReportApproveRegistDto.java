@@ -1,35 +1,53 @@
-package rms.domain.app.tran.reportapplyregist;
+package rms.domain.app.tran.reportapproveregist;
 
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 月報情報Entity
- * @author
+ * 月報承認Entity
  */
-public class ReportApplyRegistEntity extends rms.common.abstracts.AbstractEntity {
+public class ReportApproveRegistDto extends rms.common.abstracts.AbstractDto {
 
+    /* 排他制御用 ----------------------------------------------------------- */
+    /** 月報管理テーブル 排他制御用バージョン */
+    private Integer version;
+
+    /* 変数宣言 ------------------------------------------------------------- */
     /** 申請者ID */
     private String applyUserId;
+    /** 申請者名 */
+    private String applyUserNm;
     /** 年月 */
     private String targetYm;
     /** 月報ファイル */
     private MultipartFile file;
-    /** 公開有無 */
-    private String publishFlg;
-    /** 承認者ID1 */
-    private String approveUserId1;
-    /** 承認者ID2 */
-    private String approveUserId2;
-    /** 承認者ID3 */
-    private String approveUserId3;
+    /** 公開有無名称 */
+    private String publishFlgNm;
     /** 承認者名1 */
     private String approveUserNm1;
     /** 承認者名2 */
     private String approveUserNm2;
     /** 承認者名3 */
     private String approveUserNm3;
+    /** 承認状況 */
+    private String status;
 
     /* getter/setter -------------------------------------------------------- */
+
+    /**
+     * 月報管理テーブル 排他制御用バージョンを取得します。
+     * @return 月報管理テーブル 排他制御用バージョン
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * 月報管理テーブル 排他制御用バージョンを設定します。
+     * @param version 月報管理テーブル 排他制御用バージョン
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     /**
      * 申請者IDを取得します。
@@ -45,6 +63,22 @@ public class ReportApplyRegistEntity extends rms.common.abstracts.AbstractEntity
      */
     public void setApplyUserId(String applyUserId) {
         this.applyUserId = applyUserId;
+    }
+
+    /**
+     * 申請者名を取得します。
+     * @return 申請者名
+     */
+    public String getApplyUserNm() {
+        return applyUserNm;
+    }
+
+    /**
+     * 申請者名を設定します。
+     * @param applyUserNm 申請者名
+     */
+    public void setApplyUserNm(String applyUserNm) {
+        this.applyUserNm = applyUserNm;
     }
 
     /**
@@ -80,67 +114,19 @@ public class ReportApplyRegistEntity extends rms.common.abstracts.AbstractEntity
     }
 
     /**
-     * 公開有無を取得します。
-     * @return 公開有無
+     * 公開有無名称を取得します。
+     * @return 公開有無名称
      */
-    public String getPublishFlg() {
-        return publishFlg;
+    public String getPublishFlgNm() {
+        return publishFlgNm;
     }
 
     /**
-     * 公開有無を設定します。
-     * @param publishFlg 公開有無
+     * 公開有無名称を設定します。
+     * @param publishFlgNm 公開有無名称
      */
-    public void setPublishFlg(String publishFlg) {
-        this.publishFlg = publishFlg;
-    }
-
-    /**
-     * 承認者ID1を取得します。
-     * @return 承認者ID1
-     */
-    public String getApproveUserId1() {
-        return approveUserId1;
-    }
-
-    /**
-     * 承認者ID1を設定します。
-     * @param approveUserId1 承認者ID1
-     */
-    public void setApproveUserId1(String approveUserId1) {
-        this.approveUserId1 = approveUserId1;
-    }
-
-    /**
-     * 承認者ID2を取得します。
-     * @return 承認者ID2
-     */
-    public String getApproveUserId2() {
-        return approveUserId2;
-    }
-
-    /**
-     * 承認者ID2を設定します。
-     * @param approveUserId2 承認者ID2
-     */
-    public void setApproveUserId2(String approveUserId2) {
-        this.approveUserId2 = approveUserId2;
-    }
-
-    /**
-     * 承認者ID3を取得します。
-     * @return 承認者ID3
-     */
-    public String getApproveUserId3() {
-        return approveUserId3;
-    }
-
-    /**
-     * 承認者ID3を設定します。
-     * @param approveUserId3 承認者ID3
-     */
-    public void setApproveUserId3(String approveUserId3) {
-        this.approveUserId3 = approveUserId3;
+    public void setPublishFlgNm(String publishFlgNm) {
+        this.publishFlgNm = publishFlgNm;
     }
 
     /**
@@ -190,4 +176,21 @@ public class ReportApplyRegistEntity extends rms.common.abstracts.AbstractEntity
     public void setApproveUserNm3(String approveUserNm3) {
         this.approveUserNm3 = approveUserNm3;
     }
+
+    /**
+     * 承認状況を取得します。
+     * @return 承認状況
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * 承認状況を設定します。
+     * @param status 承認状況
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

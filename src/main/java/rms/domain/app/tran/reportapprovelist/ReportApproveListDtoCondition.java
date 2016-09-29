@@ -4,7 +4,7 @@ package rms.domain.app.tran.reportapprovelist;
  * 月報承認状況一覧（検索条件）Entity
  * @author
  */
-public class ReportApproveListEntityCondition extends rms.common.abstracts.AbstractEntity {
+public class ReportApproveListDtoCondition extends rms.common.abstracts.AbstractDto {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 承認者ID */

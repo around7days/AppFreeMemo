@@ -23,8 +23,8 @@ import rms.common.auth.UserInfo;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.entity.SearchResultEntity;
-import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityCondition;
+import rms.domain.app.shared.entity.SearchResultDto;
+import rms.domain.app.tran.reportapprovelist.ReportApproveListDtoCondition;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListService;
 import rms.web.app.tran.reportapproveregist.ReportApproveRegistController;
@@ -97,21 +97,21 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         form.setResultList(null);
 
         // 検索条件の生成
-        ReportApproveListEntityCondition condition = new ReportApproveListEntityCondition();
+        ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
         BeanUtils.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultEntity<ReportApproveListEntityResult> resultEntity = service.search(condition, form.getPageInfo());
-        if (resultEntity.getResultList().isEmpty()) {
+        SearchResultDto<ReportApproveListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        if (resultDto.getResultList().isEmpty()) {
             // 検索結果が見つかりません
             bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
             return PAGE_URL;
         }
 
         // 検索結果をフォームに反映
-        form.setResultList(resultEntity.getResultList());
-        form.getPageInfo().setTotalSize(resultEntity.getCount());
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }
@@ -130,16 +130,16 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        ReportApproveListEntityCondition condition = new ReportApproveListEntityCondition();
+        ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
         BeanUtils.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultEntity<ReportApproveListEntityResult> resultEntity = service.search(condition, form.getPageInfo());
+        SearchResultDto<ReportApproveListEntityResult> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
-        form.setResultList(resultEntity.getResultList());
-        form.getPageInfo().setTotalSize(resultEntity.getCount());
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }
@@ -191,16 +191,16 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportApproveListEntityResult result = form.getResultList().get(index);
-        logger.debug("選択月報情報 -> {}", result);
+        ReportApproveListEntityResult entity = form.getResultList().get(index);
+        logger.debug("選択月報情報 -> {}", entity);
 
         /*
          * ファイルダウンロード処理
          */
         // ダウンロードファイルパスの生成
         Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       result.getApplyUserId(),
-                                                       result.getTargetYm());
+                                                       entity.getApplyUserId(),
+                                                       entity.getTargetYm());
         // 月報ダウンロード
         FileUtils.reportDownload(response, filePath);
 
@@ -221,12 +221,12 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportApproveListEntityResult result = form.getResultList().get(index);
-        logger.debug("選択月報情報 -> {}", result);
+        ReportApproveListEntityResult entity = form.getResultList().get(index);
+        logger.debug("選択月報情報 -> {}", entity);
 
         // 月報承認画面
-        return redirect(ReportApproveRegistController.MAPPING_URL + "/" + result.getApplyUserId() + "/"
-                        + result.getTargetYm(), "init");
+        return redirect(ReportApproveRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
+                        + entity.getTargetYm(), "init");
     }
 
 }

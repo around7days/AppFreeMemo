@@ -4,7 +4,7 @@ package rms.domain.app.mst.userlist;
  * ユーザ一覧（検索条件）Entity
  * @author
  */
-public class UserListEntityCondition extends rms.common.abstracts.AbstractEntity {
+public class UserListDtoCondition extends rms.common.abstracts.AbstractDto {
 
     /** ユーザID */
     private String userId;

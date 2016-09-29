@@ -4,7 +4,7 @@ package rms.domain.app.tran.reportapplylist;
  * 月報申請状況一覧（検索条件）Entity
  * @author
  */
-public class ReportApplyListEntityCondition extends rms.common.abstracts.AbstractEntity {
+public class ReportApplyListDtoCondition extends rms.common.abstracts.AbstractDto {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 申請者ID */

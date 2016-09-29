@@ -30,7 +30,7 @@ import rms.common.entity.VTReport;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.SessionUtils;
-import rms.domain.app.tran.reportapproveregist.ReportApproveRegistEntity;
+import rms.domain.app.tran.reportapproveregist.ReportApproveRegistDto;
 import rms.domain.app.tran.reportapproveregist.ReportApproveRegistService;
 import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
@@ -81,10 +81,10 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
                        @AuthenticationPrincipal UserInfo userInfo,
                        Model model) {
         // 月報情報の取得
-        VTReport vTReport = service.getReportInfo(applyUserId, targetYm);
+        VTReport entity = service.getReportInfo(applyUserId, targetYm);
 
         // 値を反映
-        BeanUtils.copyProperties(vTReport, form);
+        BeanUtils.copyProperties(entity, form);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -120,7 +120,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         }
 
         // 承認情報の生成
-        ReportApproveRegistEntity entity = BeanUtils.createCopyProperties(form, ReportApproveRegistEntity.class);
+        ReportApproveRegistDto entity = BeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
 
         // 承認処理の実行
         service.approve(entity);

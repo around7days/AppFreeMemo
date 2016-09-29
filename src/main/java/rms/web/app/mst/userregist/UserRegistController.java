@@ -26,7 +26,7 @@ import rms.common.consts.MessageConst;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.SelectOptionEntity;
 import rms.common.utils.SessionUtils;
-import rms.domain.app.mst.userregist.UserRegistEntity;
+import rms.domain.app.mst.userregist.UserRegistDto;
 import rms.domain.app.mst.userregist.UserRegistService;
 import rms.web.app.mst.userlist.UserListController;
 
@@ -98,7 +98,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
                              @PathVariable String userId,
                              Model model) {
         // 選択されたユーザIDに紐付くユーザ情報を取得
-        UserRegistEntity entity = service.getUserInfo(userId);
+        UserRegistDto entity = service.getUserInfo(userId);
 
         // 取得した情報をフォームに反映
         BeanUtils.copyProperties(entity, form);
@@ -135,7 +135,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         }
 
         // ユーザ登録情報Entityの生成
-        UserRegistEntity entity = BeanUtils.createCopyProperties(form, UserRegistEntity.class);
+        UserRegistDto entity = BeanUtils.createCopyProperties(form, UserRegistDto.class);
 
         // ユーザ情報登録処理
         service.regist(entity);
@@ -175,7 +175,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         }
 
         // ユーザ登録情報Entityの生成
-        UserRegistEntity entity = BeanUtils.createCopyProperties(form, UserRegistEntity.class);
+        UserRegistDto entity = BeanUtils.createCopyProperties(form, UserRegistDto.class);
 
         // ユーザ情報更新処理
         service.update(entity);

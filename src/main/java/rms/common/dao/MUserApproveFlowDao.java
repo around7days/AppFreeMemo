@@ -5,13 +5,12 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import rms.common.entity.MUserApproveFlow;
-
-import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
  * MUserApproveFlowDaoクラス
@@ -87,4 +86,13 @@ public interface MUserApproveFlowDao {
      */
     @Delete
     int delete(MUserApproveFlow entity);
+
+    /**
+     * ユーザIDに紐付くレコードを全て削除
+     * @param userId
+     * @return
+     */
+    @Delete(sqlFile = true)
+    int deleteListByUserId(String userId);
+
 }

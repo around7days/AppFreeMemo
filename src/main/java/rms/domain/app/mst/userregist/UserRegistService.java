@@ -16,21 +16,21 @@ public interface UserRegistService {
      * @param userId
      * @return
      */
-    public UserRegistEntity getUserInfo(String userId);
+    public UserRegistDto getUserInfo(String userId);
 
     /**
      * ユーザ情報登録処理
      * @param userRegistEntity
      * @throws BusinessException
      */
-    public void regist(UserRegistEntity userRegistEntity) throws BusinessException;
+    public void regist(UserRegistDto userRegistEntity) throws BusinessException;
 
     /**
      * ユーザ情報更新処理
      * @param userRegistEntity
      * @throws BusinessException
      */
-    public void update(UserRegistEntity userRegistEntity) throws BusinessException;
+    public void update(UserRegistDto userRegistEntity) throws BusinessException;
 
     /**
      * セレクトボックス用 承認者一覧情報の取得

@@ -23,9 +23,9 @@ public interface ReportApproveRegistService {
     /**
      * 月報情報の承認処理<br>
      * 補足：承認状況はメソッド内で自動設定
-     * @param reportApproveRegistEntity
+     * @param dto
      * @throws BusinessException
      * @throws IOException
      */
-    public void approve(ReportApproveRegistEntity reportApproveRegistEntity) throws BusinessException, IOException;
+    public void approve(ReportApproveRegistDto dto) throws BusinessException, IOException;
 }

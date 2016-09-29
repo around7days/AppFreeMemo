@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.utils.PageInfo;
 import rms.common.utils.SelectOptionsUtils;
-import rms.domain.app.shared.entity.SearchResultEntity;
+import rms.domain.app.shared.entity.SearchResultDto;
 
 /**
  * 月報申請状況一覧画面サービス
@@ -35,8 +35,8 @@ public class ReportApplyListServiceImpl implements ReportApplyListService {
      * @return
      */
     @Override
-    public SearchResultEntity<ReportApplyListEntityResult> search(ReportApplyListEntityCondition condition,
-                                                                  PageInfo pageInfo) {
+    public SearchResultDto<ReportApplyListEntityResult> search(ReportApplyListDtoCondition condition,
+                                                               PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
@@ -47,10 +47,10 @@ public class ReportApplyListServiceImpl implements ReportApplyListService {
         resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
-        SearchResultEntity<ReportApplyListEntityResult> resultEntity = new SearchResultEntity<>();
-        resultEntity.setResultList(resultList);
-        resultEntity.setCount(options.getCount());
+        SearchResultDto<ReportApplyListEntityResult> resultDto = new SearchResultDto<>();
+        resultDto.setResultList(resultList);
+        resultDto.setCount(options.getCount());
 
-        return resultEntity;
+        return resultDto;
     }
 }

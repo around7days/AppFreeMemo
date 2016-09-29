@@ -58,55 +58,55 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     public VTReport getReportInfo(String applyUserId,
                                   String targetYm) {
         // 月報情報の取得
-        VTReport vTReport = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
-        logger.debug("取得情報 -> {}", vTReport);
+        VTReport entity = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
+        logger.debug("取得情報 -> {}", entity);
 
-        return vTReport;
+        return entity;
     }
 
     /**
      * 月報情報の承認処理<br>
      * 補足：承認状況はメソッド内で自動設定
-     * @param reportApproveRegistEntity
+     * @param dto
      * @throws IOException
      */
     @Override
-    public void approve(ReportApproveRegistEntity reportApproveRegistEntity) throws IOException {
+    public void approve(ReportApproveRegistDto dto) throws IOException {
 
         // 月報テーブル更新処理
-        updateReport(reportApproveRegistEntity);
+        updateReport(dto);
 
         // 月報承認フローテーブル登録処理
-        updateReportApproveFlow(reportApproveRegistEntity);
+        updateReportApproveFlow(dto);
 
         // 月報ファイル保存処理
-        saveReportFile(reportApproveRegistEntity);
+        saveReportFile(dto);
     }
 
     /**
      * 月報テーブル更新処理
-     * @param reportApproveRegistEntity
+     * @param dto
      */
-    private void updateReport(ReportApproveRegistEntity reportApproveRegistEntity) {
+    private void updateReport(ReportApproveRegistDto dto) {
 
         TReport entity = new TReport();
 
         /*
          * 主キー
          */
-        entity.setApplyUserId(reportApproveRegistEntity.getApplyUserId());
-        entity.setTargetYm(Integer.valueOf(reportApproveRegistEntity.getTargetYm()));
-        entity.setVersion(reportApproveRegistEntity.getVersion()); // 排他制御用バージョン
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setVersion(dto.getVersion()); // 排他制御用バージョン
 
         /*
          * 更新項目
          */
         // 承認状況（現在の承認状況と承認者の有無で判断）
         String newStatus = null;
-        switch (reportApproveRegistEntity.getStatus()) {
+        switch (dto.getStatus()) {
         case MCodeConst.A001_Y01:
             newStatus = MCodeConst.A001_Y02;
-            if (StringUtils.isEmpty(reportApproveRegistEntity.getApproveUserNm2())) {
+            if (StringUtils.isEmpty(dto.getApproveUserNm2())) {
                 newStatus = MCodeConst.A001_Y03;
             }
             break;
@@ -127,20 +127,20 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
 
     /**
      * 月報承認フローテーブル更新処理
-     * @param reportApproveRegistEntity
+     * @param dto
      */
-    private void updateReportApproveFlow(ReportApproveRegistEntity reportApproveRegistEntity) {
+    private void updateReportApproveFlow(ReportApproveRegistDto dto) {
 
         TReportApproveFlow entity = new TReportApproveFlow();
 
         /*
          * 主キー
          */
-        entity.setApplyUserId(reportApproveRegistEntity.getApplyUserId());
-        entity.setTargetYm(Integer.valueOf(reportApproveRegistEntity.getTargetYm()));
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
         // SEQ（現在の承認状況で判断）
         int approveSeq = -1;
-        switch (reportApproveRegistEntity.getStatus()) {
+        switch (dto.getStatus()) {
         case MCodeConst.A001_Y01:
             approveSeq = Const.APPROVE_FLOW_SEQ_1;
             break;
@@ -167,16 +167,16 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
 
     /**
      * 月報ファイル保存処理
-     * @param reportApproveRegistEntity
+     * @param dto
      * @throws IOException
      */
-    private void saveReportFile(ReportApproveRegistEntity reportApproveRegistEntity) throws IOException {
+    private void saveReportFile(ReportApproveRegistDto dto) throws IOException {
         // 月報保存ファイルパスの生成
         Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       reportApproveRegistEntity.getApplyUserId(),
-                                                       reportApproveRegistEntity.getTargetYm());
+                                                       dto.getApplyUserId(),
+                                                       dto.getTargetYm());
         // 月報保存処理
-        FileUtils.reportSave(reportApproveRegistEntity.getFile().getInputStream(), filePath);
+        FileUtils.reportSave(dto.getFile().getInputStream(), filePath);
     }
 
 }

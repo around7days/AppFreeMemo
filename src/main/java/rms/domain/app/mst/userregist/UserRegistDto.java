@@ -4,7 +4,7 @@ package rms.domain.app.mst.userregist;
  * ユーザ情報Entity
  * @author
  */
-public class UserRegistEntity extends rms.common.abstracts.AbstractEntity {
+public class UserRegistDto extends rms.common.abstracts.AbstractDto {
 
     /* 排他制御用 ----------------------------------------------------------- */
     /** ユーザマスタ 排他制御用バージョン */

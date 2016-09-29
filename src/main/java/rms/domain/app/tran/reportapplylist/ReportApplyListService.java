@@ -1,7 +1,7 @@
 package rms.domain.app.tran.reportapplylist;
 
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.entity.SearchResultEntity;
+import rms.domain.app.shared.entity.SearchResultDto;
 
 /**
  * 月報申請状況一覧画面サービスインタフェース
@@ -15,6 +15,6 @@ public interface ReportApplyListService {
      * @param pageInfo
      * @return
      */
-    public SearchResultEntity<ReportApplyListEntityResult> search(ReportApplyListEntityCondition condition,
-                                                                  PageInfo pageInfo);
+    public SearchResultDto<ReportApplyListEntityResult> search(ReportApplyListDtoCondition condition,
+                                                               PageInfo pageInfo);
 }

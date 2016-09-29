@@ -36,7 +36,7 @@ public interface ReportApplyRegistService {
      * @throws BusinessException
      * @throws NumberFormatException
      */
-    public void apply(ReportApplyRegistEntity reportApplyRegistEntity) throws IOException, NumberFormatException,
+    public void apply(ReportApplyRegistDto reportApplyRegistEntity) throws IOException, NumberFormatException,
                                                                        BusinessException;
 
 }

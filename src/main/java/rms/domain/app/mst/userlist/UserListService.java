@@ -1,7 +1,7 @@
 package rms.domain.app.mst.userlist;
 
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.entity.SearchResultEntity;
+import rms.domain.app.shared.entity.SearchResultDto;
 
 /**
  * ユーザ一覧画面サービスインタフェース
@@ -15,6 +15,6 @@ public interface UserListService {
      * @param pageInfo
      * @return
      */
-    public SearchResultEntity<UserListEntityResult> search(UserListEntityCondition condition,
-                                                           PageInfo pageInfo);
+    public SearchResultDto<UserListEntityResult> search(UserListDtoCondition condition,
+                                                        PageInfo pageInfo);
 }

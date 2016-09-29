@@ -4,9 +4,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * AbstractDto
  * @author
  */
-public abstract class AbstractEntity {
+public abstract class AbstractDto {
 
     @Override
     public String toString() {
