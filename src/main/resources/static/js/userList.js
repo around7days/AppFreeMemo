@@ -76,9 +76,10 @@ $(function() {
 
 	/**
 	 * Enterキーで検索ボタン押下<br>
-	 * ※control.jsの処理を上書き？
+	 * ※control.jsの処理を上書き
 	 */
 	$("input").keydown(function(e) {
+		// TODO enterキー判断処理はcommon.jsに移したほうがいい？
 		if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
 			$("#search").click();
 		}

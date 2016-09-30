@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.utils.BeanUtils;
 import rms.common.utils.PageInfo;
@@ -164,11 +165,13 @@ public class UserListController extends rms.common.abstracts.AbstractController 
 
     /**
      * 戻る処理
+     * @param sessionStatus
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
-    public String back() {
-        // メニュー画面に遷移
+    public String back(SessionStatus sessionStatus) {
+        // セッション破棄
+        sessionStatus.setComplete();
         return redirect(MenuController.MAPPING_URL);
     }
 

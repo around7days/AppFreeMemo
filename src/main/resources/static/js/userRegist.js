@@ -37,6 +37,7 @@ $(function() {
 	 * 削除ボタン押下
 	 */
 	$("#delete").on("click", function() {
+		// TODO 実装するか検討中
 		alert("実装していません");
 		return false;
 	});

@@ -195,6 +195,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
     public String back(SessionStatus sessionStatus) {
+        // TODO 遷移元画面によって戻り先を分岐させる必要がある
         // セッション破棄
         sessionStatus.setComplete();
         return redirect(UserListController.MAPPING_URL, "reSearch");

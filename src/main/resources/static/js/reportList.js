@@ -55,4 +55,14 @@ $(function() {
 		fmMain.attr("action", url);
 		fmMain.submit();
 	});
+
+	/**
+	 * Enterキーで検索ボタン押下<br>
+	 * ※control.jsの処理を上書き
+	 */
+	$("input").keydown(function(e) {
+		if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+			$("#search").click();
+		}
+	});
 });

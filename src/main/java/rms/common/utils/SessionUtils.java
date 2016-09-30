@@ -7,12 +7,11 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
-import org.springframework.core.Conventions;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.core.Conventions;
 
 /**
  * セッション管理Utils
@@ -31,7 +30,7 @@ public class SessionUtils {
 
     /**
      * セッション情報を破棄<br>
-     * SPRING_SECURITY_CONTEXTとCSRF_TOKENを除く
+     * セッションキー除外対象リストを除く
      * @param session
      */
     public static void remove(HttpSession session) {

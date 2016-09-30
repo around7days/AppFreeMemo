@@ -163,10 +163,13 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
 
     /**
      * 戻る処理
+     * @param sessionStatus
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
-    public String back() {
+    public String back(SessionStatus sessionStatus) {
+        // セッション破棄
+        sessionStatus.setComplete();
         return redirect(MenuController.MAPPING_URL);
     }
 

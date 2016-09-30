@@ -2,6 +2,7 @@ package rms.domain.app.shared.entity;
 
 import java.util.List;
 
+// TODO このクラスはcommonパッケージのが正しい？
 /**
  * 検索結果格納Entity
  * @author
