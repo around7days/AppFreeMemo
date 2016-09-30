@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>月報一覧画面</title>
+	<title>月報一括承認画面</title>
 
 	<!-- bootstrap CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
@@ -23,10 +23,10 @@
 	<!-- common CSS -->
 	<link rel="stylesheet" id="myStyle" th:href="@{/css/com/common.css}" href="../../static/css/com/common.css" />
 	<!-- 個別 JS -->
-	<script th:src="@{/js/reportList.js}" src="../../static/js/reportList.js"></script>
+	<script th:src="@{/js/reportApproveRegistBulk.js}" src="../../static/js/reportApproveRegistBulk.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportListForm}" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApproveRegistBulkForm}" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -38,69 +38,61 @@
 
 			<!-- ヘッダ -->
 			<div class="page-header">
-				<h2>月報一覧画面</h2>
+				<h2>月報一括承認画面</h2>
 			</div>
 
 			<!-- メッセージ -->
 			<div th:replace="@{/html/include/include_message}::message" ></div>
 
 			<!--
-				検索条件
+				月報ファイル
 			 -->
 			<div class="form-horizontal">
-				<!-- 年月 -->
 				<div class="form-group">
-					<label class="col-sm-3 control-label">年月</label>
+					<label class="col-sm-3 control-label">月報(zip)</label>
 					<div class="col-sm-9">
-						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" />
-					</div>
-				</div>
-				<!-- 申請者 -->
-				<div class="form-group">
-					<label class="col-sm-3 control-label">申請者</label>
-					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.applyUserId}" name="condition.applyUserId" id="condition.applyUserId" placeholder="申請者ID（完全一致）" class="form-control" />
-						<input type="text" th:value="*{condition.applyUserNm}" name="condition.applyUserNm" id="condition.applyUserNm" placeholder="申請者名（部分一致）" class="form-control" />
+						<input type="text" name="file" id="file" class="form-control" />
 					</div>
 				</div>
 				<!-- ボタン -->
 				<div class="text-center">
 					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">戻る <span class="glyphicon glyphicon-chevron-left"></span></button>
-					<button type="submit" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
-					<button type="button" onclick="javascript:alert('実装していません')" class="btn btn-primary">月報一括DL <span class="glyphicon glyphicon-download"></span></button>
-					<button type="button" onclick="javascript:alert('実装していません')" class="btn btn-primary">提出一覧DL <span class="glyphicon glyphicon-download"></span></button>
+					<button type="submit" id="approveBulk" class="btn btn-primary">一括承認 <span class="glyphicon glyphicon-ok"></span></button>
 				</div>
-			</div><!-- /検索条件 -->
+			</div><!-- /月報ファイル -->
 
 			<!--
-				検索結果
+				実施結果
 			 -->
 			<div th:if="*{#lists.isEmpty(resultList) == false}">
-				<!-- ページング -->
-				<div th:replace="@{/html/include/include_page}::pageing" ></div>
-
 				<!-- 検索結果テーブル -->
 				<table class="table table-hover table-condensed" id="resultTable">
 					<!-- ヘッダ -->
 					<thead class="thead-default">
 						<tr>
-							<th>年月</th>
-							<th>申請者</th>
-							<th>承認状況</th>
-							<th>月報</th>
+							<th>No</th>
+							<th>ファイル名</th>
+							<th>申請年月</th>
+							<th>申請者ID</th>
+							<th>申請者名</th>
+							<th>処理結果</th>
+							<th>処理結果コメント</th>
 						</tr>
 					</thead>
 					<!-- 明細 -->
 					<tbody>
 						<tr th:each="result,iteStatus : *{resultList}">
-							<td th:text="${result.targetYm}">201606</td>
-							<td th:text="${result.applyUserNm}">月報太郎</td>
-							<td th:text="${result.statusNm}">承認済み</td>
-							<td><button type="submit" name="download" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
+							<td th:text="${iteStatus.index} + 1">1</td>
+							<td th:text="${result.fileNm}">201609_user01.xlsx</td>
+							<td th:text="${result.targetYm}">201609</td>
+							<td th:text="${result.applyUserId}">user01</td>
+							<td th:text="${result.applyUserNm}">申請太郎</td>
+							<td th:text="${result.status}">完了</td>
+							<td th:text="${result.statusComment}">正常に承認されました。</td>
 						</tr>
 					</tbody>
 				</table>
-			</div><!-- /検索結果 -->
+			</div><!-- /実施結果 -->
 
 		</div><!-- /画面サイズ指定 -->
 	</div><!-- /container -->

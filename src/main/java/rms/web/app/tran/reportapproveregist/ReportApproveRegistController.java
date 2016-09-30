@@ -167,7 +167,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(ReportApproveListController.MAPPING_URL, "search");
+        return redirect(ReportApproveListController.MAPPING_URL, "reSearch");
     }
 
     // ----------------------------------------------------------------------------------------

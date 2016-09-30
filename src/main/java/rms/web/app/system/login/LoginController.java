@@ -58,7 +58,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
 
         // 初期処理
         // XXX ダミー値
-        form.setUserId("user11");
+        form.setUserId("user06");
         form.setPassword("pass");
 
         return PAGE_URL;

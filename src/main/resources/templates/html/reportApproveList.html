@@ -20,6 +20,8 @@
 	<!-- common JS -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<script th:src="@{/js/com/control.js}" src="../../static/js/com/control.js"></script>
+	<!-- common CSS -->
+	<link rel="stylesheet" id="myStyle" th:href="@{/css/com/common.css}" href="../../static/css/com/common.css" />
 	<!-- 個別 JS -->
 	<script th:src="@{/js/reportApproveList.js}" src="../../static/js/reportApproveList.js"></script>
 </head>
@@ -58,7 +60,8 @@
 					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">戻る <span class="glyphicon glyphicon-chevron-left"></span></button>
 					<button type="submit" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
 					<button type="button" onclick="javascript:alert('実装していません')" class="btn btn-primary">一括DL <span class="glyphicon glyphicon-download"></span></button>
-					<button type="button" onclick="javascript:alert('実装していません')" class="btn btn-primary">一括承認 <span class="glyphicon glyphicon-chevron-right"></span></button>
+					<button type="button" onclick="javascript:alert('実装していません')" class="btn btn-primary">一括否認 <span class="glyphicon glyphicon-remove"></span></button>
+					<button type="submit" id="bulkApprove" formnovalidate="formnovalidate" class="btn btn-primary">一括承認 <span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 			</div><!-- /検索条件 -->
 
@@ -82,6 +85,7 @@
 							<th>承認者３</th>
 							<th>承認状況</th>
 							<th>月報</th>
+							<th><input type="checkbox" id="switchCheckBox" onclick="javascript:alert('実装していません')" /></th>
 						</tr>
 					</thead>
 					<!-- 明細 -->
@@ -104,6 +108,7 @@
 																 result.approveReportStatus == T(rms.common.consts.Const).APPROVE_REPORT_STATUS_COMPLETE}"
 												th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button>
 							</td>
+							<td><input type="checkbox" /></td>
 						</tr>
 					</tbody>
 				</table>

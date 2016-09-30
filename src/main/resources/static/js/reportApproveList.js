@@ -28,6 +28,15 @@ $(function() {
 	});
 
 	/**
+	 * 一括承認ボタン押下
+	 */
+	$("#bulkApprove").on("click", function() {
+		var url = defaultUrl + "?bulkApprove";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
 	 * 月報DLボタン押下<br>
 	 * (テーブル明細内)
 	 */

@@ -21,6 +21,15 @@ $(function() {
 	});
 
 	/**
+	 * 戻るボタン押下
+	 */
+	$("#back").on("click", function() {
+		var url = defaultUrl + "?back";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
 	 * 月報DLボタン押下<br>
 	 * (テーブル明細内)
 	 */

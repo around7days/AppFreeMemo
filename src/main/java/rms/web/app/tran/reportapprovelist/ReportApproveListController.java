@@ -30,6 +30,7 @@ import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListService;
 import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapproveregist.ReportApproveRegistController;
+import rms.web.app.tran.reportapproveregistbulk.ReportApproveRegistBulkController;
 
 /**
  * 月報承認状況一覧画面コントローラー
@@ -177,6 +178,15 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     }
 
     /**
+     * 一括承認ボタン押下処理
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL, params = "bulkApprove")
+    public String bulkApprove() {
+        return redirect(ReportApproveRegistBulkController.MAPPING_URL, "init");
+    }
+
+    /**
      * 月報DL処理
      * @param form
      * @param index
@@ -210,7 +220,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     }
 
     /**
-     * 月報選択処理
+     * 選択処理
      * @param form
      * @param index
      * @param model
