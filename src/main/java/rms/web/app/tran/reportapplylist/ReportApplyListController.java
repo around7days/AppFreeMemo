@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
+import rms.common.dto.SearchResultDto;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.entity.SearchResultDto;
 import rms.domain.app.tran.reportapplylist.ReportApplyListDtoCondition;
 import rms.domain.app.tran.reportapplylist.ReportApplyListEntityResult;
 import rms.domain.app.tran.reportapplylist.ReportApplyListService;

@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.PageInfo;
 import rms.domain.app.mst.userlist.UserListDtoCondition;
 import rms.domain.app.mst.userlist.UserListEntityResult;
 import rms.domain.app.mst.userlist.UserListService;
-import rms.domain.app.shared.entity.SearchResultDto;
 import rms.web.app.mst.userregist.UserRegistController;
 import rms.web.app.system.menu.MenuController;
 

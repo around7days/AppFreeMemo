@@ -34,7 +34,7 @@ public class ControllerInterceptor {
         /*
          * 処理実行前のログ出力
          */
-        logger.debug("[AOP before] called {}#{}", classNm, methodNm);
+        logger.info("[AOP before] called {}#{}", classNm, methodNm);
 
         /*
          * 処理の実行
@@ -47,7 +47,7 @@ public class ControllerInterceptor {
         if (isURL(retVal)) {
             logger.info("Return URL -> {}", retVal);
         }
-        logger.debug("[AOP after ] called {}#{}", classNm, methodNm);
+        logger.info("[AOP after ] called {}#{}", classNm, methodNm);
 
         return retVal;
     }

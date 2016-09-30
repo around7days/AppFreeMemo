@@ -1,12 +1,12 @@
-package rms.domain.app.shared.entity;
+package rms.common.dto;
 
 import java.util.List;
 
-// TODO このクラスはcommonパッケージのが正しい？
 /**
- * 検索結果格納Entity
+ * 検索結果格納クラス<br>
+ * 検索結果一覧と検索結果件数（総件数）を格納
  * @author
- * @param <T> Entity
+ * @param <T>
  */
 public class SearchResultDto<T> {
 

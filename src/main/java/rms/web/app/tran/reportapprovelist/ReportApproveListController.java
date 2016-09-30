@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
+import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.entity.SearchResultDto;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListDtoCondition;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListService;

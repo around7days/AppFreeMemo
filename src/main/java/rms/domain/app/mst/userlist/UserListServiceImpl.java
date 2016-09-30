@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
 import rms.common.utils.SelectOptionsUtils;
-import rms.domain.app.shared.entity.SearchResultDto;
 
 /**
  * ユーザ一覧画面サービス

@@ -113,22 +113,19 @@
 	◆コンテキストパス設定（/mms/○○でのアクセスを基準にしたい）
 
 	◆SQL自動生成
-	△doma-genでEntityの継承がしたい。
-	△独自のSQLファイルを作りたい。
+		△doma-genでEntityの継承がしたい。
+		△独自のSQLファイルを作りたい。
 
 	◆ソースコード自動生成
-	×htmlファイルへのパス定義の自動生成
-	×Formの自動生成
+		×htmlファイルへのパス定義の自動生成
+		×Formの自動生成
 
 	◆テキストボックス上でEnterキーでsubmitが掛かってしまう。
-	○javascriptでEnter
+		○javascriptでEnterキー制御
 
 【メモ】------------------------------------------------------
 redirectとforwardの使い分けどうしよう
 htmlのフォームにth:actionを足しておかないと何故か動かない・・・
-トランザクションの境界をコントローラにしているがおかしいらしい
-
-
 
 ■■■eclipse■■■
 ◆Pleiades All in One eclipse4.5
