@@ -69,9 +69,13 @@
 					<!-- 明細 -->
 					<tbody>
 						<tr th:each="result,iteStatus : *{resultList}">
-							<td><button type="submit" name="select" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
+							<td>
+								<button type="submit" name="select" formnovalidate="formnovalidate"
+												th:value="${iteStatus.index}" th:disabled="${result.operateFlg == false}"
+												class="btn btn-default btn-sm">選択</button>
+							</td>
 							<td th:text="${result.targetYm}">201606</td>
-							<td th:text="${result.applyDate}">2016/05/31 20:23</td>
+							<td th:text="${#temporals.format(result.applyDate, 'yyyy/MM/dd HH:mm')}">2016/05/31 20:23</td>
 							<td th:text="${result.approveUserNm1}">承認者１</td>
 							<td th:text="${result.approveUserNm2}">承認者２</td>
 							<td th:text="${result.approveUserNm3}">承認者３</td>

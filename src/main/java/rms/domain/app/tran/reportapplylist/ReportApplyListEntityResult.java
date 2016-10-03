@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 
+import rms.common.consts.MCodeConst;
+
 /**
  * 月報申請状況一覧（検索結果）クラス
  */
@@ -311,4 +313,21 @@ public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEn
         this.filePath = filePath;
     }
 
+    /* 独自getter ------------------------------------------------------------- */
+
+    /**
+     * 月報操作フラグ
+     * @return true:操作可能 false:操作不可
+     */
+    public boolean isOperateFlg() {
+        boolean flg = false;
+        switch (this.getStatus()) {
+        case MCodeConst.A001_AAA: // 未提出
+        case MCodeConst.A001_N01: // 否認１
+        case MCodeConst.A001_N02: // 否認２
+        case MCodeConst.A001_N03: // 否認３
+            flg = true;
+        }
+        return flg;
+    }
 }
