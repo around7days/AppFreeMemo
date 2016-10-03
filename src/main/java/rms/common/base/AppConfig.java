@@ -7,15 +7,15 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 @Configuration
 public class AppConfig {
 
-    //    @Bean
-    //    MessageSourceAccessor messageSourceAccessorResolver() {
-    //        return new MessageSourceAccessorResolver().resolve();
-    //    }
+    // @Bean
+    // MessageSourceAccessor messageSourceAccessorResolver() {
+    // return new MessageSourceAccessorResolver().resolve();
+    // }
 
-    //    @Bean
-    //    UserInfo userInfoResolver() {
-    //        return new UserInfoResolverImpl().resolve();
-    //    }
+    // @Bean
+    // UserInfo userInfoResolver() {
+    // return new UserInfoResolverImpl().resolve();
+    // }
 
     /**
      * Thymeleaf java8Time

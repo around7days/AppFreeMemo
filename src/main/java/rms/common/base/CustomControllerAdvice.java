@@ -20,11 +20,11 @@ public class CustomControllerAdvice {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
 
-    //    @InitBinder
-    //    public void initBinder(WebDataBinder dataBinder) {
-    //        // WebDataBinderのメソッドを呼び出してカスタマイズする
-    //        dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-    //    }
+    // @InitBinder
+    // public void initBinder(WebDataBinder dataBinder) {
+    // // WebDataBinderのメソッドを呼び出してカスタマイズする
+    // dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    // }
 
     @ModelAttribute
     public void addAttribute(Model model) {
@@ -32,12 +32,12 @@ public class CustomControllerAdvice {
         model.addAttribute("novalidate", properties.getBoolean("myapp.html5.novalidate"));
     }
 
-    //    @ExceptionHandler
-    //    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    //    public String handleSystemException(Exception e) {
-    //        // 例外ハンドリングを行う
-    //        logger.error("System Error occurred.", e);
-    //        return "error/system";
-    //    }
+    // @ExceptionHandler
+    // @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    // public String handleSystemException(Exception e) {
+    // // 例外ハンドリングを行う
+    // logger.error("System Error occurred.", e);
+    // return "error/system";
+    // }
 
 }

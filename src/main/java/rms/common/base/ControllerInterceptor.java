@@ -72,22 +72,22 @@ public class ControllerInterceptor {
     }
 
     //
-    //    /**
-    //     * Serviceクラス内のメソッド開始時にログを出力
-    //     * @param joinPoint
-    //     */
-    //    @Before("within(rms..*Service*)")
-    //    public void invokeServiceBefore(JoinPoint joinPoint) {
-    //        logger.debug("[AOP before] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
-    //    }
+    // /**
+    // * Serviceクラス内のメソッド開始時にログを出力
+    // * @param joinPoint
+    // */
+    // @Before("within(rms..*Service*)")
+    // public void invokeServiceBefore(JoinPoint joinPoint) {
+    // logger.debug("[AOP before] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
+    // }
     //
-    //    /**
-    //     * Serviceクラス内のメソッド終了時にログを出力
-    //     * @param joinPoint
-    //     */
-    //    @After("within(rms..*Service*)")
-    //    public void invokeServiceAfter(JoinPoint joinPoint) {
-    //        logger.debug("[AOP after ] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
-    //    }
+    // /**
+    // * Serviceクラス内のメソッド終了時にログを出力
+    // * @param joinPoint
+    // */
+    // @After("within(rms..*Service*)")
+    // public void invokeServiceAfter(JoinPoint joinPoint) {
+    // logger.debug("[AOP after ] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
+    // }
 
 }

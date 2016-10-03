@@ -1,26 +1,26 @@
 package rms.common.base;
 
-//package rms.com.base;
+// package rms.com.base;
 //
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.MessageSource;
-//import org.springframework.context.support.MessageSourceAccessor;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.context.MessageSource;
+// import org.springframework.context.support.MessageSourceAccessor;
 //
-///**
+/// **
 // * @author
 // */
-//public class MessageSourceAccessorResolver implements MessageSourceResolver {
+// public class MessageSourceAccessorResolver implements MessageSourceResolver {
 //
-//    @Autowired
-//    private MessageSource messageSource;
+// @Autowired
+// private MessageSource messageSource;
 //
-//    /*
-//     * (非 Javadoc)
-//     * @see rms.web.com.base.MessageSourceResolver#resolve(org.springframework.context.MessageSource)
-//     */
-//    @Override
-//    public MessageSourceAccessor resolve() {
-//        return new MessageSourceAccessor(messageSource);
-//    }
+// /*
+// * (非 Javadoc)
+// * @see rms.web.com.base.MessageSourceResolver#resolve(org.springframework.context.MessageSource)
+// */
+// @Override
+// public MessageSourceAccessor resolve() {
+// return new MessageSourceAccessor(messageSource);
+// }
 //
-//}
+// }

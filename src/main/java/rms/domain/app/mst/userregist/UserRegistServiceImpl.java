@@ -84,13 +84,13 @@ public class UserRegistServiceImpl implements UserRegistService {
         List<MUserRole> mUserRoleList = mUserRoleDao.selectListUserRoleByUserId(userId);
         for (MUserRole mUserRole : mUserRoleList) {
             switch (mUserRole.getRole()) {
-            case MRoleConst.APPLY: //申請者
+            case MRoleConst.APPLY: // 申請者
                 dto.setRoleApplyFlg(Const.FLG_ON);
                 break;
-            case MRoleConst.APPROVE: //承認者
+            case MRoleConst.APPROVE: // 承認者
                 dto.setRoleApproveFlg(Const.FLG_ON);
                 break;
-            case MRoleConst.ADMIN: //管理者者
+            case MRoleConst.ADMIN: // 管理者者
                 dto.setRoleAdminFlg(Const.FLG_ON);
                 break;
             }
