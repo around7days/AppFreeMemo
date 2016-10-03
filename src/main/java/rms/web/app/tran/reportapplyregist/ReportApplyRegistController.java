@@ -23,9 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
-import rms.common.consts.MCodeConst;
 import rms.common.consts.MessageConst;
-import rms.common.entity.VMUser;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.SessionUtils;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
@@ -73,15 +71,12 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     public String initInsert(ReportApplyRegistForm form,
                              @AuthenticationPrincipal UserInfo userInfo,
                              Model model) {
-        // 申請者のユーザ情報を取得
-        VMUser entity = service.getApplyUserInfo(userInfo.getUserId());
+        // 申請者の初期表示用情報を取得
+        ReportApplyRegistDto dto = service.getInitInsertReportInfo(userInfo.getUserId());
 
         // 値を設定
-        BeanUtils.copyProperties(entity, form);
-        // ユーザIDの設定
-        form.setApplyUserId(userInfo.getUserId());
-        // 初期値設定：公開有無を「公開」に設定
-        form.setPublishFlg(MCodeConst.B001_1);
+        BeanUtils.copyProperties(dto, form);
+
         // 画面表示モードを「新規」に設定
         form.setViewMode(ReportApplyRegistForm.VIEW_MODE_INSERT);
 

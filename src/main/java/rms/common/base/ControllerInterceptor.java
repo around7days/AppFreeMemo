@@ -44,10 +44,11 @@ public class ControllerInterceptor {
         /*
          * 処理実行後のログ出力
          */
+        logger.info("[AOP after ] called {}#{}", classNm, methodNm);
+
         if (isURL(retVal)) {
             logger.info("Return URL -> {}", retVal);
         }
-        logger.info("[AOP after ] called {}#{}", classNm, methodNm);
 
         return retVal;
     }

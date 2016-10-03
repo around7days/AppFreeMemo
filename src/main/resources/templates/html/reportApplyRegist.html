@@ -48,29 +48,23 @@
 				月報申請
 			-->
 			<div class="form-horizontal">
-				<!-- 申請者 -->
 				<div class="form-group">
+					<!-- 申請者 -->
 					<label class="col-sm-3 control-label">申請者</label>
 					<div class="col-sm-9">
-						<pre sec:authentication="principal.userNm">申請太郎</pre>
+						<p th:text="*{applyUserNm}" class="form-control-static">更新表示時のユーザ名</p>
 					</div>
-				</div>
-				<!-- 年月 -->
-				<div class="form-group">
+					<!-- 年月 -->
 					<label class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9">
 						<input type="text" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control datepicker-ym" required="required" />
 					</div>
-				</div>
-				<!-- 月報 -->
-				<div class="form-group">
+					<!-- 月報 -->
 					<label class="col-sm-3 control-label">月報</label>
 					<div class="col-sm-9">
 						<input type="file" name="file" id="file" required="required" class="form-control" />
 					</div>
-				</div>
-				<!-- 公開有無 -->
-				<div class="form-group">
+					<!-- 公開有無 -->
 					<label class="col-sm-3 control-label">公開有無</label>
 					<div class="col-sm-9">
 						<label class="radio-inline">
@@ -81,22 +75,23 @@
 						</label>
 					</div>
 				</div>
+
 				<!-- 承認者 -->
 				<div class="form-group">
 					<!-- 承認者1 -->
 					<label class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
-						<pre th:text="*{approveUserNm1}">承認太郎</pre>
+						<p th:text="*{approveUserNm1}" class="form-control-static">承認太郎</p>
 					</div>
 					<!-- 承認者2 -->
 					<label class="col-sm-3 control-label">承認者２</label>
 					<div class="col-sm-9">
-						<pre th:text="*{approveUserNm2}">承認花子</pre>
+						<p th:text="*{approveUserNm2}" class="form-control-static">承認花子</p>
 					</div>
 					<!-- 承認者3 -->
 					<label class="col-sm-3 control-label">承認者３</label>
 					<div class="col-sm-9">
-						<pre th:text="*{approveUserNm3}">承認一郎</pre>
+						<p th:text="*{approveUserNm3}" class="form-control-static">承認一郎</p>
 					</div>
 				</div>
 

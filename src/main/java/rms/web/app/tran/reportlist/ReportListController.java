@@ -194,8 +194,14 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
                                                        entity.getApplyUserId(),
                                                        entity.getTargetYm());
+
+        // ダウンロードファイル名の生成
+        String fileNm = FileUtils.createReportDownloadFileNm(entity.getApplyUserId(),
+                                                             entity.getApplyUserNm(),
+                                                             entity.getTargetYm());
+
         // 月報ダウンロード
-        FileUtils.reportDownload(response, filePath);
+        FileUtils.reportDownload(response, filePath, fileNm);
 
         return null;
     }

@@ -31,6 +31,8 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
 
     /** 申請者ID */
     private String applyUserId;
+    /** 申請者名 */
+    private String applyUserNm;
     /** 年月 */
     @NotEmpty(message = "年月は{NotEmpty.message}", groups = { Insert.class, Update.class })
     private String targetYm;
@@ -58,21 +60,9 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
      * 画面表示モードを取得します。
      * @return 画面表示モード
      */
-    /* getter/setter -------------------------------------------------------- */
-
-    /**
-     * 画面表示モードを取得します。
-     * @return 画面表示モード
-     */
     public String getViewMode() {
         return viewMode;
     }
-
-    /**
-     * 画面表示モードを設定します。
-     * @param viewMode 画面表示モード
-     */
-    /* getter/setter -------------------------------------------------------- */
 
     /**
      * 画面表示モードを設定します。
@@ -96,6 +86,22 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
      */
     public void setApplyUserId(String applyUserId) {
         this.applyUserId = applyUserId;
+    }
+
+    /**
+     * 申請者名を取得します。
+     * @return 申請者名
+     */
+    public String getApplyUserNm() {
+        return applyUserNm;
+    }
+
+    /**
+     * 申請者名を設定します。
+     * @param applyUserNm 申請者名
+     */
+    public void setApplyUserNm(String applyUserNm) {
+        this.applyUserNm = applyUserNm;
     }
 
     /**

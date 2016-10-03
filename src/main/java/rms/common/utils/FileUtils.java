@@ -9,10 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * ファイルUtilsクラス
@@ -47,20 +47,56 @@ public class FileUtils {
                                             String targetYm) {
         String filePath = targetYm + "_" + applyUserId + ".xlsx";
         return Paths.get(storageDir, filePath);
+    }
 
+    /**
+     * 月報ダウンロードファイル名の生成
+     * @param applyUserId
+     * @param applyUserNm
+     * @param targetYm
+     * @return
+     */
+    public static String createReportDownloadFileNm(String applyUserId,
+                                                    String applyUserNm,
+                                                    Integer targetYm) {
+        return createReportDownloadFileNm(applyUserId, applyUserNm, String.valueOf(targetYm));
+    }
+
+    /**
+     * 月報ダウンロードファイル名の生成
+     * @param applyUserId
+     * @param applyUserNm
+     * @param targetYm
+     * @return
+     */
+    public static String createReportDownloadFileNm(String applyUserId,
+                                                    String applyUserNm,
+                                                    String targetYm) {
+        // ユーザ名の空白除去（全角半角すべて）
+        String newApplyUserNm = applyUserNm.replaceAll("\\s", "").replaceAll("　", "");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(targetYm).append("_");
+        sb.append(applyUserId).append("_");
+        sb.append(newApplyUserNm);
+        sb.append(".xlsx");
+        return sb.toString();
     }
 
     /**
      * 月報ダウンロード
      * @param response
      * @param filePath
+     * @param fileNm
      * @throws IOException
      */
     public static void reportDownload(HttpServletResponse response,
-                                      Path filePath) throws IOException {
-        // 月報ファイルパスの生成
-        String encodeFileNm = URLEncoder.encode(filePath.toFile().getName(), StandardCharsets.UTF_8.name());
+                                      Path filePath,
+                                      String fileNm) throws IOException {
         logger.debug("月報ファイルダウンロード -> {}", filePath.toAbsolutePath().normalize());
+
+        // ファイルのエンコード
+        String encodeFileNm = URLEncoder.encode(fileNm, StandardCharsets.UTF_8.name());
 
         // ヘッダ設定
         response.addHeader("Content-Disposition", "attachment; filename*=UTF-8''" + encodeFileNm);

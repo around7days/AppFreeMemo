@@ -23,7 +23,6 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VMUser;
-import rms.common.entity.VTReport;
 import rms.common.utils.FileUtils;
 import rms.common.utils.StringUtils;
 
@@ -36,6 +35,7 @@ import rms.common.utils.StringUtils;
 public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApplyRegistServiceImpl.class);
 
     @Autowired
@@ -61,29 +61,31 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     VTReportDao vTReportDao;
 
     /**
-     * 申請者のユーザ情報を取得
+     * 初期表示用月報情報の生成（新規時）
      * @param userId
      * @return
      */
     @Override
-    public VMUser getApplyUserInfo(String userId) {
-        return vMUserDao.selectById(userId);
-    }
+    public ReportApplyRegistDto getInitInsertReportInfo(String userId) {
 
-    /**
-     * 月報情報の取得
-     * @param applyUserId
-     * @param targetYm
-     * @return
-     */
-    @Override
-    public VTReport getReportInfo(String applyUserId,
-                                  String targetYm) {
-        // 月報情報の取得
-        VTReport entity = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
-        logger.debug("取得情報 -> {}", entity);
+        // ユーザ情報の取得
+        VMUser entity = vMUserDao.selectById(userId);
 
-        return entity;
+        // 返却用DTOに反映
+        ReportApplyRegistDto dto = new ReportApplyRegistDto();
+        dto.setApplyUserId(entity.getUserId());
+        dto.setApplyUserNm(entity.getUserNm());
+        dto.setApproveUserId1(entity.getApproveUserId1());
+        dto.setApproveUserId2(entity.getApproveUserId2());
+        dto.setApproveUserId3(entity.getApproveUserId3());
+        dto.setApproveUserNm1(entity.getApproveUserNm1());
+        dto.setApproveUserNm2(entity.getApproveUserNm2());
+        dto.setApproveUserNm3(entity.getApproveUserNm3());
+
+        // 初期値の設定
+        dto.setPublishFlg(MCodeConst.B001_1); // 公開有無：公開
+
+        return dto;
     }
 
     /**

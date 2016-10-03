@@ -1,7 +1,4 @@
-/* Unmatched */
-input[type=text]:invalid {
-    background-color: pink;
-}
-input[type=password]:invalid {
-    background-color: pink;
+/* フォームバリデーションエラー */
+input:invalid {
+  border-color: red;
 }

@@ -3,8 +3,6 @@ package rms.domain.app.tran.reportapplyregist;
 import java.io.IOException;
 
 import rms.common.base.BusinessException;
-import rms.common.entity.VMUser;
-import rms.common.entity.VTReport;
 
 /**
  * 月報申請画面サービス
@@ -13,20 +11,11 @@ import rms.common.entity.VTReport;
 public interface ReportApplyRegistService {
 
     /**
-     * 申請者のユーザ情報を取得
+     * 初期表示用月報情報の生成（新規時）
      * @param userId
      * @return
      */
-    public VMUser getApplyUserInfo(String userId);
-
-    /**
-     * 月報情報の取得
-     * @param applyUserId
-     * @param targetYm
-     * @return
-     */
-    public VTReport getReportInfo(String applyUserId,
-                                  String targetYm);
+    public ReportApplyRegistDto getInitInsertReportInfo(String userId);
 
     /**
      * 月報情報の申請処理<br>

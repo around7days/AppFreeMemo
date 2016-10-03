@@ -10,6 +10,8 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
 
     /** 申請者ID */
     private String applyUserId;
+    /** 申請者名 */
+    private String applyUserNm;
     /** 年月 */
     private String targetYm;
     /** 月報ファイル */
@@ -45,6 +47,22 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
      */
     public void setApplyUserId(String applyUserId) {
         this.applyUserId = applyUserId;
+    }
+
+    /**
+     * 申請者名を取得します。
+     * @return 申請者名
+     */
+    public String getApplyUserNm() {
+        return applyUserNm;
+    }
+
+    /**
+     * 申請者名を設定します。
+     * @param applyUserNm 申請者名
+     */
+    public void setApplyUserNm(String applyUserNm) {
+        this.applyUserNm = applyUserNm;
     }
 
     /**

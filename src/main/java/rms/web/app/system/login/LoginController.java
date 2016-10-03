@@ -56,11 +56,6 @@ public class LoginController extends rms.common.abstracts.AbstractController {
             return forward(SecurityConfig.LOGOUT_MAPPING_URL);
         }
 
-        // 初期処理
-        // XXX ダミー値
-        form.setUserId("user06");
-        form.setPassword("pass");
-
         return PAGE_URL;
     }
 
