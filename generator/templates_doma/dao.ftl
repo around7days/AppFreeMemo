@@ -91,10 +91,20 @@ public interface ${simpleName} {
     int updateNoOptimisticLockException(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 
     /**
+     * 削除（楽観的排他制御）
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Delete(excludeNull = true)
+    int delete(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity) throws OptimisticLockException;
+
+    /**
      * 削除
      * @param entity
      * @return affected rows
+     * @throws OptimisticLockException
      */
-    @Delete
-    int delete(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
+    @Delete(excludeNull = true, ignoreVersion = true)
+    int deleteNoOptimisticLockException(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
 }

@@ -23,6 +23,8 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VMUser;
+import rms.common.entity.VTReport;
+import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.StringUtils;
 
@@ -62,14 +64,14 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
     /**
      * 初期表示用月報情報の生成（新規時）
-     * @param userId
+     * @param applyUserId
      * @return
      */
     @Override
-    public ReportApplyRegistDto getInitInsertReportInfo(String userId) {
+    public ReportApplyRegistDto getInitInsertReportInfo(String applyUserId) {
 
         // ユーザ情報の取得
-        VMUser entity = vMUserDao.selectById(userId);
+        VMUser entity = vMUserDao.selectById(applyUserId);
 
         // 返却用DTOに反映
         ReportApplyRegistDto dto = new ReportApplyRegistDto();
@@ -89,8 +91,26 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     }
 
     /**
+     * 初期表示用月報情報の生成（更新時）
+     * @param applyUserId
+     * @param targetYm
+     * @return
+     */
+    @Override
+    public ReportApplyRegistDto getInitUpdateReportInfo(String applyUserId,
+                                                        Integer targetYm) {
+
+        // ユーザ情報の取得
+        VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
+
+        // 返却用DTOに反映
+        ReportApplyRegistDto dto = BeanUtils.createCopyProperties(entity, ReportApplyRegistDto.class);
+
+        return dto;
+    }
+
+    /**
      * 月報情報の申請処理<br>
-     * 補足：承認状況はメソッド内で自動設定
      * @param dto
      * @throws IOException
      * @throws BusinessException
@@ -100,6 +120,31 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
         // 月報の重複チェック
         validateUniquReport(dto.getApplyUserId(), dto.getTargetYm());
+
+        // 月報申請処理
+        insertReport(dto);
+
+        // 月報承認フロー登録処理
+        insertReportApproveFlow(dto);
+
+        // 月報ファイル保存処理
+        saveReportFile(dto);
+    }
+
+    /**
+     * 月報情報の再申請処理<br>
+     * @param dto
+     * @throws IOException
+     * @throws BusinessException
+     */
+    @Override
+    public void reApply(ReportApplyRegistDto dto) throws IOException, BusinessException {
+
+        // 月報申請の物理削除
+        deleteReport(dto);
+
+        // 月報承認フローの物理削除
+        deleteReportApproveFlow(dto);
 
         // 月報申請処理
         insertReport(dto);
@@ -175,6 +220,42 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
         entity.setApproveUserId(dto.getApproveUserId3());
         tReportApproveFlowDao.insert(entity);
+    }
+
+    /**
+     * 月報申請の物理削除処理
+     * @param dto
+     */
+    private void deleteReport(ReportApplyRegistDto dto) {
+        // 月報申請情報の生成
+        TReport entity = new TReport();
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(dto.getTargetYm());
+        entity.setVersion(dto.getVersion());
+
+        // 削除処理
+        tReportDao.delete(entity);
+    }
+
+    /**
+     * 月報承認フローの物理削除処理
+     * @param dto
+     */
+    private void deleteReportApproveFlow(ReportApplyRegistDto dto) {
+        // 月報承認フロー情報の生成
+        TReportApproveFlow entity = new TReportApproveFlow();
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(dto.getTargetYm());
+
+        // 削除処理：承認者１
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
+        tReportApproveFlowDao.delete(entity);
+        // 削除処理：承認者２
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
+        tReportApproveFlowDao.delete(entity);
+        // 削除処理：承認者３
+        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
+        tReportApproveFlowDao.delete(entity);
     }
 
     /**

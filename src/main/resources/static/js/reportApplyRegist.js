@@ -12,11 +12,23 @@ $(function() {
 	/**
 	 * 申請ボタン押下
 	 */
-	$("#insert").on("click", function() {
+	$("#apply").on("click", function() {
 		if (!window.confirm("申請しますか？")) {
 			return false;
 		}
-		var url = defaultUrl + "?insert";
+		var url = defaultUrl + "?apply";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
+	 * 再申請ボタン押下
+	 */
+	$("#reApply").on("click", function() {
+		if (!window.confirm("再申請しますか？")) {
+			return false;
+		}
+		var url = defaultUrl + "?reApply";
 		fmMain.attr("action", url);
 		return true;
 	});

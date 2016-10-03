@@ -8,6 +8,11 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
 
+    /* 排他制御用 ----------------------------------------------------------- */
+    /** 月報テーブル 排他制御用バージョン */
+    private Integer version;
+
+    /* 変数宣言 ------------------------------------------------------------- */
     /** 申請者ID */
     private String applyUserId;
     /** 申請者名 */
@@ -32,6 +37,22 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
     private String approveUserNm3;
 
     /* getter/setter -------------------------------------------------------- */
+
+    /**
+     * 月報テーブル 排他制御用バージョンを取得します。
+     * @return 月報テーブル 排他制御用バージョン
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * 月報テーブル 排他制御用バージョンを設定します。
+     * @param version 月報テーブル 排他制御用バージョン
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     /**
      * 申請者IDを取得します。

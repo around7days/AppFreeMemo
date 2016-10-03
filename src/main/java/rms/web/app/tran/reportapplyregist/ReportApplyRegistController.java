@@ -91,7 +91,6 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @param form
      * @param applyUserId
      * @param targetYm
-     * @param userInfo
      * @param model
      * @return
      */
@@ -99,7 +98,6 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     public String initUpdate(ReportApplyRegistForm form,
                              @PathVariable String applyUserId,
                              @PathVariable Integer targetYm,
-                             @AuthenticationPrincipal UserInfo userInfo,
                              Model model) {
         // 月報情報の取得
         ReportApplyRegistDto dto = service.getInitUpdateReportInfo(applyUserId, targetYm);
@@ -117,7 +115,6 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
 
     /**
      * 申請処理
-     * @param userInfo
      * @param form
      * @param bindingResult
      * @param sessionStatus
@@ -127,10 +124,9 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @throws BusinessException
      * @throws IOException
      */
-    @RequestMapping(value = MAPPING_URL, params = "insert")
+    @RequestMapping(value = MAPPING_URL, params = "apply")
     public String apply(@Validated(ReportApplyRegistForm.Insert.class) ReportApplyRegistForm form,
                         BindingResult bindingResult,
-                        @AuthenticationPrincipal UserInfo userInfo,
                         SessionStatus sessionStatus,
                         RedirectAttributes redirectAttr,
                         Model model) throws IOException, BusinessException {
@@ -143,10 +139,49 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         }
 
         // 申請情報の生成
-        ReportApplyRegistDto entity = BeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
+        ReportApplyRegistDto dto = BeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
 
         // 申請処理
-        service.apply(entity);
+        service.apply(dto);
+
+        // 完了メッセージ
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.004", null, Locale.getDefault()));
+        // セッション破棄
+        sessionStatus.setComplete();
+
+        return redirect(MenuController.MAPPING_URL);
+    }
+
+    /**
+     * 再申請処理
+     * @param form
+     * @param bindingResult
+     * @param sessionStatus
+     * @param redirectAttr
+     * @param model
+     * @return
+     * @throws BusinessException
+     * @throws IOException
+     */
+    @RequestMapping(value = MAPPING_URL, params = "reApply")
+    public String reApply(@Validated(ReportApplyRegistForm.Insert.class) ReportApplyRegistForm form,
+                          BindingResult bindingResult,
+                          SessionStatus sessionStatus,
+                          RedirectAttributes redirectAttr,
+                          Model model) throws IOException, BusinessException {
+        logger.debug("入力フォーム情報 -> {}", form);
+
+        // 入力チェック
+        if (bindingResult.hasErrors()) {
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
+            return PAGE_URL;
+        }
+
+        // 再申請情報の生成
+        ReportApplyRegistDto dto = BeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
+
+        // 再申請処理
+        service.reApply(dto);
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.004", null, Locale.getDefault()));

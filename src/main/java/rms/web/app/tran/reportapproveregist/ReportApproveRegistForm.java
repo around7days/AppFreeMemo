@@ -11,7 +11,7 @@ import rms.common.validator.UploadFileNotEmptyAnnotation;
 public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
 
     /* 排他制御用 ----------------------------------------------------------- */
-    /** 月報管理テーブル 排他制御用バージョン */
+    /** 月報テーブル 排他制御用バージョン */
     private Integer version;
 
     /* 変数宣言 ------------------------------------------------------------- */
@@ -44,16 +44,16 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     /* getter/setter -------------------------------------------------------- */
 
     /**
-     * 月報管理テーブル 排他制御用バージョンを取得します。
-     * @return 月報管理テーブル 排他制御用バージョン
+     * 月報テーブル 排他制御用バージョンを取得します。
+     * @return 月報テーブル 排他制御用バージョン
      */
     public Integer getVersion() {
         return version;
     }
 
     /**
-     * 月報管理テーブル 排他制御用バージョンを設定します。
-     * @param version 月報管理テーブル 排他制御用バージョン
+     * 月報テーブル 排他制御用バージョンを設定します。
+     * @param version 月報テーブル 排他制御用バージョン
      */
     public void setVersion(Integer version) {
         this.version = version;
