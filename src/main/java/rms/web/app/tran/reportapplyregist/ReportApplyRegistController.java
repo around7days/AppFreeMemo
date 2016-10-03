@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -85,34 +86,34 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         return PAGE_URL;
     }
 
-    //    /**
-    //     * 初期表示処理（更新時）
-    //     * @param form
-    //     * @param applyUserId
-    //     * @param targetYm
-    //     * @param userInfo
-    //     * @param model
-    //     * @return
-    //     */
-    //    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initUpdate")
-    //    public String initUpdate(ReportApplyRegistForm form,
-    //                             @PathVariable String applyUserId,
-    //                             @PathVariable Integer targetYm,
-    //                             @AuthenticationPrincipal UserInfo userInfo,
-    //                             Model model) {
-    //        // 画面表示モードを「更新」に設定
-    //        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_UPDATE);
-    //
-    //        // 月報情報の取得
-    //        VTReport vTReport = service.getReportInfo(applyUserId, targetYm);
-    //
-    //        // 値を設定
-    //        BeanUtils.copyProperties(vTReport, form);
-    //
-    //        logger.debug("出力フォーム情報 -> {}", form);
-    //
-    //        return PAGE_URL;
-    //    }
+    /**
+     * 初期表示処理（更新時）
+     * @param form
+     * @param applyUserId
+     * @param targetYm
+     * @param userInfo
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initUpdate")
+    public String initUpdate(ReportApplyRegistForm form,
+                             @PathVariable String applyUserId,
+                             @PathVariable Integer targetYm,
+                             @AuthenticationPrincipal UserInfo userInfo,
+                             Model model) {
+        // 月報情報の取得
+        ReportApplyRegistDto dto = service.getInitUpdateReportInfo(applyUserId, targetYm);
+
+        // 値を設定
+        BeanUtils.copyProperties(dto, form);
+
+        // 画面表示モードを「更新」に設定
+        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_UPDATE);
+
+        logger.debug("出力フォーム情報 -> {}", form);
+
+        return PAGE_URL;
+    }
 
     /**
      * 申請処理
@@ -125,7 +126,6 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @return
      * @throws BusinessException
      * @throws IOException
-     * @throws NumberFormatException
      */
     @RequestMapping(value = MAPPING_URL, params = "insert")
     public String apply(@Validated(ReportApplyRegistForm.Insert.class) ReportApplyRegistForm form,
@@ -133,7 +133,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
                         @AuthenticationPrincipal UserInfo userInfo,
                         SessionStatus sessionStatus,
                         RedirectAttributes redirectAttr,
-                        Model model) throws NumberFormatException, IOException, BusinessException {
+                        Model model) throws IOException, BusinessException {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック

@@ -38,7 +38,7 @@ public class SessionUtils {
         while (e.hasMoreElements()) {
             String key = e.nextElement();
             if (!ignoreKeyList.contains(key)) {
-                logger.debug("remove session -> {}", key);
+                // logger.debug("remove session -> {}", key);
                 session.removeAttribute(key);
             }
         }

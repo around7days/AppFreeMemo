@@ -334,7 +334,7 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
     }
 
     /* 独自getter ------------------------------------------------------------- */
-
+    // TODO ここに書くべきではない？
     /**
      * 月報操作フラグ
      * @return true:操作可能 false:操作不可
@@ -378,6 +378,9 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
             case MCodeConst.A001_Y01: // 承認待ち１
             case MCodeConst.A001_Y02: // 承認待ち２
             case MCodeConst.A001_Y03: // 承認待ち３
+            case MCodeConst.A001_N01: // 否認１
+            case MCodeConst.A001_N02: // 否認２
+            case MCodeConst.A001_N03: // 否認３
             case MCodeConst.A001_ZZZ: // 承認済み
                 flg = true;
             }
@@ -386,6 +389,8 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
             switch (this.getStatus()) {
             case MCodeConst.A001_Y02: // 承認待ち２
             case MCodeConst.A001_Y03: // 承認待ち３
+            case MCodeConst.A001_N02: // 否認２
+            case MCodeConst.A001_N03: // 否認３
             case MCodeConst.A001_ZZZ: // 承認済み
                 flg = true;
             }
@@ -393,6 +398,7 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
             // 操作者が承認者３の場合
             switch (this.getStatus()) {
             case MCodeConst.A001_Y03: // 承認待ち３
+            case MCodeConst.A001_N03: // 否認３
             case MCodeConst.A001_ZZZ: // 承認済み
                 flg = true;
             }

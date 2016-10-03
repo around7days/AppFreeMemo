@@ -40,8 +40,8 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
     public static final String MAPPING_URL = "/tran/reportapproveregistbulk";
 
     /** 月報一括承認画面サービス */
-    //    @Autowired
-    //    ReportApproveRegistService service;
+    // @Autowired
+    // ReportApproveRegistService service;
 
     /**
      * 月報一括承認画面フォームの初期化
@@ -74,7 +74,6 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
      * @return
      * @throws IOException
      * @throws BusinessException
-     * @throws NumberFormatException
      */
     @RequestMapping(value = MAPPING_URL, params = "approveBulk")
     public String approveBulk(ReportApproveRegistBulkForm form,
@@ -121,30 +120,30 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
         return PAGE_URL;
     }
 
-    //    /**
-    //     * 月報DL処理
-    //     * @param form
-    //     * @param response
-    //     * @param model
-    //     * @return
-    //     * @throws IOException
-    //     */
-    //    @RequestMapping(value = MAPPING_URL, params = "download")
-    //    public String download(ReportApproveRegistBulkForm form,
-    //                           HttpServletResponse response,
-    //                           Model model) throws IOException {
-    //        /*
-    //         * ファイルダウンロード処理
-    //         */
-    //        // ダウンロードファイルパスの生成
-    //        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-    //                                                       form.getApplyUserId(),
-    //                                                       form.getTargetYm());
-    //        // 月報ダウンロード
-    //        FileUtils.reportDownload(response, filePath);
+    // /**
+    // * 月報DL処理
+    // * @param form
+    // * @param response
+    // * @param model
+    // * @return
+    // * @throws IOException
+    // */
+    // @RequestMapping(value = MAPPING_URL, params = "download")
+    // public String download(ReportApproveRegistBulkForm form,
+    // HttpServletResponse response,
+    // Model model) throws IOException {
+    // /*
+    // * ファイルダウンロード処理
+    // */
+    // // ダウンロードファイルパスの生成
+    // Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
+    // form.getApplyUserId(),
+    // form.getTargetYm());
+    // // 月報ダウンロード
+    // FileUtils.reportDownload(response, filePath);
     //
-    //        return null;
-    //    }
+    // return null;
+    // }
     //
     /**
      * 戻る処理
@@ -158,49 +157,49 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
         return redirect(ReportApproveListController.MAPPING_URL, "reSearch");
     }
     //
-    //    // ----------------------------------------------------------------------------------------
-    //    /**
-    //     * 業務エラー（BusinessException）のエラーハンドリング
-    //     * @param e
-    //     * @param session
-    //     * @param model
-    //     * @return
-    //     */
-    //    @ExceptionHandler(BusinessException.class)
-    //    public String handlerException(BusinessException e,
-    //                                   HttpSession session,
-    //                                   Model model) {
-    //        logger.debug("業務エラー -> {}", e.getErrorMessage());
+    // // ----------------------------------------------------------------------------------------
+    // /**
+    // * 業務エラー（BusinessException）のエラーハンドリング
+    // * @param e
+    // * @param session
+    // * @param model
+    // * @return
+    // */
+    // @ExceptionHandler(BusinessException.class)
+    // public String handlerException(BusinessException e,
+    // HttpSession session,
+    // Model model) {
+    // logger.debug("業務エラー -> {}", e.getErrorMessage());
     //
-    //        // メッセージを反映
-    //        model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
-    //        // セッションからフォーム情報を取得して反映
-    //        model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistBulkForm.class));
+    // // メッセージを反映
+    // model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
+    // // セッションからフォーム情報を取得して反映
+    // model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistBulkForm.class));
     //
-    //        return PAGE_URL;
-    //    }
+    // return PAGE_URL;
+    // }
     //
-    //    /**
-    //     * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
-    //     * @param e
-    //     * @param session
-    //     * @param model
-    //     * @return
-    //     */
-    //    @ExceptionHandler(OptimisticLockException.class)
-    //    public String handlerException(OptimisticLockException e,
-    //                                   HttpSession session,
-    //                                   Model model) {
-    //        logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
+    // /**
+    // * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
+    // * @param e
+    // * @param session
+    // * @param model
+    // * @return
+    // */
+    // @ExceptionHandler(OptimisticLockException.class)
+    // public String handlerException(OptimisticLockException e,
+    // HttpSession session,
+    // Model model) {
+    // logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
     //
-    //        // メッセージとフォーム情報を反映
-    //        model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
-    //        // セッションからフォーム情報を取得して反映
-    //        model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistBulkForm.class));
+    // // メッセージとフォーム情報を反映
+    // model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
+    // // セッションからフォーム情報を取得して反映
+    // model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistBulkForm.class));
     //
-    //        return PAGE_URL;
-    //    }
+    // return PAGE_URL;
+    // }
     //
-    //    // ----------------------------------------------------------------------------------------
+    // // ----------------------------------------------------------------------------------------
 
 }

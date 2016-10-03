@@ -22,6 +22,7 @@ import rms.common.utils.SelectOptionsUtils;
 public class ReportListServiceImpl implements ReportListService {
 
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportListServiceImpl.class);
 
     /** 月報情報取得Dao */
@@ -42,9 +43,6 @@ public class ReportListServiceImpl implements ReportListService {
 
         // 検索処理
         List<ReportListEntityResult> resultList = dao.reportListByCondition(condition, options);
-        logger.debug("検索結果(全件) -> {}件", options.getCount());
-        logger.debug("検索結果 -> {}件", resultList.size());
-        resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
         SearchResultDto<ReportListEntityResult> resultDto = new SearchResultDto<>();

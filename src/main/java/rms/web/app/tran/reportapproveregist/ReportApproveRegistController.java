@@ -101,7 +101,6 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @return
      * @throws IOException
      * @throws BusinessException
-     * @throws NumberFormatException
      */
     @RequestMapping(value = MAPPING_URL, params = "approve")
     public String approve(ReportApproveRegistForm form,
@@ -141,7 +140,6 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @return
      * @throws IOException
      * @throws BusinessException
-     * @throws NumberFormatException
      */
     @RequestMapping(value = MAPPING_URL, params = "deny")
     public String deny(ReportApproveRegistForm form,

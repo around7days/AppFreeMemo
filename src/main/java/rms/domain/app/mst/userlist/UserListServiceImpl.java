@@ -21,6 +21,7 @@ import rms.common.utils.SelectOptionsUtils;
 @Transactional(rollbackFor = Exception.class)
 public class UserListServiceImpl implements UserListService {
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserListServiceImpl.class);
 
     /** ユーザ情報取得Dao */
@@ -41,9 +42,6 @@ public class UserListServiceImpl implements UserListService {
 
         // 検索処理
         List<UserListEntityResult> resultList = dao.userListByCondition(condition, options);
-        logger.debug("検索結果(全件) -> {}件", options.getCount());
-        logger.debug("検索結果 -> {}件", resultList.size());
-        resultList.forEach(result -> logger.debug("{}", result));
 
         // 検索結果格納
         SearchResultDto<UserListEntityResult> resultDto = new SearchResultDto<>();

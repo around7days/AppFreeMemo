@@ -35,6 +35,7 @@ import rms.common.utils.StringUtils;
 @Transactional(rollbackFor = Exception.class)
 public class UserRegistServiceImpl implements UserRegistService {
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserRegistServiceImpl.class);
 
     /** ユーザ情報登録Dao */
@@ -94,8 +95,6 @@ public class UserRegistServiceImpl implements UserRegistService {
                 break;
             }
         }
-
-        logger.debug("取得情報 -> {}", dto);
 
         return dto;
     }

@@ -33,6 +33,17 @@ $(function() {
 	 * 月報DLボタン押下<br>
 	 * (テーブル明細内)
 	 */
+	$("#resultTable button[name='select']").on("click", function() {
+		var index = $(this).val();
+		var url = defaultUrl + "/" + index + "?select";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
+	 * 月報DLボタン押下<br>
+	 * (テーブル明細内)
+	 */
 	$("#resultTable button[name='download']").on("click", function() {
 		var index = $(this).val();
 		var url = defaultUrl + "/" + index + "?download";

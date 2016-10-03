@@ -94,10 +94,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * @param dto
      * @throws IOException
      * @throws BusinessException
-     * @throws NumberFormatException
      */
     @Override
-    public void apply(ReportApplyRegistDto dto) throws IOException, NumberFormatException, BusinessException {
+    public void apply(ReportApplyRegistDto dto) throws IOException, BusinessException {
 
         // 月報の重複チェック
         validateUniquReport(dto.getApplyUserId(), dto.getTargetYm());
@@ -105,7 +104,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 月報申請処理
         insertReport(dto);
 
-        //月報承認フロー登録処理
+        // 月報承認フロー登録処理
         insertReportApproveFlow(dto);
 
         // 月報ファイル保存処理
