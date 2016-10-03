@@ -19,6 +19,7 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
+import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.StringUtils;
 
@@ -31,6 +32,7 @@ import rms.common.utils.StringUtils;
 public class ReportApproveRegistServiceImpl implements ReportApproveRegistService {
 
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApproveRegistServiceImpl.class);
 
     /** application.properties */
@@ -55,13 +57,18 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
      * @return
      */
     @Override
-    public VTReport getReportInfo(String applyUserId,
-                                  String targetYm) {
+    public ReportApproveRegistDto getReportInfo(String applyUserId,
+                                                String targetYm) {
         // 月報情報の取得
         VTReport entity = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
-        logger.debug("取得情報 -> {}", entity);
 
-        return entity;
+        // 返却用DTOに反映
+        //        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(entity, ReportApproveRegistDto.class);
+
+        ReportApproveRegistDto dto = new ReportApproveRegistDto();
+        BeanUtils.copyProperties(entity, dto);
+
+        return dto;
     }
 
     /**
@@ -73,8 +80,8 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     @Override
     public void approve(ReportApproveRegistDto dto) throws IOException {
 
-        // 月報テーブル更新処理
-        updateReport(dto);
+        // 月報テーブル更新処理(承認)
+        updateReportApprove(dto);
 
         // 月報承認フローテーブル登録処理
         updateReportApproveFlow(dto);
@@ -84,10 +91,23 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     }
 
     /**
-     * 月報テーブル更新処理
+     * 月報情報の否認処理<br>
+     * 補足：承認状況はメソッド内で自動設定
+     * @param dto
+     * @throws IOException
+     */
+    @Override
+    public void deny(ReportApproveRegistDto dto) throws IOException {
+
+        // 月報テーブル更新処理
+        updateReportDeny(dto);
+    }
+
+    /**
+     * 月報テーブル更新処理(承認)
      * @param dto
      */
-    private void updateReport(ReportApproveRegistDto dto) {
+    private void updateReportApprove(ReportApproveRegistDto dto) {
 
         TReport entity = new TReport();
 
@@ -115,6 +135,45 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
             break;
         case MCodeConst.A001_Y03:
             newStatus = MCodeConst.A001_ZZZ;
+            break;
+        }
+        entity.setStatus(newStatus);
+
+        /*
+         * 更新処理
+         */
+        tReportDao.update(entity);
+    }
+
+    /**
+     * 月報テーブル更新処理(否認)
+     * @param dto
+     */
+    private void updateReportDeny(ReportApproveRegistDto dto) {
+
+        TReport entity = new TReport();
+
+        /*
+         * 主キー
+         */
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setVersion(dto.getVersion()); // 排他制御用バージョン
+
+        /*
+         * 更新項目
+         */
+        // 承認状況（現在の承認状況と承認者の有無で判断）
+        String newStatus = null;
+        switch (dto.getStatus()) {
+        case MCodeConst.A001_Y01:
+            newStatus = MCodeConst.A001_N01;
+            break;
+        case MCodeConst.A001_Y02:
+            newStatus = MCodeConst.A001_N02;
+            break;
+        case MCodeConst.A001_Y03:
+            newStatus = MCodeConst.A001_N03;
             break;
         }
         entity.setStatus(newStatus);

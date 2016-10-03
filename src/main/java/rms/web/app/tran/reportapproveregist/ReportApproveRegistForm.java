@@ -21,11 +21,17 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     private String applyUserNm;
     /** 年月 */
     private String targetYm;
-    /** 月報ファイル */
-    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}")
-    private MultipartFile file;
     /** 公開有無名称 */
     private String publishFlgNm;
+    /** 承認者月報ファイル */
+    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}")
+    private MultipartFile file;
+    /** 承認者ID1 */
+    private String approveUserId1;
+    /** 承認者ID2 */
+    private String approveUserId2;
+    /** 承認者ID3 */
+    private String approveUserId3;
     /** 承認者名1 */
     private String approveUserNm1;
     /** 承認者名2 */
@@ -102,22 +108,6 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     }
 
     /**
-     * 月報ファイルを取得します。
-     * @return 月報ファイル
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * 月報ファイルを設定します。
-     * @param file 月報ファイル
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-
-    /**
      * 公開有無名称を取得します。
      * @return 公開有無名称
      */
@@ -131,6 +121,70 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
      */
     public void setPublishFlgNm(String publishFlgNm) {
         this.publishFlgNm = publishFlgNm;
+    }
+
+    /**
+     * 承認者月報ファイルを取得します。
+     * @return 承認者月報ファイル
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * 承認者月報ファイルを設定します。
+     * @param file 承認者月報ファイル
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    /**
+     * 承認者ID1を取得します。
+     * @return 承認者ID1
+     */
+    public String getApproveUserId1() {
+        return approveUserId1;
+    }
+
+    /**
+     * 承認者ID1を設定します。
+     * @param approveUserId1 承認者ID1
+     */
+    public void setApproveUserId1(String approveUserId1) {
+        this.approveUserId1 = approveUserId1;
+    }
+
+    /**
+     * 承認者ID2を取得します。
+     * @return 承認者ID2
+     */
+    public String getApproveUserId2() {
+        return approveUserId2;
+    }
+
+    /**
+     * 承認者ID2を設定します。
+     * @param approveUserId2 承認者ID2
+     */
+    public void setApproveUserId2(String approveUserId2) {
+        this.approveUserId2 = approveUserId2;
+    }
+
+    /**
+     * 承認者ID3を取得します。
+     * @return 承認者ID3
+     */
+    public String getApproveUserId3() {
+        return approveUserId3;
+    }
+
+    /**
+     * 承認者ID3を設定します。
+     * @param approveUserId3 承認者ID3
+     */
+    public void setApproveUserId3(String approveUserId3) {
+        this.approveUserId3 = approveUserId3;
     }
 
     /**

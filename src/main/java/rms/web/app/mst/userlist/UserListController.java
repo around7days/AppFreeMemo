@@ -119,6 +119,11 @@ public class UserListController extends rms.common.abstracts.AbstractController 
                            Model model) {
         logger.debug("入力フォーム情報 -> {}", form);
 
+        if (form.getPageInfo().getTotalSize() == 0) {
+            // 検索実績なしのため、再検索を行わない
+            return PAGE_URL;
+        }
+
         // 検索条件の生成
         UserListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
                                                                         UserListDtoCondition.class);

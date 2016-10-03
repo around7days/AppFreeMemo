@@ -132,6 +132,11 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
                            Model model) {
         logger.debug("フォーム情報 -> {}", form);
 
+        if (form.getPageInfo().getTotalSize() == 0) {
+            // 検索実績なしのため、再検索を行わない
+            return PAGE_URL;
+        }
+
         // 検索条件の生成
         ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
         BeanUtils.copyProperties(form.getCondition(), condition);

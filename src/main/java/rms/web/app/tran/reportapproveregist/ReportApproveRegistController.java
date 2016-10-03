@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageConst;
-import rms.common.entity.VTReport;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.SessionUtils;
@@ -81,10 +80,10 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
                        @AuthenticationPrincipal UserInfo userInfo,
                        Model model) {
         // 月報情報の取得
-        VTReport entity = service.getReportInfo(applyUserId, targetYm);
+        ReportApproveRegistDto dto = service.getReportInfo(applyUserId, targetYm);
 
         // 値を反映
-        BeanUtils.copyProperties(entity, form);
+        BeanUtils.copyProperties(dto, form);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -120,10 +119,42 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         }
 
         // 承認情報の生成
-        ReportApproveRegistDto entity = BeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
+        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
 
         // 承認処理の実行
-        service.approve(entity);
+        service.approve(dto);
+
+        // 完了メッセージ
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        // セッション破棄
+        sessionStatus.setComplete();
+
+        return redirect(MenuController.MAPPING_URL);
+    }
+
+    /**
+     * 否認処理
+     * @param form
+     * @param sessionStatus
+     * @param redirectAttr
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws BusinessException
+     * @throws NumberFormatException
+     */
+    @RequestMapping(value = MAPPING_URL, params = "deny")
+    public String deny(ReportApproveRegistForm form,
+                       SessionStatus sessionStatus,
+                       RedirectAttributes redirectAttr,
+                       Model model) throws IOException, BusinessException {
+        logger.debug("入力フォーム情報 -> {}", form);
+
+        // 否認情報の生成
+        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
+
+        // 否認処理の実行
+        service.deny(dto);
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));

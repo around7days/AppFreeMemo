@@ -8,7 +8,8 @@ from
 -- 月報提出済み
 --
 select
-    A.apply_user_id
+    /*^ condition.approveUserId */'user07' as approve_user_id
+  , A.apply_user_id
   , A.apply_user_nm
   , A.target_ym
   , A.apply_date
@@ -16,32 +17,6 @@ select
   , A.publish_flg_nm
   , A.status
   , A.status_nm
-  , case
-      when A.approve_user_id1 = /* condition.approveUserId */'user07' then
-        case A.status
-          when 'Y01' then '2'         -- 入力中
-          when 'Y02' then '3'         -- 入力済み
-          when 'Y03' then '3'         -- 入力済み
-          when 'ZZZ' then '3'         -- 入力済み
-          else            '1'         -- 依頼待ち
-        end
-      when A.approve_user_id2 = /* condition.approveUserId */'user07' then
-        case A.status
-          when 'Y01' then '1'         -- 依頼待ち
-          when 'Y02' then '2'         -- 入力中
-          when 'Y03' then '3'         -- 入力済み
-          when 'ZZZ' then '3'         -- 入力済み
-          else            '1'         -- 依頼待ち
-        end
-      when A.approve_user_id3 = /* condition.approveUserId */'user07' then
-        case A.status
-          when 'Y01' then '1'         -- 依頼待ち
-          when 'Y02' then '1'         -- 依頼待ち
-          when 'Y03' then '2'         -- 入力中
-          when 'ZZZ' then '3'         -- 入力済み
-          else            '1'         -- 依頼待ち
-        end
-    end as approve_report_status -- 承認状況（承認者視点）
   , A.approve_user_id1
   , A.approve_user_nm1
   , A.approve_user_id2
@@ -63,7 +38,8 @@ union all
 -- 月報未提出
 --
 select
-    M.user_id
+    /*^ condition.approveUserId */'user07' as approve_user_id
+  , M.user_id
   , M.user_nm
   , null
   , null
@@ -71,7 +47,6 @@ select
   , null
   , 'AAA'
   , (select A001.code_nm from m_code A001 where A001.code_kbn = 'A001' and A001.code = 'AAA')
-  , '1' -- 承認状況（承認者視点） 依頼待ち
   , M.approve_user_id1
   , M.approve_user_nm1
   , M.approve_user_id2
