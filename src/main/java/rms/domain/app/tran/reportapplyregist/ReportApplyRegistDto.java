@@ -13,7 +13,7 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
     /** 申請者名 */
     private String applyUserNm;
     /** 年月 */
-    private String targetYm;
+    private Integer targetYm;
     /** 月報ファイル */
     private MultipartFile file;
     /** 公開有無 */
@@ -69,7 +69,7 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
      * 年月を取得します。
      * @return 年月
      */
-    public String getTargetYm() {
+    public Integer getTargetYm() {
         return targetYm;
     }
 
@@ -77,7 +77,7 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
      * 年月を設定します。
      * @param targetYm 年月
      */
-    public void setTargetYm(String targetYm) {
+    public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
     }
 

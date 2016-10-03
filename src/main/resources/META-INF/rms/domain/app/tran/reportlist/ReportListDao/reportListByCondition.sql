@@ -24,7 +24,7 @@ and A.apply_user_id = /* condition.applyUserId */'user01'
 /*%if @isNotEmpty(condition.applyUserNm) */
 and A.apply_user_nm like /* @infix(condition.applyUserNm) */'%申請者%'
 /*%end */
-/*%if @isNotEmpty(condition.targetYm) */
+/*%if condition.targetYm != null */
 and A.target_ym = /* condition.targetYm */'201606'
 /*%end */
 order by

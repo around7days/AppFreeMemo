@@ -76,7 +76,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "init")
     public String init(ReportApproveRegistForm form,
                        @PathVariable String applyUserId,
-                       @PathVariable String targetYm,
+                       @PathVariable Integer targetYm,
                        @AuthenticationPrincipal UserInfo userInfo,
                        Model model) {
         // 月報情報の取得
@@ -125,7 +125,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         service.approve(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -157,7 +157,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         service.deny(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.006", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 

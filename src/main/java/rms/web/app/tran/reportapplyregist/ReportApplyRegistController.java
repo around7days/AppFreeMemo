@@ -97,7 +97,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     //    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initUpdate")
     //    public String initUpdate(ReportApplyRegistForm form,
     //                             @PathVariable String applyUserId,
-    //                             @PathVariable String targetYm,
+    //                             @PathVariable Integer targetYm,
     //                             @AuthenticationPrincipal UserInfo userInfo,
     //                             Model model) {
     //        // 画面表示モードを「更新」に設定
@@ -149,7 +149,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         service.apply(entity);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.004", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 

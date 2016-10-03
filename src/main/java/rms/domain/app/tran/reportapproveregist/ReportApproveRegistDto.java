@@ -17,7 +17,7 @@ public class ReportApproveRegistDto extends rms.common.abstracts.AbstractDto {
     /** 申請者名 */
     private String applyUserNm;
     /** 年月 */
-    private String targetYm;
+    private Integer targetYm;
     /** 公開有無名称 */
     private String publishFlgNm;
     /** 承認者月報ファイル */
@@ -91,7 +91,7 @@ public class ReportApproveRegistDto extends rms.common.abstracts.AbstractDto {
      * 年月を取得します。
      * @return 年月
      */
-    public String getTargetYm() {
+    public Integer getTargetYm() {
         return targetYm;
     }
 
@@ -99,7 +99,7 @@ public class ReportApproveRegistDto extends rms.common.abstracts.AbstractDto {
      * 年月を設定します。
      * @param targetYm 年月
      */
-    public void setTargetYm(String targetYm) {
+    public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
     }
 

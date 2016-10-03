@@ -10,7 +10,7 @@ public class ReportApproveListDtoCondition extends rms.common.abstracts.Abstract
     /** 承認者ID */
     private String approveUserId;
     /** 対象年月 */
-    private String targetYm;
+    private Integer targetYm;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -33,7 +33,7 @@ public class ReportApproveListDtoCondition extends rms.common.abstracts.Abstract
      * 対象年月を取得します。
      * @return 対象年月
      */
-    public String getTargetYm() {
+    public Integer getTargetYm() {
         return targetYm;
     }
 
@@ -41,7 +41,7 @@ public class ReportApproveListDtoCondition extends rms.common.abstracts.Abstract
      * 対象年月を設定します。
      * @param targetYm 対象年月
      */
-    public void setTargetYm(String targetYm) {
+    public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
     }
 

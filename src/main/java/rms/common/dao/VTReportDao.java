@@ -33,7 +33,7 @@ public interface VTReportDao {
      */
     @Select
     VTReport selectById(String applyUserId,
-                        String targetYm,
+                        Integer targetYm,
                         SelectOptions options);
 
 }

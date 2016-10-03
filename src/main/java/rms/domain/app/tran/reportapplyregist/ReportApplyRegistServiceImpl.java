@@ -100,7 +100,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     public void apply(ReportApplyRegistDto dto) throws IOException, NumberFormatException, BusinessException {
 
         // 月報の重複チェック
-        validateUniquReport(dto.getApplyUserId(), Integer.valueOf(dto.getTargetYm()));
+        validateUniquReport(dto.getApplyUserId(), dto.getTargetYm());
 
         // 月報申請処理
         insertReport(dto);
@@ -136,7 +136,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 申請情報の生成
         TReport entity = new TReport();
         entity.setApplyUserId(dto.getApplyUserId());
-        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setTargetYm(dto.getTargetYm());
         entity.setApplyDate(LocalDateTime.now());
         entity.setPublishFlg(dto.getPublishFlg());
         entity.setFilePath("");
@@ -162,7 +162,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 月報承認フロー情報の生成
         TReportApproveFlow entity = new TReportApproveFlow();
         entity.setApplyUserId(dto.getApplyUserId());
-        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setTargetYm(dto.getTargetYm());
 
         // 登録処理：承認者１
         entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);

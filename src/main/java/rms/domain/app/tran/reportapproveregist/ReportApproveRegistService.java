@@ -17,7 +17,7 @@ public interface ReportApproveRegistService {
      * @return
      */
     public ReportApproveRegistDto getReportInfo(String applyUserId,
-                                                String targetYm);
+                                                Integer targetYm);
 
     /**
      * 月報情報の承認処理<br>

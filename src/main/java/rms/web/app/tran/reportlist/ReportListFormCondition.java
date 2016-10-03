@@ -8,7 +8,7 @@ public class ReportListFormCondition extends rms.common.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 対象年月 */
-    private String targetYm;
+    private Integer targetYm;
     /** 申請者ID */
     private String applyUserId;
     /** 申請者名 */
@@ -19,7 +19,7 @@ public class ReportListFormCondition extends rms.common.abstracts.AbstractForm {
      * 対象年月を取得します。
      * @return 対象年月
      */
-    public String getTargetYm() {
+    public Integer getTargetYm() {
         return targetYm;
     }
 
@@ -27,7 +27,7 @@ public class ReportListFormCondition extends rms.common.abstracts.AbstractForm {
      * 対象年月を設定します。
      * @param targetYm 対象年月
      */
-    public void setTargetYm(String targetYm) {
+    public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
     }
 

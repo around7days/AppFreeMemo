@@ -32,19 +32,6 @@ public class FileUtils {
     public static Path createReportFilePath(String storageDir,
                                             String applyUserId,
                                             Integer targetYm) {
-        return createReportFilePath(storageDir, applyUserId, String.valueOf(targetYm));
-    }
-
-    /**
-     * 月報ファイルパスの生成
-     * @param storageDir
-     * @param applyUserId
-     * @param targetYm
-     * @return
-     */
-    public static Path createReportFilePath(String storageDir,
-                                            String applyUserId,
-                                            String targetYm) {
         String filePath = targetYm + "_" + applyUserId + ".xlsx";
         return Paths.get(storageDir, filePath);
     }
@@ -59,19 +46,6 @@ public class FileUtils {
     public static String createReportDownloadFileNm(String applyUserId,
                                                     String applyUserNm,
                                                     Integer targetYm) {
-        return createReportDownloadFileNm(applyUserId, applyUserNm, String.valueOf(targetYm));
-    }
-
-    /**
-     * 月報ダウンロードファイル名の生成
-     * @param applyUserId
-     * @param applyUserNm
-     * @param targetYm
-     * @return
-     */
-    public static String createReportDownloadFileNm(String applyUserId,
-                                                    String applyUserNm,
-                                                    String targetYm) {
         // ユーザ名の空白除去（全角半角すべて）
         String newApplyUserNm = applyUserNm.replaceAll("\\s", "").replaceAll("　", "");
 

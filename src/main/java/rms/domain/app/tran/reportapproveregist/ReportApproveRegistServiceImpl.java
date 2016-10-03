@@ -58,15 +58,12 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
      */
     @Override
     public ReportApproveRegistDto getReportInfo(String applyUserId,
-                                                String targetYm) {
+                                                Integer targetYm) {
         // 月報情報の取得
-        VTReport entity = vTReportDao.selectById(applyUserId, Integer.valueOf(targetYm));
+        VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
 
         // 返却用DTOに反映
-        //        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(entity, ReportApproveRegistDto.class);
-
-        ReportApproveRegistDto dto = new ReportApproveRegistDto();
-        BeanUtils.copyProperties(entity, dto);
+        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(entity, ReportApproveRegistDto.class);
 
         return dto;
     }
@@ -115,7 +112,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
          * 主キー
          */
         entity.setApplyUserId(dto.getApplyUserId());
-        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setTargetYm(dto.getTargetYm());
         entity.setVersion(dto.getVersion()); // 排他制御用バージョン
 
         /*
@@ -157,7 +154,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
          * 主キー
          */
         entity.setApplyUserId(dto.getApplyUserId());
-        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setTargetYm(dto.getTargetYm());
         entity.setVersion(dto.getVersion()); // 排他制御用バージョン
 
         /*
@@ -196,7 +193,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
          * 主キー
          */
         entity.setApplyUserId(dto.getApplyUserId());
-        entity.setTargetYm(Integer.valueOf(dto.getTargetYm()));
+        entity.setTargetYm(dto.getTargetYm());
         // SEQ（現在の承認状況で判断）
         int approveSeq = -1;
         switch (dto.getStatus()) {

@@ -1,6 +1,7 @@
 package rms.web.app.tran.reportapplyregist;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import rms.common.validator.UploadFileNotEmptyAnnotation;
@@ -34,8 +35,8 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     /** 申請者名 */
     private String applyUserNm;
     /** 年月 */
-    @NotEmpty(message = "年月は{NotEmpty.message}", groups = { Insert.class, Update.class })
-    private String targetYm;
+    @NotNull(message = "年月は{NotNull.message}", groups = { Insert.class, Update.class })
+    private Integer targetYm;
     /** 月報ファイル */
     @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}", groups = { Insert.class, Update.class })
     private MultipartFile file;
@@ -108,7 +109,7 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
      * 年月を取得します。
      * @return 年月
      */
-    public String getTargetYm() {
+    public Integer getTargetYm() {
         return targetYm;
     }
 
@@ -116,7 +117,7 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
      * 年月を設定します。
      * @param targetYm 年月
      */
-    public void setTargetYm(String targetYm) {
+    public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
     }
 
