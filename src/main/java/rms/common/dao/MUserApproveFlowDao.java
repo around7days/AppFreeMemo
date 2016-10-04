@@ -19,6 +19,8 @@ import rms.common.entity.MUserApproveFlow;
 @ConfigAutowireable
 public interface MUserApproveFlowDao {
 
+    /* 自動生成メソッド ------------------------------------------------------------- */
+
     /**
      * 1件取得
      * @param userId
@@ -80,12 +82,24 @@ public interface MUserApproveFlowDao {
     int updateNoOptimisticLockException(MUserApproveFlow entity);
 
     /**
+     * 削除（楽観的排他制御）
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Delete
+    int delete(MUserApproveFlow entity) throws OptimisticLockException;
+
+    /**
      * 削除
      * @param entity
      * @return affected rows
+     * @throws OptimisticLockException
      */
-    @Delete
-    int delete(MUserApproveFlow entity);
+    @Delete(ignoreVersion = true)
+    int deleteNoOptimisticLockException(MUserApproveFlow entity);
+
+    /* 独自メソッド ------------------------------------------------------------- */
 
     /**
      * ユーザIDに紐付くレコードを全て削除

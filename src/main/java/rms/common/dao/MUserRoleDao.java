@@ -21,6 +21,8 @@ import rms.common.entity.MUserRole;
 @ConfigAutowireable
 public interface MUserRoleDao {
 
+    /* 自動生成メソッド ------------------------------------------------------------- */
+
     /**
      * 1件取得
      * @param userId
@@ -57,14 +59,6 @@ public interface MUserRoleDao {
                                    Integer version) throws NoResultException;
 
     /**
-     * ユーザIDに紐付く一覧を取得
-     * @param userId
-     * @return
-     */
-    @Select
-    List<MUserRole> selectListUserRoleByUserId(String userId);
-
-    /**
      * 挿入
      * @param entity
      * @return affected rows
@@ -90,12 +84,32 @@ public interface MUserRoleDao {
     int updateNoOptimisticLockException(MUserRole entity);
 
     /**
+     * 削除（楽観的排他制御）
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Delete
+    int delete(MUserRole entity) throws OptimisticLockException;
+
+    /**
      * 削除
      * @param entity
      * @return affected rows
+     * @throws OptimisticLockException
      */
-    @Delete
-    int delete(MUserRole entity);
+    @Delete(ignoreVersion = true)
+    int deleteNoOptimisticLockException(MUserRole entity);
+
+    /* 独自メソッド ------------------------------------------------------------- */
+
+    /**
+     * ユーザIDに紐付く一覧を取得
+     * @param userId
+     * @return
+     */
+    @Select
+    List<MUserRole> selectListUserRoleByUserId(String userId);
 
     /**
      * ユーザIDに紐付くレコードを全て削除
@@ -104,4 +118,5 @@ public interface MUserRoleDao {
      */
     @Delete(sqlFile = true)
     int deleteListByUserId(String userId);
+
 }

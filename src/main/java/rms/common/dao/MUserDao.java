@@ -5,13 +5,12 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import rms.common.entity.MUser;
-
-import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
  * MUserDaoクラス
@@ -19,6 +18,8 @@ import org.seasar.doma.boot.ConfigAutowireable;
 @Dao
 @ConfigAutowireable
 public interface MUserDao {
+
+    /* 自動生成メソッド ------------------------------------------------------------- */
 
     /**
      * 1件取得
@@ -75,10 +76,23 @@ public interface MUserDao {
     int updateNoOptimisticLockException(MUser entity);
 
     /**
+     * 削除（楽観的排他制御）
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Delete
+    int delete(MUser entity) throws OptimisticLockException;
+
+    /**
      * 削除
      * @param entity
      * @return affected rows
+     * @throws OptimisticLockException
      */
-    @Delete
-    int delete(MUser entity);
+    @Delete(ignoreVersion = true)
+    int deleteNoOptimisticLockException(MUser entity);
+
+    /* 独自メソッド ------------------------------------------------------------- */
+
 }

@@ -5,13 +5,12 @@ import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
 
 import rms.common.entity.TReportApproveFlow;
-
-import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
  * TReportApproveFlowDaoクラス
@@ -19,6 +18,8 @@ import org.seasar.doma.boot.ConfigAutowireable;
 @Dao
 @ConfigAutowireable
 public interface TReportApproveFlowDao {
+
+    /* 自動生成メソッド ------------------------------------------------------------- */
 
     /**
      * 1件取得
@@ -87,10 +88,33 @@ public interface TReportApproveFlowDao {
     int updateNoOptimisticLockException(TReportApproveFlow entity);
 
     /**
+     * 削除（楽観的排他制御）
+     * @param entity
+     * @return affected rows
+     * @throws OptimisticLockException
+     */
+    @Delete
+    int delete(TReportApproveFlow entity) throws OptimisticLockException;
+
+    /**
      * 削除
      * @param entity
      * @return affected rows
+     * @throws OptimisticLockException
      */
-    @Delete
-    int delete(TReportApproveFlow entity);
+    @Delete(ignoreVersion = true)
+    int deleteNoOptimisticLockException(TReportApproveFlow entity);
+
+    /* 独自メソッド ------------------------------------------------------------- */
+
+    /**
+     * 申請者ID、対象年月に紐付くレコードを全て削除
+     * @param applyUserId
+     * @param targetYm
+     * @return
+     */
+    @Delete(sqlFile = true)
+    int deleteListByApplyUserIdAndTargetYm(String applyUserId,
+                                           Integer targetYm);
+
 }

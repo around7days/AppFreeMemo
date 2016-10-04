@@ -14,6 +14,8 @@ import rms.common.entity.VMUser;
 @ConfigAutowireable
 public interface VMUserDao {
 
+    /* 自動生成メソッド ------------------------------------------------------------- */
+
     /**
      * 1件取得
      * @param userId
@@ -31,5 +33,7 @@ public interface VMUserDao {
     @Select
     VMUser selectById(String userId,
                       SelectOptions options);
+
+    /* 独自メソッド ------------------------------------------------------------- */
 
 }

@@ -14,6 +14,8 @@ import rms.common.entity.VTReport;
 @ConfigAutowireable
 public interface VTReportDao {
 
+    /* 自動生成メソッド ------------------------------------------------------------- */
+
     /**
      * 1件取得
      * @param applyUserId
@@ -35,5 +37,7 @@ public interface VTReportDao {
     VTReport selectById(String applyUserId,
                         Integer targetYm,
                         SelectOptions options);
+
+    /* 独自メソッド ------------------------------------------------------------- */
 
 }

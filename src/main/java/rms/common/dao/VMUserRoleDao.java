@@ -14,6 +14,8 @@ import rms.common.entity.VMUserRole;
 @ConfigAutowireable
 public interface VMUserRoleDao {
 
+    /* 自動生成メソッド ------------------------------------------------------------- */
+
     /**
      * 1件取得
      * @param userId
@@ -35,5 +37,7 @@ public interface VMUserRoleDao {
     VMUserRole selectById(String userId,
                           String role,
                           SelectOptions options);
+
+    /* 独自メソッド ------------------------------------------------------------- */
 
 }
