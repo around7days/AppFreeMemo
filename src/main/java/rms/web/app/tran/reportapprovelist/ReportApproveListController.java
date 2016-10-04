@@ -32,6 +32,8 @@ import rms.domain.app.tran.reportapprovelist.ReportApproveListDtoCondition;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListService;
 import rms.web.app.system.menu.MenuController;
+import rms.web.app.tran.reportapprovelist.ReportApproveListForm.BulkDownload;
+import rms.web.app.tran.reportapprovelist.ReportApproveListForm.Search;
 import rms.web.app.tran.reportapproveregist.ReportApproveRegistController;
 import rms.web.app.tran.reportapproveregistbulk.ReportApproveRegistBulkController;
 
@@ -90,9 +92,9 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "search")
-    public String search(@Validated ReportApproveListForm form,
-                         @AuthenticationPrincipal UserInfo userInfo,
+    public String search(@Validated(Search.class) ReportApproveListForm form,
                          BindingResult bindingResult,
+                         @AuthenticationPrincipal UserInfo userInfo,
                          Model model) {
         logger.debug("入力フォーム情報 -> {}", form);
 
@@ -238,11 +240,15 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL, params = "bulkDownload")
-    public String bulkDownload(ReportApproveListForm form,
+    public String bulkDownload(@Validated(BulkDownload.class) ReportApproveListForm form,
                                HttpServletResponse response,
                                Model model) throws IOException {
         // 選択した月報indexの取得
         Integer[] checks = form.getReportDLCheck();
+        if (checks == null) {
+            // TODO Validator実装までの暫定対応
+            return PAGE_URL;
+        }
 
         // 月報ファイル一覧の生成
         List<String> applyUserIdList = new ArrayList<>();

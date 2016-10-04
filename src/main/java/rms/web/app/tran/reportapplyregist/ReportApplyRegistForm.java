@@ -14,17 +14,17 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
 
     /* 入力チェック宣言 ----------------------------------------------------- */
     //@formatter:off
-    /** 入力チェック：新規 */
-    protected static interface Insert{};
-    /** 入力チェック：更新 */
-    protected static interface Update{};
+    /** 入力チェック：申請 */
+    protected static interface Apply{};
+    /** 入力チェック：再申請 */
+    protected static interface ReApply{};
     //@formatter:on
 
     /* 定数宣言 ------------------------------------------------------------- */
-    /** 画面表示モード：新規 */
-    public static final String VIEW_MODE_INSERT = "insert";
-    /** 画面表示モード：更新 */
-    public static final String VIEW_MODE_UPDATE = "update";
+    /** 画面表示モード：申請 */
+    public static final String VIEW_MODE_APPLY = "apply";
+    /** 画面表示モード：再申請 */
+    public static final String VIEW_MODE_REAPPLY = "reApply";
 
     /* 排他制御用 ----------------------------------------------------------- */
     /** 月報テーブル 排他制御用バージョン */
@@ -39,10 +39,10 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     /** 申請者名 */
     private String applyUserNm;
     /** 年月 */
-    @NotNull(message = "年月は{NotNull.message}", groups = { Insert.class })
+    @NotNull(message = "年月は{NotNull.message}", groups = { Apply.class })
     private Integer targetYm;
     /** 月報ファイル */
-    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}", groups = { Insert.class, Update.class })
+    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}", groups = { Apply.class, ReApply.class })
     private MultipartFile file;
     /** 公開有無 */
     private String publishFlg;

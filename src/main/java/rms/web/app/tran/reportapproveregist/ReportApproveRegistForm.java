@@ -10,6 +10,14 @@ import rms.common.validator.UploadFileNotEmptyAnnotation;
  */
 public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
 
+    /* 入力チェック宣言 ----------------------------------------------------- */
+    //@formatter:off
+    /** 入力チェック：承認 */
+    protected static interface Approve{};
+    /** 入力チェック：否認 */
+    protected static interface Deny{};
+    //@formatter:on
+
     /* 排他制御用 ----------------------------------------------------------- */
     /** 月報テーブル 排他制御用バージョン */
     private Integer version;
@@ -24,7 +32,7 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     /** 公開有無名称 */
     private String publishFlgNm;
     /** 承認者月報ファイル */
-    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}")
+    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}", groups = { Approve.class })
     private MultipartFile file;
     /** 承認者ID1 */
     private String approveUserId1;

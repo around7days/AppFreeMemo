@@ -13,7 +13,7 @@ public class UserListFormCondition extends rms.common.abstracts.AbstractForm {
     private String userId;
 
     /** ユーザ名 */
-    @Size(max = 10, message = "ユーザ名は{Size.message}")
+    @Size(max = 20, message = "ユーザ名は{Size.message}")
     private String userNm;
 
     /**

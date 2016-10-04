@@ -37,6 +37,19 @@ $(function() {
 	});
 
 	/**
+	 * 一括ON/OFFチェックボックス押下
+	 */
+	$("#switchReportDLCheck").on("click", function() {
+		if ($("#switchReportDLCheck").prop("checked")) {
+			// チェックON
+			$("input[name=reportDLCheck]").prop("checked", true);
+		} else {
+			// チェックOFF
+			$("input[name=reportDLCheck]").prop("checked", false);
+		}
+	});
+
+	/**
 	 * 月報一括DLボタン押下
 	 */
 	$("#bulkDownload").on("click", function() {

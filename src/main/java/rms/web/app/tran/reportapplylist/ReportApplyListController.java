@@ -184,7 +184,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
 
         // 月報申請画面
         return redirect(ReportApplyRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
-                        + entity.getTargetYm(), "initUpdate");
+                        + entity.getTargetYm(), "initReApply");
     }
 
     /**

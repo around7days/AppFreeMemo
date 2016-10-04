@@ -42,15 +42,16 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
     @Size(max = 10, message = "ユーザIDは{Size.message}", groups = { Insert.class, Update.class })
     private String userId;
     /** パスワード */
-    @NotEmpty(message = "パスワードは{NotEmpty.message}", groups = { Insert.class })
-    @Size(max = 10, message = "パスワードは{Size.message}", groups = { Insert.class })
+    @NotEmpty(message = "パスワードは{NotEmpty.message}", groups = { Insert.class, Update.class })
+    @Size(max = 10, message = "パスワードは{Size.message}", groups = { Insert.class, Update.class })
     private String password;
     /** ユーザ名 */
     @NotEmpty(message = "ユーザ名は{NotEmpty.message}", groups = { Insert.class, Update.class })
-    @Size(max = 10, message = "ユーザ名は{Size.message}", groups = { Insert.class, Update.class })
+    @Size(max = 20, message = "ユーザ名は{Size.message}", groups = { Insert.class, Update.class })
     private String userNm;
     /** メールアドレス */
     @Email(message = "メールアドレスの{Email.message}", groups = { Insert.class, Update.class })
+    @Size(max = 40, message = "メールアドレスは{Size.message}", groups = { Insert.class, Update.class })
     private String email;
     /** 部署ID */
     private String departmentId;

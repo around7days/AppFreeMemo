@@ -30,6 +30,8 @@ import rms.common.utils.SessionUtils;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
 import rms.web.app.system.menu.MenuController;
+import rms.web.app.tran.reportapplyregist.ReportApplyRegistForm.Apply;
+import rms.web.app.tran.reportapplyregist.ReportApplyRegistForm.ReApply;
 
 /**
  * 月報申請画面コントローラー
@@ -62,24 +64,24 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     }
 
     /**
-     * 初期表示処理（新規時）
+     * 初期表示処理（申請時）
      * @param form
      * @param userInfo
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL, params = "initInsert")
-    public String initInsert(ReportApplyRegistForm form,
-                             @AuthenticationPrincipal UserInfo userInfo,
-                             Model model) {
+    @RequestMapping(value = MAPPING_URL, params = "initApply")
+    public String initApply(ReportApplyRegistForm form,
+                            @AuthenticationPrincipal UserInfo userInfo,
+                            Model model) {
         // 申請者の初期表示用情報を取得
         ReportApplyRegistDto dto = service.getInitInsertReportInfo(userInfo.getUserId());
 
         // 値を設定
         BeanUtils.copyProperties(dto, form);
 
-        // 画面表示モードを「新規」に設定
-        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_INSERT);
+        // 画面表示モードを「申請」に設定
+        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_APPLY);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -87,26 +89,26 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     }
 
     /**
-     * 初期表示処理（更新時）
+     * 初期表示処理（再申請時）
      * @param form
      * @param applyUserId
      * @param targetYm
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initUpdate")
-    public String initUpdate(ReportApplyRegistForm form,
-                             @PathVariable String applyUserId,
-                             @PathVariable Integer targetYm,
-                             Model model) {
+    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initReApply")
+    public String initReApply(ReportApplyRegistForm form,
+                              @PathVariable String applyUserId,
+                              @PathVariable Integer targetYm,
+                              Model model) {
         // 月報情報の取得
         ReportApplyRegistDto dto = service.getInitUpdateReportInfo(applyUserId, targetYm);
 
         // 値を設定
         BeanUtils.copyProperties(dto, form);
 
-        // 画面表示モードを「更新」に設定
-        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_UPDATE);
+        // 画面表示モードを「再申請」に設定
+        form.setViewMode(ReportApplyRegistForm.VIEW_MODE_REAPPLY);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -125,7 +127,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL, params = "apply")
-    public String apply(@Validated(ReportApplyRegistForm.Insert.class) ReportApplyRegistForm form,
+    public String apply(@Validated(Apply.class) ReportApplyRegistForm form,
                         BindingResult bindingResult,
                         SessionStatus sessionStatus,
                         RedirectAttributes redirectAttr,
@@ -164,7 +166,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL, params = "reApply")
-    public String reApply(@Validated(ReportApplyRegistForm.Update.class) ReportApplyRegistForm form,
+    public String reApply(@Validated(ReApply.class) ReportApplyRegistForm form,
                           BindingResult bindingResult,
                           SessionStatus sessionStatus,
                           RedirectAttributes redirectAttr,

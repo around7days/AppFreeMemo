@@ -29,6 +29,8 @@ import rms.common.utils.SessionUtils;
 import rms.domain.app.mst.userregist.UserRegistDto;
 import rms.domain.app.mst.userregist.UserRegistService;
 import rms.web.app.mst.userlist.UserListController;
+import rms.web.app.mst.userregist.UserRegistForm.Insert;
+import rms.web.app.mst.userregist.UserRegistForm.Update;
 
 /**
  * ユーザ登録画面コントローラー
@@ -121,7 +123,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
      * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "insert")
-    public String insert(@Validated(UserRegistForm.Insert.class) UserRegistForm form,
+    public String insert(@Validated(Insert.class) UserRegistForm form,
                          BindingResult bindingResult,
                          SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
@@ -160,7 +162,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
      * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "update")
-    public String update(@Validated(UserRegistForm.Update.class) UserRegistForm form,
+    public String update(@Validated(Update.class) UserRegistForm form,
                          BindingResult bindingResult,
                          SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,

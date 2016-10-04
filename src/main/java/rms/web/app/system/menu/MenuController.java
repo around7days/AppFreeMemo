@@ -119,7 +119,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "t002")
     public String T002(MenuForm form,
                        Model model) {
-        return redirect(ReportApplyRegistController.MAPPING_URL, "initInsert");
+        return redirect(ReportApplyRegistController.MAPPING_URL, "initApply");
     }
 
     /**

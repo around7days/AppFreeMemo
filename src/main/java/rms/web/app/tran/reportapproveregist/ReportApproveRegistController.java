@@ -14,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ import rms.domain.app.tran.reportapproveregist.ReportApproveRegistDto;
 import rms.domain.app.tran.reportapproveregist.ReportApproveRegistService;
 import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
+import rms.web.app.tran.reportapproveregist.ReportApproveRegistForm.Approve;
 
 /**
  * 月報承認画面コントローラー
@@ -108,7 +110,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "approve")
-    public String approve(ReportApproveRegistForm form,
+    public String approve(@Validated(Approve.class) ReportApproveRegistForm form,
                           BindingResult bindingResult,
                           @AuthenticationPrincipal UserInfo userInfo,
                           SessionStatus sessionStatus,

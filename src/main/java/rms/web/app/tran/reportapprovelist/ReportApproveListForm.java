@@ -13,6 +13,14 @@ import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
  */
 public class ReportApproveListForm extends rms.common.abstracts.AbstractForm {
 
+    /* 入力チェック宣言 ----------------------------------------------------- */
+    //@formatter:off
+    /** 入力チェック：検索 */
+    protected static interface Search{};
+    /** 入力チェック：一括DL */
+    protected static interface BulkDownload{};
+    //@formatter:on
+
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
     @Valid
@@ -22,6 +30,8 @@ public class ReportApproveListForm extends rms.common.abstracts.AbstractForm {
     /** 検索結果リスト */
     private List<ReportApproveListEntityResult> resultList;
     /** 検索結果チェックボックス選択リスト */
+    // TODO 未実装
+    // @NotNull(message = "ダウンロードする月報を選択して下さい", groups = { BulkDownload.class })
     private Integer[] reportDLCheck;
 
     /* getter/setter -------------------------------------------------------- */
