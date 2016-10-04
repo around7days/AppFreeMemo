@@ -82,6 +82,9 @@
 							<th>ユーザ名</th>
 							<th>メールアドレス</th>
 							<th>部署</th>
+							<th>承認者１</th>
+							<th>承認者２</th>
+							<th>承認者３</th>
 							<th>役割</th>
 						</tr>
 					</thead>
@@ -93,6 +96,9 @@
 							<td th:text="${result.userNm}">月報太郎</td>
 							<td th:text="${result.email}">xxxxxxx@xxx.xx.xx</td>
 							<td th:text="${result.departmentRnm}">1SOL</td>
+							<td th:text="${result.approveUserNm1}">承認者１</td>
+							<td th:text="${result.approveUserNm2}">承認者２</td>
+							<td th:text="${result.approveUserNm3}">承認者３</td>
 							<td th:text="${result.roleNm}">申請者</td>
 						</tr>
 					</tbody>

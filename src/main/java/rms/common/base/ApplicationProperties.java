@@ -11,6 +11,7 @@ public enum ApplicationProperties {
     INSTANCE;
 
     /** Logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = Logger.getLogger(ApplicationProperties.class);
 
     /** プロパティ名(xxxxxx.properties) */
@@ -20,13 +21,12 @@ public enum ApplicationProperties {
     private static final ResourceBundle rb = ResourceBundle.getBundle(PROPERTY_NM);
 
     /**
-     * プロパティから値を取得
+     * プロパティから値の取得
      * @param key
      * @return keyに対応する値
      */
-    public int getInt(String key) {
-        String val = getString(key);
-        return Integer.valueOf(val);
+    public Object getObject(String key) {
+        return rb.getObject(key);
     }
 
     /**
@@ -35,10 +35,6 @@ public enum ApplicationProperties {
      * @return keyに対応する値
      */
     public String getString(String key) {
-        if (!rb.containsKey(key)) {
-            logger.warn("not contains key : " + key);
-            return null;
-        }
         return rb.getString(key);
     }
 
@@ -48,10 +44,6 @@ public enum ApplicationProperties {
      * @return keyに対応する値
      */
     public boolean getBoolean(String key) {
-        if (!rb.containsKey(key)) {
-            logger.warn("not contains key : " + key);
-            return false;
-        }
         return Boolean.valueOf(rb.getString(key));
     }
 
@@ -61,11 +53,6 @@ public enum ApplicationProperties {
      * @return keyに対応する値
      */
     public Integer getInteger(String key) {
-        if (!rb.containsKey(key)) {
-            logger.warn("not contains key : " + key);
-            return null;
-        }
         return Integer.valueOf(rb.getString(key));
     }
-
 }

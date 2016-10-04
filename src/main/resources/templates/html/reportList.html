@@ -34,7 +34,7 @@
 	<!-- container -->
 	<div class="container">
 		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 60em">
+		<div class="row" style="max-width: 70em">
 
 			<!-- ヘッダ -->
 			<div class="page-header">
@@ -86,6 +86,9 @@
 						<tr>
 							<th>年月</th>
 							<th>申請者</th>
+							<th>承認者１</th>
+							<th>承認者２</th>
+							<th>承認者３</th>
 							<th>承認状況</th>
 							<th>月報</th>
 						</tr>
@@ -95,6 +98,9 @@
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td th:text="${result.targetYm}">201606</td>
 							<td th:text="${result.applyUserNm}">月報太郎</td>
+							<td th:text="${result.approveUserNm1}">承認者１</td>
+							<td th:text="${result.approveUserNm2}">承認者２</td>
+							<td th:text="${result.approveUserNm3}">承認者３</td>
 							<td th:text="${result.statusNm}">承認済み</td>
 							<td><button type="submit" name="download" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>

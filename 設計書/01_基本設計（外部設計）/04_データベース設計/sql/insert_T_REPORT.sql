@@ -1,5 +1,10 @@
 DELETE FROM T_REPORT;
-INSERT INTO T_REPORT(apply_user_id, target_ym, apply_date, publish_flg, file_path, comment, status, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', 201601, '2016-01-25', '0', '', 'ÉRÉÅÉìÉg', 'ZZZ', 0, 0, now(), 'system', now(), 'system');
-INSERT INTO T_REPORT(apply_user_id, target_ym, apply_date, publish_flg, file_path, comment, status, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user01', 201609, '2016-09-25', '1', '', 'ÉRÉÅÉìÉg', 'Y01', 0, 0, now(), 'system', now(), 'system');
-INSERT INTO T_REPORT(apply_user_id, target_ym, apply_date, publish_flg, file_path, comment, status, version, del_flg, ins_date, ins_id, upd_date, upd_id) VALUES ('user02', 201609, '2016-09-25', '1', '', 'ÉRÉÅÉìÉg', 'ZZZ', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT VALUES ('user01', 201607, '2016-07-25', '0', '', '„Ç≥„É°„É≥„Éà', 'ZZZ', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT VALUES ('user01', 201608, '2016-08-25', '1', '', '„Ç≥„É°„É≥„Éà', 'Y03', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT VALUES ('user01', 201609, '2016-09-25', '1', '', '„Ç≥„É°„É≥„Éà', 'N01', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT VALUES ('user02', 201609, '2016-09-25', '1', '', '„Ç≥„É°„É≥„Éà', 'ZZZ', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT VALUES ('user03', 201609, '2016-09-25', '1', '', '„Ç≥„É°„É≥„Éà', 'Y03', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT VALUES ('user04', 201609, '2016-09-25', '1', '', '„Ç≥„É°„É≥„Éà', 'ZZZ', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT VALUES ('user05', 201609, '2016-09-25', '1', '', '„Ç≥„É°„É≥„Éà', 'ZZZ', 0, 0, now(), 'system', now(), 'system');
 commit;
+

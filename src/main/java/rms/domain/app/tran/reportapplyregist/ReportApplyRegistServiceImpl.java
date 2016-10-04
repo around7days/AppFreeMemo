@@ -2,7 +2,11 @@ package rms.domain.app.tran.reportapplyregist;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -121,6 +125,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 月報の重複チェック
         validateUniquReport(dto.getApplyUserId(), dto.getTargetYm());
 
+        // 月報の未来日付チェック
+        validateFutureYm(dto.getTargetYm());
+
         // 月報申請処理
         insertReport(dto);
 
@@ -167,8 +174,34 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
                                      Integer targetYm) throws BusinessException {
         TReport entity = tReportDao.selectById(applyUserId, targetYm);
         if (entity != null) {
-            // 「対象年月の月報は既に登録されています」
+            // 「対象年月の月報は既に申請されています」
             throw new BusinessException(message.getMessage("error.003", null, Locale.getDefault()));
+        }
+    }
+
+    /**
+     * 月報の未来日付チェック<br>
+     * 未来の月報を提出している場合はBusinessExceptionを発生<br>
+     * 未来判定基準：当月のN日を経過していない
+     * @param targetYm
+     * @throws BusinessException
+     */
+    private void validateFutureYm(Integer targetYm) throws BusinessException {
+
+        // 月報提出可能日を生成
+        int targetYear = Integer.valueOf(targetYm.toString().substring(0, 4));
+        int targetMonth = Integer.valueOf(targetYm.toString().substring(4, 6));
+        int applyPossibleDay = properties.getInteger("myapp.report.apply.possible.day");
+        LocalDate applyPossibleDate = LocalDate.of(targetYear, targetMonth, applyPossibleDay);
+
+        // 現在の年月日を取得
+        LocalDate nowdate = LocalDate.now();
+
+        if (applyPossibleDate.compareTo(nowdate) >= 0) {
+            // 月報提出可能日 >= 現在日付の場合
+            // 「対象年月の月報は、{0}以降から申請可能です」
+            List<Object> params = Arrays.asList(applyPossibleDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+            throw new BusinessException(message.getMessage("error.007", params.toArray(), Locale.getDefault()));
         }
     }
 

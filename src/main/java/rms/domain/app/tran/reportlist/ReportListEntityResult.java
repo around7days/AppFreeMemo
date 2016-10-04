@@ -15,7 +15,7 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "apply_user_id")
     private String applyUserId;
 
-    /** ユーザ名 */
+    /** 申請者名 */
     @Column(name = "apply_user_nm")
     private String applyUserNm;
 
@@ -31,7 +31,7 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "publish_flg")
     private String publishFlg;
 
-    /** コード名称 */
+    /** 公開有無名称 */
     @Column(name = "publish_flg_nm")
     private String publishFlgNm;
 
@@ -39,7 +39,7 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "status")
     private String status;
 
-    /** コード名称 */
+    /** 承認状況名称 */
     @Column(name = "status_nm")
     private String statusNm;
 
@@ -47,7 +47,7 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "approve_user_id1")
     private String approveUserId1;
 
-    /** ユーザ名 */
+    /** 承認者名1 */
     @Column(name = "approve_user_nm1")
     private String approveUserNm1;
 
@@ -55,7 +55,7 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "approve_user_id2")
     private String approveUserId2;
 
-    /** ユーザ名 */
+    /** 承認者名2 */
     @Column(name = "approve_user_nm2")
     private String approveUserNm2;
 
@@ -63,7 +63,7 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "approve_user_id3")
     private String approveUserId3;
 
-    /** ユーザ名 */
+    /** 承認者名3 */
     @Column(name = "approve_user_nm3")
     private String approveUserNm3;
 
@@ -88,16 +88,16 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     }
 
     /**
-     * ユーザ名を取得します。
-     * @return ユーザ名
+     * 申請者名を取得します。
+     * @return 申請者名
      */
     public String getApplyUserNm() {
         return applyUserNm;
     }
 
     /**
-     * ユーザ名を設定します。
-     * @param applyUserNm ユーザ名
+     * 申請者名を設定します。
+     * @param applyUserNm 申請者名
      */
     public void setApplyUserNm(String applyUserNm) {
         this.applyUserNm = applyUserNm;
@@ -152,16 +152,16 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     }
 
     /**
-     * コード名称を取得します。
-     * @return コード名称
+     * 公開有無名称を取得します。
+     * @return 公開有無名称
      */
     public String getPublishFlgNm() {
         return publishFlgNm;
     }
 
     /**
-     * コード名称を設定します。
-     * @param publishFlgNm コード名称
+     * 公開有無名称を設定します。
+     * @param publishFlgNm 公開有無名称
      */
     public void setPublishFlgNm(String publishFlgNm) {
         this.publishFlgNm = publishFlgNm;
@@ -184,16 +184,16 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     }
 
     /**
-     * コード名称を取得します。
-     * @return コード名称
+     * 承認状況名称を取得します。
+     * @return 承認状況名称
      */
     public String getStatusNm() {
         return statusNm;
     }
 
     /**
-     * コード名称を設定します。
-     * @param statusNm コード名称
+     * 承認状況名称を設定します。
+     * @param statusNm 承認状況名称
      */
     public void setStatusNm(String statusNm) {
         this.statusNm = statusNm;
@@ -216,16 +216,16 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     }
 
     /**
-     * ユーザ名を取得します。
-     * @return ユーザ名
+     * 承認者名1を取得します。
+     * @return 承認者名1
      */
     public String getApproveUserNm1() {
         return approveUserNm1;
     }
 
     /**
-     * ユーザ名を設定します。
-     * @param approveUserNm1 ユーザ名
+     * 承認者名1を設定します。
+     * @param approveUserNm1 承認者名1
      */
     public void setApproveUserNm1(String approveUserNm1) {
         this.approveUserNm1 = approveUserNm1;
@@ -248,16 +248,16 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     }
 
     /**
-     * ユーザ名を取得します。
-     * @return ユーザ名
+     * 承認者名2を取得します。
+     * @return 承認者名2
      */
     public String getApproveUserNm2() {
         return approveUserNm2;
     }
 
     /**
-     * ユーザ名を設定します。
-     * @param approveUserNm2 ユーザ名
+     * 承認者名2を設定します。
+     * @param approveUserNm2 承認者名2
      */
     public void setApproveUserNm2(String approveUserNm2) {
         this.approveUserNm2 = approveUserNm2;
@@ -280,16 +280,16 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     }
 
     /**
-     * ユーザ名を取得します。
-     * @return ユーザ名
+     * 承認者名3を取得します。
+     * @return 承認者名3
      */
     public String getApproveUserNm3() {
         return approveUserNm3;
     }
 
     /**
-     * ユーザ名を設定します。
-     * @param approveUserNm3 ユーザ名
+     * 承認者名3を設定します。
+     * @param approveUserNm3 承認者名3
      */
     public void setApproveUserNm3(String approveUserNm3) {
         this.approveUserNm3 = approveUserNm3;
@@ -310,5 +310,6 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+
 
 }

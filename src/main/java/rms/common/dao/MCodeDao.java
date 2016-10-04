@@ -108,8 +108,6 @@ public interface MCodeDao {
      * 指定されたコード区分に紐付く一覧を取得<br>
      * （ソート順はコードの昇順）
      * @param codeKbn
-     * @param code
-     * @param options
      * @return the MCode entity
      */
     @Select
