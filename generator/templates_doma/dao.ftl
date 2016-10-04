@@ -10,10 +10,11 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
+import java.util.List;
+import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.NoResultException;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.seasar.doma.jdbc.SelectOptions;
-import org.seasar.doma.boot.ConfigAutowireable;
 
 /**
  * ${simpleName}クラス
@@ -24,6 +25,8 @@ import org.seasar.doma.boot.ConfigAutowireable;
 @Dao<#if configClassSimpleName??>(config = ${configClassSimpleName}.class)</#if>
 @ConfigAutowireable
 public interface ${simpleName} {
+
+    /* 自動生成メソッド ------------------------------------------------------------- */
 
 <#if entityDesc.idEntityPropertyDescs?size gt 0>
     /**
@@ -96,7 +99,7 @@ public interface ${simpleName} {
      * @return affected rows
      * @throws OptimisticLockException
      */
-    @Delete(excludeNull = true)
+    @Delete
     int delete(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity) throws OptimisticLockException;
 
     /**
@@ -105,6 +108,9 @@ public interface ${simpleName} {
      * @return affected rows
      * @throws OptimisticLockException
      */
-    @Delete(excludeNull = true, ignoreVersion = true)
+    @Delete(ignoreVersion = true)
     int deleteNoOptimisticLockException(<#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} entity);
+
+    /* 独自メソッド ------------------------------------------------------------- */
+
 }

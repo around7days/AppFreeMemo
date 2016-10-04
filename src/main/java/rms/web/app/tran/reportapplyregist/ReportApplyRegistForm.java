@@ -26,6 +26,10 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     /** 画面表示モード：更新 */
     public static final String VIEW_MODE_UPDATE = "update";
 
+    /* 排他制御用 ----------------------------------------------------------- */
+    /** 月報テーブル 排他制御用バージョン */
+    private Integer version;
+
     /* 変数宣言 ------------------------------------------------------------- */
     /** 画面表示モード */
     private String viewMode;
@@ -35,7 +39,7 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     /** 申請者名 */
     private String applyUserNm;
     /** 年月 */
-    @NotNull(message = "年月は{NotNull.message}", groups = { Insert.class, Update.class })
+    @NotNull(message = "年月は{NotNull.message}", groups = { Insert.class })
     private Integer targetYm;
     /** 月報ファイル */
     @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}", groups = { Insert.class, Update.class })
@@ -56,6 +60,22 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     private String approveUserNm3;
 
     /* getter/setter -------------------------------------------------------- */
+
+    /**
+     * 月報テーブル 排他制御用バージョンを取得します。
+     * @return 月報テーブル 排他制御用バージョン
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * 月報テーブル 排他制御用バージョンを設定します。
+     * @param version 月報テーブル 排他制御用バージョン
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     /**
      * 画面表示モードを取得します。

@@ -242,20 +242,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * @param dto
      */
     private void deleteReportApproveFlow(ReportApplyRegistDto dto) {
-        // 月報承認フロー情報の生成
-        TReportApproveFlow entity = new TReportApproveFlow();
-        entity.setApplyUserId(dto.getApplyUserId());
-        entity.setTargetYm(dto.getTargetYm());
 
-        // 削除処理：承認者１
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
-        tReportApproveFlowDao.delete(entity);
-        // 削除処理：承認者２
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
-        tReportApproveFlowDao.delete(entity);
-        // 削除処理：承認者３
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
-        tReportApproveFlowDao.delete(entity);
+        // 申請者ID、対象年月に紐付くレコードを全て削除
+        tReportApproveFlowDao.deleteListByApplyUserIdAndTargetYm(dto.getApplyUserId(), dto.getTargetYm());
     }
 
     /**

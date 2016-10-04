@@ -57,7 +57,14 @@
 					<!-- 年月 -->
 					<label class="col-sm-3 control-label">年月</label>
 					<div class="col-sm-9">
-						<input type="text" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control datepicker-ym" required="required" />
+						<div th:switch="*{viewMode}">
+							<div th:case="*{VIEW_MODE_INSERT}"><!-- 新規時 -->
+								<input type="text" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control datepicker-ym" required="required" />
+							</div>
+							<div th:case="*{VIEW_MODE_UPDATE}"><!-- 更新時 -->
+								<p class="form-control-static" th:text="*{targetYm}">201610</p>
+							</div>
+						</div>
 					</div>
 					<!-- 月報 -->
 					<label class="col-sm-3 control-label">月報</label>

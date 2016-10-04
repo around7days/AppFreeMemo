@@ -164,7 +164,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL, params = "reApply")
-    public String reApply(@Validated(ReportApplyRegistForm.Insert.class) ReportApplyRegistForm form,
+    public String reApply(@Validated(ReportApplyRegistForm.Update.class) ReportApplyRegistForm form,
                           BindingResult bindingResult,
                           SessionStatus sessionStatus,
                           RedirectAttributes redirectAttr,
