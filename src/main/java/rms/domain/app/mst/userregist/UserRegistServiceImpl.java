@@ -81,7 +81,7 @@ public class UserRegistServiceImpl implements UserRegistService {
         BeanUtils.copyProperties(vMUser, dto);
 
         // ユーザ役割マスタ情報の取得
-        List<MUserRole> mUserRoleList = mUserRoleDao.selectListUserRoleByUserId(userId);
+        List<MUserRole> mUserRoleList = mUserRoleDao.selectListByUserId(userId);
         for (MUserRole mUserRole : mUserRoleList) {
             switch (mUserRole.getRole()) {
             case MRoleConst.APPLY: // 申請者

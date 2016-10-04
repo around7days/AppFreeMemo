@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.dao.MUserDao;
+import rms.common.dao.MUserRoleDao;
 import rms.common.entity.MUser;
 import rms.common.entity.MUserRole;
 
@@ -26,10 +27,10 @@ import rms.common.entity.MUserRole;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private MUserDao mUserDao;
+    MUserDao mUserDao;
 
     @Autowired
-    private UserDetailsDao userDetailsDao;
+    MUserRoleDao mUserRoleDao;
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
@@ -41,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         // ユーザ役割情報の取得
-        List<MUserRole> mUserRoleList = userDetailsDao.userRoleListByUserId(id);
+        List<MUserRole> mUserRoleList = mUserRoleDao.selectListByUserId(id);
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         for (MUserRole mUserRole : mUserRoleList) {
             authorities.add(new SimpleGrantedAuthority(mUserRole.getRole()));

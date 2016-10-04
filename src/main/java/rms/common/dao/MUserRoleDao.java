@@ -109,7 +109,7 @@ public interface MUserRoleDao {
      * @return
      */
     @Select
-    List<MUserRole> selectListUserRoleByUserId(String userId);
+    List<MUserRole> selectListByUserId(String userId);
 
     /**
      * ユーザIDに紐付くレコードを全て削除
