@@ -2,10 +2,10 @@ package rms.web.app.tran.reportapprovelist;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import rms.common.utils.PageInfo;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
-
-import javax.validation.Valid;
 
 /**
  * 月報承認状況一覧画面フォーム
@@ -21,6 +21,8 @@ public class ReportApproveListForm extends rms.common.abstracts.AbstractForm {
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
     private List<ReportApproveListEntityResult> resultList;
+    /** 検索結果チェックボックス選択リスト */
+    private Integer[] reportDLCheck;
 
     /* getter/setter -------------------------------------------------------- */
     /**
@@ -69,5 +71,21 @@ public class ReportApproveListForm extends rms.common.abstracts.AbstractForm {
      */
     public void setResultList(List<ReportApproveListEntityResult> resultList) {
         this.resultList = resultList;
+    }
+
+    /**
+     * 検索結果チェックボックス選択リストを取得します。
+     * @return 検索結果チェックボックス選択リスト
+     */
+    public Integer[] getReportDLCheck() {
+        return reportDLCheck;
+    }
+
+    /**
+     * 検索結果チェックボックス選択リストを設定します。
+     * @param reportDLCheck 検索結果チェックボックス選択リスト
+     */
+    public void setReportDLCheck(Integer[] reportDLCheck) {
+        this.reportDLCheck = reportDLCheck;
     }
 }

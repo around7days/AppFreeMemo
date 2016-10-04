@@ -311,5 +311,4 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
         this.filePath = filePath;
     }
 
-
 }

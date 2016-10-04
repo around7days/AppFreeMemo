@@ -1,5 +1,7 @@
 package rms.common.entity;
 
+import java.time.LocalDateTime;
+
 import org.seasar.doma.jdbc.entity.EntityListener;
 import org.seasar.doma.jdbc.entity.PostDeleteContext;
 import org.seasar.doma.jdbc.entity.PostInsertContext;
@@ -7,9 +9,9 @@ import org.seasar.doma.jdbc.entity.PostUpdateContext;
 import org.seasar.doma.jdbc.entity.PreDeleteContext;
 import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
+
 import rms.common.auth.UserInfo;
 import rms.common.utils.AuthenticationUtils;
-import java.time.LocalDateTime;
 
 /**
  * MUserApproveFlowListenerクラス

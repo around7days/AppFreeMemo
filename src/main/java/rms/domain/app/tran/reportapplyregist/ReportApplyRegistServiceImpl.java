@@ -1,7 +1,6 @@
 package rms.domain.app.tran.reportapplyregist;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,8 +28,8 @@ import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VMUser;
 import rms.common.entity.VTReport;
 import rms.common.utils.BeanUtils;
-import rms.common.utils.FileUtils;
 import rms.common.utils.StringUtils;
+import rms.domain.app.shared.service.SharedReportFileService;
 
 /**
  * 月報申請画面サービス
@@ -44,11 +43,16 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApplyRegistServiceImpl.class);
 
-    @Autowired
-    protected MessageSource message;
-
     /** application.properties */
-    protected ApplicationProperties properties = ApplicationProperties.INSTANCE;
+    private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;
+
+    /** MessageSource */
+    @Autowired
+    MessageSource message;
+
+    /** 月報ファイル関連共通サービス */
+    @Autowired
+    SharedReportFileService sharedReportFileService;
 
     /** VMUserDao */
     @Autowired
@@ -286,12 +290,8 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * @throws IOException
      */
     private void saveReportFile(ReportApplyRegistDto dto) throws IOException {
-        // 月報保存ファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       dto.getApplyUserId(),
-                                                       dto.getTargetYm());
-        // 月報保存処理
-        FileUtils.reportSave(dto.getFile().getInputStream(), filePath);
+        // 月報ファイル保存処理
+        sharedReportFileService.saveReportFile(dto.getFile(), dto.getApplyUserId(), dto.getTargetYm());
     }
 
 }

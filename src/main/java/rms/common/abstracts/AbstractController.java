@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
-import rms.common.base.ApplicationProperties;
 import rms.common.utils.StringUtils;
 
 /**
@@ -21,9 +20,6 @@ public abstract class AbstractController {
     /** MessageSource */
     @Autowired
     protected MessageSource message;
-
-    /** application.properties */
-    protected ApplicationProperties properties = ApplicationProperties.INSTANCE;
 
     /**
      * リダイレクトURLの生成

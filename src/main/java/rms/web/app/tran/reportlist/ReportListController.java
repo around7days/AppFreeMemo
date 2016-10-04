@@ -1,7 +1,6 @@
 package rms.web.app.tran.reportlist;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +22,8 @@ import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
+import rms.domain.app.shared.dto.ReportFileDto;
+import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportlist.ReportListDtoCondition;
 import rms.domain.app.tran.reportlist.ReportListEntityResult;
 import rms.domain.app.tran.reportlist.ReportListService;
@@ -48,6 +49,10 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
     /** 月報一覧画面サービス */
     @Autowired
     ReportListService service;
+
+    /** 月報ファイル関連共通サービス */
+    @Autowired
+    SharedReportFileService sharedReportFileService;
 
     /**
      * 月報一覧画面フォームの初期化
@@ -187,21 +192,12 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         ReportListEntityResult entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
-        /*
-         * ファイルダウンロード処理
-         */
-        // ダウンロードファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       entity.getApplyUserId(),
-                                                       entity.getTargetYm());
-
-        // ダウンロードファイル名の生成
-        String fileNm = FileUtils.createReportDownloadFileNm(entity.getApplyUserId(),
-                                                             entity.getApplyUserNm(),
-                                                             entity.getTargetYm());
-
+        // 月報ファイルダウンロード情報生成
+        ReportFileDto dto = sharedReportFileService.createReportFileDownloadInfo(entity.getApplyUserId(),
+                                                                                 entity.getApplyUserNm(),
+                                                                                 entity.getTargetYm());
         // 月報ダウンロード
-        FileUtils.reportDownload(response, filePath, fileNm);
+        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
         return null;
     }

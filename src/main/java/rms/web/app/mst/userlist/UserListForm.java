@@ -2,10 +2,10 @@ package rms.web.app.mst.userlist;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import rms.common.utils.PageInfo;
 import rms.domain.app.mst.userlist.UserListEntityResult;
-
-import javax.validation.Valid;
 
 /**
  * ユーザ一覧画面フォーム

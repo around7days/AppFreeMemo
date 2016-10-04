@@ -1,16 +1,15 @@
 package rms.domain.app.tran.reportapproveregist;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rms.common.base.ApplicationProperties;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
 import rms.common.dao.TReportApproveFlowDao;
@@ -20,8 +19,8 @@ import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
 import rms.common.utils.BeanUtils;
-import rms.common.utils.FileUtils;
 import rms.common.utils.StringUtils;
+import rms.domain.app.shared.service.SharedReportFileService;
 
 /**
  * 月報承認画面サービス
@@ -35,8 +34,13 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApproveRegistServiceImpl.class);
 
-    /** application.properties */
-    protected ApplicationProperties properties = ApplicationProperties.INSTANCE;
+    /** MessageSource */
+    @Autowired
+    MessageSource message;
+
+    /** 月報ファイル関連共通サービス */
+    @Autowired
+    SharedReportFileService sharedReportFileService;
 
     /** TReportDao */
     @Autowired
@@ -227,12 +231,8 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
      * @throws IOException
      */
     private void saveReportFile(ReportApproveRegistDto dto) throws IOException {
-        // 月報保存ファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       dto.getApplyUserId(),
-                                                       dto.getTargetYm());
-        // 月報保存処理
-        FileUtils.reportSave(dto.getFile().getInputStream(), filePath);
+        // 月報ファイル保存処理
+        sharedReportFileService.saveReportFile(dto.getFile(), dto.getApplyUserId(), dto.getTargetYm());
     }
 
 }

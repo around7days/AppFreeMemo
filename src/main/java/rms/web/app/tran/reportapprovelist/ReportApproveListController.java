@@ -1,7 +1,8 @@
 package rms.web.app.tran.reportapprovelist;
 
 import java.io.IOException;
-import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,8 @@ import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
+import rms.domain.app.shared.dto.ReportFileDto;
+import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListDtoCondition;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListService;
@@ -52,6 +55,10 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     /** 月報情報取得サービス */
     @Autowired
     ReportApproveListService service;
+
+    /** 月報ファイル関連共通サービス */
+    @Autowired
+    SharedReportFileService sharedReportFileService;
 
     /**
      * 月報承認状況一覧画面フォームの初期化
@@ -96,7 +103,8 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         }
 
         // 検索結果・ページ情報の初期化
-        form.setPageInfo(new PageInfo());
+        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
+        form.setPageInfo(new PageInfo(pageLimit));
         form.setResultList(null);
 
         // 検索条件の生成
@@ -211,22 +219,52 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         ReportApproveListEntityResult entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
-        /*
-         * ファイルダウンロード処理
-         */
-        // ダウンロードファイルパスの生成
-        Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-                                                       entity.getApplyUserId(),
-                                                       entity.getTargetYm());
-
-        // ダウンロードファイル名の生成
-        String fileNm = FileUtils.createReportDownloadFileNm(entity.getApplyUserId(),
-                                                             entity.getApplyUserNm(),
-                                                             entity.getTargetYm());
-
+        // 月報ファイルダウンロード情報生成
+        ReportFileDto dto = sharedReportFileService.createReportFileDownloadInfo(entity.getApplyUserId(),
+                                                                                 entity.getApplyUserNm(),
+                                                                                 entity.getTargetYm());
         // 月報ダウンロード
-        FileUtils.reportDownload(response, filePath, fileNm);
+        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
+        return null;
+    }
+
+    /**
+     * 月報一括DL処理
+     * @param form
+     * @param response
+     * @param model
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = MAPPING_URL, params = "bulkDownload")
+    public String bulkDownload(ReportApproveListForm form,
+                               HttpServletResponse response,
+                               Model model) throws IOException {
+        // 選択した月報indexの取得
+        Integer[] checks = form.getReportDLCheck();
+
+        // 月報ファイル一覧の生成
+        List<String> applyUserIdList = new ArrayList<>();
+        List<String> applyUserNmList = new ArrayList<>();
+        List<Integer> targetYmList = new ArrayList<>();
+        for (int i : checks) {
+            ReportApproveListEntityResult entity = form.getResultList().get(i);
+            applyUserIdList.add(entity.getApplyUserId());
+            applyUserNmList.add(entity.getApplyUserNm());
+            targetYmList.add(entity.getTargetYm());
+        }
+
+        // TODO 暫定対応
+        synchronized (this) {
+            // 月報ファイル一括ダウンロード情報生成
+            ReportFileDto dto = sharedReportFileService.createReportFileBulkDownloadInfo(applyUserIdList,
+                                                                                         applyUserNmList,
+                                                                                         targetYmList,
+                                                                                         checks.length);
+            // 月報ダウンロード
+            FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        }
         return null;
     }
 

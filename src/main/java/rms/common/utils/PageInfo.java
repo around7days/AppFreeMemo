@@ -2,11 +2,12 @@ package rms.common.utils;
 
 import java.math.BigDecimal;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import rms.common.base.ApplicationProperties;
 
 /**
  * ページ情報
@@ -16,8 +17,11 @@ public class PageInfo {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(PageInfo.class);
 
+    /** application.properties */
+    private static ApplicationProperties properties = ApplicationProperties.INSTANCE;
+
     /** 1ページ表示件数（デフォルト） */
-    private static final int DEFAULT_LIMIT = 5;
+    private static final int DEFAULT_LIMIT = properties.getInteger("myapp.page.limit");
 
     /** 1ページ表示件数 */
     private int limit = DEFAULT_LIMIT;

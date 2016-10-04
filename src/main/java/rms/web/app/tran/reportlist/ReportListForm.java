@@ -2,10 +2,10 @@ package rms.web.app.tran.reportlist;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import rms.common.utils.PageInfo;
 import rms.domain.app.tran.reportlist.ReportListEntityResult;
-
-import javax.validation.Valid;
 
 /**
  * 月報一覧画面フォーム
