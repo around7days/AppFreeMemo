@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -39,8 +41,8 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     /** 月報ファイル格納ディレクトリ */
     private static final String reportFileStorageDir = properties.getString("myapp.report.storage");
 
-    /** 月報zipファイル名 */
-    private static final String zipFileNm = "report.zip";
+    /** 一時ファイル格納ディレクトリ */
+    private static final String temporaryStorageDir = properties.getString("myapp.temporary.storage");
 
     /**
      * 月報ファイル保存処理
@@ -100,9 +102,12 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                                                           List<Integer> targetYmList,
                                                           int cnt) throws FileNotFoundException, IOException {
 
-        // zipファイル名の生成
-        Path zipPath = Paths.get(properties.getString("myapp.temporary.storage"), zipFileNm);
+        // zipファイル名・ファイルパスの生成
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        String zipFileNm = "report" + LocalDateTime.now().format(dateFormat) + ".zip";
+        Path zipPath = Paths.get(temporaryStorageDir, zipFileNm);
 
+        // zipファイル生成
         try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipPath.toFile()))) {
             for (int i = 0; i < cnt; i++) {
                 String applyUserId = applyUserIdList.get(i);
@@ -115,7 +120,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                 // ダウンロードファイル名の生成
                 String fileNm = createReportDownloadFileNm(applyUserId, applyUserNm, targetYm);
 
-                // zipファイルに月報を追加
+                // zipファイルに月報ファイルを追加
                 ZipEntry entry = new ZipEntry(fileNm);
                 zos.putNextEntry(entry);
                 Files.copy(filePath.toFile(), zos);

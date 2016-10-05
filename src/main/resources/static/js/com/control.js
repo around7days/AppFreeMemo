@@ -20,4 +20,20 @@ $(function() {
 		autoclose : true
 	});
 
+	/**
+	 * ダミーファイルボタン押下
+	 */
+	$("#fakeFile").on("click", function() {
+		$('#file').click();
+	});
+
+	/**
+	 * ダミーファイルテキストへの値反映
+	 */
+	$("#file").change(function() {
+		if ($("#fakeFileText").length) {
+			$("#fakeFileText").val($("#file").val().replace("C:\\fakepath\\", ""));
+		}
+	});
+
 });

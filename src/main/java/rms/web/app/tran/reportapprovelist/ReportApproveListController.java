@@ -261,16 +261,14 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
             targetYmList.add(entity.getTargetYm());
         }
 
-        // TODO 暫定対応
-        synchronized (this) {
-            // 月報ファイル一括ダウンロード情報生成
-            ReportFileDto dto = sharedReportFileService.createReportFileBulkDownloadInfo(applyUserIdList,
-                                                                                         applyUserNmList,
-                                                                                         targetYmList,
-                                                                                         checks.length);
-            // 月報ダウンロード
-            FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
-        }
+        // 月報ファイル一括ダウンロード情報生成
+        ReportFileDto dto = sharedReportFileService.createReportFileBulkDownloadInfo(applyUserIdList,
+                                                                                     applyUserNmList,
+                                                                                     targetYmList,
+                                                                                     checks.length);
+        // 月報ダウンロード
+        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+
         return null;
     }
 
