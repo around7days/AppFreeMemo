@@ -13,6 +13,9 @@ $(function() {
 	 * 一括承認ボタン押下
 	 */
 	$("#approveBulk").on("click", function() {
+		if (!window.confirm("承認しますか？")) {
+			return false;
+		}
 		var url = defaultUrl + "?approveBulk";
 		fmMain.attr("action", url);
 		return true;

@@ -14,10 +14,10 @@ import javax.validation.Payload;
  * @author
  */
 @Documented
-@Constraint(validatedBy = UploadFileNotEmptyValidator.class)
+@Constraint(validatedBy = NotNullUploadFileValidator.class)
 @Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UploadFileNotEmptyAnnotation {
+public @interface NotNullUploadFile {
     String message() default "Validate File Upload.";
 
     Class<?>[] groups() default {};

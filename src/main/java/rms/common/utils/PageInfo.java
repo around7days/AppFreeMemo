@@ -77,7 +77,6 @@ public class PageInfo {
      * @param totalSize 合計表示件数
      */
     public void setTotalSize(Long totalSize) {
-        // TODO intの上限を超えるとエラーが発生する。
         setTotalSize(new Integer(totalSize.toString()));
     }
 

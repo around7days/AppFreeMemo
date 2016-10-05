@@ -11,7 +11,4 @@ function changeStyle(style) {
 	setTimeout(function() {
 		$("body").fadeIn("normal");
 	}, 1500);
-
-	// TODO ローカルストレージに保存
-	//localStorage.setItem("mystyle", style);
 }

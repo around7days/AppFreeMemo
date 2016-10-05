@@ -26,7 +26,7 @@
 	<script th:src="@{/js/reportApproveRegistBulk.js}" src="../../static/js/reportApproveRegistBulk.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApproveRegistBulkForm}" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${reportApproveRegistBulkForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -34,7 +34,7 @@
 	<!-- container -->
 	<div class="container">
 		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 60em">
+		<div class="row" style="max-width: 70em">
 
 			<!-- ヘッダ -->
 			<div class="page-header">
@@ -53,7 +53,7 @@
 					<div class="col-sm-9">
 						<input type="file" name="file" id="file" accept=".zip" style="display:none" />
 						<div class="input-group" id="fakeFile">
-						  <input type="text" id="fakeFileText" required="required" readonly="readonly" placeholder="select file..." class="form-control" />
+						  <input type="text" id="fakeFileText" required="required" placeholder="select file..." class="form-control" />
 						  <span class="input-group-btn"><button type="button" class="btn btn-info">ファイル選択</button></span>
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 							<td th:text="${result.applyUserId}">user01</td>
 							<td th:text="${result.applyUserNm}">申請太郎</td>
 							<td th:text="${result.status}">完了</td>
-							<td th:text="${result.statusComment}">正常に承認されました。</td>
+							<td th:text="${result.comment}">正常に承認されました。</td>
 						</tr>
 					</tbody>
 				</table>

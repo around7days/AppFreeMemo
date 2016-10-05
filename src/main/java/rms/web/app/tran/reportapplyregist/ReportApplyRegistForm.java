@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.validator.UploadFileNotEmptyAnnotation;
+import rms.common.validator.NotNullUploadFile;
 
 /**
  * 月報申請画面フォーム
@@ -42,7 +42,7 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     @NotNull(message = "年月は{NotNull.message}", groups = { Apply.class })
     private Integer targetYm;
     /** 月報ファイル */
-    @UploadFileNotEmptyAnnotation(message = "月報は{UploadFileNotEmpty.message}", groups = { Apply.class, ReApply.class })
+    @NotNullUploadFile(message = "月報は{NotNullUploadFile.message}", groups = { Apply.class, ReApply.class })
     private MultipartFile file;
     /** 公開有無 */
     private String publishFlg;

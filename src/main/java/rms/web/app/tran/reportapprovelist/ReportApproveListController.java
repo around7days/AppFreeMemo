@@ -222,7 +222,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報ファイルダウンロード情報生成
-        ReportFileDto dto = sharedReportFileService.createReportFileDownloadInfo(entity.getApplyUserId(),
+        ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(entity.getApplyUserId(),
                                                                                  entity.getApplyUserNm(),
                                                                                  entity.getTargetYm());
         // 月報ダウンロード

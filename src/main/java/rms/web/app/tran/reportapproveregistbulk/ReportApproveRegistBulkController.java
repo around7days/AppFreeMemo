@@ -1,25 +1,27 @@
 package rms.web.app.tran.reportapproveregistbulk;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageConst;
+import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
+import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkService;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
 
 /**
@@ -40,8 +42,8 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
     public static final String MAPPING_URL = "/tran/reportapproveregistbulk";
 
     /** 月報一括承認画面サービス */
-    // @Autowired
-    // ReportApproveRegistService service;
+    @Autowired
+    ReportApproveRegistBulkService service;
 
     /**
      * 月報一括承認画面フォームの初期化
@@ -68,18 +70,18 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
      * 一括承認処理
      * @param form
      * @param bindingResult
+     * @param userInfo
      * @param sessionStatus
-     * @param redirectAttr
      * @param model
      * @return
      * @throws IOException
      * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "approveBulk")
-    public String approveBulk(ReportApproveRegistBulkForm form,
+    public String approveBulk(@Validated ReportApproveRegistBulkForm form,
                               BindingResult bindingResult,
+                              @AuthenticationPrincipal UserInfo userInfo,
                               SessionStatus sessionStatus,
-                              RedirectAttributes redirectAttr,
                               Model model) throws IOException, BusinessException {
         logger.debug("入力フォーム情報 -> {}", form);
 
@@ -89,62 +91,20 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
             return PAGE_URL;
         }
 
-        List<Map<String, String>> list = new ArrayList<>();
-        {
-            Map<String, String> map = new HashMap<>();
-            map.put("fileNm", "201609_user01.xlsx");
-            map.put("targetYm", "201609");
-            map.put("applyUserId", "user01");
-            map.put("applyUserNm", "申請太郎");
-            map.put("status", "○");
-            map.put("statusComment", "");
-            list.add(map);
-        }
-        {
-            Map<String, String> map = new HashMap<>();
-            map.put("fileNm", "201609_user02.xlsx");
-            map.put("targetYm", "201609");
-            map.put("applyUserId", "user02");
-            map.put("applyUserNm", "申請花子");
-            map.put("status", "×");
-            map.put("statusComment", "承認権限がありません");
-            list.add(map);
-        }
-        form.resultList = list;
+        // 月報情報の一括承認処理
+        List<ReportApproveRegistBulkDto> resultList = service.approveBulk(form.getFile(), userInfo);
+
+        // 実行結果の反映
+        form.setResultList(resultList);
 
         // 完了メッセージ
-        model.addAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        model.addAttribute(MessageConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 
         return PAGE_URL;
     }
 
-    // /**
-    // * 月報DL処理
-    // * @param form
-    // * @param response
-    // * @param model
-    // * @return
-    // * @throws IOException
-    // */
-    // @RequestMapping(value = MAPPING_URL, params = "download")
-    // public String download(ReportApproveRegistBulkForm form,
-    // HttpServletResponse response,
-    // Model model) throws IOException {
-    // /*
-    // * ファイルダウンロード処理
-    // */
-    // // ダウンロードファイルパスの生成
-    // Path filePath = FileUtils.createReportFilePath(properties.getString("myapp.report.storage"),
-    // form.getApplyUserId(),
-    // form.getTargetYm());
-    // // 月報ダウンロード
-    // FileUtils.reportDownload(response, filePath);
-    //
-    // return null;
-    // }
-    //
     /**
      * 戻る処理
      * @param sessionStatus

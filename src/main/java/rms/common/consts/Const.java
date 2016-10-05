@@ -22,4 +22,17 @@ public class Const {
     /** 承認フロー：承認者3 */
     public static final Integer APPROVE_FLOW_SEQ_3 = 3;
 
+    /*
+     * 月報ファイル区切り文字
+     */
+    public static final String REPORT_FILE_DELIMITER = "_";
+
+    /*
+     * 月報一括承認実施結果
+     */
+    /** 月報一括承認実施結果：成功 */
+    public static final String REPORT_BULK_APPROVE_RESULT_OK = "成功";
+    /** 月報一括承認実施結果：失敗 */
+    public static final String REPORT_BULK_APPROVE_RESULT_NG = "エラー";
+
 }

@@ -13,7 +13,7 @@ $(function() {
 	 * 初期処理
 	 */
 	{
-		// TODO
+		// TODO 開発中のお手軽ログイン用設定
 		// ローカルストレージから値の取得
 		var userId = localStorage.getItem("userId");
 		var password = localStorage.getItem("password");
@@ -33,6 +33,7 @@ $(function() {
 		var url = defaultUrl + "?validate";
 		fmMain.attr("action", url);
 
+		// TODO 開発中のお手軽ログイン用設定
 		// ローカルストレージに値の保存
 		localStorage.setItem("userId", $("#userId").val());
 		localStorage.setItem("password", $("#password").val());

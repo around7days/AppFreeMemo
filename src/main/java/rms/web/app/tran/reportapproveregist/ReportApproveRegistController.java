@@ -183,7 +183,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
                            Model model) throws IOException {
 
         // 月報ファイルダウンロード情報生成
-        ReportFileDto dto = sharedReportFileService.createReportFileDownloadInfo(form.getApplyUserId(),
+        ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(form.getApplyUserId(),
                                                                                  form.getApplyUserNm(),
                                                                                  form.getTargetYm());
         // 月報ダウンロード

@@ -74,7 +74,6 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
 
     /**
      * 月報情報の承認処理<br>
-     * 補足：承認状況はメソッド内で自動設定
      * @param dto
      * @throws IOException
      */
@@ -93,7 +92,6 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
 
     /**
      * 月報情報の否認処理<br>
-     * 補足：承認状況はメソッド内で自動設定
      * @param dto
      * @throws IOException
      */
@@ -127,7 +125,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         switch (dto.getStatus()) {
         case MCodeConst.A001_Y01:
             newStatus = MCodeConst.A001_Y02;
-            if (StringUtils.isEmpty(dto.getApproveUserNm2())) {
+            if (StringUtils.isEmpty(dto.getApproveUserId2())) {
                 newStatus = MCodeConst.A001_Y03;
             }
             break;

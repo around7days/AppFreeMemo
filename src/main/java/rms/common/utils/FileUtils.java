@@ -31,7 +31,7 @@ public class FileUtils {
     public static void fileDownload(HttpServletResponse response,
                                     Path filePath,
                                     String fileNm) throws IOException {
-        logger.debug("ファイルダウンロード -> {}", filePath.toAbsolutePath().normalize());
+        logger.info("ファイルダウンロード -> {}", filePath.toAbsolutePath().normalize());
 
         // ファイルのエンコード
         String encodeFileNm = URLEncoder.encode(fileNm, StandardCharsets.UTF_8.name());
@@ -51,10 +51,24 @@ public class FileUtils {
      */
     public static void fileSave(InputStream inputStream,
                                 Path filePath) throws IOException {
-        logger.debug("ファイル保存 -> {}", filePath.toAbsolutePath().normalize());
+        logger.info("ファイル保存 -> {}", filePath.toAbsolutePath().normalize());
 
         // ファイル保存
         Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    /**
+     * ファイル保存
+     * @param fromFilePath
+     * @param toFilePath
+     * @throws IOException
+     */
+    public static void fileSave(Path fromFilePath,
+                                Path toFilePath) throws IOException {
+        logger.info("ファイル保存 -> {}", fromFilePath.toAbsolutePath().normalize());
+
+        // ファイル保存
+        Files.copy(fromFilePath, toFilePath, StandardCopyOption.REPLACE_EXISTING);
     }
 
 }
