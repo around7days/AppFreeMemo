@@ -246,8 +246,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         /*
          * 更新処理
          */
-        // XXX
-        // tReportDao.update(entity);
+        tReportDao.update(entity);
     }
 
     /**
@@ -288,8 +287,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         /*
          * 更新処理（排他制御なし）
          */
-        // XXX
-        // tReportApproveFlowDao.updateNoOptimisticLockException(entity);
+        tReportApproveFlowDao.updateNoOptimisticLockException(entity);
     }
 
     /**
@@ -301,8 +299,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
     private void saveReportFile(Path filePath,
                                 VTReport vTReport) throws IOException {
         // 月報ファイル保存処理
-        // XXX
-        // sharedReportFileService.saveReportFile(filePath, vTReport.getApplyUserId(), vTReport.getTargetYm());
+        sharedReportFileService.saveReportFile(filePath, vTReport.getApplyUserId(), vTReport.getTargetYm());
     }
 
 }
