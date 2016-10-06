@@ -22,13 +22,13 @@
 
 	◆セッション管理
 		△セッションタイムアウト設定
-		△セッション破棄（メニューで統一的に破棄したい）
+		△セッション破棄　→　出来たけど汚い
 
 	◆入力チェック（Validate）
 		○標準Validateチェックの実装
 		○独自Validateチェックの実装（単項目）
 		×独自Validateチェックの実装（相関）
-		△独自Validateチェックの実装（業務） → 出来たけど汚い・・・
+		○独自Validateチェックの実装（業務）
 		○入力チェックの条件別判定（登録時と更新時のチェック項目が異なるパターン）
 		×入力チェック順の指定
 
@@ -70,15 +70,16 @@
 		×バッチ起動
 		×メール送信
 
+
 【クライアントサイド】------------------------------------------------------
-	◆
-		○画面作成
-		○条件分岐（定数）
-		△条件分岐（Enum）→出来るけど長い　 T(mms.uniq.mst.user.regist.UserRegistForm.ViewMode).NEW
+	◆画面作成
 		○text
-		△checkbox	→checkboxがoffの時に値が空ではなくnullになるけどOK？
+		○checkbox
 		○selectbox
 		○radio
+		○条件分岐（定数）
+		△条件分岐（Enum）→出来るけど長い　 T(mms.uniq.mst.user.regist.UserRegistForm.ViewMode).NEW
+		×子画面表示
 
 	◆メッセージ出力(HTML側)
 		○エラーメッセージ出力
@@ -95,8 +96,11 @@
 	◆その他
 		×戻るボタン対策
 		×二重押下対策
-		×子画面表示
 		○Enterキーでsubmitが掛かってしまう対策 → javascriptでEnterキーの無効化
+
+
+【テスト自動化】------------------------------------------------
+	さっぱり
 
 
 【gradle】------------------------------------------------------
@@ -120,27 +124,27 @@
 		×htmlファイルへのパス定義の自動生成
 		×Formの自動生成
 
-	◆テキストボックス上でEnterキーでsubmitが掛かってしまう。
-		○javascriptでEnterキー制御
 
 【メモ】------------------------------------------------------
 redirectとforwardの使い分けどうしよう
 htmlのフォームにth:actionを足しておかないと何故か動かない・・・
 
+
+
+
 ■■■eclipse■■■
-◆Pleiades All in One eclipse4.5
+◆Pleiades All in One eclipse
 	http://mergedoc.osdn.jp/
 
-◆Spring Tool Suite(STS) for Eclipse 3.7.3.RELEASE
-	方法１　マーケットプレイスからインストール
-	方法２　http://dist.springsource.com/release/TOOLS/update/e4.5/
+◆Spring Tool Suite(STS) for Eclipse
+	マーケットプレイスからインストール
 
 ◆Doma Tools
 	http://dl.bintray.com/domaframework/eclipse/
 
 ◆Thymeleaf Content Assist
 	http://www.thymeleaf.org/eclipse-plugin-update-site/
+	プロジェクト右クリック → Thymeleaf → Thymeleafネーチャーの追加
 
 ◆FreeMarker IDE
-	http://download.jboss.org/jbosstools/updates/development/mars/
-		※marsの部分はeclipseのバージョンに合わせて変更
+	マーケットプレイスからインストール
