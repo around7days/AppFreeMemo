@@ -6,28 +6,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>ログイン画面</title>
 
-	<!-- bootstrap CSS -->
-	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
-	<!-- datepicker CSS -->
-	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker.css}" href="../../static/fw/datepicker/css/bootstrap-datepicker.css" />
-	<!-- jQuery JS -->
+	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-2.2.3.js}" src="../../static/fw/jquery/js/jquery-2.2.3.js"></script>
-	<!-- bootstrap JS -->
+	<!-- bootstrap -->
+	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<script th:src="@{/fw/bootstrap/js/bootstrap.js}" src="../../static/fw/bootstrap/js/bootstrap.js"></script>
-	<!-- datepicker JS -->
+	<!-- datepicker -->
+	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker.css}" href="../../static/fw/datepicker/css/bootstrap-datepicker.css" />
 	<script th:src="@{/fw/datepicker/js/bootstrap-datepicker.js}" src="../../static/fw/datepicker/js/bootstrap-datepicker.js"></script>
 	<script th:src="@{/fw/datepicker/locales/bootstrap-datepicker.ja.min.js}" src="../../static/fw/datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
-	<!-- common JS -->
+	<!-- 共通 -->
 	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
 	<script th:src="@{/js/com/control.js}" src="../../static/js/com/control.js"></script>
-	<!-- common CSS -->
-	<link rel="stylesheet" id="myStyle" th:href="@{/css/com/common.css}" href="../../static/css/com/common.css" />
-	<!-- 個別 JS -->
+	<link rel="stylesheet" th:href="@{/css/com/common.css}" href="../../static/css/com/common.css" />
+	<!-- 個別 -->
 	<script th:src="@{/js/login.js}" src="../../static/js/login.js"></script>
+	<!-- 個別FW（animsition） -->
+<!--
+	<link rel="stylesheet" th:href="@{/fw/animsition/css/animsition.css}" href="../../static/fw/animsition/css/animsition.css" />
+	<script th:src="@{/fw/animsition/js/animsition.js}" src="../../static/fw/animsition/js/animsition.js"></script>
+-->
 </head>
 <body>
 <form th:action="dummy" th:object="${loginForm}" id="formMain" method="post" th:novalidate="${novalidate}">
-
+<div class="animsition">
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
 
@@ -57,12 +59,13 @@
 					<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" autocomplete="off" />
 				</div>
 				<!-- ログイン -->
-				<button type="submit" id="login" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
+				<button type="submit" id="login" class="btn btn-primary animsition-link">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div><!-- /サインイン -->
 
 		</div><!-- /画面サイズ指定 -->
 	</div><!-- /container -->
 
+</div>
 </form>
 </body>
 </html>
