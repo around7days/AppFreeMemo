@@ -2,5 +2,7 @@
 /build/
 /.apt_generated/
 /.gradle/
-/xxx.*
-xxx.*
+/.settings/
+/.classpath
+/.factorypath
+/.project
