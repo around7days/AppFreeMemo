@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE configuration>
 <profiles version="11">
 <profile kind="CodeFormatterProfile" name="SpringJsFormmater" version="11">
 <setting id="org.eclipse.wst.jsdt.core.formatter.alignment_for_binary_expression" value="16"/>
