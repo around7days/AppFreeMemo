@@ -1,6 +1,6 @@
-/.apt_generated/
-/.gradle/
-/.factorypath
 /bin/
 /build/
-/file_storage/
+/.apt_generated/
+/.gradle/
+/xxx.*
+xxx.*
