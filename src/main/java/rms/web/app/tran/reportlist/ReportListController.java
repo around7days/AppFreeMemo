@@ -194,8 +194,8 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
 
         // 月報ファイルダウンロード情報生成
         ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(entity.getApplyUserId(),
-                                                                                 entity.getApplyUserNm(),
-                                                                                 entity.getTargetYm());
+                                                                              entity.getApplyUserNm(),
+                                                                              entity.getTargetYm());
         // 月報ダウンロード
         FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 

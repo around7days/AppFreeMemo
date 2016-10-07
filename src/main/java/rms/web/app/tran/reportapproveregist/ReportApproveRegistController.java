@@ -184,8 +184,8 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
 
         // 月報ファイルダウンロード情報生成
         ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(form.getApplyUserId(),
-                                                                                 form.getApplyUserNm(),
-                                                                                 form.getTargetYm());
+                                                                              form.getApplyUserNm(),
+                                                                              form.getTargetYm());
         // 月報ダウンロード
         FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
