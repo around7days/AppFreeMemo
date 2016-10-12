@@ -1,3 +1,22 @@
+/**
+ * doma-gen.gradle
+ */
+
+// doma-gen用構成定義
+configurations {
+	domaGenRuntime
+}
+
+// 外部依存関係の定義
+dependencies {
+//printf configurations.domaGenRuntime.asPath
+	// doma-gen用
+	domaGenRuntime group: 'org.seasar.doma', name: 'doma-gen', version: '+'
+	domaGenRuntime group: 'mysql', name: 'mysql-connector-java'
+//	domaGenRuntime project(':SeleniumBase')
+}
+
+
 /*
  * DB接続定義
  */
@@ -5,29 +24,29 @@ def genUrl                       = 'jdbc:mysql://localhost:3306/mmsdb'
 def genUser                      = 'mms01'
 def genPassword                  = 'mms01'
 def genVersionColumnNamePattern  = 'version'
-//def genSqlFilePattern            = 'META-INF/**/*.sql'
 
-/*
+
+/**
  * テーブル共通ソースコード自動生成
  */
 task domaGenByTable << {
     // gen
     def genTableTypes                = 'TABLE'
-    def genTemplatePrimaryDir        = 'generator/templates_doma'
+    def genTemplatePrimaryDir        = 'doma-gen'
     // entity
     def entityPackageName        = 'rms.common.entity'
     def entityOverwrite          = true
     def entityOverwriteListener  = true
     def entityUseAccessor        = true
     def entityUseListener        = true
-//    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
+//    def entitySuperclassName     = 'rms.common.abstracts.AbstractTableEntity'
     // dao
     def daoPackageName           = 'rms.common.dao'
     def daoOverwrite             = true
     // sql
     def SqlOverwrite             = true
 
-    ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)
+    ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath + ';C:\\workspace\\AppReportManagement\\src\\main\\java\\')
     ant.gen(url: genUrl,
             user: genUser,
             password: genPassword,
@@ -45,19 +64,18 @@ task domaGenByTable << {
     }
 }
 
-/*
+/**
  * ビュー共通ソースコード自動生成
  */
 task domaGenByView << {
     // gen
     def genTableTypes                = 'VIEW'
-    def genTemplatePrimaryDir        = 'generator/templates_doma/view'
+    def genTemplatePrimaryDir        = 'doma-gen/view'
     // entity
     def entityPackageName        = 'rms.common.entity'
     def entityOverwrite          = true
     def entityUseAccessor        = true
     def entityUseListener        = false
-//    def entitySuperclassName     = 'rms.com.abstracts.AbstractEntity'
     // dao
     def daoPackageName           = 'rms.common.dao'
     def daoOverwrite             = false
@@ -71,7 +89,6 @@ task domaGenByView << {
             versionColumnNamePattern: genVersionColumnNamePattern) {
         entityConfig(packageName: entityPackageName,
                      overwrite: entityOverwrite,
-//                     superclassName: entitySuperclassName,
                      useListener: entityUseListener,
                      useAccessor: entityUseAccessor)
         daoConfig(packageName: daoPackageName, overwrite: daoOverwrite)
