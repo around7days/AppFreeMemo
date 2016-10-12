@@ -51,6 +51,14 @@ public interface MRoleDao {
                                Integer version) throws NoResultException;
 
     /**
+     * 存在チェック
+     * @param role
+     * @return
+     */
+    @Select
+    boolean existsById(String role);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows

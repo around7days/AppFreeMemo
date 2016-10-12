@@ -264,9 +264,8 @@ public class UserRegistServiceImpl implements UserRegistService {
      * @throws BusinessException
      */
     private void validateUniquUserId(String userId) throws BusinessException {
-        // TODO 存在チェック用のメソッドをDoma-genから自動で作りたい
-        MUser entity = mUserDao.selectById(userId);
-        if (entity != null) {
+        boolean hasExists = mUserDao.existsById(userId);
+        if (hasExists) {
             List<Object> params = Arrays.asList("ユーザIDが");
             throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
         }

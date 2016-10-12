@@ -59,6 +59,16 @@ public interface MUserRoleDao {
                                    Integer version) throws NoResultException;
 
     /**
+     * 存在チェック
+     * @param userId
+     * @param role
+     * @return
+     */
+    @Select
+    boolean existsById(String userId,
+                       String role);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows

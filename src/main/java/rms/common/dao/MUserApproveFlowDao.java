@@ -57,6 +57,16 @@ public interface MUserApproveFlowDao {
                                           Integer version) throws NoResultException;
 
     /**
+     * 存在チェック
+     * @param userId
+     * @param approveSeq
+     * @return
+     */
+    @Select
+    boolean existsById(String userId,
+                       Integer approveSeq);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows

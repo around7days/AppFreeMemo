@@ -63,6 +63,18 @@ public interface TReportApproveFlowDao {
                                             Integer version) throws NoResultException;
 
     /**
+     * 存在チェック
+     * @param applyUserId
+     * @param targetYm
+     * @param approveSeq
+     * @return
+     */
+    @Select
+    boolean existsById(String applyUserId,
+                       Integer targetYm,
+                       Integer approveSeq);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows

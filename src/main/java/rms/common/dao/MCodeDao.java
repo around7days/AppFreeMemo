@@ -60,6 +60,16 @@ public interface MCodeDao {
                                Integer version) throws NoResultException;
 
     /**
+     * 存在チェック
+     * @param codeKbn
+     * @param code
+     * @return
+     */
+    @Select
+    boolean existsById(String codeKbn,
+                       String code);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows

@@ -67,6 +67,18 @@ public interface ${simpleName} {
     <#if entityDesc.entityPrefix??>${entityDesc.entityPrefix}</#if>${entityDesc.simpleName} selectByIdAndVersion(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}, </#list>${entityDesc.versionEntityPropertyDesc.propertyClassSimpleName} ${entityDesc.versionEntityPropertyDesc.name}) throws NoResultException;
 
 </#if>
+<#if entityDesc.idEntityPropertyDescs?size gt 0>
+    /**
+     * 存在チェック
+<#list entityDesc.idEntityPropertyDescs as property>
+     * @param ${property.name}
+</#list>
+     * @return
+     */
+    @Select
+    boolean existsById(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}<#if property_has_next>, </#if></#list>);
+
+</#if>
     /**
      * 挿入
      * @param entity

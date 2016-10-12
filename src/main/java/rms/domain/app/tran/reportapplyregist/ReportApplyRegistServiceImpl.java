@@ -176,8 +176,8 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      */
     private void validateUniquReport(String applyUserId,
                                      Integer targetYm) throws BusinessException {
-        TReport entity = tReportDao.selectById(applyUserId, targetYm);
-        if (entity != null) {
+        boolean hasExists = tReportDao.existsById(applyUserId, targetYm);
+        if (hasExists) {
             // 「対象年月の月報は既に申請されています」
             throw new BusinessException(message.getMessage("error.003", null, Locale.getDefault()));
         }

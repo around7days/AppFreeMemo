@@ -57,6 +57,16 @@ public interface TReportDao {
                                  Integer version) throws NoResultException;
 
     /**
+     * 存在チェック
+     * @param applyUserId
+     * @param targetYm
+     * @return
+     */
+    @Select
+    boolean existsById(String applyUserId,
+                       Integer targetYm);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows

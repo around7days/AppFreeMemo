@@ -118,7 +118,7 @@
 
 ◆SQL自動生成
 	△doma-genでEntityの継承がしたい。
-	△独自のSQLファイルを作りたい。
+	○独自のSQLファイルを作りたい。
 
 ◆ソースコード自動生成
 	×htmlファイルへのパス定義の自動生成
@@ -137,19 +137,5 @@
 	→eclipseのHTTPS接続のプロキシ設定を行う。
 
 
-■■■eclipse■■■
-◆Pleiades All in One eclipse
-	http://mergedoc.osdn.jp/
-
-◆Spring Tool Suite(STS) for Eclipse
-	マーケットプレイスからインストール
-
-◆Doma Tools
-	http://dl.bintray.com/domaframework/eclipse/
-
-◆Thymeleaf Content Assist
-	http://www.thymeleaf.org/eclipse-plugin-update-site/
-	プロジェクト右クリック → Thymeleaf → Thymeleafネーチャーの追加
-
-◆FreeMarker IDE
-	マーケットプレイスからインストール
+■■■環境構築■■■
+http://qiita.com/around7days/items/68ae790d9da40cc5b43c

@@ -51,6 +51,14 @@ public interface MUserDao {
                                Integer version) throws NoResultException;
 
     /**
+     * 存在チェック
+     * @param userId
+     * @return
+     */
+    @Select
+    boolean existsById(String userId);
+
+    /**
      * 挿入
      * @param entity
      * @return affected rows
