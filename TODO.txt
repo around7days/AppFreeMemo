@@ -64,7 +64,7 @@
 
 ◆その他
 	△エラー画面(404エラーとかも作る)
-	○プロパティファイルの読み込み	→ application.propertiesに独自項目を記載
+	○プロパティファイルの読み込み
 	○ファイルアップロード処理
 	○ファイルダウンロード
 	×バッチ起動
@@ -77,8 +77,8 @@
 	○checkbox
 	○selectbox
 	○radio
-	○条件分岐（定数）
-	△条件分岐（Enum）→出来るけど長い　 T(mms.uniq.mst.user.regist.UserRegistForm.ViewMode).NEW
+	○条件分岐（定数）→${val == T(xxx.Const).NEW}
+	○条件分岐（Enum）→${val == T(xxx.Enum).NEW}
 	×子画面表示
 
 ◆メッセージ出力(HTML側)
