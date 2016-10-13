@@ -143,7 +143,6 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // ユーザ情報登録処理
         service.regist(entity);
 
-        // TODO MessageResorceが使いにくい。どこかで改良。
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info001));
         // セッション破棄

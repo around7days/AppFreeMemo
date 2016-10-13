@@ -16,6 +16,8 @@ import rms.common.consts.MessageEnum;
  * @author
  */
 public class MessageUtils {
+    // TODO 本当はMessageSourceAccessorを使いたい。
+
     /** logger */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(MessageUtils.class);

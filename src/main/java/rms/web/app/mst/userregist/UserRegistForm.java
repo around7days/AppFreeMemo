@@ -8,6 +8,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import rms.common.utils.SelectOptionEntity;
+import rms.common.validator.HalfWidthAlphaNumeric;
+import rms.common.validator.NotSymbol;
 
 /**
  * ユーザ登録画面フォーム
@@ -38,16 +40,19 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
     private String viewMode;
 
     /** ユーザID */
-    @NotEmpty(message = "ユーザID：{NotEmpty.message}", groups = { Insert.class, Update.class })
-    @Size(max = 10, message = "ユーザID：{Size.message}", groups = { Insert.class, Update.class })
+    @NotEmpty(message = "ユーザID：{NotEmpty.message}", groups = { Insert.class })
+    @Size(max = 10, message = "ユーザID：{Size.message}", groups = { Insert.class })
+    @HalfWidthAlphaNumeric(message = "ユーザID：{HalfWidthAlphaNumeric.message}", groups = { Insert.class })
     private String userId;
     /** パスワード */
     @NotEmpty(message = "パスワード：{NotEmpty.message}", groups = { Insert.class, Update.class })
     @Size(max = 10, message = "パスワード：{Size.message}", groups = { Insert.class, Update.class })
+    @HalfWidthAlphaNumeric(message = "パスワード：{HalfWidthAlphaNumeric.message}", groups = { Insert.class, Update.class })
     private String password;
     /** ユーザ名 */
     @NotEmpty(message = "ユーザ名：{NotEmpty.message}", groups = { Insert.class, Update.class })
     @Size(max = 20, message = "ユーザ名：{Size.message}", groups = { Insert.class, Update.class })
+    @NotSymbol(message = "ユーザ名：{NotSymbol.message}", groups = { Insert.class, Update.class })
     private String userNm;
     /** メールアドレス */
     @Email(message = "メールアドレス：{Email.message}", groups = { Insert.class, Update.class })
