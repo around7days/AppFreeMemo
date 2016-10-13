@@ -61,7 +61,7 @@ public class ControllerInterceptor {
     private boolean isURL(Object retVal) {
         if (retVal != null && retVal instanceof String) {
             String url = retVal.toString();
-            // TODO システム独自仕様
+            // XXX システム独自仕様
             if (url.startsWith("html") || url.startsWith("redirect") || url.startsWith("forward")) {
                 // URL
                 return true;
