@@ -12,7 +12,7 @@ public class ReportApproveListFormCondition extends rms.common.abstracts.Abstrac
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 対象年月 */
-    @NotNull(message = "対象年月は{NotEmpty.message}", groups = { Search.class })
+    @NotNull(message = "対象年月：{NotEmpty.message}", groups = { Search.class })
     private Integer targetYm;
 
     /* getter/setter -------------------------------------------------------- */

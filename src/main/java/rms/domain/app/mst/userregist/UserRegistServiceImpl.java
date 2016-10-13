@@ -267,7 +267,7 @@ public class UserRegistServiceImpl implements UserRegistService {
         boolean hasExists = mUserDao.existsById(userId);
         if (hasExists) {
             // 「{0}が重複しています」
-            List<Object> params = Arrays.asList("ユーザIDが");
+            List<Object> params = Arrays.asList("ユーザID：");
             throw new BusinessException(MessageEnum.error001, params);
         }
     }

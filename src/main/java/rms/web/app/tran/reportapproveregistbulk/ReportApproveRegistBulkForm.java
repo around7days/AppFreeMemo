@@ -14,7 +14,7 @@ import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
 public class ReportApproveRegistBulkForm extends rms.common.abstracts.AbstractForm {
 
     /** 承認者月報ファイル */
-    @NotNullUploadFile(message = "月報は{NotNullUploadFile.message}")
+    @NotNullUploadFile(message = "月報：{NotNullUploadFile.message}")
     private MultipartFile file;
 
     /** 実行結果リスト */

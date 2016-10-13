@@ -1,7 +1,6 @@
 package rms.web.app.tran.reportapplyregist;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,8 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
+import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.utils.BeanUtils;
+import rms.common.utils.MessageUtils;
 import rms.common.utils.SessionUtils;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
@@ -147,7 +148,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         service.apply(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.004", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info004));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -186,7 +187,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         service.reApply(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.004", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info004));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -241,7 +242,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // メッセージとフォーム情報を反映
-        model.addAttribute(MessageTypeConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
+        model.addAttribute(MessageTypeConst.ERROR, MessageUtils.getMessage(message, MessageEnum.error002));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, ReportApplyRegistForm.class));
 

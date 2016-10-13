@@ -1,7 +1,6 @@
 package rms.web.app.mst.userregist;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,8 +21,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.base.BusinessException;
+import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.utils.BeanUtils;
+import rms.common.utils.MessageUtils;
 import rms.common.utils.SelectOptionEntity;
 import rms.common.utils.SessionUtils;
 import rms.domain.app.mst.userregist.UserRegistDto;
@@ -144,7 +145,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
         // TODO MessageResorceが使いにくい。どこかで改良。
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info001));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -183,7 +184,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         service.update(entity);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info002));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -239,7 +240,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // メッセージとフォーム情報を反映
-        model.addAttribute(MessageTypeConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
+        model.addAttribute(MessageTypeConst.ERROR, MessageUtils.getMessage(message, MessageEnum.error002));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, UserRegistForm.class));
 

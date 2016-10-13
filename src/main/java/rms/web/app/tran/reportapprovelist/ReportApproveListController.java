@@ -3,7 +3,6 @@ package rms.web.app.tran.reportapprovelist;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
+import rms.common.consts.MessageEnum;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
@@ -117,8 +117,8 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         // 検索処理
         SearchResultDto<ReportApproveListEntityResult> resultDto = service.search(condition, form.getPageInfo());
         if (resultDto.getResultList().isEmpty()) {
-            // 検索結果が見つかりません
-            bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
+            // 「検索結果が見つかりません」
+            bindingResult.reject(MessageEnum.error006.name());
             return PAGE_URL;
         }
 

@@ -32,7 +32,7 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     /** 公開有無名称 */
     private String publishFlgNm;
     /** 承認者月報ファイル */
-    @NotNullUploadFile(message = "月報は{NotNullUploadFile.message}", groups = { Approve.class })
+    @NotNullUploadFile(message = "月報：{NotNullUploadFile.message}", groups = { Approve.class })
     private MultipartFile file;
     /** 承認者ID1 */
     private String approveUserId1;

@@ -39,10 +39,10 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     /** 申請者名 */
     private String applyUserNm;
     /** 年月 */
-    @NotNull(message = "年月は{NotNull.message}", groups = { Apply.class })
+    @NotNull(message = "年月：{NotNull.message}", groups = { Apply.class })
     private Integer targetYm;
     /** 月報ファイル */
-    @NotNullUploadFile(message = "月報は{NotNullUploadFile.message}", groups = { Apply.class, ReApply.class })
+    @NotNullUploadFile(message = "月報：{NotNullUploadFile.message}", groups = { Apply.class, ReApply.class })
     private MultipartFile file;
     /** 公開有無 */
     private String publishFlg;

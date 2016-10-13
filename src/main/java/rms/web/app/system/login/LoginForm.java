@@ -11,13 +11,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class LoginForm extends rms.common.abstracts.AbstractForm {
 
     /** ユーザID */
-    @NotEmpty(message = "ユーザIDは{NotEmpty.message}")
-    @Size(max = 10, message = "ユーザIDは{Size.message}")
+    @NotEmpty(message = "ユーザID：{NotEmpty.message}")
+    @Size(max = 10, message = "ユーザID：{Size.message}")
     private String userId;
 
     /** パスワード */
-    @NotEmpty(message = "パスワードは{NotEmpty.message}")
-    @Size(max = 10, message = "パスワードは{Size.message}")
+    @NotEmpty(message = "パスワード：{NotEmpty.message}")
+    @Size(max = 10, message = "パスワード：{Size.message}")
     private String password;
 
     /**

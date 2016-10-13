@@ -2,6 +2,9 @@ package rms.web.app.mst.userlist;
 
 import javax.validation.constraints.Size;
 
+import rms.common.validator.HalfWidthAlphaNumeric;
+import rms.common.validator.NotSymbol;
+
 /**
  * ユーザ一覧画面（検索条件）フォーム
  * @author
@@ -9,11 +12,13 @@ import javax.validation.constraints.Size;
 public class UserListFormCondition extends rms.common.abstracts.AbstractForm {
 
     /** ユーザID */
-    @Size(max = 10, message = "ユーザIDは{Size.message}")
+    @Size(max = 10, message = "ユーザID：{Size.message}")
+    @HalfWidthAlphaNumeric(message = "ユーザID：{HalfWidthAlphaNumeric.message}")
     private String userId;
 
     /** ユーザ名 */
-    @Size(max = 20, message = "ユーザ名は{Size.message}")
+    @Size(max = 20, message = "ユーザ名：{Size.message}")
+    @NotSymbol(message = "ユーザ名：{NotSymbol.message}")
     private String userNm;
 
     /**

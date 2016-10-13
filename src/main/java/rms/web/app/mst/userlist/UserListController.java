@@ -1,7 +1,5 @@
 package rms.web.app.mst.userlist;
 
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import rms.common.consts.MessageEnum;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.PageInfo;
@@ -96,8 +95,8 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         // 検索処理
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
         if (resultDto.getResultList().isEmpty()) {
-            // 検索結果が見つかりません
-            bindingResult.reject("error.006", message.getMessage("error.006", null, Locale.getDefault()));
+            // 「検索結果が見つかりません」
+            bindingResult.reject(MessageEnum.error006.name());
             return PAGE_URL;
         }
 

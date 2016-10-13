@@ -2,7 +2,6 @@ package rms.web.app.tran.reportapproveregistbulk;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
+import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
+import rms.common.utils.MessageUtils;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkService;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
@@ -98,7 +99,7 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
         form.setResultList(resultList);
 
         // 完了メッセージ
-        model.addAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
+        model.addAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info005));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -153,7 +154,8 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
     // logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
     //
     // // メッセージとフォーム情報を反映
-    // model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
+    // model.addAttribute(MessageTypeConst.ERROR,
+    // message.getMessage(MessageEnum.error002.name(), null, Locale.getDefault()));
     // // セッションからフォーム情報を取得して反映
     // model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistBulkForm.class));
     //

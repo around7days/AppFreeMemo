@@ -25,6 +25,9 @@ public class BusinessException extends Exception {
     @Autowired
     MessageSource messageSource;
 
+    /** エラーコード */
+    private String errorCode;
+
     /** エラーメッセージ */
     private String errorMessage;
 
@@ -41,9 +44,10 @@ public class BusinessException extends Exception {
      */
     public BusinessException(String messageVal) {
         super();
+        this.errorCode = "";
         this.errorMessage = messageVal;
-        logger.debug("code -> {}", "");
-        logger.debug("message -> {}", this.errorMessage);
+        logger.debug("errorCode -> {}", this.errorCode);
+        logger.debug("errorMessage -> {}", this.errorMessage);
     }
 
     /**
@@ -52,9 +56,10 @@ public class BusinessException extends Exception {
      */
     public BusinessException(MessageEnum messageEnum) {
         super();
+        this.errorCode = messageEnum.name();
         this.errorMessage = messageSource.getMessage(messageEnum.name(), null, Locale.getDefault());
-        logger.debug("code -> {}", messageEnum);
-        logger.debug("message -> {}", this.errorMessage);
+        logger.debug("errorCode -> {}", this.errorCode);
+        logger.debug("errorMessage -> {}", this.errorMessage);
     }
 
     /**
@@ -64,9 +69,10 @@ public class BusinessException extends Exception {
      */
     public BusinessException(MessageEnum messageEnum, Object... args) {
         super();
+        this.errorCode = messageEnum.name();
         this.errorMessage = messageSource.getMessage(messageEnum.name(), args, Locale.getDefault());
-        logger.debug("code -> {}", messageEnum);
-        logger.debug("message -> {}", this.errorMessage);
+        logger.debug("errorCode -> {}", this.errorCode);
+        logger.debug("errorMessage -> {}", this.errorMessage);
     }
 
     /**
@@ -76,9 +82,18 @@ public class BusinessException extends Exception {
      */
     public BusinessException(MessageEnum messageEnum, List<Object> args) {
         super();
+        this.errorCode = messageEnum.name();
         this.errorMessage = messageSource.getMessage(messageEnum.name(), args.toArray(), Locale.getDefault());
-        logger.debug("code -> {}", messageEnum);
-        logger.debug("message -> {}", this.errorMessage);
+        logger.debug("errorCode -> {}", this.errorCode);
+        logger.debug("errorMessage -> {}", this.errorMessage);
+    }
+
+    /**
+     * エラーコードを取得します。
+     * @return エラーコード
+     */
+    public String getErrorCode() {
+        return errorCode;
     }
 
     /**
