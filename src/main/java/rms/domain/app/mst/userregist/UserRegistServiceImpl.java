@@ -38,6 +38,10 @@ public class UserRegistServiceImpl implements UserRegistService {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserRegistServiceImpl.class);
 
+    /** MessageSource */
+    @Autowired
+    MessageSource message;
+
     /** ユーザ情報登録Dao */
     @Autowired
     UserRegistDao dao;
@@ -61,9 +65,6 @@ public class UserRegistServiceImpl implements UserRegistService {
     /** VMUserDao */
     @Autowired
     VMUserDao vMUserDao;
-
-    @Autowired
-    protected MessageSource message;
 
     /**
      * ユーザ情報の取得
@@ -109,6 +110,7 @@ public class UserRegistServiceImpl implements UserRegistService {
 
         // ユーザIDの重複チェック
         validateUniquUserId(dto.getUserId());
+
         // 承認ルート設定チェック
         validateApprovalRoute(dto.getRoleApplyFlg(),
                               dto.getApproveUserId1(),
