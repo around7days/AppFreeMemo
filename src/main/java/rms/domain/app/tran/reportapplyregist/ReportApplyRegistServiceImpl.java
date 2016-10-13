@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +18,7 @@ import rms.common.base.ApplicationProperties;
 import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
+import rms.common.consts.MessageEnum;
 import rms.common.dao.TReportApproveFlowDao;
 import rms.common.dao.TReportDao;
 import rms.common.dao.VMUserDao;
@@ -179,7 +179,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         boolean hasExists = tReportDao.existsById(applyUserId, targetYm);
         if (hasExists) {
             // 「対象年月の月報は既に申請されています」
-            throw new BusinessException(message.getMessage("error.003", null, Locale.getDefault()));
+            throw new BusinessException(MessageEnum.error003);
         }
     }
 
@@ -205,7 +205,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
             // 月報提出可能日 >= 現在日付の場合
             // 「対象年月の月報は、{0}以降から申請可能です」
             List<Object> params = Arrays.asList(applyPossibleDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
-            throw new BusinessException(message.getMessage("error.007", params.toArray(), Locale.getDefault()));
+            throw new BusinessException(MessageEnum.error007, params);
         }
     }
 

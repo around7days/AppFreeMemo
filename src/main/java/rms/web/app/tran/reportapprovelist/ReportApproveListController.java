@@ -234,6 +234,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     /**
      * 月報一括DL処理
      * @param form
+     * @param bindingResult
      * @param response
      * @param model
      * @return
@@ -241,14 +242,17 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
      */
     @RequestMapping(value = MAPPING_URL, params = "bulkDownload")
     public String bulkDownload(@Validated(BulkDownload.class) ReportApproveListForm form,
+                               BindingResult bindingResult,
                                HttpServletResponse response,
                                Model model) throws IOException {
-        // 選択した月報indexの取得
-        Integer[] checks = form.getReportDLCheck();
-        if (checks == null) {
-            // TODO Validator実装までの暫定対応
+        // 入力チェック
+        if (bindingResult.hasErrors()) {
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
             return PAGE_URL;
         }
+
+        // 選択した月報indexの取得
+        Integer[] checks = form.getReportDLCheck();
 
         // 月報ファイル一覧の生成
         List<String> applyUserIdList = new ArrayList<>();

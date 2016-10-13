@@ -2,7 +2,6 @@ package rms.domain.app.mst.userregist;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MRoleConst;
+import rms.common.consts.MessageEnum;
 import rms.common.dao.MCodeDao;
 import rms.common.dao.MUserApproveFlowDao;
 import rms.common.dao.MUserDao;
@@ -266,8 +266,9 @@ public class UserRegistServiceImpl implements UserRegistService {
     private void validateUniquUserId(String userId) throws BusinessException {
         boolean hasExists = mUserDao.existsById(userId);
         if (hasExists) {
+            // 「{0}が重複しています」
             List<Object> params = Arrays.asList("ユーザIDが");
-            throw new BusinessException(message.getMessage("error.001", params.toArray(), Locale.getDefault()));
+            throw new BusinessException(MessageEnum.error001, params);
         }
     }
 
@@ -292,13 +293,13 @@ public class UserRegistServiceImpl implements UserRegistService {
             isValueEquals(approveUserId1, approveUserId3) ||
             isValueEquals(approveUserId2, approveUserId3)) {
             // 承認者１～３に同じ承認者は設定できません
-            throw new BusinessException(message.getMessage("error.004", null, Locale.getDefault()));
+            throw new BusinessException(MessageEnum.error004);
         }
         //@formatter:on
 
         if (Const.FLG_ON.equals(roleApplyFlg) && StringUtils.isEmpty(approveUserId3)) {
             // 役割が申請者の場合、承認者３は必須です
-            throw new BusinessException(message.getMessage("error.005", null, Locale.getDefault()));
+            throw new BusinessException(MessageEnum.error005);
         }
     }
 

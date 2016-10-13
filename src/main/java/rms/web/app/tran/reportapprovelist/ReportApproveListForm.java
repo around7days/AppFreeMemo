@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import rms.common.utils.PageInfo;
+import rms.common.validator.NotNullArray;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
 
 /**
@@ -30,8 +31,7 @@ public class ReportApproveListForm extends rms.common.abstracts.AbstractForm {
     /** 検索結果リスト */
     private List<ReportApproveListEntityResult> resultList;
     /** 検索結果チェックボックス選択リスト */
-    // TODO 未実装
-    // @NotNull(message = "ダウンロードする月報を選択して下さい", groups = { BulkDownload.class })
+    @NotNullArray(message = "ダウンロードする月報を選択して下さい", groups = { BulkDownload.class })
     private Integer[] reportDLCheck;
 
     /* getter/setter -------------------------------------------------------- */

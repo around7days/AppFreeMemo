@@ -1,10 +1,11 @@
 package rms.common.consts;
 
 /**
- * メッセージ定義
+ * メッセージタイプ定義<br>
+ * Thymeleafの共通メッセージ（include_message.html）と連動
  * @author
  */
-public class MessageConst {
+public class MessageTypeConst {
     /** メッセージタイプ：正常 */
     public static final String SUCCESS = "successMessage";
     /** メッセージタイプ：以上 */

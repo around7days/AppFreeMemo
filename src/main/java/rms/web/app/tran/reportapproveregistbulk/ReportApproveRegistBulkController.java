@@ -19,7 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
-import rms.common.consts.MessageConst;
+import rms.common.consts.MessageTypeConst;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkService;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
@@ -98,7 +98,7 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
         form.setResultList(resultList);
 
         // 完了メッセージ
-        model.addAttribute(MessageConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
+        model.addAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 

@@ -18,6 +18,7 @@ import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
+import rms.common.consts.MessageEnum;
 import rms.common.dao.TReportApproveFlowDao;
 import rms.common.dao.TReportDao;
 import rms.common.dao.VTReportDao;
@@ -30,7 +31,7 @@ import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 
 /**
- * 月報承認画面サービス
+ * 月報一括承認画面サービス
  * @author
  */
 @Service
@@ -105,12 +106,12 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
                 // 月報ファイル保存処理
                 saveReportFile(dto.getFilePath(), entity);
 
-                result.setStatus(Const.REPORT_BULK_APPROVE_RESULT_OK);
+                result.setStatus(ReportApproveRegistBulkConst.RESULT_OK);
 
             } catch (BusinessException e) {
                 // エラー自体は握りつぶす
 
-                result.setStatus(Const.REPORT_BULK_APPROVE_RESULT_NG);
+                result.setStatus(ReportApproveRegistBulkConst.RESULT_NG);
                 result.setComment(e.getErrorMessage());
             }
 
@@ -129,12 +130,13 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
     private void validateReportFileNm(String reportFileNm) throws BusinessException {
         String[] arys = reportFileNm.split(Const.REPORT_FILE_DELIMITER);
         if (arys.length <= 2) {
-            // TODO message.propertiesに書く
-            throw new BusinessException("月報ファイル名が正しくありません");
+            // 「月報ファイル名のフォーマットが正しくありません(yyyymm_userId_userNm.xlsx)」
+            throw new BusinessException(MessageEnum.error008);
+
         }
         if (!NumberUtils.isInteger(arys[0])) {
-            // TODO message.propertiesに書く
-            throw new BusinessException("月報ファイル名が正しくありません");
+            // 「月報ファイル名のフォーマットが正しくありません(yyyymm_userId_userNm.xlsx)」
+            throw new BusinessException(MessageEnum.error008);
         }
     }
 
@@ -155,8 +157,8 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         // データベースから月報情報を取得
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
         if (entity == null) {
-            // TODO message.propertiesに書く
-            throw new BusinessException("月報情報が取得できません");
+            // 「月報情報が見つかりません」
+            throw new BusinessException(MessageEnum.error009);
         }
 
         return entity;
@@ -200,9 +202,8 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         }
 
         if (!isApproveAuth) {
-            // 承認権限がない
-            // TODO message.propertiesに書く
-            throw new BusinessException("承認権限がありません");
+            // 「承認権限がありません」
+            throw new BusinessException(MessageEnum.error010);
         }
     }
 

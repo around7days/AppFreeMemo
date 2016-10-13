@@ -22,7 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.base.BusinessException;
-import rms.common.consts.MessageConst;
+import rms.common.consts.MessageTypeConst;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.SelectOptionEntity;
 import rms.common.utils.SessionUtils;
@@ -144,7 +144,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
         // TODO MessageResorceが使いにくい。どこかで改良。
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.001", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -183,7 +183,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         service.update(entity);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.002", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -218,7 +218,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         logger.debug("業務エラー -> {}", e.getErrorMessage());
 
         // メッセージを反映
-        model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
+        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, UserRegistForm.class));
 
@@ -239,7 +239,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // メッセージとフォーム情報を反映
-        model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
+        model.addAttribute(MessageTypeConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, UserRegistForm.class));
 

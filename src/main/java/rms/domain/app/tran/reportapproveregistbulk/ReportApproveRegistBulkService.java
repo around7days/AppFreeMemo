@@ -9,7 +9,7 @@ import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 
 /**
- * 月報承認画面サービス
+ * 月報一括承認画面サービス
  * @author
  */
 public interface ReportApproveRegistBulkService {

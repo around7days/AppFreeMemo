@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
-import rms.common.consts.MessageConst;
+import rms.common.consts.MessageTypeConst;
 import rms.common.utils.BeanUtils;
 import rms.common.utils.FileUtils;
 import rms.common.utils.SessionUtils;
@@ -131,7 +131,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         service.approve(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.005", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -162,7 +162,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         service.deny(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageConst.SUCCESS, message.getMessage("info.006", null, Locale.getDefault()));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage("info.006", null, Locale.getDefault()));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -219,7 +219,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         logger.debug("業務エラー -> {}", e.getErrorMessage());
 
         // メッセージを反映
-        model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
+        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistForm.class));
 
@@ -240,7 +240,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // メッセージとフォーム情報を反映
-        model.addAttribute(MessageConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
+        model.addAttribute(MessageTypeConst.ERROR, message.getMessage("error.002", null, Locale.getDefault()));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistForm.class));
 
