@@ -2,7 +2,6 @@ package rms.common.base;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 @Configuration
@@ -17,14 +16,16 @@ public class AppConfig {
         return new Java8TimeDialect();
     }
 
-    /**
-     * MessageSourceの拡張
-     * @return
-     */
-    @Bean
-    @Primary
-    public MessageSourceImpl messageSourceImpl() {
-        return new MessageSourceImpl();
-    }
+    // TODO 設定不要。なぜに・・・
+    // /**
+    // * MessageSourceの拡張
+    // * @return
+    // */
+    // @Bean
+    // @Primary
+    // public MessageSourceImpl messageSourceImpl() {
+    // return new MessageSourceImpl();
+    // }
+
 
 }

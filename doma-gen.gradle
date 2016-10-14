@@ -90,7 +90,7 @@ task domaGenByView << {
  * 個別ソースコード自動生成
  */
 task domaGenEntity << {
-    def entityPackageName = 'example'
+    def orignalEntityPackageName = 'example'
     def entityEntityName  = 'Example'
     def entityOverwrite   = true
     def entityUseAccessor = true
@@ -108,7 +108,7 @@ from
             password: genPassword,
             tableTypes: genTableTypes,
             templatePrimaryDir: genTemplatePrimaryDir) {
-        entityConfig(packageName: entityPackageName,
+        entityConfig(packageName: orignalEntityPackageName,
                      entityName: entityEntityName,
                      overwrite: entityOverwrite,
                      useAccessor: entityUseAccessor,

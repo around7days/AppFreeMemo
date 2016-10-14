@@ -43,8 +43,8 @@ dependencies {
 	runtime group: 'mysql', name: 'mysql-connector-java'
 
 	// サーバ状態監視用
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-	compile group: 'org.springframework.boot', name: 'spring-boot-actuator-docs'
+//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+//	compile group: 'org.springframework.boot', name: 'spring-boot-actuator-docs'
 
 	// test用
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'

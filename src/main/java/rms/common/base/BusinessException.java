@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import rms.common.consts.MessageEnum;
@@ -20,10 +19,10 @@ public class BusinessException extends Exception {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(BusinessException.class);
 
-    // TODO インジェクトできない・・・
+    // TODO インジェクトできない・・・とりあえずの暫定で直呼びに・・・
     /** MessageSource */
-    @Autowired
-    MessageSourceImpl message;
+    // @Autowired
+    MessageSourceImpl message = new MessageSourceImpl();
 
     /** エラーコード */
     private String errorCode;

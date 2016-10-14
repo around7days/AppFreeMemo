@@ -21,15 +21,10 @@
 	<link rel="stylesheet" th:href="@{/css/com/common.css}" href="../../static/css/com/common.css" />
 	<!-- 個別 -->
 	<script th:src="@{/js/login.js}" src="../../static/js/login.js"></script>
-	<!-- 個別FW（animsition） -->
-<!--
-	<link rel="stylesheet" th:href="@{/fw/animsition/css/animsition.css}" href="../../static/fw/animsition/css/animsition.css" />
-	<script th:src="@{/fw/animsition/js/animsition.js}" src="../../static/fw/animsition/js/animsition.js"></script>
--->
 </head>
 <body>
 <form th:action="dummy" th:object="${loginForm}" id="formMain" method="post" th:novalidate="${novalidate}">
-<div class="animsition">
+<div>
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar1"></div>
 
@@ -59,7 +54,7 @@
 					<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" autocomplete="off" />
 				</div>
 				<!-- ログイン -->
-				<button type="submit" id="login" class="btn btn-primary animsition-link">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
+				<button type="submit" id="login" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div><!-- /サインイン -->
 
 		</div><!-- /画面サイズ指定 -->
