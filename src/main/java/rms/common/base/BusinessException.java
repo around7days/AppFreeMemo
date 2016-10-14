@@ -20,6 +20,7 @@ public class BusinessException extends Exception {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(BusinessException.class);
 
+    // TODO インジェクトできない・・・
     /** MessageSource */
     @Autowired
     MessageSourceImpl message;

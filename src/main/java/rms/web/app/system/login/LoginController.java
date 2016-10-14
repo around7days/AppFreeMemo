@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import rms.common.base.BusinessException;
 import rms.common.base.SecurityConfig;
-import rms.common.consts.MessageEnum;
 
 /**
  * ログイン画面コントローラー
@@ -53,8 +51,6 @@ public class LoginController extends rms.common.abstracts.AbstractController {
     public String init(LoginForm form,
                        HttpSession session,
                        Model model) {
-        BusinessException e = null;
-        e = new BusinessException(MessageEnum.info001);
         // セッションが存在する場合は一度ログアウト処理を実施
         if (!session.isNew()) {
             return forward(SecurityConfig.LOGOUT_MAPPING_URL);
