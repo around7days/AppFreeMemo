@@ -334,7 +334,7 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
     }
 
     /* 独自getter ------------------------------------------------------------- */
-    // TODO ここに書くべきではない？
+    // TODO ここに書くべきではない？検索条件にしたい場合はやっぱりSQLで下記判定を行う必要がある。
     /**
      * 月報操作フラグ
      * @return true:操作可能 false:操作不可

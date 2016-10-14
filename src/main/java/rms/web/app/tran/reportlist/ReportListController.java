@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.consts.MessageEnum;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.BeanUtils;
+import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
 import rms.domain.app.shared.dto.ReportFileDto;
@@ -46,10 +45,6 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportlist";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** 月報一覧画面サービス */
     @Autowired
@@ -104,8 +99,8 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         form.setResultList(null);
 
         // 検索条件の生成
-        ReportListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                          ReportListDtoCondition.class);
+        ReportListDtoCondition condition = BeanUtilsImpl.createCopyProperties(form.getCondition(),
+                                                                              ReportListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
@@ -134,8 +129,8 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         logger.debug("フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        ReportListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                          ReportListDtoCondition.class);
+        ReportListDtoCondition condition = BeanUtilsImpl.createCopyProperties(form.getCondition(),
+                                                                              ReportListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());

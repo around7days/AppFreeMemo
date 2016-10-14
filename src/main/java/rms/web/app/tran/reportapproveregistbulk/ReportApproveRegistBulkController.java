@@ -6,7 +6,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,6 @@ import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.utils.MessageUtils;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkService;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
@@ -42,10 +40,6 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapproveregistbulk";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** 月報一括承認画面サービス */
     @Autowired
@@ -104,7 +98,7 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
         form.setResultList(resultList);
 
         // 完了メッセージ
-        model.addAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info005));
+        model.addAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info005));
         // セッション破棄
         sessionStatus.setComplete();
 

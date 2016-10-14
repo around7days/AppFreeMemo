@@ -4,8 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import rms.common.base.BusinessException;
 import rms.common.base.SecurityConfig;
+import rms.common.consts.MessageEnum;
 
 /**
  * ログイン画面コントローラー
@@ -32,10 +32,6 @@ public class LoginController extends rms.common.abstracts.AbstractController {
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/login";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /**
      * ログイン画面フォームの初期化
@@ -57,6 +53,8 @@ public class LoginController extends rms.common.abstracts.AbstractController {
     public String init(LoginForm form,
                        HttpSession session,
                        Model model) {
+        BusinessException e = null;
+        e = new BusinessException(MessageEnum.info001);
         // セッションが存在する場合は一度ログアウト処理を実施
         if (!session.isNew()) {
             return forward(SecurityConfig.LOGOUT_MAPPING_URL);
@@ -103,4 +101,13 @@ public class LoginController extends rms.common.abstracts.AbstractController {
         logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
         return PAGE_URL;
     }
+
+    // /*
+    // * (非 Javadoc)
+    // * @see rms.common.abstracts.AbstractController#getPageId()
+    // */
+    // @Override
+    // protected PageIdEnum getPageId() {
+    // return PageIdEnum.login;
+    // }
 }

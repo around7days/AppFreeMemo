@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import rms.common.auth.UserInfo;
 import rms.common.consts.MessageEnum;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.BeanUtils;
+import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
 import rms.domain.app.shared.dto.ReportFileDto;
@@ -54,10 +53,6 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapprovelist";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** 月報情報取得サービス */
     @Autowired
@@ -116,7 +111,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
 
         // 検索条件の生成
         ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
-        BeanUtils.copyProperties(form.getCondition(), condition);
+        BeanUtilsImpl.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
@@ -154,7 +149,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
 
         // 検索条件の生成
         ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
-        BeanUtils.copyProperties(form.getCondition(), condition);
+        BeanUtilsImpl.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理

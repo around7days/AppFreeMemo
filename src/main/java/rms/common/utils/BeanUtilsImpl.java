@@ -8,10 +8,10 @@ import org.springframework.beans.BeanInstantiationException;
  * BeanUtilsクラス
  * @author
  */
-public class BeanUtils extends org.springframework.beans.BeanUtils {
+public class BeanUtilsImpl extends org.springframework.beans.BeanUtils {
 
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(BeanUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(BeanUtilsImpl.class);
 
     /**
      * ターゲットクラスをインスタンス化し、与えられたソースBeanのプロパティ値をコピーして返却します。

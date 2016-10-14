@@ -26,8 +26,8 @@ import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VMUser;
 import rms.common.entity.VTReport;
-import rms.common.utils.BeanUtils;
-import rms.common.utils.StringUtils;
+import rms.common.utils.BeanUtilsImpl;
+import rms.common.utils.StringUtilsImpl;
 import rms.domain.app.shared.service.SharedReportFileService;
 
 /**
@@ -107,7 +107,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
 
         // 返却用DTOに反映
-        ReportApplyRegistDto dto = BeanUtils.createCopyProperties(entity, ReportApplyRegistDto.class);
+        ReportApplyRegistDto dto = BeanUtilsImpl.createCopyProperties(entity, ReportApplyRegistDto.class);
 
         return dto;
     }
@@ -218,9 +218,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         entity.setFilePath("");
 
         // 承認者の有無に合わせてステータスを設定
-        if (!StringUtils.isEmpty(dto.getApproveUserId1())) {
+        if (!StringUtilsImpl.isEmpty(dto.getApproveUserId1())) {
             entity.setStatus(MCodeConst.A001_Y01);
-        } else if (!StringUtils.isEmpty(dto.getApproveUserId2())) {
+        } else if (!StringUtilsImpl.isEmpty(dto.getApproveUserId2())) {
             entity.setStatus(MCodeConst.A001_Y02);
         } else {
             entity.setStatus(MCodeConst.A001_Y03);

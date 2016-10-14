@@ -17,8 +17,8 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
-import rms.common.utils.BeanUtils;
-import rms.common.utils.StringUtils;
+import rms.common.utils.BeanUtilsImpl;
+import rms.common.utils.StringUtilsImpl;
 import rms.domain.app.shared.service.SharedReportFileService;
 
 /**
@@ -62,7 +62,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
 
         // 返却用DTOに反映
-        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(entity, ReportApproveRegistDto.class);
+        ReportApproveRegistDto dto = BeanUtilsImpl.createCopyProperties(entity, ReportApproveRegistDto.class);
 
         return dto;
     }
@@ -120,7 +120,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         switch (dto.getStatus()) {
         case MCodeConst.A001_Y01:
             newStatus = MCodeConst.A001_Y02;
-            if (StringUtils.isEmpty(dto.getApproveUserId2())) {
+            if (StringUtilsImpl.isEmpty(dto.getApproveUserId2())) {
                 newStatus = MCodeConst.A001_Y03;
             }
             break;

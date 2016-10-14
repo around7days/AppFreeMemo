@@ -1,12 +1,17 @@
 package rms.common.abstracts;
 
-import rms.common.utils.StringUtils;
+import rms.common.base.MessageSourceImpl;
+import rms.common.utils.StringUtilsImpl;
 
 /**
  * AbstractController
  * @author
  */
 public abstract class AbstractController {
+
+    /** MessageSource */
+    // @Autowired
+    protected MessageSourceImpl message;
 
     /**
      * リダイレクトURLの生成
@@ -28,7 +33,7 @@ public abstract class AbstractController {
         StringBuilder redirectUrl = new StringBuilder();
         redirectUrl.append("redirect:");
         redirectUrl.append(url);
-        if (!StringUtils.isEmpty(param)) {
+        if (!StringUtilsImpl.isEmpty(param)) {
             redirectUrl.append("?").append(param);
         }
         return redirectUrl.toString();
@@ -54,9 +59,15 @@ public abstract class AbstractController {
         StringBuilder forwardUrl = new StringBuilder();
         forwardUrl.append("forward:");
         forwardUrl.append(url);
-        if (!StringUtils.isEmpty(param)) {
+        if (!StringUtilsImpl.isEmpty(param)) {
             forwardUrl.append("?").append(param);
         }
         return forwardUrl.toString();
     }
+
+    // /**
+    // * ページIDの取得
+    // * @return
+    // */
+    // protected abstract PageIdEnum getPageId();
 }

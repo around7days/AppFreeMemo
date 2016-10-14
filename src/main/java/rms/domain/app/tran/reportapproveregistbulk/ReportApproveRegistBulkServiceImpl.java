@@ -24,8 +24,8 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
-import rms.common.utils.NumberUtils;
-import rms.common.utils.StringUtils;
+import rms.common.utils.NumberUtilsImpl;
+import rms.common.utils.StringUtilsImpl;
 import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 
@@ -129,7 +129,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
             throw new BusinessException(MessageEnum.error008);
 
         }
-        if (!NumberUtils.isInteger(arys[0])) {
+        if (!NumberUtilsImpl.isInteger(arys[0])) {
             // 「月報ファイル名のフォーマットが正しくありません(yyyymm_userId_userNm.xlsx)」
             throw new BusinessException(MessageEnum.error008);
         }
@@ -226,7 +226,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         switch (vTReport.getStatus()) {
         case MCodeConst.A001_Y01:
             newStatus = MCodeConst.A001_Y02;
-            if (StringUtils.isEmpty(vTReport.getApproveUserId2())) {
+            if (StringUtilsImpl.isEmpty(vTReport.getApproveUserId2())) {
                 newStatus = MCodeConst.A001_Y03;
             }
             break;

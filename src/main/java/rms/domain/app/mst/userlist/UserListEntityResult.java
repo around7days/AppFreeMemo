@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 
-import rms.common.utils.StringUtils;
+import rms.common.utils.StringUtilsImpl;
 
 /**
  * ユーザ一覧（検索結果）クラス
@@ -281,9 +281,9 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
     public String getRoleNm() {
         StringJoiner join = new StringJoiner("/");
         //@formatter:off
-        if(!StringUtils.isEmpty(roleNm1)){ join.add(roleNm1); }
-        if(!StringUtils.isEmpty(roleNm2)){ join.add(roleNm2); }
-        if(!StringUtils.isEmpty(roleNm3)){ join.add(roleNm3); }
+        if(!StringUtilsImpl.isEmpty(roleNm1)){ join.add(roleNm1); }
+        if(!StringUtilsImpl.isEmpty(roleNm2)){ join.add(roleNm2); }
+        if(!StringUtilsImpl.isEmpty(roleNm3)){ join.add(roleNm3); }
         //@formatter:on
         return join.toString();
     }

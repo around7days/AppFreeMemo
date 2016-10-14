@@ -8,7 +8,6 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.utils.BeanUtils;
-import rms.common.utils.MessageUtils;
+import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.SelectOptionEntity;
 import rms.common.utils.SessionUtils;
 import rms.domain.app.mst.userregist.UserRegistDto;
@@ -50,10 +48,6 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/mst/userregist";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** ユーザ登録画面サービス */
     @Autowired
@@ -109,7 +103,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         UserRegistDto entity = service.getUserInfo(userId);
 
         // 取得した情報をフォームに反映
-        BeanUtils.copyProperties(entity, form);
+        BeanUtilsImpl.copyProperties(entity, form);
         // 画面表示モードを「更新」に設定
         form.setViewMode(UserRegistForm.VIEW_MODE_UPDATE);
 
@@ -143,13 +137,13 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         }
 
         // ユーザ登録情報Entityの生成
-        UserRegistDto entity = BeanUtils.createCopyProperties(form, UserRegistDto.class);
+        UserRegistDto entity = BeanUtilsImpl.createCopyProperties(form, UserRegistDto.class);
 
         // ユーザ情報登録処理
         service.regist(entity);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info001));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info001));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -182,13 +176,13 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         }
 
         // ユーザ登録情報Entityの生成
-        UserRegistDto entity = BeanUtils.createCopyProperties(form, UserRegistDto.class);
+        UserRegistDto entity = BeanUtilsImpl.createCopyProperties(form, UserRegistDto.class);
 
         // ユーザ情報更新処理
         service.update(entity);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info002));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info002));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -244,7 +238,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // メッセージとフォーム情報を反映
-        model.addAttribute(MessageTypeConst.ERROR, MessageUtils.getMessage(message, MessageEnum.error002));
+        model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, UserRegistForm.class));
 

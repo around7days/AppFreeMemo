@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
  * NumberUtilsクラス
  * @author
  */
-public class NumberUtils extends org.springframework.util.NumberUtils {
+public class NumberUtilsImpl extends org.springframework.util.NumberUtils {
 
     /** logger */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(NumberUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(NumberUtilsImpl.class);
 
     /**
      * 数値チェック

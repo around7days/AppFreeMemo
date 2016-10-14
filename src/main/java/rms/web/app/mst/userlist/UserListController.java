@@ -3,7 +3,6 @@ package rms.web.app.mst.userlist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.consts.MessageEnum;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.BeanUtils;
+import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.PageInfo;
 import rms.domain.app.mst.userlist.UserListDtoCondition;
 import rms.domain.app.mst.userlist.UserListEntityResult;
@@ -40,10 +39,6 @@ public class UserListController extends rms.common.abstracts.AbstractController 
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/mst/userlist";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** ユーザ情報取得サービス */
     @Autowired
@@ -94,8 +89,8 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         form.setResultList(null);
 
         // 検索条件の生成
-        UserListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                        UserListDtoCondition.class);
+        UserListDtoCondition condition = BeanUtilsImpl.createCopyProperties(form.getCondition(),
+                                                                            UserListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
@@ -129,8 +124,8 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         }
 
         // 検索条件の生成
-        UserListDtoCondition condition = BeanUtils.createCopyProperties(form.getCondition(),
-                                                                        UserListDtoCondition.class);
+        UserListDtoCondition condition = BeanUtilsImpl.createCopyProperties(form.getCondition(),
+                                                                            UserListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());

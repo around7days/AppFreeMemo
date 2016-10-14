@@ -8,7 +8,6 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +25,7 @@ import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.utils.BeanUtils;
-import rms.common.utils.MessageUtils;
+import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.SessionUtils;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
@@ -51,10 +49,6 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapplyregist";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** 月報申請画面サービス */
     @Autowired
@@ -84,7 +78,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         ReportApplyRegistDto dto = service.getInitInsertReportInfo(userInfo.getUserId());
 
         // 値を設定
-        BeanUtils.copyProperties(dto, form);
+        BeanUtilsImpl.copyProperties(dto, form);
 
         // 画面表示モードを「申請」に設定
         form.setViewMode(ReportApplyRegistForm.VIEW_MODE_APPLY);
@@ -111,7 +105,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         ReportApplyRegistDto dto = service.getInitUpdateReportInfo(applyUserId, targetYm);
 
         // 値を設定
-        BeanUtils.copyProperties(dto, form);
+        BeanUtilsImpl.copyProperties(dto, form);
 
         // 画面表示モードを「再申請」に設定
         form.setViewMode(ReportApplyRegistForm.VIEW_MODE_REAPPLY);
@@ -147,13 +141,13 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         }
 
         // 申請情報の生成
-        ReportApplyRegistDto dto = BeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
+        ReportApplyRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApplyRegistDto.class);
 
         // 申請処理
         service.apply(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info004));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info004));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -186,13 +180,13 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         }
 
         // 再申請情報の生成
-        ReportApplyRegistDto dto = BeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
+        ReportApplyRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApplyRegistDto.class);
 
         // 再申請処理
         service.reApply(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info004));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info004));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -247,7 +241,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // メッセージとフォーム情報を反映
-        model.addAttribute(MessageTypeConst.ERROR, MessageUtils.getMessage(message, MessageEnum.error002));
+        model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, ReportApplyRegistForm.class));
 

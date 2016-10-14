@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,10 +44,6 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapplylist";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** 月報申請状況一覧画面サービス */
     @Autowired

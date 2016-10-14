@@ -9,7 +9,6 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +26,8 @@ import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.utils.BeanUtils;
+import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.FileUtils;
-import rms.common.utils.MessageUtils;
 import rms.common.utils.SessionUtils;
 import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
@@ -55,10 +53,6 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapproveregist";
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** 月報承認画面サービス */
     @Autowired
@@ -96,7 +90,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         ReportApproveRegistDto dto = service.getReportInfo(applyUserId, targetYm);
 
         // 値を反映
-        BeanUtils.copyProperties(dto, form);
+        BeanUtilsImpl.copyProperties(dto, form);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -131,13 +125,13 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         }
 
         // 承認情報の生成
-        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
+        ReportApproveRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApproveRegistDto.class);
 
         // 承認処理の実行
         service.approve(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info005));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info005));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -162,13 +156,13 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 否認情報の生成
-        ReportApproveRegistDto dto = BeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
+        ReportApproveRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApproveRegistDto.class);
 
         // 否認処理の実行
         service.deny(dto);
 
         // 完了メッセージ
-        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, MessageUtils.getMessage(message, MessageEnum.info006));
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info006));
         // セッション破棄
         sessionStatus.setComplete();
 
@@ -246,8 +240,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // メッセージとフォーム情報を反映
-        // 「該当データは既に他のユーザに更新されています」
-        model.addAttribute(MessageTypeConst.ERROR, MessageUtils.getMessage(message, MessageEnum.error002));
+        model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistForm.class));
 

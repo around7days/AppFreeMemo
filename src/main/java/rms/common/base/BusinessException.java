@@ -1,12 +1,10 @@
 package rms.common.base;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import rms.common.consts.MessageEnum;
@@ -18,12 +16,13 @@ import rms.common.consts.MessageEnum;
  */
 @Component
 public class BusinessException extends Exception {
+
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(BusinessException.class);
 
     /** MessageSource */
     @Autowired
-    MessageSource message;
+    MessageSourceImpl message;
 
     /** エラーコード */
     private String errorCode;
@@ -40,50 +39,50 @@ public class BusinessException extends Exception {
 
     /**
      * コンストラクタ
-     * @param messageVal
+     * @param value
      */
-    public BusinessException(String messageVal) {
+    public BusinessException(String value) {
         super();
         this.errorCode = "";
-        this.errorMessage = messageVal;
+        this.errorMessage = value;
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }
 
     /**
      * コンストラクタ
-     * @param messageEnum
+     * @param code
      */
-    public BusinessException(MessageEnum messageEnum) {
+    public BusinessException(MessageEnum code) {
         super();
-        this.errorCode = messageEnum.name();
-        this.errorMessage = message.getMessage(messageEnum.name(), null, Locale.getDefault());
+        this.errorCode = code.name();
+        this.errorMessage = message.getMessage(code);
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }
 
     /**
      * コンストラクタ
-     * @param messageEnum
+     * @param code
      * @param args
      */
-    public BusinessException(MessageEnum messageEnum, Object... args) {
+    public BusinessException(MessageEnum code, Object... args) {
         super();
-        this.errorCode = messageEnum.name();
-        this.errorMessage = message.getMessage(messageEnum.name(), args, Locale.getDefault());
+        this.errorCode = code.name();
+        this.errorMessage = message.getMessage(code, args);
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }
 
     /**
      * コンストラクタ
-     * @param messageEnum
+     * @param code
      * @param args
      */
-    public BusinessException(MessageEnum messageEnum, List<Object> args) {
+    public BusinessException(MessageEnum code, List<Object> args) {
         super();
-        this.errorCode = messageEnum.name();
-        this.errorMessage = message.getMessage(messageEnum.name(), args.toArray(), Locale.getDefault());
+        this.errorCode = code.name();
+        this.errorMessage = message.getMessage(code, args);
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }
@@ -103,5 +102,4 @@ public class BusinessException extends Exception {
     public String getErrorMessage() {
         return errorMessage;
     }
-
 }

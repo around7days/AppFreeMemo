@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rms.common.abstracts._AbstractService;
 import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MRoleConst;
@@ -23,9 +22,9 @@ import rms.common.entity.MUser;
 import rms.common.entity.MUserApproveFlow;
 import rms.common.entity.MUserRole;
 import rms.common.entity.VMUser;
-import rms.common.utils.BeanUtils;
+import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.SelectOptionEntity;
-import rms.common.utils.StringUtils;
+import rms.common.utils.StringUtilsImpl;
 
 /**
  * ユーザ登録画面サービス
@@ -33,7 +32,7 @@ import rms.common.utils.StringUtils;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserRegistServiceImpl implements UserRegistService, _AbstractService {
+public class UserRegistServiceImpl implements UserRegistService {
     /** logger */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserRegistServiceImpl.class);
@@ -75,7 +74,7 @@ public class UserRegistServiceImpl implements UserRegistService, _AbstractServic
 
         // ユーザマスタ情報の取得
         VMUser vMUser = vMUserDao.selectById(userId);
-        BeanUtils.copyProperties(vMUser, dto);
+        BeanUtilsImpl.copyProperties(vMUser, dto);
 
         // ユーザ役割マスタ情報の取得
         List<MUserRole> mUserRoleList = mUserRoleDao.selectListByUserId(userId);
@@ -153,7 +152,7 @@ public class UserRegistServiceImpl implements UserRegistService, _AbstractServic
      */
     private void inserUser(UserRegistDto dto) {
         // 登録情報の生成
-        MUser entity = BeanUtils.createCopyProperties(dto, MUser.class);
+        MUser entity = BeanUtilsImpl.createCopyProperties(dto, MUser.class);
         // 登録処理
         mUserDao.insert(entity);
     }
@@ -225,7 +224,7 @@ public class UserRegistServiceImpl implements UserRegistService, _AbstractServic
      */
     private void updateUser(UserRegistDto dto) {
         // 更新情報の生成
-        MUser entity = BeanUtils.createCopyProperties(dto, MUser.class);
+        MUser entity = BeanUtilsImpl.createCopyProperties(dto, MUser.class);
 
         // 更新処理（楽観的排他制御）
         mUserDao.update(entity);
@@ -295,7 +294,7 @@ public class UserRegistServiceImpl implements UserRegistService, _AbstractServic
         }
         //@formatter:on
 
-        if (Const.FLG_ON.equals(roleApplyFlg) && StringUtils.isEmpty(approveUserId3)) {
+        if (Const.FLG_ON.equals(roleApplyFlg) && StringUtilsImpl.isEmpty(approveUserId3)) {
             // 役割が申請者の場合、承認者３は必須です
             throw new BusinessException(MessageEnum.error005);
         }
@@ -310,7 +309,7 @@ public class UserRegistServiceImpl implements UserRegistService, _AbstractServic
      */
     private boolean isValueEquals(String value1,
                                   String value2) {
-        if (StringUtils.isEmpty(value1) || StringUtils.isEmpty(value2)) {
+        if (StringUtilsImpl.isEmpty(value1) || StringUtilsImpl.isEmpty(value2)) {
             return false;
         }
         return value1.equals(value2);
