@@ -23,7 +23,7 @@
 	<script th:src="@{/js/menu.js}" src="../../static/js/menu.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${menuForm}" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="@{/menu}" th:object="${menuForm}" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
