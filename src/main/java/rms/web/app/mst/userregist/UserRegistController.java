@@ -8,6 +8,7 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,6 +50,10 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/mst/userregist";
+
+    /** MessageSource */
+    @Autowired
+    MessageSource message;
 
     /** ユーザ登録画面サービス */
     @Autowired

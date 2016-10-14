@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @ControllerAdvice
 public class CustomControllerAdvice {
 
-    /** application.properties */
-    private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;
-
     /** logger */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
+
+    /** application.properties */
+    private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;
 
     // @InitBinder
     // public void initBinder(WebDataBinder dataBinder) {

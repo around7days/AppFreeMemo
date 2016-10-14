@@ -9,6 +9,7 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +55,10 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapproveregist";
+
+    /** MessageSource */
+    @Autowired
+    MessageSource message;
 
     /** 月報承認画面サービス */
     @Autowired

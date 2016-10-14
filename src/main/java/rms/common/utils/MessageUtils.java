@@ -1,6 +1,3 @@
-/**
- *
- */
 package rms.common.utils;
 
 import java.util.Locale;

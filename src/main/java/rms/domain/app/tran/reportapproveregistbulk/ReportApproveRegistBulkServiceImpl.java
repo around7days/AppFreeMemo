@@ -9,7 +9,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,10 +40,6 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
     /** logger */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApproveRegistBulkServiceImpl.class);
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** 月報ファイル関連共通サービス */
     @Autowired

@@ -1,4 +1,5 @@
-/* フォームバリデーションエラー */
+/* 繝輔か繝ｼ繝繝舌Μ繝�繝ｼ繧ｷ繝ｧ繝ｳ繧ｨ繝ｩ繝ｼ */
 input:invalid {
-  border-color: red;
+/*   border-color: red; */
+   background-color: mistyrose;
 }

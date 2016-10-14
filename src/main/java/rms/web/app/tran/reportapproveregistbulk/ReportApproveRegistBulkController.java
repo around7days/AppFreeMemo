@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,10 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapproveregistbulk";
+
+    /** MessageSource */
+    @Autowired
+    MessageSource message;
 
     /** 月報一括承認画面サービス */
     @Autowired

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,6 +46,10 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
 
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportlist";
+
+    /** MessageSource */
+    @Autowired
+    MessageSource message;
 
     /** 月報一覧画面サービス */
     @Autowired

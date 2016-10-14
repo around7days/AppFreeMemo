@@ -24,6 +24,7 @@ public class ControllerInterceptor {
      * @return
      * @throws Throwable
      */
+    // XXX システム独自仕様
     @Around("within(rms..*Controller*  && !rms.web.base..*))")
     public Object invokeControllerAround(ProceedingJoinPoint joinPoint) throws Throwable {
 

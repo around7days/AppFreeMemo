@@ -23,7 +23,7 @@ public class BusinessException extends Exception {
 
     /** MessageSource */
     @Autowired
-    MessageSource messageSource;
+    MessageSource message;
 
     /** エラーコード */
     private String errorCode;
@@ -57,7 +57,7 @@ public class BusinessException extends Exception {
     public BusinessException(MessageEnum messageEnum) {
         super();
         this.errorCode = messageEnum.name();
-        this.errorMessage = messageSource.getMessage(messageEnum.name(), null, Locale.getDefault());
+        this.errorMessage = message.getMessage(messageEnum.name(), null, Locale.getDefault());
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }
@@ -70,7 +70,7 @@ public class BusinessException extends Exception {
     public BusinessException(MessageEnum messageEnum, Object... args) {
         super();
         this.errorCode = messageEnum.name();
-        this.errorMessage = messageSource.getMessage(messageEnum.name(), args, Locale.getDefault());
+        this.errorMessage = message.getMessage(messageEnum.name(), args, Locale.getDefault());
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }
@@ -83,7 +83,7 @@ public class BusinessException extends Exception {
     public BusinessException(MessageEnum messageEnum, List<Object> args) {
         super();
         this.errorCode = messageEnum.name();
-        this.errorMessage = messageSource.getMessage(messageEnum.name(), args.toArray(), Locale.getDefault());
+        this.errorMessage = message.getMessage(messageEnum.name(), args.toArray(), Locale.getDefault());
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }

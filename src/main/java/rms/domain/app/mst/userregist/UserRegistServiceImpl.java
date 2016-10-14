@@ -6,10 +6,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import rms.common.abstracts._AbstractService;
 import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MRoleConst;
@@ -33,14 +33,10 @@ import rms.common.utils.StringUtils;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserRegistServiceImpl implements UserRegistService {
+public class UserRegistServiceImpl implements UserRegistService, _AbstractService {
     /** logger */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(UserRegistServiceImpl.class);
-
-    /** MessageSource */
-    @Autowired
-    MessageSource message;
 
     /** ユーザ情報登録Dao */
     @Autowired
