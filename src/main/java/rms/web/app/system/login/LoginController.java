@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import rms.common.base.SecurityConfig;
+import rms.common.base.WebSecurityConfig;
 
 /**
  * ログイン画面コントローラー
@@ -29,7 +29,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
     private static final String PAGE_URL = "html/login";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/login";
+    public static final String MAPPING_URL = WebSecurityConfig.LOGIN_MAPPING_URL;
 
     /**
      * ログイン画面フォームの初期化
@@ -53,7 +53,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
                        Model model) {
         // セッションが存在する場合は一度ログアウト処理を実施
         if (!session.isNew()) {
-            return forward(SecurityConfig.LOGOUT_MAPPING_URL);
+            return forward(WebSecurityConfig.LOGOUT_MAPPING_URL);
         }
 
         return PAGE_URL;
@@ -78,7 +78,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
         }
 
         // ログイン認証処理にフォワード
-        return forward(SecurityConfig.AUTH_MAPPING_URL);
+        return forward(WebSecurityConfig.AUTH_MAPPING_URL);
     }
 
     /**

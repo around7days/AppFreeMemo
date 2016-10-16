@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import rms.common.base.WebSecurityConfig;
 import rms.common.utils.SessionUtils;
 import rms.web.app.mst.userlist.UserListController;
 import rms.web.app.mst.userregist.UserRegistController;
@@ -34,7 +35,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     private static final String PAGE_URL = "html/menu";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/menu";
+    public static final String MAPPING_URL = WebSecurityConfig.MENU_MAPPING_URL;
 
     /**
      * メニュー画面フォームの初期化

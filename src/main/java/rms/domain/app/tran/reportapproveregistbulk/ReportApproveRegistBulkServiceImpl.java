@@ -175,8 +175,6 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         // 承認権限有無（true:あり false:なし）
         boolean isApproveAuth = false;
 
-        // TODO 登録画面と判断処理が同じ・・・共通化すべき？（ウソ）
-
         // 承認権限有無判定（現在の承認状況と承認者から判断）
         switch (vTReport.getStatus()) {
         case MCodeConst.A001_Y01:
@@ -217,7 +215,6 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         entity.setTargetYm(vTReport.getTargetYm());
         entity.setVersion(vTReport.getVersion()); // 排他制御用バージョン
 
-        // TODO 登録画面と判断処理が同じ・・・共通化すべき？
         /*
          * 更新項目
          */
@@ -253,7 +250,6 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
 
         TReportApproveFlow entity = new TReportApproveFlow();
 
-        // TODO 登録画面と判断処理が同じ・・・共通化すべき？
         /*
          * 主キー
          */

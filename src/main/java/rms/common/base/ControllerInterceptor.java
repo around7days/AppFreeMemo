@@ -18,14 +18,17 @@ public class ControllerInterceptor {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(ControllerInterceptor.class);
 
+    /** Controller Method */
+    // XXX システム独自仕様
+    private static final String controllerClassPath = "rms.web..*Controller*";
+
     /**
      * Controllerクラス内のメソッド開始時にログを出力
      * @param joinPoint
      * @return
      * @throws Throwable
      */
-    // XXX システム独自仕様
-    @Around("within(rms..*Controller*  && !rms.web.base..*))")
+    @Around("within(" + controllerClassPath + ")")
     public Object invokeControllerAround(ProceedingJoinPoint joinPoint) throws Throwable {
 
         // クラス名・メソッド名の取得
@@ -35,7 +38,7 @@ public class ControllerInterceptor {
         /*
          * 処理実行前のログ出力
          */
-        logger.debug("called before -> {}#{}", classNm, methodNm);
+        logger.info("called before -> {}#{}", classNm, methodNm);
 
         /*
          * 処理の実行
@@ -45,7 +48,7 @@ public class ControllerInterceptor {
         /*
          * 処理実行後のログ出力
          */
-        logger.debug("called after  -> {}#{}", classNm, methodNm);
+        logger.info("called after  -> {}#{}", classNm, methodNm);
 
         return retVal;
     }

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  * @author
  */
 @ControllerAdvice
-public class CustomControllerAdvice {
+public class ControllerAdviceCustom {
 
     /** logger */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(CustomControllerAdvice.class);
+    private static final Logger logger = LoggerFactory.getLogger(ControllerAdviceCustom.class);
 
     /** application.properties */
     private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;

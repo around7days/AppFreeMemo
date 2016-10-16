@@ -30,7 +30,7 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
-        logger.info("return view name -> {}", modelAndView.getViewName());
+        logger.info("return uri  -> {}", modelAndView.getViewName());
     }
 
     @Override
