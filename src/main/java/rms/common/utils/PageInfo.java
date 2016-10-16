@@ -67,7 +67,7 @@ public class PageInfo {
     public void setPage(int page) {
         if (page < 1) {
             logger.error("page to {} can not be assigned", page);
-            throw new RuntimeException("page to " + page + "can not be assigned");
+            throw new RuntimeException("page to " + page + " can not be assigned");
         }
         this.page = page;
     }
