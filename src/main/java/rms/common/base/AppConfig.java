@@ -16,7 +16,7 @@ public class AppConfig {
         return new Java8TimeDialect();
     }
 
-    // TODO 設定不要。なぜに・・・
+    // MessageSourceインタフェースを継承しているので設定不要
     // /**
     // * MessageSourceの拡張
     // * @return
@@ -26,6 +26,5 @@ public class AppConfig {
     // public MessageSourceImpl messageSourceImpl() {
     // return new MessageSourceImpl();
     // }
-
 
 }

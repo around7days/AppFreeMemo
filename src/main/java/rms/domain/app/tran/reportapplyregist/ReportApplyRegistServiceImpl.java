@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -199,7 +197,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         if (applyPossibleDate.compareTo(nowdate) >= 0) {
             // 月報提出可能日 >= 現在日付の場合
             // 「対象年月の月報は、{0}以降から申請可能です」
-            List<Object> params = Arrays.asList(applyPossibleDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+            String params = applyPossibleDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             throw new BusinessException(MessageEnum.error007, params);
         }
     }

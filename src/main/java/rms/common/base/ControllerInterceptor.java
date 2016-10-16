@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * TraceControllerInterceptorクラス
+ * ControllerInterceptorクラス
  * @author
  */
 @Aspect
@@ -35,7 +35,7 @@ public class ControllerInterceptor {
         /*
          * 処理実行前のログ出力
          */
-        logger.info("[AOP before] called {}#{}", classNm, methodNm);
+        logger.debug("called before -> {}#{}", classNm, methodNm);
 
         /*
          * 処理の実行
@@ -45,50 +45,9 @@ public class ControllerInterceptor {
         /*
          * 処理実行後のログ出力
          */
-        logger.info("[AOP after ] called {}#{}", classNm, methodNm);
-
-        if (isURL(retVal)) {
-            logger.info("Return URL -> {}", retVal);
-        }
+        logger.debug("called after  -> {}#{}", classNm, methodNm);
 
         return retVal;
     }
-
-    /**
-     * URLかチェック
-     * @param retVal
-     * @return true:URL false:URL以外
-     */
-    private boolean isURL(Object retVal) {
-        if (retVal != null && retVal instanceof String) {
-            String url = retVal.toString();
-            // XXX システム独自仕様
-            if (url.startsWith("html") || url.startsWith("redirect") || url.startsWith("forward")) {
-                // URL
-                return true;
-            }
-        }
-        // URL以外
-        return false;
-    }
-
-    //
-    // /**
-    // * Serviceクラス内のメソッド開始時にログを出力
-    // * @param joinPoint
-    // */
-    // @Before("within(rms..*Service*)")
-    // public void invokeServiceBefore(JoinPoint joinPoint) {
-    // logger.debug("[AOP before] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
-    // }
-    //
-    // /**
-    // * Serviceクラス内のメソッド終了時にログを出力
-    // * @param joinPoint
-    // */
-    // @After("within(rms..*Service*)")
-    // public void invokeServiceAfter(JoinPoint joinPoint) {
-    // logger.debug("[AOP after ] called {}#{}", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
-    // }
 
 }

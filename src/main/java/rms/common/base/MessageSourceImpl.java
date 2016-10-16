@@ -3,22 +3,23 @@ package rms.common.base;
 import java.util.List;
 import java.util.Locale;
 
-import org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.stereotype.Component;
 
 import rms.common.consts.MessageEnum;
 
 /**
+ * MessageSource拡張クラス
  * @author
  */
-@Component
 public class MessageSourceImpl implements MessageSource {
 
     /** MessageSource */
-    private MessageSource message = new MessageSourceAutoConfiguration().messageSource();
+    @Autowired
+    private MessageSource message;
+    // private MessageSource message = new MessageSourceAutoConfiguration().messageSource();
 
     /**
      * メッセージの取得
@@ -36,7 +37,7 @@ public class MessageSourceImpl implements MessageSource {
      * @return
      */
     public String getMessage(MessageEnum code,
-                             Object[] args) {
+                             Object... args) {
         return message.getMessage(code.name(), args, Locale.getDefault());
     }
 

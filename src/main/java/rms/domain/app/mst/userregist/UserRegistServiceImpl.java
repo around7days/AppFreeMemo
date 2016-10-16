@@ -1,6 +1,5 @@
 package rms.domain.app.mst.userregist;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -264,8 +263,7 @@ public class UserRegistServiceImpl implements UserRegistService {
         boolean hasExists = mUserDao.existsById(userId);
         if (hasExists) {
             // 「{0}が重複しています」
-            List<Object> params = Arrays.asList("ユーザID：");
-            throw new BusinessException(MessageEnum.error001, params);
+            throw new BusinessException(MessageEnum.error001, "ユーザID：");
         }
     }
 
