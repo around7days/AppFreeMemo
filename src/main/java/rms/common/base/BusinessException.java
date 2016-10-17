@@ -22,6 +22,7 @@ public class BusinessException extends Exception {
     // TODO インジェクトできない・・・とりあえずの暫定で直呼びに・・・
     /** MessageSource */
     // @Autowired
+    // MessageSourceImpl message;
     MessageSourceImpl message = new MessageSourceImpl();
 
     /** エラーコード */

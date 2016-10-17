@@ -1,5 +1,7 @@
 package rms.common.abstracts;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import rms.common.base.MessageSourceImpl;
 import rms.common.utils.StringUtilsImpl;
 
@@ -10,7 +12,7 @@ import rms.common.utils.StringUtilsImpl;
 public abstract class AbstractController {
 
     /** MessageSource */
-    // @Autowired
+    @Autowired
     protected MessageSourceImpl message;
 
     /**

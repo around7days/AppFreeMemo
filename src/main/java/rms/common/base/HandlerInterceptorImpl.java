@@ -1,5 +1,7 @@
 package rms.common.base;
 
+import java.util.Formatter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +22,7 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
+        // URIのログ表示
         StringBuilder uri = new StringBuilder(request.getRequestURI());
         String query = request.getQueryString();
         if (query != null && !query.isEmpty()) {
@@ -27,6 +30,19 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
             uri.append(query);
         }
         logger.info("request uri  -> {}", uri);
+
+        // リクエストパラメータのログ表示
+        // 負荷軽減の為に事前に判定
+        if (logger.isDebugEnabled()) {
+            request.getParameterMap().entrySet().forEach(entry -> {
+                for (String val : entry.getValue()) {
+                    Formatter fm = new Formatter();
+                    fm.format("%-15s : %s", entry.getKey(), val);
+                    logger.debug("param -> {}", fm);
+                }
+            });
+        }
+
         return true;
     }
 

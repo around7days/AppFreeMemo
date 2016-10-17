@@ -47,7 +47,7 @@ public class ControllerInterceptor {
         try {
             retVal = joinPoint.proceed();
         } catch (Exception e) {
-            logger.error("called fail => {}#{}", classNm, methodNm);
+            logger.error("called fail -> {}#{}", classNm, methodNm);
             throw e;
         }
 

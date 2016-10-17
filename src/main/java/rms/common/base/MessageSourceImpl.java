@@ -3,7 +3,7 @@ package rms.common.base;
 import java.util.List;
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
@@ -17,9 +17,10 @@ import rms.common.consts.MessageEnum;
 public class MessageSourceImpl implements MessageSource {
 
     /** MessageSource */
-    @Autowired
-    private MessageSource message;
-    // private MessageSource message = new MessageSourceAutoConfiguration().messageSource();
+    // TODO インジェクトできない・・・とりあえずの別の方法に変更・・・
+    // @Autowired
+    // private MessageSource message;
+    private static final MessageSource message = new MessageSourceAutoConfiguration().messageSource();
 
     /**
      * メッセージの取得
