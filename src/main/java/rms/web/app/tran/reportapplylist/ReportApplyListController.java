@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
+import rms.common.consts.MRoleConst;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.FileUtils;
 import rms.common.utils.PageInfo;
@@ -29,11 +31,13 @@ import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapplyregist.ReportApplyRegistController;
 
 /**
- * 月報申請状況一覧画面コントローラー
+ * 月報申請状況一覧画面コントローラー<br>
+ * 役割：管理者、申請者
  * @author
  */
 @Controller
 @SessionAttributes(types = ReportApplyListForm.class)
+@Secured(value = { MRoleConst.ADMIN, MRoleConst.APPLY })
 public class ReportApplyListController extends rms.common.abstracts.AbstractController {
 
     /** logger */

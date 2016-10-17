@@ -8,6 +8,7 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
+import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.utils.BeanUtilsImpl;
@@ -35,10 +37,12 @@ import rms.web.app.tran.reportapplyregist.ReportApplyRegistForm.ReApply;
 
 /**
  * 月報申請画面コントローラー
+ * 役割：管理者、申請者
  * @author
  */
 @Controller
 @SessionAttributes(types = ReportApplyRegistForm.class)
+@Secured(value = { MRoleConst.ADMIN, MRoleConst.APPLY })
 public class ReportApplyRegistController extends rms.common.abstracts.AbstractController {
 
     /** logger */

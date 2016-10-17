@@ -30,4 +30,5 @@ public enum MessageEnum {
     error008, // 月報ファイル名のフォーマットが正しくありません(yyyymm_userId_userNm.xlsx)
     error009, // 月報情報が見つかりません
     error010, // 承認権限がありません
+    error011, // ログインに失敗しました
 }

@@ -20,8 +20,13 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
-        logger.info("request uri -> {}", request.getRequestURI());
-
+        StringBuilder uri = new StringBuilder(request.getRequestURI());
+        String query = request.getQueryString();
+        if (query != null && !query.isEmpty()) {
+            uri.append("?");
+            uri.append(query);
+        }
+        logger.info("request uri  -> {}", uri);
         return true;
     }
 
@@ -30,7 +35,8 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
-        logger.info("return uri  -> {}", modelAndView.getViewName());
+        String uri = modelAndView.getViewName();
+        logger.info("return uri   -> {}", uri);
     }
 
     @Override

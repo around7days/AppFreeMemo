@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
+import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtilsImpl;
@@ -39,10 +41,12 @@ import rms.web.app.tran.reportapproveregistbulk.ReportApproveRegistBulkControlle
 
 /**
  * 月報承認状況一覧画面コントローラー
+ * 役割：管理者、承認者
  * @author
  */
 @Controller
 @SessionAttributes(types = ReportApproveListForm.class)
+@Secured(value = { MRoleConst.ADMIN, MRoleConst.APPROVE })
 public class ReportApproveListController extends rms.common.abstracts.AbstractController {
 
     /** logger */

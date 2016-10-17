@@ -22,7 +22,7 @@ public class ErrorControllerImpl implements ErrorController {
     private static final String PAGE_URL = "html/error";
 
     /** マッピングURL */
-    public static final String MAPPING_URL = "/error";
+    public static final String MAPPING_URL = WebSecurityConfig.ERROR_MAPPING_URL;
 
     /*
      * (非 Javadoc)

@@ -1,7 +1,5 @@
 package rms.web.app.system.login;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import rms.common.base.WebSecurityConfig;
+import rms.common.consts.MessageEnum;
 
 /**
  * ログイン画面コントローラー
@@ -42,26 +41,16 @@ public class LoginController extends rms.common.abstracts.AbstractController {
 
     /**
      * 初期処理
-     * @param form
-     * @param session
-     * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL)
-    public String init(LoginForm form,
-                       HttpSession session,
-                       Model model) {
-        // セッションが存在する場合は一度ログアウト処理を実施
-        if (!session.isNew()) {
-            return forward(WebSecurityConfig.LOGOUT_MAPPING_URL);
-        }
-
+    @RequestMapping(MAPPING_URL)
+    public String init() {
         return PAGE_URL;
     }
 
     /**
      * ログイン処理<br>
-     * 備考：ログイン認証/ログアウト処理はSecurityConfigで実施
+     * 備考：ログイン認証/ログアウト処理はWebSecurityConfigで実施
      * @param form
      * @param bindingResult
      * @param model
@@ -93,17 +82,9 @@ public class LoginController extends rms.common.abstracts.AbstractController {
     public String loginError(LoginForm form,
                              BindingResult bindingResult,
                              Model model) {
-        bindingResult.reject("", "ログインに失敗しました");
-        logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
+        // 「ログインに失敗しました。」
+        bindingResult.reject(MessageEnum.error011.name());
+        logger.debug("認証エラー -> {}", bindingResult.getAllErrors());
         return PAGE_URL;
     }
-
-    // /*
-    // * (非 Javadoc)
-    // * @see rms.common.abstracts.AbstractController#getPageId()
-    // */
-    // @Override
-    // protected PageIdEnum getPageId() {
-    // return PageIdEnum.login;
-    // }
 }

@@ -8,6 +8,7 @@ import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.base.BusinessException;
+import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.utils.BeanUtilsImpl;
@@ -33,11 +35,13 @@ import rms.web.app.mst.userregist.UserRegistForm.Insert;
 import rms.web.app.mst.userregist.UserRegistForm.Update;
 
 /**
- * ユーザ登録画面コントローラー
+ * ユーザ登録画面コントローラー<br>
+ * 役割：管理者のみ
  * @author
  */
 @Controller
 @SessionAttributes(types = UserRegistForm.class)
+@Secured(value = { MRoleConst.ADMIN })
 public class UserRegistController extends rms.common.abstracts.AbstractController {
 
     /** logger */

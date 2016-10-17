@@ -3,6 +3,7 @@ package rms.common.base;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,13 +17,16 @@ import rms.common.auth.UserDetailsServiceImpl;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /** 認証 マッピングURL */
-    public static final String AUTH_MAPPING_URL = "/auth";
-    /** ログイン マッピングURL */
+    /** ベース マッピングURL */
+    public static final String BASE_MAPPING_URL = "/";
+    /** ログイン画面 マッピングURL */
     public static final String LOGIN_MAPPING_URL = "/login";
-    /** ログアウト マッピングURL */
+    /** ログイン認証 マッピングURL */
+    public static final String AUTH_MAPPING_URL = "/auth";
+    /** ログアウト処理 マッピングURL */
     public static final String LOGOUT_MAPPING_URL = "/logout";
     /** エラー マッピングURL */
     public static final String ERROR_MAPPING_URL = "/error";
@@ -39,9 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /* ログイン前の認証設定 */
         // OK(アクセス許可)
         http.authorizeRequests()
-            .antMatchers("/", //
-                         AUTH_MAPPING_URL, //
+            .antMatchers(BASE_MAPPING_URL, //
                          LOGIN_MAPPING_URL, //
+                         AUTH_MAPPING_URL, //
                          LOGOUT_MAPPING_URL, //
                          ERROR_MAPPING_URL) //
             .permitAll() //

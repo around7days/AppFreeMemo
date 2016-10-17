@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.auth.UserInfo;
 import rms.common.base.BusinessException;
+import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
@@ -25,11 +27,13 @@ import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkServic
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
 
 /**
- * 月報一括承認画面コントローラー
+ * 月報一括承認画面コントローラー<br>
+ * 役割：管理者、承認者
  * @author
  */
 @Controller
 @SessionAttributes(types = ReportApproveRegistBulkForm.class)
+@Secured(value = { MRoleConst.ADMIN, MRoleConst.APPROVE })
 public class ReportApproveRegistBulkController extends rms.common.abstracts.AbstractController {
 
     /** logger */

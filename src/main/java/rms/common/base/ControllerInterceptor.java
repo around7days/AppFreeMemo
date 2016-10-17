@@ -38,17 +38,18 @@ public class ControllerInterceptor {
         /*
          * 処理実行前のログ出力
          */
-        logger.info("called before -> {}#{}", classNm, methodNm);
+        logger.info("called start -> {}#{}", classNm, methodNm);
 
         /*
          * 処理の実行
          */
-        Object retVal = joinPoint.proceed();
-
-        /*
-         * 処理実行後のログ出力
-         */
-        logger.info("called after  -> {}#{}", classNm, methodNm);
+        Object retVal = null;
+        try {
+            retVal = joinPoint.proceed();
+        } catch (Exception e) {
+            logger.error("called fail => {}#{}", classNm, methodNm);
+            throw e;
+        }
 
         return retVal;
     }
