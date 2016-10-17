@@ -30,6 +30,9 @@ public class LoginController extends rms.common.abstracts.AbstractController {
     /** マッピングURL */
     public static final String MAPPING_URL = WebSecurityConfig.LOGIN_MAPPING_URL;
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "S001";
+
     /**
      * ログイン画面フォームの初期化
      * @return
@@ -86,5 +89,14 @@ public class LoginController extends rms.common.abstracts.AbstractController {
         bindingResult.reject(MessageEnum.error011.name());
         logger.debug("認証エラー -> {}", bindingResult.getAllErrors());
         return PAGE_URL;
+    }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
     }
 }

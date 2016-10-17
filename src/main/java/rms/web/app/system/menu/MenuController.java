@@ -37,6 +37,9 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     /** マッピングURL */
     public static final String MAPPING_URL = WebSecurityConfig.MENU_MAPPING_URL;
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "S001";
+
     /**
      * メニュー画面フォームの初期化
      * @return
@@ -134,4 +137,14 @@ public class MenuController extends rms.common.abstracts.AbstractController {
                        Model model) {
         return redirect(ReportApproveListController.MAPPING_URL, "init");
     }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
+    }
+
 }

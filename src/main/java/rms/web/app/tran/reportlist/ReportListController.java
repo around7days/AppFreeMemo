@@ -50,6 +50,9 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportlist";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "T001";
+
     /** 月報一覧画面サービス */
     @Autowired
     ReportListService service;
@@ -216,6 +219,15 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         // セッション破棄
         sessionStatus.setComplete();
         return redirect(MenuController.MAPPING_URL);
+    }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
     }
 
 }

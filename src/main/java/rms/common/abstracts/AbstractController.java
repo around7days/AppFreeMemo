@@ -67,9 +67,9 @@ public abstract class AbstractController {
         return forwardUrl.toString();
     }
 
-    // /**
-    // * ページIDの取得
-    // * @return
-    // */
-    // protected abstract PageIdEnum getPageId();
+    /**
+     * 画面IDの取得
+     * @return
+     */
+    protected abstract String getScreenId();
 }

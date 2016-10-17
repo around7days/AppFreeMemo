@@ -53,6 +53,9 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
     /** マッピングURL */
     public static final String MAPPING_URL = "/mst/userregist";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "M002";
+
     /** ユーザ登録画面サービス */
     @Autowired
     UserRegistService service;
@@ -204,6 +207,15 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // セッション破棄
         sessionStatus.setComplete();
         return redirect(UserListController.MAPPING_URL, "reSearch");
+    }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
     }
 
     // ----------------------------------------------------------------------------------------

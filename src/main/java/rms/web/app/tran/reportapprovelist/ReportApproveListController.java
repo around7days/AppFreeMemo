@@ -58,6 +58,9 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapprovelist";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "T006";
+
     /** 月報情報取得サービス */
     @Autowired
     ReportApproveListService service;
@@ -312,6 +315,15 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         // セッション破棄
         sessionStatus.setComplete();
         return redirect(MenuController.MAPPING_URL);
+    }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
     }
 
 }

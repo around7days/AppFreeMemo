@@ -58,6 +58,9 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapproveregist";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "S004";
+
     /** 月報承認画面サービス */
     @Autowired
     ReportApproveRegistService service;
@@ -206,6 +209,15 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         // セッション破棄
         sessionStatus.setComplete();
         return redirect(ReportApproveListController.MAPPING_URL, "reSearch");
+    }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
     }
 
     // ----------------------------------------------------------------------------------------

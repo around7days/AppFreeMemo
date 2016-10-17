@@ -45,6 +45,9 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapproveregistbulk";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "T005";
+
     /** 月報一括承認画面サービス */
     @Autowired
     ReportApproveRegistBulkService service;
@@ -120,6 +123,16 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
         sessionStatus.setComplete();
         return redirect(ReportApproveListController.MAPPING_URL, "reSearch");
     }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
+    }
+
     //
     // // ----------------------------------------------------------------------------------------
     // /**

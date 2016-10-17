@@ -49,6 +49,9 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapplylist";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "T003";
+
     /** 月報申請状況一覧画面サービス */
     @Autowired
     ReportApplyListService service;
@@ -203,4 +206,12 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         return redirect(MenuController.MAPPING_URL);
     }
 
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
+    }
 }

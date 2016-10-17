@@ -44,6 +44,9 @@ public class UserListController extends rms.common.abstracts.AbstractController 
     /** マッピングURL */
     public static final String MAPPING_URL = "/mst/userlist";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "M001";
+
     /** ユーザ情報取得サービス */
     @Autowired
     UserListService service;
@@ -211,4 +214,14 @@ public class UserListController extends rms.common.abstracts.AbstractController 
 
         return redirect(UserRegistController.MAPPING_URL + "/" + userEntity.getUserId(), "initUpdate");
     }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
+    }
+
 }

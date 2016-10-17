@@ -54,6 +54,9 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     /** マッピングURL */
     public static final String MAPPING_URL = "/tran/reportapplyregist";
 
+    /** 画面ID */
+    public static final String SCREEN_ID = "T002";
+
     /** 月報申請画面サービス */
     @Autowired
     ReportApplyRegistService service;
@@ -207,6 +210,15 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         // セッション破棄
         sessionStatus.setComplete();
         return redirect(MenuController.MAPPING_URL);
+    }
+
+    /*
+     * (非 Javadoc)
+     * @see rms.common.abstracts.AbstractController#getScreenId()
+     */
+    @Override
+    protected String getScreenId() {
+        return SCREEN_ID;
     }
 
     // ----------------------------------------------------------------------------------------
