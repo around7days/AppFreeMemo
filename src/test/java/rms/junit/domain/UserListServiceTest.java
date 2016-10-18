@@ -22,7 +22,7 @@ public class UserListServiceTest {
     UserListService service;
 
     @Test
-    public void test1() {
+    public void ユーザ検索_1件() {
         UserListDtoCondition condition = new UserListDtoCondition();
         condition.setUserId("user01");
 
@@ -31,4 +31,14 @@ public class UserListServiceTest {
         UserListEntityResult result = resultDto.getResultList().get(0);
         assertEquals(result.getUserNm(), "申請者０１");
     }
+
+    @Test
+    public void ユーザ検索_該当なし() {
+        UserListDtoCondition condition = new UserListDtoCondition();
+        condition.setUserId("userXX");
+
+        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
+        assertEquals(resultDto.getCount(), 0);
+    }
+
 }

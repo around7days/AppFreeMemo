@@ -20,21 +20,21 @@ public class BusinessExceptionTest {
     private static Logger logger = LoggerFactory.getLogger(BusinessExceptionTest.class);
 
     @Test
-    public void test1() {
+    public void メッセージ取得_Enum_引数なし() {
         BusinessException e = new BusinessException(MessageEnum.info001);
         printLog(e);
         assertEquals(e.getErrorMessage(), "登録が完了しました");
     }
 
     @Test
-    public void test2() {
+    public void メッセージ取得_Enum_引数あり() {
         BusinessException e = new BusinessException(MessageEnum.error001, "ユーザID");
         printLog(e);
         assertEquals(e.getErrorMessage(), "ユーザIDが重複しています");
     }
 
     @Test
-    public void test3() {
+    public void メッセージ取得_値を直接() {
         BusinessException e = new BusinessException("登録が完了しました");
         printLog(e);
         assertEquals(e.getErrorMessage(), "登録が完了しました");

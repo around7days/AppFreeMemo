@@ -2,6 +2,7 @@ package rms.common.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,7 @@ import rms.common.auth.UserDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@Order(1) // TODO gradleからのテスト実行時のみOrder指定が無いとエラーになる・・・
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /** ベース マッピングURL */

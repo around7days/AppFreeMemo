@@ -48,7 +48,8 @@ dependencies {
 
 	// test用
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
-	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.+'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
+	testCompile files('libs/SeleniumBase.jar')
 
 	// generator用
 //	compile group: 'org.freemarker', name: 'freemarker', version: '+'
