@@ -38,12 +38,12 @@ public class BusinessException extends Exception {
 
     /**
      * コンストラクタ
-     * @param value
+     * @param errorMessage
      */
-    public BusinessException(String value) {
+    public BusinessException(String errorMessage) {
         super();
         this.errorCode = "";
-        this.errorMessage = value;
+        this.errorMessage = errorMessage;
         logger.debug("errorCode -> {}", this.errorCode);
         logger.debug("errorMessage -> {}", this.errorMessage);
     }

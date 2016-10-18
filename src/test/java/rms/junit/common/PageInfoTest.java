@@ -1,24 +1,26 @@
-package rms.junit;
+package rms.junit.common;
 
 import static org.junit.Assert.*;
 
-import rms.common.utils.PageInfo;
-
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import org.junit.Test;
+import rms.common.utils.PageInfo;
 
-/**
- */
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class PageInfoTest {
 
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(PageInfoTest.class);
 
     @Test
-    public void indexTest1() {
-        logger.debug("◆indexTest1");
+    public void test1() {
+        logger.debug("◆test1");
         PageInfo page = new PageInfo();
         page.setLimit(5);
         page.setPage(1);
@@ -35,8 +37,8 @@ public class PageInfoTest {
     }
 
     @Test
-    public void indexTest2() {
-        logger.debug("◆indexTest2");
+    public void test2() {
+        logger.debug("◆test2");
         PageInfo page = new PageInfo();
         page.setLimit(5);
         page.setPage(2);
@@ -53,8 +55,8 @@ public class PageInfoTest {
     }
 
     @Test
-    public void indexTest3() {
-        logger.debug("◆indexTest3");
+    public void test3() {
+        logger.debug("◆test3");
         PageInfo page = new PageInfo();
         page.setLimit(5);
         page.setPage(10);
@@ -71,8 +73,8 @@ public class PageInfoTest {
     }
 
     @Test
-    public void indexTest4() {
-        logger.debug("◆indexTest4");
+    public void test4() {
+        logger.debug("◆test4");
         PageInfo page = new PageInfo();
         page.setLimit(5);
         page.setPage(11);
@@ -89,8 +91,8 @@ public class PageInfoTest {
     }
 
     @Test
-    public void indexTest5() {
-        logger.debug("◆indexTest5");
+    public void test5() {
+        logger.debug("◆test5");
         PageInfo page = new PageInfo();
         page.setLimit(5);
         page.setPage(11);
@@ -107,8 +109,8 @@ public class PageInfoTest {
     }
 
     @Test
-    public void indexTest6() {
-        logger.debug("◆indexTest6");
+    public void test6() {
+        logger.debug("◆test6");
         PageInfo page = new PageInfo();
         page.setLimit(5);
         page.setPage(2);
