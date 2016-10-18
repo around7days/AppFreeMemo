@@ -232,7 +232,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     public String handlerException(BusinessException e,
                                    HttpSession session,
                                    Model model) {
-        logger.debug("業務エラー -> {}", e.getErrorMessage());
+        logger.debug("業務エラー -> {}", e);
 
         // メッセージを反映
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import rms.common.consts.MessageEnum;
 
@@ -13,13 +12,12 @@ import rms.common.consts.MessageEnum;
  * 説明：業務上想定内のエラー発生時に使用する。
  * @author
  */
-@Component
 public class BusinessException extends Exception {
 
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(BusinessException.class);
 
-    // TODO インジェクトできない・・・とりあえずの暫定で直呼びに・・・
+    // TODO newしてるのでDIできない・・・とりあえずの暫定で直呼びに・・・
     /** MessageSource */
     // @Autowired
     // MessageSourceImpl message;
@@ -102,5 +100,14 @@ public class BusinessException extends Exception {
      */
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    @Override
+    public String toString() {
+        if (errorCode != null) {
+            return errorCode + ":" + errorMessage;
+        } else {
+            return errorMessage;
+        }
     }
 }

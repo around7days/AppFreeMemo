@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import rms.common.base.WebSecurityConfig;
 import rms.common.consts.MessageEnum;
+import rms.common.consts.MessageTypeConst;
 
 /**
  * ログイン画面コントローラー
@@ -86,7 +87,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
                              BindingResult bindingResult,
                              Model model) {
         // 「ログインに失敗しました。」
-        bindingResult.reject(MessageEnum.error011.name());
+        model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error011));
         logger.debug("認証エラー -> {}", bindingResult.getAllErrors());
         return PAGE_URL;
     }

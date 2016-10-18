@@ -19,6 +19,7 @@ import org.springframework.core.Conventions;
  */
 public class SessionUtils {
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(SessionUtils.class);
 
     // TODO どっかのタイミングできれいにする
@@ -64,7 +65,7 @@ public class SessionUtils {
                 return (T) obj;
             }
         } catch (Exception e) {
-            logger.warn("class instance error", e.getMessage());
+            throw new RuntimeException("class instance error", e);
         }
         return null;
     }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
+import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.BeanUtilsImpl;
 import rms.common.utils.FileUtils;
@@ -113,7 +114,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
         if (resultDto.getResultList().isEmpty()) {
             // 「検索結果が見つかりません」
-            bindingResult.reject(MessageEnum.error006.name());
+            model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error006));
             return PAGE_URL;
         }
 
