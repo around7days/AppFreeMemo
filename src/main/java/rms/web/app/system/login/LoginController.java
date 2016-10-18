@@ -1,5 +1,7 @@
 package rms.web.app.system.login;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import rms.common.base.WebSecurityConfig;
 import rms.common.consts.MessageEnum;
@@ -45,10 +48,18 @@ public class LoginController extends rms.common.abstracts.AbstractController {
 
     /**
      * 初期処理
+     * @param request
+     * @param session
      * @return
      */
     @RequestMapping(MAPPING_URL)
-    public String init() {
+    public String init(WebRequest request,
+                       HttpSession session) {
+        if (!session.isNew() && request.getUserPrincipal() != null) {
+            // セッション情報が残っている場合は一度ログアウト処理を実施（念の為セッションとユーザ情報の両方をチェック）
+            logger.debug("session invalidate -> {}", request.getSessionId());
+            return forward(WebSecurityConfig.LOGOUT_MAPPING_URL);
+        }
         return PAGE_URL;
     }
 

@@ -17,9 +17,6 @@ import rms.common.consts.MessageEnum;
 public class MessageSourceImpl implements MessageSource {
 
     /** MessageSource */
-    // TODO newしているのでDIできない・・・とりあえずの直接MessageSourceを取得
-    // @Autowired
-    // private MessageSource message;
     private static final MessageSource message = new MessageSourceAutoConfiguration().messageSource();
 
     /**

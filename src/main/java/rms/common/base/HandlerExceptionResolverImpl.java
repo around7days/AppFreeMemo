@@ -31,7 +31,7 @@ public class HandlerExceptionResolverImpl implements HandlerExceptionResolver, O
         // エラーの種類によって処理を変更
         if (ex instanceof AccessDeniedException) {
             // 操作権限エラー
-            logger.error("{} {} ", ex.getCause(), ex.getMessage());
+            logger.error("{}", ex.toString());
         } else {
             // その他エラー
             logger.error(ex.getMessage(), ex);
