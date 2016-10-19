@@ -1,4 +1,4 @@
-package rms.selenium.com.page;
+package rms.selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Loginクラス
+ * LoginPageクラス
  */
-public class LoginPage extends selenium.base.AbstractSeleniumPage {
+public class LoginPage extends rms.selenium.page.AbstractCommonPage {
 
     /** ロガー */
     @SuppressWarnings("unused")
@@ -32,17 +32,7 @@ public class LoginPage extends selenium.base.AbstractSeleniumPage {
     @CacheLookup
     private WebElement ログインボタン;
 
-    /** 通常メッセージ */
-    @FindBy(id = "alert-success")
-    @CacheLookup
-    private WebElement 通常メッセージ;
-
-    /** エラーメッセージ */
-    @FindBy(id = "alert-danger")
-    @CacheLookup
-    private WebElement エラーメッセージ;
-
-    /* 共通メソッド宣言 ------------------------------------------------------------------------------------------------- */
+    /* 共通メソッド宣言 --------------------------------------------------------------------------------------------- */
     /**
      * PageFactoryを使用してWebElementをマッピングする
      * @return Page
@@ -75,22 +65,6 @@ public class LoginPage extends selenium.base.AbstractSeleniumPage {
      */
     public void clickログインボタン() {
         this.ログインボタン.click();
-    }
-
-    /**
-     * 通常メッセージの値を取得します。
-     * @return text
-     */
-    public String getText通常メッセージ() {
-        return this.通常メッセージ.getText();
-    }
-
-    /**
-     * エラーメッセージの値を取得します。
-     * @return text
-     */
-    public String getTextエラーメッセージ() {
-        return this.エラーメッセージ.getText();
     }
 
 }

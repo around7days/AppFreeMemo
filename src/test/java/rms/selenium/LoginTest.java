@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rms.selenium.com.page.LoginPage;
+import rms.selenium.page.LoginPage;
 import selenium.base.AbstractSeleniumTest;
 
 /**
@@ -39,7 +39,6 @@ public class LoginTest extends AbstractSeleniumTest {
             $url("http://localhost:8081/login");
 
             capture.screenShot();
-
             assertEquals($getTitle(), "ログイン画面");
         }
     }
@@ -62,18 +61,15 @@ public class LoginTest extends AbstractSeleniumTest {
          */
         {
             LoginPage page = new LoginPage().initialize();
-
             page.sendkeysユーザID("xxxx01");
             page.sendkeysパスワード("pass");
-
             capture.screenShot();
-
             page.clickログインボタン();
-
             capture.screenShot();
 
+            // ログイン画面で失敗メッセージが表示されていること
             assertEquals($getTitle(), "ログイン画面");
-            assertTrue(page.getTextエラーメッセージ().contains("ログインに失敗しました"));
+            assertTrue(page.getTextメッセージ_エラー().contains("ログインに失敗しました"));
         }
     }
 
@@ -95,18 +91,15 @@ public class LoginTest extends AbstractSeleniumTest {
          */
         {
             LoginPage page = new LoginPage().initialize();
-
             page.sendkeysユーザID("user01");
             page.sendkeysパスワード("x");
-
             capture.screenShot();
-
             page.clickログインボタン();
-
             capture.screenShot();
 
+            // ログイン画面で失敗メッセージが表示されていること
             assertEquals($getTitle(), "ログイン画面");
-            assertTrue(page.getTextエラーメッセージ().contains("ログインに失敗しました"));
+            assertTrue(page.getTextメッセージ_エラー().contains("ログインに失敗しました"));
         }
 
     }
@@ -129,17 +122,14 @@ public class LoginTest extends AbstractSeleniumTest {
          */
         {
             LoginPage page = new LoginPage().initialize();
-
             page.sendkeysユーザID("user01");
             page.sendkeysパスワード("pass");
-
             capture.screenShot();
-
             page.clickログインボタン();
-
-            capture.screenShot();
-
-            assertEquals($getTitle(), "メニュー画面");
         }
+
+        // ログインに成功し、メニュー画面に遷移できていること
+        capture.screenShot();
+        assertEquals($getTitle(), "メニュー画面");
     }
 }

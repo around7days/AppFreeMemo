@@ -23,7 +23,7 @@
 	<script th:src="@{/js/menu.js}" src="../../static/js/menu.js"></script>
 </head>
 <body>
-<form th:action="@{/menu}" th:object="${menuForm}" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="dummy" th:object="${menuForm}" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
 	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
@@ -50,20 +50,20 @@
 					<li role="presentation"><a href="#" onclick="javascript:alert('実装していません')">その他</a></li>
 				</ul>
 				<!-- メニュー明細 -->
-				<div class="list-group">
+				<div class="list-group" id="menuList">
 					<div th:if="*{principal.roleAdmin}">
-						<button type="submit" name="m001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ一覧</button>
-						<button type="submit" name="m002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ登録</button>
-						<button type="submit" name="t001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧</button>
+						<button type="submit" name="M001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ一覧</button>
+						<button type="submit" name="M002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ登録</button>
+						<button type="submit" name="T001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧</button>
 					</div>
 
 					<div th:if="*{principal.roleApply}">
-						<button type="submit" name="t002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
-						<button type="submit" name="t004" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請状況一覧</button>
+						<button type="submit" name="T002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請</button>
+						<button type="submit" name="T003" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請状況一覧</button>
 					</div>
 
 					<div th:if="*{principal.roleApprove}">
-						<button type="submit" name="t005" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認状況一覧</button>
+						<button type="submit" name="T006" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認状況一覧</button>
 					</div>
 
 					<button type="button" onclick="javascript:alert('実装していません')" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　利用者情報修正</button>

@@ -4,7 +4,7 @@
 <!-- メッセージ -->
 <div th:fragment="message">
 	<!-- エラー -->
-	<div id="alert-danger">
+	<div id="messageDanger">
 		<!-- エラー(入力チェック) -->
 		<div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　エラー
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<!-- 通常 -->
-	<div id="alert-success">
+	<div id="messageSuccess">
 		<div th:if="${successMessage}" class="alert alert-success">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>　成功
 			<ul><li th:text="${successMessage}" /></ul>
