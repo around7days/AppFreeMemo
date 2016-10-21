@@ -8,7 +8,7 @@
 			<li th:class="previous" th:classappend="*{pageInfo.hasPrev == false}? 'disabled'" class="previous disabled" >
 				<a href="javascript:void(0)" th:id="*{pageInfo.hasPrev}? 'pagePrev'"><span aria-hidden="true">&larr;</span> Prev</a>
 			</li>
-			<li th:text="|*{pageInfo.totalSize}件中 *{pageInfo.startIndex}-*{pageInfo.endIndex}件表示|" th:id="pageText">100件中 1-20件表示</li>
+			<li th:text="|*{pageInfo.totalSize}件中 *{pageInfo.startIndex}-*{pageInfo.endIndex}件表示|" id="pageResult">100件中 1-20件表示</li>
 			<li th:class="next" th:classappend="*{pageInfo.hasNext == false}? 'disabled'" class="next disabled" >
 				<a href="javascript:void(0)" th:id="*{pageInfo.hasNext}? 'pageNext'">Next <span aria-hidden="true">&rarr;</span></a>
 			</li>

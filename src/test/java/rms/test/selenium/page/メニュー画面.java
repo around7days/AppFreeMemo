@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * メニュー画面クラス
  */
-public class メニュー画面 extends rms.test.selenium.page.CommonParts {
+public class メニュー画面 extends rms.test.selenium.page.共通部品 {
 
     /** ロガー */
     @SuppressWarnings("unused")

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * ユーザ一覧画面クラス
  */
-public class ユーザ一覧画面 extends rms.test.selenium.page.CommonParts {
+public class ユーザ一覧画面 extends rms.test.selenium.page.共通部品 {
 
     /** ロガー */
     @SuppressWarnings("unused")
@@ -43,11 +43,6 @@ public class ユーザ一覧画面 extends rms.test.selenium.page.CommonParts {
     @FindBy(id = "insert")
     @CacheLookup
     private WebElement 新規ボタン;
-
-    /** 検索結果_テーブル */
-    @FindBy(id = "resultTable")
-    @CacheLookup
-    private WebElement 検索結果_テーブル;
 
     /** 検索結果_選択ボタン */
     @FindBy(css = "#resultTable button[name='select']")
@@ -81,10 +76,6 @@ public class ユーザ一覧画面 extends rms.test.selenium.page.CommonParts {
 
     public WebElement 新規ボタン() {
         return this.新規ボタン;
-    }
-
-    public WebElement 検索結果_テーブル() {
-        return this.検索結果_テーブル;
     }
 
     public List<WebElement> 検索結果_選択ボタン() {

@@ -51,7 +51,7 @@ public class UserListTest extends AbstractSeleniumTest {
 
             // 1件だけ表示されていること
             capture.screenShot();
-            assertEquals(page.ページ_テキスト().getText(), "1件中 1-1件表示");
+            assertEquals(page.ページ_結果().getText(), "1件中 1-1件表示");
         }
     }
 
@@ -69,25 +69,25 @@ public class UserListTest extends AbstractSeleniumTest {
 
             // 1-5件目が表示されていること
             capture.screenShot();
-            assertTrue(page.ページ_テキスト().getText().contains("1-5件表示"));
+            assertTrue(page.ページ_結果().getText().contains("1-5件表示"));
         }
 
         {
             ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
-            page.ページ_Nextアンカー().click();
+            page.ページ_Next().click();
 
             // 6-10件目が表示されていること
             capture.screenShot();
-            assertTrue(page.ページ_テキスト().getText().contains("6-10件表示"));
+            assertTrue(page.ページ_結果().getText().contains("6-10件表示"));
         }
 
         {
             ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
-            page.ページ_Prevアンカー().click();
+            page.ページ_Prev().click();
 
             // 1-5件目が表示されていること
             capture.screenShot();
-            assertTrue(page.ページ_テキスト().getText().contains("1-5件表示"));
+            assertTrue(page.ページ_結果().getText().contains("1-5件表示"));
         }
     }
 

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * ユーザ登録画面クラス
  */
-public class ユーザ登録画面 extends rms.test.selenium.page.CommonParts {
+public class ユーザ登録画面 extends rms.test.selenium.page.共通部品 {
 
     /** ロガー */
     @SuppressWarnings("unused")
@@ -37,40 +37,40 @@ public class ユーザ登録画面 extends rms.test.selenium.page.CommonParts {
     @CacheLookup
     private WebElement メールアドレス;
 
-    /** 部署ID */
+    /** 部署セレクト */
     @FindBy(id = "departmentId")
     @CacheLookup
-    private WebElement 部署ID;
+    private WebElement 部署セレクト;
 
-    /** 承認者ID1 */
+    /** 承認者１セレクト */
     @FindBy(id = "approveUserId1")
     @CacheLookup
-    private WebElement 承認者ID1;
+    private WebElement 承認者１セレクト;
 
-    /** 承認者ID2 */
+    /** 承認者２セレクト */
     @FindBy(id = "approveUserId2")
     @CacheLookup
-    private WebElement 承認者ID2;
+    private WebElement 承認者２セレクト;
 
-    /** 承認者ID3 */
+    /** 承認者３セレクト */
     @FindBy(id = "approveUserId3")
     @CacheLookup
-    private WebElement 承認者ID3;
+    private WebElement 承認者３セレクト;
 
-    /** 役割_申請者 */
+    /** 役割_申請者チェック */
     @FindBy(id = "roleApplyFlg")
     @CacheLookup
-    private WebElement 役割_申請者;
+    private WebElement 役割_申請者チェック;
 
-    /** 役割_承認者 */
+    /** 役割_承認者チェック */
     @FindBy(id = "roleApproveFlg")
     @CacheLookup
-    private WebElement 役割_承認者;
+    private WebElement 役割_承認者チェック;
 
-    /** 役割_管理者 */
+    /** 役割_管理者チェック */
     @FindBy(id = "roleAdminFlg")
     @CacheLookup
-    private WebElement 役割_管理者;
+    private WebElement 役割_管理者チェック;
 
     /** 戻るボタン */
     @FindBy(id = "back")
@@ -117,32 +117,32 @@ public class ユーザ登録画面 extends rms.test.selenium.page.CommonParts {
         return this.メールアドレス;
     }
 
-    public WebElement 部署ID() {
-        return this.部署ID;
+    public WebElement 部署セレクト() {
+        return this.部署セレクト;
     }
 
-    public WebElement 承認者ID1() {
-        return this.承認者ID1;
+    public WebElement 承認者１セレクト() {
+        return this.承認者１セレクト;
     }
 
-    public WebElement 承認者ID2() {
-        return this.承認者ID2;
+    public WebElement 承認者２セレクト() {
+        return this.承認者２セレクト;
     }
 
-    public WebElement 承認者ID3() {
-        return this.承認者ID3;
+    public WebElement 承認者３セレクト() {
+        return this.承認者３セレクト;
     }
 
-    public WebElement 役割_申請者() {
-        return this.役割_申請者;
+    public WebElement 役割_申請者チェック() {
+        return this.役割_申請者チェック;
     }
 
-    public WebElement 役割_承認者() {
-        return this.役割_承認者;
+    public WebElement 役割_承認者チェック() {
+        return this.役割_承認者チェック;
     }
 
-    public WebElement 役割_管理者() {
-        return this.役割_管理者;
+    public WebElement 役割_管理者チェック() {
+        return this.役割_管理者チェック;
     }
 
     public WebElement 戻るボタン() {

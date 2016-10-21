@@ -56,13 +56,13 @@ public class UserRegistTest extends AbstractSeleniumTest {
         assertEquals(page.ユーザ名().getAttribute("value"), "申請者０１");
         assertEquals(page.パスワード().getAttribute("value"), "pass");
         assertEquals(page.メールアドレス().getAttribute("value"), "xxx@xxx.xx");
-        assertEquals(new Select(page.部署ID()).getFirstSelectedOption().getText(), "1SOL");
-        assertEquals(new Select(page.承認者ID1()).getFirstSelectedOption().getText(), "承認者０１");
-        assertEquals(new Select(page.承認者ID2()).getFirstSelectedOption().getText(), "承認者０２");
-        assertEquals(new Select(page.承認者ID3()).getFirstSelectedOption().getText(), "承認者０３");
-        assertEquals(page.役割_申請者().isSelected(), true);
-        assertEquals(page.役割_承認者().isSelected(), false);
-        assertEquals(page.役割_管理者().isSelected(), false);
+        assertEquals(new Select(page.部署セレクト()).getFirstSelectedOption().getText(), "1SOL");
+        assertEquals(new Select(page.承認者１セレクト()).getFirstSelectedOption().getText(), "承認者０１");
+        assertEquals(new Select(page.承認者２セレクト()).getFirstSelectedOption().getText(), "承認者０２");
+        assertEquals(new Select(page.承認者３セレクト()).getFirstSelectedOption().getText(), "承認者０３");
+        assertEquals(page.役割_申請者チェック().isSelected(), true);
+        assertEquals(page.役割_承認者チェック().isSelected(), false);
+        assertEquals(page.役割_管理者チェック().isSelected(), false);
     }
 
     /**
