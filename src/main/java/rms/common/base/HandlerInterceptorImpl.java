@@ -51,8 +51,10 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
-        String uri = modelAndView.getViewName();
-        logger.info("return uri   -> {}", uri);
+        if (modelAndView != null) {
+            String uri = modelAndView.getViewName();
+            logger.info("return uri   -> {}", uri);
+        }
     }
 
     @Override

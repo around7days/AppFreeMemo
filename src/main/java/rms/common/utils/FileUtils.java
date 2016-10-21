@@ -33,7 +33,7 @@ public class FileUtils {
                                     String fileNm) throws IOException {
         logger.info("ファイルダウンロード -> {}", filePath.toAbsolutePath().normalize());
 
-        // ファイルのエンコード
+        // ファイル名のエンコード
         String encodeFileNm = URLEncoder.encode(fileNm, StandardCharsets.UTF_8.name());
 
         // ヘッダ設定

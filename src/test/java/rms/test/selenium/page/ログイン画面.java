@@ -1,4 +1,4 @@
-package rms.selenium.page;
+package rms.test.selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -8,13 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * LoginPageクラス
+ * ログイン画面クラス
  */
-public class LoginPage extends rms.selenium.page.AbstractCommonPage {
+public class ログイン画面 extends rms.test.selenium.page.CommonParts {
 
     /** ロガー */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
+    private static final Logger logger = LoggerFactory.getLogger(ログイン画面.class);
 
     /* 項目変数宣言 ------------------------------------------------------------------------------------------------- */
     /** ユーザID */
@@ -37,34 +37,22 @@ public class LoginPage extends rms.selenium.page.AbstractCommonPage {
      * PageFactoryを使用してWebElementをマッピングする
      * @return Page
      */
-    public LoginPage initialize() {
+    public ログイン画面 initialize() {
         return PageFactory.initElements(driver, this.getClass());
     }
 
+    public WebElement ユーザID() {
+        return this.ユーザID;
+    }
+
+    public WebElement パスワード() {
+        return this.パスワード;
+    }
+
+    public WebElement ログインボタン() {
+        return this.ログインボタン;
+    }
+
     /* IE操作メソッド ----------------------------------------------------------------------------------------------- */
-    /**
-     * ユーザIDに値を入力します。
-     * @param sendKeys
-     */
-    public void sendkeysユーザID(String sendKeys) {
-        this.ユーザID.clear();
-        this.ユーザID.sendKeys(sendKeys);
-    }
-
-    /**
-     * パスワードに値を入力します。
-     * @param sendKeys
-     */
-    public void sendkeysパスワード(String sendKeys) {
-        this.パスワード.clear();
-        this.パスワード.sendKeys(sendKeys);
-    }
-
-    /**
-     * ログインボタンをクリックします。
-     */
-    public void clickログインボタン() {
-        this.ログインボタン.click();
-    }
 
 }

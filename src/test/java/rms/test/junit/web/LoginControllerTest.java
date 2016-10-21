@@ -1,3 +1,4 @@
+package rms.test.junit.web;
 // package rms.junit.web;
 //
 // import static org.junit.Assert.*;

@@ -1,4 +1,4 @@
-package rms.junit.domain;
+package rms.test.junit.domain;
 
 import static org.junit.Assert.*;
 

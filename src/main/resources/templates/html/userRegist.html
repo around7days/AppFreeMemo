@@ -53,7 +53,7 @@
 								<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
 							</div>
 							<div th:case="*{VIEW_MODE_UPDATE}"><!-- 更新時 -->
-								<p class="form-control-static" th:text="*{userId}">更新表示時のユーザ名</p>
+								<p class="form-control-static" th:text="*{userId}" id="userId">更新表示時のユーザ名</p>
 							</div>
 						</div>
 					</div>
