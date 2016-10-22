@@ -9,7 +9,7 @@
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-3.1.1.min.js}" src="../../static/fw/jquery/js/jquery-3.1.1.min.js"></script>
 	<!-- bootstrap -->
-	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<link rel="stylesheet" id="myStyle" th:data="${theme}" th:href="@{|/fw/bootstrap/css/bootswatch-theme-${theme}.css|}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<script th:src="@{/fw/bootstrap/js/bootstrap.min.js}" src="../../static/fw/bootstrap/js/bootstrap.min.js"></script>
 	<!-- datepicker -->
 	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker3.min.css}" href="../../static/fw/datepicker/css/bootstrap-datepicker3.min.css" />

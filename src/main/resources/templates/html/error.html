@@ -7,7 +7,7 @@
 	<title>システムエラー</title>
 
 	<!-- bootstrap CSS -->
-	<link rel="stylesheet" id="myStyle" th:href="@{/fw/bootstrap/css/bootswatch-theme-Cerulean.css}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
+	<link rel="stylesheet" id="myStyle" th:data="${theme}" th:href="@{|/fw/bootstrap/css/bootswatch-theme-${theme}.css|}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.css" />
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-3.1.1.min.js}" src="../../static/fw/jquery/js/jquery-3.1.1.min.js"></script>
 	<!-- bootstrap JS -->

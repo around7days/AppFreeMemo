@@ -1,4 +1,5 @@
 $(function() {
+
 	/**
 	 * inputタグ内のEnterキー無効
 	 */
@@ -11,13 +12,22 @@ $(function() {
 	});
 
 	/**
+	 * CSSテーマ変更
+	 */
+	$("#navbarTheme a").on("click", function() {
+		var theme = $(this).text();
+		// テーマ変更
+		changeTheme(theme);
+	});
+
+	/**
 	 * 年月カレンダー表示
 	 */
 	$(".datepicker-ym").datepicker({
 		format : "yyyymm",
 		language : "ja",
 		minViewMode : "months",
-		orientation: "bottom auto",
+		orientation : "bottom auto",
 		autoclose : true
 	});
 

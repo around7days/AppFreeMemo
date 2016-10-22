@@ -3,6 +3,7 @@
 
 <!-- ナビバー（ログイン前） -->
 <div th:fragment="navbar1">
+	<input type="hidden" id="theme" name="theme" th:value="${theme}" /><!-- テーマ -->
 	<nav class="navbar navbar-default navbar-static-top">
 		<div class="container-fluid">
 			<!-- ナビヘッダ -->
@@ -16,6 +17,7 @@
 
 <!-- ナビバー（ログイン後） -->
 <div th:fragment="navbar2">
+	<input type="hidden" id="theme" name="theme" th:value="${theme}" /><!-- テーマ -->
 	<nav class="navbar navbar-default navbar-static-top">
 		<div class="container-fluid">
 			<!-- ナビヘッダ -->
@@ -32,23 +34,23 @@
 					<!-- デザイン -->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">デザイン<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#" onclick="changeStyle('Cerulean');">Cerulean</a></li>
-							<li><a href="#" onclick="changeStyle('Cosmo');">Cosmo</a></li>
-							<li><a href="#" onclick="changeStyle('Cyborg');">Cyborg</a></li>
-							<li><a href="#" onclick="changeStyle('Darkly');">Darkly</a></li>
-							<li><a href="#" onclick="changeStyle('Flatly');">Flatly</a></li>
-							<li><a href="#" onclick="changeStyle('Journal');">Journal</a></li>
-							<li><a href="#" onclick="changeStyle('Lumen');">Lumen</a></li>
-							<li><a href="#" onclick="changeStyle('Paper');">Paper</a></li>
-							<li><a href="#" onclick="changeStyle('Readable');">Readable</a></li>
-							<li><a href="#" onclick="changeStyle('Sandstone');">Sandstone</a></li>
-							<li><a href="#" onclick="changeStyle('Simplex');">Simplex</a></li>
-							<li><a href="#" onclick="changeStyle('Slate');">Slate</a></li>
-							<li><a href="#" onclick="changeStyle('Spacelab');">Spacelab</a></li>
-							<li><a href="#" onclick="changeStyle('Superhero');">Superhero</a></li>
-							<li><a href="#" onclick="changeStyle('United');">United</a></li>
-							<li><a href="#" onclick="changeStyle('Yeti');">Yeti</a></li>
+						<ul class="dropdown-menu" id="navbarTheme">
+							<li><a href="#">Cerulean</a></li>
+							<li><a href="#">Cosmo</a></li>
+							<li><a href="#">Cyborg</a></li>
+							<li><a href="#">Darkly</a></li>
+							<li><a href="#">Flatly</a></li>
+							<li><a href="#">Journal</a></li>
+							<li><a href="#">Lumen</a></li>
+							<li><a href="#">Paper</a></li>
+							<li><a href="#">Readable</a></li>
+							<li><a href="#">Sandstone</a></li>
+							<li><a href="#">Simplex</a></li>
+							<li><a href="#">Slate</a></li>
+							<li><a href="#">Spacelab</a></li>
+							<li><a href="#">Superhero</a></li>
+							<li><a href="#">United</a></li>
+							<li><a href="#">Yeti</a></li>
 						</ul>
 					</li>
 					<!-- 設定 -->
