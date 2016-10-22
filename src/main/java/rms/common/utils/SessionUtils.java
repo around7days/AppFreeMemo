@@ -23,10 +23,10 @@ public class SessionUtils {
     private static final Logger logger = LoggerFactory.getLogger(SessionUtils.class);
 
     // TODO どっかのタイミングできれいにする
-
     /** セッションキー除外対象リスト */
     private static final List<String> ignoreKeyList = Arrays.asList("SPRING_SECURITY_CONTEXT", // SPRING_SECURITY_CONTEXT
-                                                                    "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN" // CRLFトークン
+                                                                    "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN", // CRLFトークン
+                                                                    "theme" // CSSテーマ
     );
 
     /**
