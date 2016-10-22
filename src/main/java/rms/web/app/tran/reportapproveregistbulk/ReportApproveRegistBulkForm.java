@@ -16,38 +16,21 @@ public class ReportApproveRegistBulkForm extends rms.common.abstracts.AbstractFo
     /** 承認者月報ファイル */
     @NotNullUploadFile(message = "月報：{NotNullUploadFile.message}")
     private MultipartFile file;
-
     /** 実行結果リスト */
     private List<ReportApproveRegistBulkDto> resultList;
 
-    /**
-     * 承認者月報ファイルを取得します。
-     * @return 承認者月報ファイル
-     */
     public MultipartFile getFile() {
         return file;
     }
 
-    /**
-     * 承認者月報ファイルを設定します。
-     * @param file 承認者月報ファイル
-     */
     public void setFile(MultipartFile file) {
         this.file = file;
     }
 
-    /**
-     * 実行結果リストを取得します。
-     * @return 実行結果リスト
-     */
     public List<ReportApproveRegistBulkDto> getResultList() {
         return resultList;
     }
 
-    /**
-     * 実行結果リストを設定します。
-     * @param resultList 実行結果リスト
-     */
     public void setResultList(List<ReportApproveRegistBulkDto> resultList) {
         this.resultList = resultList;
     }

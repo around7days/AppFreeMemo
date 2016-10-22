@@ -16,18 +16,10 @@ public class ReportApproveListFormCondition extends rms.common.abstracts.Abstrac
     private Integer targetYm;
 
     /* getter/setter -------------------------------------------------------- */
-    /**
-     * 対象年月を取得します。
-     * @return 対象年月
-     */
     public Integer getTargetYm() {
         return targetYm;
     }
 
-    /**
-     * 対象年月を設定します。
-     * @param targetYm 対象年月
-     */
     public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
     }

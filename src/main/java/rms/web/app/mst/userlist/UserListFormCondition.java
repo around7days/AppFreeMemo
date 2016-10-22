@@ -21,34 +21,18 @@ public class UserListFormCondition extends rms.common.abstracts.AbstractForm {
     @NotSymbol(message = "ユーザ名：{NotSymbol.message}")
     private String userNm;
 
-    /**
-     * ユーザIDを取得します。
-     * @return ユーザID
-     */
     public String getUserId() {
         return userId;
     }
 
-    /**
-     * ユーザIDを設定します。
-     * @param userId ユーザID
-     */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    /**
-     * ユーザ名を取得します。
-     * @return ユーザ名
-     */
     public String getUserNm() {
         return userNm;
     }
 
-    /**
-     * ユーザ名を設定します。
-     * @param userNm ユーザ名
-     */
     public void setUserNm(String userNm) {
         this.userNm = userNm;
     }

@@ -10,19 +10,10 @@ public class ReportApplyListDtoCondition extends rms.common.abstracts.AbstractDt
     /** 申請者ID */
     private String applyUserId;
 
-    /* getter/setter -------------------------------------------------------- */
-    /**
-     * 申請者IDを取得します。
-     * @return 申請者ID
-     */
     public String getApplyUserId() {
         return applyUserId;
     }
 
-    /**
-     * 申請者IDを設定します。
-     * @param applyUserId 申請者ID
-     */
     public void setApplyUserId(String applyUserId) {
         this.applyUserId = applyUserId;
     }

@@ -1,13 +1,13 @@
 // doma-gen用構成定義
 configurations {
-	domaGenRuntime
+    domaGenRuntime
 }
 
 // 外部依存関係の定義
 dependencies {
-	// doma-gen用
-	domaGenRuntime group: 'org.seasar.doma', name: 'doma-gen', version: '+'
-	domaGenRuntime group: 'mysql', name: 'mysql-connector-java'
+    // doma-gen用
+    domaGenRuntime group: 'org.seasar.doma', name: 'doma-gen', version: '+'
+    domaGenRuntime group: 'mysql', name: 'mysql-connector-java'
 }
 
 
@@ -97,9 +97,9 @@ task domaGenEntity << {
     def entitySql         =
 '''
 select
-	'X'
+    'X'
 from
-	dual
+    dual
 '''
 
     ant.taskdef(resource: 'domagentask.properties', classpath: configurations.domaGenRuntime.asPath)

@@ -2,8 +2,8 @@ package rms.common.abstracts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import rms.common.bean.UrlCreateHelper;
 import rms.common.bean.MessageSourceEnumAccessor;
+import rms.common.bean.UrlCreateHelper;
 
 /**
  * AbstractController
