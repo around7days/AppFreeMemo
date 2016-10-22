@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rms.common.base.ApplicationProperties;
 import rms.common.base.BusinessException;
+import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
 import rms.common.consts.MessageEnum;
@@ -41,7 +41,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     private static final Logger logger = LoggerFactory.getLogger(ReportApplyRegistServiceImpl.class);
 
     /** application.properties */
-    private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;
+    private static final ProjectProperties properties = ProjectProperties.INSTANCE;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
@@ -188,7 +188,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 月報提出可能日を生成
         int targetYear = Integer.valueOf(targetYm.toString().substring(0, 4));
         int targetMonth = Integer.valueOf(targetYm.toString().substring(4, 6));
-        int applyPossibleDay = properties.getInteger("myapp.report.apply.possible.day");
+        int applyPossibleDay = properties.getInteger("report.apply.possible.day");
         LocalDate applyPossibleDate = LocalDate.of(targetYear, targetMonth, applyPossibleDay);
 
         // 現在の年月日を取得

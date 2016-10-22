@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.base.ApplicationProperties;
+import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
 import rms.common.utils.FileUtils;
 import rms.domain.app.shared.dto.ReportFileDto;
@@ -40,13 +40,13 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     private static final Logger logger = LoggerFactory.getLogger(SharedReportFileServiceImpl.class);
 
     /** application.properties */
-    private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;
+    private static final ProjectProperties properties = ProjectProperties.INSTANCE;
 
     /** 月報ファイル格納ディレクトリ */
-    private static final String reportFileDir = properties.getString("myapp.report.storage");
+    private static final String reportFileDir = properties.getString("report.storage");
 
     /** 一時ファイル格納ディレクトリ */
-    private static final String temporaryDir = properties.getString("myapp.temporary.storage");
+    private static final String temporaryDir = properties.getString("temporary.storage");
 
     /** 初期処理 */
     static {

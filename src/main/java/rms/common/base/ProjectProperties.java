@@ -5,17 +5,17 @@ import java.util.ResourceBundle;
 import org.apache.log4j.Logger;
 
 /**
- * application.propertiesクラス
+ * project.propertiesクラス
  */
-public enum ApplicationProperties {
+public enum ProjectProperties {
     INSTANCE;
 
     /** Logger */
     @SuppressWarnings("unused")
-    private static final Logger logger = Logger.getLogger(ApplicationProperties.class);
+    private static final Logger logger = Logger.getLogger(ProjectProperties.class);
 
     /** プロパティ名(xxxxxx.properties) */
-    private static final String PROPERTY_NM = "application";
+    private static final String PROPERTY_NM = "project";
 
     /** プロパティ */
     private static final ResourceBundle rb = ResourceBundle.getBundle(PROPERTY_NM);

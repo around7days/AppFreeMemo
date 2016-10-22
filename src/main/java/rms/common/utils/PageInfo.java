@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rms.common.base.ApplicationProperties;
+import rms.common.base.ProjectProperties;
 
 /**
  * ページ情報
@@ -18,10 +18,10 @@ public class PageInfo {
     private static Logger logger = LoggerFactory.getLogger(PageInfo.class);
 
     /** application.properties */
-    private static ApplicationProperties properties = ApplicationProperties.INSTANCE;
+    private static ProjectProperties properties = ProjectProperties.INSTANCE;
 
     /** 1ページ表示件数（デフォルト） */
-    private static final int DEFAULT_LIMIT = properties.getInteger("myapp.page.limit");
+    private static final int DEFAULT_LIMIT = properties.getInteger("page.limit");
 
     /** 1ページ表示件数 */
     private int limit = DEFAULT_LIMIT;

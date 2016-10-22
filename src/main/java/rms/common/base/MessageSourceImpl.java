@@ -14,9 +14,11 @@ import rms.common.consts.MessageEnum;
  * MessageSource拡張クラス
  * @author
  */
-public class MessageSourceImpl implements MessageSource {
+public class MessageSourceImpl {
 
     /** MessageSource */
+    // @Autowired
+    // private MessageSource message;
     private static final MessageSource message = new MessageSourceAutoConfiguration().messageSource();
 
     /**
@@ -85,7 +87,6 @@ public class MessageSourceImpl implements MessageSource {
      * (非 Javadoc)
      * @see org.springframework.context.MessageSource#getMessage(java.lang.String, java.lang.Object[], java.lang.String, java.util.Locale)
      */
-    @Override
     public String getMessage(String code,
                              Object[] args,
                              String defaultMessage,
@@ -97,7 +98,6 @@ public class MessageSourceImpl implements MessageSource {
      * (非 Javadoc)
      * @see org.springframework.context.MessageSource#getMessage(java.lang.String, java.lang.Object[], java.util.Locale)
      */
-    @Override
     public String getMessage(String code,
                              Object[] args,
                              Locale locale) throws NoSuchMessageException {
@@ -108,7 +108,6 @@ public class MessageSourceImpl implements MessageSource {
      * (非 Javadoc)
      * @see org.springframework.context.MessageSource#getMessage(org.springframework.context.MessageSourceResolvable, java.util.Locale)
      */
-    @Override
     public String getMessage(MessageSourceResolvable resolvable,
                              Locale locale) throws NoSuchMessageException {
         return message.getMessage(resolvable, locale);

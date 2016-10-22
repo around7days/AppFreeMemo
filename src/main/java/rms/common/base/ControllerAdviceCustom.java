@@ -18,7 +18,7 @@ public class ControllerAdviceCustom {
     private static final Logger logger = LoggerFactory.getLogger(ControllerAdviceCustom.class);
 
     /** application.properties */
-    private static final ApplicationProperties properties = ApplicationProperties.INSTANCE;
+    private static final ProjectProperties properties = ProjectProperties.INSTANCE;
 
     // @InitBinder
     // public void initBinder(WebDataBinder dataBinder) {
@@ -29,7 +29,7 @@ public class ControllerAdviceCustom {
     @ModelAttribute
     public void addAttribute(Model model) {
         // クライアント入力チェック有無
-        model.addAttribute("novalidate", properties.getBoolean("myapp.html5.novalidate"));
+        model.addAttribute("novalidate", properties.getBoolean("html5.novalidate"));
     }
 
     // @ExceptionHandler
