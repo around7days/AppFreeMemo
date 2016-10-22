@@ -17,6 +17,7 @@ $(function() {
 		format : "yyyymm",
 		language : "ja",
 		minViewMode : "months",
+		orientation: "bottom auto",
 		autoclose : true
 	});
 
