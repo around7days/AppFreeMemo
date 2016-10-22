@@ -50,17 +50,20 @@
 	△Exception発生でロールバック　→　もう一度要確認
 
 ◆ログ出力
-	×ファイル出力
+	○ログファイル出力
 	○トランザクションログ出力（開始、終了、コミット、ロールバック）
 	○処理時間計測（request～response）
 	×処理時間計測（SQL実行）
-	×リクエストURLのログ出力
+	△リクエストURLのログ出力　→　HandlerInterceptorImplで実装
+	○リクエストパラメータのログ出力　→　HandlerInterceptorImplで実装
 
 ◆共通処理（基盤）
-	△
+	○入力項目の自動trim処理　→　ControllerAdviceCustomにStringTrimmerEditorを追加
+	○
 
 ◆共通処理（部品）
-	△
+	○MessageSourceの拡張
+	△業務Exceptionクラスの作成
 
 ◆その他
 	△エラー画面(404エラーとかも作る)

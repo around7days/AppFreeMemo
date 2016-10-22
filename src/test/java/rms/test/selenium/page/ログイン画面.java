@@ -1,5 +1,6 @@
 package rms.test.selenium.page;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,6 @@ public class ログイン画面 extends rms.test.selenium.page.共通部品 {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ログイン画面.class);
 
-    /* 項目変数宣言 ------------------------------------------------------------------------------------------------- */
     /** ユーザID */
     @FindBy(id = "userId")
     @CacheLookup
@@ -32,12 +32,12 @@ public class ログイン画面 extends rms.test.selenium.page.共通部品 {
     @CacheLookup
     private WebElement ログインボタン;
 
-    /* 共通メソッド宣言 --------------------------------------------------------------------------------------------- */
     /**
      * PageFactoryを使用してWebElementをマッピングする
-     * @return Page
+     * @param driver
+     * @return ログイン画面
      */
-    public ログイン画面 initialize() {
+    public ログイン画面 initialize(WebDriver driver) {
         return PageFactory.initElements(driver, this.getClass());
     }
 
@@ -52,7 +52,5 @@ public class ログイン画面 extends rms.test.selenium.page.共通部品 {
     public WebElement ログインボタン() {
         return this.ログインボタン;
     }
-
-    /* IE操作メソッド ----------------------------------------------------------------------------------------------- */
 
 }

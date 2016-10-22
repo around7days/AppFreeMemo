@@ -5,7 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rms.common.bean.MessageSourceImpl;
+import rms.common.bean.MessageSourceEnumAccessor;
 import rms.common.consts.MessageEnum;
 
 /**
@@ -22,7 +22,7 @@ public class BusinessException extends Exception {
     /** MessageSource */
     // @Autowired
     // MessageSourceImpl message;
-    MessageSourceImpl message = new MessageSourceImpl();
+    MessageSourceEnumAccessor message = new MessageSourceEnumAccessor();
 
     /** エラーコード */
     private String errorCode;

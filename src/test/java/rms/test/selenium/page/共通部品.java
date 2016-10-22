@@ -3,20 +3,18 @@ package rms.test.selenium.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 共通部品クラス
  */
-public class 共通部品 extends selenium.base.AbstractSeleniumTest {
+public class 共通部品 {
 
     /** ロガー */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(共通部品.class);
 
-    /* 項目変数宣言 ------------------------------------------------------------------------------------------------- */
     /** ページ_Prev */
     @FindBy(id = "pagePrev")
     @CacheLookup
@@ -57,15 +55,6 @@ public class 共通部品 extends selenium.base.AbstractSeleniumTest {
     @CacheLookup
     private WebElement メッセージ_エラー;
 
-    /* 共通メソッド宣言 --------------------------------------------------------------------------------------------- */
-    /**
-     * PageFactoryを使用してWebElementをマッピングする
-     * @return Page
-     */
-    public 共通部品 initialize() {
-        return PageFactory.initElements(driver, this.getClass());
-    }
-
     public WebElement ページ_Prev() {
         return this.ページ_Prev;
     }
@@ -97,7 +86,5 @@ public class 共通部品 extends selenium.base.AbstractSeleniumTest {
     public WebElement メッセージ_エラー() {
         return this.メッセージ_エラー;
     }
-
-    /* IE操作メソッド ----------------------------------------------------------------------------------------------- */
 
 }

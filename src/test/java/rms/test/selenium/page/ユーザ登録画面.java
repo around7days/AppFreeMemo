@@ -1,5 +1,6 @@
 package rms.test.selenium.page;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,6 @@ public class ユーザ登録画面 extends rms.test.selenium.page.共通部品 {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ユーザ登録画面.class);
 
-    /* 項目変数宣言 ------------------------------------------------------------------------------------------------- */
     /** ユーザID */
     @FindBy(id = "userId")
     @CacheLookup
@@ -92,12 +92,12 @@ public class ユーザ登録画面 extends rms.test.selenium.page.共通部品 {
     @CacheLookup
     private WebElement 更新ボタン;
 
-    /* 共通メソッド宣言 --------------------------------------------------------------------------------------------- */
     /**
      * PageFactoryを使用してWebElementをマッピングする
-     * @return Page
+     * @param driver
+     * @return ユーザ登録画面
      */
-    public ユーザ登録画面 initialize() {
+    public ユーザ登録画面 initialize(WebDriver driver) {
         return PageFactory.initElements(driver, this.getClass());
     }
 
@@ -160,7 +160,5 @@ public class ユーザ登録画面 extends rms.test.selenium.page.共通部品 {
     public WebElement 更新ボタン() {
         return this.更新ボタン;
     }
-
-    /* IE操作メソッド ----------------------------------------------------------------------------------------------- */
 
 }

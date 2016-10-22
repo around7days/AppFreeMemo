@@ -11,10 +11,12 @@ import org.springframework.context.NoSuchMessageException;
 import rms.common.consts.MessageEnum;
 
 /**
- * MessageSource拡張クラス
+ * MessageSource拡張クラス<br>
+ * ・引数にMessageEnumの指定が可能<br>
+ * ・引数の簡略化<br>
  * @author
  */
-public class MessageSourceImpl {
+public class MessageSourceEnumAccessor {
 
     /** MessageSource */
     // @Autowired
@@ -79,7 +81,7 @@ public class MessageSourceImpl {
      * @return
      */
     public String getMessage(String code,
-                             Object[] args) {
+                             Object... args) {
         return message.getMessage(code, args, Locale.getDefault());
     }
 

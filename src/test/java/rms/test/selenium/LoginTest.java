@@ -24,20 +24,24 @@ public class LoginTest extends AbstractSeleniumTest {
     @Test
     public void ログイン画面表示() throws IOException {
 
-        /* Webブラウザの起動 */
-        $url("http://localhost:8081/login");
+        /*
+         * ログイン画面表示までの初期処理
+         */
+        initDisplay();
 
         capture.screenShot();
-        assertEquals($getTitle(), "ログイン画面");
+        assertEquals(helper.getTitle(), "ログイン画面");
     }
 
     @Test
     public void ログイン失敗_ID間違え() throws IOException {
 
-        /* Webブラウザの起動 */
-        $url("http://localhost:8081/login");
+        /*
+         * ログイン画面表示までの初期処理
+         */
+        initDisplay();
 
-        ログイン画面 page = new ログイン画面().initialize();
+        ログイン画面 page = new ログイン画面().initialize(driver);
         page.ユーザID().clear();
         page.ユーザID().sendKeys("xxxx01");
         page.パスワード().clear();
@@ -47,17 +51,19 @@ public class LoginTest extends AbstractSeleniumTest {
 
         // ログイン画面で失敗メッセージが表示されていること
         capture.screenShot();
-        assertEquals($getTitle(), "ログイン画面");
+        assertEquals(helper.getTitle(), "ログイン画面");
         assertTrue(page.メッセージ_エラー().getText().contains("ログインに失敗しました"));
     }
 
     @Test
     public void ログイン失敗_パスワード間違え() throws IOException {
 
-        /* Webブラウザの起動 */
-        $url("http://localhost:8081/login");
+        /*
+         * ログイン画面表示までの初期処理
+         */
+        initDisplay();
 
-        ログイン画面 page = new ログイン画面().initialize();
+        ログイン画面 page = new ログイン画面().initialize(driver);
         page.ユーザID().clear();
         page.ユーザID().sendKeys("user01");
         page.パスワード().clear();
@@ -67,17 +73,19 @@ public class LoginTest extends AbstractSeleniumTest {
 
         // ログイン画面で失敗メッセージが表示されていること
         capture.screenShot();
-        assertEquals($getTitle(), "ログイン画面");
+        assertEquals(helper.getTitle(), "ログイン画面");
         assertTrue(page.メッセージ_エラー().getText().contains("ログインに失敗しました"));
     }
 
     @Test
     public void ログイン成功() throws IOException {
 
-        /* Webブラウザの起動 */
-        $url("http://localhost:8081/login");
+        /*
+         * ログイン画面表示までの初期処理
+         */
+        initDisplay();
 
-        ログイン画面 page = new ログイン画面().initialize();
+        ログイン画面 page = new ログイン画面().initialize(driver);
         page.ユーザID().clear();
         page.ユーザID().sendKeys("user01");
         page.パスワード().clear();
@@ -88,6 +96,14 @@ public class LoginTest extends AbstractSeleniumTest {
         // ログインに成功し、メニュー画面に遷移できていること
         capture.screenShot();
 
-        assertEquals($getTitle(), "メニュー画面");
+        assertEquals(helper.getTitle(), "メニュー画面");
+    }
+
+    /**
+     * ログイン画面表示までの初期処理
+     */
+    private void initDisplay() {
+        /* Webブラウザの起動 */
+        helper.url("http://localhost:8081/login");
     }
 }

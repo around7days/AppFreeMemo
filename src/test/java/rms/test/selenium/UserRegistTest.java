@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 import org.junit.Test;
-import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +34,7 @@ public class UserRegistTest extends AbstractSeleniumTest {
 
         // ユーザ登録画面が表示されていること
         capture.screenShot();
-        assertEquals($getTitle(), "ユーザ登録画面");
+        assertEquals(helper.getTitle(), "ユーザ登録画面");
     }
 
     @Test
@@ -48,18 +47,18 @@ public class UserRegistTest extends AbstractSeleniumTest {
 
         // ユーザ登録画面が表示されていること
         capture.screenShot();
-        assertEquals($getTitle(), "ユーザ登録画面");
+        assertEquals(helper.getTitle(), "ユーザ登録画面");
 
         // 表示されている値が正しいか確認
-        ユーザ登録画面 page = new ユーザ登録画面().initialize();
+        ユーザ登録画面 page = new ユーザ登録画面().initialize(driver);
         assertEquals(page.ユーザID().getText(), "user01");
-        assertEquals(page.ユーザ名().getAttribute("value"), "申請者０１");
-        assertEquals(page.パスワード().getAttribute("value"), "pass");
-        assertEquals(page.メールアドレス().getAttribute("value"), "xxx@xxx.xx");
-        assertEquals(new Select(page.部署セレクト()).getFirstSelectedOption().getText(), "1SOL");
-        assertEquals(new Select(page.承認者１セレクト()).getFirstSelectedOption().getText(), "承認者０１");
-        assertEquals(new Select(page.承認者２セレクト()).getFirstSelectedOption().getText(), "承認者０２");
-        assertEquals(new Select(page.承認者３セレクト()).getFirstSelectedOption().getText(), "承認者０３");
+        assertEquals(helper.getValue(page.ユーザ名()), "申請者０１");
+        assertEquals(helper.getValue(page.パスワード()), "pass");
+        assertEquals(helper.getValue(page.メールアドレス()), "xxx@xxx.xx");
+        assertEquals(helper.getSelectedText(page.部署セレクト()), "1SOL");
+        assertEquals(helper.getSelectedText(page.承認者１セレクト()), "承認者０１");
+        assertEquals(helper.getSelectedText(page.承認者２セレクト()), "承認者０２");
+        assertEquals(helper.getSelectedText(page.承認者３セレクト()), "承認者０３");
         assertEquals(page.役割_申請者チェック().isSelected(), true);
         assertEquals(page.役割_承認者チェック().isSelected(), false);
         assertEquals(page.役割_管理者チェック().isSelected(), false);
@@ -70,10 +69,10 @@ public class UserRegistTest extends AbstractSeleniumTest {
      */
     private void initDisplayInsert() {
         /* Webブラウザの起動 */
-        $url("http://localhost:8081/login");
+        helper.url("http://localhost:8081/login");
 
         {
-            ログイン画面 page = new ログイン画面().initialize();
+            ログイン画面 page = new ログイン画面().initialize(driver);
             page.ユーザID().clear();
             page.ユーザID().sendKeys("user11");
             page.パスワード().clear();
@@ -82,7 +81,7 @@ public class UserRegistTest extends AbstractSeleniumTest {
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize();
+            メニュー画面 page = new メニュー画面().initialize(driver);
             page.ユーザ登録().click();
         }
     }
@@ -92,10 +91,10 @@ public class UserRegistTest extends AbstractSeleniumTest {
      */
     private void initDisplayUpdate() {
         /* Webブラウザの起動 */
-        $url("http://localhost:8081/login");
+        helper.url("http://localhost:8081/login");
 
         {
-            ログイン画面 page = new ログイン画面().initialize();
+            ログイン画面 page = new ログイン画面().initialize(driver);
             page.ユーザID().clear();
             page.ユーザID().sendKeys("user11");
             page.パスワード().clear();
@@ -104,18 +103,18 @@ public class UserRegistTest extends AbstractSeleniumTest {
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize();
+            メニュー画面 page = new メニュー画面().initialize(driver);
             page.ユーザ一覧().click();
         }
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
+            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
             page.検索条件_ユーザID().sendKeys("user01");
             page.検索ボタン().click();
         }
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
+            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
             page.検索結果_選択ボタン().get(0).click();
         }
     }

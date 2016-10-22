@@ -33,7 +33,7 @@ public class UserListTest extends AbstractSeleniumTest {
 
         // ユーザ一覧画面が表示されていること
         capture.screenShot();
-        assertEquals($getTitle(), "ユーザ一覧画面");
+        assertEquals(helper.getTitle(), "ユーザ一覧画面");
     }
 
     @Test
@@ -45,7 +45,7 @@ public class UserListTest extends AbstractSeleniumTest {
         initDisplay();
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
+            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
             page.検索条件_ユーザID().sendKeys("user01");
             page.検索ボタン().click();
 
@@ -64,7 +64,7 @@ public class UserListTest extends AbstractSeleniumTest {
         initDisplay();
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
+            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
             page.検索ボタン().click();
 
             // 1-5件目が表示されていること
@@ -73,7 +73,7 @@ public class UserListTest extends AbstractSeleniumTest {
         }
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
+            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
             page.ページ_Next().click();
 
             // 6-10件目が表示されていること
@@ -82,7 +82,7 @@ public class UserListTest extends AbstractSeleniumTest {
         }
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize();
+            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
             page.ページ_Prev().click();
 
             // 1-5件目が表示されていること
@@ -96,10 +96,10 @@ public class UserListTest extends AbstractSeleniumTest {
      */
     private void initDisplay() {
         /* Webブラウザの起動 */
-        $url("http://localhost:8081/login");
+        helper.url("http://localhost:8081/login");
 
         {
-            ログイン画面 page = new ログイン画面().initialize();
+            ログイン画面 page = new ログイン画面().initialize(driver);
             page.ユーザID().clear();
             page.ユーザID().sendKeys("user11");
             page.パスワード().clear();
@@ -108,7 +108,7 @@ public class UserListTest extends AbstractSeleniumTest {
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize();
+            メニュー画面 page = new メニュー画面().initialize(driver);
             page.ユーザ一覧().click();
         }
     }

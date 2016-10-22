@@ -1,5 +1,6 @@
 package rms.test.selenium.page;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,6 @@ public class メニュー画面 extends rms.test.selenium.page.共通部品 {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(メニュー画面.class);
 
-    /* 項目変数宣言 ------------------------------------------------------------------------------------------------- */
     /** ユーザ一覧 */
     @FindBy(name = "M001")
     @CacheLookup
@@ -47,12 +47,12 @@ public class メニュー画面 extends rms.test.selenium.page.共通部品 {
     @CacheLookup
     private WebElement 月報承認状況一覧;
 
-    /* 共通メソッド宣言 --------------------------------------------------------------------------------------------- */
     /**
      * PageFactoryを使用してWebElementをマッピングする
-     * @return Page
+     * @param driver
+     * @return メニュー画面
      */
-    public メニュー画面 initialize() {
+    public メニュー画面 initialize(WebDriver driver) {
         return PageFactory.initElements(driver, this.getClass());
     }
 
@@ -79,7 +79,5 @@ public class メニュー画面 extends rms.test.selenium.page.共通部品 {
     public WebElement 月報承認状況一覧() {
         return this.月報承認状況一覧;
     }
-
-    /* IE操作メソッド ----------------------------------------------------------------------------------------------- */
 
 }

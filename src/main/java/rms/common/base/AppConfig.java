@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
-import rms.common.bean.MessageSourceImpl;
+import rms.common.bean.MessageSourceEnumAccessor;
 import rms.common.bean.UrlCreateHelper;
 
 @Configuration
@@ -24,8 +24,8 @@ public class AppConfig {
      * @return
      */
     @Bean
-    public MessageSourceImpl messageSourceImpl() {
-        return new MessageSourceImpl();
+    public MessageSourceEnumAccessor messageSourceEnumAccessor() {
+        return new MessageSourceEnumAccessor();
     }
 
     /**
