@@ -182,7 +182,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         // ページング設定
         form.getPageInfo().prev();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return urlHelper.redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -197,7 +197,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         // ページング設定
         form.getPageInfo().next();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return urlHelper.redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -206,7 +206,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
      */
     @RequestMapping(value = MAPPING_URL, params = "bulkApprove")
     public String bulkApprove() {
-        return redirect(ReportApproveRegistBulkController.MAPPING_URL, "init");
+        return urlHelper.redirect(ReportApproveRegistBulkController.MAPPING_URL, "init");
     }
 
     /**
@@ -302,8 +302,8 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報承認画面
-        return redirect(ReportApproveRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
-                        + entity.getTargetYm(), "init");
+        return urlHelper.redirect(ReportApproveRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
+                                  + entity.getTargetYm(), "init");
     }
 
     /**
@@ -315,7 +315,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /*

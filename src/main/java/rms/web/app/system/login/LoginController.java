@@ -58,7 +58,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
         if (!session.isNew() && request.getUserPrincipal() != null) {
             // セッション情報が残っている場合は一度ログアウト処理を実施（念の為セッションとユーザ情報の両方をチェック）
             logger.debug("session invalidate -> {}", request.getSessionId());
-            return forward(WebSecurityConfig.LOGOUT_MAPPING_URL);
+            return urlHelper.forward(WebSecurityConfig.LOGOUT_MAPPING_URL);
         }
         return PAGE_URL;
     }
@@ -82,7 +82,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
         }
 
         // ログイン認証処理にフォワード
-        return forward(WebSecurityConfig.AUTH_MAPPING_URL);
+        return urlHelper.forward(WebSecurityConfig.AUTH_MAPPING_URL);
     }
 
     /**

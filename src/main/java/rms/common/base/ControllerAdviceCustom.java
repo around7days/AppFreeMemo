@@ -2,8 +2,11 @@ package rms.common.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
@@ -20,11 +23,11 @@ public class ControllerAdviceCustom {
     /** application.properties */
     private static final ProjectProperties properties = ProjectProperties.INSTANCE;
 
-    // @InitBinder
-    // public void initBinder(WebDataBinder dataBinder) {
-    // // WebDataBinderのメソッドを呼び出してカスタマイズする
-    // dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-    // }
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        // Stringクラスのフィールドに対して値にtrimを掛ける
+        dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+    }
 
     @ModelAttribute
     public void addAttribute(Model model) {

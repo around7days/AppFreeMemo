@@ -48,7 +48,7 @@ public class UserInfo extends User {
         this.userNm = user.getUserNm();
         authorities.forEach(auth -> this.roleList.add(auth.toString()));
 
-        logger.debug("ユーザ情報 -> {}", this.toString());
+        logger.debug("ユーザ情報 -> {}", this);
     }
 
     /**

@@ -82,7 +82,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         form.setPageInfo(new PageInfo());
         form.setResultList(null);
 
-        return redirect(MAPPING_URL, "search");
+        return urlHelper.redirect(MAPPING_URL, "search");
     }
 
     /**
@@ -124,7 +124,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         // ページング設定
         form.getPageInfo().prev();
 
-        return redirect(MAPPING_URL, "search");
+        return urlHelper.redirect(MAPPING_URL, "search");
     }
 
     /**
@@ -139,7 +139,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         // ページング設定
         form.getPageInfo().next();
 
-        return redirect(MAPPING_URL, "search");
+        return urlHelper.redirect(MAPPING_URL, "search");
     }
 
     /**
@@ -190,8 +190,8 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報申請画面
-        return redirect(ReportApplyRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
-                        + entity.getTargetYm(), "initReApply");
+        return urlHelper.redirect(ReportApplyRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
+                                  + entity.getTargetYm(), "initReApply");
     }
 
     /**
@@ -203,7 +203,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
     public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /*

@@ -142,7 +142,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /**
@@ -173,7 +173,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /**
@@ -208,7 +208,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(ReportApproveListController.MAPPING_URL, "reSearch");
+        return urlHelper.redirect(ReportApproveListController.MAPPING_URL, "reSearch");
     }
 
     /*

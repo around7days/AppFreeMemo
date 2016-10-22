@@ -154,7 +154,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(UserListController.MAPPING_URL, "reSearch");
+        return urlHelper.redirect(UserListController.MAPPING_URL, "reSearch");
     }
 
     /**
@@ -193,7 +193,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(UserListController.MAPPING_URL, "reSearch");
+        return urlHelper.redirect(UserListController.MAPPING_URL, "reSearch");
     }
 
     /**
@@ -206,7 +206,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // TODO 遷移元画面によって戻り先を分岐させる必要がある
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(UserListController.MAPPING_URL, "reSearch");
+        return urlHelper.redirect(UserListController.MAPPING_URL, "reSearch");
     }
 
     /*

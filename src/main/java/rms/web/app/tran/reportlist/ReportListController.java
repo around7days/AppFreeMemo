@@ -162,7 +162,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         // ページング設定
         form.getPageInfo().prev();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return urlHelper.redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -177,7 +177,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         // ページング設定
         form.getPageInfo().next();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return urlHelper.redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -219,7 +219,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
     public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /*

@@ -75,7 +75,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "M001")
     public String M001(MenuForm form,
                        Model model) {
-        return redirect(UserListController.MAPPING_URL, "init");
+        return urlHelper.redirect(UserListController.MAPPING_URL, "init");
     }
 
     /**
@@ -87,7 +87,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "M002")
     public String M002(MenuForm form,
                        Model model) {
-        return redirect(UserRegistController.MAPPING_URL, "initInsert");
+        return urlHelper.redirect(UserRegistController.MAPPING_URL, "initInsert");
     }
 
     /**
@@ -99,7 +99,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "T001")
     public String T001(MenuForm form,
                        Model model) {
-        return redirect(ReportListController.MAPPING_URL, "init");
+        return urlHelper.redirect(ReportListController.MAPPING_URL, "init");
     }
 
     /**
@@ -111,7 +111,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "T003")
     public String T004(MenuForm form,
                        Model model) {
-        return redirect(ReportApplyListController.MAPPING_URL, "init");
+        return urlHelper.redirect(ReportApplyListController.MAPPING_URL, "init");
     }
 
     /**
@@ -123,7 +123,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "T002")
     public String T002(MenuForm form,
                        Model model) {
-        return redirect(ReportApplyRegistController.MAPPING_URL, "initApply");
+        return urlHelper.redirect(ReportApplyRegistController.MAPPING_URL, "initApply");
     }
 
     /**
@@ -135,7 +135,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     @RequestMapping(value = MAPPING_URL, params = "T006")
     public String T005(MenuForm form,
                        Model model) {
-        return redirect(ReportApproveListController.MAPPING_URL, "init");
+        return urlHelper.redirect(ReportApproveListController.MAPPING_URL, "init");
     }
 
     /*

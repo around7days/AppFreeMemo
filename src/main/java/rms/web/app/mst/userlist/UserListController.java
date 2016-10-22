@@ -157,7 +157,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         // ページング設定
         form.getPageInfo().prev();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return urlHelper.redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -172,7 +172,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         // ページング設定
         form.getPageInfo().next();
 
-        return redirect(MAPPING_URL, "reSearch");
+        return urlHelper.redirect(MAPPING_URL, "reSearch");
     }
 
     /**
@@ -184,7 +184,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
     public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /**
@@ -193,7 +193,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
      */
     @RequestMapping(value = MAPPING_URL, params = "insert")
     public String selectInsert() {
-        return redirect(UserRegistController.MAPPING_URL, "initInsert");
+        return urlHelper.redirect(UserRegistController.MAPPING_URL, "initInsert");
     }
 
     /**
@@ -213,7 +213,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         UserListEntityResult userEntity = form.getResultList().get(index);
         logger.debug("選択ユーザ情報 -> {}", userEntity);
 
-        return redirect(UserRegistController.MAPPING_URL + "/" + userEntity.getUserId(), "initUpdate");
+        return urlHelper.redirect(UserRegistController.MAPPING_URL + "/" + userEntity.getUserId(), "initUpdate");
     }
 
     /*

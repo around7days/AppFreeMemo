@@ -38,7 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // ユーザ情報の取得
         MUser mUser = mUserDao.selectById(id);
         if (mUser == null) {
-            throw new UsernameNotFoundException("ログインに失敗しました");
+            throw new UsernameNotFoundException("ログイン失敗");
         }
 
         // ユーザ役割情報の取得

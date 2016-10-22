@@ -11,7 +11,7 @@ import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
 
 import rms.common.auth.UserInfo;
-import rms.common.utils.AuthenticationUtils;
+import rms.common.auth.UserInfoAccessor;
 
 /**
  * MUserRoleListenerクラス
@@ -22,7 +22,7 @@ public class MUserRoleListener implements EntityListener<MUserRole> {
     public void preInsert(MUserRole entity,
                           PreInsertContext<MUserRole> context) {
         //@formatter:off
-        UserInfo userInfo = AuthenticationUtils.getPrincipal();
+        UserInfo userInfo = UserInfoAccessor.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
         if (entity.getVersion() == null) entity.setVersion(0);
         if (entity.getDelFlg() == null)  entity.setDelFlg(0);
@@ -37,7 +37,7 @@ public class MUserRoleListener implements EntityListener<MUserRole> {
     public void preUpdate(MUserRole entity,
                           PreUpdateContext<MUserRole> context) {
         //@formatter:off
-        UserInfo userInfo = AuthenticationUtils.getPrincipal();
+        UserInfo userInfo = UserInfoAccessor.getPrincipal();
         LocalDateTime now = LocalDateTime.now();
         if (entity.getUpdId() == null)   entity.setUpdId(userInfo.getUserId());
         if (entity.getUpdDate() == null) entity.setUpdDate(now);

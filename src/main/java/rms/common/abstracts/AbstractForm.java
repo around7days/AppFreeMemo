@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import rms.common.auth.UserInfo;
-import rms.common.utils.AuthenticationUtils;
+import rms.common.auth.UserInfoAccessor;
 
 /**
  * AbstractForm
@@ -17,7 +17,7 @@ public abstract class AbstractForm {
      * @return
      */
     public UserInfo getPrincipal() {
-        return AuthenticationUtils.getPrincipal();
+        return UserInfoAccessor.getPrincipal();
     }
 
     @Override

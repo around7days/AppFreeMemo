@@ -158,7 +158,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /**
@@ -197,7 +197,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         // セッション破棄
         sessionStatus.setComplete();
 
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /**
@@ -209,7 +209,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     public String back(SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        return redirect(MenuController.MAPPING_URL);
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     /*

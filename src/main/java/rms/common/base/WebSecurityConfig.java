@@ -40,7 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http://qiita.com/nvtomo1029/items/8827d95327b647a6cf50
 
         /* ログイン前の認証設定 */
         // OK(アクセス許可)
@@ -75,6 +74,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .deleteCookies("JSESSIONID") // cookiesの削除
             .invalidateHttpSession(true) // セッション破棄
         ;
+
+        /* アクセス制限設定 */
+        // http.exceptionHandling().accessDeniedPage(ERROR_MAPPING_URL);
     }
 
     @Override

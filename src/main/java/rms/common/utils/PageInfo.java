@@ -21,7 +21,7 @@ public class PageInfo {
     private static ProjectProperties properties = ProjectProperties.INSTANCE;
 
     /** 1ページ表示件数（デフォルト） */
-    private static final int DEFAULT_LIMIT = properties.getInteger("page.limit");
+    private static final int DEFAULT_LIMIT = properties.getInteger("page.limit.default");
 
     /** 1ページ表示件数 */
     private int limit = DEFAULT_LIMIT;
