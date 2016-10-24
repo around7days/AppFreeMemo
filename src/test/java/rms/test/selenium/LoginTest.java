@@ -1,6 +1,7 @@
 package rms.test.selenium;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 import java.io.IOException;
 
@@ -24,86 +25,71 @@ public class LoginTest extends AbstractSeleniumTest {
     @Test
     public void ログイン画面表示() throws IOException {
 
-        /*
-         * ログイン画面表示までの初期処理
-         */
+        // ログイン画面表示までの初期処理
         initDisplay();
 
         capture.screenShot();
-        assertEquals(helper.getTitle(), "ログイン画面");
+        assertThat(helper.getTitle(), is("ログイン画面"));
     }
 
     @Test
     public void ログイン失敗_ID間違え() throws IOException {
 
-        /*
-         * ログイン画面表示までの初期処理
-         */
+        // ログイン画面表示までの初期処理
         initDisplay();
 
         ログイン画面 page = new ログイン画面().initialize(driver);
-        page.ユーザID().clear();
-        page.ユーザID().sendKeys("xxxx01");
-        page.パスワード().clear();
-        page.パスワード().sendKeys("pass");
+        helper.sendKeys(page.ユーザID(), "xxxx01");
+        helper.sendKeys(page.パスワード(), "pass");
         capture.screenShot();
         page.ログインボタン().click();
 
         // ログイン画面で失敗メッセージが表示されていること
         capture.screenShot();
-        assertEquals(helper.getTitle(), "ログイン画面");
-        assertTrue(page.メッセージ_エラー().getText().contains("ログインに失敗しました"));
+        assertThat(helper.getTitle(), is("ログイン画面"));
+        assertThat(page.メッセージ_エラー().getText(), is(containsString("ログインに失敗しました")));
     }
 
     @Test
     public void ログイン失敗_パスワード間違え() throws IOException {
 
-        /*
-         * ログイン画面表示までの初期処理
-         */
+        // ログイン画面表示までの初期処理
         initDisplay();
 
         ログイン画面 page = new ログイン画面().initialize(driver);
-        page.ユーザID().clear();
-        page.ユーザID().sendKeys("user01");
-        page.パスワード().clear();
-        page.パスワード().sendKeys("x");
+        helper.sendKeys(page.ユーザID(), "user01");
+        helper.sendKeys(page.パスワード(), "x");
         capture.screenShot();
         page.ログインボタン().click();
 
         // ログイン画面で失敗メッセージが表示されていること
         capture.screenShot();
-        assertEquals(helper.getTitle(), "ログイン画面");
-        assertTrue(page.メッセージ_エラー().getText().contains("ログインに失敗しました"));
+        assertThat(helper.getTitle(), is("ログイン画面"));
+        assertThat(page.メッセージ_エラー().getText(), is(containsString("ログインに失敗しました")));
     }
 
     @Test
     public void ログイン成功() throws IOException {
 
-        /*
-         * ログイン画面表示までの初期処理
-         */
+        // ログイン画面表示までの初期処理
         initDisplay();
 
         ログイン画面 page = new ログイン画面().initialize(driver);
-        page.ユーザID().clear();
-        page.ユーザID().sendKeys("user01");
-        page.パスワード().clear();
-        page.パスワード().sendKeys("pass");
+        helper.sendKeys(page.ユーザID(), "user01");
+        helper.sendKeys(page.パスワード(), "pass");
         capture.screenShot();
         page.ログインボタン().click();
 
         // ログインに成功し、メニュー画面に遷移できていること
         capture.screenShot();
-
-        assertEquals(helper.getTitle(), "メニュー画面");
+        assertThat(helper.getTitle(), is("メニュー画面"));
     }
 
     /**
      * ログイン画面表示までの初期処理
      */
     private void initDisplay() {
-        /* Webブラウザの起動 */
+        // Webブラウザの起動
         helper.url("http://localhost:8081/login");
     }
 }
