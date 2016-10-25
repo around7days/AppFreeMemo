@@ -16,6 +16,7 @@ apply {
 	plugin 'java'
 	plugin 'war'
 	plugin 'spring-boot'
+	plugin 'jacoco' // コードカバレッジ
 }
 
 
@@ -48,6 +49,7 @@ dependencies {
 
 	// test用
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+	testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.+'
 	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
 	testCompile files('libs/SeleniumBase.jar')
 

@@ -1,5 +1,6 @@
 package rms.test.junit.domain;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class UserListServiceTest {
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
 
         UserListEntityResult result = resultDto.getResultList().get(0);
-        assertEquals(result.getUserNm(), "申請者０１");
+        assertThat(result.getUserNm(), is("申請者０１"));
     }
 
     @Test
@@ -38,7 +39,7 @@ public class UserListServiceTest {
         condition.setUserId("userXX");
 
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
-        assertEquals(resultDto.getCount(), 0);
+        assertThat(resultDto.getCount(), is(0));
     }
 
 }

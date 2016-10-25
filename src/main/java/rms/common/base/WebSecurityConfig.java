@@ -1,17 +1,13 @@
 package rms.common.base;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import rms.common.auth.UserDetailsServiceImpl;
 
 /**
  * Spring Security設定クラス.
@@ -34,9 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String ERROR_MAPPING_URL = "/error";
     /** メニュー マッピングURL */
     public static final String MENU_MAPPING_URL = "/menu";
-
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -84,11 +77,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // セキュリティ設定を無視するリクエスト設定
         // 静的リソース(images、css、javascript等)に対するアクセスはセキュリティ設定を無視する
         web.ignoring().antMatchers("/fw/**", "/js/**", "/css/**", "/image/**", "/webjars/**");
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // 独自認証
-        auth.userDetailsService(userDetailsService);
     }
 }

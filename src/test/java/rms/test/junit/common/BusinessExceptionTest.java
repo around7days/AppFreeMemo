@@ -1,5 +1,6 @@
 package rms.test.junit.common;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -23,21 +24,21 @@ public class BusinessExceptionTest {
     public void メッセージ取得_Enum_引数なし() {
         BusinessException e = new BusinessException(MessageEnum.info001);
         printLog(e);
-        assertEquals(e.getErrorMessage(), "登録が完了しました");
+        assertThat(e.getErrorMessage(), is("登録が完了しました"));
     }
 
     @Test
     public void メッセージ取得_Enum_引数あり() {
         BusinessException e = new BusinessException(MessageEnum.error001, "ユーザID");
         printLog(e);
-        assertEquals(e.getErrorMessage(), "ユーザIDが重複しています");
+        assertThat(e.getErrorMessage(), is("ユーザIDが重複しています"));
     }
 
     @Test
     public void メッセージ取得_値を直接() {
         BusinessException e = new BusinessException("登録が完了しました");
         printLog(e);
-        assertEquals(e.getErrorMessage(), "登録が完了しました");
+        assertThat(e.getErrorMessage(), is("登録が完了しました"));
     }
 
     private void printLog(BusinessException e) {

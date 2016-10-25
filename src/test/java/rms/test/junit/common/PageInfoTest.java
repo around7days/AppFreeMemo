@@ -1,5 +1,6 @@
 package rms.test.junit.common;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -28,12 +29,12 @@ public class PageInfoTest {
 
         printLog(page);
 
-        assertEquals(page.getPage(), 1);
-        assertEquals(page.getTotalPage(), 10);
-        assertEquals(page.getStartIndex(), 1);
-        assertEquals(page.getEndIndex(), 5);
-        assertEquals(page.getHasPrev(), false);
-        assertEquals(page.getHasNext(), true);
+        assertThat(page.getPage(), is(1));
+        assertThat(page.getTotalPage(), is(10));
+        assertThat(page.getStartIndex(), is(1));
+        assertThat(page.getEndIndex(), is(5));
+        assertThat(page.getHasPrev(), is(false));
+        assertThat(page.getHasNext(), is(true));
     }
 
     @Test
@@ -46,12 +47,12 @@ public class PageInfoTest {
 
         printLog(page);
 
-        assertEquals(page.getPage(), 2);
-        assertEquals(page.getTotalPage(), 10);
-        assertEquals(page.getStartIndex(), 6);
-        assertEquals(page.getEndIndex(), 10);
-        assertEquals(page.getHasPrev(), true);
-        assertEquals(page.getHasNext(), true);
+        assertThat(page.getPage(), is(2));
+        assertThat(page.getTotalPage(), is(10));
+        assertThat(page.getStartIndex(), is(6));
+        assertThat(page.getEndIndex(), is(10));
+        assertThat(page.getHasPrev(), is(true));
+        assertThat(page.getHasNext(), is(true));
     }
 
     @Test
@@ -64,12 +65,12 @@ public class PageInfoTest {
 
         printLog(page);
 
-        assertEquals(page.getPage(), 10);
-        assertEquals(page.getTotalPage(), 10);
-        assertEquals(page.getStartIndex(), 46);
-        assertEquals(page.getEndIndex(), 50);
-        assertEquals(page.getHasPrev(), true);
-        assertEquals(page.getHasNext(), false);
+        assertThat(page.getPage(), is(10));
+        assertThat(page.getTotalPage(), is(10));
+        assertThat(page.getStartIndex(), is(46));
+        assertThat(page.getEndIndex(), is(50));
+        assertThat(page.getHasPrev(), is(true));
+        assertThat(page.getHasNext(), is(false));
     }
 
     @Test
@@ -82,12 +83,12 @@ public class PageInfoTest {
 
         printLog(page);
 
-        assertEquals(page.getPage(), 10);
-        assertEquals(page.getTotalPage(), 10);
-        assertEquals(page.getStartIndex(), 46);
-        assertEquals(page.getEndIndex(), 50);
-        assertEquals(page.getHasPrev(), true);
-        assertEquals(page.getHasNext(), false);
+        assertThat(page.getPage(), is(10));
+        assertThat(page.getTotalPage(), is(10));
+        assertThat(page.getStartIndex(), is(46));
+        assertThat(page.getEndIndex(), is(50));
+        assertThat(page.getHasPrev(), is(true));
+        assertThat(page.getHasNext(), is(false));
     }
 
     @Test
@@ -100,12 +101,12 @@ public class PageInfoTest {
 
         printLog(page);
 
-        assertEquals(page.getPage(), 11);
-        assertEquals(page.getTotalPage(), 11);
-        assertEquals(page.getStartIndex(), 51);
-        assertEquals(page.getEndIndex(), 51);
-        assertEquals(page.getHasPrev(), true);
-        assertEquals(page.getHasNext(), false);
+        assertThat(page.getPage(), is(11));
+        assertThat(page.getTotalPage(), is(11));
+        assertThat(page.getStartIndex(), is(51));
+        assertThat(page.getEndIndex(), is(51));
+        assertThat(page.getHasPrev(), is(true));
+        assertThat(page.getHasNext(), is(false));
     }
 
     @Test
@@ -118,12 +119,12 @@ public class PageInfoTest {
 
         printLog(page);
 
-        assertEquals(page.getPage(), 1);
-        assertEquals(page.getTotalPage(), 0);
-        assertEquals(page.getStartIndex(), 0);
-        assertEquals(page.getEndIndex(), 0);
-        assertEquals(page.getHasPrev(), false);
-        assertEquals(page.getHasNext(), false);
+        assertThat(page.getPage(), is(1));
+        assertThat(page.getTotalPage(), is(0));
+        assertThat(page.getStartIndex(), is(0));
+        assertThat(page.getEndIndex(), is(0));
+        assertThat(page.getHasPrev(), is(false));
+        assertThat(page.getHasNext(), is(false));
     }
 
     private void printLog(PageInfo page) {
