@@ -30,28 +30,28 @@ public class VMUser {
     /** 部署ID コードマスタ：D001 */
     @Column(name = "department_id")
     private String departmentId;
-    /** コード名称 */
+    /** 部署名 */
     @Column(name = "department_nm")
     private String departmentNm;
-    /** 属性１ */
+    /** 部署略称 */
     @Column(name = "department_rnm")
     private String departmentRnm;
-    /** 承認者ID */
+    /** 承認者ID1 */
     @Column(name = "approve_user_id1")
     private String approveUserId1;
-    /**  */
+    /** 承認者名1 */
     @Column(name = "approve_user_nm1")
     private String approveUserNm1;
-    /** 承認者ID */
+    /** 承認者ID2 */
     @Column(name = "approve_user_id2")
     private String approveUserId2;
-    /**  */
+    /** 承認者名2 */
     @Column(name = "approve_user_nm2")
     private String approveUserNm2;
-    /** 承認者ID */
+    /** 承認者ID3 */
     @Column(name = "approve_user_id3")
     private String approveUserId3;
-    /**  */
+    /** 承認者名3 */
     @Column(name = "approve_user_nm3")
     private String approveUserNm3;
     /** バージョン */

@@ -71,7 +71,7 @@ public class UserRegistTest extends AbstractSeleniumTest {
 
         {
             ユーザ登録画面 page = new ユーザ登録画面().initialize(driver);
-            String userId = "ZZ" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+            String userId = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmssSSS"));
             page.ユーザID().sendKeys(userId);
             page.ユーザ名().sendKeys("テストユーザ" + userId);
             page.パスワード().sendKeys("pass");
