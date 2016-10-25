@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.*;
 
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,21 +23,20 @@ public class LoginTest extends AbstractSeleniumTest {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(LoginTest.class);
 
+    @Before
+    public void setup() {
+        // ログイン画面表示までの初期処理
+        helper.url("http://localhost:8081/login");
+    }
+
     @Test
     public void ログイン画面表示() throws IOException {
-
-        // ログイン画面表示までの初期処理
-        initDisplay();
-
         capture.screenShot();
         assertThat(helper.getTitle(), is("ログイン画面"));
     }
 
     @Test
     public void ログイン失敗_ID間違え() throws IOException {
-
-        // ログイン画面表示までの初期処理
-        initDisplay();
 
         ログイン画面 page = new ログイン画面().initialize(driver);
         helper.sendKeys(page.ユーザID(), "xxxx01");
@@ -53,9 +53,6 @@ public class LoginTest extends AbstractSeleniumTest {
     @Test
     public void ログイン失敗_パスワード間違え() throws IOException {
 
-        // ログイン画面表示までの初期処理
-        initDisplay();
-
         ログイン画面 page = new ログイン画面().initialize(driver);
         helper.sendKeys(page.ユーザID(), "user01");
         helper.sendKeys(page.パスワード(), "x");
@@ -71,9 +68,6 @@ public class LoginTest extends AbstractSeleniumTest {
     @Test
     public void ログイン成功() throws IOException {
 
-        // ログイン画面表示までの初期処理
-        initDisplay();
-
         ログイン画面 page = new ログイン画面().initialize(driver);
         helper.sendKeys(page.ユーザID(), "user01");
         helper.sendKeys(page.パスワード(), "pass");
@@ -85,11 +79,4 @@ public class LoginTest extends AbstractSeleniumTest {
         assertThat(helper.getTitle(), is("メニュー画面"));
     }
 
-    /**
-     * ログイン画面表示までの初期処理
-     */
-    private void initDisplay() {
-        // Webブラウザの起動
-        helper.url("http://localhost:8081/login");
-    }
 }

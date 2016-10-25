@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.*;
 
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +24,14 @@ public class MenuTest extends AbstractSeleniumTest {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(MenuTest.class);
 
+    @Before
+    public void setup() {
+        // ログイン画面表示までの初期処理
+        helper.url("http://localhost:8081/login");
+    }
+
     @Test
     public void ヘッダ_ユーザ名確認() throws IOException {
-
-        // ログイン画面表示までの初期処理
-        initDisplay();
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
@@ -47,9 +51,6 @@ public class MenuTest extends AbstractSeleniumTest {
 
     @Test
     public void メニュー表示確認_申請者() throws IOException {
-
-        // ログイン画面表示までの初期処理
-        initDisplay();
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
@@ -73,9 +74,6 @@ public class MenuTest extends AbstractSeleniumTest {
     @Test
     public void メニュー表示確認_承認者() throws IOException {
 
-        // ログイン画面表示までの初期処理
-        initDisplay();
-
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
             helper.sendKeys(page.ユーザID(), "user06");
@@ -98,9 +96,6 @@ public class MenuTest extends AbstractSeleniumTest {
     @Test
     public void メニュー表示確認_管理者() throws IOException {
 
-        // ログイン画面表示までの初期処理
-        initDisplay();
-
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
             helper.sendKeys(page.ユーザID(), "user11");
@@ -118,14 +113,6 @@ public class MenuTest extends AbstractSeleniumTest {
             assertThat(helper.exists(page.月報申請状況一覧()), is(false));
             assertThat(helper.exists(page.月報承認状況一覧()), is(false));
         }
-    }
-
-    /**
-     * ログイン画面表示までの初期処理
-     */
-    private void initDisplay() {
-        // Webブラウザの起動
-        helper.url("http://localhost:8081/login");
     }
 
 }
