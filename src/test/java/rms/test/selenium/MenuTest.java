@@ -35,8 +35,8 @@ public class MenuTest extends AbstractSeleniumTest {
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
-            helper.sendKeys(page.ユーザID(), "user01");
-            helper.sendKeys(page.パスワード(), "pass");
+            helper.setKeys(page.ユーザID(), "user01");
+            helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
@@ -54,8 +54,8 @@ public class MenuTest extends AbstractSeleniumTest {
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
-            helper.sendKeys(page.ユーザID(), "user01");
-            helper.sendKeys(page.パスワード(), "pass");
+            helper.setKeys(page.ユーザID(), "user01");
+            helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
@@ -76,8 +76,8 @@ public class MenuTest extends AbstractSeleniumTest {
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
-            helper.sendKeys(page.ユーザID(), "user06");
-            helper.sendKeys(page.パスワード(), "pass");
+            helper.setKeys(page.ユーザID(), "user06");
+            helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
@@ -98,8 +98,8 @@ public class MenuTest extends AbstractSeleniumTest {
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
-            helper.sendKeys(page.ユーザID(), "user11");
-            helper.sendKeys(page.パスワード(), "pass");
+            helper.setKeys(page.ユーザID(), "user11");
+            helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 

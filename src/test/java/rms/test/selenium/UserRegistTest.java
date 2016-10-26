@@ -39,8 +39,8 @@ public class UserRegistTest extends AbstractSeleniumTest {
 
             {
                 ログイン画面 page = new ログイン画面().initialize(driver);
-                helper.sendKeys(page.ユーザID(), "user11");
-                helper.sendKeys(page.パスワード(), "pass");
+                helper.setKeys(page.ユーザID(), "user11");
+                helper.setKeys(page.パスワード(), "pass");
                 page.ログインボタン().click();
             }
 
@@ -75,7 +75,7 @@ public class UserRegistTest extends AbstractSeleniumTest {
 
                 capture.screenShot();
                 page.登録ボタン().click();
-                helper.$switchToAlert().accept();
+                helper.switchToAlert().accept();
             }
 
             {
@@ -101,8 +101,8 @@ public class UserRegistTest extends AbstractSeleniumTest {
 
             {
                 ログイン画面 page = new ログイン画面().initialize(driver);
-                helper.sendKeys(page.ユーザID(), "user11");
-                helper.sendKeys(page.パスワード(), "pass");
+                helper.setKeys(page.ユーザID(), "user11");
+                helper.setKeys(page.パスワード(), "pass");
                 page.ログインボタン().click();
             }
 
@@ -152,7 +152,7 @@ public class UserRegistTest extends AbstractSeleniumTest {
                 ユーザ登録画面 page = new ユーザ登録画面().initialize(driver);
                 capture.screenShot();
                 page.更新ボタン().click();
-                helper.$switchToAlert().accept();
+                helper.switchToAlert().accept();
             }
 
             {

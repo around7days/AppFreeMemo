@@ -32,8 +32,8 @@ public class UserListTest extends AbstractSeleniumTest {
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
-            helper.sendKeys(page.ユーザID(), "user11");
-            helper.sendKeys(page.パスワード(), "pass");
+            helper.setKeys(page.ユーザID(), "user11");
+            helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 

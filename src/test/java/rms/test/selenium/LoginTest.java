@@ -39,8 +39,8 @@ public class LoginTest extends AbstractSeleniumTest {
     public void ログイン失敗_ID間違え() throws IOException {
 
         ログイン画面 page = new ログイン画面().initialize(driver);
-        helper.sendKeys(page.ユーザID(), "xxxx01");
-        helper.sendKeys(page.パスワード(), "pass");
+        helper.setKeys(page.ユーザID(), "xxxx01");
+        helper.setKeys(page.パスワード(), "pass");
         capture.screenShot();
         page.ログインボタン().click();
 
@@ -54,8 +54,8 @@ public class LoginTest extends AbstractSeleniumTest {
     public void ログイン失敗_パスワード間違え() throws IOException {
 
         ログイン画面 page = new ログイン画面().initialize(driver);
-        helper.sendKeys(page.ユーザID(), "user01");
-        helper.sendKeys(page.パスワード(), "x");
+        helper.setKeys(page.ユーザID(), "user01");
+        helper.setKeys(page.パスワード(), "x");
         capture.screenShot();
         page.ログインボタン().click();
 
@@ -69,8 +69,8 @@ public class LoginTest extends AbstractSeleniumTest {
     public void ログイン成功() throws IOException {
 
         ログイン画面 page = new ログイン画面().initialize(driver);
-        helper.sendKeys(page.ユーザID(), "user01");
-        helper.sendKeys(page.パスワード(), "pass");
+        helper.setKeys(page.ユーザID(), "user01");
+        helper.setKeys(page.パスワード(), "pass");
         capture.screenShot();
         page.ログインボタン().click();
 
