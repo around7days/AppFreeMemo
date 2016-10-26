@@ -62,14 +62,6 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         }
     }
 
-    /**
-     * 月報ファイルダウンロード情報生成
-     * 引数を基に生成した月報ファイル情報を返却する
-     * @param applyUserId
-     * @param applyUserNm
-     * @param targetYm
-     * @return
-     */
     @Override
     public ReportFileDto getReportFileDownloadInfo(String applyUserId,
                                                    String applyUserNm,
@@ -89,17 +81,6 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         return dto;
     }
 
-    /**
-     * 月報ファイル一括ダウンロード情報生成<br>
-     * サーバ内でzipファイルを作成して、作成したzipファイル情報を返却する
-     * @param applyUserIdList
-     * @param applyUserNmList
-     * @param targetYmList
-     * @param cnt
-     * @return
-     * @throws IOException
-     * @throws FileNotFoundException
-     */
     @Override
     public ReportFileDto createReportFileBulkDownloadInfo(List<String> applyUserIdList,
                                                           List<String> applyUserNmList,
@@ -142,10 +123,6 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         return dto;
     }
 
-    /**
-     * 月報ファイル保存処理
-     * @throws IOException
-     */
     @Override
     public void saveReportFile(MultipartFile file,
                                String applyUserId,
@@ -157,10 +134,6 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         FileUtils.fileSave(file.getInputStream(), filePath);
     }
 
-    /**
-     * 月報ファイル保存処理
-     * @throws IOException
-     */
     @Override
     public void saveReportFile(Path fromFilePath,
                                String applyUserId,
@@ -172,11 +145,6 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         FileUtils.fileSave(fromFilePath, toFilePath);
     }
 
-    /**
-     * 月報zipファイル解凍処理
-     * サーバ内でzipファイルを解凍して、zipファイル中に含まれる月報情報一覧を返却する
-     * @throws IOException
-     */
     @Override
     public List<ReportFileDto> unZipReportFileInfo(MultipartFile file) throws IOException {
 

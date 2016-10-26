@@ -49,15 +49,9 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     @Autowired
     VTReportDao vTReportDao;
 
-    /**
-     * 月報情報の取得
-     * @param applyUserId
-     * @param targetYm
-     * @return
-     */
     @Override
-    public ReportApproveRegistDto getReportInfo(String applyUserId,
-                                                Integer targetYm) {
+    public ReportApproveRegistDto initDisplay(String applyUserId,
+                                              Integer targetYm) {
         // 月報情報の取得
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
 
@@ -67,11 +61,6 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         return dto;
     }
 
-    /**
-     * 月報情報の承認処理<br>
-     * @param dto
-     * @throws IOException
-     */
     @Override
     public void approve(ReportApproveRegistDto dto) throws IOException {
 
@@ -85,11 +74,6 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         saveReportFile(dto);
     }
 
-    /**
-     * 月報情報の否認処理<br>
-     * @param dto
-     * @throws IOException
-     */
     @Override
     public void deny(ReportApproveRegistDto dto) throws IOException {
 

@@ -13,8 +13,10 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
 /**
- * 記号チェック 独自Annotation<br>
- * 記号が含まれる場合にエラー【!"#$%&'()*+,-./:;<=>?@[¥]^_`{|}~】
+ * 半角記号チェック 独自Annotation<br>
+ * 半角記号が含まれる場合にエラー<br>
+ * 対象記号は\p{Punct}を参照
+ * @see "https://docs.oracle.com/javase/jp/8/docs/api/java/util/regex/Pattern.html"
  * @author
  */
 @Documented

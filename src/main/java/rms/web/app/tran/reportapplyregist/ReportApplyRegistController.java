@@ -82,7 +82,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
                             @AuthenticationPrincipal UserInfo userInfo,
                             Model model) {
         // 申請者の初期表示用情報を取得
-        ReportApplyRegistDto dto = service.getInitInsertReportInfo(userInfo.getUserId());
+        ReportApplyRegistDto dto = service.initDisplayApply(userInfo.getUserId());
 
         // 値を設定
         BeanUtilsImpl.copyProperties(dto, form);
@@ -109,7 +109,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
                               @PathVariable Integer targetYm,
                               Model model) {
         // 月報情報の取得
-        ReportApplyRegistDto dto = service.getInitUpdateReportInfo(applyUserId, targetYm);
+        ReportApplyRegistDto dto = service.initDisplayReApply(applyUserId, targetYm);
 
         // 値を設定
         BeanUtilsImpl.copyProperties(dto, form);

@@ -63,13 +63,8 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     @Autowired
     VTReportDao vTReportDao;
 
-    /**
-     * 初期表示用月報情報の生成（新規時）
-     * @param applyUserId
-     * @return
-     */
     @Override
-    public ReportApplyRegistDto getInitInsertReportInfo(String applyUserId) {
+    public ReportApplyRegistDto initDisplayApply(String applyUserId) {
 
         // ユーザ情報の取得
         VMUser entity = vMUserDao.selectById(applyUserId);
@@ -91,15 +86,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         return dto;
     }
 
-    /**
-     * 初期表示用月報情報の生成（更新時）
-     * @param applyUserId
-     * @param targetYm
-     * @return
-     */
     @Override
-    public ReportApplyRegistDto getInitUpdateReportInfo(String applyUserId,
-                                                        Integer targetYm) {
+    public ReportApplyRegistDto initDisplayReApply(String applyUserId,
+                                                   Integer targetYm) {
 
         // ユーザ情報の取得
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
@@ -110,12 +99,6 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         return dto;
     }
 
-    /**
-     * 月報情報の申請処理<br>
-     * @param dto
-     * @throws IOException
-     * @throws BusinessException
-     */
     @Override
     public void apply(ReportApplyRegistDto dto) throws IOException, BusinessException {
 
@@ -135,12 +118,6 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         saveReportFile(dto);
     }
 
-    /**
-     * 月報情報の再申請処理<br>
-     * @param dto
-     * @throws IOException
-     * @throws BusinessException
-     */
     @Override
     public void reApply(ReportApplyRegistDto dto) throws IOException, BusinessException {
 

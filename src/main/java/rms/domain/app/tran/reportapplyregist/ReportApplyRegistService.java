@@ -11,20 +11,20 @@ import rms.common.base.BusinessException;
 public interface ReportApplyRegistService {
 
     /**
-     * 初期表示用月報情報の生成（新規時）
+     * 画面初期表示処理（申請時）
      * @param applyUserId
      * @return
      */
-    public ReportApplyRegistDto getInitInsertReportInfo(String applyUserId);
+    public ReportApplyRegistDto initDisplayApply(String applyUserId);
 
     /**
-     * 初期表示用月報情報の生成（更新時）
+     * 画面初期表示処理（再申請時）
      * @param applyUserId
      * @param targetYm
      * @return
      */
-    public ReportApplyRegistDto getInitUpdateReportInfo(String applyUserId,
-                                                        Integer targetYm);
+    public ReportApplyRegistDto initDisplayReApply(String applyUserId,
+                                                   Integer targetYm);
 
     /**
      * 月報情報の申請処理<br>

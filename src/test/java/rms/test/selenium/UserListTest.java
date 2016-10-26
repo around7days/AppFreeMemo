@@ -7,28 +7,28 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.runner.RunWith;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.test.selenium.page.メニュー画面;
 import rms.test.selenium.page.ユーザ一覧画面;
 import rms.test.selenium.page.ログイン画面;
 import selenium.base.AbstractSeleniumTest;
 
-/**
- * ユーザ一覧画面テスト
- * @author
- */
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UserListTest extends AbstractSeleniumTest {
 
-    /** ロガー */
-    @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(UserListTest.class);
+    @LocalServerPort
+    private int port;
 
     @Before
     public void setup() {
         // ユーザ一覧画面表示までの初期処理
-        helper.url("http://localhost:8081/login");
+        helper.url("http://localhost:" + port + "/login");
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);

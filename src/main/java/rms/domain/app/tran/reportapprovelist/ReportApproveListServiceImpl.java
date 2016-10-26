@@ -29,12 +29,6 @@ public class ReportApproveListServiceImpl implements ReportApproveListService {
     @Autowired
     ReportApproveListDao dao;
 
-    /**
-     * 月報情報一覧取得（承認者用）
-     * @param condition
-     * @param pageInfo
-     * @return
-     */
     @Override
     public SearchResultDto<ReportApproveListEntityResult> search(ReportApproveListDtoCondition condition,
                                                                  PageInfo pageInfo) {

@@ -11,8 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.test.selenium.page.メニュー画面;
 import rms.test.selenium.page.ユーザ一覧画面;
@@ -20,23 +22,20 @@ import rms.test.selenium.page.ユーザ登録画面;
 import rms.test.selenium.page.ログイン画面;
 import selenium.base.AbstractSeleniumTest;
 
-/**
- * ユーザ登録画面テスト
- * @author
- */
 @RunWith(Enclosed.class)
 public class UserRegistTest extends AbstractSeleniumTest {
 
-    /** ロガー */
-    @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(UserRegistTest.class);
-
+    @RunWith(SpringRunner.class)
+    @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
     public static class 新規登録テストグループ {
+
+        @LocalServerPort
+        private int port;
 
         @Before
         public void setup() {
             // ユーザ登録画面（新規）までの初期処理
-            helper.url("http://localhost:8081/login");
+            helper.url("http://localhost:" + port + "/login");
 
             {
                 ログイン画面 page = new ログイン画面().initialize(driver);
@@ -88,12 +87,17 @@ public class UserRegistTest extends AbstractSeleniumTest {
         }
     }
 
+    @RunWith(SpringRunner.class)
+    @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
     public static class 更新テストグループ {
+
+        @LocalServerPort
+        private int port;
 
         @Before
         public void setup() {
             // ユーザ登録画面（更新）までの初期処理
-            helper.url("http://localhost:8081/login");
+            helper.url("http://localhost:" + port + "/login");
 
             {
                 ログイン画面 page = new ログイン画面().initialize(driver);

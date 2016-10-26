@@ -19,7 +19,6 @@ apply {
 	plugin 'jacoco' // コードカバレッジ
 }
 
-
 // リポジトリ
 repositories {
 	mavenCentral()
@@ -51,15 +50,11 @@ dependencies {
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 	testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.+'
 	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
-//	testCompile files('libs/SeleniumBase.jar')
-
-	// generator用
-//	compile group: 'org.freemarker', name: 'freemarker', version: '+'
+	testCompile files('libs/SeleniumBase.jar')
 }
 
-//
+// javaコンパイルバージョン
 sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 // warファイル定義
 war {
@@ -77,6 +72,19 @@ jar {
 javadoc {
 	options.charSet  = 'UTF-8'
 	options.encoding = 'UTF-8'
+}
+
+//
+test {
+	exclude '**/*$*' // JUnitのEnclosedテストランナー対策（2重実行防止）
+}
+
+//
+jacocoTestReport {
+    reports {
+        html.enabled = true
+        xml.enabled = true
+    }
 }
 
 

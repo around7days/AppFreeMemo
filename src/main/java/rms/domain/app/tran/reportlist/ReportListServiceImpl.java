@@ -29,12 +29,6 @@ public class ReportListServiceImpl implements ReportListService {
     @Autowired
     ReportListDao dao;
 
-    /**
-     * 月報情報一覧取得
-     * @param condition
-     * @param pageInfo
-     * @return
-     */
     @Override
     public SearchResultDto<ReportListEntityResult> search(ReportListDtoCondition condition,
                                                           PageInfo pageInfo) {

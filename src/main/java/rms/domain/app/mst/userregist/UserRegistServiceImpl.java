@@ -60,13 +60,8 @@ public class UserRegistServiceImpl implements UserRegistService {
     @Autowired
     VMUserDao vMUserDao;
 
-    /**
-     * ユーザ情報の取得
-     * @param userId
-     * @return
-     */
     @Override
-    public UserRegistDto getUserInfo(String userId) {
+    public UserRegistDto initDisplayUpdate(String userId) {
 
         // 返却用ユーザ情報の生成
         UserRegistDto dto = new UserRegistDto();
@@ -94,11 +89,6 @@ public class UserRegistServiceImpl implements UserRegistService {
         return dto;
     }
 
-    /**
-     * ユーザ情報登録処理
-     * @param dto
-     * @throws BusinessException
-     */
     @Override
     public void regist(UserRegistDto dto) throws BusinessException {
 
@@ -121,11 +111,6 @@ public class UserRegistServiceImpl implements UserRegistService {
         deleteInsertUserRole(dto);
     }
 
-    /**
-     * ユーザ情報更新処理
-     * @param dto
-     * @throws BusinessException
-     */
     @Override
     public void update(UserRegistDto dto) throws BusinessException {
 
@@ -143,6 +128,22 @@ public class UserRegistServiceImpl implements UserRegistService {
 
         // ユーザ役割マスタ登録
         deleteInsertUserRole(dto);
+    }
+
+    @Override
+    public List<SelectOptionEntity> getSelectboxApprove() {
+        // セレクトボックス用 承認者一覧の取得
+        List<SelectOptionEntity> approveList = dao.selectboxApproveUser();
+
+        return approveList;
+    }
+
+    @Override
+    public List<SelectOptionEntity> getSelectboxDepartment() {
+        // セレクトボックス用 部署一覧の取得
+        List<SelectOptionEntity> departmentList = mCodeDao.selectboxDepartmentRnm();
+
+        return departmentList;
     }
 
     /**
@@ -227,30 +228,6 @@ public class UserRegistServiceImpl implements UserRegistService {
 
         // 更新処理（楽観的排他制御）
         mUserDao.update(entity);
-    }
-
-    /**
-     * セレクトボックス用 承認者一覧情報の取得
-     * @return
-     */
-    @Override
-    public List<SelectOptionEntity> getSelectboxApprove() {
-        // セレクトボックス用 承認者一覧の取得
-        List<SelectOptionEntity> approveList = dao.selectboxApproveUser();
-
-        return approveList;
-    }
-
-    /**
-     * セレクトボックス用 部署一覧情報の取得
-     * @return
-     */
-    @Override
-    public List<SelectOptionEntity> getSelectboxDepartment() {
-        // セレクトボックス用 部署一覧の取得
-        List<SelectOptionEntity> departmentList = mCodeDao.selectboxDepartmentRnm();
-
-        return departmentList;
     }
 
     /**

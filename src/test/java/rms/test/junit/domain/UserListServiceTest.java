@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,31 +16,37 @@ import rms.domain.app.mst.userlist.UserListDtoCondition;
 import rms.domain.app.mst.userlist.UserListEntityResult;
 import rms.domain.app.mst.userlist.UserListService;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@RunWith(Enclosed.class)
 public class UserListServiceTest {
 
-    @Autowired
-    UserListService service;
+    @RunWith(SpringRunner.class)
+    @SpringBootTest
+    public static class searchInterface {
 
-    @Test
-    public void ユーザ検索_1件() {
-        UserListDtoCondition condition = new UserListDtoCondition();
-        condition.setUserId("user01");
+        @Autowired
+        UserListService service;
 
-        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
+        @Test
+        public void ユーザ検索_1件() {
+            UserListDtoCondition condition = new UserListDtoCondition();
+            condition.setUserId("user01");
 
-        UserListEntityResult result = resultDto.getResultList().get(0);
-        assertThat(result.getUserNm(), is("申請者０１"));
-    }
+            SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
 
-    @Test
-    public void ユーザ検索_該当なし() {
-        UserListDtoCondition condition = new UserListDtoCondition();
-        condition.setUserId("userXX");
+            UserListEntityResult result = resultDto.getResultList().get(0);
+            assertThat(result.getUserNm(), is("申請者０１"));
+        }
 
-        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
-        assertThat(resultDto.getCount(), is(0));
+        @Test
+        public void ユーザ検索_該当なし() {
+            UserListDtoCondition condition = new UserListDtoCondition();
+            condition.setUserId("userXX");
+
+            SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
+
+            assertThat(resultDto.getCount(), is(Long.valueOf(0)));
+        }
+
     }
 
 }

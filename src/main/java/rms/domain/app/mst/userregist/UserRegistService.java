@@ -12,11 +12,12 @@ import rms.common.utils.SelectOptionEntity;
 public interface UserRegistService {
 
     /**
-     * ユーザ情報の取得
+     * 画面初期表示処理（更新時）<br>
+     * ユーザIDをもとにユーザ登録画面の初期表示情報を生成
      * @param userId
      * @return
      */
-    public UserRegistDto getUserInfo(String userId);
+    public UserRegistDto initDisplayUpdate(String userId);
 
     /**
      * ユーザ情報登録処理

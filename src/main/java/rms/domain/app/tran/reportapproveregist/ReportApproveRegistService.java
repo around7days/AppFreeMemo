@@ -11,13 +11,13 @@ import rms.common.base.BusinessException;
 public interface ReportApproveRegistService {
 
     /**
-     * 月報情報の取得
+     * 画面初期表示処理
      * @param applyUserId
      * @param targetYm
      * @return
      */
-    public ReportApproveRegistDto getReportInfo(String applyUserId,
-                                                Integer targetYm);
+    public ReportApproveRegistDto initDisplay(String applyUserId,
+                                              Integer targetYm);
 
     /**
      * 月報情報の承認処理<br>

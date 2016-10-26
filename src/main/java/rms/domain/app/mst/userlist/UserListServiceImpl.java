@@ -28,12 +28,6 @@ public class UserListServiceImpl implements UserListService {
     @Autowired
     UserListDao dao;
 
-    /**
-     * ユーザ情報一覧検索処理
-     * @param condition
-     * @param pageInfo
-     * @return
-     */
     @Override
     public SearchResultDto<UserListEntityResult> search(UserListDtoCondition condition,
                                                         PageInfo pageInfo) {

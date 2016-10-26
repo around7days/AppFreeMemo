@@ -94,7 +94,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
                        @AuthenticationPrincipal UserInfo userInfo,
                        Model model) {
         // 月報情報の取得
-        ReportApproveRegistDto dto = service.getReportInfo(applyUserId, targetYm);
+        ReportApproveRegistDto dto = service.initDisplay(applyUserId, targetYm);
 
         // 値を反映
         BeanUtilsImpl.copyProperties(dto, form);

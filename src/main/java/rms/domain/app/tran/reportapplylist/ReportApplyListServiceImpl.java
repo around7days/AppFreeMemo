@@ -29,12 +29,6 @@ public class ReportApplyListServiceImpl implements ReportApplyListService {
     @Autowired
     ReportApplyListDao dao;
 
-    /**
-     * 月報情報一覧取得（申請者用）
-     * @param condition
-     * @param pageInfo
-     * @return
-     */
     @Override
     public SearchResultDto<ReportApplyListEntityResult> search(ReportApplyListDtoCondition condition,
                                                                PageInfo pageInfo) {

@@ -57,14 +57,6 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
     @Autowired
     VTReportDao vTReportDao;
 
-    /**
-     * 月報情報の承認処理<br>
-     * @param file
-     * @param userInfo
-     * @return
-     * @throws IOException
-     * @throws BusinessException
-     */
     @Override
     public List<ReportApproveRegistBulkDto> approveBulk(MultipartFile file,
                                                         UserInfo userInfo) throws IOException, BusinessException {

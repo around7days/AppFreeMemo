@@ -107,7 +107,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
                              @PathVariable String userId,
                              Model model) {
         // 選択されたユーザIDに紐付くユーザ情報を取得
-        UserRegistDto entity = service.getUserInfo(userId);
+        UserRegistDto entity = service.initDisplayUpdate(userId);
 
         // 取得した情報をフォームに反映
         BeanUtilsImpl.copyProperties(entity, form);
