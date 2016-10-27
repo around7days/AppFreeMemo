@@ -32,6 +32,17 @@ $(function() {
 	});
 
 	/**
+	 * DataTables設定
+	 */
+	$(".dataTable").dataTable({
+		lengthChange : false,
+		paging : false,
+		searching : true,
+		ordering : true,
+		info : false
+	});
+
+	/**
 	 * ダミーファイルボタン押下
 	 */
 	$("#fakeFile").on("click", function() {

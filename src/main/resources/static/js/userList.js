@@ -83,12 +83,4 @@ $(function() {
 			$("#search").click();
 		}
 	});
-
-	$("#resultTable").dataTable({
-		lengthChange : false,
-		paging : false,
-		searching : false,
-		ordering : true,
-		info : false
-	});
 });
