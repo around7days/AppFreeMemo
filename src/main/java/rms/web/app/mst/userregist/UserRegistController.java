@@ -15,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -102,9 +101,9 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/{userId}", params = "initUpdate")
+    @RequestMapping(value = MAPPING_URL, params = "initUpdate")
     public String initUpdate(UserRegistForm form,
-                             @PathVariable String userId,
+                             @ModelAttribute("userId") String userId,
                              Model model) {
         // 選択されたユーザIDに紐付くユーザ情報を取得
         UserRegistDto entity = service.initDisplayUpdate(userId);

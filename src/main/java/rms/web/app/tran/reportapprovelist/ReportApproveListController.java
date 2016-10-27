@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
 import rms.common.consts.MRoleConst;
@@ -288,12 +289,14 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
      * 選択処理
      * @param form
      * @param index
+     * @param attributes
      * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
     public String select(ReportApproveListForm form,
                          @PathVariable int index,
+                         RedirectAttributes attributes,
                          Model model) {
         logger.debug("選択値 -> {}", index);
 
@@ -301,9 +304,10 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         ReportApproveListEntityResult entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
-        // 月報承認画面
-        return urlHelper.redirect(ReportApproveRegistController.MAPPING_URL + "/" + entity.getApplyUserId() + "/"
-                                  + entity.getTargetYm(), "init");
+        // 月報承認画面に遷移
+        attributes.addFlashAttribute("applyUserId", entity.getApplyUserId());
+        attributes.addFlashAttribute("targetYm", entity.getTargetYm());
+        return urlHelper.redirect(ReportApproveRegistController.MAPPING_URL, "init");
     }
 
     /**

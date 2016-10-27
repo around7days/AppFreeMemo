@@ -17,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -83,15 +82,13 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @param form
      * @param applyUserId
      * @param targetYm
-     * @param userInfo
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "init")
+    @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(ReportApproveRegistForm form,
-                       @PathVariable String applyUserId,
-                       @PathVariable Integer targetYm,
-                       @AuthenticationPrincipal UserInfo userInfo,
+                       @ModelAttribute(value = "applyUserId") String applyUserId,
+                       @ModelAttribute(value = "targetYm") Integer targetYm,
                        Model model) {
         // 月報情報の取得
         ReportApproveRegistDto dto = service.initDisplay(applyUserId, targetYm);

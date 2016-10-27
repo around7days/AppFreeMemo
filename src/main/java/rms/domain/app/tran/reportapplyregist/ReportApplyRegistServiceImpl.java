@@ -90,7 +90,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     public ReportApplyRegistDto initDisplayReApply(String applyUserId,
                                                    Integer targetYm) {
 
-        // ユーザ情報の取得
+        // 月報情報の取得
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
 
         // 返却用DTOに反映

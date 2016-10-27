@@ -16,7 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -103,12 +102,12 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @param model
      * @return
      */
-    @RequestMapping(value = MAPPING_URL + "/{applyUserId}/{targetYm}", params = "initReApply")
+    @RequestMapping(value = MAPPING_URL, params = "initReApply")
     public String initReApply(ReportApplyRegistForm form,
-                              @PathVariable String applyUserId,
-                              @PathVariable Integer targetYm,
+                              @ModelAttribute("applyUserId") String applyUserId,
+                              @ModelAttribute("targetYm") Integer targetYm,
                               Model model) {
-        // 月報情報の取得
+        // 申請者の月報情報を取得
         ReportApplyRegistDto dto = service.initDisplayReApply(applyUserId, targetYm);
 
         // 値を設定

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
@@ -200,12 +201,14 @@ public class UserListController extends rms.common.abstracts.AbstractController 
      * ユーザ選択処理
      * @param form
      * @param index
+     * @param attributes
      * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "select")
     public String select(UserListForm form,
                          @PathVariable int index,
+                         RedirectAttributes attributes,
                          Model model) {
         logger.debug("選択値 -> {}", index);
 
@@ -213,7 +216,8 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         UserListEntityResult userEntity = form.getResultList().get(index);
         logger.debug("選択ユーザ情報 -> {}", userEntity);
 
-        return urlHelper.redirect(UserRegistController.MAPPING_URL + "/" + userEntity.getUserId(), "initUpdate");
+        attributes.addFlashAttribute("userId", userEntity.getUserId());
+        return urlHelper.redirect(UserRegistController.MAPPING_URL, "initUpdate");
     }
 
     /*
