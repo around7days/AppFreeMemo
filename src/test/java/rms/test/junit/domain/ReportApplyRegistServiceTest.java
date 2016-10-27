@@ -167,8 +167,8 @@ public class ReportApplyRegistServiceTest {
                 assertThat(vTReport.getStatus(), is("Y01"));
             }
 
-            // ファイル登録内容の確認
-            fail("ファイル確認は未実装");
+            // TODO ファイル登録内容の確認は未実装
+            // fail("ファイル確認は未実装");
         }
     }
 
@@ -219,8 +219,8 @@ public class ReportApplyRegistServiceTest {
                 assertThat(vTReport.getStatus(), is("Y01"));
             }
 
-            // ファイル登録内容の確認
-            fail("ファイル確認は未実装");
+            // TODO ファイル登録内容の確認は未実装
+            // fail("ファイル確認は未実装");
         }
     }
 

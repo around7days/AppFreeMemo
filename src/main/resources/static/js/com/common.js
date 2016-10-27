@@ -5,7 +5,7 @@
  */
 function changeTheme(theme) {
 
-	var cssUrl = "/fw/bootstrap/css/bootswatch-theme-" + theme + ".css";
+	var cssUrl = "/fw/bootstrap/css/bootswatch-theme-" + theme + ".min.css";
 
 	// フェードアウト後にCSS変更
 	$("body").fadeOut("normal", function() {
