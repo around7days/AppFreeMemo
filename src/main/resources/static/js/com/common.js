@@ -9,7 +9,7 @@ function changeTheme(theme) {
 
 	// フェードアウト後にCSS変更
 	$("body").fadeOut("normal", function() {
-		$("#myStyle").attr("href", cssUrl);
+		$("#myTheme").attr("href", cssUrl);
 	});
 
 	// N秒後にフェードイン
