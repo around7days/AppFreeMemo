@@ -77,7 +77,7 @@ javadoc {
 //
 test {
 	exclude '**/*$*' // JUnitのEnclosedテストランナー対策（2重実行防止）
-	jvmArgs = ['-Dspring.profiles.active=test'] // テスト用application.propertiesの読み込み
+	jvmArgs = ['-Dspring.profiles.active=test'] // テスト用プロパティファイルの読み込み（application-test.properties）
 }
 
 //
