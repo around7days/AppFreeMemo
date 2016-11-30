@@ -15,7 +15,8 @@ buildscript {
 apply {
 	plugin 'java'
 	plugin 'war'
-	plugin 'spring-boot'
+//	plugin 'spring-boot'
+	plugin 'org.springframework.boot'
 	plugin 'jacoco' // コードカバレッジ
 }
 
@@ -50,6 +51,7 @@ dependencies {
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 	testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.+'
 	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
+	testCompile group: 'ru.yandex.qatools.ashot', name: 'ashot', version: '+'
 	testCompile files('libs/SeleniumBase.jar')
 }
 
