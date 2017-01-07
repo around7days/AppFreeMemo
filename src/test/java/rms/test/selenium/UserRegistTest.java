@@ -23,11 +23,11 @@ import rms.test.selenium.page.ログイン画面;
 import selenium.base.AbstractSeleniumTest;
 
 @RunWith(Enclosed.class)
-public class UserRegistTest extends AbstractSeleniumTest {
+public class UserRegistTest {
 
     @RunWith(SpringRunner.class)
     @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-    public static class 新規登録テストグループ {
+    public static class 新規登録テストグループ extends AbstractSeleniumTest {
 
         @LocalServerPort
         private int port;
@@ -89,7 +89,7 @@ public class UserRegistTest extends AbstractSeleniumTest {
 
     @RunWith(SpringRunner.class)
     @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-    public static class 更新テストグループ {
+    public static class 更新テストグループ extends AbstractSeleniumTest {
 
         @LocalServerPort
         private int port;
