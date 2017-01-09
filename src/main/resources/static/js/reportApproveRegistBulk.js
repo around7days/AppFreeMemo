@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/reportapproveregistbulk";
+	var defaultUrl = fmMain.attr("action") + "tran/reportapproveregistbulk";
 
 	/**
 	 * 一括承認ボタン押下

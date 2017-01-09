@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/mst/userregist";
+	var defaultUrl = fmMain.attr("action") + "mst/userregist";
 
 	/**
 	 * 登録ボタン押下

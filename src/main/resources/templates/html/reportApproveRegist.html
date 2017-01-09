@@ -27,10 +27,10 @@
 	<script th:src="@{/js/reportApproveRegist.js}" src="../../static/js/reportApproveRegist.js"></script>
 </head>
 <body>
-<form th:action="dummy" th:object="${reportApproveRegistForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
+<form th:action="@{/}" th:object="${reportApproveRegistForm}" enctype="multipart/form-data" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
-	<div th:replace="@{/html/include/include_navbar}::navbar2"></div>
+	<div th:replace="/html/include/include_navbar::navbar2"></div>
 
 	<!-- container -->
 	<div class="container">
@@ -43,7 +43,7 @@
 			</div>
 
 			<!-- メッセージ -->
-			<div th:replace="@{/html/include/include_message}::message" ></div>
+			<div th:replace="/html/include/include_message::message" ></div>
 
 			<!--
 				月報承認

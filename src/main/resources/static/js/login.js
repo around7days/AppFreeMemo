@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/login";
+	var defaultUrl = fmMain.attr("action") + "login";
 
 	/**
 	 * 初期処理

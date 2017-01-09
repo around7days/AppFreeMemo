@@ -60,12 +60,12 @@ sourceCompatibility = 1.8
 
 // warファイル定義
 war {
-	baseName = 'ReportManagementSystem'
+	baseName = 'ReportManagement'
 }
 
 // jarファイル定義
 jar {
-	baseName = 'ReportManagementSystem'
+	baseName = 'ReportManagement'
 	version = '0.0.1-SNAPSHOT'
 }
 

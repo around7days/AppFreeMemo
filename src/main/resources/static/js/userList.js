@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/mst/userlist";
+	var defaultUrl = fmMain.attr("action") + "mst/userlist";
 
 	/**
 	 * 戻るボタン押下

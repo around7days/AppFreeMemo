@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/reportapplyregist";
+	var defaultUrl = fmMain.attr("action") + "tran/reportapplyregist";
 
 	/**
 	 * 申請ボタン押下

@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/menu";
+	var defaultUrl = fmMain.attr("action") + "menu";
 
 	/**
 	 * メニュークリック

@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/reportapprovelist";
+	var defaultUrl = fmMain.attr("action") + "tran/reportapprovelist";
 
 	/**
 	 * 戻るボタン押下

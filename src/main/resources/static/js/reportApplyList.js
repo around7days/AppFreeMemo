@@ -7,7 +7,7 @@ $(function() {
 	var fmMain = $("#formMain");
 
 	/** デフォルトURL */
-	var defaultUrl = "/tran/reportapplylist";
+	var defaultUrl = fmMain.attr("action") + "tran/reportapplylist";
 
 	/**
 	 * 選択ボタン押下<br>
