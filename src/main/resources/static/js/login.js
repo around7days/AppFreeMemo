@@ -28,7 +28,7 @@ $(function() {
 		// ローカルストレージからテーマを取得
 		var theme = localStorage.getItem("theme");
 		if (theme != null && theme != "") {
-			if (theme != $("#myTheme").val()) {
+			if (theme != $("#theme").val()) {
 				// テーマ変更
 				changeTheme(theme);
 			}

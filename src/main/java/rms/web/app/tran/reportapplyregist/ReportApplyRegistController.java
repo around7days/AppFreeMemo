@@ -238,6 +238,8 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, ReportApplyRegistForm.class));
+        // XXX CSSテーマの設定
+        model.addAttribute("theme", session.getAttribute("theme"));
 
         return PAGE_URL;
     }
@@ -259,6 +261,8 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
         // セッションからフォーム情報を取得して反映
         model.addAttribute(SessionUtils.getSessionForm(session, ReportApplyRegistForm.class));
+        // XXX CSSテーマの設定
+        model.addAttribute("theme", session.getAttribute("theme"));
 
         return PAGE_URL;
     }
