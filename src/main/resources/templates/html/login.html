@@ -30,7 +30,7 @@
 <form th:action="@{/}" th:object="${loginForm}" id="formMain" method="post" th:novalidate="${novalidate}">
 
 	<!-- ナビバー -->
-	<div th:replace="/html/include/include_navbar::navbar1"></div>
+	<div th:replace="html/include/include_navbar::navbar1"></div>
 
 	<!-- container -->
 	<div class="container">
@@ -43,7 +43,7 @@
 			</div>
 
 			<!-- メッセージ -->
-			<div th:replace="/html/include/include_message::message" ></div>
+			<div th:replace="html/include/include_message::message" ></div>
 
 			<!-- サインイン -->
 			<div>
