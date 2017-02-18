@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -25,10 +26,13 @@ public class UserListTest extends AbstractSeleniumTest {
     @LocalServerPort
     private int port;
 
+    @Value("${server.context-path}")
+    private String serverContextPath;
+
     @Before
     public void setup() {
         // ユーザ一覧画面表示までの初期処理
-        helper.url("http://localhost:" + port + "/login");
+        helper.url("http://localhost:" + port + serverContextPath + "/login");
 
         {
             ログイン画面 page = new ログイン画面().initialize(driver);
