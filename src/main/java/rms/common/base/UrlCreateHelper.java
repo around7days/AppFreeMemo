@@ -1,4 +1,4 @@
-package rms.common.bean;
+package rms.common.base;
 
 import rms.common.utils.StringUtilsImpl;
 

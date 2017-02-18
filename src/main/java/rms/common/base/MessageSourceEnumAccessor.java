@@ -1,4 +1,4 @@
-package rms.common.bean;
+package rms.common.base;
 
 import java.util.List;
 import java.util.Locale;

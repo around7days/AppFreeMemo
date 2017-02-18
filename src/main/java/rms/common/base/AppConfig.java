@@ -4,10 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
-import rms.common.bean.AppProperties;
-import rms.common.bean.MessageSourceEnumAccessor;
-import rms.common.bean.UrlCreateHelper;
-
 @Configuration
 public class AppConfig {
 
@@ -39,12 +35,12 @@ public class AppConfig {
     }
 
     /**
-     * AppProperties
+     * ProjectProperties
      * @return
      */
     @Bean
-    public AppProperties appProperties() {
-        return new AppProperties();
+    public ProjectProperties appProperties() {
+        return new ProjectProperties();
     }
 
 }

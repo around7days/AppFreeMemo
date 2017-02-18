@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.bean.AppProperties;
+import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
 import rms.common.utils.FileUtils;
 import rms.domain.app.shared.dto.ReportFileDto;
@@ -42,7 +42,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
 
     /** application.properties */
     @Autowired
-    private AppProperties properties;
+    private ProjectProperties properties;
 
     @Override
     public ReportFileDto getReportFileDownloadInfo(String applyUserId,

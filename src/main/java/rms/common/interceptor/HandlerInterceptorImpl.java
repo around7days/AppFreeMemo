@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.common.interceptor;
 
 import java.util.Formatter;
 

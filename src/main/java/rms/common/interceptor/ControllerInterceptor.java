@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.common.interceptor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

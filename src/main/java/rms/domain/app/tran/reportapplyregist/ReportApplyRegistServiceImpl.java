@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.base.BusinessException;
-import rms.common.bean.AppProperties;
+import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
 import rms.common.consts.MessageEnum;
@@ -42,7 +42,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
     /** application.properties */
     @Autowired
-    private AppProperties properties;
+    private ProjectProperties properties;
 
     /** 月報ファイル関連共通サービス */
     @Autowired

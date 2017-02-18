@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.common.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import rms.common.bean.AppProperties;
+import rms.common.base.ProjectProperties;
 import rms.common.utils.StringUtilsImpl;
 
 /**
@@ -29,7 +29,7 @@ public class ControllerAdviceCustom {
 
     /** application.properties */
     @Autowired
-    private AppProperties properties;
+    private ProjectProperties properties;
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {

@@ -1,4 +1,4 @@
-package rms.common.bean;
+package rms.common.base;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * application.propertiesクラス<br>
  */
 @Component
-public class AppProperties {
+public class ProjectProperties {
 
     /** HTML5入力チェック有無[true:チェックしない false:チェックする] */
     @Value("${app.html5.novalidate}")

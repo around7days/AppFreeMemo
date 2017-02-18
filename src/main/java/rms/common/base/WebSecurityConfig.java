@@ -15,7 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@Order(1) // TODO gradleからのテスト実行時のみOrder指定が無いとエラーになる・・・
+@Order(1) // XXX gradleからのテスト実行時のみOrder指定が無いとエラーになる・・・
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /** ベース マッピングURL */
