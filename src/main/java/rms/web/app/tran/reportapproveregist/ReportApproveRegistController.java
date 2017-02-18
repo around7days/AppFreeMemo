@@ -233,10 +233,8 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
 
         // メッセージを反映
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッションからフォーム情報を取得して反映
-        model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistForm.class));
-        // XXX CSSテーマの設定
-        model.addAttribute("theme", session.getAttribute("theme"));
+        // セッション情報の詰め直し
+        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }
@@ -256,10 +254,8 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
 
         // メッセージとフォーム情報を反映
         model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
-        // セッションからフォーム情報を取得して反映
-        model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistForm.class));
-        // XXX CSSテーマの設定
-        model.addAttribute("theme", session.getAttribute("theme"));
+        // セッション情報の詰め直し
+        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }

@@ -39,7 +39,7 @@ public class AppConfig {
      * @return
      */
     @Bean
-    public ProjectProperties appProperties() {
+    public ProjectProperties projectProperties() {
         return new ProjectProperties();
     }
 

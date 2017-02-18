@@ -5,13 +5,14 @@ package rms.common.utils;
 
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.Conventions;
 
 /**
  * セッション管理Utils
@@ -46,27 +47,45 @@ public class SessionUtils {
     }
 
     /**
-     * セッションから指定されたクラスのフォーム情報の取得
-     * @param <T>
+     * セッション情報をMapに変換
      * @param session
-     * @param cls
      * @return
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T getSessionForm(HttpSession session,
-                                       Class<T> cls) {
+    public static Map<String, ?> convertSessionToMap(HttpSession session) {
+        Map<String, Object> attributes = new HashMap<>();
 
-        try {
-            // クラスオブジェクトからSpringの自動生成keyを取得
-            String key = Conventions.getVariableName(cls.newInstance());
-            // セッションから取得
-            Object obj = session.getAttribute(key);
-            if (obj != null && obj.getClass() == cls) {
-                return (T) obj;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("class instance error", e);
+        Enumeration<String> names = session.getAttributeNames();
+        while (names.hasMoreElements()) {
+            String name = names.nextElement();
+            Object obj = session.getAttribute(name);
+            attributes.put(name, obj);
         }
-        return null;
+        return attributes;
     }
+
+    // /**
+    // * セッションから指定されたクラスのフォーム情報の取得
+    // * @param <T>
+    // * @param session
+    // * @param cls
+    // * @return
+    // */
+    // @SuppressWarnings("unchecked")
+    // public static <T> T getSessionForm(HttpSession session,
+    // Class<T> cls) {
+    //
+    // try {
+    // // クラスオブジェクトからSpringの自動生成keyを取得
+    // String key = Conventions.getVariableName(cls.newInstance());
+    // // セッションから取得
+    // Object obj = session.getAttribute(key);
+    // if (obj != null && obj.getClass() == cls) {
+    // return (T) obj;
+    // }
+    // } catch (Exception e) {
+    // throw new RuntimeException("class instance error", e);
+    // }
+    // return null;
+    // }
+
 }

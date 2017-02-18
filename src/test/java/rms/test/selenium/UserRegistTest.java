@@ -89,6 +89,29 @@ public class UserRegistTest {
                 assertThat(page.メッセージ_通常().getText(), is(containsString("登録が完了しました")));
             }
         }
+
+        @Test
+        public void ユーザ登録_重複エラー() throws IOException {
+
+            {
+                ユーザ登録画面 page = new ユーザ登録画面().initialize(driver);
+                page.ユーザID().sendKeys("user11");
+                page.ユーザ名().sendKeys("テストユーザ");
+                page.パスワード().sendKeys("pass");
+
+                capture.screenShot();
+                page.登録ボタン().click();
+                helper.switchToAlert().accept();
+            }
+
+            {
+                ユーザ登録画面 page = new ユーザ登録画面().initialize(driver);
+                capture.screenShot();
+                assertThat(helper.getTitle(), is(containsString("ユーザ登録画面")));
+                assertThat(page.メッセージ_エラー().getText(), is(containsString("ユーザIDが重複しています")));
+            }
+        }
+
     }
 
     @RunWith(SpringRunner.class)
