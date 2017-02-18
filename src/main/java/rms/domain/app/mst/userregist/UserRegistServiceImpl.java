@@ -38,27 +38,27 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     /** ユーザ情報登録Dao */
     @Autowired
-    UserRegistDao dao;
+    private UserRegistDao dao;
 
     /** MCodeDao */
     @Autowired
-    MCodeDao mCodeDao;
+    private MCodeDao mCodeDao;
 
     /** MUserDao */
     @Autowired
-    MUserDao mUserDao;
+    private MUserDao mUserDao;
 
     /** MUserApproveFlowDao */
     @Autowired
-    MUserApproveFlowDao mUserApproveFlowDao;
+    private MUserApproveFlowDao mUserApproveFlowDao;
 
     /** MUserRoleDao */
     @Autowired
-    MUserRoleDao mUserRoleDao;
+    private MUserRoleDao mUserRoleDao;
 
     /** VMUserDao */
     @Autowired
-    VMUserDao vMUserDao;
+    private VMUserDao vMUserDao;
 
     @Override
     public UserRegistDto initDisplayUpdate(String userId) {

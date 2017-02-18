@@ -65,11 +65,11 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
 
     /** 月報情報取得サービス */
     @Autowired
-    ReportApproveListService service;
+    private ReportApproveListService service;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    SharedReportFileService sharedReportFileService;
+    private SharedReportFileService sharedReportFileService;
 
     /**
      * 月報承認状況一覧画面フォームの初期化

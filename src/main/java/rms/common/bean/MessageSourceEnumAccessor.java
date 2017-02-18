@@ -3,7 +3,9 @@ package rms.common.bean;
 import java.util.List;
 import java.util.Locale;
 
-import org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration;
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
@@ -19,9 +21,16 @@ import rms.common.consts.MessageEnum;
 public class MessageSourceEnumAccessor {
 
     /** MessageSource */
-    // @Autowired
-    // private MessageSource message;
-    private static final MessageSource message = new MessageSourceAutoConfiguration().messageSource();
+    @Autowired
+    private static MessageSource message;
+
+    @Autowired
+    private MessageSource wiredMessage;
+
+    @PostConstruct
+    public void init() {
+        MessageSourceEnumAccessor.message = wiredMessage;
+    }
 
     /**
      * メッセージの取得

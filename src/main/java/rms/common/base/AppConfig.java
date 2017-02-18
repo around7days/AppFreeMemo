@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+import rms.common.bean.AppProperties;
 import rms.common.bean.MessageSourceEnumAccessor;
 import rms.common.bean.UrlCreateHelper;
 
@@ -35,6 +36,15 @@ public class AppConfig {
     @Bean
     public UrlCreateHelper urlCreateHelper() {
         return new UrlCreateHelper();
+    }
+
+    /**
+     * AppProperties
+     * @return
+     */
+    @Bean
+    public AppProperties appProperties() {
+        return new AppProperties();
     }
 
 }

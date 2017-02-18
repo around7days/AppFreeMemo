@@ -26,7 +26,7 @@ public class UserListServiceImpl implements UserListService {
 
     /** ユーザ情報取得Dao */
     @Autowired
-    UserListDao dao;
+    private UserListDao dao;
 
     @Override
     public SearchResultDto<UserListEntityResult> search(UserListDtoCondition condition,

@@ -56,11 +56,11 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
 
     /** 月報一覧画面サービス */
     @Autowired
-    ReportListService service;
+    private ReportListService service;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    SharedReportFileService sharedReportFileService;
+    private SharedReportFileService sharedReportFileService;
 
     /**
      * 月報一覧画面フォームの初期化

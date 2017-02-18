@@ -35,19 +35,19 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    SharedReportFileService sharedReportFileService;
+    private SharedReportFileService sharedReportFileService;
 
     /** TReportDao */
     @Autowired
-    TReportDao tReportDao;
+    private TReportDao tReportDao;
 
     /** TReportApproveFlowDao */
     @Autowired
-    TReportApproveFlowDao tReportApproveFlowDao;
+    private TReportApproveFlowDao tReportApproveFlowDao;
 
     /** VTReportDao */
     @Autowired
-    VTReportDao vTReportDao;
+    private VTReportDao vTReportDao;
 
     @Override
     public ReportApproveRegistDto initDisplay(String applyUserId,

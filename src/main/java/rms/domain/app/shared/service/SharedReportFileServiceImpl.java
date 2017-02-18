@@ -19,11 +19,12 @@ import java.util.zip.ZipOutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.base.ProjectProperties;
+import rms.common.bean.AppProperties;
 import rms.common.consts.Const;
 import rms.common.utils.FileUtils;
 import rms.domain.app.shared.dto.ReportFileDto;
@@ -40,27 +41,8 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     private static final Logger logger = LoggerFactory.getLogger(SharedReportFileServiceImpl.class);
 
     /** application.properties */
-    private static final ProjectProperties properties = ProjectProperties.INSTANCE;
-
-    /** 月報ファイル格納ディレクトリ */
-    private static final String reportFileDir = properties.getString("report.storage");
-
-    /** 一時ファイル格納ディレクトリ */
-    private static final String temporaryDir = properties.getString("temporary.storage");
-
-    /** 初期処理 */
-    static {
-        // 月報保存ディレクトリの生成
-        File dir1 = new File(reportFileDir);
-        if (!dir1.exists()) {
-            dir1.mkdirs();
-        }
-        // 一時ファイル格納ディレクトリの生成
-        File dir2 = new File(temporaryDir);
-        if (!dir2.exists()) {
-            dir2.mkdirs();
-        }
-    }
+    @Autowired
+    private AppProperties properties;
 
     @Override
     public ReportFileDto getReportFileDownloadInfo(String applyUserId,
@@ -68,7 +50,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                                                    Integer targetYm) {
 
         // ダウンロードファイルパスの生成
-        Path filePath = createReportFilePath(reportFileDir, applyUserId, targetYm);
+        Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
         // ダウンロードファイル名の生成
         String fileNm = createReportDownloadFileNm(applyUserId, applyUserNm, targetYm);
@@ -90,7 +72,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         // zipファイル名・ファイルパスの生成
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
         String zipFileNm = "report" + LocalDateTime.now().format(dateFormat) + ".zip";
-        Path zipPath = Paths.get(temporaryDir, zipFileNm);
+        Path zipPath = Paths.get(properties.getTemporaryStorage(), zipFileNm);
 
         // zipファイル生成
         try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipPath.toFile()))) {
@@ -100,7 +82,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                 Integer targetYm = targetYmList.get(i);
 
                 // ダウンロードファイルパスの生成
-                Path filePath = createReportFilePath(reportFileDir, applyUserId, targetYm);
+                Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
                 // ダウンロードファイル名の生成
                 String fileNm = createReportDownloadFileNm(applyUserId, applyUserNm, targetYm);
@@ -128,7 +110,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                                String applyUserId,
                                Integer targetYm) throws IOException {
         // 月報保存ファイルパスの生成
-        Path filePath = createReportFilePath(reportFileDir, applyUserId, targetYm);
+        Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
         // 月報保存処理
         FileUtils.fileSave(file.getInputStream(), filePath);
@@ -139,7 +121,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                                String applyUserId,
                                Integer targetYm) throws IOException {
         // 月報保存ファイルパスの生成
-        Path toFilePath = createReportFilePath(reportFileDir, applyUserId, targetYm);
+        Path toFilePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
         // 月報保存処理
         FileUtils.fileSave(fromFilePath, toFilePath);
@@ -153,7 +135,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
 
         // zipアップロード一時格納先ディレクトリの生成
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-        Path unzipDir = Paths.get(temporaryDir, LocalDateTime.now().format(dateFormat));
+        Path unzipDir = Paths.get(properties.getTemporaryStorage(), LocalDateTime.now().format(dateFormat));
         unzipDir.toFile().mkdirs();
 
         // zipファイルパスの生成

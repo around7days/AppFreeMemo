@@ -62,11 +62,11 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
 
     /** 月報承認画面サービス */
     @Autowired
-    ReportApproveRegistService service;
+    private ReportApproveRegistService service;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    SharedReportFileService sharedReportFileService;
+    private SharedReportFileService sharedReportFileService;
 
     /**
      * 月報承認画面フォームの初期化

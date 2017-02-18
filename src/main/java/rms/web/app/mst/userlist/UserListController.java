@@ -51,7 +51,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
 
     /** ユーザ情報取得サービス */
     @Autowired
-    UserListService service;
+    private UserListService service;
 
     /**
      * ユーザ一覧画面フォームの初期化

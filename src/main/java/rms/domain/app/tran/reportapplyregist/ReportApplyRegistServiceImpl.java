@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.base.BusinessException;
-import rms.common.base.ProjectProperties;
+import rms.common.bean.AppProperties;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
 import rms.common.consts.MessageEnum;
@@ -41,27 +41,28 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     private static final Logger logger = LoggerFactory.getLogger(ReportApplyRegistServiceImpl.class);
 
     /** application.properties */
-    private static final ProjectProperties properties = ProjectProperties.INSTANCE;
+    @Autowired
+    private AppProperties properties;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    SharedReportFileService sharedReportFileService;
+    private SharedReportFileService sharedReportFileService;
 
     /** VMUserDao */
     @Autowired
-    VMUserDao vMUserDao;
+    private VMUserDao vMUserDao;
 
     /** TReportDao */
     @Autowired
-    TReportDao tReportDao;
+    private TReportDao tReportDao;
 
     /** TReportApproveFlowDao */
     @Autowired
-    TReportApproveFlowDao tReportApproveFlowDao;
+    private TReportApproveFlowDao tReportApproveFlowDao;
 
     /** VTReportDao */
     @Autowired
-    VTReportDao vTReportDao;
+    private VTReportDao vTReportDao;
 
     @Override
     public ReportApplyRegistDto initDisplayApply(String applyUserId) {
@@ -165,7 +166,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 月報提出可能日を生成
         int targetYear = Integer.valueOf(targetYm.toString().substring(0, 4));
         int targetMonth = Integer.valueOf(targetYm.toString().substring(4, 6));
-        int applyPossibleDay = properties.getInteger("report.apply.possible.day");
+        int applyPossibleDay = properties.getReportApplyPossibleDay();
         LocalDate applyPossibleDate = LocalDate.of(targetYear, targetMonth, applyPossibleDay);
 
         // 現在の年月日を取得

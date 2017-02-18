@@ -55,11 +55,11 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
 
     /** 月報申請状況一覧画面サービス */
     @Autowired
-    ReportApplyListService service;
+    private ReportApplyListService service;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    SharedReportFileService sharedReportFileService;
+    private SharedReportFileService sharedReportFileService;
 
     /**
      * 月報承認状況一覧画面フォームの初期化

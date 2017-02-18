@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import rms.common.bean.AppProperties;
 import rms.common.utils.StringUtilsImpl;
 
 /**
@@ -26,7 +28,8 @@ public class ControllerAdviceCustom {
     private static final Logger logger = LoggerFactory.getLogger(ControllerAdviceCustom.class);
 
     /** application.properties */
-    private static final ProjectProperties properties = ProjectProperties.INSTANCE;
+    @Autowired
+    private AppProperties properties;
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -39,14 +42,14 @@ public class ControllerAdviceCustom {
                              HttpSession session,
                              Model model) {
         // クライアント入力チェック有無
-        model.addAttribute("novalidate", properties.getBoolean("html5.novalidate"));
+        model.addAttribute("novalidate", properties.getHtml5Novalidate());
 
         // CSSテーマのデフォルトを設定
         // XXX 最終的にはAjaxに変更したい
         String theme = null;
         String requestTheme = request.getParameter("theme");
         Object sessionTheme = session.getAttribute("theme");
-        String propertyTheme = properties.getString("css.theme.default");
+        String propertyTheme = properties.getCssThemeDefault();
         if (!StringUtilsImpl.isEmpty(requestTheme)) {
             theme = requestTheme;
         } else if (!StringUtilsImpl.isEmpty(sessionTheme)) {

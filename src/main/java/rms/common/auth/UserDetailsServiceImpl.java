@@ -27,10 +27,10 @@ import rms.common.entity.MUserRole;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    MUserDao mUserDao;
+    private MUserDao mUserDao;
 
     @Autowired
-    MUserRoleDao mUserRoleDao;
+    private MUserRoleDao mUserRoleDao;
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {

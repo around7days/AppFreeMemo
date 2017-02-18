@@ -18,11 +18,9 @@ public class BusinessException extends Exception {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(BusinessException.class);
 
-    // TODO newしてるのでDIできない・・・とりあえずの暫定で直呼びに・・・
     /** MessageSource */
-    // @Autowired
-    // MessageSourceImpl message;
-    MessageSourceEnumAccessor message = new MessageSourceEnumAccessor();
+    // TODO newしてるのでDIできない為、暫定で直呼びに・・・
+    private MessageSourceEnumAccessor message = new MessageSourceEnumAccessor();
 
     /** エラーコード */
     private String errorCode;

@@ -50,7 +50,7 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
 
     /** 月報一括承認画面サービス */
     @Autowired
-    ReportApproveRegistBulkService service;
+    private ReportApproveRegistBulkService service;
 
     /**
      * 月報一括承認画面フォームの初期化
