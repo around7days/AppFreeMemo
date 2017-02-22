@@ -60,12 +60,12 @@ sourceCompatibility = 1.8
 
 // warファイル定義
 war {
-	baseName = 'ReportManagement'
+	baseName = 'rmsweb'
 }
 
 // jarファイル定義
 jar {
-	baseName = 'ReportManagement'
+	baseName = 'rmsweb'
 	version = '0.0.1-SNAPSHOT'
 }
 
