@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.common.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +10,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+
+import rms.common.base.WebSecurityConfig;
 
 /**
  * 例外ハンドラ共通処理

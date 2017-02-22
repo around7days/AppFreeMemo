@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.web.app.system.error;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import rms.common.base.WebSecurityConfig;
 
 /**
  * エラー画面コントローラー
