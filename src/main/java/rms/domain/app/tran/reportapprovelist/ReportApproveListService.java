@@ -10,6 +10,12 @@ import rms.common.utils.PageInfo;
 public interface ReportApproveListService {
 
     /**
+     * 画面初期表示処理
+     * @return
+     */
+    public ReportApproveListDtoCondition initDisplay();
+
+    /**
      * 月報情報一覧取得（承認者用）
      * @param condition
      * @param pageInfo

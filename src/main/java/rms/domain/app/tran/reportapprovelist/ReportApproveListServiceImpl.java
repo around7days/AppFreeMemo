@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import rms.common.base.ProjectProperties;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
+import rms.common.utils.RmsUtils;
 import rms.common.utils.SelectOptionsUtils;
 
 /**
@@ -25,9 +27,23 @@ public class ReportApproveListServiceImpl implements ReportApproveListService {
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApproveListServiceImpl.class);
 
+    /** application.properties */
+    @Autowired
+    private ProjectProperties properties;
+
     /** 月報情報取得Dao */
     @Autowired
     private ReportApproveListDao dao;
+
+    @Override
+    public ReportApproveListDtoCondition initDisplay() {
+        // 初期値の生成
+        ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
+        Integer targetYm = RmsUtils.getThisTargetYm(properties.getSysdate(), properties.getSwitchMonthReferenceDay());
+        condition.setTargetYm(targetYm); // 対象年月：当月
+
+        return condition;
+    }
 
     @Override
     public SearchResultDto<ReportApproveListEntityResult> search(ReportApproveListDtoCondition condition,

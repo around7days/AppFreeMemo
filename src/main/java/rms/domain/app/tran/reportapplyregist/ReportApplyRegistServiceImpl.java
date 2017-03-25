@@ -25,6 +25,7 @@ import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VMUser;
 import rms.common.entity.VTReport;
 import rms.common.utils.BeanUtilsImpl;
+import rms.common.utils.RmsUtils;
 import rms.common.utils.StringUtilsImpl;
 import rms.domain.app.shared.service.SharedReportFileService;
 
@@ -83,6 +84,8 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
         // 初期値の設定
         dto.setPublishFlg(MCodeConst.B001_1); // 公開有無：公開
+        Integer targetYm = RmsUtils.getThisTargetYm(properties.getSysdate(), properties.getSwitchMonthReferenceDay());
+        dto.setTargetYm(targetYm); // 対象年月：当月
 
         return dto;
     }
@@ -166,11 +169,11 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 月報提出可能日を生成
         int targetYear = Integer.valueOf(targetYm.toString().substring(0, 4));
         int targetMonth = Integer.valueOf(targetYm.toString().substring(4, 6));
-        int applyPossibleDay = properties.getReportApplyPossibleDay();
+        int applyPossibleDay = properties.getSwitchMonthReferenceDay();
         LocalDate applyPossibleDate = LocalDate.of(targetYear, targetMonth, applyPossibleDay);
 
         // 現在の年月日を取得
-        LocalDate nowdate = LocalDate.now();
+        LocalDate nowdate = properties.getSysdate();
 
         if (applyPossibleDate.compareTo(nowdate) >= 0) {
             // 月報提出可能日 >= 現在日付の場合

@@ -89,6 +89,14 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(ReportApproveListForm form,
                        Model model) {
+        // 初期表示用情報を取得
+        ReportApproveListDtoCondition dto = service.initDisplay();
+
+        // 値を設定
+        BeanUtilsImpl.copyProperties(dto, form.getCondition());
+
+        logger.debug("出力フォーム情報 -> {}", form);
+
         return PAGE_URL;
     }
 

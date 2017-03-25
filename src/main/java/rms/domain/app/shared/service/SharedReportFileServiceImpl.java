@@ -44,6 +44,10 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     @Autowired
     private ProjectProperties properties;
 
+    /** ファイル名の文字コード */
+    // TODO MS932固定で大丈夫？
+    private static final Charset FILE_NM_CHARSET = Charset.forName("MS932");
+
     @Override
     public ReportFileDto getReportFileDownloadInfo(String applyUserId,
                                                    String applyUserNm,
@@ -75,7 +79,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         Path zipPath = Paths.get(properties.getTemporaryStorage(), zipFileNm);
 
         // zipファイル生成
-        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipPath.toFile()))) {
+        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipPath.toFile()), FILE_NM_CHARSET)) {
             for (int i = 0; i < cnt; i++) {
                 String applyUserId = applyUserIdList.get(i);
                 String applyUserNm = applyUserNmList.get(i);
@@ -145,8 +149,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         FileUtils.fileSave(file.getInputStream(), zipPath);
 
         // zipファイルの解凍処理
-        // TODO 常にCharset.forName("MS932")で本当にOK？
-        try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zipPath.toFile()), Charset.forName("MS932"))) {
+        try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zipPath.toFile()), FILE_NM_CHARSET)) {
             ZipEntry entry = null;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.isDirectory()) {
