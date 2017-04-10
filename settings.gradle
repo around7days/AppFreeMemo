@@ -1,6 +1,5 @@
 rootProject.name = 'ReportManagementSystem'
 include 'rms-base'
-include 'rms-common'
 include 'rms-domain'
 include 'rms-web'
 include 'rms-batch'

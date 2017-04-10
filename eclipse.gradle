@@ -45,15 +45,15 @@ eclipseJdt {
 }
 
 task eclipseSettings(type: Copy) {
-//  from rootProject.files("eclipse/org.eclipse.jdt.ui.prefs")
-//  into project.file('.settings/')
-//  outputs.upToDateWhen { false }
+  from rootProject.files("eclipse/org.eclipse.jdt.ui.prefs")
+  into project.file('.settings/')
+  outputs.upToDateWhen { false }
 }
 
 task eclipseJdtPrepare(type: Copy) {
-//  from rootProject.file("eclipse/org.eclipse.jdt.core.prefs")
-//  into project.file(".settings/")
-//  outputs.upToDateWhen { false }
+  from rootProject.file("eclipse/org.eclipse.jdt.core.prefs")
+  into project.file(".settings/")
+  outputs.upToDateWhen { false }
 }
 
 task cleanEclipseJdtUi(type: Delete) {
