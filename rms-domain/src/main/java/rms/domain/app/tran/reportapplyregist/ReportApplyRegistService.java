@@ -28,18 +28,18 @@ public interface ReportApplyRegistService {
 
     /**
      * 月報情報の申請処理<br>
-     * @param reportApplyRegistDto
+     * @param dto
      * @throws IOException
      * @throws BusinessException
      */
-    public void apply(ReportApplyRegistDto reportApplyRegistDto) throws IOException, BusinessException;
+    public void apply(ReportApplyRegistDto dto) throws IOException, BusinessException;
 
     /**
      * 月報情報の再申請処理<br>
-     * @param reportApplyRegistDto
+     * @param dto
      * @throws IOException
      * @throws BusinessException
      */
-    public void reApply(ReportApplyRegistDto reportApplyRegistDto) throws IOException, BusinessException;
+    public void reApply(ReportApplyRegistDto dto) throws IOException, BusinessException;
 
 }
