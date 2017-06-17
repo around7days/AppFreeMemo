@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import rms.common.base.WebSecurityConfig;
-import rms.common.utils.SessionUtils;
+import rms.common.utils.RmsSessionUtils;
 import rms.web.app.mst.userlist.UserListController;
 import rms.web.app.mst.userregist.UserRegistController;
 import rms.web.app.tran.reportapplylist.ReportApplyListController;
@@ -61,7 +61,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
                        HttpSession session,
                        Model model) {
         // 個別セッションの破棄
-        SessionUtils.remove(session);
+        RmsSessionUtils.remove(session);
 
         return PAGE_URL;
     }

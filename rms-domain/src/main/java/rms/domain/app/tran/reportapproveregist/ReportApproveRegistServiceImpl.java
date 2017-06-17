@@ -17,9 +17,9 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
-import rms.common.utils.BeanUtilsImpl;
-import rms.common.utils.StringUtilsImpl;
+import rms.common.utils.RmsBeanUtils;
 import rms.domain.app.shared.service.SharedReportFileService;
+import rms.domain.app.shared.service.SharedReportService;
 
 /**
  * 月報承認画面サービス
@@ -32,6 +32,10 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     /** logger */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApproveRegistServiceImpl.class);
+
+    /** 月報関連共通サービス */
+    @Autowired
+    private SharedReportService sharedReportService;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
@@ -56,7 +60,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
 
         // 返却用DTOに反映
-        ReportApproveRegistDto dto = BeanUtilsImpl.createCopyProperties(entity, ReportApproveRegistDto.class);
+        ReportApproveRegistDto dto = RmsBeanUtils.createCopyProperties(entity, ReportApproveRegistDto.class);
 
         return dto;
     }
@@ -99,22 +103,10 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         /*
          * 更新項目
          */
-        // 承認状況（現在の承認状況と承認者の有無で判断）
-        String newStatus = null;
-        switch (dto.getStatus()) {
-        case MCodeConst.A001_Y01:
-            newStatus = MCodeConst.A001_Y02;
-            if (StringUtilsImpl.isEmpty(dto.getApproveUserId2())) {
-                newStatus = MCodeConst.A001_Y03;
-            }
-            break;
-        case MCodeConst.A001_Y02:
-            newStatus = MCodeConst.A001_Y03;
-            break;
-        case MCodeConst.A001_Y03:
-            newStatus = MCodeConst.A001_ZZZ;
-            break;
-        }
+        // 処理後の承認状況を計算
+        String newStatus = sharedReportService.getNewStatus(dto.getApplyUserId(),
+                                                            dto.getTargetYm(),
+                                                            Const.StatusExecKbn.APPROVE);
         entity.setStatus(newStatus);
 
         /*
@@ -141,19 +133,10 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
         /*
          * 更新項目
          */
-        // 承認状況（現在の承認状況と承認者の有無で判断）
-        String newStatus = null;
-        switch (dto.getStatus()) {
-        case MCodeConst.A001_Y01:
-            newStatus = MCodeConst.A001_N01;
-            break;
-        case MCodeConst.A001_Y02:
-            newStatus = MCodeConst.A001_N02;
-            break;
-        case MCodeConst.A001_Y03:
-            newStatus = MCodeConst.A001_N03;
-            break;
-        }
+        // 処理後の承認状況を計算
+        String newStatus = sharedReportService.getNewStatus(dto.getApplyUserId(),
+                                                            dto.getTargetYm(),
+                                                            Const.StatusExecKbn.DENY);
         entity.setStatus(newStatus);
 
         /*
@@ -186,6 +169,9 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
             break;
         case MCodeConst.A001_Y03:
             approveSeq = Const.APPROVE_FLOW_SEQ_3;
+            break;
+        case MCodeConst.A001_Y04:
+            approveSeq = Const.APPROVE_FLOW_SEQ_4;
             break;
         }
         entity.setApproveSeq(approveSeq);

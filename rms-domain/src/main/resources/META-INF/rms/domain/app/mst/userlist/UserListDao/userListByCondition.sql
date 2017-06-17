@@ -9,6 +9,8 @@ select
   ,u.approve_user_nm2
   ,u.approve_user_id3
   ,u.approve_user_nm3
+  ,u.approve_user_id4
+  ,u.approve_user_nm4
   ,mr1.role_nm as role_nm1
   ,mr2.role_nm as role_nm2
   ,mr3.role_nm as role_nm3

@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rms.common.auth.UserInfo;
 import rms.common.consts.MRoleConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.FileUtils;
+import rms.common.utils.RmsFileUtils;
 import rms.common.utils.PageInfo;
 import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
@@ -168,7 +168,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
                                                                               entity.getApplyUserNm(),
                                                                               entity.getTargetYm());
         // 月報ダウンロード
-        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
         return null;
     }

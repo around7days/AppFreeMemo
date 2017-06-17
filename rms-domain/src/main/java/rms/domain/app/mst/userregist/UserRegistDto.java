@@ -28,6 +28,8 @@ public class UserRegistDto extends rms.common.abstracts.AbstractDto {
     private String approveUserId2;
     /** 承認者ID3 */
     private String approveUserId3;
+    /** 承認者ID4 */
+    private String approveUserId4;
 
     /** 役割：申請者フラグ */
     private String roleApplyFlg;
@@ -180,6 +182,14 @@ public class UserRegistDto extends rms.common.abstracts.AbstractDto {
      */
     public void setApproveUserId3(String approveUserId3) {
         this.approveUserId3 = approveUserId3;
+    }
+
+    public String getApproveUserId4() {
+        return approveUserId4;
+    }
+
+    public void setApproveUserId4(String approveUserId4) {
+        this.approveUserId4 = approveUserId4;
     }
 
     /**

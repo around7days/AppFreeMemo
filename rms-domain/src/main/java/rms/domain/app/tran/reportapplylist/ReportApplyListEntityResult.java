@@ -69,6 +69,14 @@ public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEn
     @Column(name = "approve_user_nm3")
     private String approveUserNm3;
 
+    /** 承認者ID4 */
+    @Column(name = "approve_user_id4")
+    private String approveUserId4;
+
+    /** 承認者名4 */
+    @Column(name = "approve_user_nm4")
+    private String approveUserNm4;
+
     /** 月報ファイルパス */
     @Column(name = "file_path")
     private String filePath;
@@ -185,6 +193,22 @@ public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEn
         this.approveUserNm3 = approveUserNm3;
     }
 
+    public String getApproveUserId4() {
+        return approveUserId4;
+    }
+
+    public void setApproveUserId4(String approveUserId4) {
+        this.approveUserId4 = approveUserId4;
+    }
+
+    public String getApproveUserNm4() {
+        return approveUserNm4;
+    }
+
+    public void setApproveUserNm4(String approveUserNm4) {
+        this.approveUserNm4 = approveUserNm4;
+    }
+
     public String getFilePath() {
         return filePath;
     }
@@ -204,6 +228,7 @@ public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEn
         case MCodeConst.A001_N01: // 否認１
         case MCodeConst.A001_N02: // 否認２
         case MCodeConst.A001_N03: // 否認３
+        case MCodeConst.A001_N04: // 否認４
             flg = true;
         }
         return flg;

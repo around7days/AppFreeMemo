@@ -18,10 +18,10 @@ import org.slf4j.LoggerFactory;
  * セッション管理Utils
  * @author
  */
-public class SessionUtils {
+public class RmsSessionUtils {
     /** logger */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(SessionUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(RmsSessionUtils.class);
 
     // TODO どっかのタイミングできれいにする
     /** セッションキー除外対象リスト */

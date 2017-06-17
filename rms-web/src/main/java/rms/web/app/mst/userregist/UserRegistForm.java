@@ -67,6 +67,8 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
     private String approveUserId2;
     /** 承認者ID3 */
     private String approveUserId3;
+    /** 承認者ID4 */
+    private String approveUserId4;
 
     /** 役割：申請者フラグ */
     private String roleApplyFlg;
@@ -160,7 +162,15 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
         this.approveUserId3 = approveUserId3;
     }
 
-    public String getRoleApplyFlg() {
+    public String getApproveUserId4() {
+		return approveUserId4;
+	}
+
+	public void setApproveUserId4(String approveUserId4) {
+		this.approveUserId4 = approveUserId4;
+	}
+
+	public String getRoleApplyFlg() {
         return roleApplyFlg;
     }
 

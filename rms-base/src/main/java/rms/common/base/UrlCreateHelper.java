@@ -1,6 +1,6 @@
 package rms.common.base;
 
-import rms.common.utils.StringUtilsImpl;
+import rms.common.utils.RmsStringUtils;
 
 /**
  * URL生成補助クラス
@@ -28,7 +28,7 @@ public class UrlCreateHelper {
         StringBuilder redirectUrl = new StringBuilder();
         redirectUrl.append("redirect:");
         redirectUrl.append(url);
-        if (!StringUtilsImpl.isEmpty(param)) {
+        if (!RmsStringUtils.isEmpty(param)) {
             redirectUrl.append("?").append(param);
         }
         return redirectUrl.toString();
@@ -54,7 +54,7 @@ public class UrlCreateHelper {
         StringBuilder forwardUrl = new StringBuilder();
         forwardUrl.append("forward:");
         forwardUrl.append(url);
-        if (!StringUtilsImpl.isEmpty(param)) {
+        if (!RmsStringUtils.isEmpty(param)) {
             forwardUrl.append("?").append(param);
         }
         return forwardUrl.toString();

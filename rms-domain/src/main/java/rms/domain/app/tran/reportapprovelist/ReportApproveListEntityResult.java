@@ -73,6 +73,14 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
     @Column(name = "approve_user_nm3")
     private String approveUserNm3;
 
+    /** 承認者ID4 */
+    @Column(name = "approve_user_id4")
+    private String approveUserId4;
+
+    /** 承認者名4 */
+    @Column(name = "approve_user_nm4")
+    private String approveUserNm4;
+
     /** 月報ファイルパス */
     @Column(name = "file_path")
     private String filePath;
@@ -197,6 +205,22 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
         this.approveUserNm3 = approveUserNm3;
     }
 
+    public String getApproveUserId4() {
+        return approveUserId4;
+    }
+
+    public void setApproveUserId4(String approveUserId4) {
+        this.approveUserId4 = approveUserId4;
+    }
+
+    public String getApproveUserNm4() {
+        return approveUserNm4;
+    }
+
+    public void setApproveUserNm4(String approveUserNm4) {
+        this.approveUserNm4 = approveUserNm4;
+    }
+
     public String getFilePath() {
         return filePath;
     }
@@ -231,6 +255,12 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
             case MCodeConst.A001_Y03: // 承認待ち３
                 flg = true;
             }
+        } else if (this.approveUserId.equals(this.approveUserId4)) {
+            // 操作者が承認者４の場合
+            switch (this.getStatus()) {
+            case MCodeConst.A001_Y04: // 承認待ち４
+                flg = true;
+            }
         }
 
         return flg;
@@ -249,9 +279,11 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
             case MCodeConst.A001_Y01: // 承認待ち１
             case MCodeConst.A001_Y02: // 承認待ち２
             case MCodeConst.A001_Y03: // 承認待ち３
+            case MCodeConst.A001_Y04: // 承認待ち４
             case MCodeConst.A001_N01: // 否認１
             case MCodeConst.A001_N02: // 否認２
             case MCodeConst.A001_N03: // 否認３
+            case MCodeConst.A001_N04: // 否認４
             case MCodeConst.A001_ZZZ: // 承認済み
                 flg = true;
             }
@@ -260,8 +292,10 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
             switch (this.getStatus()) {
             case MCodeConst.A001_Y02: // 承認待ち２
             case MCodeConst.A001_Y03: // 承認待ち３
+            case MCodeConst.A001_Y04: // 承認待ち４
             case MCodeConst.A001_N02: // 否認２
             case MCodeConst.A001_N03: // 否認３
+            case MCodeConst.A001_N04: // 否認４
             case MCodeConst.A001_ZZZ: // 承認済み
                 flg = true;
             }
@@ -269,7 +303,17 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
             // 操作者が承認者３の場合
             switch (this.getStatus()) {
             case MCodeConst.A001_Y03: // 承認待ち３
+            case MCodeConst.A001_Y04: // 承認待ち４
             case MCodeConst.A001_N03: // 否認３
+            case MCodeConst.A001_N04: // 否認４
+            case MCodeConst.A001_ZZZ: // 承認済み
+                flg = true;
+            }
+        } else if (this.approveUserId.equals(this.approveUserId4)) {
+            // 操作者が承認者４の場合
+            switch (this.getStatus()) {
+            case MCodeConst.A001_Y04: // 承認待ち４
+            case MCodeConst.A001_N04: // 否認４
             case MCodeConst.A001_ZZZ: // 承認済み
                 flg = true;
             }

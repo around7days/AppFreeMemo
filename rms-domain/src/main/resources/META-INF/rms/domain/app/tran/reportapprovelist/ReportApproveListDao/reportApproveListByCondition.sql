@@ -23,13 +23,20 @@ select
   , A.approve_user_nm2
   , A.approve_user_id3
   , A.approve_user_nm3
+  , A.approve_user_id4
+  , A.approve_user_nm4
   , A.file_path
 from
   v_t_report A
 where
   A.del_flg = 0
   and A.target_ym = /* condition.targetYm */'201606'
-  and /* condition.approveUserId */'user07' in (A.approve_user_id1, A.approve_user_id2, A.approve_user_id3)
+  and /* condition.approveUserId */'user07' in (
+          A.approve_user_id1,
+          A.approve_user_id2,
+          A.approve_user_id3,
+          A.approve_user_id4
+      )
 
 
 union all
@@ -53,12 +60,19 @@ select
   , M.approve_user_nm2
   , M.approve_user_id3
   , M.approve_user_nm3
+  , M.approve_user_id4
+  , M.approve_user_nm4
   , null
 from
   v_m_user M
 where
   M.del_flg = 0
-  and /* condition.approveUserId */'user07' in (M.approve_user_id1, M.approve_user_id2, M.approve_user_id3)
+  and /* condition.approveUserId */'user07' in (
+          M.approve_user_id1,
+          M.approve_user_id2,
+          M.approve_user_id3,
+          M.approve_user_id4
+      )
   and not exists (
         select
             'X'

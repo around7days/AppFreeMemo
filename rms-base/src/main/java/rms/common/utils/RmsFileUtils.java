@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
  * ファイルUtilsクラス
  * @author
  */
-public class FileUtils {
+public class RmsFileUtils {
     /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(FileUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(RmsFileUtils.class);
 
     /**
      * ファイルダウンロード

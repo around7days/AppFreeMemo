@@ -156,6 +156,8 @@ select
   , (select X.user_nm from M_USER X where X.user_id = F2.approve_user_id) as approve_user_nm2 -- 承認者名2
   , F3.approve_user_id as approve_user_id3        -- 承認者ID3
   , (select X.user_nm from M_USER X where X.user_id = F3.approve_user_id) as approve_user_nm3 -- 承認者名3
+  , F4.approve_user_id as approve_user_id4        -- 承認者ID4
+  , (select X.user_nm from M_USER X where X.user_id = F4.approve_user_id) as approve_user_nm4 -- 承認者名4
   , U.version                                     -- バージョン
   , U.del_flg                                     -- 削除フラグ
   , U.ins_date                                    -- 登録日時
@@ -173,6 +175,9 @@ from
   left join M_USER_APPROVE_FLOW F3
     on U.user_id = F3.user_id
     and F3.approve_seq = 3
+  left join M_USER_APPROVE_FLOW F4
+    on U.user_id = F4.user_id
+    and F4.approve_seq = 4
   left join M_CODE D001
     on D001.code_kbn = 'D001'
     and U.department_id = D001.code
@@ -220,6 +225,9 @@ select
   , F3.approve_user_id as approve_user_id3        -- 承認者ID3
   , (select X.user_nm from M_USER X where X.user_id = F3.approve_user_id) as approve_user_nm3 -- 承認者名3
   , F3.approve_date as approve_date3              -- 承認日3
+  , F4.approve_user_id as approve_user_id4        -- 承認者ID4
+  , (select X.user_nm from M_USER X where X.user_id = F4.approve_user_id) as approve_user_nm4 -- 承認者名4
+  , F4.approve_date as approve_date4              -- 承認日4
   , A.file_path                                   -- 月報ファイルパス
   , A.comment as apply_user_comment               -- 申請者コメント
   , A.status                                      -- 承認状況
@@ -246,6 +254,10 @@ from
     on A.apply_user_id = F3.apply_user_id
     and A.target_ym = F3.target_ym
     and F3.approve_seq = 3
+  left join T_REPORT_APPROVE_FLOW F4
+    on A.apply_user_id = F4.apply_user_id
+    and A.target_ym = F4.target_ym
+    and F4.approve_seq = 4
   inner join M_CODE A001
     on A001.code_kbn = 'A001'
     and A.status = A001.code

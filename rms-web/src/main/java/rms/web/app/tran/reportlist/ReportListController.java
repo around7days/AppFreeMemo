@@ -22,8 +22,8 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.BeanUtilsImpl;
-import rms.common.utils.FileUtils;
+import rms.common.utils.RmsBeanUtils;
+import rms.common.utils.RmsFileUtils;
 import rms.common.utils.PageInfo;
 import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
@@ -107,7 +107,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         form.setResultList(null);
 
         // 検索条件の生成
-        ReportListDtoCondition condition = BeanUtilsImpl.createCopyProperties(form.getCondition(),
+        ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
                                                                               ReportListDtoCondition.class);
 
         // 検索処理
@@ -137,7 +137,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         logger.debug("フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        ReportListDtoCondition condition = BeanUtilsImpl.createCopyProperties(form.getCondition(),
+        ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
                                                                               ReportListDtoCondition.class);
 
         // 検索処理
@@ -205,7 +205,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
                                                                               entity.getApplyUserNm(),
                                                                               entity.getTargetYm());
         // 月報ダウンロード
-        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
         return null;
     }

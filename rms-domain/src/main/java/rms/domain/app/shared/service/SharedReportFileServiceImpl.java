@@ -26,11 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
-import rms.common.utils.FileUtils;
+import rms.common.utils.RmsFileUtils;
 import rms.domain.app.shared.dto.ReportFileDto;
 
 /**
- * 月報ファイル関連共通サービスインタフェース
+ * 月報ファイル関連共通サービス実装
  * @author
  */
 @Service
@@ -117,7 +117,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
         // 月報保存処理
-        FileUtils.fileSave(file.getInputStream(), filePath);
+        RmsFileUtils.fileSave(file.getInputStream(), filePath);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         Path toFilePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
         // 月報保存処理
-        FileUtils.fileSave(fromFilePath, toFilePath);
+        RmsFileUtils.fileSave(fromFilePath, toFilePath);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         Path zipPath = unzipDir.resolve("report.zip");
 
         // zipファイルの保存
-        FileUtils.fileSave(file.getInputStream(), zipPath);
+        RmsFileUtils.fileSave(file.getInputStream(), zipPath);
 
         // zipファイルの解凍処理
         try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zipPath.toFile()), FILE_NM_CHARSET)) {

@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
  * StringUtilsクラス
  * @author
  */
-public class StringUtilsImpl extends org.springframework.util.StringUtils {
+public class RmsStringUtils extends org.springframework.util.StringUtils {
 
     /** logger */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(StringUtilsImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(RmsStringUtils.class);
 
 }

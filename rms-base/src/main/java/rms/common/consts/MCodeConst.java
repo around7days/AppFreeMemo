@@ -17,12 +17,16 @@ public class MCodeConst {
     public static final String A001_Y02 = "Y02";
     /** 月報承認状況：承認待ち３ */
     public static final String A001_Y03 = "Y03";
+    /** 月報承認状況：承認待ち４ */
+    public static final String A001_Y04 = "Y04";
     /** 月報承認状況：否認１ */
     public static final String A001_N01 = "N01";
     /** 月報承認状況：否認２ */
     public static final String A001_N02 = "N02";
     /** 月報承認状況：否認３ */
     public static final String A001_N03 = "N03";
+    /** 月報承認状況：否認４ */
+    public static final String A001_N04 = "N04";
     /** 月報承認状況：承認済み */
     public static final String A001_ZZZ = "ZZZ";
 

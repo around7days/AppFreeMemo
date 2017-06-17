@@ -24,10 +24,11 @@ import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VMUser;
 import rms.common.entity.VTReport;
-import rms.common.utils.BeanUtilsImpl;
+import rms.common.utils.RmsBeanUtils;
+import rms.common.utils.RmsStringUtils;
 import rms.common.utils.RmsUtils;
-import rms.common.utils.StringUtilsImpl;
 import rms.domain.app.shared.service.SharedReportFileService;
+import rms.domain.app.shared.service.SharedReportService;
 
 /**
  * 月報申請画面サービス
@@ -44,6 +45,10 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     /** application.properties */
     @Autowired
     private ProjectProperties properties;
+
+    /** 月報関連共通サービス */
+    @Autowired
+    private SharedReportService sharedReportService;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
@@ -78,9 +83,11 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         dto.setApproveUserId1(entity.getApproveUserId1());
         dto.setApproveUserId2(entity.getApproveUserId2());
         dto.setApproveUserId3(entity.getApproveUserId3());
+        dto.setApproveUserId4(entity.getApproveUserId4());
         dto.setApproveUserNm1(entity.getApproveUserNm1());
         dto.setApproveUserNm2(entity.getApproveUserNm2());
         dto.setApproveUserNm3(entity.getApproveUserNm3());
+        dto.setApproveUserNm4(entity.getApproveUserNm4());
 
         // 初期値の設定
         dto.setPublishFlg(MCodeConst.B001_1); // 公開有無：公開
@@ -98,7 +105,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         VTReport entity = vTReportDao.selectById(applyUserId, targetYm);
 
         // 返却用DTOに反映
-        ReportApplyRegistDto dto = BeanUtilsImpl.createCopyProperties(entity, ReportApplyRegistDto.class);
+        ReportApplyRegistDto dto = RmsBeanUtils.createCopyProperties(entity, ReportApplyRegistDto.class);
 
         return dto;
     }
@@ -118,6 +125,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         // 月報承認フロー登録処理
         insertReportApproveFlow(dto);
 
+        // 承認状況の更新処理
+        updateReportStatus(dto);
+
         // 月報ファイル保存処理
         saveReportFile(dto);
     }
@@ -136,6 +146,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
         // 月報承認フロー登録処理
         insertReportApproveFlow(dto);
+
+        // 承認状況の更新処理
+        updateReportStatus(dto);
 
         // 月報ファイル保存処理
         saveReportFile(dto);
@@ -188,6 +201,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * @param dto
      */
     private void insertReport(ReportApplyRegistDto dto) {
+
         // 申請情報の生成
         TReport entity = new TReport();
         entity.setApplyUserId(dto.getApplyUserId());
@@ -195,15 +209,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         entity.setApplyDate(LocalDateTime.now());
         entity.setPublishFlg(dto.getPublishFlg());
         entity.setFilePath("");
-
-        // 承認者の有無に合わせてステータスを設定
-        if (!StringUtilsImpl.isEmpty(dto.getApproveUserId1())) {
-            entity.setStatus(MCodeConst.A001_Y01);
-        } else if (!StringUtilsImpl.isEmpty(dto.getApproveUserId2())) {
-            entity.setStatus(MCodeConst.A001_Y02);
-        } else {
-            entity.setStatus(MCodeConst.A001_Y03);
-        }
+        entity.setStatus(MCodeConst.A001_AAA); // 承認状況は後で再計算する。
 
         // 登録処理
         tReportDao.insert(entity);
@@ -220,17 +226,48 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         entity.setTargetYm(dto.getTargetYm());
 
         // 登録処理：承認者１
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
-        entity.setApproveUserId(dto.getApproveUserId1());
-        tReportApproveFlowDao.insert(entity);
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId1())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
+            entity.setApproveUserId(dto.getApproveUserId1());
+            tReportApproveFlowDao.insert(entity);
+        }
         // 登録処理：承認者２
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
-        entity.setApproveUserId(dto.getApproveUserId2());
-        tReportApproveFlowDao.insert(entity);
-        // 登録処理：承認者３の
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
-        entity.setApproveUserId(dto.getApproveUserId3());
-        tReportApproveFlowDao.insert(entity);
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId2())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
+            entity.setApproveUserId(dto.getApproveUserId2());
+            tReportApproveFlowDao.insert(entity);
+        }
+        // 登録処理：承認者３
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId3())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
+            entity.setApproveUserId(dto.getApproveUserId3());
+            tReportApproveFlowDao.insert(entity);
+        }
+        // 登録処理：承認者４
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId4())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_4);
+            entity.setApproveUserId(dto.getApproveUserId4());
+            tReportApproveFlowDao.insert(entity);
+        }
+    }
+
+    /**
+     * 承認状況の更新処理
+     * @param dto
+     */
+    private void updateReportStatus(ReportApplyRegistDto dto) {
+
+        // 処理後の承認状況を計算
+        String newStatus = sharedReportService.getNewStatus(dto.getApplyUserId(),
+                                                            dto.getTargetYm(),
+                                                            Const.StatusExecKbn.APPLY);
+
+        // 月報更新情報の生成
+        TReport entity = new TReport();
+        entity.setApplyUserId(dto.getApplyUserId());
+        entity.setTargetYm(dto.getTargetYm());
+        entity.setStatus(newStatus);
+        tReportDao.updateNoOptimisticLockException(entity);
     }
 
     /**

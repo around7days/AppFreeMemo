@@ -21,9 +21,9 @@ import rms.common.entity.MUser;
 import rms.common.entity.MUserApproveFlow;
 import rms.common.entity.MUserRole;
 import rms.common.entity.VMUser;
-import rms.common.utils.BeanUtilsImpl;
+import rms.common.utils.RmsBeanUtils;
+import rms.common.utils.RmsStringUtils;
 import rms.common.utils.SelectOptionEntity;
-import rms.common.utils.StringUtilsImpl;
 
 /**
  * ユーザ登録画面サービス
@@ -68,7 +68,7 @@ public class UserRegistServiceImpl implements UserRegistService {
 
         // ユーザマスタ情報の取得
         VMUser vMUser = vMUserDao.selectById(userId);
-        BeanUtilsImpl.copyProperties(vMUser, dto);
+        RmsBeanUtils.copyProperties(vMUser, dto);
 
         // ユーザ役割マスタ情報の取得
         List<MUserRole> mUserRoleList = mUserRoleDao.selectListByUserId(userId);
@@ -99,7 +99,8 @@ public class UserRegistServiceImpl implements UserRegistService {
         validateApprovalRoute(dto.getRoleApplyFlg(),
                               dto.getApproveUserId1(),
                               dto.getApproveUserId2(),
-                              dto.getApproveUserId3());
+                              dto.getApproveUserId3(),
+                              dto.getApproveUserId4());
 
         // ユーザマスタ登録
         inserUser(dto);
@@ -118,7 +119,8 @@ public class UserRegistServiceImpl implements UserRegistService {
         validateApprovalRoute(dto.getRoleApplyFlg(),
                               dto.getApproveUserId1(),
                               dto.getApproveUserId2(),
-                              dto.getApproveUserId3());
+                              dto.getApproveUserId3(),
+                              dto.getApproveUserId4());
 
         // ユーザマスタ更新
         updateUser(dto);
@@ -152,7 +154,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      */
     private void inserUser(UserRegistDto dto) {
         // 登録情報の生成
-        MUser entity = BeanUtilsImpl.createCopyProperties(dto, MUser.class);
+        MUser entity = RmsBeanUtils.createCopyProperties(dto, MUser.class);
         // 登録処理
         mUserDao.insert(entity);
     }
@@ -172,19 +174,29 @@ public class UserRegistServiceImpl implements UserRegistService {
         entity.setUserId(dto.getUserId());
 
         // 承認者１の登録
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
-        entity.setApproveUserId(dto.getApproveUserId1());
-        mUserApproveFlowDao.insert(entity);
-
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId1())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_1);
+            entity.setApproveUserId(dto.getApproveUserId1());
+            mUserApproveFlowDao.insert(entity);
+        }
         // 承認者２の登録
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
-        entity.setApproveUserId(dto.getApproveUserId2());
-        mUserApproveFlowDao.insert(entity);
-
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId2())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_2);
+            entity.setApproveUserId(dto.getApproveUserId2());
+            mUserApproveFlowDao.insert(entity);
+        }
         // 承認者３の登録
-        entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
-        entity.setApproveUserId(dto.getApproveUserId3());
-        mUserApproveFlowDao.insert(entity);
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId3())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_3);
+            entity.setApproveUserId(dto.getApproveUserId3());
+            mUserApproveFlowDao.insert(entity);
+        }
+        // 承認者４の登録
+        if (!RmsStringUtils.isEmpty(dto.getApproveUserId4())) {
+            entity.setApproveSeq(Const.APPROVE_FLOW_SEQ_4);
+            entity.setApproveUserId(dto.getApproveUserId4());
+            mUserApproveFlowDao.insert(entity);
+        }
     }
 
     /**
@@ -224,7 +236,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      */
     private void updateUser(UserRegistDto dto) {
         // 更新情報の生成
-        MUser entity = BeanUtilsImpl.createCopyProperties(dto, MUser.class);
+        MUser entity = RmsBeanUtils.createCopyProperties(dto, MUser.class);
 
         // 更新処理（楽観的排他制御）
         mUserDao.update(entity);
@@ -248,31 +260,40 @@ public class UserRegistServiceImpl implements UserRegistService {
      * 承認ルート設定チェック<br>
      * 承認ルート設定エラーでBusinessExceptionを発生させます。<br>
      * チェック内容は以下の二つ<br>
-     * ・承認者１～３に同じ承認者は設定できません<br>
-     * ・役割に申請者を保持している場合、承認者３は必須入力になります
+     * ・承認者１～４に同じ承認者は設定できません<br>
+     * ・役割に申請者を保持している場合、承認者４は必須入力になります
      * @param roleApplyFlg
      * @param approveUserId1
      * @param approveUserId2
      * @param approveUserId3
+     * @param approveUserId4
      * @throws BusinessException
      */
     private void validateApprovalRoute(String roleApplyFlg,
                                        String approveUserId1,
                                        String approveUserId2,
-                                       String approveUserId3) throws BusinessException {
+                                       String approveUserId3,
+                                       String approveUserId4) throws BusinessException {
         //@formatter:off
         if (isValueEquals(approveUserId1, approveUserId2) ||
             isValueEquals(approveUserId1, approveUserId3) ||
-            isValueEquals(approveUserId2, approveUserId3)) {
-            // 承認者１～３に同じ承認者は設定できません
+            isValueEquals(approveUserId1, approveUserId4) ||
+            isValueEquals(approveUserId2, approveUserId3) ||
+            isValueEquals(approveUserId2, approveUserId4) ||
+            isValueEquals(approveUserId3, approveUserId4)) {
+            // 承認者１～４に同じ承認者は設定できません
             throw new BusinessException(MessageEnum.error004);
         }
-        //@formatter:on
 
-        if (Const.FLG_ON.equals(roleApplyFlg) && StringUtilsImpl.isEmpty(approveUserId3)) {
-            // 役割が申請者の場合、承認者３は必須です
+        if (Const.FLG_ON.equals(roleApplyFlg) &&
+            RmsStringUtils.isEmpty(approveUserId1) &&
+            RmsStringUtils.isEmpty(approveUserId2) &&
+            RmsStringUtils.isEmpty(approveUserId3) &&
+            RmsStringUtils.isEmpty(approveUserId4)){
+            // 役割が申請者の場合、承認者は必須です
             throw new BusinessException(MessageEnum.error005);
         }
+        //@formatter:on
     }
 
     /**
@@ -284,7 +305,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      */
     private boolean isValueEquals(String value1,
                                   String value2) {
-        if (StringUtilsImpl.isEmpty(value1) || StringUtilsImpl.isEmpty(value2)) {
+        if (RmsStringUtils.isEmpty(value1) || RmsStringUtils.isEmpty(value2)) {
             return false;
         }
         return value1.equals(value2);

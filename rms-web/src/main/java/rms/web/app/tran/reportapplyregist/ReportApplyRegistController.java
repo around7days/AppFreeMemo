@@ -26,8 +26,8 @@ import rms.common.base.BusinessException;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.utils.BeanUtilsImpl;
-import rms.common.utils.SessionUtils;
+import rms.common.utils.RmsBeanUtils;
+import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
 import rms.web.app.system.menu.MenuController;
@@ -84,7 +84,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         ReportApplyRegistDto dto = service.initDisplayApply(userInfo.getUserId());
 
         // 値を設定
-        BeanUtilsImpl.copyProperties(dto, form);
+        RmsBeanUtils.copyProperties(dto, form);
 
         // 画面表示モードを「申請」に設定
         form.setViewMode(ReportApplyRegistForm.VIEW_MODE_APPLY);
@@ -111,7 +111,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         ReportApplyRegistDto dto = service.initDisplayReApply(applyUserId, targetYm);
 
         // 値を設定
-        BeanUtilsImpl.copyProperties(dto, form);
+        RmsBeanUtils.copyProperties(dto, form);
 
         // 画面表示モードを「再申請」に設定
         form.setViewMode(ReportApplyRegistForm.VIEW_MODE_REAPPLY);
@@ -147,7 +147,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         }
 
         // 申請情報の生成
-        ReportApplyRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApplyRegistDto.class);
+        ReportApplyRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
 
         // 申請処理
         service.apply(dto);
@@ -186,7 +186,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         }
 
         // 再申請情報の生成
-        ReportApplyRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApplyRegistDto.class);
+        ReportApplyRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
 
         // 再申請処理
         service.reApply(dto);
@@ -237,7 +237,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         // メッセージを反映
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
         // セッション情報の詰め直し
-        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }
@@ -258,7 +258,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         // メッセージとフォーム情報を反映
         model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
         // セッション情報の詰め直し
-        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }

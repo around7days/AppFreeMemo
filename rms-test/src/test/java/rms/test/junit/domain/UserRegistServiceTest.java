@@ -45,6 +45,7 @@ public class UserRegistServiceTest {
             assertThat(dto.getApproveUserId1(), is("user06"));
             assertThat(dto.getApproveUserId2(), is("user07"));
             assertThat(dto.getApproveUserId3(), is("user08"));
+            assertThat(dto.getApproveUserId4(), is("user09"));
             assertThat(dto.getRoleApplyFlg(), is("1"));
             assertThat(dto.getRoleApproveFlg(), is(nullValue()));
             assertThat(dto.getRoleAdminFlg(), is(nullValue()));
@@ -88,11 +89,11 @@ public class UserRegistServiceTest {
                 dto.setRoleApplyFlg("1");
                 dto.setApproveUserId1("user06");
                 dto.setApproveUserId2("user07");
-                dto.setApproveUserId3("user07");
+                dto.setApproveUserId4("user07");
 
                 service.regist(dto);
             } catch (BusinessException e) {
-                assertThat(e.getErrorMessage(), is("承認者１～３に同じ承認者は設定できません"));
+                assertThat(e.getErrorMessage(), is("承認者１～４に同じ承認者は設定できません"));
                 return;
             }
 
@@ -100,7 +101,7 @@ public class UserRegistServiceTest {
         }
 
         @Test
-        public void ユーザ登録_承認ルートチェックエラー_役割が申請者で承認者３が設定されていない() {
+        public void ユーザ登録_承認ルートチェックエラー_役割が申請者で承認者が設定されていない() {
 
             try {
                 UserRegistDto dto = new UserRegistDto();
@@ -109,10 +110,11 @@ public class UserRegistServiceTest {
                 dto.setApproveUserId1("");
                 dto.setApproveUserId2("");
                 dto.setApproveUserId3("");
+                dto.setApproveUserId4("");
 
                 service.regist(dto);
             } catch (BusinessException e) {
-                assertThat(e.getErrorMessage(), is("役割が申請者の場合、承認者３は必須です"));
+                assertThat(e.getErrorMessage(), is("役割が申請者の場合、承認者は必須です"));
                 return;
             }
 
@@ -136,6 +138,7 @@ public class UserRegistServiceTest {
                 dto.setApproveUserId1("user06");
                 dto.setApproveUserId2("user07");
                 dto.setApproveUserId3("user08");
+                dto.setApproveUserId4("user09");
                 dto.setRoleApplyFlg("1");
                 dto.setRoleApproveFlg("1");
                 dto.setRoleAdminFlg("1");
@@ -154,6 +157,7 @@ public class UserRegistServiceTest {
                 assertThat(vMUser.getApproveUserId1(), is("user06"));
                 assertThat(vMUser.getApproveUserId2(), is("user07"));
                 assertThat(vMUser.getApproveUserId3(), is("user08"));
+                assertThat(vMUser.getApproveUserId3(), is("user09"));
 
                 assertThat(mUserRoleDao.existsById(userId, "ROLE_APPLY"), is(true));
                 assertThat(mUserRoleDao.existsById(userId, "ROLE_APPROVE"), is(true));
@@ -187,7 +191,7 @@ public class UserRegistServiceTest {
 
                 service.update(dto);
             } catch (BusinessException e) {
-                assertThat(e.getErrorMessage(), is("承認者１～３に同じ承認者は設定できません"));
+                assertThat(e.getErrorMessage(), is("承認者１～４に同じ承認者は設定できません"));
                 return;
             }
 
@@ -195,7 +199,7 @@ public class UserRegistServiceTest {
         }
 
         @Test
-        public void ユーザ更新_承認ルートチェックエラー_役割が申請者で承認者３が設定されていない() {
+        public void ユーザ更新_承認ルートチェックエラー_役割が申請者で承認者が設定されていない() {
 
             try {
                 UserRegistDto dto = new UserRegistDto();
@@ -204,10 +208,11 @@ public class UserRegistServiceTest {
                 dto.setApproveUserId1("");
                 dto.setApproveUserId2("");
                 dto.setApproveUserId3("");
+                dto.setApproveUserId4("");
 
                 service.update(dto);
             } catch (BusinessException e) {
-                assertThat(e.getErrorMessage(), is("役割が申請者の場合、承認者３は必須です"));
+                assertThat(e.getErrorMessage(), is("役割が申請者の場合、承認者は必須です"));
                 return;
             }
 
@@ -222,8 +227,6 @@ public class UserRegistServiceTest {
             dto.setUserId("user01");
             dto.setRoleApplyFlg("1");
             dto.setApproveUserId1("user06");
-            dto.setApproveUserId2("user07");
-            dto.setApproveUserId3("user08");
             dto.setVersion(Integer.MAX_VALUE);
 
             // 楽観的排他エラーが発生する
@@ -245,9 +248,10 @@ public class UserRegistServiceTest {
                 dto.setUserNm("テストユーザーＸＸＸＸ");
                 dto.setEmail("aaa@bbb.com");
                 dto.setDepartmentId("1");
-                dto.setApproveUserId1("user06");
-                dto.setApproveUserId2("user07");
-                dto.setApproveUserId3("user08");
+                dto.setApproveUserId1("user07");
+                dto.setApproveUserId2("user08");
+                dto.setApproveUserId3("user09");
+                dto.setApproveUserId4("user10");
                 dto.setRoleApplyFlg("1");
                 dto.setRoleApproveFlg("1");
                 dto.setRoleAdminFlg("1");
@@ -264,9 +268,10 @@ public class UserRegistServiceTest {
                 assertThat(vMUser.getUserNm(), is("テストユーザーＸＸＸＸ"));
                 assertThat(vMUser.getEmail(), is("aaa@bbb.com"));
                 assertThat(vMUser.getDepartmentId(), is("1"));
-                assertThat(vMUser.getApproveUserId1(), is("user06"));
-                assertThat(vMUser.getApproveUserId2(), is("user07"));
-                assertThat(vMUser.getApproveUserId3(), is("user08"));
+                assertThat(vMUser.getApproveUserId1(), is("user07"));
+                assertThat(vMUser.getApproveUserId2(), is("user08"));
+                assertThat(vMUser.getApproveUserId3(), is("user09"));
+                assertThat(vMUser.getApproveUserId4(), is("user10"));
 
                 assertThat(mUserRoleDao.existsById(userId, "ROLE_APPLY"), is(true));
                 assertThat(mUserRoleDao.existsById(userId, "ROLE_APPROVE"), is(true));

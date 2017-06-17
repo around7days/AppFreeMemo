@@ -24,10 +24,10 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
-import rms.common.utils.NumberUtilsImpl;
-import rms.common.utils.StringUtilsImpl;
+import rms.common.utils.RmsNumberUtils;
 import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
+import rms.domain.app.shared.service.SharedReportService;
 
 /**
  * 月報一括承認画面サービス
@@ -40,6 +40,10 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
     /** logger */
     @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(ReportApproveRegistBulkServiceImpl.class);
+
+    /** 月報関連共通サービス */
+    @Autowired
+    private SharedReportService sharedReportService;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
@@ -121,7 +125,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
             throw new BusinessException(MessageEnum.error008);
 
         }
-        if (!NumberUtilsImpl.isInteger(arys[0])) {
+        if (!RmsNumberUtils.isInteger(arys[0])) {
             // 「月報ファイル名のフォーマットが正しくありません(yyyymm_userId_userNm.xlsx)」
             throw new BusinessException(MessageEnum.error008);
         }
@@ -184,6 +188,11 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
                 isApproveAuth = true;
             }
             break;
+        case MCodeConst.A001_Y04:
+            if (approveUserId.equals(vTReport.getApproveUserId4())) {
+                isApproveAuth = true;
+            }
+            break;
         }
 
         if (!isApproveAuth) {
@@ -210,22 +219,11 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         /*
          * 更新項目
          */
-        // 承認状況（現在の承認状況と承認者の有無で判断）
-        String newStatus = null;
-        switch (vTReport.getStatus()) {
-        case MCodeConst.A001_Y01:
-            newStatus = MCodeConst.A001_Y02;
-            if (StringUtilsImpl.isEmpty(vTReport.getApproveUserId2())) {
-                newStatus = MCodeConst.A001_Y03;
-            }
-            break;
-        case MCodeConst.A001_Y02:
-            newStatus = MCodeConst.A001_Y03;
-            break;
-        case MCodeConst.A001_Y03:
-            newStatus = MCodeConst.A001_ZZZ;
-            break;
-        }
+        // 処理後の承認状況を計算
+        String newStatus = sharedReportService.getNewStatus(vTReport.getApplyUserId(),
+                                                            vTReport.getTargetYm(),
+                                                            Const.StatusExecKbn.APPROVE);
+
         entity.setStatus(newStatus);
 
         /*
@@ -258,6 +256,9 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
             break;
         case MCodeConst.A001_Y03:
             approveSeq = Const.APPROVE_FLOW_SEQ_3;
+            break;
+        case MCodeConst.A001_Y04:
+            approveSeq = Const.APPROVE_FLOW_SEQ_4;
             break;
         }
         entity.setApproveSeq(approveSeq);

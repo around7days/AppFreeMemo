@@ -63,6 +63,7 @@
 							<th>承認者１</th>
 							<th>承認者２</th>
 							<th>承認者３</th>
+							<th>承認者４</th>
 							<th>承認状況</th>
 							<th>月報</th>
 						</tr>
@@ -80,6 +81,7 @@
 							<td th:text="${result.approveUserNm1}">承認者１</td>
 							<td th:text="${result.approveUserNm2}">承認者２</td>
 							<td th:text="${result.approveUserNm3}">承認者３</td>
+							<td th:text="${result.approveUserNm4}">承認者４</td>
 							<td th:text="${result.statusNm}">承認済み</td>
 							<td><button type="submit" name="download" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
 						</tr>

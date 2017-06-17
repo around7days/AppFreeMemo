@@ -1,0 +1,131 @@
+// ビルドスクリプト
+buildscript {
+	ext {
+		springBootVersion = '1.5.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+allprojects {
+	//プラグインの指定
+	apply {
+		plugin 'eclipse'
+	}
+
+}
+
+subprojects {
+	//プラグインの指定
+	apply {
+		plugin 'java'
+		plugin 'war'
+		plugin 'org.springframework.boot'
+		plugin 'jacoco' // コードカバレッジ
+	}
+
+	// リポジトリ
+	repositories {
+		mavenCentral()
+		mavenLocal()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+	}
+
+	// 外部依存関係の定義
+	dependencies {
+		// 本体
+		compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+		compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail'
+		compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+		compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+		compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
+		compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+		compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
+	//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch'
+		compile group: 'org.seasar.doma.boot', name: 'doma-spring-boot-starter', version: '1.+'
+		compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.+'
+		compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '2.+'
+		compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'
+		runtime group: 'mysql', name: 'mysql-connector-java'
+	}
+
+	// javaコンパイルバージョン
+	sourceCompatibility = 1.8
+
+	// warファイル定義
+	war {
+		baseName = 'rmsweb'
+	}
+
+	// jarファイル定義
+	jar {
+		baseName = 'rmsweb'
+		version = '0.0.1-SNAPSHOT'
+	}
+
+	// javadoc
+	javadoc {
+		options.charSet  = 'UTF-8'
+		options.encoding = 'UTF-8'
+	}
+
+	//
+	test {
+		exclude '**/*$*' // JUnitのEnclosedテストランナー対策（2重実行防止）
+		jvmArgs = ['-Dspring.profiles.active=test'] // テスト用プロパティファイルの読み込み（application-test.properties）
+	}
+
+	//
+	jacocoTestReport {
+		reports {
+			html.enabled = true
+			xml.enabled = true
+		}
+	}
+
+	// DomaのSQLファイルをコンパイルより前に出力先Dirにコピーするための設定
+	processResources.destinationDir = compileJava.destinationDir
+	compileJava.dependsOn processResources
+
+	apply from:'../eclipse.gradle'
+	apply from:'../doma-gen.gradle'
+}
+
+project(':rms-base') {
+}
+
+project(':rms-domain') {
+	dependencies {
+		compile project(':rms-base')
+	}
+}
+
+project(':rms-web') {
+	dependencies {
+		compile project(':rms-base')
+		compile project(':rms-domain')
+	}
+}
+
+project(':rms-batch') {
+}
+
+project(':rms-test') {
+	dependencies {
+		compile project(':rms-base')
+		compile project(':rms-domain')
+		compile project(':rms-web')
+		compile project(':rms-batch')
+		// test用
+		testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+		testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.+'
+		testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
+		testCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.+'
+		testCompile group: 'ru.yandex.qatools.ashot', name: 'ashot', version: '+'
+		testCompile files('libs/SeleniumBase.jar')
+	}
+}

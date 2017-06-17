@@ -27,9 +27,9 @@ import rms.common.base.BusinessException;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.utils.BeanUtilsImpl;
-import rms.common.utils.FileUtils;
-import rms.common.utils.SessionUtils;
+import rms.common.utils.RmsBeanUtils;
+import rms.common.utils.RmsFileUtils;
+import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportapproveregist.ReportApproveRegistDto;
@@ -94,7 +94,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         ReportApproveRegistDto dto = service.initDisplay(applyUserId, targetYm);
 
         // 値を反映
-        BeanUtilsImpl.copyProperties(dto, form);
+        RmsBeanUtils.copyProperties(dto, form);
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -129,7 +129,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         }
 
         // 承認情報の生成
-        ReportApproveRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApproveRegistDto.class);
+        ReportApproveRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
 
         // 承認処理の実行
         service.approve(dto);
@@ -160,7 +160,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 否認情報の生成
-        ReportApproveRegistDto dto = BeanUtilsImpl.createCopyProperties(form, ReportApproveRegistDto.class);
+        ReportApproveRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
 
         // 否認処理の実行
         service.deny(dto);
@@ -191,7 +191,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
                                                                               form.getApplyUserNm(),
                                                                               form.getTargetYm());
         // 月報ダウンロード
-        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
         return null;
     }
@@ -234,7 +234,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         // メッセージを反映
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
         // セッション情報の詰め直し
-        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }
@@ -255,7 +255,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         // メッセージとフォーム情報を反映
         model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
         // セッション情報の詰め直し
-        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }

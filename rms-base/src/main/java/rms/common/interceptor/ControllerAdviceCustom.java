@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import rms.common.base.ProjectProperties;
-import rms.common.utils.StringUtilsImpl;
+import rms.common.utils.RmsStringUtils;
 
 /**
  * CustomControllerAdviceクラス
@@ -50,9 +50,9 @@ public class ControllerAdviceCustom {
         String requestTheme = request.getParameter("theme");
         Object sessionTheme = session.getAttribute("theme");
         String propertyTheme = properties.getCssThemeDefault();
-        if (!StringUtilsImpl.isEmpty(requestTheme)) {
+        if (!RmsStringUtils.isEmpty(requestTheme)) {
             theme = requestTheme;
-        } else if (!StringUtilsImpl.isEmpty(sessionTheme)) {
+        } else if (!RmsStringUtils.isEmpty(sessionTheme)) {
             theme = sessionTheme.toString();
         } else {
             theme = propertyTheme;

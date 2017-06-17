@@ -60,6 +60,15 @@ public class VTReport {
     /** 承認日３ */
     @Column(name = "approve_date3")
     private LocalDateTime approveDate3;
+    /** 承認者ID４ */
+    @Column(name = "approve_user_id4")
+    private String approveUserId4;
+    /** 承認者名４ */
+    @Column(name = "approve_user_nm4")
+    private String approveUserNm4;
+    /** 承認日４ */
+    @Column(name = "approve_date4")
+    private LocalDateTime approveDate4;
     /** 月報ファイルパス */
     @Column(name = "file_path")
     private String filePath;
@@ -202,6 +211,30 @@ public class VTReport {
 
     public void setApproveUserNm3(String approveUserNm3) {
         this.approveUserNm3 = approveUserNm3;
+    }
+
+    public String getApproveUserId4() {
+        return approveUserId4;
+    }
+
+    public void setApproveUserId4(String approveUserId4) {
+        this.approveUserId4 = approveUserId4;
+    }
+
+    public String getApproveUserNm4() {
+        return approveUserNm4;
+    }
+
+    public void setApproveUserNm4(String approveUserNm4) {
+        this.approveUserNm4 = approveUserNm4;
+    }
+
+    public LocalDateTime getApproveDate4() {
+        return approveDate4;
+    }
+
+    public void setApproveDate4(LocalDateTime approveDate4) {
+        this.approveDate4 = approveDate4;
     }
 
     public LocalDateTime getApproveDate3() {

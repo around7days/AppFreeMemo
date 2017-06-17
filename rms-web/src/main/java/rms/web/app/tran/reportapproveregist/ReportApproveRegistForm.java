@@ -40,12 +40,16 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     private String approveUserId2;
     /** 承認者ID3 */
     private String approveUserId3;
+    /** 承認者ID4 */
+    private String approveUserId4;
     /** 承認者名1 */
     private String approveUserNm1;
     /** 承認者名2 */
     private String approveUserNm2;
     /** 承認者名3 */
     private String approveUserNm3;
+    /** 承認者名4 */
+    private String approveUserNm4;
     /** 承認状況 */
     private String status;
 
@@ -121,6 +125,14 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
         this.approveUserId3 = approveUserId3;
     }
 
+    public String getApproveUserId4() {
+        return approveUserId4;
+    }
+
+    public void setApproveUserId4(String approveUserId4) {
+        this.approveUserId4 = approveUserId4;
+    }
+
     public String getApproveUserNm1() {
         return approveUserNm1;
     }
@@ -143,6 +155,14 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
 
     public void setApproveUserNm3(String approveUserNm3) {
         this.approveUserNm3 = approveUserNm3;
+    }
+
+    public String getApproveUserNm4() {
+        return approveUserNm4;
+    }
+
+    public void setApproveUserNm4(String approveUserNm4) {
+        this.approveUserNm4 = approveUserNm4;
     }
 
     public String getStatus() {

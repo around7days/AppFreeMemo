@@ -34,7 +34,15 @@ public class UserListServiceTest {
             SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
 
             UserListEntityResult result = resultDto.getResultList().get(0);
+            assertThat(result.getUserId(), is("user01"));
             assertThat(result.getUserNm(), is("申請者０１"));
+            assertThat(result.getEmail(), is("xxx@xxx.xx"));
+            assertThat(result.getDepartmentRnm(), is("1SOL"));
+            assertThat(result.getApproveUserId1(), is("user06"));
+            assertThat(result.getApproveUserId2(), is("user07"));
+            assertThat(result.getApproveUserId3(), is("user08"));
+            assertThat(result.getApproveUserId4(), is("user09"));
+            assertThat(result.getRoleNm(), is("申請者"));
         }
 
         @Test

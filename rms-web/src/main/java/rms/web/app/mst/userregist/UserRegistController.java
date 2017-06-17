@@ -24,9 +24,9 @@ import rms.common.base.BusinessException;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.utils.BeanUtilsImpl;
+import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.SelectOptionEntity;
-import rms.common.utils.SessionUtils;
+import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.mst.userregist.UserRegistDto;
 import rms.domain.app.mst.userregist.UserRegistService;
 import rms.web.app.mst.userlist.UserListController;
@@ -109,7 +109,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         UserRegistDto entity = service.initDisplayUpdate(userId);
 
         // 取得した情報をフォームに反映
-        BeanUtilsImpl.copyProperties(entity, form);
+        RmsBeanUtils.copyProperties(entity, form);
         // 画面表示モードを「更新」に設定
         form.setViewMode(UserRegistForm.VIEW_MODE_UPDATE);
 
@@ -143,7 +143,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         }
 
         // ユーザ登録情報Entityの生成
-        UserRegistDto entity = BeanUtilsImpl.createCopyProperties(form, UserRegistDto.class);
+        UserRegistDto entity = RmsBeanUtils.createCopyProperties(form, UserRegistDto.class);
 
         // ユーザ情報登録処理
         service.regist(entity);
@@ -182,7 +182,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         }
 
         // ユーザ登録情報Entityの生成
-        UserRegistDto entity = BeanUtilsImpl.createCopyProperties(form, UserRegistDto.class);
+        UserRegistDto entity = RmsBeanUtils.createCopyProperties(form, UserRegistDto.class);
 
         // ユーザ情報更新処理
         service.update(entity);
@@ -234,7 +234,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // メッセージを反映
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
         // セッション情報の詰め直し
-        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }
@@ -255,7 +255,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // メッセージとフォーム情報を反映
         model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
         // セッション情報の詰め直し
-        model.addAllAttributes(SessionUtils.convertSessionToMap(session));
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
 
         return PAGE_URL;
     }

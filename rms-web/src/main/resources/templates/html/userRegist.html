@@ -111,6 +111,14 @@
 							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId3}" th:text="${obj.value}"></option>
 						</select>
 					</div>
+					<!-- 承認者4 -->
+					<label class="col-sm-3 control-label">承認者４</label>
+					<div class="col-sm-9">
+						<select name="approveUserId4" id="approveUserId4" class="form-control">
+							<option value=""></option>
+							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId4}" th:text="${obj.value}"></option>
+						</select>
+					</div>
 				</div>
 
 				<!-- 役割 -->

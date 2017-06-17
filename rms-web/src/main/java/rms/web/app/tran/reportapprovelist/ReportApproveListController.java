@@ -27,8 +27,8 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.BeanUtilsImpl;
-import rms.common.utils.FileUtils;
+import rms.common.utils.RmsBeanUtils;
+import rms.common.utils.RmsFileUtils;
 import rms.common.utils.PageInfo;
 import rms.domain.app.shared.dto.ReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
@@ -93,7 +93,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         ReportApproveListDtoCondition dto = service.initDisplay();
 
         // 値を設定
-        BeanUtilsImpl.copyProperties(dto, form.getCondition());
+        RmsBeanUtils.copyProperties(dto, form.getCondition());
 
         logger.debug("出力フォーム情報 -> {}", form);
 
@@ -128,7 +128,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
 
         // 検索条件の生成
         ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
-        BeanUtilsImpl.copyProperties(form.getCondition(), condition);
+        RmsBeanUtils.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
@@ -166,7 +166,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
 
         // 検索条件の生成
         ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
-        BeanUtilsImpl.copyProperties(form.getCondition(), condition);
+        RmsBeanUtils.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
@@ -243,7 +243,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
                                                                               entity.getApplyUserNm(),
                                                                               entity.getTargetYm());
         // 月報ダウンロード
-        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
         return null;
     }
@@ -288,7 +288,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
                                                                                      targetYmList,
                                                                                      checks.length);
         // 月報ダウンロード
-        FileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
         return null;
     }
