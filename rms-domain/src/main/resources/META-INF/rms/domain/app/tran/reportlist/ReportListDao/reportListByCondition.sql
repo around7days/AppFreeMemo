@@ -11,6 +11,8 @@ select
   , A.approve_user_nm2
   , A.approve_user_id3
   , A.approve_user_nm3
+  , A.approve_user_id4
+  , A.approve_user_nm4
   , A.file_path
   , A.status
   , A.status_nm
