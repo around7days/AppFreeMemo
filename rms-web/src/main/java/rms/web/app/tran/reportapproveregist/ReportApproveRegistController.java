@@ -30,7 +30,7 @@ import rms.common.consts.MessageTypeConst;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
 import rms.common.utils.RmsSessionUtils;
-import rms.domain.app.shared.dto.ReportFileDto;
+import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportapproveregist.ReportApproveRegistDto;
 import rms.domain.app.tran.reportapproveregist.ReportApproveRegistService;
@@ -187,9 +187,9 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
                            Model model) throws IOException {
 
         // 月報ファイルダウンロード情報生成
-        ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(form.getApplyUserId(),
-                                                                              form.getApplyUserNm(),
-                                                                              form.getTargetYm());
+        SharedFileDto dto = sharedReportFileService.getReportFileInfo(form.getApplyUserId(),
+                                                                      form.getApplyUserNm(),
+                                                                      form.getTargetYm());
         // 月報ダウンロード
         RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 

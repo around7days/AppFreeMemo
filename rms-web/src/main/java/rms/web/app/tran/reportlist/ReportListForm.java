@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import rms.common.utils.PageInfo;
+import rms.common.validator.NotNullArray;
 import rms.domain.app.tran.reportlist.ReportListEntityResult;
 
 /**
@@ -12,6 +13,12 @@ import rms.domain.app.tran.reportlist.ReportListEntityResult;
  * @author
  */
 public class ReportListForm extends rms.common.abstracts.AbstractForm {
+    /* 入力チェック宣言 ----------------------------------------------------- */
+    //@formatter:off
+    /** 入力チェック：検索 */
+    protected static interface Search{};
+    /** 入力チェック：一括DL */
+    protected static interface BulkDownload{};
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
@@ -21,6 +28,9 @@ public class ReportListForm extends rms.common.abstracts.AbstractForm {
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
     private List<ReportListEntityResult> resultList;
+    /** 検索結果チェックボックス選択リスト */
+    @NotNullArray(message = "ダウンロードする月報を選択して下さい", groups = { BulkDownload.class })
+    private Integer[] reportDLCheck;
 
     public ReportListFormCondition getCondition() {
         return condition;
@@ -45,5 +55,14 @@ public class ReportListForm extends rms.common.abstracts.AbstractForm {
     public void setResultList(List<ReportListEntityResult> resultList) {
         this.resultList = resultList;
     }
+
+    public Integer[] getReportDLCheck() {
+        return reportDLCheck;
+    }
+
+    public void setReportDLCheck(Integer[] reportDLCheck) {
+        this.reportDLCheck = reportDLCheck;
+    }
+
 
 }

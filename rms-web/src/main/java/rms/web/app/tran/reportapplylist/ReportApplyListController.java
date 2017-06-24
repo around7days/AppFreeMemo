@@ -21,9 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rms.common.auth.UserInfo;
 import rms.common.consts.MRoleConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.RmsFileUtils;
 import rms.common.utils.PageInfo;
-import rms.domain.app.shared.dto.ReportFileDto;
+import rms.common.utils.RmsFileUtils;
+import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportapplylist.ReportApplyListDtoCondition;
 import rms.domain.app.tran.reportapplylist.ReportApplyListEntityResult;
@@ -164,9 +164,9 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報ファイルダウンロード情報生成
-        ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(entity.getApplyUserId(),
-                                                                              entity.getApplyUserNm(),
-                                                                              entity.getTargetYm());
+        SharedFileDto dto = sharedReportFileService.getReportFileInfo(entity.getApplyUserId(),
+                                                                      entity.getApplyUserNm(),
+                                                                      entity.getTargetYm());
         // 月報ダウンロード
         RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 

@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoints;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,121 +20,76 @@ public class PageInfoTest {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(PageInfoTest.class);
 
+    @DataPoints
+    Fixture[] fixture = {
+          // @formatter:off
+          // ---------No | limit | page | totalSize /// page | totalPage | sIdx | eIdx | hasPrev | hasNext
+          new Fixture(1,   5,     1,      50,           1,     10,          1,     5,    false,    true),  // 先頭ページ
+          new Fixture(2,   5,     2,      50,           2,     10,          6,     10,   true,     true),  // 中間ページ
+          new Fixture(3,   5,     10,     50,           10,    10,          46,    50,   true,     false), // 最終ページ
+          new Fixture(4,   5,     11,     50,           10,    10,          46,    50,   true,     false), // 最終ページ以上(割り切れる件数)
+          new Fixture(5,   5,     11,     51,           11,    11,          51,    51,   true,     false), // 最終ページ以上(割り切れない件数)
+          new Fixture(6,   5,     2,      0,            1,     0,           0,     0,    false,    false), // 0件
+          // @formatter:on
+    };
+
+    // TODO Theoriesを使いたいけどSpringBootでの実行方法が分からず
     @Test
-    public void test1() {
-        logger.debug("◆test1");
-        PageInfo page = new PageInfo();
-        page.setLimit(5);
-        page.setPage(1);
-        page.setTotalSize(50);
+    public void ページ制御処理() {
+        for (Fixture f : fixture) {
+            logger.debug("◆test" + f.no);
+            PageInfo page = new PageInfo();
+            page.setLimit(f.limit);
+            page.setPage(f.page);
+            page.setTotalSize(f.totalSize);
 
-        printLog(page);
+            printLog(page);
 
-        assertThat(page.getPage(), is(1));
-        assertThat(page.getTotalPage(), is(10));
-        assertThat(page.getStartIndex(), is(1));
-        assertThat(page.getEndIndex(), is(5));
-        assertThat(page.getHasPrev(), is(false));
-        assertThat(page.getHasNext(), is(true));
-    }
-
-    @Test
-    public void test2() {
-        logger.debug("◆test2");
-        PageInfo page = new PageInfo();
-        page.setLimit(5);
-        page.setPage(2);
-        page.setTotalSize(50);
-
-        printLog(page);
-
-        assertThat(page.getPage(), is(2));
-        assertThat(page.getTotalPage(), is(10));
-        assertThat(page.getStartIndex(), is(6));
-        assertThat(page.getEndIndex(), is(10));
-        assertThat(page.getHasPrev(), is(true));
-        assertThat(page.getHasNext(), is(true));
-    }
-
-    @Test
-    public void test3() {
-        logger.debug("◆test3");
-        PageInfo page = new PageInfo();
-        page.setLimit(5);
-        page.setPage(10);
-        page.setTotalSize(50);
-
-        printLog(page);
-
-        assertThat(page.getPage(), is(10));
-        assertThat(page.getTotalPage(), is(10));
-        assertThat(page.getStartIndex(), is(46));
-        assertThat(page.getEndIndex(), is(50));
-        assertThat(page.getHasPrev(), is(true));
-        assertThat(page.getHasNext(), is(false));
-    }
-
-    @Test
-    public void test4() {
-        logger.debug("◆test4");
-        PageInfo page = new PageInfo();
-        page.setLimit(5);
-        page.setPage(11);
-        page.setTotalSize(50);
-
-        printLog(page);
-
-        assertThat(page.getPage(), is(10));
-        assertThat(page.getTotalPage(), is(10));
-        assertThat(page.getStartIndex(), is(46));
-        assertThat(page.getEndIndex(), is(50));
-        assertThat(page.getHasPrev(), is(true));
-        assertThat(page.getHasNext(), is(false));
-    }
-
-    @Test
-    public void test5() {
-        logger.debug("◆test5");
-        PageInfo page = new PageInfo();
-        page.setLimit(5);
-        page.setPage(11);
-        page.setTotalSize(51);
-
-        printLog(page);
-
-        assertThat(page.getPage(), is(11));
-        assertThat(page.getTotalPage(), is(11));
-        assertThat(page.getStartIndex(), is(51));
-        assertThat(page.getEndIndex(), is(51));
-        assertThat(page.getHasPrev(), is(true));
-        assertThat(page.getHasNext(), is(false));
-    }
-
-    @Test
-    public void test6() {
-        logger.debug("◆test6");
-        PageInfo page = new PageInfo();
-        page.setLimit(5);
-        page.setPage(2);
-        page.setTotalSize(0);
-
-        printLog(page);
-
-        assertThat(page.getPage(), is(1));
-        assertThat(page.getTotalPage(), is(0));
-        assertThat(page.getStartIndex(), is(0));
-        assertThat(page.getEndIndex(), is(0));
-        assertThat(page.getHasPrev(), is(false));
-        assertThat(page.getHasNext(), is(false));
+            assertThat(page.getPage(), is(f.expectedPage));
+            assertThat(page.getTotalPage(), is(f.expectedTotalPage));
+            assertThat(page.getStartIndex(), is(f.expectedStartIndex));
+            assertThat(page.getEndIndex(), is(f.expectedEndIndex));
+            assertThat(page.getHasPrev(), is(f.expectedHasPrev));
+            assertThat(page.getHasNext(), is(f.expectedHasNext));
+        }
     }
 
     private void printLog(PageInfo page) {
-        logger.debug("page.getPage()       -> {}", page.getPage());
-        logger.debug("page.getTotalPage()  -> {}", page.getTotalPage());
+        logger.debug("page.getPage() -> {}", page.getPage());
+        logger.debug("page.getTotalPage() -> {}", page.getTotalPage());
         logger.debug("page.getStartIndex() -> {}", page.getStartIndex());
-        logger.debug("page.getEndIndex()   -> {}", page.getEndIndex());
-        logger.debug("page.getHasPrev()    -> {}", page.getHasPrev());
-        logger.debug("page.getHasNext()    -> {}", page.getHasNext());
+        logger.debug("page.getEndIndex() -> {}", page.getEndIndex());
+        logger.debug("page.getHasPrev() -> {}", page.getHasPrev());
+        logger.debug("page.getHasNext() -> {}", page.getHasNext());
+    }
+
+    class Fixture {
+        public int no;
+
+        public int limit;
+        public int page;
+        public int totalSize;
+
+        public int expectedPage;
+        public int expectedTotalPage;
+        public int expectedStartIndex;
+        public int expectedEndIndex;
+        public boolean expectedHasPrev;
+        public boolean expectedHasNext;
+
+        Fixture(int no, int limit, int page, int totalSize, int expectedPage, int expectedTotalPage,
+                int expectedStartIndex, int expectedEndIndex, boolean expectedHasPrev, boolean expectedHasNext) {
+            this.no = no;
+            this.limit = limit;
+            this.page = page;
+            this.totalSize = totalSize;
+            this.expectedPage = expectedPage;
+            this.expectedTotalPage = expectedTotalPage;
+            this.expectedStartIndex = expectedStartIndex;
+            this.expectedEndIndex = expectedEndIndex;
+            this.expectedHasPrev = expectedHasPrev;
+            this.expectedHasNext = expectedHasNext;
+        }
     }
 
 }

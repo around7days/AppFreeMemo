@@ -19,8 +19,8 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.PageInfo;
+import rms.common.utils.RmsBeanUtils;
 import rms.domain.app.mst.userlist.UserListDtoCondition;
 import rms.domain.app.mst.userlist.UserListEntityResult;
 import rms.domain.app.mst.userlist.UserListService;
@@ -99,7 +99,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
 
         // 検索条件の生成
         UserListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                            UserListDtoCondition.class);
+                                                                           UserListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
@@ -134,7 +134,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
 
         // 検索条件の生成
         UserListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                            UserListDtoCondition.class);
+                                                                           UserListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());

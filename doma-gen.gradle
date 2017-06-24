@@ -14,9 +14,9 @@ dependencies {
 /*
  * タスク共通定義
  */
-def genUrl                       = 'jdbc:mysql://localhost:3306/mmsdb'
-def genUser                      = 'mms01'
-def genPassword                  = 'mms01'
+def genUrl                       = 'jdbc:mysql://localhost:3306/rmsdb_dev'
+def genUser                      = 'rms_dev'
+def genPassword                  = 'rms_dev'
 def genVersionColumnNamePattern  = 'version'
 def entityPackageName            = 'rms.common.entity'
 def daoPackageName               = 'rms.common.dao'

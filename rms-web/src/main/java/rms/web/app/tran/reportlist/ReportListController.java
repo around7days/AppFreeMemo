@@ -1,6 +1,8 @@
 package rms.web.app.tran.reportlist;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,19 +20,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import rms.common.consts.Const.ReportNmPattern;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
+import rms.common.utils.PageInfo;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
-import rms.common.utils.PageInfo;
-import rms.domain.app.shared.dto.ReportFileDto;
+import rms.domain.app.shared.dto.SharedFileDto;
+import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportlist.ReportListDtoCondition;
 import rms.domain.app.tran.reportlist.ReportListEntityResult;
 import rms.domain.app.tran.reportlist.ReportListService;
 import rms.web.app.system.menu.MenuController;
+import rms.web.app.tran.reportlist.ReportListForm.BulkDownload;
+import rms.web.app.tran.reportlist.ReportListForm.Search;
 
 /**
  * 月報一覧画面コントローラー<br>
@@ -91,7 +97,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "search")
-    public String search(@Validated ReportListForm form,
+    public String search(@Validated(Search.class) ReportListForm form,
                          BindingResult bindingResult,
                          Model model) {
         logger.debug("入力フォーム情報 -> {}", form);
@@ -103,12 +109,13 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         }
 
         // 検索結果・ページ情報の初期化
-        form.setPageInfo(new PageInfo());
+        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
+        form.setPageInfo(new PageInfo(pageLimit));
         form.setResultList(null);
 
         // 検索条件の生成
         ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                              ReportListDtoCondition.class);
+                                                                             ReportListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
@@ -138,7 +145,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
 
         // 検索条件の生成
         ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                              ReportListDtoCondition.class);
+                                                                             ReportListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
@@ -201,9 +208,52 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報ファイルダウンロード情報生成
-        ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(entity.getApplyUserId(),
-                                                                              entity.getApplyUserNm(),
-                                                                              entity.getTargetYm());
+        SharedFileDto dto = sharedReportFileService.getReportFileInfo(entity.getApplyUserId(),
+                                                                      entity.getApplyUserNm(),
+                                                                      entity.getTargetYm());
+        // 月報ダウンロード
+        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+
+        return null;
+    }
+
+    /**
+     * 月報一括DL処理
+     * @param form
+     * @param bindingResult
+     * @param response
+     * @param model
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = MAPPING_URL, params = "bulkDownload")
+    public String bulkDownload(@Validated(BulkDownload.class) ReportListForm form,
+                               BindingResult bindingResult,
+                               HttpServletResponse response,
+                               Model model) throws IOException {
+        // 入力チェック
+        if (bindingResult.hasErrors()) {
+            logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
+            return PAGE_URL;
+        }
+
+        // ダウンロードする月報情報リストの生成
+        List<SharedSubmitReportFileDto> list = new ArrayList<>();
+
+        // 選択した月報indexの取得
+        Integer[] checks = form.getReportDLCheck();
+        for (int i : checks) {
+            ReportListEntityResult entity = form.getResultList().get(i);
+
+            SharedSubmitReportFileDto dto = new SharedSubmitReportFileDto();
+            dto.setApplyUserId(entity.getApplyUserId());
+            dto.setTargetYm(entity.getTargetYm());
+
+            list.add(dto);
+        }
+
+        // 月報一括ダウンロードファイルの生成
+        SharedFileDto dto = sharedReportFileService.createReportFileBulk(list, ReportNmPattern.SUBMIT);
         // 月報ダウンロード
         RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 

@@ -107,6 +107,7 @@ DELETE FROM T_REPORT_APPROVE_FLOW;
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user01', '201607', '1', 'user06', '2016-07-25', '', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user01', '201607', '2', 'user07', '2016-07-26', '', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user01', '201607', '3', 'user08', '2016-07-27', '', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user01', '201607', '4', 'user09', '2016-07-28', '', 0, 0, now(), 'system', now(), 'system');
 
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user01', '201608', '1', 'user06', '2016-08-25', '', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user01', '201608', '2', 'user07', '2016-08-26', '', 0, 0, now(), 'system', now(), 'system');

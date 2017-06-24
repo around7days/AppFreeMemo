@@ -28,6 +28,18 @@ $(function() {
 	});
 
 	/**
+	 * 月報一括DLボタン押下
+	 */
+	$("#bulkDownload").on("click", function() {
+		if (!window.confirm("一括ダウンロードしますか？")) {
+			return false;
+		}
+		var url = defaultUrl + "?bulkDownload";
+		fmMain.attr("action", url);
+		return true;
+	});
+
+	/**
 	 * 月報DLボタン押下<br>
 	 * (テーブル明細内)
 	 */
@@ -54,6 +66,19 @@ $(function() {
 		var url = defaultUrl + "?pageNext";
 		fmMain.attr("action", url);
 		fmMain.submit();
+	});
+
+	/**
+	 * 一括ON/OFFチェックボックス押下
+	 */
+	$("#switchReportDLCheck").on("click", function() {
+		if ($("#switchReportDLCheck").prop("checked")) {
+			// チェックON
+			$("input[name=reportDLCheck]").prop("checked", true);
+		} else {
+			// チェックOFF
+			$("input[name=reportDLCheck]").prop("checked", false);
+		}
 	});
 
 	/**

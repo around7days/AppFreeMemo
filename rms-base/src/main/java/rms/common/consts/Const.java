@@ -40,4 +40,12 @@ public class Const {
         /** 否認 */
         DENY
     }
+
+    /** 月報ファイル名パターン */
+    public enum ReportNmPattern {
+        /** 通常 */
+        NOMAL,
+        /** 提出用 */
+        SUBMIT
+    }
 }

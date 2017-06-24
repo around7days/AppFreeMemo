@@ -23,14 +23,16 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
+import rms.common.consts.Const.ReportNmPattern;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
+import rms.common.utils.PageInfo;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
-import rms.common.utils.PageInfo;
-import rms.domain.app.shared.dto.ReportFileDto;
+import rms.domain.app.shared.dto.SharedFileDto;
+import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListDtoCondition;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
@@ -239,9 +241,9 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報ファイルダウンロード情報生成
-        ReportFileDto dto = sharedReportFileService.getReportFileDownloadInfo(entity.getApplyUserId(),
-                                                                              entity.getApplyUserNm(),
-                                                                              entity.getTargetYm());
+        SharedFileDto dto = sharedReportFileService.getReportFileInfo(entity.getApplyUserId(),
+                                                                      entity.getApplyUserNm(),
+                                                                      entity.getTargetYm());
         // 月報ダウンロード
         RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 
@@ -268,25 +270,23 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
             return PAGE_URL;
         }
 
+        // ダウンロードする月報情報リストの生成
+        List<SharedSubmitReportFileDto> list = new ArrayList<>();
+
         // 選択した月報indexの取得
         Integer[] checks = form.getReportDLCheck();
-
-        // 月報ファイル一覧の生成
-        List<String> applyUserIdList = new ArrayList<>();
-        List<String> applyUserNmList = new ArrayList<>();
-        List<Integer> targetYmList = new ArrayList<>();
         for (int i : checks) {
             ReportApproveListEntityResult entity = form.getResultList().get(i);
-            applyUserIdList.add(entity.getApplyUserId());
-            applyUserNmList.add(entity.getApplyUserNm());
-            targetYmList.add(entity.getTargetYm());
+
+            SharedSubmitReportFileDto dto = new SharedSubmitReportFileDto();
+            dto.setApplyUserId(entity.getApplyUserId());
+            dto.setTargetYm(entity.getTargetYm());
+
+            list.add(dto);
         }
 
-        // 月報ファイル一括ダウンロード情報生成
-        ReportFileDto dto = sharedReportFileService.createReportFileBulkDownloadInfo(applyUserIdList,
-                                                                                     applyUserNmList,
-                                                                                     targetYmList,
-                                                                                     checks.length);
+        // 月報一括ダウンロードファイルの生成
+        SharedFileDto dto = sharedReportFileService.createReportFileBulk(list, ReportNmPattern.NOMAL);
         // 月報ダウンロード
         RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
 

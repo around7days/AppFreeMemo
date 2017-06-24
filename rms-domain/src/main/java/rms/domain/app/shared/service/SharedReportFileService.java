@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.domain.app.shared.dto.ReportFileDto;
+import rms.common.consts.Const.ReportNmPattern;
+import rms.domain.app.shared.dto.SharedFileDto;
+import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 
 /**
  * 月報ファイル関連共通サービスインタフェース
@@ -23,25 +25,22 @@ public interface SharedReportFileService {
      * @param targetYm
      * @return
      */
-    public ReportFileDto getReportFileDownloadInfo(String applyUserId,
-                                                   String applyUserNm,
-                                                   Integer targetYm);
+    public SharedFileDto getReportFileInfo(String applyUserId,
+                                           String applyUserNm,
+                                           Integer targetYm);
 
     /**
-     * 月報ファイル一括ダウンロード情報生成
+     * 月報ファイル一覧ZIPファイル生成<br>
      * サーバ内でzipファイルを作成して、作成したzipファイル情報を返却する
-     * @param applyUserIdList
-     * @param applyUserNmList
-     * @param targetYmList
-     * @param cnt
-     * @return
+     * @param reportFileDtoList
+     * @param reportNmPattern
+     * @return 生成したzipファイル情報
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public ReportFileDto createReportFileBulkDownloadInfo(List<String> applyUserIdList,
-                                                          List<String> applyUserNmList,
-                                                          List<Integer> targetYmList,
-                                                          int cnt) throws FileNotFoundException, IOException;
+    public SharedFileDto createReportFileBulk(List<SharedSubmitReportFileDto> reportFileDtoList,
+                                              ReportNmPattern reportNmPattern) throws FileNotFoundException,
+                                                                               IOException;
 
     /**
      * 月報ファイル保存処理
@@ -72,6 +71,6 @@ public interface SharedReportFileService {
      * @return
      * @throws IOException
      */
-    public List<ReportFileDto> unZipReportFileInfo(MultipartFile file) throws IOException;
+    public List<SharedFileDto> unZipReportFileInfo(MultipartFile file) throws IOException;
 
 }

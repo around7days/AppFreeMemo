@@ -25,7 +25,7 @@ import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
 import rms.common.utils.RmsNumberUtils;
-import rms.domain.app.shared.dto.ReportFileDto;
+import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.shared.service.SharedReportService;
 
@@ -68,8 +68,8 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
         List<ReportApproveRegistBulkDto> resultList = new ArrayList<>();
 
         // 月報zipファイルを解凍して月報ファイル一覧を取得
-        List<ReportFileDto> reportList = sharedReportFileService.unZipReportFileInfo(file);
-        for (ReportFileDto dto : reportList) {
+        List<SharedFileDto> reportList = sharedReportFileService.unZipReportFileInfo(file);
+        for (SharedFileDto dto : reportList) {
 
             ReportApproveRegistBulkDto result = new ReportApproveRegistBulkDto();
 

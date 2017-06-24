@@ -26,8 +26,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
+import rms.common.consts.Const.ReportNmPattern;
+import rms.common.dao.VMUserDao;
+import rms.common.entity.VMUser;
 import rms.common.utils.RmsFileUtils;
-import rms.domain.app.shared.dto.ReportFileDto;
+import rms.domain.app.shared.dto.SharedFileDto;
+import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 
 /**
  * 月報ファイル関連共通サービス実装
@@ -44,23 +48,26 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     @Autowired
     private ProjectProperties properties;
 
+    @Autowired
+    protected VMUserDao vMUserDao;
+
     /** ファイル名の文字コード */
     // TODO MS932固定で大丈夫？
     private static final Charset FILE_NM_CHARSET = Charset.forName("MS932");
 
     @Override
-    public ReportFileDto getReportFileDownloadInfo(String applyUserId,
-                                                   String applyUserNm,
-                                                   Integer targetYm) {
+    public SharedFileDto getReportFileInfo(String applyUserId,
+                                           String applyUserNm,
+                                           Integer targetYm) {
 
         // ダウンロードファイルパスの生成
         Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
         // ダウンロードファイル名の生成
-        String fileNm = createReportDownloadFileNm(applyUserId, applyUserNm, targetYm);
+        String fileNm = createReportDownloadFileNm1(applyUserId, applyUserNm, targetYm);
 
         // 返却用情報の生成
-        ReportFileDto dto = new ReportFileDto();
+        SharedFileDto dto = new SharedFileDto();
         dto.setFilePath(filePath);
         dto.setFileNm(fileNm);
 
@@ -68,10 +75,9 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     }
 
     @Override
-    public ReportFileDto createReportFileBulkDownloadInfo(List<String> applyUserIdList,
-                                                          List<String> applyUserNmList,
-                                                          List<Integer> targetYmList,
-                                                          int cnt) throws FileNotFoundException, IOException {
+    public SharedFileDto createReportFileBulk(List<SharedSubmitReportFileDto> reportFileDtoList,
+                                              ReportNmPattern reportNmPattern) throws FileNotFoundException,
+                                                                               IOException {
 
         // zipファイル名・ファイルパスの生成
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
@@ -80,16 +86,26 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
 
         // zipファイル生成
         try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipPath.toFile()), FILE_NM_CHARSET)) {
-            for (int i = 0; i < cnt; i++) {
-                String applyUserId = applyUserIdList.get(i);
-                String applyUserNm = applyUserNmList.get(i);
-                Integer targetYm = targetYmList.get(i);
+            for (SharedSubmitReportFileDto dto : reportFileDtoList) {
+                String applyUserId = dto.getApplyUserId();
+                Integer targetYm = dto.getTargetYm();
 
                 // ダウンロードファイルパスの生成
                 Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
 
                 // ダウンロードファイル名の生成
-                String fileNm = createReportDownloadFileNm(applyUserId, applyUserNm, targetYm);
+                VMUser mUser = vMUserDao.selectById(dto.getApplyUserId());
+                String fileNm;
+                if (reportNmPattern == ReportNmPattern.NOMAL) {
+                    // 通常のファイル名
+                    fileNm = createReportDownloadFileNm1(applyUserId, mUser.getUserNm(), targetYm);
+                } else {
+                    // 提出用のファイル名
+                    fileNm = createReportDownlaodFileNm2(applyUserId,
+                                                         mUser.getUserNm(),
+                                                         targetYm,
+                                                         mUser.getDepartmentRnm());
+                }
 
                 // zipファイルに月報ファイルを追加
                 ZipEntry entry = new ZipEntry(fileNm);
@@ -97,12 +113,12 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                 Files.copy(filePath, zos);
             }
         } catch (Exception e) {
-            logger.warn("zipファイルの解凍に失敗 -> {}", zipPath);
+            logger.warn("zipファイルの生成に失敗 -> {}", zipPath);
             throw e;
         }
 
         // 返却用情報の生成
-        ReportFileDto dto = new ReportFileDto();
+        SharedFileDto dto = new SharedFileDto();
         dto.setFilePath(zipPath);
         dto.setFileNm(zipFileNm);
 
@@ -132,10 +148,10 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     }
 
     @Override
-    public List<ReportFileDto> unZipReportFileInfo(MultipartFile file) throws IOException {
+    public List<SharedFileDto> unZipReportFileInfo(MultipartFile file) throws IOException {
 
         // 解凍後の月報情報リスト
-        List<ReportFileDto> reportList = new ArrayList<>();
+        List<SharedFileDto> reportList = new ArrayList<>();
 
         // zipアップロード一時格納先ディレクトリの生成
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
@@ -173,7 +189,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
                 }
 
                 // 返却情報の設定
-                ReportFileDto dto = new ReportFileDto();
+                SharedFileDto dto = new SharedFileDto();
                 dto.setFilePath(reportFile.toPath());
                 dto.setFileNm(reportFile.getName());
                 reportList.add(dto);
@@ -202,11 +218,11 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
      * @param applyUserId
      * @param applyUserNm
      * @param targetYm
-     * @return
+     * @return ファイル名[yyyymm_userId_userNm.xlsx]
      */
-    private String createReportDownloadFileNm(String applyUserId,
-                                              String applyUserNm,
-                                              Integer targetYm) {
+    private String createReportDownloadFileNm1(String applyUserId,
+                                               String applyUserNm,
+                                               Integer targetYm) {
         // ユーザ名の空白除去（全角半角すべて）
         String newApplyUserNm = applyUserNm.replaceAll("\\s", "").replaceAll("　", "");
 
@@ -218,4 +234,32 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         return sb.toString();
     }
 
+    /**
+     * 月報ダウンロードファイル名の生成（提出用）
+     * @param applyUserId
+     * @param applyUserNm
+     * @param targetYm
+     * @param departmentRnm
+     * @return ファイル名[yyyy mm 作業月報【departmentRnm)userNm_userId】.xlsx]
+     */
+    private String createReportDownlaodFileNm2(String applyUserId,
+                                               String applyUserNm,
+                                               Integer targetYm,
+                                               String departmentRnm) {
+        // ユーザ名の空白除去（全角半角すべて）
+        String newApplyUserNm = applyUserNm.replaceAll("\\s", "").replaceAll("　", "");
+        // 年月で分割
+        String yyyy = targetYm.toString().substring(0, 4);
+        String mm = targetYm.toString().substring(4, 6);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(yyyy).append(" ").append(mm).append(" ");
+        sb.append("作業月報");
+        sb.append("【");
+        sb.append(departmentRnm).append(")").append(applyUserId).append("_").append(newApplyUserNm);
+        sb.append("】");
+        sb.append(".xlsx");
+
+        return sb.toString();
+    }
 }
