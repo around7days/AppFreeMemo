@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
+import rms.common.base.BusinessException;
 import rms.common.consts.Const.ReportNmPattern;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
@@ -31,6 +34,7 @@ import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
+import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
@@ -228,12 +232,13 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
      * @param model
      * @return
      * @throws IOException
+     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "download")
     public String download(ReportApproveListForm form,
                            @PathVariable int index,
                            HttpServletResponse response,
-                           Model model) throws IOException {
+                           Model model) throws IOException, BusinessException {
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
@@ -258,12 +263,13 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
      * @param model
      * @return
      * @throws IOException
+     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "bulkDownload")
     public String bulkDownload(@Validated(BulkDownload.class) ReportApproveListForm form,
                                BindingResult bindingResult,
                                HttpServletResponse response,
-                               Model model) throws IOException {
+                               Model model) throws IOException, BusinessException {
         // 入力チェック
         if (bindingResult.hasErrors()) {
             logger.debug("入力チェックエラー -> {}", bindingResult.getAllErrors());
@@ -338,5 +344,28 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     protected String getScreenId() {
         return SCREEN_ID;
     }
+
+    // ----------------------------------------------------------------------------------------
+    /**
+     * 業務エラー（BusinessException）のエラーハンドリング
+     * @param e
+     * @param session
+     * @param model
+     * @return
+     */
+    @ExceptionHandler(BusinessException.class)
+    public String handlerException(BusinessException e,
+                                   HttpSession session,
+                                   Model model) {
+        logger.debug("業務エラー -> {}", e.toString());
+
+        // メッセージを反映
+        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+        // セッション情報の詰め直し
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
+
+        return PAGE_URL;
+    }
+    // ----------------------------------------------------------------------------------------
 
 }

@@ -2,7 +2,6 @@ package rms.domain.app.shared.service;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -24,9 +23,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import rms.common.base.BusinessException;
 import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
 import rms.common.consts.Const.ReportNmPattern;
+import rms.common.consts.MessageEnum;
 import rms.common.dao.VMUserDao;
 import rms.common.entity.VMUser;
 import rms.common.utils.RmsFileUtils;
@@ -58,10 +59,14 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     @Override
     public SharedFileDto getReportFileInfo(String applyUserId,
                                            String applyUserNm,
-                                           Integer targetYm) {
+                                           Integer targetYm) throws BusinessException {
 
         // ダウンロードファイルパスの生成
         Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
+        if (!filePath.toFile().exists()) {
+            // 月報ファイルが見つかりません
+            throw new BusinessException(MessageEnum.error012, String.valueOf(targetYm), applyUserNm);
+        }
 
         // ダウンロードファイル名の生成
         String fileNm = createReportDownloadFileNm1(applyUserId, applyUserNm, targetYm);
@@ -76,8 +81,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
 
     @Override
     public SharedFileDto createReportFileBulk(List<SharedSubmitReportFileDto> reportFileDtoList,
-                                              ReportNmPattern reportNmPattern) throws FileNotFoundException,
-                                                                               IOException {
+                                              ReportNmPattern reportNmPattern) throws IOException, BusinessException {
 
         // zipファイル名・ファイルパスの生成
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
@@ -89,12 +93,16 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
             for (SharedSubmitReportFileDto dto : reportFileDtoList) {
                 String applyUserId = dto.getApplyUserId();
                 Integer targetYm = dto.getTargetYm();
+                VMUser mUser = vMUserDao.selectById(dto.getApplyUserId());
 
                 // ダウンロードファイルパスの生成
                 Path filePath = createReportFilePath(properties.getReportStorage(), applyUserId, targetYm);
+                if (!filePath.toFile().exists()) {
+                    // 月報ファイルが見つかりません
+                    throw new BusinessException(MessageEnum.error012, String.valueOf(targetYm), mUser.getUserNm());
+                }
 
                 // ダウンロードファイル名の生成
-                VMUser mUser = vMUserDao.selectById(dto.getApplyUserId());
                 String fileNm;
                 if (reportNmPattern == ReportNmPattern.NOMAL) {
                     // 通常のファイル名
@@ -262,4 +270,5 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
 
         return sb.toString();
     }
+
 }

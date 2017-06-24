@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import rms.common.base.BusinessException;
 import rms.common.consts.Const.ReportNmPattern;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
@@ -23,11 +24,12 @@ public interface SharedReportFileService {
      * @param applyUserId
      * @param applyUserNm
      * @param targetYm
+     * @throws BusinessException
      * @return
      */
     public SharedFileDto getReportFileInfo(String applyUserId,
                                            String applyUserNm,
-                                           Integer targetYm);
+                                           Integer targetYm) throws BusinessException;
 
     /**
      * 月報ファイル一覧ZIPファイル生成<br>
@@ -37,10 +39,10 @@ public interface SharedReportFileService {
      * @return 生成したzipファイル情報
      * @throws FileNotFoundException
      * @throws IOException
+     * @throws BusinessException
      */
     public SharedFileDto createReportFileBulk(List<SharedSubmitReportFileDto> reportFileDtoList,
-                                              ReportNmPattern reportNmPattern) throws FileNotFoundException,
-                                                                               IOException;
+                                              ReportNmPattern reportNmPattern) throws IOException, BusinessException;
 
     /**
      * 月報ファイル保存処理

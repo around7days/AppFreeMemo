@@ -6,11 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import rms.common.base.BusinessException;
 import rms.common.base.WebSecurityConfig;
+import rms.common.consts.MessageTypeConst;
 import rms.common.utils.RmsSessionUtils;
 import rms.web.app.mst.userlist.UserListController;
 import rms.web.app.mst.userregist.UserRegistController;
@@ -28,7 +31,6 @@ import rms.web.app.tran.reportlist.ReportListController;
 public class MenuController extends rms.common.abstracts.AbstractController {
 
     /** logger */
-    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
     /** ページURL */
@@ -146,5 +148,28 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     protected String getScreenId() {
         return SCREEN_ID;
     }
+
+    // ----------------------------------------------------------------------------------------
+    /**
+     * 業務エラー（BusinessException）のエラーハンドリング
+     * @param e
+     * @param session
+     * @param model
+     * @return
+     */
+    @ExceptionHandler(BusinessException.class)
+    public String handlerException(BusinessException e,
+                                   HttpSession session,
+                                   Model model) {
+        logger.debug("業務エラー -> {}", e.toString());
+
+        // メッセージを反映
+        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+        // セッション情報の詰め直し
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
+
+        return PAGE_URL;
+    }
+    // ----------------------------------------------------------------------------------------
 
 }

@@ -3,6 +3,8 @@ package rms.web.app.tran.reportapproveregistbulk;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -22,6 +25,7 @@ import rms.common.base.BusinessException;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
+import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkService;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
@@ -133,28 +137,27 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
         return SCREEN_ID;
     }
 
-    //
-    // // ----------------------------------------------------------------------------------------
-    // /**
-    // * 業務エラー（BusinessException）のエラーハンドリング
-    // * @param e
-    // * @param session
-    // * @param model
-    // * @return
-    // */
-    // @ExceptionHandler(BusinessException.class)
-    // public String handlerException(BusinessException e,
-    // HttpSession session,
-    // Model model) {
-    // logger.debug("業務エラー -> {}", e.getErrorMessage());
-    //
-    // // メッセージを反映
-    // model.addAttribute(MessageConst.ERROR, e.getErrorMessage());
-    // // セッションからフォーム情報を取得して反映
-    // model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistBulkForm.class));
-    //
-    // return PAGE_URL;
-    // }
+    // ----------------------------------------------------------------------------------------
+    /**
+     * 業務エラー（BusinessException）のエラーハンドリング
+     * @param e
+     * @param session
+     * @param model
+     * @return
+     */
+    @ExceptionHandler(BusinessException.class)
+    public String handlerException(BusinessException e,
+                                   HttpSession session,
+                                   Model model) {
+        logger.debug("業務エラー -> {}", e.toString());
+
+        // メッセージを反映
+        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+        // セッション情報の詰め直し
+        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
+
+        return PAGE_URL;
+    }
     //
     // /**
     // * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
@@ -178,6 +181,6 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
     // return PAGE_URL;
     // }
     //
-    // // ----------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------
 
 }

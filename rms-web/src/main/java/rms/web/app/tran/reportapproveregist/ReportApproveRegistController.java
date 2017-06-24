@@ -180,11 +180,12 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @param model
      * @return
      * @throws IOException
+     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "download")
     public String download(ReportApproveRegistForm form,
                            HttpServletResponse response,
-                           Model model) throws IOException {
+                           Model model) throws IOException, BusinessException {
 
         // 月報ファイルダウンロード情報生成
         SharedFileDto dto = sharedReportFileService.getReportFileInfo(form.getApplyUserId(),
@@ -229,7 +230,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     public String handlerException(BusinessException e,
                                    HttpSession session,
                                    Model model) {
-        logger.debug("業務エラー -> {}", e);
+        logger.debug("業務エラー -> {}", e.toString());
 
         // メッセージを反映
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());

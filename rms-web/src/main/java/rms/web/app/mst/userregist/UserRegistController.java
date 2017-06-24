@@ -229,7 +229,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
     public String handlerException(BusinessException e,
                                    HttpSession session,
                                    Model model) {
-        logger.debug("業務エラー -> {}", e);
+        logger.debug("業務エラー -> {}", e.toString());
 
         // メッセージを反映
         model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
