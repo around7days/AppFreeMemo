@@ -2,13 +2,13 @@ package rms.batch.app;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Component;
 
 import rms.common.base.BusinessException;
@@ -25,6 +25,10 @@ public class BatchFacade {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(BatchFacade.class);
 
+    /** 起動引数 */
+    @Autowired
+    private ApplicationArguments arguments;
+
     /** 月報初期データ登録バッチサービス */
     @Autowired
     private ReportInitRegistService service;
@@ -34,17 +38,26 @@ public class BatchFacade {
 
     /**
      * サービス呼び出し<br>
-     * @param args
-     *            args[1]:バッチID
-     *            args[2]～:各処理のパラメータ
      * @throws Exception
      */
-    public void call(String[] args) throws Exception {
-        if (args == null || args.length == 1) {
-            call(null, null);
+    public void call() throws Exception {
+        /*
+         * Springオプションを除いたコマンドライン引数を取得
+         * args[0] :"batch"固定
+         * args[1] :バッチID
+         * args[2]～:パラメータ
+         */
+        List<String> args = new ArrayList<>();
+        args.addAll(arguments.getNonOptionArgs());
+        if (args.size() >= 2) {
+            String batchId = args.get(1);
+            args.remove(0); // "batch"固定
+            args.remove(0); // バッチIDを除去
+            call(batchId, args);
         } else {
-            String batchId = args[1];
-            call(batchId, ArrayUtils.removeAll(args, 0, 1));
+            // エラー終了
+            call(null, args);
+            return;
         }
     }
 
@@ -55,11 +68,11 @@ public class BatchFacade {
      * @throws Exception
      */
     public void call(String batchId,
-                     String[] args) throws Exception {
+                     List<String> args) throws Exception {
         logger.info("サービス呼び出し開始");
         logger.info("バッチID -> {}", batchId);
-        if (args != null && args.length > 0) {
-            logger.info("パラメータ -> {}", ToStringBuilder.reflectionToString(args, ToStringStyle.SIMPLE_STYLE));
+        if (!args.isEmpty()) {
+            args.forEach(val -> logger.info("パラメータ -> {}", val));
         }
         // パラメータチェック
         if (batchId == null || batchId.isEmpty()) {
@@ -75,11 +88,11 @@ public class BatchFacade {
             /*
              * 月報初期データ登録バッチ<br>
              * 対象年月が未指定の場合はシステム日付から取得
-             * @param args[1]:対象年月
+             * @param args[0]:対象年月
              */
             Integer targetYm;
-            if (args.length != 0) {
-                targetYm = Integer.valueOf(args[0]);
+            if (args.size() != 0) {
+                targetYm = Integer.valueOf(args.get(0));
             } else {
                 LocalDate sysdate = LocalDate.now();
                 targetYm = Integer.valueOf(sysdate.format(DateTimeFormatter.ofPattern("yyyyMM")));

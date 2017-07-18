@@ -51,6 +51,35 @@ public class RmsUtils {
         return LocalDate.of(year, month, switchDay);
     }
 
+    /**
+     * 指定された年月の正当性を確認
+     * @param targetYm
+     * @return 結果 [true:正常 false:異常]
+     */
+    public static boolean isTargetYmCheck(Integer targetYm) {
+        if (targetYm == null) {
+            return false;
+        }
+
+        // 桁チェック
+        if (targetYm.toString().length() != 6) {
+            return false;
+        }
+        // 年チェック
+        int year = Integer.valueOf(targetYm.toString().substring(0, 4));
+        if (year <= 2000 || 3000 <= year) {
+            return false;
+        }
+        // 月チェック
+        int month = Integer.valueOf(targetYm.toString().substring(4, 6));
+        if (month < 1 || 12 < month) {
+            return false;
+        }
+
+        // 正常
+        return true;
+    }
+
     // /**
     // * 年月から年を取得
     // * @param targetYm

@@ -50,8 +50,14 @@ public class SpringBatchApplication {
         System.exit(ret);
     }
 
+    /**
+     * 実行<br>
+     * コマンドライン引数はDI経由で取得する為、batchFacadeに渡さない。
+     * @param args
+     * @throws Exception
+     */
     private void run(String[] args) throws Exception {
-        batchFacade.call(args);
+        batchFacade.call();
     }
 
 }

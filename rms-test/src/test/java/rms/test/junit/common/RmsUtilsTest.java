@@ -36,7 +36,6 @@ public class RmsUtilsTest {
             Integer targetYm = RmsUtils.getThisTargetYm(date, switchDay);
             assertThat(targetYm, is(201706));
         }
-
     }
 
     @Test
@@ -45,6 +44,30 @@ public class RmsUtilsTest {
         Integer switchDay = 20;
         LocalDate date = RmsUtils.getSwitchDate(targetYm, switchDay);
         assertThat(date.format(DateTimeFormatter.BASIC_ISO_DATE), is("20170620"));
+    }
+
+    @Test
+    public void testIsTargetYmCheck() {
+        {
+            Integer targetYm = 201706;
+            boolean b = RmsUtils.isTargetYmCheck(targetYm);
+            assertThat(b, is(true));
+        }
+        {
+            Integer targetYm = 20170601;
+            boolean b = RmsUtils.isTargetYmCheck(targetYm);
+            assertThat(b, is(false));
+        }
+        {
+            Integer targetYm = 999901;
+            boolean b = RmsUtils.isTargetYmCheck(targetYm);
+            assertThat(b, is(false));
+        }
+        {
+            Integer targetYm = 201799;
+            boolean b = RmsUtils.isTargetYmCheck(targetYm);
+            assertThat(b, is(false));
+        }
     }
 
 }

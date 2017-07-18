@@ -55,6 +55,11 @@ public class ReportInitRegistServiceImpl implements ReportInitRegistService {
 
     @Override
     public boolean regist(Integer targetYm) {
+        // パラメータチェック
+        if (!RmsUtils.isTargetYmCheck(targetYm)) {
+            logger.error("対象年月(yyyymm)の指定が不正です -> {}", targetYm);
+            return false;
+        }
 
         // 実行日付の取得
         LocalDate execDate = properties.getSysdate();

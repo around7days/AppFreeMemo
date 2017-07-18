@@ -1,5 +1,7 @@
 package rms;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,9 +26,14 @@ public class SpringSwitchApplication {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
+        // 起動タイプの判定
         Type type = getStartupType(args);
         logger.info("***************************** START UP -> {} *****************************", type);
+        if (args != null && args.length > 0) {
+            logger.debug("起動パラメータ -> {}", ToStringBuilder.reflectionToString(args, ToStringStyle.SIMPLE_STYLE));
+        }
 
+        // 起動
         switch (type) {
         case WEB:
             SpringWebApplication.main(args);
