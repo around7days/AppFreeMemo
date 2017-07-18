@@ -101,6 +101,10 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         // 値を設定
         RmsBeanUtils.copyProperties(dto, form.getCondition());
 
+        // ページ情報の設定
+        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
+        form.setPageInfo(new PageInfo(pageLimit));
+
         logger.debug("出力フォーム情報 -> {}", form);
 
         return PAGE_URL;
@@ -127,11 +131,6 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
             return PAGE_URL;
         }
 
-        // 検索結果・ページ情報の初期化
-        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
-        form.setPageInfo(new PageInfo(pageLimit));
-        form.setResultList(null);
-
         // 検索条件の生成
         ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
         RmsBeanUtils.copyProperties(form.getCondition(), condition);
@@ -139,15 +138,16 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
 
         // 検索処理
         SearchResultDto<ReportApproveListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+
+        // 検索結果をフォームに反映
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
+
         if (resultDto.getResultList().isEmpty()) {
             // 「検索結果が見つかりません」
             model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error006));
             return PAGE_URL;
         }
-
-        // 検索結果をフォームに反映
-        form.setResultList(resultDto.getResultList());
-        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }

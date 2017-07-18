@@ -147,9 +147,9 @@ select
   , U.user_nm                                     -- ユーザ名
   , U.password                                    -- パスワード
   , U.email                                       -- メールアドレス
-  , U.department_id                                -- 部署ID
-  , D001.code_nm as department_nm                  -- 部署名
-  , D001.attr1  as department_rnm                  -- 部署略称
+  , U.department_id                               -- 部署ID
+  , D001.code_nm as department_nm                 -- 部署名
+  , D001.attr1  as department_rnm                 -- 部署略称
   , F1.approve_user_id as approve_user_id1        -- 承認者ID1
   , (select X.user_nm from M_USER X where X.user_id = F1.approve_user_id) as approve_user_nm1 -- 承認者名1
   , F2.approve_user_id as approve_user_id2        -- 承認者ID2
@@ -214,6 +214,9 @@ select
   , U.user_nm   as apply_user_nm                  -- 申請者名
   , A.target_ym                                   -- 年月
   , A.apply_date                                  -- 申請日
+  , U.department_id                               -- 部署ID
+  , D001.code_nm as department_nm                 -- 部署名
+  , D001.attr1 as department_rnm                  -- 部署略称
   , A.publish_flg                                 -- 公開有無
   , B001.code_nm as publish_flg_nm                -- 公開有無名称
   , F1.approve_user_id as approve_user_id1        -- 承認者ID1
@@ -264,4 +267,7 @@ from
   left join M_CODE B001
     on B001.code_kbn = 'B001'
     and A.publish_flg = B001.code
+  left join M_CODE D001
+    on D001.code_kbn = 'D001'
+    and D001.code = U.department_id
 ;

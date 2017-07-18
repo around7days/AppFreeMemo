@@ -73,6 +73,10 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
     @Column(name = "role_nm3")
     private String roleNm3;
 
+    /** 役割名4 */
+    @Column(name = "role_nm4")
+    private String roleNm4;
+
     public String getUserId() {
         return userId;
     }
@@ -193,6 +197,14 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
         this.roleNm3 = roleNm3;
     }
 
+    public String getRoleNm4() {
+        return roleNm4;
+    }
+
+    public void setRoleNm4(String roleNm4) {
+        this.roleNm4 = roleNm4;
+    }
+
     /**
      * 役割名を返却します<br>
      * 備考：役割が複数存在する場合は「/」で結合して返却
@@ -204,6 +216,7 @@ public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
         if(!RmsStringUtils.isEmpty(roleNm1)){ join.add(roleNm1); }
         if(!RmsStringUtils.isEmpty(roleNm2)){ join.add(roleNm2); }
         if(!RmsStringUtils.isEmpty(roleNm3)){ join.add(roleNm3); }
+        if(!RmsStringUtils.isEmpty(roleNm4)){ join.add(roleNm4); }
         //@formatter:on
         return join.toString();
     }

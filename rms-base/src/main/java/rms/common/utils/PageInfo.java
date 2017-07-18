@@ -15,11 +15,8 @@ public class PageInfo {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(PageInfo.class);
 
-    /** 1ページ表示件数（デフォルト） */
-    private static final int DEFAULT_LIMIT = 5;
-
     /** 1ページ表示件数 */
-    private int limit = DEFAULT_LIMIT;
+    private int limit = 0; // TODO 本当はプロパティファイルから取得した値を使いたい・・・
 
     /** 表示ページ */
     private int page = 1;
@@ -28,12 +25,6 @@ public class PageInfo {
     private int totalSize = 0;
 
     /*-----------------------------------------------------------------------*/
-    /**
-     * コンストラクタ
-     */
-    public PageInfo() {
-    }
-
     /**
      * コンストラクタ
      * @param limit

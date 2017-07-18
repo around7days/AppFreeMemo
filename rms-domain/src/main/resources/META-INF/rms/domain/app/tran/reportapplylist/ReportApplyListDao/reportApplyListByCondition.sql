@@ -3,8 +3,7 @@ select
   , A.apply_user_nm
   , A.target_ym
   , A.apply_date
-  , A.publish_flg
-  , A.publish_flg_nm
+  , A.department_rnm
   , A.status
   , A.status_nm
   , A.approve_user_id1

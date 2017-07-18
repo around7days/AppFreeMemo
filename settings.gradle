@@ -1,6 +1,1 @@
 rootProject.name = 'ReportManagementSystem'
-include 'rms-base'
-include 'rms-domain'
-include 'rms-web'
-include 'rms-batch'
-include 'rms-test'

@@ -20,10 +20,9 @@ public class UserInfoAccessor {
      */
     public static UserInfo getPrincipal() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) {
-            return null;
+        if (authentication != null && authentication.getPrincipal() instanceof UserInfo) {
+            return (UserInfo) authentication.getPrincipal();
         }
-
-        return (UserInfo) authentication.getPrincipal();
+        return null;
     }
 }

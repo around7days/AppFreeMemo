@@ -55,7 +55,7 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
-//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch'
 	compile group: 'org.seasar.doma.boot', name: 'doma-spring-boot-starter', version: '1.+'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.+'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '2.+'
@@ -77,12 +77,18 @@ sourceCompatibility = 1.8
 // warファイル定義
 war {
 	baseName = 'rmsweb'
+	version = '20170718'
 }
 
 // jarファイル定義
 jar {
 	baseName = 'rmsweb'
-	version = '0.0.1-SNAPSHOT'
+	version = '20170718'
+}
+
+// Springboot実行メインクラス
+springBoot {
+	mainClass = 'rms.SpringSwitchApplication'
 }
 
 // javadoc

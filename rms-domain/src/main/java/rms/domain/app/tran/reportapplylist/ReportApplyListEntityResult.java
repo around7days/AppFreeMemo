@@ -29,13 +29,9 @@ public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEn
     @Column(name = "apply_date")
     private LocalDateTime applyDate;
 
-    /** 公開有無 */
-    @Column(name = "publish_flg")
-    private String publishFlg;
-
-    /** 公開有無名称 */
-    @Column(name = "publish_flg_nm")
-    private String publishFlgNm;
+    /** 部署略称 */
+    @Column(name = "department_rnm")
+    private String departmentRnm;
 
     /** 承認状況 */
     @Column(name = "status")
@@ -113,20 +109,12 @@ public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEn
         this.applyDate = applyDate;
     }
 
-    public String getPublishFlg() {
-        return publishFlg;
+    public String getDepartmentRnm() {
+        return departmentRnm;
     }
 
-    public void setPublishFlg(String publishFlg) {
-        this.publishFlg = publishFlg;
-    }
-
-    public String getPublishFlgNm() {
-        return publishFlgNm;
-    }
-
-    public void setPublishFlgNm(String publishFlgNm) {
-        this.publishFlgNm = publishFlgNm;
+    public void setDepartmentRnm(String departmentRnm) {
+        this.departmentRnm = departmentRnm;
     }
 
     public String getStatus() {

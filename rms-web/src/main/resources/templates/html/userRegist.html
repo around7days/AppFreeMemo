@@ -132,6 +132,9 @@
 							<input type="checkbox" name="roleApproveFlg" id="roleApproveFlg" th:field="*{roleApproveFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" /> 承認者
 						</label>
 						<label class="checkbox-inline">
+							<input type="checkbox" name="roleReferenceFlg" id="roleReferenceFlg" th:field="*{roleReferenceFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" /> 閲覧者
+						</label>
+						<label class="checkbox-inline">
 							<input type="checkbox" name="roleAdminFlg" id="roleAdminFlg" th:field="*{roleAdminFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" /> 管理者
 						</label>
 					</div>
@@ -141,7 +144,7 @@
 				<div class="text-center">
 					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
 					<button type="submit" id="insert" th:if="*{viewMode == VIEW_MODE_INSERT}" class="btn btn-primary">登録<span class="glyphicon glyphicon-ok"></span></button>
-					<button type="button" id="delete" th:if="*{viewMode == VIEW_MODE_UPDATE}" onclick="javascript:alert('実装していません')" class="btn btn-primary">削除<span class="glyphicon glyphicon-remove"></span></button>
+					<button type="button" id="delete" th:if="*{viewMode == VIEW_MODE_UPDATE}" onclick="javascript:alert('システム管理者に連絡してください')" class="btn btn-primary">削除<span class="glyphicon glyphicon-remove"></span></button>
 					<button type="submit" id="update" th:if="*{viewMode == VIEW_MODE_UPDATE}" class="btn btn-primary">更新<span class="glyphicon glyphicon-ok"></span></button>
 				</div>
 

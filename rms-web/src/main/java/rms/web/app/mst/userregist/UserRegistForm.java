@@ -74,6 +74,8 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
     private String roleApplyFlg;
     /** 役割：承認者フラグ */
     private String roleApproveFlg;
+    /** 役割：閲覧者フラグ */
+    private String roleReferenceFlg;
     /** 役割：管理者フラグ */
     private String roleAdminFlg;
 
@@ -163,14 +165,14 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
     }
 
     public String getApproveUserId4() {
-		return approveUserId4;
-	}
+        return approveUserId4;
+    }
 
-	public void setApproveUserId4(String approveUserId4) {
-		this.approveUserId4 = approveUserId4;
-	}
+    public void setApproveUserId4(String approveUserId4) {
+        this.approveUserId4 = approveUserId4;
+    }
 
-	public String getRoleApplyFlg() {
+    public String getRoleApplyFlg() {
         return roleApplyFlg;
     }
 
@@ -184,6 +186,14 @@ public class UserRegistForm extends rms.common.abstracts.AbstractForm {
 
     public void setRoleApproveFlg(String roleApproveFlg) {
         this.roleApproveFlg = roleApproveFlg;
+    }
+
+    public String getRoleReferenceFlg() {
+        return roleReferenceFlg;
+    }
+
+    public void setRoleReferenceFlg(String roleReferenceFlg) {
+        this.roleReferenceFlg = roleReferenceFlg;
     }
 
     public String getRoleAdminFlg() {

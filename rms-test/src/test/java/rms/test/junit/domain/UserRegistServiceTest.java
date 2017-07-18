@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.common.base.BusinessException;
 import rms.common.dao.MUserRoleDao;
 import rms.common.dao.VMUserDao;
@@ -26,7 +27,7 @@ import rms.domain.app.mst.userregist.UserRegistService;
 public class UserRegistServiceTest {
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class initDisplayUpdateInterface {
 
         @Autowired
@@ -53,7 +54,7 @@ public class UserRegistServiceTest {
     }
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class registInterface {
         @Autowired
         UserRegistService service;
@@ -167,7 +168,7 @@ public class UserRegistServiceTest {
     }
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class updateInterface {
         @Autowired
         UserRegistService service;

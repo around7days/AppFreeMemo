@@ -3,6 +3,7 @@ package rms.common.abstracts;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import rms.common.base.MessageSourceEnumAccessor;
+import rms.common.base.ProjectProperties;
 import rms.common.base.UrlCreateHelper;
 
 /**
@@ -14,6 +15,10 @@ public abstract class AbstractController {
     /** MessageSource */
     @Autowired
     protected MessageSourceEnumAccessor message;
+
+    /** application.properties */
+    @Autowired
+    protected ProjectProperties properties;
 
     /** UrlCreateHelper */
     @Autowired

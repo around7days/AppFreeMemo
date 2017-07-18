@@ -67,20 +67,8 @@
 							</div>
 						</div>
 					</div>
-					<!-- 公開有無 -->
-					<label class="col-sm-3 control-label">公開有無</label>
-					<div class="col-sm-9">
-						<label class="radio-inline">
-							<input type="radio" name="publishFlg" id="publishFlgOff" th:value="${T(rms.common.consts.MCodeConst).B001_0}" th:field="*{publishFlg}" />非公開
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="publishFlg" id="publishFlgOn"  th:value="${T(rms.common.consts.MCodeConst).B001_1}" th:field="*{publishFlg}" />公開
-						</label>
-					</div>
-				</div>
 
-				<!-- 承認者 -->
-				<div class="form-group">
+					<!-- 承認者 -->
 					<!-- 承認者1 -->
 					<label class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
@@ -101,10 +89,8 @@
 					<div class="col-sm-9">
 						<p th:text="*{approveUserNm4}" class="form-control-static">承認一郎</p>
 					</div>
-				</div>
 
-				<!-- 申請者月報 -->
-				<div class="form-group">
+					<!-- 申請者月報 -->
 					<label class="col-sm-3 control-label">申請者月報</label>
 					<div class="col-sm-9">
 						<input type="file" name="file" id="file" accept=".xlsx" style="display:none" />

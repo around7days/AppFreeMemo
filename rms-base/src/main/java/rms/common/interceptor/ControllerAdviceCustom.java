@@ -45,7 +45,7 @@ public class ControllerAdviceCustom {
         model.addAttribute("novalidate", properties.getHtml5Novalidate());
 
         // CSSテーマのデフォルトを設定
-        // XXX 最終的にはAjaxに変更したい
+        // TODO 最終的にはAjaxに変更したい
         String theme = null;
         String requestTheme = request.getParameter("theme");
         Object sessionTheme = session.getAttribute("theme");

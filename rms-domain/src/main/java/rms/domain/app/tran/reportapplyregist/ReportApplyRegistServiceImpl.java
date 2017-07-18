@@ -90,7 +90,6 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         dto.setApproveUserNm4(entity.getApproveUserNm4());
 
         // 初期値の設定
-        dto.setPublishFlg(MCodeConst.B001_1); // 公開有無：公開
         Integer targetYm = RmsUtils.getThisTargetYm(properties.getSysdate(), properties.getSwitchMonthReferenceDay());
         dto.setTargetYm(targetYm); // 対象年月：当月
 
@@ -118,6 +117,12 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
         // 月報の未来日付チェック
         validateFutureYm(dto.getTargetYm());
+
+        // 月報申請の物理削除
+        deleteReport(dto);
+
+        // 月報承認フローの物理削除
+        deleteReportApproveFlow(dto);
 
         // 月報申請処理
         insertReport(dto);
@@ -156,15 +161,16 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
     /**
      * 月報の重複チェック<br>
-     * 重複している場合はBusinessExceptionを発生
+     * 承認状況が「未提出」以外で重複している場合はBusinessExceptionを発生
      * @param applyUserId
      * @param targetYm
      * @throws BusinessException
      */
     private void validateUniquReport(String applyUserId,
                                      Integer targetYm) throws BusinessException {
-        boolean hasExists = tReportDao.existsById(applyUserId, targetYm);
-        if (hasExists) {
+        TReport entity = tReportDao.selectById(applyUserId, targetYm);
+        if (entity != null && !MCodeConst.A001_AAA.equals(entity.getStatus())) {
+            // 月報が存在、且つ、承認状況が「未提出」以外の場合
             // 「対象年月の月報は既に申請されています」
             throw new BusinessException(MessageEnum.error003);
         }
@@ -179,19 +185,17 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      */
     private void validateFutureYm(Integer targetYm) throws BusinessException {
 
-        // 月報提出可能日を生成
-        int targetYear = Integer.valueOf(targetYm.toString().substring(0, 4));
-        int targetMonth = Integer.valueOf(targetYm.toString().substring(4, 6));
-        int applyPossibleDay = properties.getSwitchMonthReferenceDay();
-        LocalDate applyPossibleDate = LocalDate.of(targetYear, targetMonth, applyPossibleDay);
+        // 現在日付
+        LocalDate sysdate = properties.getSysdate();
 
-        // 現在の年月日を取得
-        LocalDate nowdate = properties.getSysdate();
+        // 月報提出可能日の取得
+        int switchDay = properties.getSwitchMonthReferenceDay();
+        LocalDate switchDate = RmsUtils.getSwitchDate(targetYm, switchDay);
 
-        if (applyPossibleDate.compareTo(nowdate) >= 0) {
-            // 月報提出可能日 >= 現在日付の場合
+        if (sysdate.isBefore(switchDate)) {
+            // 現在日付 < 月報提出可能日
             // 「対象年月の月報は、{0}以降から申請可能です」
-            String params = applyPossibleDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            String params = switchDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             throw new BusinessException(MessageEnum.error007, params);
         }
     }
@@ -207,7 +211,6 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         entity.setApplyUserId(dto.getApplyUserId());
         entity.setTargetYm(dto.getTargetYm());
         entity.setApplyDate(LocalDateTime.now());
-        entity.setPublishFlg(dto.getPublishFlg());
         entity.setFilePath("");
         entity.setStatus(MCodeConst.A001_AAA); // 承認状況は後で再計算する。
 
@@ -279,10 +282,9 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
         TReport entity = new TReport();
         entity.setApplyUserId(dto.getApplyUserId());
         entity.setTargetYm(dto.getTargetYm());
-        entity.setVersion(dto.getVersion());
 
         // 削除処理
-        tReportDao.delete(entity);
+        tReportDao.deleteNoOptimisticLockException(entity);
     }
 
     /**

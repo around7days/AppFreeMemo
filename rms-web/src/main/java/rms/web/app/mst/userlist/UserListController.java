@@ -76,6 +76,10 @@ public class UserListController extends rms.common.abstracts.AbstractController 
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(UserListForm form,
                        Model model) {
+        // ページ情報の設定
+        Integer pageLimit = properties.getPageLimitDefault();
+        form.setPageInfo(new PageInfo(pageLimit));
+
         return PAGE_URL;
     }
 
@@ -98,25 +102,22 @@ public class UserListController extends rms.common.abstracts.AbstractController 
             return PAGE_URL;
         }
 
-        // 検索結果・ページ情報の初期化
-        form.setPageInfo(new PageInfo());
-        form.setResultList(null);
-
         // 検索条件の生成
         UserListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
                                                                            UserListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+
+        // 検索結果をフォームに反映
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
+
         if (resultDto.getResultList().isEmpty()) {
             // 「検索結果が見つかりません」
             model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error006));
             return PAGE_URL;
         }
-
-        // 検索結果をフォームに反映
-        form.setResultList(resultDto.getResultList());
-        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }

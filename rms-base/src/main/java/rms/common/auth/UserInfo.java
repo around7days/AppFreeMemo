@@ -84,6 +84,14 @@ public class UserInfo extends User {
     }
 
     /**
+     * 役割：閲覧者？
+     * @return
+     */
+    public boolean isRoleReference() {
+        return roleList.contains(MRoleConst.REFERENCE);
+    }
+
+    /**
      * 役割：管理者？
      * @return
      */

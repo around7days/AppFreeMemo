@@ -18,6 +18,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
+import rms.SpringWebApplication;
 import rms.common.base.BusinessException;
 import rms.common.dao.VTReportDao;
 import rms.common.entity.VTReport;
@@ -28,7 +29,7 @@ import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
 public class ReportApplyRegistServiceTest {
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class initDisplayApplyInterface {
 
         @Autowired
@@ -43,7 +44,6 @@ public class ReportApplyRegistServiceTest {
             assertThat(dto.getApplyUserNm(), is("申請者０１"));
             // assertThat(dto.getTargetYm(), is(nullValue())); TODO システム日付を指定してテストする必要あり
             assertThat(dto.getFile(), is(nullValue()));
-            assertThat(dto.getPublishFlg(), is("1"));
             assertThat(dto.getApproveUserId1(), is("user06"));
             assertThat(dto.getApproveUserId2(), is("user07"));
             assertThat(dto.getApproveUserId3(), is("user08"));
@@ -54,7 +54,7 @@ public class ReportApplyRegistServiceTest {
     }
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class initDisplayReApplyInterface {
 
         @Autowired
@@ -69,7 +69,6 @@ public class ReportApplyRegistServiceTest {
             assertThat(dto.getApplyUserNm(), is("申請者０１"));
             assertThat(dto.getTargetYm(), is(201609));
             assertThat(dto.getFile(), is(nullValue()));
-            assertThat(dto.getPublishFlg(), is("0"));
             assertThat(dto.getApproveUserId1(), is("user06"));
             assertThat(dto.getApproveUserId2(), is("user07"));
             assertThat(dto.getApproveUserId3(), is("user08"));
@@ -80,7 +79,7 @@ public class ReportApplyRegistServiceTest {
     }
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class applyInterface {
 
         @Autowired
@@ -144,7 +143,6 @@ public class ReportApplyRegistServiceTest {
                 dto.setApproveUserId1("user06");
                 dto.setApproveUserId2("user07");
                 dto.setApproveUserId3("user08");
-                dto.setPublishFlg("0");
                 MultipartFile file = createMockMultipartFile();
                 dto.setFile(file);
 
@@ -173,7 +171,7 @@ public class ReportApplyRegistServiceTest {
     }
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class reApplyInterface {
 
         @Autowired
@@ -196,7 +194,6 @@ public class ReportApplyRegistServiceTest {
                 dto.setApproveUserId1("user06");
                 dto.setApproveUserId2("user07");
                 dto.setApproveUserId3("user08");
-                dto.setPublishFlg("0");
                 MultipartFile file = createMockMultipartFile();
                 dto.setFile(file);
                 dto.setVersion(0);

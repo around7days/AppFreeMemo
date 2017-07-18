@@ -10,11 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.common.base.BusinessException;
 import rms.common.consts.MessageEnum;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = SpringWebApplication.class)
 public class BusinessExceptionTest {
 
     /** logger */

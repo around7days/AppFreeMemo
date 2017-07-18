@@ -1,5 +1,7 @@
 package rms.common.dao;
 
+import java.util.List;
+
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
@@ -110,6 +112,14 @@ public interface MUserApproveFlowDao {
     int deleteNoOptimisticLockException(MUserApproveFlow entity);
 
     /* 独自メソッド ------------------------------------------------------------- */
+
+    /**
+     * ユーザIDに紐付く一覧を取得
+     * @param userId
+     * @return
+     */
+    @Select
+    List<MUserApproveFlow> selectListByUserId(String userId);
 
     /**
      * ユーザIDに紐付くレコードを全て削除

@@ -18,8 +18,6 @@ public class ReportApproveRegistDto extends rms.common.abstracts.AbstractDto {
     private String applyUserNm;
     /** 年月 */
     private Integer targetYm;
-    /** 公開有無名称 */
-    private String publishFlgNm;
     /** 承認者月報ファイル */
     private MultipartFile file;
     /** 承認者ID1 */
@@ -71,14 +69,6 @@ public class ReportApproveRegistDto extends rms.common.abstracts.AbstractDto {
 
     public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
-    }
-
-    public String getPublishFlgNm() {
-        return publishFlgNm;
-    }
-
-    public void setPublishFlgNm(String publishFlgNm) {
-        this.publishFlgNm = publishFlgNm;
     }
 
     public MultipartFile getFile() {

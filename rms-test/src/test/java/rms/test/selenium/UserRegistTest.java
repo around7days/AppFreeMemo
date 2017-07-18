@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.test.selenium.page.メニュー画面;
 import rms.test.selenium.page.ユーザ一覧画面;
 import rms.test.selenium.page.ユーザ登録画面;
@@ -27,7 +28,7 @@ import selenium.base.AbstractSeleniumTest;
 public class UserRegistTest {
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+    @SpringBootTest(classes = SpringWebApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
     public static class 新規登録テストグループ extends AbstractSeleniumTest {
 
         @LocalServerPort
@@ -115,7 +116,7 @@ public class UserRegistTest {
     }
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+    @SpringBootTest(classes = SpringWebApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
     public static class 更新テストグループ extends AbstractSeleniumTest {
 
         @LocalServerPort

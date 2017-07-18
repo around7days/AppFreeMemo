@@ -13,7 +13,7 @@ public class ReportApplyListForm extends rms.common.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** ページ情報 */
-    private PageInfo pageInfo = new PageInfo();
+    private PageInfo pageInfo;
     /** 検索結果リスト */
     private List<ReportApplyListEntityResult> resultList;
 

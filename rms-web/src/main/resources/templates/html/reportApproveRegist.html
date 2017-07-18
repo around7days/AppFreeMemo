@@ -65,15 +65,8 @@
 					<div class="col-sm-9">
 						<p><button type="submit" id="download" formnovalidate="formnovalidate" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></p>
 					</div>
-					<!-- 公開有無 -->
-					<label class="col-sm-3 control-label">公開有無</label>
-					<div class="col-sm-9">
-						<p th:text="*{publishFlgNm}" class="form-control-static">公開</p>
-					</div>
-				</div>
 
-				<!-- 承認者 -->
-				<div class="form-group">
+					<!-- 承認者 -->
 					<!-- 承認者1 -->
 					<label class="col-sm-3 control-label">承認者１</label>
 					<div class="col-sm-9">
@@ -94,10 +87,8 @@
 					<div class="col-sm-9">
 						<p th:text="*{approveUserNm4}" class="form-control-static">承認一郎</p>
 					</div>
-				</div>
 
-				<!-- 承認者月報 -->
-				<div class="form-group">
+					<!-- 承認者月報 -->
 					<label class="col-sm-3 control-label">承認者月報</label>
 					<div class="col-sm-9">
 						<input type="file" name="file" id="file" accept=".xlsx" style="display:none" />

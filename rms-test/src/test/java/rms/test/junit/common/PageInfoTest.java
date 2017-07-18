@@ -11,10 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.common.utils.PageInfo;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = SpringWebApplication.class)
 public class PageInfoTest {
 
     /** logger */
@@ -38,8 +39,7 @@ public class PageInfoTest {
     public void ページ制御処理() {
         for (Fixture f : fixture) {
             logger.debug("◆test" + f.no);
-            PageInfo page = new PageInfo();
-            page.setLimit(f.limit);
+            PageInfo page = new PageInfo(f.limit);
             page.setPage(f.page);
             page.setTotalSize(f.totalSize);
 

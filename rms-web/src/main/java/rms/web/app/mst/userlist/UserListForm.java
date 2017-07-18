@@ -18,7 +18,7 @@ public class UserListForm extends rms.common.abstracts.AbstractForm {
     @Valid
     private UserListFormCondition condition = new UserListFormCondition();
     /** ページ情報 */
-    private PageInfo pageInfo = new PageInfo();
+    private PageInfo pageInfo;
     /** 検索結果リスト */
     private List<UserListEntityResult> resultList;
 

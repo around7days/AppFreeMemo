@@ -80,7 +80,10 @@ public class UserRegistServiceImpl implements UserRegistService {
             case MRoleConst.APPROVE: // 承認者
                 dto.setRoleApproveFlg(Const.FLG_ON);
                 break;
-            case MRoleConst.ADMIN: // 管理者者
+            case MRoleConst.REFERENCE: // 閲覧者
+                dto.setRoleReferenceFlg(Const.FLG_ON);
+                break;
+            case MRoleConst.ADMIN: // 管理者
                 dto.setRoleAdminFlg(Const.FLG_ON);
                 break;
             }
@@ -223,7 +226,12 @@ public class UserRegistServiceImpl implements UserRegistService {
             entity.setRole(MRoleConst.APPROVE);
             mUserRoleDao.insert(entity);
         }
-        // 管理者者の登録
+        // 閲覧者の登録
+        if (Const.FLG_ON.equals(dto.getRoleReferenceFlg())) {
+            entity.setRole(MRoleConst.REFERENCE);
+            mUserRoleDao.insert(entity);
+        }
+        // 管理者の登録
         if (Const.FLG_ON.equals(dto.getRoleAdminFlg())) {
             entity.setRole(MRoleConst.ADMIN);
             mUserRoleDao.insert(entity);

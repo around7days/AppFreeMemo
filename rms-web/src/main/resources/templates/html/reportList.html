@@ -56,20 +56,11 @@
 						<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" />
 					</div>
 				</div>
-				<!-- 申請者 -->
-				<div class="form-group">
-					<label class="col-sm-3 control-label">申請者</label>
-					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.applyUserId}" name="condition.applyUserId" id="condition.applyUserId" placeholder="申請者ID（完全一致）" class="form-control" />
-						<input type="text" th:value="*{condition.applyUserNm}" name="condition.applyUserNm" id="condition.applyUserNm" placeholder="申請者名（部分一致）" class="form-control" />
-					</div>
-				</div>
 				<!-- ボタン -->
 				<div class="text-center">
 					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">戻る <span class="glyphicon glyphicon-chevron-left"></span></button>
 					<button type="submit" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
 					<button type="submit" id="bulkDownload" formnovalidate="formnovalidate" class="btn btn-primary">月報一括DL <span class="glyphicon glyphicon-download"></span></button>
-					<button type="button" onclick="javascript:alert('実装していません')" class="btn btn-primary">提出状況DL <span class="glyphicon glyphicon-download"></span></button>
 				</div>
 			</div>
 
@@ -87,6 +78,7 @@
 						<tr>
 							<th>年月</th>
 							<th>申請者</th>
+							<th>部署</th>
 							<th>承認者１</th>
 							<th>承認者２</th>
 							<th>承認者３</th>
@@ -101,13 +93,18 @@
 						<tr th:each="result,iteStatus : *{resultList}">
 							<td th:text="${result.targetYm}">201606</td>
 							<td th:text="${result.applyUserNm}">月報太郎</td>
+							<td th:text="${result.departmentRnm}">1SOL</td>
 							<td th:text="${result.approveUserNm1}">承認者１</td>
 							<td th:text="${result.approveUserNm2}">承認者２</td>
 							<td th:text="${result.approveUserNm3}">承認者３</td>
 							<td th:text="${result.approveUserNm4}">承認者４</td>
 							<td th:text="${result.statusNm}">承認済み</td>
-							<td><button type="submit" name="download" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-link btn-sm">月報DL<span class="glyphicon glyphicon-download"></span></button></td>
-							<td><input type="checkbox" name="reportDLCheck" th:value="${iteStatus.index}" /></td>
+							<td>
+								<button type="submit" name="download" formnovalidate="formnovalidate" th:value="${iteStatus.index}" th:if="${result.reportDLFlg == true}" class="btn btn-link btn-sm">
+									月報DL<span class="glyphicon glyphicon-download"></span>
+								</button>
+							</td>
+							<td><input type="checkbox" name="reportDLCheck" th:value="${iteStatus.index}" th:if="${result.reportDLFlg == true}" /></td>
 						</tr>
 					</tbody>
 				</table>

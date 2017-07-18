@@ -14,12 +14,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.test.selenium.page.メニュー画面;
 import rms.test.selenium.page.ログイン画面;
 import selenium.base.AbstractSeleniumTest;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = SpringWebApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class MenuTest extends AbstractSeleniumTest {
 
     @LocalServerPort

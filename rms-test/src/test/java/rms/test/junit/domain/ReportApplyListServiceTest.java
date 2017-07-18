@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
 import rms.domain.app.tran.reportapplylist.ReportApplyListDtoCondition;
@@ -23,7 +24,7 @@ import rms.domain.app.tran.reportapplylist.ReportApplyListService;
 public class ReportApplyListServiceTest {
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class searchInterface {
 
         @Autowired
@@ -56,8 +57,7 @@ public class ReportApplyListServiceTest {
             // 検索
             ReportApplyListDtoCondition condition = new ReportApplyListDtoCondition();
             condition.setApplyUserId(userId);
-            PageInfo pageInfo = new PageInfo();
-            pageInfo.setLimit(Integer.MAX_VALUE); // テスト用に件数を無制限に設定
+            PageInfo pageInfo = new PageInfo(Integer.MAX_VALUE);// テスト用に件数を無制限に設定
             SearchResultDto<ReportApplyListEntityResult> resultDto = service.search(condition, pageInfo);
 
             // 検索結果件数の確認

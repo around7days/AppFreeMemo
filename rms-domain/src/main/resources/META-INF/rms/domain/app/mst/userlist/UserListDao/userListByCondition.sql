@@ -14,6 +14,7 @@ select
   ,mr1.role_nm as role_nm1
   ,mr2.role_nm as role_nm2
   ,mr3.role_nm as role_nm3
+  ,mr4.role_nm as role_nm4
 from
   v_m_user u
   left join v_m_user_role mr1
@@ -24,7 +25,10 @@ from
     and mr2.role = 'ROLE_APPROVE'
   left join v_m_user_role mr3
     on u.user_id = mr3.user_id
-    and mr3.role = 'ROLE_ADMIN'
+    and mr3.role = 'ROLE_REFERENCE'
+  left join v_m_user_role mr4
+    on u.user_id = mr4.user_id
+    and mr4.role = 'ROLE_ADMIN'
 where
 /*%if @isNotEmpty(condition.userId) */
   u.user_id = /* condition.userId */'user01'

@@ -84,9 +84,9 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String initInsert(ReportApplyListForm form,
                              Model model) {
-        // 検索結果・ページ情報の初期化
-        form.setPageInfo(new PageInfo());
-        form.setResultList(null);
+        // ページ情報の設定
+        int pageLimit = properties.getPageLimitDefault();
+        form.setPageInfo(new PageInfo(pageLimit));
 
         return urlHelper.redirect(MAPPING_URL, "search");
     }

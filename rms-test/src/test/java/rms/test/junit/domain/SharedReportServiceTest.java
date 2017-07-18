@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.common.consts.Const.StatusExecKbn;
 import rms.common.entity.VTReport;
 import rms.domain.app.shared.service.SharedReportServiceImpl;
@@ -26,7 +27,7 @@ public class SharedReportServiceTest {
     private static Logger logger = LoggerFactory.getLogger(SharedReportServiceTest.class);
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class searchInterface {
 
         @Autowired

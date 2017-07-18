@@ -43,8 +43,6 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
     /** 月報ファイル */
     @NotNullUploadFile(message = "月報：{NotNullUploadFile.message}", groups = { Apply.class, ReApply.class })
     private MultipartFile file;
-    /** 公開有無 */
-    private String publishFlg;
     /** 承認者ID1 */
     private String approveUserId1;
     /** 承認者ID2 */
@@ -108,14 +106,6 @@ public class ReportApplyRegistForm extends rms.common.abstracts.AbstractForm {
 
     public void setFile(MultipartFile file) {
         this.file = file;
-    }
-
-    public String getPublishFlg() {
-        return publishFlg;
-    }
-
-    public void setPublishFlg(String publishFlg) {
-        this.publishFlg = publishFlg;
     }
 
     public String getApproveUserId1() {

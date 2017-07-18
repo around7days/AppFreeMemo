@@ -29,8 +29,6 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
     private String applyUserNm;
     /** 年月 */
     private Integer targetYm;
-    /** 公開有無名称 */
-    private String publishFlgNm;
     /** 承認者月報ファイル */
     @NotNullUploadFile(message = "月報：{NotNullUploadFile.message}", groups = { Approve.class })
     private MultipartFile file;
@@ -83,14 +81,6 @@ public class ReportApproveRegistForm extends rms.common.abstracts.AbstractForm {
 
     public void setTargetYm(Integer targetYm) {
         this.targetYm = targetYm;
-    }
-
-    public String getPublishFlgNm() {
-        return publishFlgNm;
-    }
-
-    public void setPublishFlgNm(String publishFlgNm) {
-        this.publishFlgNm = publishFlgNm;
     }
 
     public MultipartFile getFile() {

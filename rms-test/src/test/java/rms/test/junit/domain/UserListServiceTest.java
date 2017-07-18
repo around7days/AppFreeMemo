@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringWebApplication;
 import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
 import rms.domain.app.mst.userlist.UserListDtoCondition;
@@ -20,7 +21,7 @@ import rms.domain.app.mst.userlist.UserListService;
 public class UserListServiceTest {
 
     @RunWith(SpringRunner.class)
-    @SpringBootTest
+    @SpringBootTest(classes = SpringWebApplication.class)
     public static class searchInterface {
 
         @Autowired
@@ -31,7 +32,8 @@ public class UserListServiceTest {
             UserListDtoCondition condition = new UserListDtoCondition();
             condition.setUserId("user01");
 
-            SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
+            SearchResultDto<UserListEntityResult> resultDto = service.search(condition,
+                                                                             new PageInfo(Integer.MAX_VALUE));
 
             UserListEntityResult result = resultDto.getResultList().get(0);
             assertThat(result.getUserId(), is("user01"));
@@ -50,7 +52,8 @@ public class UserListServiceTest {
             UserListDtoCondition condition = new UserListDtoCondition();
             condition.setUserId("userXX");
 
-            SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo());
+            SearchResultDto<UserListEntityResult> resultDto = service.search(condition,
+                                                                             new PageInfo(Integer.MAX_VALUE));
 
             assertThat(resultDto.getCount(), is(Long.valueOf(0)));
         }

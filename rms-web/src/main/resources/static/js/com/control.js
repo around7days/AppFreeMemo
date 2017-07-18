@@ -39,7 +39,8 @@ $(function() {
 		paging : false,
 		searching : true,
 		ordering : true,
-		info : false
+		info : false,
+		order: []
 	});
 
 	/**

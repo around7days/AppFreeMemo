@@ -21,8 +21,6 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
     private Integer targetYm;
     /** 月報ファイル */
     private MultipartFile file;
-    /** 公開有無 */
-    private String publishFlg;
     /** 承認者ID1 */
     private String approveUserId1;
     /** 承認者ID2 */
@@ -78,14 +76,6 @@ public class ReportApplyRegistDto extends rms.common.abstracts.AbstractDto {
 
     public void setFile(MultipartFile file) {
         this.file = file;
-    }
-
-    public String getPublishFlg() {
-        return publishFlg;
-    }
-
-    public void setPublishFlg(String publishFlg) {
-        this.publishFlg = publishFlg;
     }
 
     public String getApproveUserId1() {

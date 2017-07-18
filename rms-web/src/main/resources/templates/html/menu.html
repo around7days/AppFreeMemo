@@ -49,15 +49,17 @@
 			<div>
 				<!-- メニュータブ -->
 				<ul class="nav nav-tabs">
-					<li role="presentation" class="active"><a href="#">メニュー１</a></li>
-					<li role="presentation"><a href="#" onclick="javascript:alert('実装していません')">メニュー２</a></li>
-					<li role="presentation"><a href="#" onclick="javascript:alert('実装していません')">メニュー３</a></li>
+					<li role="presentation" class="active"><a href="#">メニュー</a></li>
 				</ul>
 				<!-- メニュー明細 -->
 				<div class="list-group" id="menuList">
 					<div th:if="*{principal.roleAdmin}">
 						<button type="submit" name="M001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ一覧</button>
 						<button type="submit" name="M002" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ登録</button>
+						<button type="submit" name="T001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧</button>
+					</div>
+
+					<div th:if="*{principal.roleReference}">
 						<button type="submit" name="T001" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧</button>
 					</div>
 
@@ -70,7 +72,7 @@
 						<button type="submit" name="T006" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認状況一覧</button>
 					</div>
 
-					<button type="button" onclick="javascript:alert('実装していません')" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　利用者情報修正</button>
+					<button type="button" onclick="javascript:alert('今後実装予定')" class="list-group-item" ><span class="glyphicon glyphicon glyphicon-hand-right"></span>　パスワード変更</button>
 
 				</div>
 			</div>

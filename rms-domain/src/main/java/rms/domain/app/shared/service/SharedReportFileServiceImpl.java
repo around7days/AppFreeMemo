@@ -248,7 +248,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
      * @param applyUserNm
      * @param targetYm
      * @param departmentRnm
-     * @return ファイル名[yyyy mm 作業月報【departmentRnm)userNm_userId】.xlsx]
+     * @return ファイル名[yyyy mm 作業月報【departmentRnm)userNm】.xlsx]
      */
     private String createReportDownlaodFileNm2(String applyUserId,
                                                String applyUserNm,
@@ -264,7 +264,7 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
         sb.append(yyyy).append(" ").append(mm).append(" ");
         sb.append("作業月報");
         sb.append("【");
-        sb.append(departmentRnm).append(")").append(applyUserId).append("_").append(newApplyUserNm);
+        sb.append(departmentRnm).append(")").append(newApplyUserNm);
         sb.append("】");
         sb.append(".xlsx");
 

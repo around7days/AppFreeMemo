@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 
+import rms.common.consts.MCodeConst;
+
 /**
  * 月報一覧（検索結果）クラス
  */
@@ -27,13 +29,9 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "apply_date")
     private LocalDateTime applyDate;
 
-    /** 公開有無 */
-    @Column(name = "publish_flg")
-    private String publishFlg;
-
-    /** 公開有無名称 */
-    @Column(name = "publish_flg_nm")
-    private String publishFlgNm;
+    /** 部署略称 */
+    @Column(name = "department_rnm")
+    private String departmentRnm;
 
     /** 承認状況 */
     @Column(name = "status")
@@ -111,20 +109,12 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
         this.applyDate = applyDate;
     }
 
-    public String getPublishFlg() {
-        return publishFlg;
+    public String getDepartmentRnm() {
+        return departmentRnm;
     }
 
-    public void setPublishFlg(String publishFlg) {
-        this.publishFlg = publishFlg;
-    }
-
-    public String getPublishFlgNm() {
-        return publishFlgNm;
-    }
-
-    public void setPublishFlgNm(String publishFlgNm) {
-        this.publishFlgNm = publishFlgNm;
+    public void setDepartmentRnm(String departmentRnm) {
+        this.departmentRnm = departmentRnm;
     }
 
     public String getStatus() {
@@ -213,6 +203,25 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    /**
+     * 月報DLフラグ
+     * @return true:DL可能 false:DL不可
+     */
+    public boolean isReportDLFlg() {
+        boolean flg = false;
+
+        switch (this.getStatus()) {
+        // case MCodeConst.A001_Y01: // 承認待ち１
+        // case MCodeConst.A001_Y02: // 承認待ち２
+        // case MCodeConst.A001_Y03: // 承認待ち３
+        // case MCodeConst.A001_Y04: // 承認待ち４
+        case MCodeConst.A001_ZZZ: // 承認済み
+            flg = true;
+        }
+
+        return flg;
     }
 
 }

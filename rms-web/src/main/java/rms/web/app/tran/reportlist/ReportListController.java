@@ -44,12 +44,12 @@ import rms.web.app.tran.reportlist.ReportListForm.Search;
 
 /**
  * 月報一覧画面コントローラー<br>
- * 役割：管理者のみ
+ * 役割：管理者、閲覧者
  * @author
  */
 @Controller
 @SessionAttributes(types = ReportListForm.class)
-@Secured(value = { MRoleConst.ADMIN })
+@Secured(value = { MRoleConst.ADMIN, MRoleConst.REFERENCE })
 public class ReportListController extends rms.common.abstracts.AbstractController {
 
     /** logger */
@@ -90,6 +90,10 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(ReportListForm form,
                        Model model) {
+        // ページ情報の設定
+        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
+        form.setPageInfo(new PageInfo(pageLimit));
+
         return PAGE_URL;
     }
 
@@ -112,26 +116,22 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
             return PAGE_URL;
         }
 
-        // 検索結果・ページ情報の初期化
-        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
-        form.setPageInfo(new PageInfo(pageLimit));
-        form.setResultList(null);
-
         // 検索条件の生成
         ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
                                                                              ReportListDtoCondition.class);
 
         // 検索処理
         SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+
+        // 検索結果をフォームに反映
+        form.setResultList(resultDto.getResultList());
+        form.getPageInfo().setTotalSize(resultDto.getCount());
+
         if (resultDto.getResultList().isEmpty()) {
             // 「検索結果が見つかりません」
             model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error006));
             return PAGE_URL;
         }
-
-        // 検索結果をフォームに反映
-        form.setResultList(resultDto.getResultList());
-        form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
     }
