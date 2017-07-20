@@ -23,11 +23,14 @@ $(function() {
 	/**
 	 * 年月カレンダー表示
 	 */
+	$(".datepicker-ym").focus(function(){ $(this).blur();});
+	$(".datepicker-ym").keydown(function(){ return false;});
 	$(".datepicker-ym").datepicker({
 		format : "yyyymm",
 		language : "ja",
 		minViewMode : "months",
 		orientation : "bottom auto",
+		clearBtn: true,
 		autoclose : true
 	});
 
