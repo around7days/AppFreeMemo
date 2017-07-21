@@ -1,6 +1,22 @@
 $(function() {
 
 	/**
+	 * 多重submit防止<br>
+	 * （一定秒画面をロック）
+	 */
+	$("form").on("submit", function() {
+		$.blockUI({
+			overlayCSS : {
+				backgroundColor : "#ffffff",
+				opacity : 0.0
+			},
+			message : null
+		});
+
+		setTimeout($.unblockUI, 5000);
+	})
+
+	/**
 	 * inputタグ内のEnterキー無効
 	 */
 	$("input").keydown(function(e) {
@@ -30,7 +46,7 @@ $(function() {
 		language : "ja",
 		minViewMode : "months",
 		orientation : "bottom auto",
-		clearBtn: true,
+		clearBtn : true,
 		autoclose : true
 	});
 
@@ -43,7 +59,7 @@ $(function() {
 		searching : true,
 		ordering : true,
 		info : false,
-		order: []
+		order : []
 	});
 
 	/**
