@@ -13,7 +13,7 @@ $(function() {
 			message : null
 		});
 
-		setTimeout($.unblockUI, 5000);
+		setTimeout($.unblockUI, 3000);
 	})
 
 	/**

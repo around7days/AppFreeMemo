@@ -21,7 +21,6 @@ import rms.common.consts.MessageEnum;
 public class MessageSourceEnumAccessor {
 
     /** MessageSource */
-    @Autowired
     private static MessageSource message;
 
     @Autowired
