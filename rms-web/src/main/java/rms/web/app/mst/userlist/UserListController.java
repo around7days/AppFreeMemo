@@ -23,7 +23,6 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.PageInfo;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.mst.userlist.UserListDtoCondition;
@@ -76,10 +75,6 @@ public class UserListController extends rms.common.abstracts.AbstractController 
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(UserListForm form,
                        Model model) {
-        // ページ情報の設定
-        Integer pageLimit = properties.getPageLimitDefault();
-        form.setPageInfo(new PageInfo(pageLimit));
-
         return PAGE_URL;
     }
 

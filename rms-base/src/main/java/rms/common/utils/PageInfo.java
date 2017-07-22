@@ -7,6 +7,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import rms.common.base.ProjectPropertiesStaticAccessor;
+
 /**
  * ページ情報
  * @author
@@ -15,8 +17,23 @@ public class PageInfo {
     /** logger */
     private static Logger logger = LoggerFactory.getLogger(PageInfo.class);
 
+    /** 1ページ表示件数（デフォルト） */
+    public static final int LIMIT_DEFAULT = ProjectPropertiesStaticAccessor.properties.getPageLimitDefault();
+    /** 1ページ表示件数（5件） */
+    public static final int LIMIT_5 = 5;
+    /** 1ページ表示件数（20件） */
+    public static final int LIMIT_20 = 20;
+    /** 1ページ表示件数（50件） */
+    public static final int LIMIT_50 = 50;
+    /** 1ページ表示件数（100件） */
+    public static final int LIMIT_100 = 100;
+    /** 1ページ表示件数（200件） */
+    public static final int LIMIT_200 = 200;
+    /** 1ページ表示件数（無制限） */
+    public static final int LIMIT_MAX = Integer.MAX_VALUE;
+
     /** 1ページ表示件数 */
-    private int limit = 0; // TODO 本当はプロパティファイルから取得した値を使いたい・・・
+    private int limit = PageInfo.LIMIT_DEFAULT;
 
     /** 表示ページ */
     private int page = 1;
@@ -25,6 +42,12 @@ public class PageInfo {
     private int totalSize = 0;
 
     /*-----------------------------------------------------------------------*/
+    /**
+     * コンストラクタ
+     */
+    public PageInfo() {
+    }
+
     /**
      * コンストラクタ
      * @param limit

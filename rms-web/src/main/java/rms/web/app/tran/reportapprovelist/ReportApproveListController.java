@@ -31,7 +31,6 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.PageInfo;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
 import rms.common.utils.RmsSessionUtils;
@@ -97,16 +96,10 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
                        Model model) {
         // 初期表示用情報を取得
         ReportApproveListDtoCondition dto = service.initDisplay();
-
         // 値を設定
         RmsBeanUtils.copyProperties(dto, form.getCondition());
 
-        // ページ情報の設定
-        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
-        form.setPageInfo(new PageInfo(pageLimit));
-
         logger.debug("出力フォーム情報 -> {}", form);
-
         return PAGE_URL;
     }
 

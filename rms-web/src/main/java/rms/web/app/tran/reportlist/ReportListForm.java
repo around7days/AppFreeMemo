@@ -25,7 +25,7 @@ public class ReportListForm extends rms.common.abstracts.AbstractForm {
     @Valid
     private ReportListFormCondition condition = new ReportListFormCondition();
     /** ページ情報 */
-    private PageInfo pageInfo;
+    private PageInfo pageInfo = new PageInfo(PageInfo.LIMIT_200);
     /** 検索結果リスト */
     private List<ReportListEntityResult> resultList;
     /** 検索結果チェックボックス選択リスト */

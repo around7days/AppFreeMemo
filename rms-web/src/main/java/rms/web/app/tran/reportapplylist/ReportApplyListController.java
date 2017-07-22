@@ -25,7 +25,6 @@ import rms.common.base.BusinessException;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.PageInfo;
 import rms.common.utils.RmsFileUtils;
 import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.shared.dto.SharedFileDto;
@@ -84,10 +83,6 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String initInsert(ReportApplyListForm form,
                              Model model) {
-        // ページ情報の設定
-        int pageLimit = properties.getPageLimitDefault();
-        form.setPageInfo(new PageInfo(pageLimit));
-
         return urlHelper.redirect(MAPPING_URL, "search");
     }
 

@@ -28,7 +28,6 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.dto.SearchResultDto;
-import rms.common.utils.PageInfo;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
 import rms.common.utils.RmsSessionUtils;
@@ -90,10 +89,6 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
     @RequestMapping(value = MAPPING_URL, params = "init")
     public String init(ReportListForm form,
                        Model model) {
-        // ページ情報の設定
-        int pageLimit = Integer.MAX_VALUE; // 件数を無制限に設定
-        form.setPageInfo(new PageInfo(pageLimit));
-
         return PAGE_URL;
     }
 
