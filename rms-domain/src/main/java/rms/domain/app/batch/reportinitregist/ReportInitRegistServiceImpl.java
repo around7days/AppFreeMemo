@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import rms.common.base.BusinessException;
 import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
+import rms.common.consts.MessageEnum;
 import rms.common.dao.MUserApproveFlowDao;
 import rms.common.dao.TReportApproveFlowDao;
 import rms.common.dao.TReportDao;
@@ -54,12 +56,7 @@ public class ReportInitRegistServiceImpl implements ReportInitRegistService {
     private ReportInitRegistDao dao;
 
     @Override
-    public boolean regist(Integer targetYm) {
-        // パラメータチェック
-        if (!RmsUtils.isTargetYmCheck(targetYm)) {
-            logger.error("対象年月(yyyymm)の指定が不正です -> {}", targetYm);
-            return false;
-        }
+    public void regist(Integer targetYm) throws Exception {
 
         // 実行日付の取得
         LocalDate execDate = properties.getSysdate();
@@ -71,8 +68,8 @@ public class ReportInitRegistServiceImpl implements ReportInitRegistService {
         if (execDate.isBefore(switchDate)) {
             // 実行日付 < 月報提出可能日
             String params = switchDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-            logger.warn("{}の月報初期データは{}以降に作成可能です。", targetYm, params);
-            return false;
+            // 「{}の月報初期データは{}以降に作成可能です。」
+            throw new BusinessException(MessageEnum.error017, RmsUtils.formatTargetYm(targetYm), params);
         }
 
         // 指定された対象年月の月報が存在しないユーザ一覧を取得
@@ -101,8 +98,6 @@ public class ReportInitRegistServiceImpl implements ReportInitRegistService {
                 tReportApproveFlowDao.insert(reportFlow);
             }
         }
-
-        return true;
     }
 
 }
