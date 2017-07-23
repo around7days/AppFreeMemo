@@ -1,11 +1,12 @@
-package rms.common.base;
+package rms.common.utils;
 
-import rms.common.utils.RmsStringUtils;
+import org.springframework.stereotype.Component;
 
 /**
  * URL生成補助クラス
  * @author
  */
+@Component
 public class UrlCreateHelper {
 
     /**

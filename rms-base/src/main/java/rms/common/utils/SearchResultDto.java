@@ -1,4 +1,4 @@
-package rms.common.dto;
+package rms.common.utils;
 
 import java.util.List;
 

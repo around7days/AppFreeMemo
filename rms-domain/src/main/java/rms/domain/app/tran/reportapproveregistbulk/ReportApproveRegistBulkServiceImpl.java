@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import rms.common.auth.UserInfo;
-import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
 import rms.common.consts.MessageEnum;
@@ -24,6 +23,7 @@ import rms.common.dao.VTReportDao;
 import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VTReport;
+import rms.common.exception.BusinessException;
 import rms.common.utils.RmsNumberUtils;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;

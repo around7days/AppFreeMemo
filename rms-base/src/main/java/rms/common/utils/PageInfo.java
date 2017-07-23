@@ -7,8 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rms.common.base.ProjectPropertiesStaticAccessor;
-
 /**
  * ページ情報
  * @author

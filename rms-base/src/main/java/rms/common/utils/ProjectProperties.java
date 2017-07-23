@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.common.utils;
 
 import java.time.LocalDate;
 

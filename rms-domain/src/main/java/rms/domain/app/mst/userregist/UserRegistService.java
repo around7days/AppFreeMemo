@@ -2,7 +2,7 @@ package rms.domain.app.mst.userregist;
 
 import java.util.List;
 
-import rms.common.base.BusinessException;
+import rms.common.exception.BusinessException;
 import rms.common.utils.SelectOptionEntity;
 
 /**

@@ -16,10 +16,10 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.common.base.BusinessException;
 import rms.common.dao.MUserRoleDao;
 import rms.common.dao.VMUserDao;
 import rms.common.entity.VMUser;
+import rms.common.exception.BusinessException;
 import rms.domain.app.mst.userregist.UserRegistDto;
 import rms.domain.app.mst.userregist.UserRegistService;
 

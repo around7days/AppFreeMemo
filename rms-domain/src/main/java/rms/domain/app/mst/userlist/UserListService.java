@@ -1,7 +1,7 @@
 package rms.domain.app.mst.userlist;
 
-import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
+import rms.common.utils.SearchResultDto;
 
 /**
  * ユーザ一覧画面サービスインタフェース

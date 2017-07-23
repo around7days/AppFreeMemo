@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import rms.common.abstracts.AbstractBatch;
-import rms.common.base.BusinessException;
-import rms.common.base.ProjectProperties;
 import rms.common.consts.MessageEnum;
+import rms.common.exception.BusinessException;
+import rms.common.utils.ProjectProperties;
 import rms.common.utils.RmsUtils;
 import rms.domain.app.batch.reportinitregist.ReportInitRegistService;
 

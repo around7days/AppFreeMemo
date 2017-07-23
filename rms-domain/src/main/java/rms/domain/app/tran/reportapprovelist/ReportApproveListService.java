@@ -1,7 +1,7 @@
 package rms.domain.app.tran.reportapprovelist;
 
-import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
+import rms.common.utils.SearchResultDto;
 
 /**
  * 月報承認状況一覧画面サービスインタフェース

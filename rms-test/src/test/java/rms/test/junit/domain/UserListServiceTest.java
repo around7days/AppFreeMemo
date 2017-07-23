@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
+import rms.common.utils.SearchResultDto;
 import rms.domain.app.mst.userlist.UserListDtoCondition;
 import rms.domain.app.mst.userlist.UserListEntityResult;
 import rms.domain.app.mst.userlist.UserListService;

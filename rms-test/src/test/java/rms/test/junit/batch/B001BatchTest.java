@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringBatchApplication;
 import rms.batch.app.B001Batch;
-import rms.common.base.BusinessException;
 import rms.common.consts.MessageEnum;
+import rms.common.exception.BusinessException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBatchApplication.class)

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import rms.common.base.BusinessException;
 import rms.common.base.WebSecurityConfig;
 import rms.common.consts.MessageTypeConst;
+import rms.common.exception.BusinessException;
 import rms.common.utils.RmsSessionUtils;
 import rms.web.app.mst.userlist.UserListController;
 import rms.web.app.mst.userregist.UserRegistController;

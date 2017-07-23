@@ -2,7 +2,7 @@ package rms.domain.app.tran.reportapplyregist;
 
 import java.io.IOException;
 
-import rms.common.base.BusinessException;
+import rms.common.exception.BusinessException;
 
 /**
  * 月報申請画面サービス

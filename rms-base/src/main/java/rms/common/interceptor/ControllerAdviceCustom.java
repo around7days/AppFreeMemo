@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import rms.common.base.ProjectProperties;
+import rms.common.utils.ProjectProperties;
 import rms.common.utils.RmsStringUtils;
 
 /**

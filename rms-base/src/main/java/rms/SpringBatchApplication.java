@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import rms.batch.app.BatchMain;
-import rms.common.base.BusinessException;
+import rms.common.exception.BusinessException;
 
 /**
  * SpringBatchApplicationクラス*

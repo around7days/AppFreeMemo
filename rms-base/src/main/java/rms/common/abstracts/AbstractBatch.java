@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import rms.common.base.ProjectProperties;
+import rms.common.utils.ProjectProperties;
 
 /**
  * AbstractController

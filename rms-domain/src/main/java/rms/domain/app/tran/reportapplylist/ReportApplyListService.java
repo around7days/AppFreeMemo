@@ -1,7 +1,7 @@
 package rms.domain.app.tran.reportapplylist;
 
-import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
+import rms.common.utils.SearchResultDto;
 
 /**
  * 月報申請状況一覧画面サービスインタフェース

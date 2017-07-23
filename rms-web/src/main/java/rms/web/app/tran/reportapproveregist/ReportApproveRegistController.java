@@ -23,10 +23,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import rms.common.auth.UserInfo;
-import rms.common.base.BusinessException;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
+import rms.common.exception.BusinessException;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
 import rms.common.utils.RmsSessionUtils;

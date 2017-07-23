@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.common.utils;
 
 import javax.annotation.PostConstruct;
 

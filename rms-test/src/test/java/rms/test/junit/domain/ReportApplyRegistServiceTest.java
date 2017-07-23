@@ -19,9 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import rms.SpringWebApplication;
-import rms.common.base.BusinessException;
 import rms.common.dao.VTReportDao;
 import rms.common.entity.VTReport;
+import rms.common.exception.BusinessException;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
 

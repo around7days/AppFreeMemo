@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rms.common.base.BusinessException;
 import rms.common.consts.Const;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
@@ -21,6 +20,7 @@ import rms.common.entity.MUser;
 import rms.common.entity.MUserApproveFlow;
 import rms.common.entity.MUserRole;
 import rms.common.entity.VMUser;
+import rms.common.exception.BusinessException;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsStringUtils;
 import rms.common.utils.SelectOptionEntity;

@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.base.BusinessException;
 import rms.common.consts.Const.ReportNmPattern;
+import rms.common.exception.BusinessException;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 

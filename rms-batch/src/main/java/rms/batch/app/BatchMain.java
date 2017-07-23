@@ -10,8 +10,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Component;
 
 import rms.common.abstracts.AbstractBatch;
-import rms.common.base.BusinessException;
 import rms.common.consts.MessageEnum;
+import rms.common.exception.BusinessException;
 
 /**
  * バッチ処理Mainクラス<br>

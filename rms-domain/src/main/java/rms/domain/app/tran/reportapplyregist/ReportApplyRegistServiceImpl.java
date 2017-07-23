@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rms.common.base.BusinessException;
-import rms.common.base.ProjectProperties;
 import rms.common.consts.Const;
 import rms.common.consts.MCodeConst;
 import rms.common.consts.MessageEnum;
@@ -24,6 +22,8 @@ import rms.common.entity.TReport;
 import rms.common.entity.TReportApproveFlow;
 import rms.common.entity.VMUser;
 import rms.common.entity.VTReport;
+import rms.common.exception.BusinessException;
+import rms.common.utils.ProjectProperties;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsStringUtils;
 import rms.common.utils.RmsUtils;

@@ -14,8 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.common.dto.SearchResultDto;
 import rms.common.utils.PageInfo;
+import rms.common.utils.SearchResultDto;
 import rms.domain.app.tran.reportapplylist.ReportApplyListDtoCondition;
 import rms.domain.app.tran.reportapplylist.ReportApplyListEntityResult;
 import rms.domain.app.tran.reportapplylist.ReportApplyListService;

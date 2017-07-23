@@ -1,4 +1,4 @@
-package rms.common.base;
+package rms.common.exception;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import rms.common.consts.MessageEnum;
+import rms.common.utils.MessageSourceEnumAccessor;
 
 /**
  * 業務ロジックチェックException<br>

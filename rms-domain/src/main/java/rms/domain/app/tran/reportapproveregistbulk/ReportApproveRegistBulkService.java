@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import rms.common.auth.UserInfo;
-import rms.common.base.BusinessException;
+import rms.common.exception.BusinessException;
 
 /**
  * 月報一括承認画面サービス
