@@ -56,7 +56,7 @@ public class RmsUtils {
      * @param targetYm
      * @return 結果 [true:正常 false:異常]
      */
-    public static boolean isTargetYmCheck(Integer targetYm) {
+    public static boolean isTargetYmCheck(Object targetYm) {
         if (targetYm == null) {
             return false;
         }
@@ -80,22 +80,32 @@ public class RmsUtils {
         return true;
     }
 
-    // /**
-    // * 年月から年を取得
-    // * @param targetYm
-    // * @return year
-    // */
-    // public static int getYear(Integer targetYm) {
-    // return Integer.valueOf(targetYm.toString().substring(0, 4));
-    // }
-    //
-    // /**
-    // * 年月から月を取得
-    // * @param targetYm
-    // * @return month
-    // */
-    // public static int getMonth(Integer targetYm) {
-    // return Integer.valueOf(targetYm.toString().substring(4, 6));
-    // }
+    /**
+     * 年月のフォーマット変換<br>
+     * yyyymm → yyyy/mm
+     * @param targetYm
+     * @return yyyy/mm
+     */
+    public static String formatTargetYm(Integer targetYm) {
+        return RmsUtils.getTargetYear(targetYm) + "/" + RmsUtils.getTargetMonth(targetYm);
+    }
+
+    /**
+     * 年月から年を取得
+     * @param targetYm
+     * @return year
+     */
+    public static Integer getTargetYear(Integer targetYm) {
+        return Integer.valueOf(targetYm.toString().substring(0, 4));
+    }
+
+    /**
+     * 年月から月を取得
+     * @param targetYm
+     * @return month
+     */
+    public static Integer getTargetMonth(Integer targetYm) {
+        return Integer.valueOf(targetYm.toString().substring(4, 6));
+    }
 
 }
