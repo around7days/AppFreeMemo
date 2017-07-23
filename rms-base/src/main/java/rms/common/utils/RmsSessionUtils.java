@@ -27,7 +27,7 @@ public class RmsSessionUtils {
     /** セッションキー除外対象リスト */
     private static final List<String> ignoreKeyList = Arrays.asList("SPRING_SECURITY_CONTEXT", // SPRING_SECURITY_CONTEXT
                                                                     "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN", // CRLFトークン
-                                                                    "theme" // CSSテーマ
+                                                                    RmsSessionInfo.KEY.RMS_SESSION_INFO.name() // アプリケーション固有セッション情報
     );
 
     /**
