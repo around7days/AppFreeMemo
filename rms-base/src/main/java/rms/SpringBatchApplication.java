@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import rms.batch.app.BatchFacade;
+import rms.batch.app.BatchMain;
 import rms.common.base.BusinessException;
 
 /**
@@ -20,9 +20,9 @@ public class SpringBatchApplication {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(SpringBatchApplication.class);
 
-    /** バッチ処理Facade */
+    /** バッチ処理Main */
     @Autowired
-    private BatchFacade batchFacade;
+    private BatchMain batchMain;
 
     /**
      * メイン起動
@@ -52,12 +52,12 @@ public class SpringBatchApplication {
 
     /**
      * 実行<br>
-     * コマンドライン引数はDI経由で取得する為、batchFacadeに渡さない。
+     * コマンドライン引数はDI経由で取得する為、batchMainに渡さない。
      * @param args
      * @throws Exception
      */
     private void run(String[] args) throws Exception {
-        batchFacade.call();
+        batchMain.call();
     }
 
 }
