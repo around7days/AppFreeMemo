@@ -40,7 +40,7 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     public static final String MAPPING_URL = WebSecurityConfig.MENU_MAPPING_URL;
 
     /** 画面ID */
-    public static final String SCREEN_ID = "S001";
+    public static final String SCREEN_ID = "S002";
 
     /**
      * メニュー画面フォームの初期化
