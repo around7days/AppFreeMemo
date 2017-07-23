@@ -25,13 +25,14 @@ import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.exception.BusinessException;
 import rms.common.utils.RmsBeanUtils;
-import rms.common.utils.SelectOptionEntity;
 import rms.common.utils.RmsSessionUtils;
+import rms.common.utils.SelectOptionEntity;
 import rms.domain.app.mst.userregist.UserRegistDto;
 import rms.domain.app.mst.userregist.UserRegistService;
 import rms.web.app.mst.userlist.UserListController;
 import rms.web.app.mst.userregist.UserRegistForm.Insert;
 import rms.web.app.mst.userregist.UserRegistForm.Update;
+import rms.web.app.system.menu.MenuController;
 
 /**
  * ユーザ登録画面コントローラー<br>
@@ -202,10 +203,15 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
     public String back(SessionStatus sessionStatus) {
-        // TODO 遷移元画面によって戻り先を分岐させる必要がある
         // セッション破棄
         sessionStatus.setComplete();
-        return urlHelper.redirect(UserListController.MAPPING_URL, "reSearch");
+        if (MenuController.SCREEN_ID.equals(rmsSessionInfo.getPreScreenId())) {
+            // 前画面がメニューの場合
+            return urlHelper.redirect(MenuController.MAPPING_URL);
+        } else {
+            // 前画面がユーザ一覧画面の場合
+            return urlHelper.redirect(UserListController.MAPPING_URL, "reSearch");
+        }
     }
 
     /*
