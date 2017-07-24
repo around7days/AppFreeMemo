@@ -77,10 +77,6 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
     @Column(name = "approve_user_nm4")
     private String approveUserNm4;
 
-    /** 月報ファイルパス */
-    @Column(name = "file_path")
-    private String filePath;
-
     public String getApproveUserId() {
         return approveUserId;
     }
@@ -207,14 +203,6 @@ public class ReportApproveListEntityResult extends rms.common.abstracts.Abstract
 
     public void setApproveUserNm4(String approveUserNm4) {
         this.approveUserNm4 = approveUserNm4;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
     }
 
     // TODO ここに書くべきではない？検索条件にしたい場合はやっぱりSQLで下記判定を行う必要がある。

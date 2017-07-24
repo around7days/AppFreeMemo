@@ -14,7 +14,6 @@ select
   , A.approve_user_nm3
   , A.approve_user_id4
   , A.approve_user_nm4
-  , A.file_path
 from
   v_t_report A
 where

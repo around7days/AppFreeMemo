@@ -73,10 +73,6 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
     @Column(name = "approve_user_nm4")
     private String approveUserNm4;
 
-    /** 月報ファイルパス */
-    @Column(name = "file_path")
-    private String filePath;
-
     public String getApplyUserId() {
         return applyUserId;
     }
@@ -195,14 +191,6 @@ public class ReportListEntityResult extends rms.common.abstracts.AbstractEntity 
 
     public void setApproveUserNm4(String approveUserNm4) {
         this.approveUserNm4 = approveUserNm4;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
     }
 
     /**
