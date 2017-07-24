@@ -77,7 +77,7 @@ DELETE FROM M_USER_APPROVE_FLOW;
 INSERT INTO M_USER_APPROVE_FLOW VALUES ('user01', 1, 'user06', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO M_USER_APPROVE_FLOW VALUES ('user01', 2, 'user07', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO M_USER_APPROVE_FLOW VALUES ('user01', 3, 'user08', 0, 0, now(), 'system', now(), 'system');
-INSERT INTO M_USER_APPROVE_FLOW VALUES ('user01', 3, 'user09', 0, 0, now(), 'system', now(), 'system');
+INSERT INTO M_USER_APPROVE_FLOW VALUES ('user01', 4, 'user09', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO M_USER_APPROVE_FLOW VALUES ('user02', 2, 'user07', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO M_USER_APPROVE_FLOW VALUES ('user02', 3, 'user08', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO M_USER_APPROVE_FLOW VALUES ('user03', 3, 'user08', 0, 0, now(), 'system', now(), 'system');
