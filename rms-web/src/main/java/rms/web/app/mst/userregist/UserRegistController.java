@@ -198,14 +198,18 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
     /**
      * 戻る処理
+     * @param session
      * @param sessionStatus
      * @return
      */
     @RequestMapping(value = MAPPING_URL, params = "back")
-    public String back(SessionStatus sessionStatus) {
+    public String back(HttpSession session,
+                       SessionStatus sessionStatus) {
         // セッション破棄
         sessionStatus.setComplete();
-        if (MenuController.SCREEN_ID.equals(rmsSessionInfo.getPreScreenId())) {
+
+        String preScreenId = RmsSessionUtils.getRmsSessionInfo(session).getPreScreenId();
+        if (MenuController.SCREEN_ID.equals(preScreenId)) {
             // 前画面がメニューの場合
             return urlHelper.redirect(MenuController.MAPPING_URL);
         } else {

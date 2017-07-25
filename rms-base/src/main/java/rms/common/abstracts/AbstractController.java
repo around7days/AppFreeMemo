@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import rms.common.utils.MessageSourceEnumAccessor;
 import rms.common.utils.ProjectProperties;
 import rms.common.utils.RmsSessionInfo;
+import rms.common.utils.RmsSessionUtils;
 import rms.common.utils.UrlCreateHelper;
 
 /**
@@ -19,6 +20,7 @@ import rms.common.utils.UrlCreateHelper;
 public abstract class AbstractController {
 
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(AbstractController.class);
 
     /** MessageSource */
@@ -33,10 +35,6 @@ public abstract class AbstractController {
     @Autowired
     protected UrlCreateHelper urlHelper;
 
-    /** RmsSessionInfo */
-    @Autowired
-    protected RmsSessionInfo rmsSessionInfo;
-
     /**
      * 画面IDの取得
      * @return
@@ -49,6 +47,9 @@ public abstract class AbstractController {
      */
     @ModelAttribute
     protected void saveScreenId(HttpSession session) {
+        // アプリケーション固有セッション情報の取得
+        RmsSessionInfo rmsSessionInfo = RmsSessionUtils.getRmsSessionInfo(session);
+
         String newScreenId = getScreenId();
         String screenId = rmsSessionInfo.getScreenId();
 
@@ -58,8 +59,5 @@ public abstract class AbstractController {
         if (!newScreenId.equals(screenId)) {
             rmsSessionInfo.setPreScreenId(screenId);
         }
-
-        logger.debug("screenId    -> " + rmsSessionInfo.getScreenId());
-        logger.debug("preScreenId -> " + rmsSessionInfo.getPreScreenId());
     }
 }

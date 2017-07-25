@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import rms.common.utils.ProjectProperties;
 import rms.common.utils.RmsSessionInfo;
+import rms.common.utils.RmsSessionUtils;
 import rms.common.utils.RmsStringUtils;
 
 /**
@@ -32,10 +33,6 @@ public class ControllerAdviceCustom {
     @Autowired
     private ProjectProperties properties;
 
-    /** RmsSessionInfo */
-    @Autowired
-    private RmsSessionInfo rmsSessionInfo;
-
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         // Stringクラスのフィールドに対して値にtrimを掛ける
@@ -46,13 +43,15 @@ public class ControllerAdviceCustom {
     public void addAttribute(HttpServletRequest request,
                              HttpSession session,
                              Model model) {
+        // アプリケーション固有セッション情報の取得
+        RmsSessionInfo rmsSessionInfo = RmsSessionUtils.getRmsSessionInfo(session);
+
         // クライアント入力チェック有無
         model.addAttribute("novalidate", properties.getHtml5Novalidate());
 
         // CSSテーマのデフォルトを設定
-        // TODO 最終的にはAjaxに変更したい
         String theme = null;
-        String requestTheme = request.getParameter(RmsSessionInfo.KEY.theme.name());
+        String requestTheme = request.getParameter("theme");
         String sessionTheme = rmsSessionInfo.getTheme();
         String propertyTheme = properties.getCssThemeDefault();
         if (!RmsStringUtils.isEmpty(requestTheme)) {
@@ -62,7 +61,10 @@ public class ControllerAdviceCustom {
         } else {
             theme = propertyTheme;
         }
-        model.addAttribute(RmsSessionInfo.KEY.theme.name(), theme);
+
+        // レスポンスに追加
+        model.addAttribute("theme", theme);
+        // セッションに保存
         rmsSessionInfo.setTheme(theme);
     }
 

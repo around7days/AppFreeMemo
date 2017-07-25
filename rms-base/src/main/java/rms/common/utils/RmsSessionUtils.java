@@ -27,7 +27,7 @@ public class RmsSessionUtils {
     /** セッションキー除外対象リスト */
     private static final List<String> ignoreKeyList = Arrays.asList("SPRING_SECURITY_CONTEXT", // SPRING_SECURITY_CONTEXT
                                                                     "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN", // CRLFトークン
-                                                                    RmsSessionInfo.KEY.RMS_SESSION_INFO.name() // アプリケーション固有セッション情報
+                                                                    RmsSessionInfo.SESSION_KEY // アプリケーション固有セッション情報
     );
 
     /**
@@ -61,6 +61,27 @@ public class RmsSessionUtils {
             attributes.put(name, obj);
         }
         return attributes;
+    }
+
+    /**
+     * アプリケーション固有セッション情報の取得<br>
+     * 取得できない場合は新規作成する。
+     * @param session
+     * @return
+     */
+    public static RmsSessionInfo getRmsSessionInfo(HttpSession session) {
+        RmsSessionInfo rmsSessionInfo;
+        Object obj = session.getAttribute(RmsSessionInfo.SESSION_KEY);
+        if (obj != null) {
+            // 存在する場合はそのまま返却
+            rmsSessionInfo = (RmsSessionInfo) obj;
+        } else {
+            // 存在しない場合は新規生成して返却
+            rmsSessionInfo = new RmsSessionInfo();
+            session.setAttribute(RmsSessionInfo.SESSION_KEY, rmsSessionInfo);
+        }
+
+        return rmsSessionInfo;
     }
 
     // /**

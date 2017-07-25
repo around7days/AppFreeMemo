@@ -2,22 +2,18 @@ package rms.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
  * アプリケーション固有セッション情報保持クラス
  * @author
  */
-@Component
 public class RmsSessionInfo {
     /** logger */
     @SuppressWarnings("unused")
     private static Logger logger = LoggerFactory.getLogger(RmsSessionInfo.class);
 
     /** セッションキー */
-    public enum KEY {
-        RMS_SESSION_INFO, theme
-    }
+    public static final String SESSION_KEY = RmsSessionInfo.class.getName();
 
     /** CSSテーマ */
     private String theme;
