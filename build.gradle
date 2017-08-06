@@ -77,13 +77,13 @@ sourceCompatibility = 1.8
 // warファイル定義
 war {
 	baseName = 'rmsweb'
-	version = '20170718'
+	version = getProperty("app.version")
 }
 
 // jarファイル定義
 jar {
 	baseName = 'rmsweb'
-	version = '20170718'
+	version = getProperty("app.version")
 }
 
 // Springboot実行メインクラス
