@@ -161,7 +161,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
     /**
      * 月報の重複チェック<br>
-     * 承認状況が「未提出」以外で重複している場合はBusinessExceptionを発生
+     * 承認状況が「承認待ち」or「承認済み」の場合はBusinessExceptionを発生
      * @param applyUserId
      * @param targetYm
      * @throws BusinessException
@@ -169,8 +169,17 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
     private void validateUniquReport(String applyUserId,
                                      Integer targetYm) throws BusinessException {
         TReport entity = tReportDao.selectById(applyUserId, targetYm);
-        if (entity != null && !MCodeConst.A001_AAA.equals(entity.getStatus())) {
-            // 月報が存在、且つ、承認状況が「未提出」以外の場合
+        if (entity == null) {
+            return;
+        }
+
+        // 承認状況が「承認待ち」or「承認済み」の場合
+        switch (entity.getStatus()) {
+        case MCodeConst.A001_Y01:
+        case MCodeConst.A001_Y02:
+        case MCodeConst.A001_Y03:
+        case MCodeConst.A001_Y04:
+        case MCodeConst.A001_ZZZ:
             // 「対象年月の月報は既に申請されています」
             throw new BusinessException(MessageEnum.error003);
         }
