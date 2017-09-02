@@ -6,14 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import rms.common.base.WebSecurityConfig;
 import rms.common.consts.MessageTypeConst;
-import rms.common.exception.BusinessException;
 import rms.common.utils.RmsSessionUtils;
 import rms.web.app.mst.userlist.UserListController;
 import rms.web.app.mst.userregist.UserRegistController;
@@ -31,6 +30,7 @@ import rms.web.app.tran.reportlist.ReportListController;
 public class MenuController extends rms.common.abstracts.AbstractController {
 
     /** logger */
+    @SuppressWarnings("unused")
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
     /** ページURL */
@@ -55,15 +55,21 @@ public class MenuController extends rms.common.abstracts.AbstractController {
      * メニュー画面初期表示
      * @param form
      * @param session
+     * @param req
      * @param model
      * @return
      */
     @RequestMapping(value = MAPPING_URL)
     public String init(MenuForm form,
                        HttpSession session,
+                       WebRequest req,
                        Model model) {
         // 個別セッションの破棄
         RmsSessionUtils.remove(session);
+
+        // TODO @ExceptionHandler経由のエラーメッセージキャッチ方法が微妙・・・
+        // @ExceptionHandler経由でエラーメッセージが設定されている場合は反映
+        model.addAttribute(MessageTypeConst.ERROR, req.getParameter(MessageTypeConst.ERROR));
 
         return PAGE_URL;
     }
@@ -148,28 +154,5 @@ public class MenuController extends rms.common.abstracts.AbstractController {
     protected String getScreenId() {
         return SCREEN_ID;
     }
-
-    // ----------------------------------------------------------------------------------------
-    /**
-     * 業務エラー（BusinessException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(BusinessException.class)
-    public String handlerException(BusinessException e,
-                                   HttpSession session,
-                                   Model model) {
-        logger.debug("業務エラー -> {}", e.toString());
-
-        // メッセージを反映
-        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
-
-        return PAGE_URL;
-    }
-    // ----------------------------------------------------------------------------------------
 
 }

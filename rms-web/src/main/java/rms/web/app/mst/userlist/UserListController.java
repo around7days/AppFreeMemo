@@ -1,7 +1,5 @@
 package rms.web.app.mst.userlist;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
-import rms.common.exception.BusinessException;
 import rms.common.utils.RmsBeanUtils;
-import rms.common.utils.RmsSessionUtils;
 import rms.common.utils.SearchResultDto;
 import rms.domain.app.mst.userlist.UserListDtoCondition;
 import rms.domain.app.mst.userlist.UserListEntityResult;
@@ -145,6 +140,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         form.getPageInfo().setTotalSize(resultDto.getCount());
 
         return PAGE_URL;
+
     }
 
     /**
@@ -229,28 +225,5 @@ public class UserListController extends rms.common.abstracts.AbstractController 
     protected String getScreenId() {
         return SCREEN_ID;
     }
-
-    // ----------------------------------------------------------------------------------------
-    /**
-     * 業務エラー（BusinessException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(BusinessException.class)
-    public String handlerException(BusinessException e,
-                                   HttpSession session,
-                                   Model model) {
-        logger.debug("業務エラー -> {}", e.toString());
-
-        // メッセージを反映
-        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
-
-        return PAGE_URL;
-    }
-    // ----------------------------------------------------------------------------------------
 
 }

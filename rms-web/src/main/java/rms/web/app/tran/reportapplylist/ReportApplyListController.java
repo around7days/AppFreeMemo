@@ -3,7 +3,6 @@ package rms.web.app.tran.reportapplylist;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +23,6 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageTypeConst;
 import rms.common.exception.BusinessException;
 import rms.common.utils.RmsFileUtils;
-import rms.common.utils.RmsSessionUtils;
 import rms.common.utils.SearchResultDto;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
@@ -151,25 +148,30 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
      * @param model
      * @return
      * @throws IOException
-     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL + "/{index}", params = "download")
     public String download(ReportApplyListForm form,
                            @PathVariable int index,
                            HttpServletResponse response,
-                           Model model) throws IOException, BusinessException {
+                           Model model) throws IOException {
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
         ReportApplyListEntityResult entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
-        // 月報ファイルダウンロード情報生成
-        SharedFileDto dto = sharedReportFileService.getReportFileInfo(entity.getApplyUserId(),
-                                                                      entity.getApplyUserNm(),
-                                                                      entity.getTargetYm());
-        // 月報ダウンロード
-        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        try {
+            // 月報ファイルダウンロード情報生成
+            SharedFileDto dto = sharedReportFileService.getReportFileInfo(entity.getApplyUserId(),
+                                                                          entity.getApplyUserNm(),
+                                                                          entity.getTargetYm());
+            // 月報ダウンロード
+            RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         return null;
     }
@@ -219,28 +221,5 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
     protected String getScreenId() {
         return SCREEN_ID;
     }
-
-    // ----------------------------------------------------------------------------------------
-    /**
-     * 業務エラー（BusinessException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(BusinessException.class)
-    public String handlerException(BusinessException e,
-                                   HttpSession session,
-                                   Model model) {
-        logger.debug("業務エラー -> {}", e.toString());
-
-        // メッセージを反映
-        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
-
-        return PAGE_URL;
-    }
-    // ----------------------------------------------------------------------------------------
 
 }

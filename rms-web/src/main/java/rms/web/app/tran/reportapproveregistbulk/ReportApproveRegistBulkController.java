@@ -3,8 +3,6 @@ package rms.web.app.tran.reportapproveregistbulk;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -25,7 +22,6 @@ import rms.common.consts.MRoleConst;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.exception.BusinessException;
-import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkDto;
 import rms.domain.app.tran.reportapproveregistbulk.ReportApproveRegistBulkService;
 import rms.web.app.tran.reportapprovelist.ReportApproveListController;
@@ -86,14 +82,13 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
      * @param model
      * @return
      * @throws IOException
-     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "approveBulk")
     public String approveBulk(@Validated ReportApproveRegistBulkForm form,
                               BindingResult bindingResult,
                               @AuthenticationPrincipal UserInfo userInfo,
                               SessionStatus sessionStatus,
-                              Model model) throws IOException, BusinessException {
+                              Model model) throws IOException {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
@@ -102,11 +97,16 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
             return PAGE_URL;
         }
 
-        // 月報情報の一括承認処理
-        List<ReportApproveRegistBulkDto> resultList = service.approveBulk(form.getFile(), userInfo);
-
-        // 実行結果の反映
-        form.setResultList(resultList);
+        try {
+            // 月報情報の一括承認処理
+            List<ReportApproveRegistBulkDto> resultList = service.approveBulk(form.getFile(), userInfo);
+            // 実行結果の反映
+            form.setResultList(resultList);
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         // 完了メッセージ
         model.addAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info005));
@@ -136,51 +136,5 @@ public class ReportApproveRegistBulkController extends rms.common.abstracts.Abst
     protected String getScreenId() {
         return SCREEN_ID;
     }
-
-    // ----------------------------------------------------------------------------------------
-    /**
-     * 業務エラー（BusinessException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(BusinessException.class)
-    public String handlerException(BusinessException e,
-                                   HttpSession session,
-                                   Model model) {
-        logger.debug("業務エラー -> {}", e.toString());
-
-        // メッセージを反映
-        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
-
-        return PAGE_URL;
-    }
-    //
-    // /**
-    // * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
-    // * @param e
-    // * @param session
-    // * @param model
-    // * @return
-    // */
-    // @ExceptionHandler(OptimisticLockException.class)
-    // public String handlerException(OptimisticLockException e,
-    // HttpSession session,
-    // Model model) {
-    // logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
-    //
-    // // メッセージとフォーム情報を反映
-    // model.addAttribute(MessageTypeConst.ERROR,
-    // message.getMessage(MessageEnum.error002.name(), null, Locale.getDefault()));
-    // // セッションからフォーム情報を取得して反映
-    // model.addAttribute(SessionUtils.getSessionForm(session, ReportApproveRegistBulkForm.class));
-    //
-    // return PAGE_URL;
-    // }
-    //
-    // ----------------------------------------------------------------------------------------
 
 }

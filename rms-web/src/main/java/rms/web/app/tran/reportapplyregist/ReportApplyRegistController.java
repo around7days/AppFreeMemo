@@ -27,7 +27,6 @@ import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.exception.BusinessException;
 import rms.common.utils.RmsBeanUtils;
-import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
 import rms.web.app.system.menu.MenuController;
@@ -129,7 +128,6 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @param redirectAttr
      * @param model
      * @return
-     * @throws BusinessException
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL, params = "apply")
@@ -137,7 +135,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
                         BindingResult bindingResult,
                         SessionStatus sessionStatus,
                         RedirectAttributes redirectAttr,
-                        Model model) throws IOException, BusinessException {
+                        Model model) throws IOException {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
@@ -149,8 +147,15 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         // 申請情報の生成
         ReportApplyRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
 
-        // 申請処理
-        service.apply(dto);
+        try {
+            // 申請処理
+            service.apply(dto);
+        } catch (BusinessException e) {
+            // 業務エラー
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info004));
@@ -168,7 +173,6 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
      * @param redirectAttr
      * @param model
      * @return
-     * @throws BusinessException
      * @throws IOException
      */
     @RequestMapping(value = MAPPING_URL, params = "reApply")
@@ -176,7 +180,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
                           BindingResult bindingResult,
                           SessionStatus sessionStatus,
                           RedirectAttributes redirectAttr,
-                          Model model) throws IOException, BusinessException {
+                          Model model) throws IOException {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
@@ -188,8 +192,14 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
         // 再申請情報の生成
         ReportApplyRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApplyRegistDto.class);
 
-        // 再申請処理
-        service.reApply(dto);
+        try {
+            // 再申請処理
+            service.reApply(dto);
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info004));
@@ -221,46 +231,27 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
     }
 
     // ----------------------------------------------------------------------------------------
-    /**
-     * 業務エラー（BusinessException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(BusinessException.class)
-    public String handlerException(BusinessException e,
-                                   HttpSession session,
-                                   Model model) {
-        logger.debug("業務エラー -> {}", e.toString());
-
-        // メッセージを反映
-        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
-
-        return PAGE_URL;
-    }
 
     /**
      * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
      * @param e
      * @param session
+     * @param redirectAttr
      * @param model
      * @return
      */
     @ExceptionHandler(OptimisticLockException.class)
     public String handlerException(OptimisticLockException e,
                                    HttpSession session,
+                                   RedirectAttributes redirectAttr,
                                    Model model) {
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
-        // メッセージとフォーム情報を反映
-        model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
+        // エラーメッセージを設定
+        redirectAttr.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
 
-        return PAGE_URL;
+        // メニュー画面に戻る
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     // ----------------------------------------------------------------------------------------

@@ -91,7 +91,6 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
                              Model model) {
         // 画面表示モードを「新規」に設定
         form.setViewMode(UserRegistForm.VIEW_MODE_INSERT);
-
         return PAGE_URL;
     }
 
@@ -127,14 +126,13 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
      * @param redirectAttr
      * @param model
      * @return
-     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "insert")
     public String insert(@Validated(Insert.class) UserRegistForm form,
                          BindingResult bindingResult,
                          SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
-                         Model model) throws BusinessException {
+                         Model model) {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
@@ -146,8 +144,14 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // ユーザ登録情報Entityの生成
         UserRegistDto entity = RmsBeanUtils.createCopyProperties(form, UserRegistDto.class);
 
-        // ユーザ情報登録処理
-        service.regist(entity);
+        try {
+            // ユーザ情報登録処理
+            service.regist(entity);
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info001));
@@ -165,14 +169,13 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
      * @param redirectAttr
      * @param model
      * @return
-     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "update")
     public String update(@Validated(Update.class) UserRegistForm form,
                          BindingResult bindingResult,
                          SessionStatus sessionStatus,
                          RedirectAttributes redirectAttr,
-                         Model model) throws BusinessException {
+                         Model model) {
         // TODO フォームでリクエスト情報を受け取る場合に、ユーザーID等の想定外の情報まで受け取る可能性があるのが気になる。
         logger.debug("入力フォーム情報 -> {}", form);
 
@@ -185,8 +188,14 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
         // ユーザ登録情報Entityの生成
         UserRegistDto entity = RmsBeanUtils.createCopyProperties(form, UserRegistDto.class);
 
-        // ユーザ情報更新処理
-        service.update(entity);
+        try {
+            // ユーザ情報更新処理
+            service.update(entity);
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info002));
@@ -229,45 +238,25 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
     // ----------------------------------------------------------------------------------------
     /**
-     * 業務エラー（BusinessException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(BusinessException.class)
-    public String handlerException(BusinessException e,
-                                   HttpSession session,
-                                   Model model) {
-        logger.debug("業務エラー -> {}", e.toString());
-
-        // メッセージを反映
-        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
-
-        return PAGE_URL;
-    }
-
-    /**
      * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
      * @param e
      * @param session
+     * @param redirectAttr
      * @param model
      * @return
      */
     @ExceptionHandler(OptimisticLockException.class)
     public String handlerException(OptimisticLockException e,
                                    HttpSession session,
+                                   RedirectAttributes redirectAttr,
                                    Model model) {
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
-        // メッセージとフォーム情報を反映
-        model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
+        // エラーメッセージを設定
+        redirectAttr.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
 
-        return PAGE_URL;
+        // メニュー画面に戻る
+        return urlHelper.redirect(MenuController.MAPPING_URL);
     }
 
     // ----------------------------------------------------------------------------------------

@@ -29,7 +29,6 @@ import rms.common.consts.MessageTypeConst;
 import rms.common.exception.BusinessException;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.RmsFileUtils;
-import rms.common.utils.RmsSessionUtils;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
 import rms.domain.app.tran.reportapproveregist.ReportApproveRegistDto;
@@ -111,7 +110,6 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @param model
      * @return
      * @throws IOException
-     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "approve")
     public String approve(@Validated(Approve.class) ReportApproveRegistForm form,
@@ -119,7 +117,7 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
                           @AuthenticationPrincipal UserInfo userInfo,
                           SessionStatus sessionStatus,
                           RedirectAttributes redirectAttr,
-                          Model model) throws IOException, BusinessException {
+                          Model model) throws IOException {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 入力チェック
@@ -131,8 +129,14 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
         // 承認情報の生成
         ReportApproveRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
 
-        // 承認処理の実行
-        service.approve(dto);
+        try {
+            // 承認処理の実行
+            service.approve(dto);
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info005));
@@ -150,20 +154,25 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @param model
      * @return
      * @throws IOException
-     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "deny")
     public String deny(ReportApproveRegistForm form,
                        SessionStatus sessionStatus,
                        RedirectAttributes redirectAttr,
-                       Model model) throws IOException, BusinessException {
+                       Model model) throws IOException {
         logger.debug("入力フォーム情報 -> {}", form);
 
         // 否認情報の生成
         ReportApproveRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
 
-        // 否認処理の実行
-        service.deny(dto);
+        try {
+            // 否認処理の実行
+            service.deny(dto);
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         // 完了メッセージ
         redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info006));
@@ -180,19 +189,24 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
      * @param model
      * @return
      * @throws IOException
-     * @throws BusinessException
      */
     @RequestMapping(value = MAPPING_URL, params = "download")
     public String download(ReportApproveRegistForm form,
                            HttpServletResponse response,
-                           Model model) throws IOException, BusinessException {
+                           Model model) throws IOException {
 
-        // 月報ファイルダウンロード情報生成
-        SharedFileDto dto = sharedReportFileService.getReportFileInfo(form.getApplyUserId(),
-                                                                      form.getApplyUserNm(),
-                                                                      form.getTargetYm());
-        // 月報ダウンロード
-        RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        try {
+            // 月報ファイルダウンロード情報生成
+            SharedFileDto dto = sharedReportFileService.getReportFileInfo(form.getApplyUserId(),
+                                                                          form.getApplyUserNm(),
+                                                                          form.getTargetYm());
+            // 月報ダウンロード
+            RmsFileUtils.fileDownload(response, dto.getFilePath(), dto.getFileNm());
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
 
         return null;
     }
@@ -219,46 +233,27 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     }
 
     // ----------------------------------------------------------------------------------------
-    /**
-     * 業務エラー（BusinessException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(BusinessException.class)
-    public String handlerException(BusinessException e,
-                                   HttpSession session,
-                                   Model model) {
-        logger.debug("業務エラー -> {}", e.toString());
-
-        // メッセージを反映
-        model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
-
-        return PAGE_URL;
-    }
 
     /**
      * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
      * @param e
      * @param session
+     * @param redirectAttr
      * @param model
      * @return
      */
     @ExceptionHandler(OptimisticLockException.class)
     public String handlerException(OptimisticLockException e,
                                    HttpSession session,
+                                   RedirectAttributes redirectAttr,
                                    Model model) {
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
-        // メッセージとフォーム情報を反映
-        model.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
-        // セッション情報の詰め直し
-        model.addAllAttributes(RmsSessionUtils.convertSessionToMap(session));
+        // エラーメッセージを設定
+        redirectAttr.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
 
-        return PAGE_URL;
+        // メニュー画面に戻る
+        return urlHelper.forward(MenuController.MAPPING_URL);
     }
 
     // ----------------------------------------------------------------------------------------
