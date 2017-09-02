@@ -158,7 +158,7 @@ public class UserRegistServiceTest {
                 assertThat(vMUser.getApproveUserId1(), is("user06"));
                 assertThat(vMUser.getApproveUserId2(), is("user07"));
                 assertThat(vMUser.getApproveUserId3(), is("user08"));
-                assertThat(vMUser.getApproveUserId3(), is("user09"));
+                assertThat(vMUser.getApproveUserId4(), is("user09"));
 
                 assertThat(mUserRoleDao.existsById(userId, "ROLE_APPLY"), is(true));
                 assertThat(mUserRoleDao.existsById(userId, "ROLE_APPROVE"), is(true));
