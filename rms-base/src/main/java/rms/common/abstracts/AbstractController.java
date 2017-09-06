@@ -41,6 +41,7 @@ public abstract class AbstractController {
      */
     protected abstract String getScreenId();
 
+    // TODO ここにこの処理を書くのは微妙・・・
     /**
      * 画面ID・前画面IDの保存
      * @param session
