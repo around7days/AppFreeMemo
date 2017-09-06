@@ -3,9 +3,7 @@ package rms.web.app.tran.reportapproveregist;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.seasar.doma.jdbc.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -231,31 +228,5 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     protected String getScreenId() {
         return SCREEN_ID;
     }
-
-    // ----------------------------------------------------------------------------------------
-
-    /**
-     * 楽観的排他制御（OptimisticLockException）のエラーハンドリング
-     * @param e
-     * @param session
-     * @param redirectAttr
-     * @param model
-     * @return
-     */
-    @ExceptionHandler(OptimisticLockException.class)
-    public String handlerException(OptimisticLockException e,
-                                   HttpSession session,
-                                   RedirectAttributes redirectAttr,
-                                   Model model) {
-        logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
-
-        // エラーメッセージを設定
-        redirectAttr.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
-
-        // メニュー画面に戻る
-        return urlHelper.forward(MenuController.MAPPING_URL);
-    }
-
-    // ----------------------------------------------------------------------------------------
 
 }
