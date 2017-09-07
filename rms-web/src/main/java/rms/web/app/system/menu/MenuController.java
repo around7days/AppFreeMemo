@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
 
 import rms.common.base.WebSecurityConfig;
-import rms.common.consts.MessageTypeConst;
 import rms.common.utils.RmsSessionUtils;
 import rms.web.app.mst.userlist.UserListController;
 import rms.web.app.mst.userregist.UserRegistController;
@@ -66,10 +65,6 @@ public class MenuController extends rms.common.abstracts.AbstractController {
                        Model model) {
         // 個別セッションの破棄
         RmsSessionUtils.remove(session);
-
-        // TODO @ExceptionHandler経由のエラーメッセージキャッチ方法が微妙・・・
-        // @ExceptionHandler経由でエラーメッセージが設定されている場合は反映
-        model.addAttribute(MessageTypeConst.ERROR, req.getParameter(MessageTypeConst.ERROR));
 
         return PAGE_URL;
     }

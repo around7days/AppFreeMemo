@@ -104,7 +104,7 @@ public class ControllerAdviceCustom {
         logger.debug("楽観的排他制御エラー -> {}", e.getMessage());
 
         // エラーメッセージを設定
-        redirectAttr.addAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
+        redirectAttr.addFlashAttribute(MessageTypeConst.ERROR, message.getMessage(MessageEnum.error002));
 
         // メニュー画面に戻る
         return urlHelper.redirect(MenuController.MAPPING_URL);
