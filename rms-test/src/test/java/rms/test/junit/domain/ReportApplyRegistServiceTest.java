@@ -3,8 +3,6 @@ package rms.test.junit.domain;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,7 +11,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +21,8 @@ import rms.common.entity.VTReport;
 import rms.common.exception.BusinessException;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistDto;
 import rms.domain.app.tran.reportapplyregist.ReportApplyRegistService;
+import rms.test.common.mock.RmsMockFileType;
+import rms.test.common.mock.RmsMockUtils;
 
 @RunWith(Enclosed.class)
 public class ReportApplyRegistServiceTest {
@@ -143,7 +142,7 @@ public class ReportApplyRegistServiceTest {
                 dto.setApproveUserId1("user06");
                 dto.setApproveUserId2("user07");
                 dto.setApproveUserId3("user08");
-                MultipartFile file = createMockMultipartFile();
+                MultipartFile file = RmsMockUtils.getDummyMultipartFile(RmsMockFileType.XLSX);
                 dto.setFile(file);
 
                 service.apply(dto);
@@ -194,7 +193,7 @@ public class ReportApplyRegistServiceTest {
                 dto.setApproveUserId1("user06");
                 dto.setApproveUserId2("user07");
                 dto.setApproveUserId3("user08");
-                MultipartFile file = createMockMultipartFile();
+                MultipartFile file = RmsMockUtils.getDummyMultipartFile(RmsMockFileType.XLSX);
                 dto.setFile(file);
                 dto.setVersion(0);
                 service.reApply(dto);
@@ -220,18 +219,4 @@ public class ReportApplyRegistServiceTest {
             // fail("ファイル確認は未実装");
         }
     }
-
-    /**
-     * MultipartFileのモック作成
-     * @return
-     * @throws IOException
-     */
-    private static MultipartFile createMockMultipartFile() throws IOException {
-        InputStream stream = ReportApplyRegistServiceTest.class.getClassLoader()
-                                                               .getResource("dummy/dummy_report_apply.xlsx")
-                                                               .openStream();
-        MultipartFile file = new MockMultipartFile("dummmy_report", stream);
-        return file;
-    }
-
 }
