@@ -6,15 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.common.utils.ProjectPropertiesStaticAccessor;
-
 /**
  * モックファイル反映エディター
  */
 public class RmsMockFileEditor extends PropertyEditorSupport {
-
-    /** アプリケーション実行モード */
-    public static final String MODE = ProjectPropertiesStaticAccessor.properties.getMode();
 
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(RmsMockFileEditor.class);
