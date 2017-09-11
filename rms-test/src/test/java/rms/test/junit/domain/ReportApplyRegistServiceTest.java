@@ -154,7 +154,6 @@ public class ReportApplyRegistServiceTest {
                 assertThat(vTReport.getApplyUserId(), is(applyUserId));
                 assertThat(vTReport.getTargetYm(), is(targetYm));
                 assertThat(vTReport.getApplyDate().toLocalDate(), is(LocalDate.now()));
-                assertThat(vTReport.getPublishFlg(), is("0"));
                 assertThat(vTReport.getApproveUserId1(), is("user06"));
                 assertThat(vTReport.getApproveUserId2(), is("user07"));
                 assertThat(vTReport.getApproveUserId3(), is("user08"));
@@ -205,7 +204,6 @@ public class ReportApplyRegistServiceTest {
                 assertThat(vTReport.getApplyUserId(), is(applyUserId));
                 assertThat(vTReport.getTargetYm(), is(targetYm));
                 assertThat(vTReport.getApplyDate().toLocalDate(), is(LocalDate.now()));
-                assertThat(vTReport.getPublishFlg(), is("0"));
                 assertThat(vTReport.getApproveUserId1(), is("user06"));
                 assertThat(vTReport.getApproveUserId2(), is("user07"));
                 assertThat(vTReport.getApproveUserId3(), is("user08"));
