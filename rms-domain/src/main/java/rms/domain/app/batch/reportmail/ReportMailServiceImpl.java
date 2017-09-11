@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
+// TODO 未実装
 public class ReportMailServiceImpl implements ReportMailService {
 
     /** logger */

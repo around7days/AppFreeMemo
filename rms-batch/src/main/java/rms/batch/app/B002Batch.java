@@ -17,6 +17,7 @@ import rms.domain.app.batch.reportmail.ReportMailService;
  * @author
  */
 @Component
+//TODO 未実装
 public class B002Batch extends AbstractBatch {
 
     /** logger */

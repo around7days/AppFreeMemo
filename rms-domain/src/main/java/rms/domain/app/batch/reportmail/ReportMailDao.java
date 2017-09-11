@@ -8,6 +8,7 @@ import org.seasar.doma.boot.ConfigAutowireable;
  */
 @Dao
 @ConfigAutowireable
+// TODO 未実装
 public interface ReportMailDao {
 
 }
