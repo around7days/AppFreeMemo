@@ -1,7 +1,7 @@
 // ビルドスクリプト
 buildscript {
 	ext {
-		springBootVersion = '1.5.6.RELEASE'
+		springBootVersion = '1.5.7.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -68,6 +68,8 @@ dependencies {
 	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
 	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.+'
 	testCompile group: 'ru.yandex.qatools.ashot', name: 'ashot', version: '+'
+	testCompile group: 'org.jmockit', name: 'jmockit', version: '+'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '+'
 	testCompile files('rms-test/libs/SeleniumBase.jar')
 }
 
