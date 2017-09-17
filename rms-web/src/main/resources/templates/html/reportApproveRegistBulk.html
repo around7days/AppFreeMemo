@@ -8,22 +8,11 @@
 
 	<!-- jQuery -->
 	<script th:src="@{/fw/jquery/js/jquery-3.1.1.min.js}" src="../../static/fw/jquery/js/jquery-3.1.1.min.js"></script>
-	<script th:src="@{/fw/jquery/js/jquery.blockUI.js}" src="../../static/fw/jquery/js/jquery.blockUI.js"></script>
 	<!-- bootstrap -->
 	<link rel="stylesheet" id="myTheme" th:href="@{|/fw/bootstrap/css/bootswatch-theme-${theme}.min.css|}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.min.css" />
 	<script th:src="@{/fw/bootstrap/js/bootstrap.min.js}" src="../../static/fw/bootstrap/js/bootstrap.min.js"></script>
-	<!-- datepicker -->
-	<link rel="stylesheet" th:href="@{/fw/datepicker/css/bootstrap-datepicker3.min.css}" href="../../static/fw/datepicker/css/bootstrap-datepicker3.min.css" />
-	<script th:src="@{/fw/datepicker/js/bootstrap-datepicker.min.js}" src="../../static/fw/datepicker/js/bootstrap-datepicker.min.js"></script>
-	<script th:src="@{/fw/datepicker/locales/bootstrap-datepicker.ja.min.js}" src="../../static/fw/datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
-	<!-- DataTables -->
-	<link rel="stylesheet" th:href="@{/fw/DataTables/media/css/dataTables.bootstrap.min.css}" href="../../static/fw/DataTables/media/css/dataTables.bootstrap.min.css" />
-	<script th:src="@{/fw/DataTables/media/js/jquery.dataTables.min.js}" src="../../static/fw/DataTables/media/js/jquery.dataTables.min.js"></script>
-	<script th:src="@{/fw/DataTables/media/js/dataTables.bootstrap.min.js}" src="../../static/fw/DataTables/media/js/dataTables.bootstrap.min.js"></script>
-	<!-- 共通 -->
-	<script th:src="@{/js/com/common.js}" src="../../static/js/com/common.js"></script>
-	<script th:src="@{/js/com/control.js}" src="../../static/js/com/control.js"></script>
-	<link rel="stylesheet" th:href="@{/css/com/common.css}" href="../../static/css/com/common.css" />
+	<!-- 共通JS/CSS -->
+	<link th:replace="html/include/include_lib"></link>
 	<!-- 個別 -->
 	<script th:src="@{/js/reportApproveRegistBulk.js}" src="../../static/js/reportApproveRegistBulk.js"></script>
 </head>
