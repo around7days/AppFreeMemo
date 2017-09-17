@@ -76,6 +76,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // セキュリティ設定を無視するリクエスト設定
         // 静的リソース(images、css、javascript等)に対するアクセスはセキュリティ設定を無視する
-        web.ignoring().antMatchers("/fw/**", "/js/**", "/css/**", "/image/**", "/webjars/**");
+        web.ignoring().antMatchers("/fw/**", "/js/**", "/css/**", "/image/**", "/webjars/**, **/favicon.ico");
     }
 }
