@@ -54,6 +54,11 @@ public class ControllerAdviceCustom {
         dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
     }
 
+    @InitBinder
+    public void initBinderMock(WebDataBinder dataBinder) {
+        // Mock拡張ポイント
+    }
+
     @ModelAttribute
     public void addAttribute(HttpServletRequest request,
                              HttpSession session,
