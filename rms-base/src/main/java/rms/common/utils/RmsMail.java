@@ -97,7 +97,7 @@ public class RmsMail {
             // メール送信
             mailSender.send(message);
             b = true;
-            logger.info("mail send successs");
+            logger.debug("mail send successs");
         } catch (Exception e) {
             logger.warn("mail send error", e);
         }
