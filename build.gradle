@@ -60,6 +60,8 @@ dependencies {
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.+'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '2.+'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'
+	compile group: 'com.ullink.slack', name: 'simpleslackapi', version: '1.+'
+	compile group: 'com.ullink.slack', name: 'simpleslackapi-lib', version: '+'
 	runtime group: 'mysql', name: 'mysql-connector-java'
 
 	// test用

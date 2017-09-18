@@ -32,6 +32,9 @@ public class ProjectProperties {
     /** システム日付 */
     @Value("${app.sysdate}")
     private String sysdate;
+    /** SlackToken */
+    @Value("${app.slack.token}")
+    private String slackToken;
 
     public Boolean getHtml5Novalidate() {
         return html5Novalidate;
@@ -62,5 +65,9 @@ public class ProjectProperties {
             return LocalDate.now();
         }
         return LocalDate.parse(sysdate);
+    }
+
+    public String getSlackToken() {
+        return slackToken;
     }
 }
