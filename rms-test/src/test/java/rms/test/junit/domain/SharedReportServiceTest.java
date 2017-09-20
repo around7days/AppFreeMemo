@@ -53,10 +53,20 @@ public class SharedReportServiceTest {
                               new Fixture(31, APPROVE, A001_Y03, null, null, null, "xx", A001_Y04),
                               new Fixture(32, APPROVE, A001_Y03, null, null, null, null, A001_ZZZ),
                               new Fixture(41, APPROVE, A001_Y04, null, null, null, null, A001_ZZZ),
-                              new Fixture(51, DENY, A001_Y01, null, null, null, null, A001_N01),
-                              new Fixture(52, DENY, A001_Y02, null, null, null, null, A001_N02),
-                              new Fixture(53, DENY, A001_Y03, null, null, null, null, A001_N03),
-                              new Fixture(54, DENY, A001_Y04, null, null, null, null, A001_N04), };
+                              new Fixture(51, REMAND, A001_Y01, null, null, null, null, A001_N01),
+                              new Fixture(61, REMAND, A001_Y02, null, null, null, null, A001_N02),
+                              new Fixture(62, REMAND, A001_Y02, "xx", null, null, null, A001_Y01),
+                              new Fixture(71, REMAND, A001_Y03, null, null, null, null, A001_N03),
+                              new Fixture(72, REMAND, A001_Y03, "xx", null, null, null, A001_Y01),
+                              new Fixture(73, REMAND, A001_Y03, "xx", "xx", null, null, A001_Y02),
+                              new Fixture(81, REMAND, A001_Y04, null, null, null, null, A001_N04),
+                              new Fixture(82, REMAND, A001_Y04, "xx", null, null, null, A001_Y01),
+                              new Fixture(83, REMAND, A001_Y04, "xx", "xx", null, null, A001_Y02),
+                              new Fixture(84, REMAND, A001_Y04, "xx", "xx", "xx", null, A001_Y03),
+                              new Fixture(91, DENY, A001_Y01, null, null, null, null, A001_N01),
+                              new Fixture(92, DENY, A001_Y02, null, null, null, null, A001_N02),
+                              new Fixture(93, DENY, A001_Y03, null, null, null, null, A001_N03),
+                              new Fixture(94, DENY, A001_Y04, null, null, null, null, A001_N04), };
 
         // TODO Theoriesを使いたいけどSpringBootでの実行方法が分からず
         @Test

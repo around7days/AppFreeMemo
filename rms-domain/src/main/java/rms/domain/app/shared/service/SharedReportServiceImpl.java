@@ -59,21 +59,15 @@ public class SharedReportServiceImpl implements SharedReportService {
             // 申請
             if (!RmsStringUtils.isEmpty(approveUserId1)) {
                 newStatus = MCodeConst.A001_Y01;
-                break;
-            }
-            if (!RmsStringUtils.isEmpty(approveUserId2)) {
+            } else if (!RmsStringUtils.isEmpty(approveUserId2)) {
                 newStatus = MCodeConst.A001_Y02;
-                break;
-            }
-            if (!RmsStringUtils.isEmpty(approveUserId3)) {
+            } else if (!RmsStringUtils.isEmpty(approveUserId3)) {
                 newStatus = MCodeConst.A001_Y03;
-                break;
-            }
-            if (!RmsStringUtils.isEmpty(approveUserId4)) {
+            } else if (!RmsStringUtils.isEmpty(approveUserId4)) {
                 newStatus = MCodeConst.A001_Y04;
-                break;
+            } else {
+                newStatus = MCodeConst.A001_ZZZ;
             }
-            newStatus = MCodeConst.A001_ZZZ;
             break;
 
         case APPROVE:
@@ -81,35 +75,61 @@ public class SharedReportServiceImpl implements SharedReportService {
             if (MCodeConst.A001_Y01.equals(status)) {
                 if (!RmsStringUtils.isEmpty(approveUserId2)) {
                     newStatus = MCodeConst.A001_Y02;
-                    break;
-                }
-                if (!RmsStringUtils.isEmpty(approveUserId3)) {
+                } else if (!RmsStringUtils.isEmpty(approveUserId3)) {
                     newStatus = MCodeConst.A001_Y03;
-                    break;
-                }
-                if (!RmsStringUtils.isEmpty(approveUserId4)) {
+                } else if (!RmsStringUtils.isEmpty(approveUserId4)) {
                     newStatus = MCodeConst.A001_Y04;
-                    break;
+                } else {
+                    newStatus = MCodeConst.A001_ZZZ;
                 }
             } else if (MCodeConst.A001_Y02.equals(status)) {
                 if (!RmsStringUtils.isEmpty(approveUserId3)) {
                     newStatus = MCodeConst.A001_Y03;
-                    break;
-                }
-                if (!RmsStringUtils.isEmpty(approveUserId4)) {
+                } else if (!RmsStringUtils.isEmpty(approveUserId4)) {
                     newStatus = MCodeConst.A001_Y04;
-                    break;
+                } else {
+                    newStatus = MCodeConst.A001_ZZZ;
                 }
             } else if (MCodeConst.A001_Y03.equals(status)) {
                 if (!RmsStringUtils.isEmpty(approveUserId4)) {
                     newStatus = MCodeConst.A001_Y04;
-                    break;
+                } else {
+                    newStatus = MCodeConst.A001_ZZZ;
                 }
             } else if (MCodeConst.A001_Y04.equals(status)) {
-
+                newStatus = MCodeConst.A001_ZZZ;
             }
+            break;
 
-            newStatus = MCodeConst.A001_ZZZ;
+        case REMAND:
+            // 差戻
+            if (MCodeConst.A001_Y04.equals(status)) {
+                if (!RmsStringUtils.isEmpty(approveUserId3)) {
+                    newStatus = MCodeConst.A001_Y03;
+                } else if (!RmsStringUtils.isEmpty(approveUserId2)) {
+                    newStatus = MCodeConst.A001_Y02;
+                } else if (!RmsStringUtils.isEmpty(approveUserId1)) {
+                    newStatus = MCodeConst.A001_Y01;
+                } else {
+                    newStatus = MCodeConst.A001_N04;
+                }
+            } else if (MCodeConst.A001_Y03.equals(status)) {
+                if (!RmsStringUtils.isEmpty(approveUserId2)) {
+                    newStatus = MCodeConst.A001_Y02;
+                } else if (!RmsStringUtils.isEmpty(approveUserId1)) {
+                    newStatus = MCodeConst.A001_Y01;
+                } else {
+                    newStatus = MCodeConst.A001_N03;
+                }
+            } else if (MCodeConst.A001_Y02.equals(status)) {
+                if (!RmsStringUtils.isEmpty(approveUserId1)) {
+                    newStatus = MCodeConst.A001_Y01;
+                } else {
+                    newStatus = MCodeConst.A001_N02;
+                }
+            } else if (MCodeConst.A001_Y01.equals(status)) {
+                newStatus = MCodeConst.A001_N01;
+            }
             break;
 
         case DENY:
@@ -129,9 +149,10 @@ public class SharedReportServiceImpl implements SharedReportService {
                 break;
             }
             break;
+
         }
 
-        logger.debug("承認状況 ->{} → {} ", status, newStatus);
+        logger.debug("承認状況 -> {} → {} ", status, newStatus);
 
         return newStatus;
     }

@@ -144,6 +144,42 @@ public class ReportApproveRegistController extends rms.common.abstracts.Abstract
     }
 
     /**
+     * 差戻処理
+     * @param form
+     * @param sessionStatus
+     * @param redirectAttr
+     * @param model
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = MAPPING_URL, params = "remand")
+    public String remand(ReportApproveRegistForm form,
+                         SessionStatus sessionStatus,
+                         RedirectAttributes redirectAttr,
+                         Model model) throws IOException {
+        logger.debug("入力フォーム情報 -> {}", form);
+
+        // 差戻情報の生成
+        ReportApproveRegistDto dto = RmsBeanUtils.createCopyProperties(form, ReportApproveRegistDto.class);
+
+        try {
+            // 差戻処理の実行
+            service.remand(dto);
+        } catch (BusinessException e) {
+            logger.debug("業務エラー -> {}", e.toString());
+            model.addAttribute(MessageTypeConst.ERROR, e.getErrorMessage());
+            return PAGE_URL;
+        }
+
+        // 完了メッセージ
+        redirectAttr.addFlashAttribute(MessageTypeConst.SUCCESS, message.getMessage(MessageEnum.info007));
+        // セッション破棄
+        sessionStatus.setComplete();
+
+        return urlHelper.redirect(MenuController.MAPPING_URL);
+    }
+
+    /**
      * 否認処理
      * @param form
      * @param sessionStatus

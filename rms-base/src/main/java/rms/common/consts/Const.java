@@ -40,6 +40,8 @@ public class Const {
         APPLY,
         /** 承認 */
         APPROVE,
+        /** 差戻 */
+        REMAND,
         /** 否認 */
         DENY
     }

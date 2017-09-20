@@ -28,6 +28,14 @@ public interface ReportApproveRegistService {
     public void approve(ReportApproveRegistDto dto) throws BusinessException, IOException;
 
     /**
+     * 月報情報の差戻処理<br>
+     * @param dto
+     * @throws BusinessException
+     * @throws IOException
+     */
+    public void remand(ReportApproveRegistDto dto) throws BusinessException, IOException;
+
+    /**
      * 月報情報の否認処理<br>
      * @param dto
      * @throws BusinessException

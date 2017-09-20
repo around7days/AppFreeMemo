@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rms.common.consts.Const;
+import rms.common.consts.Const.StatusExecKbn;
 import rms.common.consts.MCodeConst;
 import rms.common.dao.TReportApproveFlowDao;
 import rms.common.dao.TReportDao;
@@ -68,8 +69,8 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     @Override
     public void approve(ReportApproveRegistDto dto) throws IOException {
 
-        // 月報テーブル更新処理(承認)
-        updateReportApprove(dto);
+        // 月報テーブル更新処理（承認）
+        updateReport(dto, Const.StatusExecKbn.APPROVE);
 
         // 月報承認フローテーブル登録処理
         updateReportApproveFlow(dto);
@@ -79,17 +80,26 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
     }
 
     @Override
+    public void remand(ReportApproveRegistDto dto) throws IOException {
+
+        // 月報テーブル更新処理（差戻）
+        updateReport(dto, Const.StatusExecKbn.REMAND);
+    }
+
+    @Override
     public void deny(ReportApproveRegistDto dto) throws IOException {
 
-        // 月報テーブル更新処理
-        updateReportDeny(dto);
+        // 月報テーブル更新処理（否認）
+        updateReport(dto, Const.StatusExecKbn.DENY);
     }
 
     /**
-     * 月報テーブル更新処理(承認)
+     * 月報テーブル更新処理
      * @param dto
+     * @param execKbn
      */
-    private void updateReportApprove(ReportApproveRegistDto dto) {
+    private void updateReport(ReportApproveRegistDto dto,
+                              StatusExecKbn execKbn) {
 
         TReport entity = new TReport();
 
@@ -104,39 +114,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
          * 更新項目
          */
         // 処理後の承認状況を計算
-        String newStatus = sharedReportService.getNewStatus(dto.getApplyUserId(),
-                                                            dto.getTargetYm(),
-                                                            Const.StatusExecKbn.APPROVE);
-        entity.setStatus(newStatus);
-
-        /*
-         * 更新処理
-         */
-        tReportDao.update(entity);
-    }
-
-    /**
-     * 月報テーブル更新処理(否認)
-     * @param dto
-     */
-    private void updateReportDeny(ReportApproveRegistDto dto) {
-
-        TReport entity = new TReport();
-
-        /*
-         * 主キー
-         */
-        entity.setApplyUserId(dto.getApplyUserId());
-        entity.setTargetYm(dto.getTargetYm());
-        entity.setVersion(dto.getVersion()); // 排他制御用バージョン
-
-        /*
-         * 更新項目
-         */
-        // 処理後の承認状況を計算
-        String newStatus = sharedReportService.getNewStatus(dto.getApplyUserId(),
-                                                            dto.getTargetYm(),
-                                                            Const.StatusExecKbn.DENY);
+        String newStatus = sharedReportService.getNewStatus(dto.getApplyUserId(), dto.getTargetYm(), execKbn);
         entity.setStatus(newStatus);
 
         /*

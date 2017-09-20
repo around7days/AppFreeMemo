@@ -22,6 +22,8 @@ public enum MessageEnum {
     info005,
     /** 否認が完了しました */
     info006,
+    /** 差戻が完了しました */
+    info007,
 
     /*
      * meessage error
