@@ -1,5 +1,14 @@
 /* フォームバリデーションエラー */
 input:invalid {
-/*   border-color: red; */
-   background-color: mistyrose;
+/*  border-color: red; */
+  background-color: mistyrose;
+}
+
+/* 上に戻るアンカー */
+#pageTop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-weight : bold;
 }

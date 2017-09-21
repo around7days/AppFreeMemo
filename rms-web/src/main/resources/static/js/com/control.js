@@ -78,4 +78,30 @@ $(function() {
 		}
 	});
 
+	/**
+	 * 上に戻るアンカー操作（スクロールイベント）
+	 */
+	$(window).on("scroll", function() {
+		if ($(this).scrollTop() > 100) {
+			$("#pageTop").fadeIn("slow");
+		} else {
+			$("#pageTop").fadeOut("slow");
+		}
+	});
+
+	/**
+	 * 上に戻るアンカー押下時
+	 */
+	$("#pageTop").on("click", function() {
+		// スクロールの速度（ミリ秒）
+		var speed = 400;
+		// 移動先を数値で取得
+		var position = $("html").offset().top;
+		// スムーススクロール
+		$("body,html").animate({
+			scrollTop : position
+		}, speed, "swing");
+		return false;
+	});
+
 });
