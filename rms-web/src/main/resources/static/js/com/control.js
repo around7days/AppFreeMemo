@@ -45,6 +45,7 @@ $(function() {
 		format : "yyyymm",
 		language : "ja",
 		minViewMode : "months",
+		maxViewMode : "years",
 		orientation : "bottom auto",
 		clearBtn : true,
 		autoclose : true
