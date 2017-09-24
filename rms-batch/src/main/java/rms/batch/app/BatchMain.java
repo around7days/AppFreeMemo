@@ -28,6 +28,7 @@ public class BatchMain {
     private ApplicationArguments arguments;
 
     /** BatchFactory */
+    @Autowired
     private BatchFactory factory;
 
     /**
