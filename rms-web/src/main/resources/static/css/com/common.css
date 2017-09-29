@@ -12,3 +12,13 @@ input:invalid {
   right: 20px;
   font-weight : bold;
 }
+
+/* ヘッダ固定分 */
+body {
+  padding-top: 50px;
+}
+
+/* ツールチップ */
+.tooltip {
+  font-size: medium;
+}

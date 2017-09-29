@@ -4,7 +4,7 @@
 <!-- ナビバー（ログイン前） -->
 <div th:fragment="navbar1">
 	<input type="hidden" id="theme" name="theme" th:value="${theme}" /><!-- テーマ -->
-	<nav class="navbar navbar-default navbar-static-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- ナビヘッダ -->
 			<div class="navbar-header">
@@ -18,7 +18,7 @@
 <!-- ナビバー（ログイン後） -->
 <div th:fragment="navbar2">
 	<input type="hidden" id="theme" name="theme" th:value="${theme}" /><!-- テーマ -->
-	<nav class="navbar navbar-default navbar-static-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- ナビヘッダ -->
 			<div class="navbar-header">
