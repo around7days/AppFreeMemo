@@ -14,7 +14,7 @@ $(function() {
 		});
 
 		setTimeout($.unblockUI, 3000);
-	})
+	});
 
 	/**
 	 * inputタグ内のEnterキー無効
@@ -67,7 +67,7 @@ $(function() {
 	 * ダミーファイルボタン押下
 	 */
 	$("#fakeFile").on("click", function() {
-		$('#file').click();
+		$("#file").click();
 	});
 
 	/**

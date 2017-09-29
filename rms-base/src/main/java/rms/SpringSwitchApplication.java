@@ -52,7 +52,7 @@ public class SpringSwitchApplication {
      * @throws Exception
      */
     private static Type getStartupType(String[] args) {
-        if (args != null && args.length > 0 && args[0].toUpperCase().equals(Type.BATCH.name())) {
+        if (args != null && args.length > 0 && args[0].equalsIgnoreCase(Type.BATCH.name())) {
             return Type.BATCH;
         }
         return Type.WEB;
