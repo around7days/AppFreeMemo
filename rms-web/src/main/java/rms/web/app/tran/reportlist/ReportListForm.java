@@ -19,13 +19,14 @@ public class ReportListForm extends rms.common.abstracts.AbstractForm {
     protected static interface Search{};
     /** 入力チェック：一括DL */
     protected static interface BulkDownload{};
+    //@formatter:on
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
     @Valid
     private ReportListFormCondition condition = new ReportListFormCondition();
     /** ページ情報 */
-    private PageInfo pageInfo = new PageInfo(PageInfo.LIMIT_200);
+    private PageInfo pageInfo = new PageInfo(PageInfo.LIMIT_100);
     /** 検索結果リスト */
     private List<ReportListEntityResult> resultList;
     /** 検索結果チェックボックス選択リスト */
@@ -63,6 +64,5 @@ public class ReportListForm extends rms.common.abstracts.AbstractForm {
     public void setReportDLCheck(Integer[] reportDLCheck) {
         this.reportDLCheck = reportDLCheck;
     }
-
 
 }
