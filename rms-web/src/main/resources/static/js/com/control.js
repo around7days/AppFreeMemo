@@ -33,14 +33,18 @@ $(function() {
 	$("#navbarTheme a").on("click", function() {
 		var theme = $(this).text();
 		// テーマ変更
-		changeTheme(theme);
+		rms.changeTheme(theme);
 	});
 
 	/**
 	 * 年月カレンダー表示
 	 */
-	$(".datepicker-ym").focus(function(){ $(this).blur();});
-	$(".datepicker-ym").keydown(function(){ return false;});
+	$(".datepicker-ym").focus(function() {
+		$(this).blur();
+	});
+	$(".datepicker-ym").keydown(function() {
+		return false;
+	});
 	$(".datepicker-ym").datepicker({
 		format : "yyyymm",
 		language : "ja",
