@@ -3,7 +3,7 @@
  */
 var Rms = function() {
 
-}
+};
 
 /**
  * 関数定義
@@ -15,7 +15,7 @@ Rms.prototype = {
 	 * 
 	 * @param theme
 	 */
-	changeTheme : function(theme) {
+	changeTheme(theme) {
 		if (theme === $("#theme").val()) {
 			// 現在と同じテーマの場合は何もしない
 			return;
@@ -39,7 +39,7 @@ Rms.prototype = {
 		// hiddenの値を更新
 		$("#theme").val(theme);
 	}
-}
+};
 
 /*
  * グローバル変数
