@@ -24,84 +24,90 @@
 
 	<!-- container -->
 	<div class="container">
-		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 80em">
+	<!-- 画面サイズ指定 -->
+	<div class="row" style="max-width: 80em">
 
-			<!-- ヘッダ -->
-			<div class="page-header">
-				<h3>ユーザ一覧画面</h3>
-			</div>
-
-			<!-- メッセージ -->
-			<div th:replace="html/include/include_message::message" ></div>
-
-			<!--
-				検索条件
-			 -->
-			<div class="form-horizontal">
-				<!-- ユーザ -->
-				<div class="form-group">
-					<label class="col-sm-3 control-label">ユーザ</label>
-					<div class="col-sm-9 form-inline">
-						<input type="text" th:value="*{condition.userId}" name="condition.userId" id="condition.userId" placeholder="ユーザID（完全一致）" class="form-control" />
-						<input type="text" th:value="*{condition.userNm}" name="condition.userNm" id="condition.userNm" placeholder="ユーザ名（部分一致）" class="form-control" />
-					</div>
-				</div>
-				<!-- ボタン -->
-				<div class="text-center">
-					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">戻る <span class="glyphicon glyphicon-chevron-left"></span></button>
-					<button type="submit" id="search" class="btn btn-primary">検索 <span class="glyphicon glyphicon-search"></span></button>
-					<button type="submit" id="insert" formnovalidate="formnovalidate" class="btn btn-primary">新規 <span class="glyphicon glyphicon-chevron-right"></span></button>
-				</div>
-			</div>
-
-
-			<!--
-				検索結果
-			 -->
-			<div th:if="*{#lists.isEmpty(resultList) == false}">
-				<!-- ページング -->
-				<div th:replace="html/include/include_page::pageing" ></div>
-
-				<!-- 検索結果テーブル -->
-				<table class="table table-hover table-condensed dataTable" id="resultTable">
-					<!-- ヘッダ -->
-					<thead class="thead-default">
-						<tr>
-							<th>選択</th>
-							<th>ユーザID</th>
-							<th>ユーザ名</th>
-							<th>メールアドレス</th>
-							<th>部署</th>
-							<th>承認者１</th>
-							<th>承認者２</th>
-							<th>承認者３</th>
-							<th>承認者４</th>
-							<th>役割</th>
-						</tr>
-					</thead>
-					<!-- 明細 -->
-					<tbody>
-						<tr th:each="result,iteStatus : *{resultList}">
-							<td><button type="submit" name="select" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
-							<td th:text="${result.userId}">id0000</td>
-							<td th:text="${result.userNm}">月報太郎</td>
-							<td th:text="${result.email}">xxxxxxx@xxx.xx.xx</td>
-							<td th:text="${result.departmentRnm}">1SOL</td>
-							<td th:text="${result.approveUserNm1}">承認者１</td>
-							<td th:text="${result.approveUserNm2}">承認者２</td>
-							<td th:text="${result.approveUserNm3}">承認者３</td>
-							<td th:text="${result.approveUserNm4}">承認者４</td>
-							<td th:text="${result.roleNm}">申請者</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<!-- 上に戻るアンカー -->
-			<div th:replace="html/include/include_pageTop"></div>
-
+		<!-- ヘッダ -->
+		<div class="page-header">
+			<h3>ユーザ一覧画面</h3>
 		</div>
+
+		<!-- メッセージ -->
+		<div th:replace="html/include/include_message::message" ></div>
+
+		<!--
+			検索条件
+		 -->
+		<div class="form-horizontal">
+			<!-- ユーザ -->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">ユーザ</label>
+				<div class="col-sm-9 form-inline">
+					<input type="text" th:value="*{condition.userId}" name="condition.userId" id="condition.userId" placeholder="ユーザID（完全一致）" class="form-control" />
+					<input type="text" th:value="*{condition.userNm}" name="condition.userNm" id="condition.userNm" placeholder="ユーザ名（部分一致）" class="form-control" />
+				</div>
+			</div>
+			<!-- ボタン -->
+			<div class="text-center">
+				<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">
+					戻る <span class="glyphicon glyphicon-chevron-left"></span>
+				</button>
+				<button type="submit" id="search" class="btn btn-primary">
+					検索 <span class="glyphicon glyphicon-search"></span>
+				</button>
+				<button type="submit" id="insert" formnovalidate="formnovalidate" class="btn btn-primary">
+					新規 <span class="glyphicon glyphicon-chevron-right"></span>
+				</button>
+			</div>
+		</div>
+
+
+		<!--
+			検索結果
+		 -->
+		<div th:if="*{#lists.isEmpty(resultList) == false}">
+			<!-- ページング -->
+			<div th:replace="html/include/include_page::pageing" ></div>
+
+			<!-- 検索結果テーブル -->
+			<table class="table table-hover table-condensed dataTable" id="resultTable">
+				<!-- ヘッダ -->
+				<thead class="thead-default">
+					<tr>
+						<th>選択</th>
+						<th>ユーザID</th>
+						<th>ユーザ名</th>
+						<th>メールアドレス</th>
+						<th>部署</th>
+						<th>承認者１</th>
+						<th>承認者２</th>
+						<th>承認者３</th>
+						<th>承認者４</th>
+						<th>役割</th>
+					</tr>
+				</thead>
+				<!-- 明細 -->
+				<tbody>
+					<tr th:each="result,iteStatus : *{resultList}">
+						<td><button type="submit" name="select" formnovalidate="formnovalidate" th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button></td>
+						<td th:text="${result.userId}">id0000</td>
+						<td th:text="${result.userNm}">月報太郎</td>
+						<td th:text="${result.email}">xxxxxxx@xxx.xx.xx</td>
+						<td th:text="${result.departmentRnm}">1SOL</td>
+						<td th:text="${result.approveUserNm1}">承認者１</td>
+						<td th:text="${result.approveUserNm2}">承認者２</td>
+						<td th:text="${result.approveUserNm3}">承認者３</td>
+						<td th:text="${result.approveUserNm4}">承認者４</td>
+						<td th:text="${result.roleNm}">申請者</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- 上に戻るアンカー -->
+		<div th:replace="html/include/include_pageTop"></div>
+
+	</div>
 	</div>
 
 </form>

@@ -24,34 +24,36 @@
 
 	<!-- container -->
 	<div class="container">
-		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 30em">
+	<!-- 画面サイズ指定 -->
+	<div class="row" style="max-width: 30em">
 
-			<!-- ヘッダ -->
-			<div class="page-header">
-				<h3>ログイン画面</h3>
-			</div>
-
-			<!-- メッセージ -->
-			<div th:replace="html/include/include_message::message" ></div>
-
-			<!-- サインイン -->
-			<div>
-				<!-- ID -->
-				<div class="form-group">
-					<label class="control-label">ID</label>
-					<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
-				</div>
-				<!-- パスワード -->
-				<div class="form-group">
-					<label class="control-label">パスワード</label>
-					<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" autocomplete="off" />
-				</div>
-				<!-- ログイン -->
-				<button type="submit" id="login" class="btn btn-primary">ログイン<span class="glyphicon glyphicon-chevron-right"></span></button>
-			</div>
-
+		<!-- ヘッダ -->
+		<div class="page-header">
+			<h3>ログイン画面</h3>
 		</div>
+
+		<!-- メッセージ -->
+		<div th:replace="html/include/include_message::message" ></div>
+
+		<!-- サインイン -->
+		<div>
+			<!-- ID -->
+			<div class="form-group">
+				<label class="control-label">ID</label>
+				<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
+			</div>
+			<!-- パスワード -->
+			<div class="form-group">
+				<label class="control-label">パスワード</label>
+				<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" autocomplete="off" />
+			</div>
+			<!-- ログイン -->
+			<button type="submit" id="login" class="btn btn-primary">
+				ログイン<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+		</div>
+
+	</div>
 	</div>
 
 </form>

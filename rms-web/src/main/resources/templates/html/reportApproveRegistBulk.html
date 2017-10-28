@@ -24,75 +24,79 @@
 
 	<!-- container -->
 	<div class="container">
-		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 70em">
+	<!-- 画面サイズ指定 -->
+	<div class="row" style="max-width: 70em">
 
-			<!-- ヘッダ -->
-			<div class="page-header">
-				<h3>月報一括承認画面</h3>
-			</div>
+		<!-- ヘッダ -->
+		<div class="page-header">
+			<h3>月報一括承認画面</h3>
+		</div>
 
-			<!-- メッセージ -->
-			<div th:replace="html/include/include_message::message" ></div>
+		<!-- メッセージ -->
+		<div th:replace="html/include/include_message::message" ></div>
 
-			<!--
-				月報ファイル
-			 -->
-			<div class="form-horizontal">
-				<div class="form-group">
-					<label class="col-sm-3 control-label">月報(zip)</label>
-					<div class="col-sm-9">
-						<input type="file" name="file" id="file" accept=".zip" style="display:none" />
-						<div class="input-group" id="fakeFile">
-						  <input type="text" id="fakeFileText" required="required" placeholder="select file..." class="form-control" />
-						  <span class="input-group-btn"><button type="button" class="btn btn-info">ファイル選択</button></span>
-						</div>
+		<!--
+			月報ファイル
+		 -->
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">月報(zip)</label>
+				<div class="col-sm-9">
+					<input type="file" name="file" id="file" accept=".zip" style="display:none" />
+					<div class="input-group" id="fakeFile">
+					  <input type="text" id="fakeFileText" required="required" placeholder="select file..." class="form-control" />
+					  <span class="input-group-btn"><button type="button" class="btn btn-info">ファイル選択</button></span>
 					</div>
 				</div>
-				<!-- ボタン -->
-				<div class="text-center">
-					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">戻る <span class="glyphicon glyphicon-chevron-left"></span></button>
-					<button type="submit" id="approveBulk" class="btn btn-primary">一括承認 <span class="glyphicon glyphicon-ok"></span></button>
-				</div>
 			</div>
-
-			<!--
-				実施結果
-			 -->
-			<div th:if="*{#lists.isEmpty(resultList) == false}">
-				<!-- 検索結果テーブル -->
-				<table class="table table-hover table-condensed dataTable" id="resultTable">
-					<!-- ヘッダ -->
-					<thead class="thead-default">
-						<tr>
-							<th>No</th>
-							<th>ファイル名</th>
-							<th>申請年月</th>
-							<th>申請者ID</th>
-							<th>申請者名</th>
-							<th>処理結果</th>
-							<th>処理結果コメント</th>
-						</tr>
-					</thead>
-					<!-- 明細 -->
-					<tbody>
-						<tr th:each="result,iteStatus : *{resultList}">
-							<td th:text="${iteStatus.index} + 1">1</td>
-							<td th:text="${result.fileNm}">201609_user01.xlsx</td>
-							<td th:text="${result.targetYm}">201609</td>
-							<td th:text="${result.applyUserId}">user01</td>
-							<td th:text="${result.applyUserNm}">申請太郎</td>
-							<td th:text="${result.status}">完了</td>
-							<td th:text="${result.comment}">正常に承認されました。</td>
-						</tr>
-					</tbody>
-				</table>
+			<!-- ボタン -->
+			<div class="text-center">
+				<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">
+					戻る <span class="glyphicon glyphicon-chevron-left"></span>
+				</button>
+				<button type="submit" id="approveBulk" class="btn btn-primary">
+					一括承認 <span class="glyphicon glyphicon-ok"></span>
+				</button>
 			</div>
-
-			<!-- 上に戻るアンカー -->
-			<div th:replace="html/include/include_pageTop"></div>
-
 		</div>
+
+		<!--
+			実施結果
+		 -->
+		<div th:if="*{#lists.isEmpty(resultList) == false}">
+			<!-- 検索結果テーブル -->
+			<table class="table table-hover table-condensed dataTable" id="resultTable">
+				<!-- ヘッダ -->
+				<thead class="thead-default">
+					<tr>
+						<th>No</th>
+						<th>ファイル名</th>
+						<th>申請年月</th>
+						<th>申請者ID</th>
+						<th>申請者名</th>
+						<th>処理結果</th>
+						<th>処理結果コメント</th>
+					</tr>
+				</thead>
+				<!-- 明細 -->
+				<tbody>
+					<tr th:each="result,iteStatus : *{resultList}">
+						<td th:text="${iteStatus.index} + 1">1</td>
+						<td th:text="${result.fileNm}">201609_user01.xlsx</td>
+						<td th:text="${result.targetYm}">201609</td>
+						<td th:text="${result.applyUserId}">user01</td>
+						<td th:text="${result.applyUserNm}">申請太郎</td>
+						<td th:text="${result.status}">完了</td>
+						<td th:text="${result.comment}">正常に承認されました。</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- 上に戻るアンカー -->
+		<div th:replace="html/include/include_pageTop"></div>
+
+	</div>
 	</div>
 
 </form>

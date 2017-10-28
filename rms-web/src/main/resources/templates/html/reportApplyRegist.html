@@ -24,82 +24,88 @@
 
 	<!-- container -->
 	<div class="container">
-		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 40em">
+	<!-- 画面サイズ指定 -->
+	<div class="row" style="max-width: 40em">
 
-			<!-- ヘッダ -->
-			<div class="page-header">
-				<h3>月報申請画面</h3>
-			</div>
-
-			<!-- メッセージ -->
-			<div th:replace="html/include/include_message::message" ></div>
-
-			<!--
-				月報申請
-			-->
-			<div class="form-horizontal">
-				<div class="form-group">
-					<!-- 申請者 -->
-					<label class="col-sm-3 control-label">申請者</label>
-					<div class="col-sm-9">
-						<p th:text="*{applyUserNm}" class="form-control-static">更新表示時のユーザ名</p>
-					</div>
-					<!-- 年月 -->
-					<label class="col-sm-3 control-label">年月</label>
-					<div class="col-sm-9">
-						<div th:switch="*{viewMode}">
-							<div th:case="*{VIEW_MODE_APPLY}"><!-- 申請時 -->
-								<input type="text" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control datepicker-ym" required="required" />
-							</div>
-							<div th:case="*{VIEW_MODE_REAPPLY}"><!-- 再申請時 -->
-								<p class="form-control-static" th:text="*{targetYm}">201610</p>
-							</div>
-						</div>
-					</div>
-
-					<!-- 承認者 -->
-					<!-- 承認者1 -->
-					<label class="col-sm-3 control-label">承認者１</label>
-					<div class="col-sm-9">
-						<p th:text="*{approveUserNm1}" class="form-control-static">承認太郎</p>
-					</div>
-					<!-- 承認者2 -->
-					<label class="col-sm-3 control-label">承認者２</label>
-					<div class="col-sm-9">
-						<p th:text="*{approveUserNm2}" class="form-control-static">承認花子</p>
-					</div>
-					<!-- 承認者3 -->
-					<label class="col-sm-3 control-label">承認者３</label>
-					<div class="col-sm-9">
-						<p th:text="*{approveUserNm3}" class="form-control-static">承認一郎</p>
-					</div>
-					<!-- 承認者4 -->
-					<label class="col-sm-3 control-label">承認者４</label>
-					<div class="col-sm-9">
-						<p th:text="*{approveUserNm4}" class="form-control-static">承認一郎</p>
-					</div>
-
-					<!-- 申請者月報 -->
-					<label class="col-sm-3 control-label">申請者月報</label>
-					<div class="col-sm-9">
-						<input type="file" name="file" id="file" accept=".xlsx" style="display:none" />
-						<div class="input-group" id="fakeFile">
-						  <input type="text" id="fakeFileText" required="required" placeholder="select file..." class="form-control" />
-						  <span class="input-group-btn"><button type="button" class="btn btn-info">ファイル選択</button></span>
-						</div>
-					</div>
-				</div>
-
-				<!-- ボタン -->
-				<div class="text-center">
-					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-					<button type="submit" id="apply" th:if="*{viewMode == VIEW_MODE_APPLY}" class="btn btn-primary">申請<span class="glyphicon glyphicon-ok"></span></button>
-					<button type="submit" id="reApply" th:if="*{viewMode == VIEW_MODE_REAPPLY}" class="btn btn-primary">再申請<span class="glyphicon glyphicon-ok"></span></button>
-				</div>
-			</div>
-
+		<!-- ヘッダ -->
+		<div class="page-header">
+			<h3>月報申請画面</h3>
 		</div>
+
+		<!-- メッセージ -->
+		<div th:replace="html/include/include_message::message" ></div>
+
+		<!--
+			月報申請
+		-->
+		<div class="form-horizontal">
+			<div class="form-group">
+				<!-- 申請者 -->
+				<label class="col-sm-3 control-label">申請者</label>
+				<div class="col-sm-9">
+					<p th:text="*{applyUserNm}" class="form-control-static">更新表示時のユーザ名</p>
+				</div>
+				<!-- 年月 -->
+				<label class="col-sm-3 control-label">年月</label>
+				<div class="col-sm-9">
+					<div th:switch="*{viewMode}">
+						<div th:case="*{VIEW_MODE_APPLY}"><!-- 申請時 -->
+							<input type="text" th:value="*{targetYm}" name="targetYm" id="targetYm" class="form-control datepicker-ym" required="required" />
+						</div>
+						<div th:case="*{VIEW_MODE_REAPPLY}"><!-- 再申請時 -->
+							<p class="form-control-static" th:text="*{targetYm}">201610</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- 承認者 -->
+				<!-- 承認者1 -->
+				<label class="col-sm-3 control-label">承認者１</label>
+				<div class="col-sm-9">
+					<p th:text="*{approveUserNm1}" class="form-control-static">承認太郎</p>
+				</div>
+				<!-- 承認者2 -->
+				<label class="col-sm-3 control-label">承認者２</label>
+				<div class="col-sm-9">
+					<p th:text="*{approveUserNm2}" class="form-control-static">承認花子</p>
+				</div>
+				<!-- 承認者3 -->
+				<label class="col-sm-3 control-label">承認者３</label>
+				<div class="col-sm-9">
+					<p th:text="*{approveUserNm3}" class="form-control-static">承認一郎</p>
+				</div>
+				<!-- 承認者4 -->
+				<label class="col-sm-3 control-label">承認者４</label>
+				<div class="col-sm-9">
+					<p th:text="*{approveUserNm4}" class="form-control-static">承認一郎</p>
+				</div>
+
+				<!-- 申請者月報 -->
+				<label class="col-sm-3 control-label">申請者月報</label>
+				<div class="col-sm-9">
+					<input type="file" name="file" id="file" accept=".xlsx" style="display:none" />
+					<div class="input-group" id="fakeFile">
+					  <input type="text" id="fakeFileText" required="required" placeholder="select file..." class="form-control" />
+					  <span class="input-group-btn"><button type="button" class="btn btn-info">ファイル選択</button></span>
+					</div>
+				</div>
+			</div>
+
+			<!-- ボタン -->
+			<div class="text-center">
+				<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">
+					<span class="glyphicon glyphicon-chevron-left">戻る</span>
+				</button>
+				<button type="submit" id="apply" th:if="*{viewMode == VIEW_MODE_APPLY}" class="btn btn-primary">
+					申請<span class="glyphicon glyphicon-ok"></span>
+				</button>
+				<button type="submit" id="reApply" th:if="*{viewMode == VIEW_MODE_REAPPLY}" class="btn btn-primary">
+					再申請<span class="glyphicon glyphicon-ok"></span>
+				</button>
+			</div>
+		</div>
+
+	</div>
 	</div>
 
 </form>

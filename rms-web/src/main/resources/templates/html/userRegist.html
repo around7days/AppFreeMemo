@@ -24,123 +24,135 @@
 
 	<!-- container -->
 	<div class="container">
-		<!-- 画面サイズ指定 -->
-		<div class="row" style="max-width: 40em">
+	<!-- 画面サイズ指定 -->
+	<div class="row" style="max-width: 40em">
 
-			<!-- ヘッダ -->
-			<div class="page-header">
-				<h3>ユーザ登録画面</h3>
-			</div>
+		<!-- ヘッダ -->
+		<div class="page-header">
+			<h3>ユーザ登録画面</h3>
+		</div>
 
-			<!-- メッセージ -->
-			<div th:replace="html/include/include_message::message" ></div>
+		<!-- メッセージ -->
+		<div th:replace="html/include/include_message::message" ></div>
 
-			<!-- ユーザ登録 -->
-			<div class="form-horizontal">
+		<!-- ユーザ登録 -->
+		<div class="form-horizontal">
 
-				<div class="form-group">
-					<!-- ユーザID -->
-					<label class="col-sm-3 control-label">ユーザID</label>
-					<div class="col-sm-9">
-						<div th:switch="*{viewMode}">
-							<div th:case="*{VIEW_MODE_INSERT}"><!-- 新規時 -->
-								<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
-							</div>
-							<div th:case="*{VIEW_MODE_UPDATE}"><!-- 更新時 -->
-								<p class="form-control-static" th:text="*{userId}" id="userId">更新表示時のユーザ名</p>
-							</div>
+			<div class="form-group">
+				<!-- ユーザID -->
+				<label class="col-sm-3 control-label">ユーザID</label>
+				<div class="col-sm-9">
+					<div th:switch="*{viewMode}">
+						<div th:case="*{VIEW_MODE_INSERT}"><!-- 新規時 -->
+							<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
+						</div>
+						<div th:case="*{VIEW_MODE_UPDATE}"><!-- 更新時 -->
+							<p class="form-control-static" th:text="*{userId}" id="userId">更新表示時のユーザ名</p>
 						</div>
 					</div>
-					<!-- パスワード -->
-					<label class="col-sm-3 control-label">パスワード</label>
-					<div class="col-sm-9">
-						<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" />
-					</div>
-					<!-- ユーザ名 -->
-					<label class="col-sm-3 control-label">ユーザ名</label>
-					<div class="col-sm-9">
-						<input type="text" th:value="*{userNm}" name="userNm" id="userNm" required="required" class="form-control" />
-					</div>
-					<!-- メールアドレス -->
-					<label class="col-sm-3 control-label">メールアドレス</label>
-					<div class="col-sm-9">
-						<input type="email" th:value="*{email}" name="email" id="email" class="form-control" placeholder="xxxx@gmail.com" />
-					</div>
-					<!-- 部署 -->
-					<label class="col-sm-3 control-label">部署</label>
-					<div class="col-sm-9">
-						<select name="departmentId" id="departmentId" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{departmentList}" th:value="${obj.key}" th:selected="${obj.key} == *{departmentId}" th:text="${obj.value}"></option>
-						</select>
-					</div>
 				</div>
-
-				<div class="form-group">
-					<!-- 承認者1 -->
-					<label class="col-sm-3 control-label">承認者１</label>
-					<div class="col-sm-9">
-						<select name="approveUserId1" id="approveUserId1" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId1}" th:text="${obj.value}"></option>
-						</select>
-					</div>
-					<!-- 承認者2 -->
-					<label class="col-sm-3 control-label">承認者２</label>
-					<div class="col-sm-9">
-						<select name="approveUserId2" id="approveUserId2" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId2}" th:text="${obj.value}"></option>
-						</select>
-					</div>
-					<!-- 承認者3 -->
-					<label class="col-sm-3 control-label">承認者３</label>
-					<div class="col-sm-9">
-						<select name="approveUserId3" id="approveUserId3" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId3}" th:text="${obj.value}"></option>
-						</select>
-					</div>
-					<!-- 承認者4 -->
-					<label class="col-sm-3 control-label">承認者４</label>
-					<div class="col-sm-9">
-						<select name="approveUserId4" id="approveUserId4" class="form-control">
-							<option value=""></option>
-							<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId4}" th:text="${obj.value}"></option>
-						</select>
-					</div>
+				<!-- パスワード -->
+				<label class="col-sm-3 control-label">パスワード</label>
+				<div class="col-sm-9">
+					<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" />
 				</div>
-
-				<!-- 役割 -->
-				<div class="form-group">
-					<label class="col-sm-3 control-label">役割</label>
-					<div class="col-sm-9">
-						<label class="checkbox-inline">
-							<input type="checkbox" name="roleApplyFlg" id="roleApplyFlg" th:field="*{roleApplyFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" /> 申請者
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="roleApproveFlg" id="roleApproveFlg" th:field="*{roleApproveFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" /> 承認者
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="roleReferenceFlg" id="roleReferenceFlg" th:field="*{roleReferenceFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" /> 閲覧者
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" name="roleAdminFlg" id="roleAdminFlg" th:field="*{roleAdminFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" /> 管理者
-						</label>
-					</div>
+				<!-- ユーザ名 -->
+				<label class="col-sm-3 control-label">ユーザ名</label>
+				<div class="col-sm-9">
+					<input type="text" th:value="*{userNm}" name="userNm" id="userNm" required="required" class="form-control" />
 				</div>
-
-				<!-- ボタン -->
-				<div class="text-center">
-					<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left">戻る</span></button>
-					<button type="submit" id="insert" th:if="*{viewMode == VIEW_MODE_INSERT}" class="btn btn-primary">登録<span class="glyphicon glyphicon-ok"></span></button>
-					<button type="button" id="delete" th:if="*{viewMode == VIEW_MODE_UPDATE}" onclick="javascript:alert('システム管理者に連絡してください')" class="btn btn-primary">削除<span class="glyphicon glyphicon-remove"></span></button>
-					<button type="submit" id="update" th:if="*{viewMode == VIEW_MODE_UPDATE}" class="btn btn-primary">更新<span class="glyphicon glyphicon-ok"></span></button>
+				<!-- メールアドレス -->
+				<label class="col-sm-3 control-label">メールアドレス</label>
+				<div class="col-sm-9">
+					<input type="email" th:value="*{email}" name="email" id="email" class="form-control" placeholder="xxxx@gmail.com" />
 				</div>
+				<!-- 部署 -->
+				<label class="col-sm-3 control-label">部署</label>
+				<div class="col-sm-9">
+					<select name="departmentId" id="departmentId" class="form-control">
+						<option value=""></option>
+						<option th:each="obj : *{departmentList}" th:value="${obj.key}" th:selected="${obj.key} == *{departmentId}" th:text="${obj.value}"></option>
+					</select>
+				</div>
+			</div>
 
+			<div class="form-group">
+				<!-- 承認者1 -->
+				<label class="col-sm-3 control-label">承認者１</label>
+				<div class="col-sm-9">
+					<select name="approveUserId1" id="approveUserId1" class="form-control">
+						<option value=""></option>
+						<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId1}" th:text="${obj.value}"></option>
+					</select>
+				</div>
+				<!-- 承認者2 -->
+				<label class="col-sm-3 control-label">承認者２</label>
+				<div class="col-sm-9">
+					<select name="approveUserId2" id="approveUserId2" class="form-control">
+						<option value=""></option>
+						<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId2}" th:text="${obj.value}"></option>
+					</select>
+				</div>
+				<!-- 承認者3 -->
+				<label class="col-sm-3 control-label">承認者３</label>
+				<div class="col-sm-9">
+					<select name="approveUserId3" id="approveUserId3" class="form-control">
+						<option value=""></option>
+						<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId3}" th:text="${obj.value}"></option>
+					</select>
+				</div>
+				<!-- 承認者4 -->
+				<label class="col-sm-3 control-label">承認者４</label>
+				<div class="col-sm-9">
+					<select name="approveUserId4" id="approveUserId4" class="form-control">
+						<option value=""></option>
+						<option th:each="obj : *{approveList}" th:value="${obj.key}" th:selected="${obj.key} == *{approveUserId4}" th:text="${obj.value}"></option>
+					</select>
+				</div>
+			</div>
+
+			<!-- 役割 -->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">役割</label>
+				<div class="col-sm-9">
+					<label class="checkbox-inline">
+						<input type="checkbox" name="roleApplyFlg" id="roleApplyFlg" th:field="*{roleApplyFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" />
+						申請者
+					</label>
+					<label class="checkbox-inline">
+						<input type="checkbox" name="roleApproveFlg" id="roleApproveFlg" th:field="*{roleApproveFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" />
+						承認者
+					</label>
+					<label class="checkbox-inline">
+						<input type="checkbox" name="roleReferenceFlg" id="roleReferenceFlg" th:field="*{roleReferenceFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" />
+						閲覧者
+					</label>
+					<label class="checkbox-inline">
+						<input type="checkbox" name="roleAdminFlg" id="roleAdminFlg" th:field="*{roleAdminFlg}" th:value="${T(rms.common.consts.Const).FLG_ON}" />
+						管理者
+					</label>
+				</div>
+			</div>
+
+			<!-- ボタン -->
+			<div class="text-center">
+				<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">
+					<span class="glyphicon glyphicon-chevron-left">戻る</span>
+				</button>
+				<button type="submit" id="insert" th:if="*{viewMode == VIEW_MODE_INSERT}" class="btn btn-primary">
+					登録<span class="glyphicon glyphicon-ok"></span>
+				</button>
+				<button type="button" id="delete" th:if="*{viewMode == VIEW_MODE_UPDATE}" onclick="javascript:alert('システム管理者に連絡してください')" class="btn btn-primary">
+					削除<span class="glyphicon glyphicon-remove"></span>
+				</button>
+				<button type="submit" id="update" th:if="*{viewMode == VIEW_MODE_UPDATE}" class="btn btn-primary">
+					更新<span class="glyphicon glyphicon-ok"></span>
+				</button>
 			</div>
 
 		</div>
+
+	</div>
 	</div>
 
 </form>
