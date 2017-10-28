@@ -209,4 +209,17 @@ public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEn
         }
         return flg;
     }
+
+    /**
+     * 月報DLフラグ
+     * @return true:DL可能 false:DL不可
+     */
+    public boolean isReportDLFlg() {
+        boolean flg = true;
+        switch (this.getStatus()) {
+        case MCodeConst.A001_AAA: // 未提出
+            flg = false;
+        }
+        return flg;
+    }
 }
