@@ -36,7 +36,7 @@ public class SpringBatchApplication {
         // 処理開始
         int ret = 0;
         try (ConfigurableApplicationContext ctx = application.run(args)) {
-            logger.debug("--------------------- Batch Application Start --------------------- ");
+            logger.info("--------------------- Batch Application Start --------------------- ");
             SpringBatchApplication app = ctx.getBean(SpringBatchApplication.class);
             app.run(args);
         } catch (BusinessException be) {
@@ -46,7 +46,7 @@ public class SpringBatchApplication {
             logger.error("batch error", e);
             ret = 1;
         }
-        logger.debug("--------------------- Batch Application End --------------------- ");
+        logger.info("--------------------- Batch Application End --------------------- ");
         System.exit(ret);
     }
 
