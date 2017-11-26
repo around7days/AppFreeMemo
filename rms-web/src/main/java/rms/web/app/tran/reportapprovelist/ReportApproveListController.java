@@ -121,6 +121,9 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
             return PAGE_URL;
         }
 
+        // ページ情報の初期化
+        form.getPageInfo().clear();
+
         // 検索条件の生成
         ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
         RmsBeanUtils.copyProperties(form.getCondition(), condition);

@@ -108,6 +108,9 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
             return PAGE_URL;
         }
 
+        // ページ情報の初期化
+        form.getPageInfo().clear();
+
         // 検索条件の生成
         ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
                                                                              ReportListDtoCondition.class);

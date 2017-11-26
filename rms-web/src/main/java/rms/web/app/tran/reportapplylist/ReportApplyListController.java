@@ -96,6 +96,9 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
                          Model model) {
         logger.debug("入力フォーム情報 -> {}", form);
 
+        // ページ情報の初期化
+        form.getPageInfo().clear();
+
         // 検索条件の生成
         ReportApplyListDtoCondition condition = new ReportApplyListDtoCondition();
         condition.setApplyUserId(userInfo.getUserId());

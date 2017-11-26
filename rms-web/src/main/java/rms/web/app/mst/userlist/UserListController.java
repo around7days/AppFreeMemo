@@ -92,6 +92,9 @@ public class UserListController extends rms.common.abstracts.AbstractController 
             return PAGE_URL;
         }
 
+        // ページ情報の初期化
+        form.getPageInfo().clear();
+
         // 検索条件の生成
         UserListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
                                                                            UserListDtoCondition.class);
