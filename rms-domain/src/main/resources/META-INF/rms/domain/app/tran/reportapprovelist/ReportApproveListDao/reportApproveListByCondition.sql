@@ -19,7 +19,9 @@ from
   v_t_report A
 where
   A.del_flg = 0
+/*%if condition.targetYm != null */
   and A.target_ym = /* condition.targetYm */'201606'
+/*%end */
   and /* condition.approveUserId */'user07' in (
           A.approve_user_id1,
           A.approve_user_id2,
@@ -27,4 +29,5 @@ where
           A.approve_user_id4
       )
 order by
-  apply_user_id
+  A.target_ym desc
+  , apply_user_id

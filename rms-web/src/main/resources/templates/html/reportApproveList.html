@@ -25,7 +25,7 @@
 	<!-- container -->
 	<div class="container">
 	<!-- 画面サイズ指定 -->
-	<div class="row" style="max-width: 60em">
+	<div class="row" style="max-width: 80em">
 
 		<!-- ヘッダ -->
 		<div class="page-header">
@@ -43,7 +43,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">年月</label>
 				<div class="col-sm-9">
-					<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" required="required" />
+					<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" />
 				</div>
 			</div>
 			<!-- ボタン -->
@@ -76,6 +76,7 @@
 				<thead class="thead-default">
 					<tr>
 						<th>選択</th>
+						<th>年月</th>
 						<th>申請者</th>
 						<th>部署</th>
 						<th>申請日</th>
@@ -92,9 +93,10 @@
 				<tbody>
 					<tr th:each="result,iteStatus : *{resultList}">
 						<td>
-							<button type="submit" name="select" formnovalidate="formnovalidate" th:disabled="${result.operateFlg == false}"
-											th:value="${iteStatus.index}" class="btn btn-default btn-sm">選択</button>
+							<button type="submit" name="select" formnovalidate="formnovalidate" class="btn btn-default btn-sm"
+									th:value="${iteStatus.index}" th:disabled="${result.operateFlg == false}">選択</button>
 						</td>
+						<td th:text="${result.targetYm}">201707</td>
 						<td th:text="${result.applyUserNm}">申請者</td>
 						<td th:text="${result.departmentRnm}">2SOL</td>
 						<td th:text="${result.applyDate} ? ${#temporals.format(result.applyDate, 'yyyy/MM/dd')}">2016/05/31</td>
