@@ -100,6 +100,16 @@ public class PageInfo {
     }
 
     /**
+     * ページ情報のクリア
+     * ・表示ページのクリア
+     * ・合計表示件数のクリア
+     */
+    public void clear() {
+        setPage(1);
+        setTotalSize(0);
+    }
+
+    /**
      * 前ページに移動します。
      */
     public void prev() {
