@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,8 @@ import org.springframework.web.context.request.WebRequest;
 import rms.common.base.WebSecurityConfig;
 import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
+import rms.common.entity.TInfomation;
+import rms.domain.app.system.login.LoginService;
 
 /**
  * ログイン画面コントローラー
@@ -37,6 +40,10 @@ public class LoginController extends rms.common.abstracts.AbstractController {
     /** 画面ID */
     public static final String SCREEN_ID = "S001";
 
+    /** ログイン画面サービス */
+    @Autowired
+    private LoginService service;
+
     /**
      * ログイン画面フォームの初期化
      * @return
@@ -53,13 +60,21 @@ public class LoginController extends rms.common.abstracts.AbstractController {
      * @return
      */
     @RequestMapping(MAPPING_URL)
-    public String init(WebRequest request,
+    public String init(LoginForm form,
+                       WebRequest request,
                        HttpSession session) {
         if (!session.isNew() && request.getUserPrincipal() != null) {
             // セッション情報が残っている場合は一度ログアウト処理を実施（念の為セッションとユーザ情報の両方をチェック）
             logger.debug("session invalidate -> {}", request.getSessionId());
             return urlHelper.forward(WebSecurityConfig.LOGOUT_MAPPING_URL);
         }
+
+        // お知らせ情報の取得
+        TInfomation entity = service.getInfomation();
+        if (entity != null) {
+            form.setInfo(entity.getInfo());
+        }
+
         return PAGE_URL;
     }
 

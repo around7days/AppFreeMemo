@@ -20,6 +20,9 @@ public class LoginForm extends rms.common.abstracts.AbstractForm {
     @Size(max = 10, message = "パスワード：{Size.message}")
     private String password;
 
+    /** お知らせ情報 */
+    private String info;
+
     public String getUserId() {
         return userId;
     }
@@ -34,5 +37,13 @@ public class LoginForm extends rms.common.abstracts.AbstractForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
