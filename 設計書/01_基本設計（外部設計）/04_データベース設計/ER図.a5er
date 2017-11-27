@@ -1,4 +1,4 @@
-﻿# A5:ER FORMAT:10
+﻿# A5:ER FORMAT:11
 # A5:ER ENCODING:UTF8
 # A5:ER Mk-1 Copyright (C)2007 m.matsubara
 # A5:SQL Mk-2 Copyright (C)1997 m.matsubara
@@ -46,6 +46,22 @@ DefaultFkName=%0:s_FK%1:d
 SqlSeparator=0
 ShowTag=1
 ShowCommonAttributes=0
+
+[Entity]
+PName=T_INFOMATION
+LName=お知らせテーブル
+Comment=
+TableOption=
+Page=Table
+Left=100
+Top=1500
+Field="No","no","int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="お知らせ情報","info","varchar(4096)",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20171127234817
+Position="Table",100,1500
 
 [Comment]
 Comment=【各テーブル共通項目定義】\nバージョン\n削除フラグ\n登録日\n登録ID\n更新日\n更新ID

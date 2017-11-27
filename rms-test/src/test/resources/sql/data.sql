@@ -133,3 +133,11 @@ INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user04', '201609', '3', 'user09', '20
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user05', '201609', '1', 'user08', null, '', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user05', '201609', '2', '', null, '', 0, 0, now(), 'system', now(), 'system');
 INSERT INTO T_REPORT_APPROVE_FLOW VALUES ('user05', '201609', '3', 'user09', '2016-09-27', '', 0, 0, now(), 'system', now(), 'system');
+
+
+
+--
+-- T_INFOMATION
+--
+DELETE FROM T_INFOMATION;
+INSERT INTO T_INFOMATION VALUES (1, 'お知らせ<br>テスト', 0, 0, now(), 'system', now(), 'system');

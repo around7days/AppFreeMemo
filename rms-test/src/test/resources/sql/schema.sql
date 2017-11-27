@@ -137,6 +137,22 @@ create table T_REPORT_APPROVE_FLOW (
   , constraint T_REPORT_APPROVE_FLOW_PKC primary key (apply_user_id,target_ym,approve_seq)
 ) comment '月報承認フローテーブル' ;
 
+--
+-- お知らせテーブル
+--
+drop table if exists T_INFOMATION cascade;
+create table T_INFOMATION (
+  seq int not null comment '連番'
+  , info varchar(4096) comment 'お知らせ情報'
+  , version int not null comment 'バージョン'
+  , del_flg int not null comment '削除フラグ'
+  , ins_date datetime not null comment '登録日時'
+  , ins_id varchar(20) not null comment '登録ID'
+  , upd_date datetime not null comment '更新日時'
+  , upd_id varchar(20) not null comment '更新ID'
+  , constraint T_INFOMATION_PKC primary key (seq)
+) comment 'お知らせテーブル' ;
+
 
 --
 -- ユーザマスタビュー
