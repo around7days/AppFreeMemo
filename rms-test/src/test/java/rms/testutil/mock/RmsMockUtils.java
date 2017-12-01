@@ -1,4 +1,4 @@
-package rms.test.common.mock;
+package rms.testutil.mock;
 
 import java.io.IOException;
 import java.io.InputStream;

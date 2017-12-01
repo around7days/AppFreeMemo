@@ -1,4 +1,4 @@
-package rms.test.selenium.page;
+package rms.selenium.page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 /**
  * 月報申請画面クラス
  */
-public class 月報申請画面 extends rms.test.selenium.page.共通部品 {
+public class ReportApplyPage extends rms.selenium.page.CommonPage {
 
     /** ロガー */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(月報申請画面.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReportApplyPage.class);
 
     /** 年月 */
     @FindBy(id = "targetYm")
@@ -57,7 +57,7 @@ public class 月報申請画面 extends rms.test.selenium.page.共通部品 {
      * @param driver
      * @return 月報申請画面
      */
-    public 月報申請画面 initialize(WebDriver driver) {
+    public ReportApplyPage initialize(WebDriver driver) {
         return PageFactory.initElements(driver, this.getClass());
     }
 

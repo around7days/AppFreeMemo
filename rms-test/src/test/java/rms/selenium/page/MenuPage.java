@@ -1,4 +1,4 @@
-package rms.test.selenium.page;
+package rms.selenium.page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 /**
  * メニュー画面クラス
  */
-public class メニュー画面 extends rms.test.selenium.page.共通部品 {
+public class MenuPage extends rms.selenium.page.CommonPage {
 
     /** ロガー */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(メニュー画面.class);
+    private static final Logger logger = LoggerFactory.getLogger(MenuPage.class);
 
     /** ユーザ一覧 */
     @FindBy(name = "M001")
@@ -52,7 +52,7 @@ public class メニュー画面 extends rms.test.selenium.page.共通部品 {
      * @param driver
      * @return メニュー画面
      */
-    public メニュー画面 initialize(WebDriver driver) {
+    public MenuPage initialize(WebDriver driver) {
         return PageFactory.initElements(driver, this.getClass());
     }
 

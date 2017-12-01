@@ -22,7 +22,7 @@ public class RmsSlackTest {
     RmsSlack slack;
 
     @Test
-    public void slack接続失敗() throws MessagingException, IOException {
+    public void test_slack接続失敗() throws MessagingException, IOException {
         RmsSlackInfo info = new RmsSlackInfo();
         info.setMail("");
         info.setText("hello world!");

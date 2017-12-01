@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringBatchApplication;
-import rms.batch.app.B001Batch;
 import rms.common.consts.MessageEnum;
 import rms.common.exception.BusinessException;
 
@@ -25,7 +24,7 @@ public class B001BatchTest {
     B001Batch b001;
 
     @Test
-    public void 月報初期データ登録処理_失敗_未来日付エラー() throws Exception {
+    public void test_execute_月報初期データ登録処理_失敗_未来日付エラー() throws Exception {
         String targetYm = "209912";
         List<String> args = new ArrayList<>();
         args.add(targetYm);
@@ -38,7 +37,7 @@ public class B001BatchTest {
     }
 
     @Test
-    public void 月報初期データ登録処理_失敗_パラメータエラー() throws Exception {
+    public void test_execute_月報初期データ登録処理_失敗_パラメータエラー() throws Exception {
         String targetYm = "201x";
         List<String> args = new ArrayList<>();
         args.add(targetYm);
@@ -51,7 +50,7 @@ public class B001BatchTest {
     }
 
     @Test
-    public void 月報初期データ登録処理_成功_パラメータ指定あり() throws Exception {
+    public void test_execute_月報初期データ登録処理_成功_パラメータ指定あり() throws Exception {
         String targetYm = "201705";
         List<String> args = new ArrayList<>();
         args.add(targetYm);
@@ -62,7 +61,7 @@ public class B001BatchTest {
     }
 
     @Test
-    public void 月報初期データ登録処理_成功_パラメータ指定なし() throws Exception {
+    public void test_execute_月報初期データ登録処理_成功_パラメータ指定なし() throws Exception {
         List<String> args = new ArrayList<>();
 
         b001.execute(args);

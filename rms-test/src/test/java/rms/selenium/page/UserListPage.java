@@ -1,4 +1,4 @@
-package rms.test.selenium.page;
+package rms.selenium.page;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory;
 /**
  * ユーザ一覧画面クラス
  */
-public class ユーザ一覧画面 extends rms.test.selenium.page.共通部品 {
+public class UserListPage extends rms.selenium.page.CommonPage {
 
     /** ロガー */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(ユーザ一覧画面.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserListPage.class);
 
     /** 検索条件_ユーザID */
     @FindBy(id = "condition.userId")
@@ -54,7 +54,7 @@ public class ユーザ一覧画面 extends rms.test.selenium.page.共通部品 {
      * @param driver
      * @return ユーザ一覧画面
      */
-    public ユーザ一覧画面 initialize(WebDriver driver) {
+    public UserListPage initialize(WebDriver driver) {
         return PageFactory.initElements(driver, this.getClass());
     }
 

@@ -9,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringBatchApplication;
-import rms.batch.app.B001Batch;
-import rms.batch.app.BatchFactory;
 import rms.common.abstracts.AbstractBatch;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +19,7 @@ public class BatchFactoryTest {
     BatchFactory factory;
 
     @Test
-    public void test_create() throws Exception {
+    public void test_create_バッチクラス生成() throws Exception {
         String batchId = "B001";
         AbstractBatch batch = factory.create(batchId);
         assertTrue(batch instanceof B001Batch);

@@ -1,4 +1,4 @@
-package rms.test.selenium;
+package rms.selenium;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -15,9 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.test.selenium.page.メニュー画面;
-import rms.test.selenium.page.ユーザ一覧画面;
-import rms.test.selenium.page.ログイン画面;
+import rms.selenium.page.LoginPage;
+import rms.selenium.page.MenuPage;
+import rms.selenium.page.UserListPage;
 import selenium.base.AbstractSeleniumTest;
 
 @RunWith(SpringRunner.class)
@@ -36,20 +36,20 @@ public class UserListTest extends AbstractSeleniumTest {
         helper.url("http://localhost:" + port + serverContextPath + "/login");
 
         {
-            ログイン画面 page = new ログイン画面().initialize(driver);
+            LoginPage page = new LoginPage().initialize(driver);
             helper.setKeys(page.ユーザID(), "user11");
             helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize(driver);
+            MenuPage page = new MenuPage().initialize(driver);
             page.ユーザ一覧().click();
         }
     }
 
     @Test
-    public void ユーザ一覧画面表示() throws IOException {
+    public void test_ユーザ一覧画面表示() throws IOException {
 
         // ユーザ一覧画面が表示されていること
         capture.screenShot();
@@ -57,10 +57,10 @@ public class UserListTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void ユーザ検索_ID検索() throws IOException {
+    public void test_ユーザ検索_ID検索() throws IOException {
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
+            UserListPage page = new UserListPage().initialize(driver);
             page.検索条件_ユーザID().sendKeys("user01");
             page.検索ボタン().click();
 
@@ -71,10 +71,10 @@ public class UserListTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void ユーザ検索_改ページ() throws IOException {
+    public void test_ユーザ検索_改ページ() throws IOException {
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
+            UserListPage page = new UserListPage().initialize(driver);
             page.検索ボタン().click();
 
             // 1-5件目が表示されていること
@@ -83,7 +83,7 @@ public class UserListTest extends AbstractSeleniumTest {
         }
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
+            UserListPage page = new UserListPage().initialize(driver);
             page.ページ_Next().click();
 
             // 6-10件目が表示されていること
@@ -92,7 +92,7 @@ public class UserListTest extends AbstractSeleniumTest {
         }
 
         {
-            ユーザ一覧画面 page = new ユーザ一覧画面().initialize(driver);
+            UserListPage page = new UserListPage().initialize(driver);
             page.ページ_Prev().click();
 
             // 1-5件目が表示されていること

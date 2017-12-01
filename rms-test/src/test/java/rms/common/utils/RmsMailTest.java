@@ -12,8 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.test.common.mock.RmsMockFileType;
-import rms.test.common.mock.RmsMockUtils;
+import rms.testutil.mock.RmsMockFileType;
+import rms.testutil.mock.RmsMockUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringWebApplication.class)
@@ -23,7 +23,7 @@ public class RmsMailTest {
     RmsMail mail;
 
     @Test
-    public void メール送信_単体_添付ファイル無し() throws MessagingException {
+    public void test_send_メール送信_単体_添付ファイル無し() throws MessagingException {
         RmsMailInfo mailInfo = new RmsMailInfo();
         mailInfo.setFromAddr("from@xxx.com")
                 .addToAddr("to@xxx.com")
@@ -36,7 +36,7 @@ public class RmsMailTest {
     }
 
     @Test
-    public void メール送信_複数_添付ファイル無し() throws MessagingException {
+    public void test_send_メール送信_複数_添付ファイル無し() throws MessagingException {
         List<RmsMailInfo> list = new ArrayList<>();
 
         {
@@ -60,7 +60,7 @@ public class RmsMailTest {
     }
 
     @Test
-    public void メール送信_単体_添付ファイルあり() throws MessagingException {
+    public void test_send_メール送信_単体_添付ファイルあり() throws MessagingException {
         String fileNm = "丑 丞 乃 之 乎 也 云 亘‐亙 些 亦 　 髙 ～ ①.xlsx";
         String filePath = RmsMockUtils.getDummyFilePath(RmsMockFileType.TXT);
 

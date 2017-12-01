@@ -1,4 +1,4 @@
-package rms.test.selenium.page;
+package rms.selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 /**
  * 共通部品クラス
  */
-public class 共通部品 {
+public class CommonPage {
 
     /** ロガー */
     @SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(共通部品.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommonPage.class);
 
     /** ページ_Prev */
     @FindBy(id = "pagePrev")

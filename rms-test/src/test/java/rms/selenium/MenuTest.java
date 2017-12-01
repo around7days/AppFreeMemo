@@ -1,4 +1,4 @@
-package rms.test.selenium;
+package rms.selenium;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -15,8 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.test.selenium.page.メニュー画面;
-import rms.test.selenium.page.ログイン画面;
+import rms.selenium.page.MenuPage;
+import rms.selenium.page.LoginPage;
 import selenium.base.AbstractSeleniumTest;
 
 @RunWith(SpringRunner.class)
@@ -36,17 +36,17 @@ public class MenuTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void ヘッダ_ユーザ名確認() throws IOException {
+    public void test_ヘッダ_ユーザ名確認() throws IOException {
 
         {
-            ログイン画面 page = new ログイン画面().initialize(driver);
+            LoginPage page = new LoginPage().initialize(driver);
             helper.setKeys(page.ユーザID(), "user01");
             helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize(driver);
+            MenuPage page = new MenuPage().initialize(driver);
 
             // ログインに成功し、メニュー画面のヘッダにログインユーザ名が正しく表示されていること
             capture.screenShot();
@@ -55,17 +55,17 @@ public class MenuTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void メニュー表示確認_申請者() throws IOException {
+    public void test_メニュー表示確認_申請者() throws IOException {
 
         {
-            ログイン画面 page = new ログイン画面().initialize(driver);
+            LoginPage page = new LoginPage().initialize(driver);
             helper.setKeys(page.ユーザID(), "user01");
             helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize(driver);
+            MenuPage page = new MenuPage().initialize(driver);
             capture.screenShot();
             assertThat(helper.exists(page.ユーザ一覧()), is(false));
             assertThat(helper.exists(page.ユーザ登録()), is(false));
@@ -77,17 +77,17 @@ public class MenuTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void メニュー表示確認_承認者() throws IOException {
+    public void test_メニュー表示確認_承認者() throws IOException {
 
         {
-            ログイン画面 page = new ログイン画面().initialize(driver);
+            LoginPage page = new LoginPage().initialize(driver);
             helper.setKeys(page.ユーザID(), "user06");
             helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize(driver);
+            MenuPage page = new MenuPage().initialize(driver);
             capture.screenShot();
             assertThat(helper.exists(page.ユーザ一覧()), is(false));
             assertThat(helper.exists(page.ユーザ登録()), is(false));
@@ -99,17 +99,17 @@ public class MenuTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void メニュー表示確認_管理者() throws IOException {
+    public void test_メニュー表示確認_管理者() throws IOException {
 
         {
-            ログイン画面 page = new ログイン画面().initialize(driver);
+            LoginPage page = new LoginPage().initialize(driver);
             helper.setKeys(page.ユーザID(), "user11");
             helper.setKeys(page.パスワード(), "pass");
             page.ログインボタン().click();
         }
 
         {
-            メニュー画面 page = new メニュー画面().initialize(driver);
+            MenuPage page = new MenuPage().initialize(driver);
             capture.screenShot();
             assertThat(helper.exists(page.ユーザ一覧()), is(true));
             assertThat(helper.exists(page.ユーザ登録()), is(true));

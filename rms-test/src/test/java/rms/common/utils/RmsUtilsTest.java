@@ -10,15 +10,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rms.common.utils.RmsUtils;
-
 public class RmsUtilsTest {
     /** logger */
     @SuppressWarnings("unused")
     private static Logger logger = LoggerFactory.getLogger(RmsUtilsTest.class);
 
     @Test
-    public void testGetThisTargetYm() {
+    public void test_getThisTargetYm() {
 
         int switchDay = 20;
         {
@@ -39,7 +37,7 @@ public class RmsUtilsTest {
     }
 
     @Test
-    public void testGetSwitchDate() {
+    public void test_getSwitchDate() {
         Integer targetYm = 201706;
         Integer switchDay = 20;
         LocalDate date = RmsUtils.getSwitchDate(targetYm, switchDay);
@@ -47,7 +45,7 @@ public class RmsUtilsTest {
     }
 
     @Test
-    public void testIsTargetYmCheck() {
+    public void test_isTargetYmCheck() {
         {
             Integer targetYm = 201706;
             boolean b = RmsUtils.isTargetYmCheck(targetYm);

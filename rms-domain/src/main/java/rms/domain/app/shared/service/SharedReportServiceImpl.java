@@ -41,9 +41,8 @@ public class SharedReportServiceImpl implements SharedReportService {
         return getNewStatus(entity, execKbn);
     }
 
-    // TODO publicの理由はテストコードから直接参照させる為（リフレクション使った方がいい？）
-    public String getNewStatus(VTReport entity,
-                               StatusExecKbn execKbn) {
+    String getNewStatus(VTReport entity,
+                        StatusExecKbn execKbn) {
         // 処理後の承認状況
         String newStatus = null;
 

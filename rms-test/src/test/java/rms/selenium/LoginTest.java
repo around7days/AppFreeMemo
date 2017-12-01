@@ -1,4 +1,4 @@
-package rms.test.selenium;
+package rms.selenium;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.test.selenium.page.ログイン画面;
+import rms.selenium.page.LoginPage;
 import selenium.base.AbstractSeleniumTest;
 
 @RunWith(SpringRunner.class)
@@ -35,15 +35,15 @@ public class LoginTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void ログイン画面表示() throws IOException {
+    public void test_ログイン画面表示() throws IOException {
         capture.screenShot();
         assertThat(helper.getTitle(), is("ログイン画面"));
     }
 
     @Test
-    public void ログイン失敗_ID間違え() throws IOException {
+    public void test_ログイン失敗_ID間違え() throws IOException {
 
-        ログイン画面 page = new ログイン画面().initialize(driver);
+        LoginPage page = new LoginPage().initialize(driver);
         helper.setKeys(page.ユーザID(), "xxxx01");
         helper.setKeys(page.パスワード(), "pass");
         capture.screenShot();
@@ -56,9 +56,9 @@ public class LoginTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void ログイン失敗_パスワード間違え() throws IOException {
+    public void test_ログイン失敗_パスワード間違え() throws IOException {
 
-        ログイン画面 page = new ログイン画面().initialize(driver);
+        LoginPage page = new LoginPage().initialize(driver);
         helper.setKeys(page.ユーザID(), "user01");
         helper.setKeys(page.パスワード(), "x");
         capture.screenShot();
@@ -71,9 +71,9 @@ public class LoginTest extends AbstractSeleniumTest {
     }
 
     @Test
-    public void ログイン成功() throws IOException {
+    public void test_ログイン成功() throws IOException {
 
-        ログイン画面 page = new ログイン画面().initialize(driver);
+        LoginPage page = new LoginPage().initialize(driver);
         helper.setKeys(page.ユーザID(), "user01");
         helper.setKeys(page.パスワード(), "pass");
         capture.screenShot();

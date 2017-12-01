@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.common.utils.PageInfo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringWebApplication.class)
@@ -36,7 +35,7 @@ public class PageInfoTest {
 
     // TODO Theoriesを使いたいけどSpringBootでの実行方法が分からず
     @Test
-    public void ページ制御処理() {
+    public void test_ページ制御処理() {
         for (Fixture f : fixture) {
             logger.debug("◆test" + f.no);
             PageInfo page = new PageInfo(f.limit);
