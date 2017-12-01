@@ -37,23 +37,23 @@ public class ReportInitRegistServiceImpl implements ReportInitRegistService {
 
     /** application.properties */
     @Autowired
-    private ProjectProperties properties;
+    ProjectProperties properties;
 
     /** MUserApproveFlowDao */
     @Autowired
-    private MUserApproveFlowDao mUserApproveFlowDao;
+    MUserApproveFlowDao mUserApproveFlowDao;
 
     /** TReportDao */
     @Autowired
-    private TReportDao tReportDao;
+    TReportDao tReportDao;
 
     /** TReportApproveFlowDao */
     @Autowired
-    private TReportApproveFlowDao tReportApproveFlowDao;
+    TReportApproveFlowDao tReportApproveFlowDao;
 
     /** 月報初期データ登録Dao */
     @Autowired
-    private ReportInitRegistDao dao;
+    ReportInitRegistDao dao;
 
     @Override
     public void regist(Integer targetYm) throws Exception {

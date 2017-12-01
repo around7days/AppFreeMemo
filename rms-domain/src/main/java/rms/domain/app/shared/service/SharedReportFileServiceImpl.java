@@ -45,16 +45,16 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
     /** logger */
     private static final Logger logger = LoggerFactory.getLogger(SharedReportFileServiceImpl.class);
 
-    /** application.properties */
-    @Autowired
-    private ProjectProperties properties;
-
-    @Autowired
-    protected VMUserDao vMUserDao;
-
     /** ファイル名の文字コード */
     // TODO MS932固定で大丈夫？
     private static final Charset FILE_NM_CHARSET = Charset.forName("MS932");
+
+    /** application.properties */
+    @Autowired
+    ProjectProperties properties;
+
+    @Autowired
+    VMUserDao vMUserDao;
 
     @Override
     public SharedFileDto getReportFileInfo(String applyUserId,
@@ -214,9 +214,9 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
      * @param targetYm
      * @return
      */
-    private Path createReportFilePath(String storageDir,
-                                      String applyUserId,
-                                      Integer targetYm) {
+    Path createReportFilePath(String storageDir,
+                              String applyUserId,
+                              Integer targetYm) {
         String filePath = targetYm + Const.REPORT_FILE_DELIMITER + applyUserId + ".xlsx";
         return Paths.get(storageDir, filePath);
     }
@@ -228,9 +228,9 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
      * @param targetYm
      * @return ファイル名[yyyymm_userId_userNm.xlsx]
      */
-    private String createReportDownloadFileNm1(String applyUserId,
-                                               String applyUserNm,
-                                               Integer targetYm) {
+    String createReportDownloadFileNm1(String applyUserId,
+                                       String applyUserNm,
+                                       Integer targetYm) {
         // ユーザ名の空白除去（全角半角すべて）
         String newApplyUserNm = applyUserNm.replaceAll("\\s", "").replaceAll("　", "");
 
@@ -250,10 +250,10 @@ public class SharedReportFileServiceImpl implements SharedReportFileService {
      * @param departmentRnm
      * @return ファイル名[yyyy mm 作業月報【departmentRnm)userNm】.xlsx]
      */
-    private String createReportDownlaodFileNm2(String applyUserId,
-                                               String applyUserNm,
-                                               Integer targetYm,
-                                               String departmentRnm) {
+    String createReportDownlaodFileNm2(String applyUserId,
+                                       String applyUserNm,
+                                       Integer targetYm,
+                                       String departmentRnm) {
         // ユーザ名の空白除去（全角半角すべて）
         String newApplyUserNm = applyUserNm.replaceAll("\\s", "").replaceAll("　", "");
         // 年月で分割

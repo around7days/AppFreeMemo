@@ -53,7 +53,7 @@ public class ReportApplyRegistController extends rms.common.abstracts.AbstractCo
 
     /** 月報申請画面サービス */
     @Autowired
-    private ReportApplyRegistService service;
+    ReportApplyRegistService service;
 
     /**
      * 月報申請画面フォームの初期化

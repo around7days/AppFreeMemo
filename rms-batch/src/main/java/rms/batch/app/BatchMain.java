@@ -25,11 +25,11 @@ public class BatchMain {
 
     /** 起動引数 */
     @Autowired
-    private ApplicationArguments arguments;
+    ApplicationArguments arguments;
 
     /** BatchFactory */
     @Autowired
-    private BatchFactory factory;
+    BatchFactory factory;
 
     /**
      * 各バッチ処理呼び出し<br>

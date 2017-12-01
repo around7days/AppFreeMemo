@@ -38,15 +38,15 @@ public class ControllerAdviceCustom {
 
     /** application.properties */
     @Autowired
-    private ProjectProperties properties;
+    ProjectProperties properties;
 
     /** UrlCreateHelper */
     @Autowired
-    private UrlCreateHelper urlHelper;
+    UrlCreateHelper urlHelper;
 
     /** MessageSource */
     @Autowired
-    private MessageSourceEnumAccessor message;
+    MessageSourceEnumAccessor message;
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {

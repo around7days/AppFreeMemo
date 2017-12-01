@@ -24,10 +24,10 @@ public class RmsMail {
 
     /** メール関連Helper */
     @Autowired
-    private RmsMailHelper helper;
+    RmsMailHelper helper;
 
     @Autowired
-    private JavaMailSender mailSender;
+    JavaMailSender mailSender;
 
     /**
      * メール送信

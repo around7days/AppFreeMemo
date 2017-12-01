@@ -56,7 +56,7 @@ public class UserRegistController extends rms.common.abstracts.AbstractControlle
 
     /** ユーザ登録画面サービス */
     @Autowired
-    private UserRegistService service;
+    UserRegistService service;
 
     /**
      * ユーザ登録画面フォームの初期化

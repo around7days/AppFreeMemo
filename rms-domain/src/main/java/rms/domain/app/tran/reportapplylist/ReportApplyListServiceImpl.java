@@ -27,7 +27,7 @@ public class ReportApplyListServiceImpl implements ReportApplyListService {
 
     /** 月報情報取得Dao */
     @Autowired
-    private ReportApplyListDao dao;
+    ReportApplyListDao dao;
 
     @Override
     public SearchResultDto<ReportApplyListEntityResult> search(ReportApplyListDtoCondition condition,

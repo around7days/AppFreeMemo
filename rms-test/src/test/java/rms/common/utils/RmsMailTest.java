@@ -12,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.common.utils.RmsMail;
-import rms.common.utils.RmsMailInfo;
 import rms.test.common.mock.RmsMockFileType;
 import rms.test.common.mock.RmsMockUtils;
 
@@ -22,7 +20,7 @@ import rms.test.common.mock.RmsMockUtils;
 public class RmsMailTest {
 
     @Autowired
-    private RmsMail mail;
+    RmsMail mail;
 
     @Test
     public void メール送信_単体_添付ファイル無し() throws MessagingException {

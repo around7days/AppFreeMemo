@@ -21,7 +21,7 @@ package rms.web.app.system.login;
 // public class LoginControllerTest extends AbstractControllerTest {
 //
 // @Autowired
-// public LoginController controller;
+// LoginController controller;
 //
 // protected MockHttpServletRequest request;
 // protected MockHttpServletResponse response;

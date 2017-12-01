@@ -20,7 +20,7 @@ public class BatchFactory {
 
     /** 月報初期データ登録バッチ */
     @Autowired
-    private B001Batch b001;
+    B001Batch b001;
 
     /**
      * バッチクラス生成<br>

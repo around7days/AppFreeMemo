@@ -38,27 +38,27 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     /** ユーザ情報登録Dao */
     @Autowired
-    private UserRegistDao dao;
+    UserRegistDao dao;
 
     /** MCodeDao */
     @Autowired
-    private MCodeDao mCodeDao;
+    MCodeDao mCodeDao;
 
     /** MUserDao */
     @Autowired
-    private MUserDao mUserDao;
+    MUserDao mUserDao;
 
     /** MUserApproveFlowDao */
     @Autowired
-    private MUserApproveFlowDao mUserApproveFlowDao;
+    MUserApproveFlowDao mUserApproveFlowDao;
 
     /** MUserRoleDao */
     @Autowired
-    private MUserRoleDao mUserRoleDao;
+    MUserRoleDao mUserRoleDao;
 
     /** VMUserDao */
     @Autowired
-    private VMUserDao vMUserDao;
+    VMUserDao vMUserDao;
 
     @Override
     public UserRegistDto initDisplayUpdate(String userId) {
@@ -155,7 +155,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      * ユーザマスタ登録処理
      * @param dto
      */
-    private void inserUser(UserRegistDto dto) {
+    void inserUser(UserRegistDto dto) {
         // 登録情報の生成
         MUser entity = RmsBeanUtils.createCopyProperties(dto, MUser.class);
         // 登録処理
@@ -167,7 +167,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      * 説明：ユーザIDに紐付く承認フローを全て削除してから新規登録を行います。
      * @param dto
      */
-    private void deleteInsertUserApproveFlow(UserRegistDto dto) {
+    void deleteInsertUserApproveFlow(UserRegistDto dto) {
 
         // ユーザIDに紐付くレコードを全て削除
         mUserApproveFlowDao.deleteListByUserId(dto.getUserId());
@@ -207,7 +207,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      * 説明：ユーザに紐付くユーザ役割マスタを全て削除してから新規登録を行います。
      * @param dto
      */
-    private void deleteInsertUserRole(UserRegistDto dto) {
+    void deleteInsertUserRole(UserRegistDto dto) {
 
         // ユーザIDに紐付くレコードを全て削除
         mUserRoleDao.deleteListByUserId(dto.getUserId());
@@ -242,7 +242,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      * ユーザマスタ更新処理
      * @param dto
      */
-    private void updateUser(UserRegistDto dto) {
+    void updateUser(UserRegistDto dto) {
         // 更新情報の生成
         MUser entity = RmsBeanUtils.createCopyProperties(dto, MUser.class);
 
@@ -256,7 +256,7 @@ public class UserRegistServiceImpl implements UserRegistService {
      * @param userId
      * @throws BusinessException
      */
-    private void validateUniquUserId(String userId) throws BusinessException {
+    void validateUniquUserId(String userId) throws BusinessException {
         boolean hasExists = mUserDao.existsById(userId);
         if (hasExists) {
             // 「{0}が重複しています」
@@ -277,11 +277,11 @@ public class UserRegistServiceImpl implements UserRegistService {
      * @param approveUserId4
      * @throws BusinessException
      */
-    private void validateApprovalRoute(String roleApplyFlg,
-                                       String approveUserId1,
-                                       String approveUserId2,
-                                       String approveUserId3,
-                                       String approveUserId4) throws BusinessException {
+    void validateApprovalRoute(String roleApplyFlg,
+                               String approveUserId1,
+                               String approveUserId2,
+                               String approveUserId3,
+                               String approveUserId4) throws BusinessException {
         //@formatter:off
         if (isValueEquals(approveUserId1, approveUserId2) ||
             isValueEquals(approveUserId1, approveUserId3) ||
@@ -311,8 +311,8 @@ public class UserRegistServiceImpl implements UserRegistService {
      * @param value2
      * @return true:同じ false:異なる
      */
-    private boolean isValueEquals(String value1,
-                                  String value2) {
+    boolean isValueEquals(String value1,
+                          String value2) {
         if (RmsStringUtils.isEmpty(value1) || RmsStringUtils.isEmpty(value2)) {
             return false;
         }

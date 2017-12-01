@@ -42,7 +42,7 @@ public class LoginController extends rms.common.abstracts.AbstractController {
 
     /** ログイン画面サービス */
     @Autowired
-    private LoginService service;
+    LoginService service;
 
     /**
      * ログイン画面フォームの初期化

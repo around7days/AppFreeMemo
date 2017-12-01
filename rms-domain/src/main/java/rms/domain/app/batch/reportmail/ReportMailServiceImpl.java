@@ -20,23 +20,23 @@ public class ReportMailServiceImpl implements ReportMailService {
 
     // /** application.properties */
     // @Autowired
-    // private ProjectProperties properties;
+    // ProjectProperties properties;
     //
     // /** MUserApproveFlowDao */
     // @Autowired
-    // private MUserApproveFlowDao mUserApproveFlowDao;
+    // MUserApproveFlowDao mUserApproveFlowDao;
     //
     // /** TReportDao */
     // @Autowired
-    // private TReportDao tReportDao;
+    // TReportDao tReportDao;
     //
     // /** TReportApproveFlowDao */
     // @Autowired
-    // private TReportApproveFlowDao tReportApproveFlowDao;
+    // TReportApproveFlowDao tReportApproveFlowDao;
     //
     // /** 月報初期データ登録Dao */
     // @Autowired
-    // private ReportMailDao dao;
+    // ReportMailDao dao;
 
     @Override
     public void sendmailApproved() throws Exception {

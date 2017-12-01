@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 
     /** TInfomationDao */
     @Autowired
-    private TInfomationDao tInfomationDao;
+    TInfomationDao tInfomationDao;
 
     @Override
     public TInfomation getInfomation() {

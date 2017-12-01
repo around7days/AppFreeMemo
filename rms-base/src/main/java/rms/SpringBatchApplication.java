@@ -22,7 +22,7 @@ public class SpringBatchApplication {
 
     /** バッチ処理Main */
     @Autowired
-    private BatchMain batchMain;
+    BatchMain batchMain;
 
     /**
      * メイン起動

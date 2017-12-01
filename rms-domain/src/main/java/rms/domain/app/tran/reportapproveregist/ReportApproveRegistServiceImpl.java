@@ -36,23 +36,23 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
 
     /** 月報関連共通サービス */
     @Autowired
-    private SharedReportService sharedReportService;
+    SharedReportService sharedReportService;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    private SharedReportFileService sharedReportFileService;
+    SharedReportFileService sharedReportFileService;
 
     /** TReportDao */
     @Autowired
-    private TReportDao tReportDao;
+    TReportDao tReportDao;
 
     /** TReportApproveFlowDao */
     @Autowired
-    private TReportApproveFlowDao tReportApproveFlowDao;
+    TReportApproveFlowDao tReportApproveFlowDao;
 
     /** VTReportDao */
     @Autowired
-    private VTReportDao vTReportDao;
+    VTReportDao vTReportDao;
 
     @Override
     public ReportApproveRegistDto initDisplay(String applyUserId,
@@ -98,8 +98,8 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
      * @param dto
      * @param execKbn
      */
-    private void updateReport(ReportApproveRegistDto dto,
-                              StatusExecKbn execKbn) {
+    void updateReport(ReportApproveRegistDto dto,
+                      StatusExecKbn execKbn) {
 
         TReport entity = new TReport();
 
@@ -127,7 +127,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
      * 月報承認フローテーブル更新処理
      * @param dto
      */
-    private void updateReportApproveFlow(ReportApproveRegistDto dto) {
+    void updateReportApproveFlow(ReportApproveRegistDto dto) {
 
         TReportApproveFlow entity = new TReportApproveFlow();
 
@@ -171,7 +171,7 @@ public class ReportApproveRegistServiceImpl implements ReportApproveRegistServic
      * @param dto
      * @throws IOException
      */
-    private void saveReportFile(ReportApproveRegistDto dto) throws IOException {
+    void saveReportFile(ReportApproveRegistDto dto) throws IOException {
         // 月報ファイル保存処理
         sharedReportFileService.saveReportFile(dto.getFile(), dto.getApplyUserId(), dto.getTargetYm());
     }

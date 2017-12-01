@@ -44,31 +44,31 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
 
     /** application.properties */
     @Autowired
-    private ProjectProperties properties;
+    ProjectProperties properties;
 
     /** 月報関連共通サービス */
     @Autowired
-    private SharedReportService sharedReportService;
+    SharedReportService sharedReportService;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    private SharedReportFileService sharedReportFileService;
+    SharedReportFileService sharedReportFileService;
 
     /** VMUserDao */
     @Autowired
-    private VMUserDao vMUserDao;
+    VMUserDao vMUserDao;
 
     /** TReportDao */
     @Autowired
-    private TReportDao tReportDao;
+    TReportDao tReportDao;
 
     /** TReportApproveFlowDao */
     @Autowired
-    private TReportApproveFlowDao tReportApproveFlowDao;
+    TReportApproveFlowDao tReportApproveFlowDao;
 
     /** VTReportDao */
     @Autowired
-    private VTReportDao vTReportDao;
+    VTReportDao vTReportDao;
 
     @Override
     public ReportApplyRegistDto initDisplayApply(String applyUserId) {
@@ -166,8 +166,8 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * @param targetYm
      * @throws BusinessException
      */
-    private void validateUniquReport(String applyUserId,
-                                     Integer targetYm) throws BusinessException {
+    void validateUniquReport(String applyUserId,
+                             Integer targetYm) throws BusinessException {
         TReport entity = tReportDao.selectById(applyUserId, targetYm);
         if (entity == null) {
             return;
@@ -192,7 +192,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * @param targetYm
      * @throws BusinessException
      */
-    private void validateFutureYm(Integer targetYm) throws BusinessException {
+    void validateFutureYm(Integer targetYm) throws BusinessException {
 
         // 現在日付
         LocalDate sysdate = properties.getSysdate();
@@ -213,7 +213,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * 月報申請処理
      * @param dto
      */
-    private void insertReport(ReportApplyRegistDto dto) {
+    void insertReport(ReportApplyRegistDto dto) {
 
         // 申請情報の生成
         TReport entity = new TReport();
@@ -231,7 +231,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * 月報承認フロー登録処理
      * @param dto
      */
-    private void insertReportApproveFlow(ReportApplyRegistDto dto) {
+    void insertReportApproveFlow(ReportApplyRegistDto dto) {
         // 月報承認フロー情報の生成
         TReportApproveFlow entity = new TReportApproveFlow();
         entity.setApplyUserId(dto.getApplyUserId());
@@ -267,7 +267,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * 承認状況の更新処理
      * @param dto
      */
-    private void updateReportStatus(ReportApplyRegistDto dto) {
+    void updateReportStatus(ReportApplyRegistDto dto) {
 
         // 処理後の承認状況を計算
         String newStatus = sharedReportService.getNewStatus(dto.getApplyUserId(),
@@ -286,7 +286,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * 月報申請の物理削除処理
      * @param dto
      */
-    private void deleteReport(ReportApplyRegistDto dto) {
+    void deleteReport(ReportApplyRegistDto dto) {
         // 月報申請情報の生成
         TReport entity = new TReport();
         entity.setApplyUserId(dto.getApplyUserId());
@@ -300,7 +300,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * 月報承認フローの物理削除処理
      * @param dto
      */
-    private void deleteReportApproveFlow(ReportApplyRegistDto dto) {
+    void deleteReportApproveFlow(ReportApplyRegistDto dto) {
 
         // 申請者ID、対象年月に紐付くレコードを全て削除
         tReportApproveFlowDao.deleteListByApplyUserIdAndTargetYm(dto.getApplyUserId(), dto.getTargetYm());
@@ -311,7 +311,7 @@ public class ReportApplyRegistServiceImpl implements ReportApplyRegistService {
      * @param dto
      * @throws IOException
      */
-    private void saveReportFile(ReportApplyRegistDto dto) throws IOException {
+    void saveReportFile(ReportApplyRegistDto dto) throws IOException {
         // 月報ファイル保存処理
         sharedReportFileService.saveReportFile(dto.getFile(), dto.getApplyUserId(), dto.getTargetYm());
     }

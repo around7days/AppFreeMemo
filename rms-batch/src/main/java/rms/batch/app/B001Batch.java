@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import rms.common.abstracts.AbstractBatch;
 import rms.common.consts.MessageEnum;
 import rms.common.exception.BusinessException;
-import rms.common.utils.ProjectProperties;
 import rms.common.utils.RmsUtils;
 import rms.domain.app.batch.reportinitregist.ReportInitRegistService;
 
@@ -29,13 +28,9 @@ public class B001Batch extends AbstractBatch {
     /** バッチID */
     public static final String BATCH_ID = "B001";
 
-    /** application.properties */
-    @Autowired
-    private ProjectProperties properties;
-
     /** 月報初期データ登録バッチサービス */
     @Autowired
-    private ReportInitRegistService service;
+    ReportInitRegistService service;
 
     /**
      * 月報初期データ登録バッチ<br>

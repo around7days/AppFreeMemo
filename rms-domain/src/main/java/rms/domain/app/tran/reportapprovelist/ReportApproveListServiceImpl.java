@@ -29,11 +29,11 @@ public class ReportApproveListServiceImpl implements ReportApproveListService {
     /** application.properties */
     @SuppressWarnings("unused")
     @Autowired
-    private ProjectProperties properties;
+    ProjectProperties properties;
 
     /** 月報情報取得Dao */
     @Autowired
-    private ReportApproveListDao dao;
+    ReportApproveListDao dao;
 
     @Override
     public ReportApproveListDtoCondition initDisplay() {

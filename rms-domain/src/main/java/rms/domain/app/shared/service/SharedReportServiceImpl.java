@@ -27,10 +27,10 @@ public class SharedReportServiceImpl implements SharedReportService {
     /** application.properties */
     @SuppressWarnings("unused")
     @Autowired
-    private ProjectProperties properties;
+    ProjectProperties properties;
 
     @Autowired
-    protected VTReportDao vTReportDao;
+    VTReportDao vTReportDao;
 
     @Override
     public String getNewStatus(String applyUserId,

@@ -13,15 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringWebApplication;
-import rms.common.utils.RmsSlack;
-import rms.common.utils.RmsSlackInfo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringWebApplication.class)
 public class RmsSlackTest {
 
     @Autowired
-    private RmsSlack slack;
+    RmsSlack slack;
 
     @Test
     public void slack接続失敗() throws MessagingException, IOException {

@@ -43,23 +43,23 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
 
     /** 月報関連共通サービス */
     @Autowired
-    private SharedReportService sharedReportService;
+    SharedReportService sharedReportService;
 
     /** 月報ファイル関連共通サービス */
     @Autowired
-    private SharedReportFileService sharedReportFileService;
+    SharedReportFileService sharedReportFileService;
 
     /** TReportDao */
     @Autowired
-    private TReportDao tReportDao;
+    TReportDao tReportDao;
 
     /** TReportApproveFlowDao */
     @Autowired
-    private TReportApproveFlowDao tReportApproveFlowDao;
+    TReportApproveFlowDao tReportApproveFlowDao;
 
     /** VTReportDao */
     @Autowired
-    private VTReportDao vTReportDao;
+    VTReportDao vTReportDao;
 
     @Override
     public List<ReportApproveRegistBulkDto> approveBulk(MultipartFile file,
@@ -118,7 +118,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
      * @param reportFileNm
      * @throws BusinessException
      */
-    private void validateReportFileNm(String reportFileNm) throws BusinessException {
+    void validateReportFileNm(String reportFileNm) throws BusinessException {
         String[] arys = reportFileNm.split(Const.REPORT_FILE_DELIMITER);
         if (arys.length <= 2) {
             // 「月報ファイル名のフォーマットが正しくありません(yyyymm_userId_userNm.xlsx)」
@@ -138,7 +138,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
      * @return
      * @throws BusinessException
      */
-    private VTReport getReportInfo(String reportFileNm) throws BusinessException {
+    VTReport getReportInfo(String reportFileNm) throws BusinessException {
 
         // 月報ファイル名から対象年月と申請者IDを取得
         String[] arys = reportFileNm.split(Const.REPORT_FILE_DELIMITER);
@@ -162,8 +162,8 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
      * @param userInfo
      * @throws BusinessException
      */
-    private void validateApproveAuthority(VTReport vTReport,
-                                          UserInfo userInfo) throws BusinessException {
+    void validateApproveAuthority(VTReport vTReport,
+                                  UserInfo userInfo) throws BusinessException {
 
         // 承認者
         String approveUserId = userInfo.getUserId();
@@ -205,7 +205,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
      * 月報テーブル更新処理(承認)
      * @param vTReport
      */
-    private void updateReportApprove(VTReport vTReport) {
+    void updateReportApprove(VTReport vTReport) {
 
         TReport entity = new TReport();
 
@@ -236,7 +236,7 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
      * 月報承認フローテーブル更新処理
      * @param vTReport
      */
-    private void updateReportApproveFlow(VTReport vTReport) {
+    void updateReportApproveFlow(VTReport vTReport) {
 
         TReportApproveFlow entity = new TReportApproveFlow();
 
@@ -281,8 +281,8 @@ public class ReportApproveRegistBulkServiceImpl implements ReportApproveRegistBu
      * @param vTReport
      * @throws IOException
      */
-    private void saveReportFile(Path filePath,
-                                VTReport vTReport) throws IOException {
+    void saveReportFile(Path filePath,
+                        VTReport vTReport) throws IOException {
         // 月報ファイル保存処理
         sharedReportFileService.saveReportFile(filePath, vTReport.getApplyUserId(), vTReport.getTargetYm());
     }

@@ -24,10 +24,10 @@ public class RmsMailHelper {
     private static Logger logger = LoggerFactory.getLogger(RmsMailHelper.class);
 
     @Autowired
-    private JavaMailSender mailSender;
+    JavaMailSender mailSender;
 
     // @Autowired
-    // private ProjectProperties properties;
+    // ProjectProperties properties;
 
     /**
      * メッセージ作成
