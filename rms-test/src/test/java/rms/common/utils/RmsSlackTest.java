@@ -1,4 +1,4 @@
-package rms.test.junit.common;
+package rms.common.utils;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package rms.test.junit.domain;
+package rms.domain.app.tran.reportapplyregist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;

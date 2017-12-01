@@ -1,4 +1,4 @@
-package rms.test.junit.common;
+package rms.common.exception;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;

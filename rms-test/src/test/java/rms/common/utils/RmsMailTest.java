@@ -1,4 +1,4 @@
-package rms.test.junit.common;
+package rms.common.utils;
 
 import java.util.ArrayList;
 import java.util.List;

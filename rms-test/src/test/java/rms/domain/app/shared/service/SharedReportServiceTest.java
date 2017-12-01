@@ -1,4 +1,4 @@
-package rms.test.junit.domain;
+package rms.domain.app.shared.service;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;

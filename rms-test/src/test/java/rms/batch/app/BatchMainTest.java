@@ -1,4 +1,4 @@
-package rms.test.junit.batch;
+package rms.batch.app;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;

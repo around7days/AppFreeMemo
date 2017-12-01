@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-import rms.test.junit.common.RmsMailTest;
+import rms.common.utils.RmsMailTest;
 
 /**
  * MockUtilsクラス
