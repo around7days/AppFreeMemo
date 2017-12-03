@@ -21,7 +21,7 @@ public interface ReportApproveListDao {
      * @return
      */
     @Select
-    List<ReportApproveListEntityResult> reportApproveListByCondition(ReportApproveListDtoCondition condition,
+    List<ReportApproveListResultEntity> reportApproveListByCondition(ReportApproveListDto condition,
                                                                      SelectOptions options);
 
 }

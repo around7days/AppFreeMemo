@@ -2,6 +2,8 @@ package rms.domain.app.tran.reportapplyregist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,12 +12,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import rms.SpringWebApplication;
+import rms.common.consts.MCodeConst;
+import rms.common.consts.MessageEnum;
+import rms.common.dao.TReportDao;
 import rms.common.dao.VTReportDao;
+import rms.common.entity.TReport;
 import rms.common.entity.VTReport;
 import rms.common.exception.BusinessException;
 import rms.testutil.mock.RmsMockFileType;
@@ -28,7 +35,12 @@ public class ReportApplyRegistServiceTest {
     @Autowired
     ReportApplyRegistService service;
     @Autowired
+    ReportApplyRegistServiceImpl serviceImpl;
+    @Autowired
     VTReportDao vTReportDao;
+
+    @SpyBean
+    TReportDao tReportDao;
 
     @Test
     public void test_initDisplayApply_月報申請_初期表示処理() {
@@ -97,7 +109,9 @@ public class ReportApplyRegistServiceTest {
         try {
             service.apply(dto);
         } catch (BusinessException e) {
-            assertThat(e.getErrorMessage(), is(allOf(startsWith("対象年月の月報は"), endsWith("以降から申請可能です"))));
+            assertThat(e.getErrorMessage(),
+                       is(allOf(org.hamcrest.CoreMatchers.startsWith("対象年月の月報は"),
+                                org.hamcrest.CoreMatchers.endsWith("以降から申請可能です"))));
             return;
         }
 
@@ -181,5 +195,25 @@ public class ReportApplyRegistServiceTest {
 
         // TODO ファイル登録内容の確認は未実装
         // fail("ファイル確認は未実装");
+    }
+
+    @WithUserDetails(value = "user01", userDetailsServiceBeanName = "userDetailsServiceImpl")
+    @Test
+    public void test_validateUniquReport_月報の重複チェック() throws Exception {
+
+        // Mock定義 ---------------------------------------------------
+        TReport entity = new TReport();
+        entity.setStatus(MCodeConst.A001_Y01);
+        doReturn(entity).when(tReportDao).selectById(anyString(), anyInt());
+        // -----------------------------------------------------------
+
+        try {
+            serviceImpl.validateUniquReport("dummy", 999999);
+        } catch (BusinessException e) {
+            assertThat(e.getErrorCode(), is(MessageEnum.error003.name()));
+            return;
+        }
+
+        fail("失敗");
     }
 }

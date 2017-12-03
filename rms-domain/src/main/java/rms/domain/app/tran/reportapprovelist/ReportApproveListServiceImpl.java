@@ -36,9 +36,9 @@ public class ReportApproveListServiceImpl implements ReportApproveListService {
     ReportApproveListDao dao;
 
     @Override
-    public ReportApproveListDtoCondition initDisplay() {
+    public ReportApproveListDto initDisplay() {
         // 初期値の生成
-        ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
+        ReportApproveListDto condition = new ReportApproveListDto();
         // Integer targetYm = RmsUtils.getThisTargetYm(properties.getSysdate(), properties.getSwitchMonthReferenceDay());
         // condition.setTargetYm(targetYm); // 対象年月：当月
 
@@ -46,16 +46,16 @@ public class ReportApproveListServiceImpl implements ReportApproveListService {
     }
 
     @Override
-    public SearchResultDto<ReportApproveListEntityResult> search(ReportApproveListDtoCondition condition,
+    public SearchResultDto<ReportApproveListResultEntity> search(ReportApproveListDto condition,
                                                                  PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
-        List<ReportApproveListEntityResult> resultList = dao.reportApproveListByCondition(condition, options);
+        List<ReportApproveListResultEntity> resultList = dao.reportApproveListByCondition(condition, options);
 
         // 検索結果格納
-        SearchResultDto<ReportApproveListEntityResult> resultDto = new SearchResultDto<>();
+        SearchResultDto<ReportApproveListResultEntity> resultDto = new SearchResultDto<>();
         resultDto.setResultList(resultList);
         resultDto.setCount(options.getCount());
 

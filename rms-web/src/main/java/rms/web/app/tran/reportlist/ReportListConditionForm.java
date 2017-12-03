@@ -4,7 +4,7 @@ package rms.web.app.tran.reportlist;
  * 月報一覧（検索条件）画面フォーム
  * @author
  */
-public class ReportListFormCondition extends rms.common.abstracts.AbstractForm {
+public class ReportListConditionForm extends rms.common.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 対象年月 */

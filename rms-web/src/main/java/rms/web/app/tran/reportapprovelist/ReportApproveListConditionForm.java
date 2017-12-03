@@ -4,7 +4,7 @@ package rms.web.app.tran.reportapprovelist;
  * 月報承認状況一覧（検索条件）画面フォーム
  * @author
  */
-public class ReportApproveListFormCondition extends rms.common.abstracts.AbstractForm {
+public class ReportApproveListConditionForm extends rms.common.abstracts.AbstractForm {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 対象年月 */

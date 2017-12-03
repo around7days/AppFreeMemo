@@ -11,7 +11,7 @@ import rms.common.consts.MCodeConst;
  * 月報申請状況一覧（検索結果）クラス
  */
 @Entity
-public class ReportApplyListEntityResult extends rms.common.abstracts.AbstractEntity {
+public class ReportApplyListResultEntity extends rms.common.abstracts.AbstractEntity {
 
     /** 申請者ID */
     @Column(name = "apply_user_id")

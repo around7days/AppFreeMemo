@@ -30,16 +30,16 @@ public class ReportApplyListServiceImpl implements ReportApplyListService {
     ReportApplyListDao dao;
 
     @Override
-    public SearchResultDto<ReportApplyListEntityResult> search(ReportApplyListDtoCondition condition,
+    public SearchResultDto<ReportApplyListResultEntity> search(ReportApplyListDto condition,
                                                                PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
-        List<ReportApplyListEntityResult> resultList = dao.reportApplyListByCondition(condition, options);
+        List<ReportApplyListResultEntity> resultList = dao.reportApplyListByCondition(condition, options);
 
         // 検索結果格納
-        SearchResultDto<ReportApplyListEntityResult> resultDto = new SearchResultDto<>();
+        SearchResultDto<ReportApplyListResultEntity> resultDto = new SearchResultDto<>();
         resultDto.setResultList(resultList);
         resultDto.setCount(options.getCount());
 

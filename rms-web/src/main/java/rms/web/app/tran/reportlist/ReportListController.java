@@ -31,8 +31,8 @@ import rms.common.utils.SearchResultDto;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
-import rms.domain.app.tran.reportlist.ReportListDtoCondition;
-import rms.domain.app.tran.reportlist.ReportListEntityResult;
+import rms.domain.app.tran.reportlist.ReportListDto;
+import rms.domain.app.tran.reportlist.ReportListResultEntity;
 import rms.domain.app.tran.reportlist.ReportListService;
 import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportlist.ReportListForm.BulkDownload;
@@ -112,11 +112,11 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         form.getPageInfo().clear();
 
         // 検索条件の生成
-        ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                             ReportListDtoCondition.class);
+        ReportListDto condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
+                                                                             ReportListDto.class);
 
         // 検索処理
-        SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        SearchResultDto<ReportListResultEntity> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultDto.getResultList());
@@ -143,11 +143,11 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         logger.debug("フォーム情報 -> {}", form);
 
         // 検索条件の生成
-        ReportListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                             ReportListDtoCondition.class);
+        ReportListDto condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
+                                                                             ReportListDto.class);
 
         // 検索処理
-        SearchResultDto<ReportListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        SearchResultDto<ReportListResultEntity> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultDto.getResultList());
@@ -203,7 +203,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportListEntityResult entity = form.getResultList().get(index);
+        ReportListResultEntity entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
         try {
@@ -248,7 +248,7 @@ public class ReportListController extends rms.common.abstracts.AbstractControlle
         // 選択した月報indexの取得
         Integer[] checks = form.getReportDLCheck();
         for (int i : checks) {
-            ReportListEntityResult entity = form.getResultList().get(i);
+            ReportListResultEntity entity = form.getResultList().get(i);
 
             SharedSubmitReportFileDto dto = new SharedSubmitReportFileDto();
             dto.setApplyUserId(entity.getApplyUserId());

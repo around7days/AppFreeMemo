@@ -11,7 +11,7 @@ import rms.common.consts.MCodeConst;
  * 月報承認一覧（検索結果）クラス
  */
 @Entity
-public class ReportApproveListEntityResult extends rms.common.abstracts.AbstractEntity {
+public class ReportApproveListResultEntity extends rms.common.abstracts.AbstractEntity {
 
     /** 承認者ID */
     @Column(name = "approve_user_id")

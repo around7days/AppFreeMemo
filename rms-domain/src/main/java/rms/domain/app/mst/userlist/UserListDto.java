@@ -4,7 +4,7 @@ package rms.domain.app.mst.userlist;
  * ユーザ一覧（検索条件）クラス
  * @author
  */
-public class UserListDtoCondition extends rms.common.abstracts.AbstractDto {
+public class UserListDto extends rms.common.abstracts.AbstractDto {
 
     /** ユーザID */
     private String userId;

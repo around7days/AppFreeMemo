@@ -20,8 +20,8 @@ import rms.common.consts.MessageEnum;
 import rms.common.consts.MessageTypeConst;
 import rms.common.utils.RmsBeanUtils;
 import rms.common.utils.SearchResultDto;
-import rms.domain.app.mst.userlist.UserListDtoCondition;
-import rms.domain.app.mst.userlist.UserListEntityResult;
+import rms.domain.app.mst.userlist.UserListDto;
+import rms.domain.app.mst.userlist.UserListResultEntity;
 import rms.domain.app.mst.userlist.UserListService;
 import rms.web.app.mst.userregist.UserRegistController;
 import rms.web.app.system.menu.MenuController;
@@ -96,11 +96,11 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         form.getPageInfo().clear();
 
         // 検索条件の生成
-        UserListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                           UserListDtoCondition.class);
+        UserListDto condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
+                                                                           UserListDto.class);
 
         // 検索処理
-        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        SearchResultDto<UserListResultEntity> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultDto.getResultList());
@@ -132,11 +132,11 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         }
 
         // 検索条件の生成
-        UserListDtoCondition condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
-                                                                           UserListDtoCondition.class);
+        UserListDto condition = RmsBeanUtils.createCopyProperties(form.getCondition(),
+                                                                           UserListDto.class);
 
         // 検索処理
-        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        SearchResultDto<UserListResultEntity> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultDto.getResultList());
@@ -213,7 +213,7 @@ public class UserListController extends rms.common.abstracts.AbstractController 
         logger.debug("選択値 -> {}", index);
 
         // 選択したユーザ情報
-        UserListEntityResult userEntity = form.getResultList().get(index);
+        UserListResultEntity userEntity = form.getResultList().get(index);
         logger.debug("選択ユーザ情報 -> {}", userEntity);
 
         attributes.addFlashAttribute("userId", userEntity.getUserId());

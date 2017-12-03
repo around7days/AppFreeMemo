@@ -15,6 +15,6 @@ public interface UserListService {
      * @param pageInfo
      * @return
      */
-    public SearchResultDto<UserListEntityResult> search(UserListDtoCondition condition,
+    public SearchResultDto<UserListResultEntity> search(UserListDto condition,
                                                         PageInfo pageInfo);
 }

@@ -29,16 +29,16 @@ public class UserListServiceImpl implements UserListService {
     UserListDao dao;
 
     @Override
-    public SearchResultDto<UserListEntityResult> search(UserListDtoCondition condition,
+    public SearchResultDto<UserListResultEntity> search(UserListDto condition,
                                                         PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
-        List<UserListEntityResult> resultList = dao.userListByCondition(condition, options);
+        List<UserListResultEntity> resultList = dao.userListByCondition(condition, options);
 
         // 検索結果格納
-        SearchResultDto<UserListEntityResult> resultDto = new SearchResultDto<>();
+        SearchResultDto<UserListResultEntity> resultDto = new SearchResultDto<>();
         resultDto.setResultList(resultList);
         resultDto.setCount(options.getCount());
 

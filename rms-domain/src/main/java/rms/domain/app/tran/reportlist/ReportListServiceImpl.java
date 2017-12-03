@@ -30,16 +30,16 @@ public class ReportListServiceImpl implements ReportListService {
     ReportListDao dao;
 
     @Override
-    public SearchResultDto<ReportListEntityResult> search(ReportListDtoCondition condition,
+    public SearchResultDto<ReportListResultEntity> search(ReportListDto condition,
                                                           PageInfo pageInfo) {
         // ページ情報の生成
         SelectOptions options = SelectOptionsUtils.get(pageInfo);
 
         // 検索処理
-        List<ReportListEntityResult> resultList = dao.reportListByCondition(condition, options);
+        List<ReportListResultEntity> resultList = dao.reportListByCondition(condition, options);
 
         // 検索結果格納
-        SearchResultDto<ReportListEntityResult> resultDto = new SearchResultDto<>();
+        SearchResultDto<ReportListResultEntity> resultDto = new SearchResultDto<>();
         resultDto.setResultList(resultList);
         resultDto.setCount(options.getCount());
 

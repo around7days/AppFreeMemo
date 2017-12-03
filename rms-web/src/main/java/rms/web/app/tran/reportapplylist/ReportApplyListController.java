@@ -26,8 +26,8 @@ import rms.common.utils.RmsFileUtils;
 import rms.common.utils.SearchResultDto;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
-import rms.domain.app.tran.reportapplylist.ReportApplyListDtoCondition;
-import rms.domain.app.tran.reportapplylist.ReportApplyListEntityResult;
+import rms.domain.app.tran.reportapplylist.ReportApplyListDto;
+import rms.domain.app.tran.reportapplylist.ReportApplyListResultEntity;
 import rms.domain.app.tran.reportapplylist.ReportApplyListService;
 import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapplyregist.ReportApplyRegistController;
@@ -100,11 +100,11 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         form.getPageInfo().clear();
 
         // 検索条件の生成
-        ReportApplyListDtoCondition condition = new ReportApplyListDtoCondition();
+        ReportApplyListDto condition = new ReportApplyListDto();
         condition.setApplyUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultDto<ReportApplyListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        SearchResultDto<ReportApplyListResultEntity> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultDto.getResultList());
@@ -160,7 +160,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportApplyListEntityResult entity = form.getResultList().get(index);
+        ReportApplyListResultEntity entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
         try {
@@ -195,7 +195,7 @@ public class ReportApplyListController extends rms.common.abstracts.AbstractCont
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportApplyListEntityResult entity = form.getResultList().get(index);
+        ReportApplyListResultEntity entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報申請画面へ遷移

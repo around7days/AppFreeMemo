@@ -22,12 +22,12 @@ public class UserListServiceTest {
 
     @Test
     public void test_search_ユーザ検索_1件() {
-        UserListDtoCondition condition = new UserListDtoCondition();
+        UserListDto condition = new UserListDto();
         condition.setUserId("user01");
 
-        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo(Integer.MAX_VALUE));
+        SearchResultDto<UserListResultEntity> resultDto = service.search(condition, new PageInfo(Integer.MAX_VALUE));
 
-        UserListEntityResult result = resultDto.getResultList().get(0);
+        UserListResultEntity result = resultDto.getResultList().get(0);
         assertThat(result.getUserId(), is("user01"));
         assertThat(result.getUserNm(), is("申請者０１"));
         assertThat(result.getEmail(), is("xxx@xxx.xx"));
@@ -41,10 +41,10 @@ public class UserListServiceTest {
 
     @Test
     public void test_search_ユーザ検索_該当なし() {
-        UserListDtoCondition condition = new UserListDtoCondition();
+        UserListDto condition = new UserListDto();
         condition.setUserId("userXX");
 
-        SearchResultDto<UserListEntityResult> resultDto = service.search(condition, new PageInfo(Integer.MAX_VALUE));
+        SearchResultDto<UserListResultEntity> resultDto = service.search(condition, new PageInfo(Integer.MAX_VALUE));
 
         assertThat(resultDto.getCount(), is(Long.valueOf(0)));
     }

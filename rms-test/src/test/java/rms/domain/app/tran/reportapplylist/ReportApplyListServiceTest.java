@@ -48,17 +48,17 @@ public class ReportApplyListServiceTest {
         final Integer targetYm = 201607;
 
         // 検索
-        ReportApplyListDtoCondition condition = new ReportApplyListDtoCondition();
+        ReportApplyListDto condition = new ReportApplyListDto();
         condition.setApplyUserId(userId);
         PageInfo pageInfo = new PageInfo(Integer.MAX_VALUE);// テスト用に件数を無制限に設定
-        SearchResultDto<ReportApplyListEntityResult> resultDto = service.search(condition, pageInfo);
+        SearchResultDto<ReportApplyListResultEntity> resultDto = service.search(condition, pageInfo);
 
         // 検索結果件数の確認
         // assertThat(resultDto.getCount(), is(Long.valueOf(3)));
 
         // 検索結果の確認（targetYmの年月データを確認）
-        List<ReportApplyListEntityResult> list = resultDto.getResultList();
-        ReportApplyListEntityResult entity = list.stream()
+        List<ReportApplyListResultEntity> list = resultDto.getResultList();
+        ReportApplyListResultEntity entity = list.stream()
                                                  .filter(e -> e.getTargetYm().intValue() == targetYm)
                                                  .findFirst()
                                                  .get();

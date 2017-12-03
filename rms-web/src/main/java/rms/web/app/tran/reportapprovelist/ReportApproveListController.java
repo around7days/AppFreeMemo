@@ -34,8 +34,8 @@ import rms.common.utils.SearchResultDto;
 import rms.domain.app.shared.dto.SharedFileDto;
 import rms.domain.app.shared.dto.SharedSubmitReportFileDto;
 import rms.domain.app.shared.service.SharedReportFileService;
-import rms.domain.app.tran.reportapprovelist.ReportApproveListDtoCondition;
-import rms.domain.app.tran.reportapprovelist.ReportApproveListEntityResult;
+import rms.domain.app.tran.reportapprovelist.ReportApproveListDto;
+import rms.domain.app.tran.reportapprovelist.ReportApproveListResultEntity;
 import rms.domain.app.tran.reportapprovelist.ReportApproveListService;
 import rms.web.app.system.menu.MenuController;
 import rms.web.app.tran.reportapprovelist.ReportApproveListForm.BulkDownload;
@@ -92,7 +92,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
     public String init(ReportApproveListForm form,
                        Model model) {
         // 初期表示用情報を取得
-        ReportApproveListDtoCondition dto = service.initDisplay();
+        ReportApproveListDto dto = service.initDisplay();
         // 値を設定
         RmsBeanUtils.copyProperties(dto, form.getCondition());
 
@@ -125,12 +125,12 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         form.getPageInfo().clear();
 
         // 検索条件の生成
-        ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
+        ReportApproveListDto condition = new ReportApproveListDto();
         RmsBeanUtils.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultDto<ReportApproveListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        SearchResultDto<ReportApproveListResultEntity> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultDto.getResultList());
@@ -164,12 +164,12 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         }
 
         // 検索条件の生成
-        ReportApproveListDtoCondition condition = new ReportApproveListDtoCondition();
+        ReportApproveListDto condition = new ReportApproveListDto();
         RmsBeanUtils.copyProperties(form.getCondition(), condition);
         condition.setApproveUserId(userInfo.getUserId());
 
         // 検索処理
-        SearchResultDto<ReportApproveListEntityResult> resultDto = service.search(condition, form.getPageInfo());
+        SearchResultDto<ReportApproveListResultEntity> resultDto = service.search(condition, form.getPageInfo());
 
         // 検索結果をフォームに反映
         form.setResultList(resultDto.getResultList());
@@ -234,7 +234,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportApproveListEntityResult entity = form.getResultList().get(index);
+        ReportApproveListResultEntity entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
         try {
@@ -279,7 +279,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         // 選択した月報indexの取得
         Integer[] checks = form.getReportDLCheck();
         for (int i : checks) {
-            ReportApproveListEntityResult entity = form.getResultList().get(i);
+            ReportApproveListResultEntity entity = form.getResultList().get(i);
 
             SharedSubmitReportFileDto dto = new SharedSubmitReportFileDto();
             dto.setApplyUserId(entity.getApplyUserId());
@@ -318,7 +318,7 @@ public class ReportApproveListController extends rms.common.abstracts.AbstractCo
         logger.debug("選択値 -> {}", index);
 
         // 選択した月報情報
-        ReportApproveListEntityResult entity = form.getResultList().get(index);
+        ReportApproveListResultEntity entity = form.getResultList().get(index);
         logger.debug("選択月報情報 -> {}", entity);
 
         // 月報承認画面に遷移

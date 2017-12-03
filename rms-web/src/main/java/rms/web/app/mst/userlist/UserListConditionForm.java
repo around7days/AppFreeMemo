@@ -9,7 +9,7 @@ import rms.common.validator.NotSymbol;
  * ユーザ一覧画面（検索条件）フォーム
  * @author
  */
-public class UserListFormCondition extends rms.common.abstracts.AbstractForm {
+public class UserListConditionForm extends rms.common.abstracts.AbstractForm {
 
     /** ユーザID */
     @Size(max = 10, message = "ユーザID：{Size.message}")

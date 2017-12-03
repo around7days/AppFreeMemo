@@ -11,7 +11,7 @@ import rms.common.utils.RmsStringUtils;
  * ユーザ一覧（検索結果）クラス
  */
 @Entity
-public class UserListEntityResult extends rms.common.abstracts.AbstractEntity {
+public class UserListResultEntity extends rms.common.abstracts.AbstractEntity {
 
     /** ユーザID */
     @Column(name = "user_id")

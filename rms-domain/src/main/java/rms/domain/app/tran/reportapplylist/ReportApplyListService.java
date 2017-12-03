@@ -15,6 +15,6 @@ public interface ReportApplyListService {
      * @param pageInfo
      * @return
      */
-    public SearchResultDto<ReportApplyListEntityResult> search(ReportApplyListDtoCondition condition,
+    public SearchResultDto<ReportApplyListResultEntity> search(ReportApplyListDto condition,
                                                                PageInfo pageInfo);
 }

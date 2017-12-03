@@ -4,7 +4,7 @@ package rms.domain.app.tran.reportlist;
  * 月報一覧（検索条件）クラス
  * @author
  */
-public class ReportListDtoCondition extends rms.common.abstracts.AbstractDto {
+public class ReportListDto extends rms.common.abstracts.AbstractDto {
 
     /* 変数宣言 ------------------------------------------------------------- */
     /** 対象年月 */

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import rms.common.utils.PageInfo;
-import rms.domain.app.mst.userlist.UserListEntityResult;
+import rms.domain.app.mst.userlist.UserListResultEntity;
 
 /**
  * ユーザ一覧画面フォーム
@@ -16,17 +16,17 @@ public class UserListForm extends rms.common.abstracts.AbstractForm {
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
     @Valid
-    private UserListFormCondition condition = new UserListFormCondition();
+    private UserListConditionForm condition = new UserListConditionForm();
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo();
     /** 検索結果リスト */
-    private List<UserListEntityResult> resultList;
+    private List<UserListResultEntity> resultList;
 
-    public UserListFormCondition getCondition() {
+    public UserListConditionForm getCondition() {
         return condition;
     }
 
-    public void setCondition(UserListFormCondition condition) {
+    public void setCondition(UserListConditionForm condition) {
         this.condition = condition;
     }
 
@@ -38,11 +38,11 @@ public class UserListForm extends rms.common.abstracts.AbstractForm {
         this.pageInfo = pageInfo;
     }
 
-    public List<UserListEntityResult> getResultList() {
+    public List<UserListResultEntity> getResultList() {
         return resultList;
     }
 
-    public void setResultList(List<UserListEntityResult> resultList) {
+    public void setResultList(List<UserListResultEntity> resultList) {
         this.resultList = resultList;
     }
 

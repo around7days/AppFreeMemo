@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import rms.common.utils.PageInfo;
 import rms.common.validator.NotNullArray;
-import rms.domain.app.tran.reportlist.ReportListEntityResult;
+import rms.domain.app.tran.reportlist.ReportListResultEntity;
 
 /**
  * 月報一覧画面フォーム
@@ -24,20 +24,20 @@ public class ReportListForm extends rms.common.abstracts.AbstractForm {
     /* 変数宣言 ------------------------------------------------------------- */
     /** 検索条件 */
     @Valid
-    private ReportListFormCondition condition = new ReportListFormCondition();
+    private ReportListConditionForm condition = new ReportListConditionForm();
     /** ページ情報 */
     private PageInfo pageInfo = new PageInfo(PageInfo.LIMIT_100);
     /** 検索結果リスト */
-    private List<ReportListEntityResult> resultList;
+    private List<ReportListResultEntity> resultList;
     /** 検索結果チェックボックス選択リスト */
     @NotNullArray(message = "ダウンロードする月報を選択して下さい", groups = { BulkDownload.class })
     private Integer[] reportDLCheck;
 
-    public ReportListFormCondition getCondition() {
+    public ReportListConditionForm getCondition() {
         return condition;
     }
 
-    public void setCondition(ReportListFormCondition condition) {
+    public void setCondition(ReportListConditionForm condition) {
         this.condition = condition;
     }
 
@@ -49,11 +49,11 @@ public class ReportListForm extends rms.common.abstracts.AbstractForm {
         this.pageInfo = pageInfo;
     }
 
-    public List<ReportListEntityResult> getResultList() {
+    public List<ReportListResultEntity> getResultList() {
         return resultList;
     }
 
-    public void setResultList(List<ReportListEntityResult> resultList) {
+    public void setResultList(List<ReportListResultEntity> resultList) {
         this.resultList = resultList;
     }
 
