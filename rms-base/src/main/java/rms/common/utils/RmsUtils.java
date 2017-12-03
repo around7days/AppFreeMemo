@@ -95,8 +95,8 @@ public class RmsUtils {
      * @param targetYm
      * @return year
      */
-    public static Integer getTargetYear(Integer targetYm) {
-        return Integer.valueOf(targetYm.toString().substring(0, 4));
+    public static String getTargetYear(Integer targetYm) {
+        return targetYm.toString().substring(0, 4);
     }
 
     /**
@@ -104,8 +104,8 @@ public class RmsUtils {
      * @param targetYm
      * @return month
      */
-    public static Integer getTargetMonth(Integer targetYm) {
-        return Integer.valueOf(targetYm.toString().substring(4, 6));
+    public static String getTargetMonth(Integer targetYm) {
+        return targetYm.toString().substring(4, 6);
     }
 
 }
