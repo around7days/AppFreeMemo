@@ -25,7 +25,7 @@ public class ProjectProperties {
     private Integer switchMonthReferenceDay;
     /** 1ページ表示件数（デフォルト） */
     @Value("${app.page.limit.default}")
-    private Integer PageLimitDefault;
+    private Integer pageLimitDefault;
     /** CSSテーマ（デフォルト） */
     @Value("${app.css.theme.default}")
     private String cssThemeDefault;
@@ -53,7 +53,7 @@ public class ProjectProperties {
     }
 
     public Integer getPageLimitDefault() {
-        return PageLimitDefault;
+        return pageLimitDefault;
     }
 
     public String getCssThemeDefault() {
