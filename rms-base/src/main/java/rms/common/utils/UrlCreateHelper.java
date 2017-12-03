@@ -21,16 +21,16 @@ public class UrlCreateHelper {
     /**
      * リダイレクトURLの生成
      * @param url
-     * @param param
+     * @param methodNm
      * @return
      */
     public String redirect(String url,
-                           String param) {
+                           String methodNm) {
         StringBuilder redirectUrl = new StringBuilder();
         redirectUrl.append("redirect:");
         redirectUrl.append(url);
-        if (!RmsStringUtils.isEmpty(param)) {
-            redirectUrl.append("?").append(param);
+        if (!RmsStringUtils.isEmpty(methodNm)) {
+            redirectUrl.append("?").append(methodNm);
         }
         return redirectUrl.toString();
     }
@@ -47,16 +47,16 @@ public class UrlCreateHelper {
     /**
      * フォワードURLの生成
      * @param url
-     * @param param
+     * @param methodNm
      * @return
      */
     public String forward(String url,
-                          String param) {
+                          String methodNm) {
         StringBuilder forwardUrl = new StringBuilder();
         forwardUrl.append("forward:");
         forwardUrl.append(url);
-        if (!RmsStringUtils.isEmpty(param)) {
-            forwardUrl.append("?").append(param);
+        if (!RmsStringUtils.isEmpty(methodNm)) {
+            forwardUrl.append("?").append(methodNm);
         }
         return forwardUrl.toString();
     }
