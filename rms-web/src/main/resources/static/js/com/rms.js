@@ -34,7 +34,7 @@ Rms.prototype.changeTheme = function(theme) {
 	localStorage.setItem("theme", theme);
 	// hiddenの値を更新
 	$("#theme").val(theme);
-}
+};
 
 /*
  * グローバル変数
