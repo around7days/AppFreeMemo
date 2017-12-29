@@ -2,76 +2,70 @@ package rms.domain.app.tran.reportapplylist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringBatchApplication;
 import rms.SpringWebApplication;
 import rms.common.utils.PageInfo;
 import rms.common.utils.SearchResultDto;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringWebApplication.class)
+@SpringBootTest(classes = SpringWebApplication.class, properties = "spring.profiles.active=test")
 public class ReportApplyListServiceTest {
 
+    /* テスト対象 */
     @Autowired
     ReportApplyListService service;
 
-    // @Test
-    // public void 申請状況検索処理_検索結果件数の確認() {
-    //
-    // // 確認するデータ
-    // final String userId = "user01";
-    //
-    // // 検索
-    // ReportApplyListDtoCondition condition = new ReportApplyListDtoCondition();
-    // condition.setApplyUserId(userId);
-    // PageInfo pageInfo = new PageInfo();
-    // pageInfo.setLimit(Integer.MAX_VALUE); // テスト用に件数を無制限に設定
-    // SearchResultDto<ReportApplyListEntityResult> resultDto = service.search(condition, pageInfo);
-    //
-    // 検索結果件数の確認
-    // assertThat(resultDto.getCount(), is(Long.valueOf(3)));
-    // }
+    /* Mock対象Dao */
+    @MockBean
+    ReportApplyListDao reportApplyListDao;
+
+    @BeforeClass
+    public static void beforeAll() {
+        SpringApplication application = new SpringApplication(SpringBatchApplication.class);
+        application.setWebEnvironment(false); // 内臓tomcatの起動を抑制
+    }
 
     @Test
-    public void test_search_申請状況検索処理_結果明細の確認() {
+    public void test_search_申請状況検索処理() {
 
-        // 確認するデータ
-        final String userId = "user01";
-        final Integer targetYm = 201607;
+        // テスト実行
+        // Mock定義 ---------------------------------------------------
+        List<ReportApplyListResultEntity> mockResultList = new ArrayList<ReportApplyListResultEntity>();
+        {
+            ReportApplyListResultEntity mockEntity = new ReportApplyListResultEntity();
+            mockEntity.setApplyUserId("ユーザID1");
+            mockResultList.add(mockEntity);
+        }
+        {
+            ReportApplyListResultEntity mockEntity = new ReportApplyListResultEntity();
+            mockEntity.setApplyUserId("ユーザID2");
+            mockResultList.add(mockEntity);
+        }
+        doReturn(mockResultList).when(reportApplyListDao).reportApplyListByCondition(anyObject(), anyObject());
+        // ----------------------------------------------------------
 
-        // 検索
-        ReportApplyListDto condition = new ReportApplyListDto();
-        condition.setApplyUserId(userId);
-        PageInfo pageInfo = new PageInfo(Integer.MAX_VALUE);// テスト用に件数を無制限に設定
-        SearchResultDto<ReportApplyListResultEntity> resultDto = service.search(condition, pageInfo);
+        // テスト実行
+        SearchResultDto<ReportApplyListResultEntity> resultDto = service.search(new ReportApplyListDto(),
+                                                                                new PageInfo());
 
-        // 検索結果件数の確認
-        // assertThat(resultDto.getCount(), is(Long.valueOf(3)));
-
-        // 検索結果の確認（targetYmの年月データを確認）
-        List<ReportApplyListResultEntity> list = resultDto.getResultList();
-        ReportApplyListResultEntity entity = list.stream()
-                                                 .filter(e -> e.getTargetYm().intValue() == targetYm)
-                                                 .findFirst()
-                                                 .get();
-
-        assertThat(entity.getApplyUserId(), is(userId));
-        assertThat(entity.getApplyUserNm(), is("申請者０１"));
-        assertThat(entity.getTargetYm(), is(targetYm));
-        assertThat(entity.getApplyDate().format(DateTimeFormatter.BASIC_ISO_DATE), is("20160725"));
-        assertThat(entity.getStatusNm(), is("承認済み"));
-        assertThat(entity.getApproveUserNm1(), is("承認者０１"));
-        assertThat(entity.getApproveUserNm2(), is("承認者０２"));
-        assertThat(entity.getApproveUserNm3(), is("承認者０３"));
-        assertThat(entity.getApproveUserNm4(), is("承認者０４"));
+        // テスト結果確認
+        assertThat(resultDto.getResultList().get(0).getApplyUserId(), is("ユーザID1"));
+        assertThat(resultDto.getResultList().get(1).getApplyUserId(), is("ユーザID2"));
     }
 
 }
