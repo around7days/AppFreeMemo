@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import rms.SpringWebApplication;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringWebApplication.class)
+@SpringBootTest(classes = SpringWebApplication.class, properties = "spring.profiles.active=test")
 public class RmsSlackTest {
 
     @Autowired

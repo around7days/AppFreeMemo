@@ -16,7 +16,7 @@ import rms.testutil.mock.RmsMockFileType;
 import rms.testutil.mock.RmsMockUtils;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringWebApplication.class)
+@SpringBootTest(classes = SpringWebApplication.class, properties = "spring.profiles.active=test")
 public class RmsMailTest {
 
     @Autowired

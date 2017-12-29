@@ -3,22 +3,31 @@ package rms.domain.app.mst.userlist;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringBatchApplication;
 import rms.SpringWebApplication;
 import rms.common.utils.PageInfo;
 import rms.common.utils.SearchResultDto;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringWebApplication.class)
+@SpringBootTest(classes = SpringWebApplication.class, properties = "spring.profiles.active=test")
 public class UserListServiceTest {
 
     @Autowired
     UserListService service;
+
+    @BeforeClass
+    public static void beforeAll() {
+        SpringApplication application = new SpringApplication(SpringBatchApplication.class);
+        application.setWebEnvironment(false); // 内臓tomcatの起動を抑制
+    }
 
     @Test
     public void test_search_ユーザ検索_1件() {

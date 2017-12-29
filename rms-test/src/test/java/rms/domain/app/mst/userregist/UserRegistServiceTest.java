@@ -1,4 +1,4 @@
-package rms.domain.app.mst.userlist;
+package rms.domain.app.mst.userregist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -6,24 +6,25 @@ import static org.junit.Assert.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.seasar.doma.jdbc.OptimisticLockException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringBatchApplication;
 import rms.SpringWebApplication;
 import rms.common.dao.MUserRoleDao;
 import rms.common.dao.VMUserDao;
 import rms.common.entity.VMUser;
 import rms.common.exception.BusinessException;
-import rms.domain.app.mst.userregist.UserRegistDto;
-import rms.domain.app.mst.userregist.UserRegistService;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringWebApplication.class)
+@SpringBootTest(classes = SpringWebApplication.class, properties = "spring.profiles.active=test")
 public class UserRegistServiceTest {
 
     @Autowired
@@ -32,6 +33,12 @@ public class UserRegistServiceTest {
     VMUserDao vMUserDao;
     @Autowired
     MUserRoleDao mUserRoleDao;
+
+    @BeforeClass
+    public static void beforeAll() {
+        SpringApplication application = new SpringApplication(SpringBatchApplication.class);
+        application.setWebEnvironment(false); // 内臓tomcatの起動を抑制
+    }
 
     @Test
     public void test_initDisplayUpdate_ユーザ情報取得() {

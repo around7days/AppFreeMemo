@@ -7,20 +7,21 @@ import static org.mockito.BDDMockito.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import rms.SpringBatchApplication;
-import rms.batch.app.BatchMain;
 import rms.common.exception.BusinessException;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringBatchApplication.class)
+@SpringBootTest(classes = SpringBatchApplication.class, properties = "spring.profiles.active=test")
 public class BatchMainTest {
 
     @Autowired
@@ -28,6 +29,12 @@ public class BatchMainTest {
 
     @MockBean
     ApplicationArguments arguments;
+
+    @BeforeClass
+    public static void beforeAll() {
+        SpringApplication application = new SpringApplication(SpringBatchApplication.class);
+        application.setWebEnvironment(false); // 内臓tomcatの起動を抑制
+    }
 
     @Test
     public void test_call_パラメータエラー() throws Exception {

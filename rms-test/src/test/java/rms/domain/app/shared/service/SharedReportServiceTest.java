@@ -5,21 +5,24 @@ import static org.hamcrest.MatcherAssert.*;
 import static rms.common.consts.Const.StatusExecKbn.*;
 import static rms.common.consts.MCodeConst.*;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import rms.SpringBatchApplication;
 import rms.SpringWebApplication;
 import rms.common.consts.Const.StatusExecKbn;
 import rms.common.entity.VTReport;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringWebApplication.class)
+@SpringBootTest(classes = SpringWebApplication.class, properties = "spring.profiles.active=test")
 public class SharedReportServiceTest {
 
     /** logger */
@@ -62,6 +65,12 @@ public class SharedReportServiceTest {
                           new Fixture(92, DENY, A001_Y02, null, null, null, null, A001_N02),
                           new Fixture(93, DENY, A001_Y03, null, null, null, null, A001_N03),
                           new Fixture(94, DENY, A001_Y04, null, null, null, null, A001_N04), };
+
+    @BeforeClass
+    public static void beforeAll() {
+        SpringApplication application = new SpringApplication(SpringBatchApplication.class);
+        application.setWebEnvironment(false); // 内臓tomcatの起動を抑制
+    }
 
     // TODO Theoriesを使いたいけどSpringBootでの実行方法が分からず
     @Test
