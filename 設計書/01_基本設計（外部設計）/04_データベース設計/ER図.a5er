@@ -52,16 +52,16 @@ PName=T_INFOMATION
 LName=お知らせテーブル
 Comment=
 TableOption=
-Page=Table
+Page=TABLE
 Left=100
 Top=1500
-Field="No","no","int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="連番","seq","int","NOT NULL",0,"","",$FFFFFFFF,""
 Field="お知らせ情報","info","varchar(4096)",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20171127234817
-Position="Table",100,1500
+ModifiedDateTime=20171127235020
+Position="TABLE",100,1500
 
 [Comment]
 Comment=【各テーブル共通項目定義】\nバージョン\n削除フラグ\n登録日\n登録ID\n更新日\n更新ID
@@ -195,22 +195,6 @@ Position="VIEW",100,300
 Page=VIEW
 Left=100
 Top=300
-
-[Comment]
-Comment=【課題】\n・履歴は残さない？\n・アップロードされた月報は上書きになる？
-FontName=Tahoma
-FontBold=0
-FontItalic=0
-FontUnderline=0
-FontSize=9
-FontColor=$000000
-LineColor=$000000
-BkColor=$FFFFFF
-Page=TABLE
-Left=2087
-Top=1101
-Width=718
-Height=331
 
 [Entity]
 PName=T_REPORT_APPROVE_FLOW
