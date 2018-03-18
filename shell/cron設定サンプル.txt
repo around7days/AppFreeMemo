@@ -1,0 +1,7 @@
+# B001:月報初期データ登録バッチサービス
+0 0 * * * /opt/rms/rmsweb/batch_execute.sh B001
+
+# バックアップ
+0 5 * * * /opt/rms/rmsweb/backup.sh &>> /data/rms/rmsweb/backup/backup.log
+# 古いバックアップファイルの削除
+0 0 * * * find /data/rms/rmsweb/backup/rms* -mtime +30 -exec rm -f {} \;
