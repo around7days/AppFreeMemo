@@ -14,8 +14,8 @@ $(function() {
 	 */
 	{
 		// ツールチップ追加
-		$("#remand").attr("data-toggle", "tooltip").attr("data-title", "承認状況を１つ戻します");
-		$("#deny").attr("data-toggle", "tooltip").attr("data-title", "申請者からやり直します");
+		$("#remand").attr("data-toggle", "tooltip").attr("title", "承認状況を１つ戻します");
+		$("#deny").attr("data-toggle", "tooltip").attr("title", "申請者からやり直します");
 		// ツールチップ初期化
 		$("[data-toggle='tooltip']").tooltip();
 	}

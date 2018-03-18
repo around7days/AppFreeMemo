@@ -2,7 +2,7 @@ package rms.domain.app.tran.reportapplyregist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 import org.junit.BeforeClass;
@@ -47,7 +47,7 @@ public class ReportApplyRegistServiceImplTest {
     public void test_validateUniquReport_月報の重複チェック_正常() throws Exception {
 
         // Mock定義 ---------------------------------------------------
-        doReturn(null).when(tReportDao).selectById(anyObject(), anyObject());
+        doReturn(null).when(tReportDao).selectById(any(), any());
         // -----------------------------------------------------------
 
         // テスト実行
@@ -63,7 +63,7 @@ public class ReportApplyRegistServiceImplTest {
         // Mock定義 ---------------------------------------------------
         TReport entity = new TReport();
         entity.setStatus(MCodeConst.A001_Y01);
-        doReturn(entity).when(tReportDao).selectById(anyObject(), anyObject());
+        doReturn(entity).when(tReportDao).selectById(any(), any());
         // -----------------------------------------------------------
 
         try {
@@ -92,7 +92,7 @@ public class ReportApplyRegistServiceImplTest {
     public void test_insertReport_月報申請処理() throws Exception {
 
         // Mock定義 ---------------------------------------------------
-        doReturn(1).when(tReportDao).insert(anyObject());
+        doReturn(1).when(tReportDao).insert(any());
         // -----------------------------------------------------------
 
         // テストデータ

@@ -6,11 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>月報承認状況一覧画面</title>
 
-	<!-- jQuery -->
-	<script th:src="@{/fw/jquery/js/jquery-3.1.1.min.js}" src="../../static/fw/jquery/js/jquery-3.1.1.min.js"></script>
-	<!-- bootstrap -->
-	<link rel="stylesheet" id="myTheme" th:href="@{|/fw/bootstrap/css/bootswatch-theme-${theme}.min.css|}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.min.css" />
-	<script th:src="@{/fw/bootstrap/js/bootstrap.min.js}" src="../../static/fw/bootstrap/js/bootstrap.min.js"></script>
 	<!-- 共通JS/CSS -->
 	<link th:replace="html/include/include_lib"></link>
 	<!-- 個別 -->
@@ -24,54 +19,47 @@
 
 	<!-- container -->
 	<div class="container">
-	<!-- 画面サイズ指定 -->
-	<div class="row" style="max-width: 80em">
-
-		<!-- ヘッダ -->
-		<div class="page-header">
-			<h3>月報承認状況一覧画面</h3>
-		</div>
+		<!-- 画面タイトル-->
+		<div class="py-4"><h4>月報承認状況一覧画面</h4></div>
 
 		<!-- メッセージ -->
-		<div th:replace="html/include/include_message::message" ></div>
+		<div th:replace="html/include/include_message::message"></div>
 
-		<!--
-			検索条件
-		 -->
-		<div class="form-horizontal">
+		<!-- 検索条件 -->
+		<div class="row">
 			<!-- 年月 -->
-			<div class="form-group">
-				<label class="col-sm-3 control-label">年月</label>
-				<div class="col-sm-9">
+			<div class="form-group col-sm-3">
+				<strong>年月</strong>
+				<div>
 					<input type="text" th:value="*{condition.targetYm}" name="condition.targetYm" id="condition.targetYm" class="form-control datepicker-ym" />
 				</div>
 			</div>
 			<!-- ボタン -->
-			<div class="text-center">
+			<div class="col-sm-9 text-right">
 				<button type="submit" id="back" formnovalidate="formnovalidate" class="btn btn-primary">
-					戻る <span class="glyphicon glyphicon-chevron-left"></span>
+					<i class="fa fa-chevron-left"></i> 戻る
 				</button>
 				<button type="submit" id="search" class="btn btn-primary">
-					検索 <span class="glyphicon glyphicon-search"></span>
+					検索 <i class="fa fa-search"></i>
 				</button>
 				<button type="submit" id="bulkDownload" formnovalidate="formnovalidate" class="btn btn-primary">
-					一括DL <span class="glyphicon glyphicon-download"></span>
+					一括DL <i class="fa fa-download"></i>
 				</button>
 				<button type="submit" id="bulkApprove" formnovalidate="formnovalidate" class="btn btn-primary">
-					一括承認 <span class="glyphicon glyphicon-chevron-right"></span>
+					一括承認 <i class="fa fa-chevron-right"></i>
 				</button>
 			</div>
-		</div>
+		</div><!-- /検索条件 -->
 
-		<!--
-			検索結果
-		 -->
+		<hr />
+
+		<!-- 検索結果 -->
 		<div th:if="*{#lists.isEmpty(resultList) == false}">
 			<!-- ページング -->
 			<div th:replace="html/include/include_page::pageing" ></div>
 
 			<!-- 検索結果テーブル -->
-			<table class="table table-hover table-condensed dataTable" id="resultTable">
+			<table class="table table-hover table-sm dataTable" id="resultTable">
 				<!-- ヘッダ -->
 				<thead class="thead-default">
 					<tr>
@@ -107,20 +95,19 @@
 						<td th:text="${result.statusNm}">承認済み</td>
 						<td>
 							<button type="submit" name="download" th:if="${result.reportDLFlg == true}" th:value="${iteStatus.index}" formnovalidate="formnovalidate" class="btn btn-link btn-sm">
-								月報DL<span class="glyphicon glyphicon-download"></span>
+								月報DL <i class="fa fa-download"></i>
 							</button>
 						</td>
 						<td><input type="checkbox" name="reportDLCheck" th:value="${iteStatus.index}" th:if="${result.reportDLFlg == true}" /></td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		</div><!-- /検索結果 -->
 
 		<!-- 上に戻るアンカー -->
 		<div th:replace="html/include/include_pageTop"></div>
 
-	</div>
-	</div>
+	</div><!-- /container -->
 
 	<!-- checkbox未送信対応（一覧用） -->
 	<input type="hidden" name="_reportDLCheck" value="on" />

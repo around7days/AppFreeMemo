@@ -2,7 +2,7 @@ package rms.domain.app.tran.reportapplylist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class ReportApplyListServiceTest {
             mockEntity.setApplyUserId("ユーザID2");
             mockResultList.add(mockEntity);
         }
-        doReturn(mockResultList).when(reportApplyListDao).reportApplyListByCondition(anyObject(), anyObject());
+        doReturn(mockResultList).when(reportApplyListDao).reportApplyListByCondition(any(), any());
         // ----------------------------------------------------------
 
         // テスト実行

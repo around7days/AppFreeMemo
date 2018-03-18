@@ -2,7 +2,7 @@ package rms.domain.app.tran.reportapplyregist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 import org.junit.BeforeClass;
@@ -61,7 +61,7 @@ public class ReportApplyRegistServiceTest {
         mockEntity.setApproveUserNm2("承認者名2");
         mockEntity.setApproveUserNm3("承認者名3");
         mockEntity.setApproveUserNm4("承認者名4");
-        doReturn(mockEntity).when(vMUserDao).selectById(anyObject());
+        doReturn(mockEntity).when(vMUserDao).selectById(any());
         // -----------------------------------------------------------
 
         // テスト実行
@@ -97,7 +97,7 @@ public class ReportApplyRegistServiceTest {
         mockEntity.setApproveUserNm2("承認者名2");
         mockEntity.setApproveUserNm3("承認者名3");
         mockEntity.setApproveUserNm4("承認者名4");
-        doReturn(mockEntity).when(vTReportDao).selectById(anyObject(), anyObject());
+        doReturn(mockEntity).when(vTReportDao).selectById(any(), any());
         // -----------------------------------------------------------
 
         // テスト実行
@@ -120,14 +120,14 @@ public class ReportApplyRegistServiceTest {
     public void test_apply_月報申請処理() throws Exception {
 
         // Mock定義 ---------------------------------------------------
-        doNothing().when(serviceImpl).validateUniquReport(anyObject(), anyObject());
-        doNothing().when(serviceImpl).validateFutureYm(anyObject());
-        doNothing().when(serviceImpl).deleteReport(anyObject());
-        doNothing().when(serviceImpl).deleteReportApproveFlow(anyObject());
-        doNothing().when(serviceImpl).insertReport(anyObject());
-        doNothing().when(serviceImpl).insertReportApproveFlow(anyObject());
-        doNothing().when(serviceImpl).updateReportStatus(anyObject());
-        doNothing().when(serviceImpl).saveReportFile(anyObject());
+        doNothing().when(serviceImpl).validateUniquReport(any(), any());
+        doNothing().when(serviceImpl).validateFutureYm(any());
+        doNothing().when(serviceImpl).deleteReport(any());
+        doNothing().when(serviceImpl).deleteReportApproveFlow(any());
+        doNothing().when(serviceImpl).insertReport(any());
+        doNothing().when(serviceImpl).insertReportApproveFlow(any());
+        doNothing().when(serviceImpl).updateReportStatus(any());
+        doNothing().when(serviceImpl).saveReportFile(any());
         // -----------------------------------------------------------
 
         // テスト実行
@@ -141,12 +141,12 @@ public class ReportApplyRegistServiceTest {
     public void test_reApply_月報再申請処理() throws Exception {
 
         // Mock定義 ---------------------------------------------------
-        doNothing().when(serviceImpl).deleteReport(anyObject());
-        doNothing().when(serviceImpl).deleteReportApproveFlow(anyObject());
-        doNothing().when(serviceImpl).insertReport(anyObject());
-        doNothing().when(serviceImpl).insertReportApproveFlow(anyObject());
-        doNothing().when(serviceImpl).updateReportStatus(anyObject());
-        doNothing().when(serviceImpl).saveReportFile(anyObject());
+        doNothing().when(serviceImpl).deleteReport(any());
+        doNothing().when(serviceImpl).deleteReportApproveFlow(any());
+        doNothing().when(serviceImpl).insertReport(any());
+        doNothing().when(serviceImpl).insertReportApproveFlow(any());
+        doNothing().when(serviceImpl).updateReportStatus(any());
+        doNothing().when(serviceImpl).saveReportFile(any());
         // -----------------------------------------------------------
 
         // テスト実行

@@ -6,11 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>ログイン画面</title>
 
-	<!-- jQuery -->
-	<script th:src="@{/fw/jquery/js/jquery-3.1.1.min.js}" src="../../static/fw/jquery/js/jquery-3.1.1.min.js"></script>
-	<!-- bootstrap -->
-	<link rel="stylesheet" id="myTheme" th:href="@{|/fw/bootstrap/css/bootswatch-theme-${theme}.min.css|}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.min.css" />
-	<script th:src="@{/fw/bootstrap/js/bootstrap.min.js}" src="../../static/fw/bootstrap/js/bootstrap.min.js"></script>
 	<!-- 共通JS/CSS -->
 	<link th:replace="html/include/include_lib"></link>
 	<!-- 個別 -->
@@ -24,52 +19,48 @@
 
 	<!-- container -->
 	<div class="container">
-	<!-- 画面サイズ指定 -->
-	<div class="row" style="max-width: 30em">
-
-		<!-- ヘッダ -->
-		<div class="page-header">
-			<h3>ログイン画面</h3>
-		</div>
+		<!-- 画面タイトル-->
+		<div class="py-4"><h4>ログイン画面</h4></div>
 
 		<!-- メッセージ -->
-		<div th:replace="html/include/include_message::message" ></div>
+		<div th:replace="html/include/include_message::message"></div>
 
-		<!-- サインイン -->
-		<div>
+		<!-- ログイン -->
+		<div class="width20">
 			<!-- ID -->
 			<div class="form-group">
-				<label class="control-label">ID</label>
-				<input type="text" th:value="*{userId}" name="userId" id="userId" required="required" class="form-control" autofocus="autofocus" />
+				<strong>ID</strong>
+				<input type="text" th:value="*{userId}" name="userId" id="userId"
+						required="required" class="form-control" autofocus="autofocus" />
 			</div>
 			<!-- パスワード -->
 			<div class="form-group">
-				<label class="control-label">パスワード</label>
-				<input type="password" th:value="*{password}" name="password" id="password" required="required" class="form-control" autocomplete="off" />
+				<strong>パスワード</strong>
+				<input type="password" th:value="*{password}" name="password" id="password"
+						required="required" class="form-control" autocomplete="off" />
 			</div>
 			<!-- ログイン -->
-			<button type="submit" id="login" class="btn btn-primary">
-				ログイン<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
-		</div>
+			<div class="form-group">
+				<button type="submit" id="login" class="btn btn-primary">
+					ログイン <i class="fa fa-chevron-right"></i>
+				</button>
+			</div>
+		</div><!-- /ログイン -->
 
-	</div>
+		<hr />
 
-	<!-- 画面サイズ指定 -->
-	<div class="row" style="max-width: 50em">
-		<br/><br/>
 		<!-- お知らせ情報 -->
-		<div class="panel panel-info">
-			<div class="panel-heading">お知らせ情報&nbsp;<span class="glyphicon glyphicon-info-sign"></span></div>
-			<div class="panel-body">
+		<div class="card width40">
+			<div class="card-header">お知らせ情報 <i class="fa fa-info-circle"></i></div>
+			<div class="card-text">
 				<p th:utext="*{info}">
 					お知らせ<br/>テスト
 				</p>
+				&nbsp;
 			</div>
 		</div>
-	</div>
 
-	</div>
+	</div><!-- /container -->
 
 </form>
 </body>

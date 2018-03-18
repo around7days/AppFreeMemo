@@ -22,3 +22,12 @@ body {
 .tooltip {
   font-size: medium;
 }
+
+/* サイズ */
+.width10 { max-width: 10em; }
+.width20 { max-width: 20em; }
+.width30 { max-width: 30em; }
+.width40 { max-width: 40em; }
+.width50 { max-width: 50em; }
+.width60 { max-width: 60em; }
+.width70 { max-width: 70em; }

@@ -6,11 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>システムエラー</title>
 
-	<!-- jQuery -->
-	<script th:src="@{/fw/jquery/js/jquery-3.1.1.min.js}" src="../../static/fw/jquery/js/jquery-3.1.1.min.js"></script>
-	<!-- bootstrap -->
-	<link rel="stylesheet" id="myTheme" th:href="@{|/fw/bootstrap/css/bootswatch-theme-${theme}.min.css|}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.min.css" />
-	<script th:src="@{/fw/bootstrap/js/bootstrap.min.js}" src="../../static/fw/bootstrap/js/bootstrap.min.js"></script>
 	<!-- 共通JS/CSS -->
 	<link th:replace="html/include/include_lib"></link>
 </head>
@@ -22,21 +17,15 @@
 
 	<!-- container -->
 	<div class="container">
-	<!-- 画面サイズ指定 -->
-	<div class="row" style="max-width: 30em">
+		<!-- 画面タイトル-->
+		<div class="py-4"><h4>システムエラー</h4></div>
 
-		<!-- ヘッダ -->
-		<div class="page-header">
-			<h3>システムエラー</h3>
-		</div>
-
-		<div class="alert alert-danger">
+		<div class="alert alert-danger width30">
 			システムエラーが発生しました。<br />
-			<a th:href="@{/login}" href="./ログイン.html" class="alert-link">ログイン画面</a>に戻ってやり直してください。
+			<a th:href="@{/login}" class="alert-link">ログイン画面</a>に戻ってやり直してください。
 		</div>
 
-	</div>
-	</div>
+	</div><!-- /container -->
 
 </form>
 </body>

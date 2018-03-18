@@ -17,7 +17,7 @@ Rms.prototype.changeTheme = function(theme) {
 		return;
 	}
 
-	var cssBaseUrl = $("form").attr("action") + "fw/bootstrap/css/";
+	var cssBaseUrl = $("form").attr("action") + "fw/bootstrap4/css/";
 	var cssName = "bootswatch-theme-" + theme + ".min.css";
 
 	// フェードアウト後にCSS変更

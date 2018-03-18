@@ -4,71 +4,77 @@
 <!-- ナビバー（ログイン前） -->
 <div th:fragment="navbar1">
 	<input type="hidden" id="theme" name="theme" th:value="${theme}" /><!-- テーマ -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- ナビヘッダ -->
-			<div class="navbar-header">
-				<div class="navbar-brand"><strong>月報管理システム</strong></div>
-			</div>
-		</div>
-	</nav>
+	<!-- navbar -->
+	<nav class="navbar fixed-top navbar-dark bg-primary">
+		<div class="navbar-brand"><strong>月報管理システム</strong></div>
+	</nav><!-- /navbar -->
 </div>
 
 
 <!-- ナビバー（ログイン後） -->
 <div th:fragment="navbar2">
 	<input type="hidden" id="theme" name="theme" th:value="${theme}" /><!-- テーマ -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- ナビヘッダ -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-content">
-					<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-				</button>
-				<div class="navbar-brand"><strong>月報管理システム</strong></div>
-			</div>
+	<!-- navbar -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+		<!-- システム名 -->
+		<div class="navbar-brand"><strong>月報管理システム</strong></div>
 
-			<!-- ナビ -->
-			<div class="collapse navbar-collapse" id="nav-content">
-				<ul class="nav navbar-nav navbar-left">
-					<!-- デザイン -->
-					<li class="dropdown">
-						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">デザイン<span class="caret"></span></a>
-						<ul class="dropdown-menu" id="navbarTheme">
-							<li><a href="javascript:void(0);">Cerulean</a></li>
-							<li><a href="javascript:void(0);">Cosmo</a></li>
-							<li><a href="javascript:void(0);">Cyborg</a></li>
-							<li><a href="javascript:void(0);">Darkly</a></li>
-							<li><a href="javascript:void(0);">Flatly</a></li>
-							<li><a href="javascript:void(0);">Journal</a></li>
-							<li><a href="javascript:void(0);">Lumen</a></li>
-							<li><a href="javascript:void(0);">Paper</a></li>
-							<li><a href="javascript:void(0);">Readable</a></li>
-							<li><a href="javascript:void(0);">Sandstone</a></li>
-							<li><a href="javascript:void(0);">Simplex</a></li>
-							<li><a href="javascript:void(0);">Slate</a></li>
-							<li><a href="javascript:void(0);">Spacelab</a></li>
-							<li><a href="javascript:void(0);">Superhero</a></li>
-							<li><a href="javascript:void(0);">United</a></li>
-							<li><a href="javascript:void(0);">Yeti</a></li>
-						</ul>
-					</li>
-					<!-- 設定 -->
-					<!-- <li><a href="javascript:void(0);">設定<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a></li> -->
-					<!-- メニュー -->
-					<li><a th:href="@{/menu}" href="./メニュー.html" id="navbarMenu">メニュー<span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-					<!-- ログアウト -->
-					<li><a th:href="@{/logout}" href="./ログイン.html" id="navbarLogout">ログアウト<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<!-- ユーザ情報 -->
-					<li class="navbar-brand">
-						<small>ユーザ名：<span sec:authentication="principal.userNm" id="navbarUserNm"></span></small>
-					</li>
-				</ul>
+		<!-- コンテンツ定義 -->
+		<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- ナビ -->
+		<div class="collapse navbar-collapse" id="nav-content">
+			<ul class="navbar-nav mr-auto">
+				<!-- デザイン -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+						デザイン<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu" id="navbarTheme">
+						<a class="dropdown-item" href="javascript:void(0);">Cerulean</a>
+						<a class="dropdown-item" href="javascript:void(0);">Cosmo</a>
+						<a class="dropdown-item" href="javascript:void(0);">Cyborg</a>
+						<a class="dropdown-item" href="javascript:void(0);">Darkly</a>
+						<a class="dropdown-item" href="javascript:void(0);">Flatly</a>
+						<a class="dropdown-item" href="javascript:void(0);">Journal</a>
+						<a class="dropdown-item" href="javascript:void(0);">Litera</a>
+						<a class="dropdown-item" href="javascript:void(0);">Lumen</a>
+						<a class="dropdown-item" href="javascript:void(0);">Lux</a>
+						<a class="dropdown-item" href="javascript:void(0);">Materia</a>
+						<a class="dropdown-item" href="javascript:void(0);">Minty</a>
+						<a class="dropdown-item" href="javascript:void(0);">Pulse</a>
+						<a class="dropdown-item" href="javascript:void(0);">Sandstone</a>
+						<a class="dropdown-item" href="javascript:void(0);">Simplex</a>
+						<a class="dropdown-item" href="javascript:void(0);">Sketchy</a>
+						<a class="dropdown-item" href="javascript:void(0);">Slate</a>
+						<a class="dropdown-item" href="javascript:void(0);">Solar</a>
+						<a class="dropdown-item" href="javascript:void(0);">Spacelab</a>
+						<a class="dropdown-item" href="javascript:void(0);">Superhero</a>
+						<a class="dropdown-item" href="javascript:void(0);">United</a>
+						<a class="dropdown-item" href="javascript:void(0);">Yeti</a>
+					</div>
+				</li>
+				<!-- メニュー -->
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/menu}" id="navbarMenu">メニュー<i class="fa fa-home"></i></a>
+				</li>
+				<!-- ログアウト -->
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/logout}" id="navbarLogout">ログアウト<i class="fa fa-sign-out"></i></a>
+				</li>
+			</ul>
+			<div class="navbar-brand">
+				<!-- ユーザ情報 -->
+				<small>ユーザ名：<span sec:authentication="principal.userNm" id="navbarUserNm"></span></small>
 			</div>
 		</div>
-	</nav>
+	</nav><!-- /navbar -->
 </div>
+
+ <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Dropdown link
+ </a>
 
 </html>

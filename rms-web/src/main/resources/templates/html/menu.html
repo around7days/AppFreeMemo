@@ -6,11 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>メニュー画面</title>
 
-	<!-- jQuery -->
-	<script th:src="@{/fw/jquery/js/jquery-3.1.1.min.js}" src="../../static/fw/jquery/js/jquery-3.1.1.min.js"></script>
-	<!-- bootstrap -->
-	<link rel="stylesheet" id="myTheme" th:href="@{|/fw/bootstrap/css/bootswatch-theme-${theme}.min.css|}" href="../../static/fw/bootstrap/css/bootswatch-theme-Cerulean.min.css" />
-	<script th:src="@{/fw/bootstrap/js/bootstrap.min.js}" src="../../static/fw/bootstrap/js/bootstrap.min.js"></script>
 	<!-- 共通JS/CSS -->
 	<link th:replace="html/include/include_lib"></link>
 	<!-- 個別 -->
@@ -24,72 +19,69 @@
 
 	<!-- container -->
 	<div class="container">
-	<!-- 画面サイズ指定 -->
-	<div class="row" style="max-width: 80em">
-
-		<!-- ヘッダ -->
-		<div class="page-header">
-			<h3>メニュー画面</h3>
-		</div>
+		<!-- 画面タイトル-->
+		<div class="py-4"><h4>メニュー画面</h4></div>
 
 		<!-- メッセージ -->
-		<div th:replace="html/include/include_message::message" ></div>
+		<div th:replace="html/include/include_message::message"></div>
 
-		<!-- メニュー -->
-		<div>
+		<!-- メイン -->
+		<div class="width40">
 			<!-- メニュータブ -->
 			<ul class="nav nav-tabs">
-				<li role="presentation" class="active"><a href="#">メニュー</a></li>
+				<li class="nav-item">
+					<a class="nav-link active" href="#">メニュー</a>
+				</li>
+				<li role="presentation" class="active"></li>
 			</ul>
 			<!-- メニュー明細 -->
 			<div class="list-group" id="menuList">
 				<!-- 管理者権限 -->
 				<div th:if="*{principal.roleAdmin}">
-					<button type="submit" name="M001" class="list-group-item" >
-						<span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ一覧
+					<button type="submit" name="M001" class="list-group-item list-group-item-action" >
+						<i class="fa fa-hand-o-right"></i>　ユーザ一覧
 					</button>
-					<button type="submit" name="M002" class="list-group-item" >
-						<span class="glyphicon glyphicon glyphicon-hand-right"></span>　ユーザ登録
+					<button type="submit" name="M002" class="list-group-item list-group-item-action" >
+						<i class="fa fa-hand-o-right"></i>　ユーザ登録
 					</button>
-					<button type="submit" name="T001" class="list-group-item" >
-						<span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧
+					<button type="submit" name="T001" class="list-group-item list-group-item-action" >
+						<i class="fa fa-hand-o-right"></i>　月報一覧
 					</button>
 				</div>
 
 				<!-- 参照権限 -->
 				<div th:if="*{principal.roleReference}">
-					<button type="submit" name="T001" class="list-group-item" >
-						<span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報一覧
+					<button type="submit" name="T001" class="list-group-item list-group-item-action" >
+						<i class="fa fa-hand-o-right"></i>　月報一覧
 					</button>
 				</div>
 
 				<!-- 申請者権限 -->
 				<div th:if="*{principal.roleApply}">
-					<button type="submit" name="T002" class="list-group-item" >
-						<span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請
+					<button type="submit" name="T002" class="list-group-item list-group-item-action" >
+						<i class="fa fa-hand-o-right"></i>　月報申請
 					</button>
-					<button type="submit" name="T003" class="list-group-item" >
-						<span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報申請状況一覧
+					<button type="submit" name="T003" class="list-group-item list-group-item-action" >
+						<i class="fa fa-hand-o-right"></i>　月報申請状況一覧
 					</button>
 				</div>
 
 				<!-- 承認者権限 -->
 				<div th:if="*{principal.roleApprove}">
-					<button type="submit" name="T006" class="list-group-item" >
-						<span class="glyphicon glyphicon glyphicon-hand-right"></span>　月報承認状況一覧
+					<button type="submit" name="T006" class="list-group-item list-group-item-action" >
+						<i class="fa fa-hand-o-right"></i>　月報承認状況一覧
 					</button>
 				</div>
 
 				<!-- 共通 -->
-				<button type="button" onclick="javascript:alert('今後実装予定')" class="list-group-item" >
-					<span class="glyphicon glyphicon glyphicon-hand-right"></span>　パスワード変更
+				<button type="button" onclick="javascript:alert('今後実装予定')" class="list-group-item list-group-item-action" >
+					<i class="fa fa-hand-o-right"></i>　パスワード変更
 				</button>
 
 			</div>
-		</div>
+		</div><!-- /メイン -->
 
-	</div>
-	</div>
+	</div><!-- /container -->
 
 </form>
 </body>
